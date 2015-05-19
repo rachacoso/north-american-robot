@@ -1,0 +1,5 @@
+<% if @matches.count > 0 %>
+	<%= @matches.count %> <%= @matches.count > 1 ? "saved matches" : "saved match" %>
+<% else %>
+	No Saved Matches. You can save matches on the All Matches screen.
+<% end %>

@@ -1,0 +1,83 @@
+<% ort ||= "sq" %>
+<% set ||= nil %>
+<% if @current_user.subscriber? %>
+
+	<% if matches.blank? %>
+
+		<%= render "no_matches" %>
+
+	<% else %>
+		
+		<% case ort %>
+		<% when "hz" %>
+			<div class="row" style="padding: 0px;">
+				<div class="small-12 columns">
+					<% matches.each do |match| %>
+						<%= render partial: "shared/profile/profile_list_tile_small_h", locals: {profile_item: match, set: set} %>
+					<% end %>
+				</div>
+			</div>
+		<% when "sq" %>
+			<div class="row" style="padding: 0px;">
+				<div class="small-12 columns">
+					<ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-3 ">
+						<% matches.each do |match| %>
+						<li><%= render partial: "shared/profile/profile_list_tile_small_sq", locals: {profile_item: match, set: set} %></li>
+						<% end %>
+					</ul>
+				</div>
+			</div>
+		<% end %>
+
+	<% end %>
+
+<% else %>
+
+	<% if action_name == "index" %>
+
+		<% if matches.blank? %>
+			<div class="row">
+				<div class="small-10 small-centered columns previewtile text-center">
+						<h2>No Distributors</h2>
+				</div>
+			</div>
+		<% else %>
+
+			<div class="row">
+				<div class="small-12 columns">
+
+					<table width="100%">
+					  	<tbody>
+							<% matches.each do |match| %>
+							<tr id="pot_<%= match.id %>">
+								<td>
+									
+								<%= render partial: "shared/profile/profile_list_tile_small_h", locals: {profile_item: match, set: set} %>
+
+								</td>
+
+							</tr>
+							<% end %>
+							</tbody>
+					</table>
+
+				</div>
+			</div>
+		<% end %>
+
+	<% else %>
+
+		<div class="row">
+			<div class="small-10 small-centered columns previewtile text-center">
+				<h1>Available to subscribers only</h1>
+				<% if @new_contact_messages > 0 %>
+					<h3>You have been contacted by <%= @new_contact_messages %> <%= @current_user.type_inverse? %><%= @new_contact_messages > 1 ? "s" : "" %><br>
+						<%= link_to 'SUBSCRIBE', '#' %> to connect!
+					</h3>
+				<% end %>				
+			</div>
+		</div>
+
+	<% end %>
+
+<% end %>

@@ -1,0 +1,36 @@
+
+<li class="has-form">
+	<div id="loginwidget" style="width: 24em;">
+		<%= form_tag '/login', method: 'post', id: "loginform" do %>
+	  <div class="row collapse">
+			<div class="medium-5 columns">
+				<%= email_field_tag :email, '', placeholder: 'EMAIL'%>
+			</div>
+			<div class="medium-5 columns">
+				<%= password_field_tag :password, '', placeholder: 'PASSWORD' %>
+			</div>
+			<div class="medium-2 columns">
+					<%= submit_tag "LOGIN", class: "alert button expand", id: "submit-login", style: "padding:0;" %>
+					<%#= link_to 'LOGIN', "#", :onclick => "$('#loginform').submit()".html_safe, class: "alert button expand" %>
+			</div>
+		</div>
+		
+		<div class="row collapse">
+			<div class="small-12 columns">
+				<div class="row">
+					<div class="small-6 columns" style="padding-top: 10px; padding-left: 0px;">
+						<%= check_box_tag :keep_me_logged_in %>
+						<%= label_tag :keep_me_logged_in, 'KEEP ME LOGGED IN', class: "top-bar-login-text" %>
+					</div>
+					<div class="small-4 columns end text-right" style="padding-top: 10px; padding-left: 0px;">
+						<small><%= link_to 'forgot password?', '#' %></small>
+					</div>
+				</div>
+			</div>
+		</div>
+		<% end %>
+	</div>
+</li>
+
+
+

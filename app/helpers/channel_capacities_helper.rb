@@ -1,0 +1,2 @@
+module ChannelCapacitiesHelper
+end

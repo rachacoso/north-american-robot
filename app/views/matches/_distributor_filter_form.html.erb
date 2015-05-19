@@ -1,0 +1,72 @@
+<div id="filter-form-container" <%= action_name != "index" ? "style='display: none;'".html_safe : "" %> >
+	<div class="clearfix">
+	<ul class="tabs right" data-tab role="tablist">
+	  <li class="tab-title active" role="presentational" ><a href="#panel2-1" role="tab" tabindex="0" aria-selected="true" controls="panel2-1">Brand Match</a></li>
+	  <li class="tab-title" role="presentational" ><a href="#panel2-2" role="tab" tabindex="0"aria-selected="false" controls="panel2-2">Search by Name</a></li>
+	</ul>
+	</div>
+
+	<div class="tabs-content">
+		<section role="tabpanel" aria-hidden="false" class="content active" id="panel2-1">
+			<div class="filter-form-panel">
+				<h2><strong> I'm Looking for Brands... </strong></h2>
+				<%= form_tag all_matches_url, id: 'filters-form', method: 'post', remote: true do %>
+				<%= hidden_field_tag "filter_form", "true" %>
+				<div class="row filterform">
+					<div class="small-12 columns">
+						<strong><small>From:</small></strong>					
+						<% @countries.each_with_index do |co, index| %>
+							<%= render partial: "shared/filter_checkbox", locals: {field: "country", label: co, fid: co, cbid: "country_#{index}", on_off_switch: filter_on_or_off(co, @country), cclass: "mfcountry" } %>
+						<% end %>
+						<input id="selectallcountries" name="selectallcountries" type="checkbox" style="font-color: black;" class="filter" checked/>
+						<label for="selectallcountries" style="color: black; border: 1px dotted black; background: transparent;">Select/Deselect All</label>
+					<br><br>
+					</div>
+				</div>
+				<div class="row filterform">
+					<div class="small-12 columns">
+						<strong><small>in these Sectors:</small></strong>
+						<% @profile.sectors.each_with_index do |co, index| %>
+							<%= render partial: "shared/filter_checkbox", locals: {field: "sector", label: co.name, fid: co.id, cbid: "sector_#{index}", on_off_switch: filter_on_or_off(co.id.to_s, @sector), cclass: "mfsector" } %>
+						<% end %>
+						<input id="selectallsectors" name="selectallsectors" type="checkbox" style="font-color: black;" class="filter" checked/>
+						<label for="selectallsectors" style="color: black; border: 1px dotted black; background: transparent;">Select/Deselect All</label>
+					<br><br>
+					</div>
+				</div>
+				<div class="row filterform">
+					<div class="small-12 columns">
+						<strong><small>That Sell In:</small></strong>
+						<% @profile.channels.each_with_index do |co, index| %>
+							<%= render partial: "shared/filter_checkbox", locals: {field: "channel", label: co.name, fid: co.id, cbid: "channel_#{index}", on_off_switch: filter_on_or_off(co.id.to_s, @channel), cclass: "mfchannel" } %>
+						<% end %>
+						<input id="selectallchannels" name="selectallchannels" type="checkbox" style="font-color: black;" class="filter" checked/>
+						<label for="selectallchannels" style="color: black; border: 1px dotted black; background: transparent;">Select/Deselect All</label>
+					</div>
+				</div>
+				<% end %>
+			</div>
+		</section>
+		<section role="tabpanel" aria-hidden="false" class="content" id="panel2-2">
+		<div class="row">
+			<div class="small-12 columns">
+				<%= form_tag(search_url, method: "get", remote: true) do %>
+					<div class="row">
+					  
+					  <div class="small-11 small-centered columns">
+					  	<%= label_tag(:q, "Search for:") %>
+						  <%= text_field_tag :q, "", :placeholder => 'Search For' %>	
+					  </div><!--/.small-11 small-centered -->
+					  <div class="small-11 small-centered columns">
+						  <%= submit_tag "Search", class: 'button alert tiny right' %>	
+					  </div><!--/.small-11 small-centered -->
+					</div>
+				<% end %>
+			</div><!--/.small-12-->
+		</div>
+		</section>	
+	</div>
+
+
+
+</div> <!-- #filter-form-container -->

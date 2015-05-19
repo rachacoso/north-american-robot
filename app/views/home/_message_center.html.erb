@@ -1,0 +1,89 @@
+<div class="dashboard-messages-panel">
+
+<% if @current_user.subscriber? %>
+
+<div class="row">
+	<div class="medium-4 columns text-center">
+		<%= image_tag 'Dashboard-Messages.svg' %>
+		<h4><%= @messages_unread > 0 ? "" : "No" %> New Messages</h4>
+		<% if @messages_unread > 0 %>
+		<div class="dashboard-messages-badge"><span class="alert round label"><%= @messages_unread %></span></div>
+
+		<div class="dashboard-messages-preview-list">
+		<small>from:</small><br>
+		<% @unread_list.each do |m| %>
+			<% this_one = m.send(@current_user.type_inverse?) %>
+			<% a,b  = unread_count_from_match(this_one) %>
+			<small><%= link_to this_one.company_name, view_match_url(this_one.id, "na") %>
+			(<%= b %>)</small>
+			<br>
+			<% unless m == @unread_list.last %>
+				<br>
+			<% end %>
+		<% end %>
+		</div>
+
+
+		<% end %>
+	</div><!--/.medium-4-->
+
+	<div class="medium-4 columns text-center">
+		<%= image_tag 'Dashboard-Contacts.svg' %>
+		<h4><%= @new_contact_messages > 0 ? "" : "No" %> New Contact Requests</h4>
+		<% if @new_contact_messages > 0 %>
+		<div class="dashboard-messages-badge"><span class="alert round label"><%= @new_contact_messages %></span></div>
+
+		<div class="dashboard-messages-preview-list">
+		<small>from:</small><br>
+		<% @incoming_requests_list.each do |m| %>
+			<% this_one = m.send(@current_user.type_inverse?) %>
+			<small><%= link_to this_one.company_name, view_match_url(this_one.id, "na") %></small>
+			<% unless m == @incoming_requests_list.last %>
+				<br>
+			<% end %>
+		<% end %>
+		</div>
+
+		<% end %>
+	</div><!--/.medium-4-->
+
+	<div class="medium-4 columns text-center">
+		<%= image_tag 'Dashboard-Awaiting.svg' %>
+		<h4><%= @outgoing_requests_list.count > 0 ? "Awaiting Response" : "No Unanswered Requests" %></h4>
+
+		<% if @outgoing_requests_list.count > 0 %>	
+		<div class="dashboard-messages-badge"><span class="alert round label"><%= @outgoing_requests_list.count %></span></div>
+
+		<div class="dashboard-messages-preview-list">
+		<small>from:</small><br>
+		<% @outgoing_requests_list.each do |m| %>
+			<% this_one = m.send(@current_user.type_inverse?) %>
+			<small><%= link_to this_one.company_name, view_match_url(this_one.id, "na") %></small>
+			<% unless m == @outgoing_requests_list.last %>
+				<br>
+			<% end %>
+		<% end %>
+		</div>
+
+		<% end %>
+
+	</div><!--/.medium-4-->		
+</div><!--/.row-->
+
+	
+
+
+<% else %>
+	<div class="row">
+		<div class="small-12 text-center columns">
+			<% if  @new_contact_messages > 0  %>
+				<h3>An Interested <%= @current_user.type_inverse? %> is trying to contact you. Subscribe to connect!</h3>
+			<% elsif @messages_unread > 0 %>
+				<h3>You have unread messages. <br>Renew your subscribe to access!</h3>
+			<% else %>
+				<h3>Available to Subscribers Only</h3>
+			<% end %>
+		</div><!--/.small-12 text-center-->
+	</div><!--/.row-->
+<% end %>
+</div>

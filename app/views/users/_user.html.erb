@@ -1,0 +1,57 @@
+<% profile = user.distributor || user.brand %>
+<div class="row">
+	<div class="small-8 columns">
+		<div class="row">
+
+			<div class="small-2 columns">
+
+		<% unless user.administrator %>
+			
+				<%= image_tag profile.logo.url(:medium)%>
+			
+		<% end %>
+
+			</div><!--/.small-1-->
+
+			<div class="small-10 columns">
+
+		<% unless user.administrator %>
+		<strong><%= profile.company_name %></strong><br>
+		<% end %>
+		<%= user.email %>
+
+			</div><!--/.small-11-->
+
+		</div><!--/.row-->
+		
+
+
+
+	</div>
+
+	<div class="small-4 columns">
+		<%= link_to edit_user_url(user) do %>
+			<i class="fi-pencil"></i> <small>Edit User</small>
+		<% end %>
+		|
+		<a href="#" data-reveal-id="myModal_<%= user.id %>">
+			<i class="fi-x"></i> <small>Delete User</small>
+		</a>
+
+
+	</div>
+
+</div>
+
+<div id="myModal_<%= user.id %>" class="reveal-modal small" data-reveal>
+	<h2>Delete <strong>User</strong></h2>
+  	<div class="AdminSectionSpacer1"></div>
+  	<h4><strong><%= user.email %></strong></h4>
+
+		<h6>Are you sure you want to delete this user?<br>
+			<strong style="color: red;">All Deletions are Final</strong>
+		</h6>
+		<div class="AdminSectionSpacer1"></div>
+  <%= button_to "Yes, Delete", user_path(user), :method => 'delete', data: { :confirm => 'Are you sure you want to delete this user?'} , class: "tiny radius alert button" %> <a class="tiny radius info button custom-close-reveal-modal">No, I've changed my mind!!!</a>
+  <a class="close-reveal-modal">&#215;</a>
+</div>

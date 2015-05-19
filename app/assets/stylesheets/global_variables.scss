@@ -1,0 +1,55 @@
+// Global
+
+// We use these to define default font weights
+// $font-weight-normal: normal !default
+// $font-weight-bold: bold !default
+
+
+// Landing colors
+$landing-yellow: #FCEE21;
+$landing-blue: #33CCFF;
+$landing-orange: #F15A24;
+$landing-light-gray: #f2f2f2;
+$landing-middle-gray: #B3B3B3;
+$landing-dark-gray: #333;
+$landing-teal: #4FCDAD;
+
+// We use these to control various global styles
+$body-bg: #E5E5E5; // overriden by javascript in landing.js -- need to fix
+$content-body-bg: #FFFEF7;
+$body-font-color: #333;
+$body-font-color-analogue: #7DA1BF;
+// $body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+$body-font-family: "proxima-nova", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+// $body-font-weight: $font-weight-normal;
+// $body-font-style: normal;
+
+// We use this to control font-smoothing
+// $font-smoothing: antialiased;
+
+// We use these to control text direction settings
+// $text-direction: ltr;
+// $opposite-direction: right;
+// $default-float: left;
+
+// We use these as default colors throughout
+$primary-color: $landing-middle-gray;
+$secondary-color: $landing-light-gray;
+$alert-color: $landing-orange;
+$success-color: $landing-middle-gray;
+$warning-color: #f08a24;
+$info-color: #FF6D11;
+$link-color: $landing-blue;
+
+
+
+
+// $input-background-color: scale-color(#7DA1BF, $lightness: 80%);
+$input-background-color: scale-color(#C6CBCC, $lightness: 10%);
+$input-text-color: scale-color(#8a8587, $lightness: -30%);
+$input-top-border: scale-color($input-background-color, $lightness: -50%);
+
+
+// We use these to make sure border radius matches unless we want it different.
+$global-radius: 2px;
+// $global-rounded: 1000px;

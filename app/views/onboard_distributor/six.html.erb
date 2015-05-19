@@ -1,0 +1,163 @@
+<%= render partial: "shared/topbar" %>
+<%= render layout: "shared/panel" do %>
+
+
+	<div class="row">
+		<div class="medium-12 columns">
+			<br>
+			<div class="onboard-instructions">Brand partners want to know their brand is in good hands. Please share your internal and external capabilities for marketing, sales and how you promote the brands in your portfolio.  </div>
+			<br><br>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="small-12 columns">
+			<h1>Trade Shows</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="medium-10 columns push-2">
+			<br>
+			<div class="onboard-instructions smaller">Sharing what trade shows you attend/exhibit can boost your marketing credibility with potential brand partners.  </div>
+		</div>
+	</div>
+
+
+	<%= render partial: "shared/editcollblock", locals: { 
+		coll: @trade_shows,
+		identifier: "name",
+		no_item_message: "No Trade Shows",
+		coll_new_item: @new_trade_show,
+		coll_new_item_text: "Add a Trade Show",
+		#iscurrent: "true"
+	} %>
+
+<br><br>
+
+	<%= form_for @distributor, url: distributor_url do |f| %>
+	<%= hidden_field_tag :redirect, 'complete' %>
+
+
+		<div class="row">
+			<div class="small-12 columns">
+				<h1>Sales / Education Capabilities</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="medium-10 columns push-2">
+				<br>
+				<div class="onboard-instructions smaller">How many people do you employ that are dedicated to sales, training and education of retailers and other partners? Internal sales force include people who are hired full-time or part-time by your company. External sales force include people who you hire on a contract or temporary basis to help with projects  </div>
+				<hr>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="medium-10 columns push-2">
+				<%= render partial: "shared/numeric_field", locals: {f: f, field: :inside_sales_size, fieldlabel: 'Inside Sales Force Size' } %>	
+			</div>
+		</div>
+		<div class="row">
+			<div class="medium-10 columns push-2">
+				<%= render partial: "shared/numeric_field", locals: {f: f, field: :outside_sales_size, fieldlabel: 'Outside Sales Force Size' } %>
+			</div>
+		</div>
+
+
+<br><br>
+
+		<div class="row">
+			<div class="small-12 columns">
+				<h1>Marketing/PR Capabilities</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="medium-10 columns push-2">
+				<br>
+				<div class="onboard-instructions smaller">[Something here about marketing?]  </div>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="medium-10 columns push-2">
+				<h3>Internal Marketing/PR</h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="medium-10 columns push-2">
+				<%= render partial: "shared/numeric_field", locals: {f: f, field: :internal_marketing_size, fieldlabel: 'Internal Marketing/PR Team Size' } %>
+			</div>
+		</div>
+
+	
+
+		<div class="row">
+			<div class="medium-10 columns push-2">
+				<h3>External Marketing/PR</h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="medium-10 columns push-2">
+
+				<%= radio_button_tag("distributor[employ_pr_agency]", false,  (@distributor.employ_pr_agency rescue false) ? false : true ) %>
+				<%= label_tag("distributor[employ_pr_agency]_false", "No, we do not employ an outside PR Agency") %>
+				<%= radio_button_tag("distributor[employ_pr_agency]", true, (@distributor.employ_pr_agency rescue false) ? true : false ) %>
+				<%= label_tag("distributor[employ_pr_agency]_true", "Yes, we employ an outside PR Agency") %>
+
+			<hr>
+			</div>
+		</div>				
+
+
+		<div class="row">
+			<div class="medium-10 columns push-2">
+				<h3>Where have you marketed/advertised your products?</h3>
+			</div>
+		</div>
+
+		<div class="row editform">
+			<div class="medium-10 columns push-2">
+				<div class="row">
+					<div class="medium-4 columns">
+						<%= render partial: "shared/checkbox", locals: {field: "marketing_via_print", label: 'Print' } %>
+						<%= render partial: "shared/checkbox", locals: {field: "marketing_via_online", label: 'Online' } %>
+						<%= render partial: "shared/checkbox", locals: {field: "marketing_via_email", label: 'Email' } %>
+						<%= render partial: "shared/checkbox", locals: {field: "marketing_via_outdoor", label: 'Outdoor' } %>
+					</div>
+					<div class="medium-4 columns end">
+						<%= render partial: "shared/checkbox", locals: {field: "marketing_via_events", label: 'Events' } %>
+						<%= render partial: "shared/checkbox", locals: {field: "marketing_via_direct_mail", label: 'Direct Mail' } %>
+						<%= render partial: "shared/checkbox", locals: {field: "marketing_via_classes", label: 'Classes' } %>
+					</div>
+				</div>
+
+			<hr>	
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="medium-10 columns push-2">
+				<h3>Customer Database</h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="medium-10 columns push-2">
+				<%= render partial: "shared/numeric_field", locals: {f: f, field: :customer_database_size, fieldlabel: 'Customer Database Size' } %>	
+			</div>
+		</div>
+
+
+	<br><br>
+	<div class="row onboard-submit-footer">
+		<div class="medium-12 columns text-right">
+			 <%= f.submit 'Finish', class: "tiny radius alert button right"  %>
+		</div>
+	</div>
+
+
+	<% end %>
+
+
+<% end %>

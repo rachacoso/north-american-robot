@@ -1,0 +1,108 @@
+<%= render partial: "shared/topbar" %>
+
+<div class="row collapse">
+	<div class="small-11 small-centered columns marketplace-header">
+		<%= image_tag "logo_header_marketplace.svg" %>
+	</div>
+</div>
+<div class="row">
+	<div class="small-11 small-centered columns marketplace-subpage-header">
+	<h1>MESSAGES</h1>
+	<h3>Your incoming messages / requests</h3>
+	</div>
+</div>
+
+<div class="row collapse">
+	<div class="small-11 small-centered columns marketplace-content">
+
+		<% if @current_user.subscriber? %>
+
+		
+		<br>
+		<div class="row">
+			<div class="small-6 columns">
+				
+			</div><!--/.small-6-->
+			<div class="small-6 columns text-right">
+				<%= render "matches/list_style" %>		
+			</div><!--/.small-6-->
+		</div><!--/.row-->
+		
+		<div class="conversations-container">
+			<div class="conversations-header">
+				<h2>MESSAGES</h2>
+			</div>
+			<div class="conversations-content">
+
+				<% if @messages_unread > 0 %>
+				<small><%= @messages_unread %> unread message<%= @messages_unread > 1 ? "s" : "" %></small>								
+				<div id="match-list">
+					<div class="row">
+						<div class="small-12 columns" >
+							<%= render partial: "matches/#{@current_user.type?}_match_list", locals: {matches: @unread_list_for_match_list, ort: @list_style} %>
+						</div>
+					</div>
+				</div>
+
+				<% else %>
+					<h3>No unread messages</h3>
+				<% end %>
+
+			</div>
+		</div>
+
+
+		<br>
+		<div class="conversations-container">
+			<div class="conversations-header">
+				<h2>CONTACT REQUESTS</h2>
+			</div>
+			<div class="conversations-content">
+				<% if @new_contact_messages > 0 %>
+					<small><%= @new_contact_messages %> new contact request<%= @new_contact_messages > 1 ? "s" : "" %></small>
+
+					<div id="match-list">
+						<div class="row">
+							<div class="small-12 columns" >
+								<%= render partial: "matches/#{@current_user.type?}_match_list", locals: {matches: @new_requests_list_for_match_list, ort: @list_style} %>
+							</div>
+						</div>
+					</div>
+
+				<% else %>
+					<h3>No new contact requests</h3>
+				<% end %>
+			
+			
+			</div>
+		</div>
+		<br>
+
+		<% else %>
+		<div class="row collapse">
+			<div class="small-6 small-centered text-center columns">
+				<h1>Available to subscribers only</h1>
+								<% if @new_contact_messages > 0 %>
+									<h3>You have been contacted by <%= @new_contact_messages %> <%= @current_user.type_inverse? %><%= @new_contact_messages > 1 ? "s" : "" %><br>
+										<%= link_to 'SUBSCRIBE', '#' %> to connect!
+									</h3>
+								<% end %>
+						    <% if @messages_unread > 0 || @new_contact_messages > 0 %>
+									<div class="panel text-left">
+										<div class="row">
+											<div class="medium-2 columns">
+												<h1>[ <strong style="color: red;">!</strong> ]</h1>
+											</div><!--/.medium-4-->
+											<div class="medium-10 columns">
+												<h3> A <%= @current_user.type_inverse? %> is interested in communicating with you. <br> <%= link_to 'SUBSCRIBE', '#' %> to initiate/resume contact. </h3>							
+											</div><!--/.medium-10-->
+										</div><!--/.row-->
+									</div>
+						    <% end %>
+			</div><!--/.small-11 small-centered text-center-->
+		</div><!--/.row-->
+		<% end %>
+
+
+	</div>
+</div>

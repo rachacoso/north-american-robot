@@ -1,0 +1,7 @@
+<% u = @current_user.brand || @current_user.distributor %>
+
+$('#custom-channels-list').hide().html("<%= j (render partial: 'shared/profileform/custom_channels_list', locals:{u: u}) %>").fadeIn(1000);
+$('#custom-channel-capacities-list').hide().html("<%= j (render partial: 'shared/profileform/custom_channel_capacities_list', locals:{u: u}) %>").fadeIn(1000);
+
+$(document).foundation();
+$(document).foundation('equalizer', 'reflow');

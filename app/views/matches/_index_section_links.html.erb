@@ -1,0 +1,8 @@
+
+<% matchtype = @current_user.distributor ? "Brands" : "Distributors" %>
+<ul class="button-group even-4">
+<li><%= action_name == "index" ? (link_to "All #{matchtype}", all_matches_url(fr: "true"), class: "match-groups tiny button primary", id: "all-matches-url", remote: true) : (link_to "All #{matchtype}", all_matches_url(fr: "true"), class: "match-groups tiny button secondary", id: "all-matches-url", remote: true) %></li>
+<li><%= action_name == "index_saved_matches" ? (link_to "Saved #{matchtype}", saved_matches_url, class: "match-groups tiny button primary", id: "saved-matches-url", remote: true) : (link_to "Saved #{matchtype}", saved_matches_url, class: "match-groups tiny button secondary", id: "saved-matches-url", remote: true) %></li>
+<li><%= action_name == "index_contacted_matches" ? (link_to "#{matchtype} you contacted", contacted_matches_url, class: "match-groups tiny button primary", id: "outgoing-matches-url", remote: true) : (link_to "#{matchtype} you contacted", contacted_matches_url, class: "match-groups tiny button secondary", id: "outgoing-matches-url", remote: true) %></li>
+<li><%= action_name == "index_incoming_matches" ? (link_to "#{matchtype} contacting you", incoming_matches_url, class: "match-groups tiny button primary", id: "incoming-matches-url", remote: true) : (link_to "#{matchtype} contacting you", incoming_matches_url, class: "match-groups tiny button secondary", id: "incoming-matches-url", remote: true) %></li>
+</ul>

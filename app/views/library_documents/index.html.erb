@@ -1,0 +1,50 @@
+<%= render partial: "shared/topbar" %>
+
+<div class="row collapse">
+  <div class="small-12 columns" id="page-content">
+
+<% if @current_user.subscriber? %>
+<div class="row">
+	<div class="medium-12 medium-centered columns">
+
+<% user = @current_user.brand || @current_user.distributor %>
+
+<% user.library_documents.each do |doc| %>
+  
+    <%= link_to doc.file_file_name, doc.file.url %> | 
+    <%#= image_tag photo.photo.url(:small) %>
+    <%= link_to 'X', library_document_delete_url(doc), :method => 'delete', data: { :confirm => 'Are you sure you want to delete this document?'}  %>
+    <br>
+  <br>
+<% end %>
+
+<% if flash[:error] %>
+  <%= flash[:error] %> <br>
+<% end %>
+
+<%= form_for(LibraryDocument.new) do |f| %>
+  <div class="row collapse">
+    <div class="small-6 columns">
+      <%= f.file_field :file, label: "&nbsp;".html_safe, accept: 'application/pdf,application/vnd.ms-excel,application/vnd.ms-powerpoint,application/msword,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document' %>
+    </div>
+    <div class="small-6 columns">
+      <%= f.submit 'Upload Document', :class=> 'button small postfix' %>
+    </div>
+  </div>
+<% end %>
+
+	</div>
+</div>
+
+<% else %>
+<div class="row">
+  <div class="small-11 small-centered text-center columns">
+    <h1>Available to subscribers only</h1>
+  </div><!--/.small-11 small-centered text-center-->
+</div><!--/.row-->
+<% end %>
+
+
+  </div>
+</div>
+

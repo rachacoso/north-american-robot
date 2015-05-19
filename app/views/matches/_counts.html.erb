@@ -1,0 +1,18 @@
+<% matchtype = @current_user.type_inverse? %>
+
+
+<% if matches.count > 0 %>
+
+	<% if action_name == "index" %>
+		<div class="matchcount"><%= matches.count %> <%= matches.count > 1 ? "#{matchtype}s" : "#{matchtype}" %> found</div>
+	<% elsif action_name == "index_saved_matches" %>
+		<div id="saved-match-count" class="matchcount"><%= matches.count %> saved <%= matches.count > 1 ? "#{matchtype}s" : "#{matchtype}" %></div>
+	<% elsif action_name == "index_contacted_matches" %>
+		<div id="saved-match-count" class="matchcount"><%= matches.count %> <%= matches.count > 1 ? "#{matchtype}s" : "#{matchtype}" %></div>
+	<% elsif action_name == "index_incoming_matches" %>
+		<div id="saved-match-count" class="matchcount"><%= matches.count %> <%= matches.count > 1 ? "#{matchtype}s" : "#{matchtype}" %></div>		
+	<% elsif action_name == "index_conversations" %>
+		<div id="saved-match-count" class="matchcount"><%= matches.count %> <%= matches.count > 1 ? "#{matchtype}s" : "#{matchtype}" %></div>		
+	<% end %>
+
+<% end %>

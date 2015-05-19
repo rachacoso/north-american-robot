@@ -1,0 +1,171 @@
+<%= render partial: "shared/topbar" %>
+
+<div class="row collapse">
+	<div class="small-11 small-centered columns marketplace-header">
+		<%= image_tag "logo_header_marketplace.svg" %>
+	</div>
+</div>
+
+<div class="row collapse">
+	<div class="small-11 small-centered columns">
+
+
+<% if @current_user.send(@current_user.type?).sectors.blank? %>
+	<div class="row">
+		<div class="medium-8 medium-centered columns">
+			<div class="panel text-left">
+				<div class="row">
+					<div class="medium-2 columns">
+						<h1>[ <strong style="color: red;">!</strong> ]</h1>
+					</div><!--/.medium-4-->
+					<div class="medium-10 columns">
+						<h3>You don't have you SECTOR designated in 
+							<%= link_to 'Your Profile', eval("#{@current_user.type?}_url(:anchor => 'a-sectors')") %>
+						</h3>
+						<h3>You can't get matched with <%=@current_user.type_inverse?.capitalize%>s without a designated SECTOR.</h3>			
+					</div><!--/.medium-10-->
+				</div><!--/.row-->
+			</div>
+		</div><!--/.medium-6 medium-centered-->
+	</div><!--/.row-->
+<% else %>
+
+	<% case @current_user.type? %>
+	<% when 'brand'%>
+
+		<div class="row" data-equalizer>
+			<div style="background: white;">
+			<div class="medium-3 columns" style="background: white;" data-equalizer-watch><h1>FIND DISTRIBUTORS IN NEW MARKETS</h1>		</div><!--/.medium-3-->
+			<div class="medium-6 columns" style="background: white;" data-equalizer-watch>
+				<div id="match-map-container">
+
+					<div id="match-search">
+						<%= render partial: "brand_search_start" %>
+					</div>
+
+				</div><!--/.match-map-container -->
+			</div><!--/.medium-6-->
+			<div class="medium-3 columns" style="background: white;" data-equalizer-watch> &nbsp; </div><!--/.medium-3-->
+			</div>
+		</div>
+
+	<% if @country %>	
+
+	<div class="marketplace-content padded">
+		<h1><%= @country_proper.upcase %></h1>
+		<strong><%= render partial: "counts", locals: {matches: @matches} %></strong>
+				<div class="row">
+					<div class="small-6 columns">
+						<%= paginate @matches %>		
+					</div><!--/.small-6-->
+					<div class="small-6 columns text-right">
+						<%= render "list_style" %>		
+					</div><!--/.small-6-->
+				</div><!--/.row-->
+		<hr>
+		<div id="match-list">
+			<div class="row">
+				<div class="small-12 columns" >
+					<%= render partial: 'brand_match_list', locals: {matches: @matches, ort: @list_style} %>
+				</div>
+			</div>
+		</div>
+		<%= paginate @matches %>
+	</div>
+
+	<% else %>
+
+	<div class="marketplace-content padded">
+		<h1>ALL COUNTRIES</h1>
+		<strong><%= render partial: "counts", locals: {matches: @matches} %></strong>
+				<div class="row">
+					<div class="small-6 columns">
+						<%= paginate @matches %>		
+					</div><!--/.small-6-->
+					<div class="small-6 columns text-right">
+						<%= render "list_style" %>		
+					</div><!--/.small-6-->
+				</div><!--/.row-->
+		<hr>
+		<div id="match-list">
+			<div class="row">
+				<div class="small-12 columns" >
+					<%= render partial: 'brand_match_list', locals: {matches: @matches, ort: @list_style} %>
+				</div>
+			</div>
+		</div>
+		<%= paginate @matches %>
+	</div>
+
+	<% end %>
+
+	<% when 'distributor' %>
+
+		<div class="row" data-equalizer>
+			<div class="medium-3 columns" style="background: white;" data-equalizer-watch><h1>FIND NEW BRANDS</h1>		</div><!--/.medium-3-->
+			<div class="medium-8 columns" style="background: white;" data-equalizer-watch>
+				<div id="match-sectors-container">
+					<div id="match-search">
+						<%= render partial: "distributor_search_start" %>
+					</div>
+				</div><!--/.match-map-container -->
+			</div><!--/.medium-6-->
+			<div class="medium-1 columns" style="background: white;" data-equalizer-watch> &nbsp; </div><!--/.medium-3-->
+		</div>
+
+		<% if @sector %>	
+			<div class="marketplace-content padded">
+				<h1><%= Sector.find(@sector).name %></h1>
+				<strong><%= render partial: "counts", locals: {matches: @matches} %></strong>
+				<div class="row">
+					<div class="small-6 columns">
+						<%= paginate @matches %>		
+					</div><!--/.small-6-->
+					<div class="small-6 columns text-right">
+						<%= render "list_style" %>		
+					</div><!--/.small-6-->
+				</div><!--/.row-->
+				<hr>
+				<div id="match-list">
+					<div class="row">
+						<div class="small-12 columns" >
+							<%= render partial: 'distributor_match_list', locals: {matches: @matches, ort: @list_style}  %>
+						</div>
+					</div>
+				</div>
+				<%= paginate @matches %>
+			</div>
+		<% else %>
+
+			<div class="marketplace-content padded">
+				<h1>ALL SECTORS</h1>
+				<strong><%= render partial: "counts", locals: {matches: @matches} %></strong>
+				<div class="row">
+					<div class="small-6 columns">
+						<%= paginate @matches %>		
+					</div><!--/.small-6-->
+					<div class="small-6 columns text-right">
+						<%= render "list_style" %>		
+					</div><!--/.small-6-->
+				</div><!--/.row-->
+				<hr>
+				<div id="match-list">
+					<div class="row">
+						<div class="small-12 columns" >
+							<%= render partial: 'distributor_match_list', locals: {matches: @matches, ort: @list_style} %>
+						</div>
+					</div>
+				</div>
+				<%= paginate @matches %>
+			</div>
+
+		<% end %>
+
+	<% end %>
+
+
+<% end %>
+
+	</div><!--/.small-12 medium-10 -->
+</div><!--/.row-->
+

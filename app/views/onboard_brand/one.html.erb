@@ -1,0 +1,163 @@
+<%= render partial: "shared/topbar" %>
+
+<div class="row">
+	<div class="medium-8 medium-centered columns">
+
+			<div class="row">
+				<div class="medium-12 medium-centered columns">
+					<br>
+					<div class="onboard-instructions"><p>Create a profile that showcases your brand and products for potential international partners. <br><br>It takes on average less than 10 minutes to complete the profile.</p> <h2 class="text-center"><strong>Let’s get started!</strong></h2></div>
+				</div>
+			</div>
+
+	</div>
+</div>
+
+<%= render layout: "shared/panel" do %>
+
+	
+	<%= form_for @brand, url: brand_url do |f| %>
+	<%= hidden_field_tag :redirect, 'two' %>
+
+	<div class="row">
+		<div class="small-12 columns">
+			<h1>Company Info</h1>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="medium-12 columns">
+			<%= f.text_area :company_name, rows: 2, style: "font-size:2em; font-weight:bold;", placeholder: "Company Name" %>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="medium-6 columns">
+			<%= f.label :logo do %>
+			Company logo <br>
+			<%= image_tag @brand.logo.url(:medium), width: "200", height: "200", alt: "Logo", id: "logo-preview" %>
+			<% end %>
+			<br>
+			<%= f.file_field :logo, label: false, accept: 'image/png,image/gif,image/jpeg' %>
+		</div>
+		<div class="medium-6 columns">
+
+			<div class="row">
+				<div class="small-12 columns">
+					<%= f.text_field :country_of_origin, class: "country-autocomplete", placeholder: 'Country of origin' %>
+				</div>
+				<div class="small-12 columns">				
+					<%= label_tag(:year_established, "Year established") %>
+					<%= select_tag :year_established, options_for_select(1900..Time.now.year, @brand.year_established ? @brand.year_established.strftime("%Y") : '2000') %>
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="small-12 columns">
+					<div class="row collapse">
+						<%= label_tag(:website, "Website") %>
+						<div class="small-3 columns">
+							<span class="prefix">http://</span>
+						</div>
+						<div class="small-9 columns">
+							<%= f.text_field :website, label: false %>
+						</div>
+					</div>
+				</div>
+
+				<div class="small-12 columns">
+					<%= label_tag(:facebook, "Facebook") %>
+					<%= f.text_field :facebook, label: false %>
+				</div>
+				<div class="small-12 columns">
+					<%= label_tag(:linkedin, "LinkedIn") %>
+					<%= f.text_field :linkedin, label: false %>
+				</div>
+
+
+				<div class="small-12 columns">
+					<%= label_tag(:company_size, "Company Size") %>
+					<%= f.collection_select(:company_size, CompanySize.all, :id, :name) %>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+
+
+
+<hr>
+
+	<%= f.fields_for :contact_info do |ff| %>
+	<div class="row">
+		<div class="medium-6 columns">
+			<h3>Company Contact Info</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="medium-6 columns">
+			<%= ff.text_field :contact_name %>
+		</div>
+		<div class="medium-6 columns">
+			<%= ff.text_field :contact_title %>
+		</div>						
+	</div>
+	<div class="row">
+		<div class="medium-6 columns">
+			<%= ff.text_field :email %>
+		</div>
+		<div class="medium-6 columns">
+			<%= ff.text_field :phone %>
+		</div>
+	</div>
+
+<hr>
+
+	<div class="row">
+		<div class="medium-6 columns">
+			<h3>Company Address</h3>
+		</div>
+	</div>						
+	<div class="row">
+		<div class="medium-12 columns">
+			<%= ff.text_field :address1, label: "Address" %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="medium-12 columns">
+			<%= ff.text_field :address2, label: "Address (cont'd)" %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="medium-4 columns">
+			<%= ff.text_field :city %>
+		</div>
+		<div class="medium-4 columns">
+			<%= ff.text_field :state %>
+		</div>
+		<div class="medium-4 columns">
+			<%= ff.text_field :postcode %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="medium-6 columns">
+			<%= ff.text_field :country, class: "country-autocomplete", placeholder: 'Country' %>
+		</div>
+	</div>
+	<% end %>
+
+	<br><br>
+	<div class="row onboard-submit-footer">
+		<div class="medium-12 columns text-right">
+			<%= f.submit 'Next', class: "tiny radius alert button"  %>
+		</div>
+	</div>
+
+
+	<% end %>
+
+<% end %>
+
+

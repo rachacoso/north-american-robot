@@ -1,0 +1,41 @@
+
+<%= render partial: "shared/topbar" %>
+
+<% content_for :javascript_foot do %>
+
+<% end %>
+<br>
+<div class="row">
+	<div class="small-10 small-centered columns">
+		
+		<div class="row">
+
+			<div class="medium-8 columns">
+
+				<div id="dashboard-marketplace-container">
+						<%= render "marketplace" %>
+				</div>
+
+				<br>
+				
+				<div id="dashboard-agency-container">	
+					<%= render "agency" %>
+				</div>
+
+			</div>
+
+			<div class="medium-4 columns">
+
+				<div id="dashboard-insights-container">
+					<%= render "insights" %>
+				</div>
+
+			</div>
+
+		</div>
+	</div><!--/.small-11 small-centered-->
+</div><!--/.row-->
+
+<br>
+<br>	
+

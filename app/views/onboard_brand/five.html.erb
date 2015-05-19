@@ -1,0 +1,133 @@
+<%= render partial: "shared/topbar" %>
+<%= render layout: "shared/panel" do %>
+
+	<div class="row">
+		<div class="small-12 columns">
+			<a class="anchor" id="a-brand-photos"></a>
+			<h1>Brand Photos</h1>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="medium-10 columns push-2">
+			<br>
+			<div class="onboard-instructions">
+				<p>Show us what makes your brand (and products) special and unique. </p>
+			</div>
+			<hr>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="medium-10 columns push-2">
+			<% if @brand.brand_photos %>
+				<ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
+				<% @brand.brand_photos.each do |photo| %>
+						<li>
+
+			<a data-dropdown="d_<%= photo.id %>" href="#"><%= image_tag photo.photo.url(:small) %></a>
+			<div id="d_<%= photo.id %>" data-dropdown-content class="f-dropdown content medium" aria-hidden="true" tabindex="-1">
+			  <%= image_tag photo.photo.url(:large), width: "400"%>
+			</div>											
+							<%= link_to 'X', brand_photo_url(photo, :ob => true), :method => 'delete', data: { :confirm => 'Are you sure you want to delete this photo?'}  %>
+						</li>
+				<% end %>
+				</ul>
+			<% else %>
+				<h3>[No Brand Photos]</h3>
+			<% end %>
+		</div>
+	</div>	
+	<div class="row">
+		<div class="small-12 columns">
+			<a href="#" data-reveal-id="brandPhotos" class="tiny radius alert button right">Add Photo</a>				
+		</div>
+	</div>
+
+
+<br><br>
+
+
+	<div class="row">
+		<div class="medium-12 columns">
+			<div class="row">
+				<div class="small-12 columns">
+					<h1>Press Hits</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="medium-10 columns push-2">
+			<div class="onboard-instructions smaller">Share some of your fabulous press coverage with potential international partners. </div>
+		</div>
+	</div>
+
+	<%= render partial: "shared/editcollblock", locals: {
+		coll: @press_hits,
+		identifier: "source",
+		no_item_message: "No Press Hits",
+		coll_new_item: @new_press_hit,
+		coll_new_item_text: "Add a Press Hit",
+		# iscurrent: false
+	} %>
+
+<br><br>
+
+	<div class="row">
+		<div class="medium-12 columns">
+			<div class="row">
+				<div class="small-12 columns">
+					<h1>Trade Shows</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="medium-10 columns push-2">
+			<div class="onboard-instructions smaller">Tell us what tradeshows you attended and/or exhibit your brand(s).</div>
+		</div>
+	</div>
+						
+	<%= render partial: "shared/editcollblock", locals: {
+		coll: @trade_shows,
+		identifier: "name",
+		no_item_message: "No Trade Shows",
+		coll_new_item: @new_trade_show,
+		coll_new_item_text: "Add a Trade Show",
+		# iscurrent: false
+	} %>	
+	
+	<br><br>
+	<div class="row onboard-submit-footer">
+		<div class="medium-12 columns text-right">
+			<%= button_to "Next", onboard_brand_six_url, method: :get, class: "tiny radius alert button right" %>
+			<%= render "shared/profileform/return_later" %>
+		</div>
+	</div>
+	
+<% end %>
+
+<div id="brandPhotos" class="reveal-modal small" data-reveal>
+
+	<div class="row">
+		<div class="small-12 columns">
+			<%= form_for BrandPhoto.new do |f| %>
+				<%= hidden_field_tag :ob, "true" %>
+	      <div class="row">
+	        <div class="small-6 columns">
+	          <%= f.file_field :photo, label: 'Select Product Photo', accept: 'image/png,image/gif,image/jpeg' %>
+	        </div>
+	        <div class="small-6 columns">
+	          <%= f.submit 'Upload', :class=> 'button tiny' %>
+	        </div>
+	      </div>
+			<% end %>
+		</div>
+	</div>
+
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+

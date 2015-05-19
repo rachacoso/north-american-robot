@@ -1,0 +1,2 @@
+module PressHitsHelper
+end

@@ -1,0 +1,24 @@
+
+<% matchtype = @current_user.type_inverse? %>
+<div class="row">
+	<div class="small-10 small-centered columns previewtile match-empty text-center">
+		<% if action_name == "index" %>
+			<h2>No <%= matchtype.capitalize %>s</h2> 
+		<% elsif action_name == "index_saved_matches" %>
+			<h2>No Saved <%= matchtype.capitalize %>s</h2>
+			<h3><%= link_to "Find #{matchtype} matches", all_matches_url %></h3>
+		<% elsif action_name == "index_contacted_matches" %>
+			<h2>You haven't contacted any <%= matchtype %>s</h2>
+			<h3>Contact <%= matchtype %>s you have <%= link_to "Found", all_matches_url %> or <%= link_to "Saved", saved_matches_url %></h3>
+		<% elsif action_name == "index_incoming_matches" %>
+			<h2>No <%= matchtype %>s have contacted you</h2>
+			<h3>Make sure <%= link_to 'Your Profile', eval("#{@current_user.type?}_full_profile_url") %>  is complete</h3>
+		<% elsif action_name == "search" %>
+			<h2>No <%= matchtype %>s found</h2>
+			<h3>Please try adjusting your search</h3>
+		<% elsif action_name == "index_conversations" %>
+			<h2>No Contacted Brands</h2>
+			<h3><%= link_to "Find #{matchtype} matches", all_matches_url %></h3>
+		<% end %>
+	</div>
+</div>

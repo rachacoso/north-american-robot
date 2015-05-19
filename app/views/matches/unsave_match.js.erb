@@ -1,0 +1,8 @@
+$('#pst_<%= @mid %>').html("<%= j (render 'save_link') %>");
+
+<% if @remove == "true" %>
+	$('#pot_<%= @mid %>').hide(350);
+
+	$('#saved-match-count').html("<%= j (render 'saved_match_count') %>");
+
+<% end %>

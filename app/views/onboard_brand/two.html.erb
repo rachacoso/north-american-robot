@@ -1,0 +1,94 @@
+<%= render partial: "shared/topbar" %>
+<%= render layout: "shared/panel" do %>
+
+<div class="row">
+	<div class="medium-6 columns">
+		<div class="row">
+			<div class="small-12 columns">
+				<h1>Sectors</h1>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="medium-10 columns medium-centered">
+				<div class="onboard-instructions smaller">Tell us what category of products your company sells. <br><br>For example, if you manufacture hats, you would be in the Fashion/Accessories sector.  If you manufacture baby toys, you’d be in the Baby/Kids sector. <br><br>If you don’t see a good fit, please select “Other.”</div>
+			</div>
+		</div>	
+	<br>
+		<%= form_for @brand, url: brand_url do |f| %>
+		<%= hidden_field_tag :redirect, 'three' %>	
+		<div class="row editform">
+			<div class="medium-10 columns medium-centered">
+			<%= f.hidden_field :company_name %>		
+	      <input id="selectallsectors" name="selectallsectors" type="checkbox" />
+	      <label for="selectallsectors" style="color: black; border: 0; background: transparent;">Select All</label>			
+				<% Sector.each do |sc| %>
+			      <%= check_box_tag "sectors[#{sc.id}]", sc.id, (@brand.sectors.find(sc) rescue false) ? true : false, class: "sectors" %>
+			      <%= label_tag("sectors[#{sc.id}]", sc.name) %>
+			  <% end %>
+
+			</div>
+
+		</div>
+	</div><!--/.medium-6-->
+
+	<div class="medium-6 columns">
+		<div class="row">
+			<div class="small-12 columns">
+				<h1>Channels</h1>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="medium-10 columns medium-centered">
+				<div class="onboard-instructions smaller">Under Channels, you can share what types of retail channels you sell your products. You can select as many as are applicable. If you don’t see a channel listed, please feel free to add a channel</div>
+			</div>
+		</div>	
+		<br>
+		<div class="row editform">
+			<div class="medium-10 columns medium-centered">
+	      <input id="selectallchannels" name="selectallsectors" type="checkbox" style="font-color: black;"/>
+	      <label for="selectallchannels" style="color: black; border: 0; background: transparent;">Select All</label>			
+				<% Channel.each do |ch| %>
+			    	<%= check_box_tag "channels[#{ch.id}]", ch.id, (@brand.channels.find(ch) rescue false) ? true : false, class: "channels"  %>
+			      <%#= label_tag("channels[#{ch.id}]", ch.name) %>
+			      <%= label_tag "channels[#{ch.id}]" do %>
+			      	<%= ch.name %><br>
+							<%= simple_format(ch.description, {style: "font-size: 0.75em; margin-left: 2em;"}, wrapper_tag: "div") %>
+			      <% end %>
+			  <% end %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="medium-10 columns medium-centered">
+				<br>		  
+			  <h3><strong>(Add Custom Channels)</strong></h3>
+			  <div id="customchannellist">
+			  	
+				</div>
+				<br>
+				<input type="text" id="ccName" placeholder="Custom Channel Name" />
+				<input type="button" value="Add a Custom Channel" id="btnSave" />
+			</div>
+		</div>
+
+	</div><!--/.medium-6-->
+</div><!--/.row-->
+
+<br><br>
+<div class="row onboard-submit-footer">
+	<div class="small-12 columns text-right">
+
+		<div class="row">
+			<div class="medium-10 columns push-2">
+				<%= f.submit 'Next', class: "tiny radius alert button right" %>
+		<% end %>
+				<%= render "shared/profileform/return_later" %>
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+<% end %>
+

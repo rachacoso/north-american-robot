@@ -1,0 +1,136 @@
+<% matchtype = @current_user.type? == "distributor" ? "Brands" : "Distributors" %>
+<%= render partial: "shared/topbar" %>
+
+<div class="row collapse">
+	<div class="small-11 small-centered columns marketplace-header">
+		<%= image_tag "logo_header_marketplace.svg" %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="small-11 small-centered columns marketplace-subpage-header">
+	<h1>CONTACTED <%= @current_user.type_inverse?.upcase %>S</h1>
+	<h3><%= @current_user.type_inverse?.capitalize %>s you are currently in contact with.</h3>
+	</div>
+</div>
+
+
+<div class="row collapse">
+	<div class="small-11 small-centered columns marketplace-content">
+		
+<% if @current_user.subscriber? %>
+
+	<% if @matches_accepted.values.all? {|x| x.blank? } && @matches_incoming_waiting.values.all? {|x| x.blank? } && @matches_outgoing_waiting.values.all? {|x| x.blank? } %>
+
+		<%= render "no_matches" %>
+
+
+	<% else %>
+		
+
+
+		<% unless @matches_accepted.values.all? {|x| x.blank? } %>
+		
+		<br>
+		<div class="row">
+			<div class="small-12 columns text-right">
+				<%= render "list_style" %>		
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+		<div class="conversations-container">
+			<div class="conversations-header">
+				<h2>IN CONVERSATION</h2>
+			</div>
+			<div class="conversations-content">
+				<% @matches_accepted.each do |name,list| %>
+				<% next if list.blank? %>
+					<h2><%= name %></h2>
+					<small><strong><%= render partial: "counts", locals: {matches: list} %></strong></small>
+					<br>
+					<div class="saved-contacted-match-list">
+					<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: list, ort: @list_style} %>
+					</div>
+				<% end %>
+			</div>
+		</div>
+		<br>
+
+		<% end %>
+
+
+
+		<% unless @matches_incoming_waiting.values.all? {|x| x.blank? } %>
+		<br>
+		<div class="conversations-container">
+			<div class="conversations-header">
+				<h2>NEW REQUEST - AWAITING YOUR RESPONSE</h2>
+			</div>
+			<div class="conversations-content">
+
+				<% @matches_incoming_waiting.each do |name,list| %>
+				<% next if list.blank? %>
+					<h2><%= name %></h2>
+					<small><strong><%= render partial: "counts", locals: {matches: list} %></strong></small>
+					<br>
+					<div class="saved-contacted-match-list">
+					<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: list, ort: @list_style} %>
+					</div>
+				<% end %>
+
+			</div>
+		</div>
+		<br>
+
+		<% end %>
+
+
+		<% unless @matches_outgoing_waiting.values.all? {|x| x.blank? } %>
+
+		<br>
+		<div class="conversations-container">
+			<div class="conversations-header">
+				<h2>NEW REQUEST - AWAITING THEIR RESPONSE</h2>
+			</div>
+			<div class="conversations-content">
+
+				<% @matches_outgoing_waiting.each do |name,list| %>
+				<% next if list.blank? %>
+					<h2><%= name %></h2>			
+					<small><strong><%= render partial: "counts", locals: {matches: list} %></strong></small>
+					<br>
+					<div class="saved-contacted-match-list">
+					<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: list, ort: @list_style} %>
+					</div>
+				<% end %>
+
+			</div>
+		</div>
+		<br>
+
+		<% end %>
+
+	<% end %>
+
+<% else %>
+	<div class="row">
+	  <div class="small-6 small-centered text-center columns">
+	    <h1>Available to subscribers only</h1>
+	    <% if @messages_unread > 0 || @new_contact_messages > 0 %>
+				<div class="panel text-left">
+					<div class="row">
+						<div class="medium-2 columns">
+							<h1>[ <strong style="color: red;">!</strong> ]</h1>
+						</div><!--/.medium-4-->
+						<div class="medium-10 columns">
+							<h3> A <%= @current_user.type_inverse? %> is interested in communicating with you.  <%= link_to 'SUBSCRIBE', '#' %> to connect! to initiate/resume contact. </h3>							
+						</div><!--/.medium-10-->
+					</div><!--/.row-->
+				</div>
+	    <% end %>
+	  </div><!--/.small-11 small-centered text-center-->
+	</div><!--/.row-->
+<% end %>
+
+	</div><!--/.medium-10-->
+</div>
+

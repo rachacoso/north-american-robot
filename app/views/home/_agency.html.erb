@@ -1,0 +1,43 @@
+<div id="dashboard-agency-header">
+	<%= image_tag "logo_header_agency.svg" %>
+</div>
+
+<div id="dashboard-marketplace-content">
+<% if @current_user.distributor %>
+
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="agency-panel">
+
+				<p>The Landing International Agency is a full-service international development agency that works with distributors to identify and sign brands for distribution or licensing partnerships in their markets.</p>
+
+
+
+				<p>Email <a href="mailto:agency@landinginternational.com">agency@landinginternational.com</a> for more information.</p>
+
+			</div>
+ 
+
+		</div>
+	</div>
+
+
+<% elsif @current_user.brand %>
+
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="agency-panel">
+
+				<p>The Landing International Agency is a full-service international development agency that works with brands to create an international expansion strategy, identify and qualify distribution partners, negotiate agreements and manage distributor relationships. We serve as an extension of our clients’ teams to create revenue opportunities and grow their international business.</p>
+
+
+				<p>Email <a href="mailto:agency@landinginternational.com">agency@landinginternational.com</a> for more information.</p>
+
+			</div>
+ 
+
+		</div>
+	</div>
+
+<% end %>
+</div>

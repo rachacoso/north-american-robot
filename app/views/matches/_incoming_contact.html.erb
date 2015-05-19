@@ -1,0 +1,60 @@
+<% match = this_match(@match) %>
+
+
+	<div class="row">
+		<div class="small-12 columns" style="background: #7ecdec">
+			<% if !match.messages.blank? %>
+			<h4><strong><%= @match.company_name %></strong> started a conversation with you</h4>
+			<% else %>
+			<h4><strong><%= @match.company_name %></strong> would like to have a conversation with you</h4>
+			<% end %>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="small-11 small-centered medium-9 medium-pull-1 columns">
+			<div class="bubble-container">
+				<div class="bubble-them">
+					<%= simple_format(match.intro_message) %>
+				</div>
+				<small>Sent <%= match.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%d %b %Y at %H:%M %Z") %></small>	
+			</div>
+		</div>
+	</div>
+
+
+	<div id="message-list">
+	<% if !match.messages.blank? %>
+	<%= render 'shared/messages/message_list' %>
+	<% end %>
+	</div>
+
+	<div class="row">
+		<hr>
+		<div class="medium-10 medium-push-2 columns">
+				
+			<%= form_for Message.new, remote: true do |f| %>
+			<div class="bubble-container">
+			<div class="bubble-you">
+			<div class="row">
+				<div class="small-11 small-centered columns">
+					<%= f.text_area :text, label: false, id: "message-input", rows: "5" %>
+					<%#= f.hidden_field :recipient, value: (@current_user.type? == 'distributor' ? 'brand' : 'distributor') %>
+					<% if match.messages.blank? %>
+					<%= f.hidden_field :new_contact, value: 'true' %>
+					<% end %>
+					<%= hidden_field_tag :match_id, match.id %>
+				</div>
+			</div>
+			</div>
+			</div>
+			<div class="row">
+				<div class="small-11 small-centered columns text-right">
+					<%= f.submit 'Send Message', :class => " button tiny expand", :style => "margin-top: 0;" %>
+				</div>
+			<% end %>
+			</div>			
+		</div>				
+	</div>	
+

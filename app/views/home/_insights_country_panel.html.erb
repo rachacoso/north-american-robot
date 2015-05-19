@@ -1,0 +1,26 @@
+<% credits ||= nil %>
+<div class="insights-panel">
+	<div class="row collapse">
+		<div class="medium-8 columns">
+			<div class="insights-panel-image">
+			<img src="images/<%= image %>">
+			<div class="insights-panel-image-label"><%= country %></div>
+			</div>
+		</div>
+		<% if credits %>
+		<div class="medium-4 columns">
+			<div class="image-credits-content"><%= credits.html_safe %></div>
+		</div>
+		<% end %>
+	</div>
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="insights-panel-text"><%= text %> ... <strong> more </strong></div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-12 columns">
+			<%= link_to 'BUY FULL REPORT', '#', class: 'button tiny success radius' %>
+		</div>
+	</div>
+</div>

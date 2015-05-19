@@ -1,0 +1,64 @@
+
+<%= render partial: "shared/topbar" %>
+
+<div class="row collapse">
+	<div class="small-11 small-centered columns marketplace-header">
+		<%= image_tag "logo_header_marketplace.svg" %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="small-11 small-centered columns marketplace-subpage-header">
+	<h1>YOUR PROFILE</h1>
+	<h3>Preview &amp; Edit your marketplace profile.</h3>
+	</div>
+</div>
+<div class="row collapse">
+	<div class="small-11 small-centered columns marketplace-content">
+		
+
+		<div class="row collapse">
+			<div class="medium-6 push-6 columns">
+				<ul class="button-group even-3">
+			  <li><%= link_to 'PUBLIC Profile', brand_public_profile_url, class: "tiny button secondary" %></li>
+			  <li><%= link_to 'FULL Profile', "#", class: "tiny button info"%></li>
+			  <li><%= link_to 'EDIT Profile', brand_url, class: "tiny button secondary" %></li>
+			  </ul>
+
+				<div class="panel">
+					<div class="row">
+						<div class="small-6 columns">
+							<h2>Full Profile</h2>
+							<small><span data-tooltip aria-haspopup="true" class="has-tip radius" title="Your full profile is viewable only by premium distributor subscribers. It contains information that helps distributors determine whether your brand would be a good fit for their market and their portfolio.">What is this?</span></small>							
+						</div>
+						<div class="small-6 columns">					
+							<div class="row">
+								<div class="small-12 columns text-center">
+									<% percent = check_brand_full_profile %>
+									<div class="progress small-12 round <%= percent == 100 ? "success" : "" %>" style="margin: auto;">
+									  <span class="meter" style="width: <%= percent %>%"></span>
+									</div>
+									<small>Your Full Profile is <%= percent == 100 ? "" : "#{percent}%" %> Complete!</small>
+								</div>
+							</div>
+						</div>		
+					</div>
+				</div>
+
+			</div>
+			<div class="medium-6 pull-6 columns">
+				
+			</div>
+		</div>
+
+		<%= render partial: "/shared/profile/brand_full_profile", locals: {profile: @profile} %>
+
+
+		
+	</div>
+</div>
+
+
+
+
+

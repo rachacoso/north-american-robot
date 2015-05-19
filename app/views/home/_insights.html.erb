@@ -1,0 +1,26 @@
+<div id="dashboard-insights-header">
+	<%= image_tag "logo_header_insights.svg" %>
+</div>
+
+<div id="dashboard-insights-content">
+	<div class="row">
+		<div class="small-12 columns">
+			<h3 class="dashboard-section-title">Featured Insight Reports</h3>
+
+<%= render partial: "insights_country_panel", locals: {country: "UNITED KINGDOM", image: "insights_uk.jpg", text: "Brits are open, curious and savvy when it comes to buying into new, engaging or better value products"} %>
+<hr>
+<%= render partial: "insights_country_panel", locals: {country: "INDIA", image: "insights_india.jpg", text: "India has a fast-growing and formidable middle class that is changing the market for consumer goods"} %>
+<hr>
+<%= render partial: "insights_country_panel", locals: {country: "BRAZIL", image: "insights_brazil.jpg", text: "37% of Brazil’s 60 million households will belong to the middle and affluent classes by 2020, compared with", credits: "Photo by: 
+<br>Peter Molnar"} %>
+<hr>
+<%= render partial: "insights_country_panel", locals: {country: "CHINA", image: "insights_china.jpg", text: "China is the largest country in the world with 1.4 billion people, representing 19.24% of the world’s"} %>
+<hr>
+<%= render partial: "insights_country_panel", locals: {country: "SOUTH KOREA", image: "insights_korea.jpg", text: "South Korea has become a trend-setter and influencer for fashion and luxury in Asia. Korea is considered"} %>
+<hr>
+<%= render partial: "insights_country_panel", locals: {country: "RUSSIA", image: "insights_russia.jpg", text: "Russia is predicted to become the largest consumer market in Europe by 2018. Russia’s middle class"} %>
+
+
+		</div>
+	</div>
+</div>

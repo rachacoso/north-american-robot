@@ -1,0 +1,12 @@
+// $('#pct_<%= @match.id %>').html("<%= j (render 'contacted_link') %>");
+
+
+$('#match-view').hide().html("<%= j (render 'match_view') %>").fadeIn(1000);
+
+
+$(document).foundation();
+$(document).foundation('tab', 'reflow');
+
+$('#contactModal').foundation('reveal', 'close');
+// $('#match-view').fadeOut();
+// $('#match-view').fadeIn(6000);

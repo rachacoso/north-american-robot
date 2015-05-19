@@ -1,0 +1,114 @@
+<%= render partial: "shared/topbar_admin" %>
+
+<% content_for :subnav do %>
+<div class="row">
+	<div class="large-12 columns">
+		<ul class="breadcrumbs">
+		  <li class="current"><%= link_to "ALL USERS", "#" %></li>
+		</ul>					
+	</div>
+</div>
+<% end %>
+
+<% if flash[:notice] %>
+<div class="row">
+	<div class="small-10 small-centered columns panel">
+		<div data-alert class="alert-box success round">
+	  	<%= flash[:notice] %>
+		  <a href="#" class="close">&times;</a>
+		</div>		
+	</div>
+</div>
+<% end %>
+
+<div class="row">
+	<div class="small-10 small-centered columns">
+		<ul class="tabs right" data-tab>
+		  <li class="tab-title"><a href="#panel1">Administrators</a></li>
+		  <li class="tab-title active"><a href="#panel2">Distributors</a></li>
+		  <li class="tab-title"><a href="#panel3">Brands</a></li>
+		</ul>
+	</div>
+</div>
+
+<div class="tabs-content">
+
+  <div class="content" id="panel1">
+		<div class="row">
+			<div class="small-10 small-centered columns panel">
+				<h3><strong>Administrators</strong></h3><hr>
+				<%= paginate @admins, :param_name => :page_admins %>
+				<%= render partial: @admins, spacer_template: "shared/indexspacer" %>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="small-7 small-centered columns panel">
+				<h3>Add Administrator</h3>
+				<div class="errornotice <%= flash[:error] ? "error-on" : "" %>"><%= flash[:error] ? flash[:error].upcase.html_safe : "&nbsp;".html_safe %></div>				
+				<%= form_for @newuser do |f| %>
+					<%= hidden_field_tag :administrator, 'true' %>
+					<%= f.fields_for :user_profile do |ff| %>
+					<div class="row collapse">
+					<div class="medium-6 columns">
+						<%= ff.text_field :firstname, :placeholder => 'First Name', :label => false  %>
+					</div>
+					<div class="medium-6 columns">
+						<%= ff.text_field :lastname, :placeholder => 'Last Name', :label => false  %>
+					</div>
+					</div>
+					<% end %>
+					<div class="row">
+					<div class="medium-12 columns">
+					<%= f.text_field :email, :placeholder => 'Email (will be used as your login)', :label => false %>
+					</div>
+					<div class="medium-12 columns">
+					<%= f.password_field :password, :placeholder => 'Password', :label => false %>
+					</div>
+					<div class="medium-12 columns">
+					<%= f.password_field :password_confirmation, :placeholder => 'Password (repeat)', :label => false %>
+					</div>
+					<div class="medium-12 columns text-right">
+					<%= f.submit 'Add Administrator', class: "tiny button alert" %>
+					</div>				
+					</div>
+				<% end %>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="content active" id="panel2">
+		<div class="row">
+			<div class="small-10 small-centered columns panel">
+				<h3><strong>Distributors</strong></h3>
+				<% if !@distributors.empty? %>
+				<%= paginate @distributors, :param_name => :page_distributors %>
+				<hr>
+				<%= render partial: @distributors.sort_by { |d| d.distributor.company_name }, spacer_template: "shared/indexspacer" %>
+				<% else %>
+				<hr>
+				<h3><em>No Distributors</em></h3>
+				<% end %>
+			</div>
+		</div>
+	</div>
+
+	<div class="content" id="panel3">
+		<div class="row">
+			<div class="small-10 small-centered columns panel">
+				<h3><strong>Brands</strong></h3>
+				<% if !@brands.empty? %>
+				<%= paginate @brands, :param_name => :page_brands %>
+				<hr>
+				<%= render partial: @brands.sort_by { |b| b.brand.company_name }, spacer_template: "shared/indexspacer" %>
+				<% else %>
+				<hr>
+				<h3><em>No Brands</em></h3>
+				<% end %>				
+			</div>
+		</div>
+	</div>
+
+</div>
+

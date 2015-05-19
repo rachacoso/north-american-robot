@@ -1,0 +1,41 @@
+<%= render partial: "shared/topbar" %>
+<%= render layout: "shared/panel" do %>
+
+	<div class="row">
+		<div class="medium-12 columns">
+			<div class="row">
+				<div class="small-12 columns">
+					<h1>Countries of Export</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="medium-10 columns push-2">
+			<br>
+			<div class="onboard-instructions smaller">
+				Tell us what international markets you currently exports your products to. <br><br>
+				This information is ONLY shared with distributors that you have approved to see your full profile. <br>[ADD INFO ABOUT WHAT DISTRIBUTORS CAN SEE WHEN]
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="medium-6 medium-centered columns">
+
+			<%= render 'shared/profileform/export_countries_form' %>
+
+		</div>
+	</div>
+
+	<br><br>
+	<div class="row onboard-submit-footer">
+		<div class="medium-12 columns text-right">
+		<%= button_to "Next", onboard_brand_eight_url, method: :get, class: "tiny radius alert button right"%>
+		<%= render "shared/profileform/return_later" %>
+		</div>
+	</div>
+
+<% end %>
+
+

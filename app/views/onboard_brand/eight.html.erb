@@ -1,0 +1,189 @@
+<%= render partial: "shared/topbar" %>
+<%= render layout: "shared/panel" do %>
+
+
+	<div class="row">
+		<div class="medium-12 columns">
+			<div class="row">
+				<div class="small-12 columns">
+					<h1>Patents</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="medium-10 columns push-2">
+			<div class="onboard-instructions smaller">
+				Tell us about your intellectual property assets.<br><br>
+				This will be helpful for international partners to know what protections you (and they) will have. 
+				<br><br>This information is ONLY shared with distributors that you have approved to see your full profile.
+				<br>[ADD INFO ABOUT WHAT DISTRIBUTORS CAN SEE WHEN]
+			</div>
+		</div>
+	</div>
+
+	<%= render partial: "shared/editcollblock", locals: {
+		coll: @patents,
+		identifier: "product",
+		no_item_message: "No Patents",
+		coll_new_item: @new_patent,
+		coll_new_item_text: "Add a Patent",
+		# iscurrent: false
+	} %>
+
+<br><br>
+
+
+	<div class="row">
+		<div class="medium-12 columns">
+			<div class="row">
+				<div class="small-12 columns">
+					<h1>Trademarks</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="medium-10 columns push-2">
+			<div class="onboard-instructions smaller">
+
+				For Example:
+				<div class="row">
+					<div class="small-2 columns">
+						<strong><small>Product:</small></strong>
+					</div>
+					<div class="small-10 columns">
+						Organic Mineral Peel Face
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-2 columns">
+						<strong><small>Description:</small></strong>
+					</div>
+					<div class="small-10 columns">
+						Trademarked words “Organic Mineral Peel” for use for exfoliators in cosmetic category
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-2 columns">
+						<strong><small>Date:</small></strong>
+					</div>
+					<div class="small-10 columns">
+						May 2013
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-2 columns">
+						<strong><small>Country:</small></strong>
+					</div>
+					<div class="small-10 columns">
+						USA
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-2 columns">
+						<strong><small>Status:</small></strong>
+					</div>
+					<div class="small-10 columns">
+						Granted
+					</div>
+				</div> 
+
+				<br><br>This information is ONLY shared with distributors that you have approved to see your full profile.
+				<br>[ADD INFO ABOUT WHAT DISTRIBUTORS CAN SEE WHEN]
+			</div>
+		</div>
+	</div>
+
+	<%= render partial: "shared/editcollblock", locals: {
+		coll: @trademarks,
+		identifier: "product",
+		no_item_message: "No Trademarks",
+		coll_new_item: @new_trademark,
+		coll_new_item_text: "Add a Trademark",
+		# iscurrent: false
+	} %>
+
+<br><br>
+
+
+	<div class="row">
+		<div class="medium-12 columns">
+			<div class="row">
+				<div class="small-12 columns">
+					<h1>Certification / Regulatory Compliance</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="medium-10 columns push-2">
+			<div class="onboard-instructions smaller">
+
+
+				For Example:
+				<div class="row">
+					<div class="small-2 columns">
+						<strong><small>Product:</small></strong>
+					</div>
+					<div class="small-10 columns">
+						Organic Mineral Peel Face
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-2 columns">
+						<strong><small>Description:</small></strong>
+					</div>
+					<div class="small-10 columns">
+						Compliant with European Union guidelines
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-2 columns">
+						<strong><small>Date:</small></strong>
+					</div>
+					<div class="small-10 columns">
+						May 2013
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-2 columns">
+						<strong><small>Country:</small></strong>
+					</div>
+					<div class="small-10 columns">
+						European Union
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-2 columns">
+						<strong><small>Status:</small></strong>
+					</div>
+					<div class="small-10 columns">
+						Pending Compliance
+					</div>
+				</div>
+
+				<br><br>This information is ONLY shared with distributors that you have approved to see your full profile.
+				<br>[ADD INFO ABOUT WHAT DISTRIBUTORS CAN SEE WHEN]
+			</div>
+		</div>
+	</div>
+	
+	<%= render partial: "shared/editcollblock", locals: {
+		coll: @compliances,
+		identifier: "product_or_category",
+		no_item_message: "No Certifications / Regulatory Compliances",
+		coll_new_item: @new_compliance,
+		coll_new_item_text: "Add a Certification / Regulatory Compliance",
+		# iscurrent: false
+	} %>
+
+	<br><br>
+	<div class="row onboard-submit-footer">
+		<div class="medium-12 columns text-right">
+			<%= button_to "Finish", dashboard_url, method: :get, class: "tiny radius alert button right" %>
+		</div>
+	</div>
+
+
+<% end %>

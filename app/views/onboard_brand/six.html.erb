@@ -1,0 +1,105 @@
+<%= render partial: "shared/topbar" %>
+<%= render layout: "shared/panel" do %>
+
+
+
+	<div class="row">
+		<div class="medium-12 columns">
+			<div class="row">
+				<div class="small-12 columns">
+					<h1>Channel Capacities</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="medium-10 columns push-2">
+			<br>
+			<div class="onboard-instructions smaller">
+				Distributors are often interested in where you sell the most of your products.<br><br> Based on your specified channels, please select approximately how many locations you are sold in.<br><br> This information is ONLY shared with distributors that you have approved to see your full profile. <br>[ADD INFO ABOUT WHAT DISTRIBUTORS CAN SEE WHEN]
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="medium-12 medium-centered columns">
+			
+
+
+				<div class="row">
+					<div class="medium-6 columns text-right">
+						<h4><strong>Channel</strong></h4>
+					</div>
+					<div class="medium-6 columns">
+						<h4><strong>Capacity</strong></h4>
+					</div>
+				</div>	
+
+
+				<%= form_tag(channel_capacity_bulkupdate_url, method: "post") do  %>
+					<%= hidden_field_tag :ob, 'true' %>
+					<% if @brand.channels.empty? %>
+						<div class="row">
+							<div class="medium-12 columns text-center">
+							<h6 class="information">( Please Select Channels in Sector and Channel Profile )</h6>
+							</div>
+						</div>
+
+					<% end %>
+
+					<% @brand.channels.each do |chan| %>
+
+						<div class="row">
+							<div class="medium-6 columns">
+								<%= label_tag "channel_capacity[bulk_ids][#{chan.id}]", chan.name, class: "right" %>
+							</div>
+							<div class="medium-3 columns end">
+								<%= number_field_tag("channel_capacity[bulk_ids][#{chan.id}]", @brand.channel_capacities.where(channel_id: chan.id).first.capacity) %>
+							</div>
+						</div>
+		
+					<% end %>
+
+					<% if @brand.channel_capacities.where(channel_id: 0).first %>
+						<div class="row">
+							<div class="medium-6 columns text-right">
+								<h4><strong>Custom Channel</strong></h4>
+							</div>
+							<div class="medium-6 columns">
+								<h4><strong>Capacity</strong></h4>
+							</div>
+						</div>
+					<% end %>
+					<% @brand.channel_capacities.where(channel_id: 0).each do |cc| %>
+						<div class="row">
+							<div class="medium-6 columns">
+								<%= label_tag "channel_capacity[bulk_ids][#{cc.id}]", cc.custom_channel_name, class: "right" %>&nbsp;
+							</div>
+							<div class="medium-3 columns end">
+								<%= number_field_tag("channel_capacity[bulk_ids][#{cc.id}]", cc.capacity) %>
+							</div>
+						</div>
+
+					<% end %>
+
+
+	<br><br>
+	<div class="row onboard-submit-footer">
+		<div class="medium-12 columns text-right">
+						<div class="row">
+							<div class="medium-12 columns">
+								<%= submit_tag('Next', class: "tiny radius alert button right") %>
+				<% end %>									
+								<%= render "shared/profileform/return_later" %>
+							</div>
+						</div>
+
+		</div>
+	</div>
+
+			
+		</div>
+	</div>
+
+<% end %>
+

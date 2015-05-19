@@ -1,0 +1,18 @@
+<div class="row">
+	<div class="small-12 columns">
+
+
+			<div class="row">
+				<div class="large-12 columns">
+					<ul class="breadcrumbs">
+					  <li class="current"><%= link_to "Your #{@current_user.type?} profile", "#" %></li>
+					</ul>					
+				</div>
+				<div class="large-9 columns">
+					<%= yield %>
+				</div>
+			</div>
+
+
+	</div>
+</div>

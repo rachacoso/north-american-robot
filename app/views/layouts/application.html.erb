@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= content_for?(:title) ? yield(:title) : "Landing" %></title>
+  <link rel="shortcut icon" href="/favicon.ico?v=2" />
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "vendor/modernizr" %>
+
+  <%= csrf_meta_tags %>
+
+<script src="//use.typekit.net/aaw2ric.js"></script>
+<script>try{Typekit.load();}catch(e){}</script>
+
+  <%= content_for?(:javascript_head) ? yield(:javascript_head) : "" %>
+  <%= content_for?(:css_head) ? yield(:css_head) : "" %>
+
+
+
+</head>
+<body>
+
+<%= content_for?(:user_head) ? yield(:user_head) : "" %>
+
+<%= content_for?(:subnav) ? yield(:subnav) : "" %>
+
+
+<div id="loading-modal" class="reveal-modal tiny" data-reveal>
+<p>Loading...</p>
+</div>
+
+<%= yield %>
+
+
+<div class="overlay"></div>
+<div class="modal ajax-wait">Please Wait...</div>
+
+<%= javascript_include_tag "application" %>
+<%= content_for?(:javascript_foot) ? yield(:javascript_foot) : "" %>
+
+
+</body>
+</html>
+
+
+

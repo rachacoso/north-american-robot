@@ -1,0 +1,27 @@
+
+
+<div class="row">
+	<div class="medium-12 columns">
+		
+		<% if @current_user.distributor %>
+
+			<% if @current_user.subscriber? %>
+				<%= render partial: "/shared/profile/brand_full_profile", locals: {profile: @match} %>
+			<% else %>
+				<%# LEGACY?  SEE IF CAN REMOVE %>
+				<%#= render partial: "/shared/profile/brand_public_profile_tiles", locals: {profile: @match} %>
+			<% end %>
+
+		<% elsif @current_user.brand %>
+
+			<% if @current_user.subscriber? %>
+				<%= render partial: "/shared/profile/distributor_full_profile", locals: {profile: @match} %>
+			<% else %>
+				<%# LEGACY?  SEE IF CAN REMOVE %>
+				<%#= render partial: "/shared/profile/distributor_public_profile_tiles", locals: {profile: @match} %>
+			<% end %>
+
+		<% end %>
+	</div>
+</div>
+

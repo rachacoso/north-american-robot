@@ -1,0 +1,73 @@
+<%= render partial: "shared/topbar" %>
+<%= render layout: "shared/panel" do %>
+
+	<div class="row">
+		<div class="medium-12 columns">
+			<div class="row">
+				<div class="small-12 columns">
+					<h1>Product Portfolio</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="medium-10 columns push-2">
+			<br>
+			<div class="onboard-instructions smaller">
+			Here is where you can share information about your products. <br>
+			Tell distributors about your current products as well as those in the pipeline. 
+
+			<br><br><strong>The more information you provide for the description and key benefits, the more information distributors have to understand and buy into your products!</strong>
+
+			<br><br>This information is ONLY shared with distributors that you have approved to see your full profile. 
+			<br>[ADD INFO ABOUT WHAT DISTRIBUTORS CAN SEE WHEN]
+			</div>
+			<hr>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="medium-12 columns">
+			<h3>Current Products</h3>
+			<hr>
+		</div>
+	</div>
+	
+	<%= render partial: "shared/editcollblock", locals: {
+		coll: @current_products,
+		identifier: "name",
+		no_item_message: "No Current Products",
+		coll_new_item: @new_product,
+		coll_new_item_text: "Add a Current Product",
+		iscurrent: "true"
+	} %>
+	
+	<div class="row">
+		<div class="medium-12 columns">
+			<h3>Upcoming Products</h3>
+			<hr>
+		</div>
+	</div>
+	
+	<%= render partial: "shared/editcollblock", locals: { 
+		coll: @past_products,
+		identifier: "name",
+		no_item_message: "No Upcoming Products",
+		coll_new_item: @new_product,
+		coll_new_item_text: "Add Upcoming Product",
+		iscurrent: "false"
+	} %>
+	
+
+	<br><br>
+	<div class="row onboard-submit-footer">
+		<div class="medium-12 columns text-right">
+<%= button_to "Next", onboard_brand_five_url, method: :get, class: "tiny radius alert button right" %>
+<%= render "shared/profileform/return_later" %>
+		</div>
+	</div>
+	
+<% end %>
+
+

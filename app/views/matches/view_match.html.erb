@@ -1,0 +1,63 @@
+
+<%= render partial: "shared/topbar" %>
+
+
+<div class="row collapse">
+	<div class="small-11 small-centered columns marketplace-header">
+		<%= image_tag "logo_header_marketplace.svg" %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="small-11 small-centered columns marketplace-subpage-header">
+	<h2><%= @current_user.type_inverse?.capitalize %> profile</h2>
+	<h3></h3>
+	
+	</div>
+</div>
+
+
+<div class="row collapse">
+	<div class="small-12 columns" id="page-content">
+
+<!-- <div class="row">
+	<div class="small-12 columns">
+		<ul class="breadcrumbs">
+			<li>
+			<% if @referrer %>
+				<% matchtype = @current_user.type_inverse? %>
+				<%= link_to "Find #{matchtype}s", all_matches_url %></li>
+
+				<% if @referrer == "index_saved_matches" %>  
+				  <li><%= link_to "Saved #{matchtype}s", saved_matches_url %></li>
+				<% elsif @referrer == "index_contacted_matches" %>  
+				  <li><%= link_to "#{matchtype}s you contacted", contacted_matches_url %></li>
+				<% elsif @referrer == "index_incoming_matches" %>  
+				  <li><%= link_to "#{matchtype}s contacting you", incoming_matches_url %></li>
+			  <% end %>
+		  <% else %>
+				<%= link_to 'All Matches', all_matches_url %>
+		  <% end %>
+		  </li>
+		  <li class="current"> <%= link_to (@current_user.subscriber? ? "<strong>#{@match.company_name}</strong>".html_safe : "[Name Hidden]"), "#" %> </li>
+		</ul>
+	</div>
+</div> -->
+
+
+
+<div id="match-view">
+
+<%= render "match_view" %>
+
+</div> <!-- /.#match-view -->
+
+
+	</div><!--/.medium-10-->
+</div>
+
+
+
+
+
+

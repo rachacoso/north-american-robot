@@ -1,0 +1,30 @@
+
+<% if @current_user.distributor.sectors %>
+
+	<%# sectors = Sector.find(@current_user.distributor.sector_ids) %>
+	<% sectors = Sector.all %>
+
+	<div class="row">
+		<% sectors.order_by{|s| s.id }.each do |s| %>
+		<%= link_to all_matches_url(:sector => s.id) do %>
+		<div class="medium-3 columns hide-for-small-only text-center" id="match-<%=s.name.downcase.tr("/"," ").squish.tr(" ","-") %>">
+		</div>
+		<% end %>
+		<% end %>		
+	</div><!--/.row-->
+
+	<div class="row show-for-small-only">
+		<div class="small-12 columns">
+			<% sectors.each do |s| %>
+				<%= link_to s.name, all_matches_url%><br>
+			<% end %>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+
+<% else %>
+	<div class="row">
+		<div class="small-12 columns">
+			<h1>You must have at least one sector selected in your profile to see matches.</h1>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+<% end %>

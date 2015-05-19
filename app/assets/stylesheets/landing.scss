@@ -1,0 +1,1859 @@
+@import "foundation/functions";
+@import "global_variables";
+@import "foundation/components/labels";
+
+body {
+  min-height: 100%;
+}
+
+h1, h2, h3 {
+  font-weight: 100;
+}
+h4, h5, h6 {
+  font-weight: 200;
+}
+
+// div {
+//   border: 1px solid red; 
+// }
+
+// .redborder {
+//   border: 1px solid red;
+// }
+
+/////////////
+// MIXINS
+/////////////
+
+// Transparent backgrounds
+
+@mixin transparent($color, $alpha) {
+  $rgba: rgba($color, $alpha);
+  // $rgb: rgb($color);
+  $ie-hex-str: ie-hex-str($rgba);
+  /* Fallback for web browsers that doesn't support RGBa */
+  // background: $rgb;
+  background: $color;
+  /* RGBa with opacity */
+  background: $rgba;
+  /* For IE 5.5 - 7*/
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str},endColorstr=#{$ie-hex-str});
+  /* For IE 8*/
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str}, endColorstr=#{$ie-hex-str})";
+}
+
+
+// Button Styled Text Link 
+
+@mixin formlinkstyle($color: $link-color, $font-size: 0.65em) {
+  border: 1px solid $color;
+  transition: 0.2s;
+  padding: 0.1em 0.4em;
+  border-radius: 5px;
+  font-size: $font-size;
+  background-color: white;
+  color: $color;
+  &:hover {
+    background-color: $color;
+    color: white;
+  }
+  &.active {
+    background-color: $color;
+    color: white;
+  }    
+}
+
+
+
+/////////////
+// DEV STYLES
+/////////////
+
+/*
+ * Let's target IE to respect aspect ratios and sizes for img tags containing SVG files
+ *
+ * [1] IE9
+ * [2] IE10+
+ */
+/* 1 */
+.ie9 img[src*=".svg"] {
+  width: 100%; 
+}
+/* 2 */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  img[src*=".svg"] {
+    width: 100%; 
+  }
+}
+
+
+
+/////////////
+// ERRORS/ALERTS STYLES
+/////////////
+
+
+// Error/Validation styling
+
+.errornotice {
+  color: red;
+  font-size: 0.80em;
+  margin-bottom: 0.3em;
+  padding: 0.2em;
+  // border: 1px solid transparent;
+  &.error-on {
+    // border: 1px solid red;
+  }
+}
+
+// Alerts
+
+.information {
+  color: $info-color;
+}
+
+.bodywrapper {
+  min-height: 100%;
+  // background-color: #fff;
+  padding: 1em 0em 3em 0em;
+
+}
+
+
+
+/////////////
+// EDIT PANELS
+/////////////
+
+.groupwrapper {
+  background-color: transparent;
+  padding: 0.5em;
+  margin: 0.5em 0em;
+  // border: 2px solid #455E80;
+  vertical-align: bottom;
+
+}
+
+.addnewform {
+  background-color: scale-color($body-font-color-analogue, $lightness: 10%);
+  .addnewforminputs {
+    padding: 0em 1em;
+  }
+  .addnewformsubmit {
+    margin: 0.5em 1em;
+  }
+}
+.updateform {
+  padding: 0em 1em;
+}
+
+a.itemformlink {
+  @include formlinkstyle
+}
+
+a.itemformlink.profilelink {
+  @include formlinkstyle($link-color, 120%)
+}
+.rowitem {
+  padding: 0em;
+  margin: 0em 0em 0.25em 0em;
+  a {
+    @include formlinkstyle;
+  }
+
+  // styling for the collection accordions
+  .accordion-navigation > a {
+    border: none;
+    transition: 0.2s;
+    // padding: 0.1em 0.4em;
+    border-radius: 0px;
+    font-size: 1.25em;
+    font-weight: 100;
+    // border-bottom: 2px solid scale-color(#ABBACC, $lightness: -30%);
+    &:hover {
+      background-color: $landing-dark-gray;
+      // border-bottom: 2px solid #efefef;
+      color: white;
+    }
+  }
+
+  .accordion-navigation.active > a {
+    color: white;
+  }
+
+  .rowheadback {
+    background-color: #ABBACC;
+    padding: 0.5em;
+    margin: 0em 0em 1em 0em;
+    color: white;
+    border-bottom: 2px solid scale-color(#ABBACC, $lightness: -30%);
+    &.addnew {
+      background-color: scale-color(#ABBACC, $lightness: -50%);
+    }
+  }
+}
+
+.columnheader {
+  // border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  padding: 0.1em 0.5em;
+}
+
+// Top Bar
+.topbar {
+  border-radius: 0px;
+  padding: 0.5em 0em;
+  #loginwidget  {
+    padding: 0em;
+    margin: 0.7em 0.5em;
+    a {
+      padding-top: 1em;
+    }
+  }
+  .usernav {
+    // border-bottom: 1px dotted black;
+    margin: 0.5em 0.5em;
+    padding: 0em;
+  }     
+}
+.top-bar-section .dropdown li:not(.has-form) a:not(.button) {
+  line-height: 3;
+}
+.topbarborder {
+  border-bottom: 1px dotted $link-color;
+  height:1em;
+}
+
+
+.ldpanel {
+  border-radius: 3px; 
+	border: 1px dotted scale-color($link-color, $lightness: 50%);
+  padding: 0.5em 1em;
+  margin: 0.5em 0em 1.5em 0em;
+  @include transparent(#fff, 1);
+  h1 {
+    padding: 0em 0.4em;
+    background-color: $body-font-color;
+    color: white;
+    small {
+      color: white;
+    }
+  }
+}
+
+.headpanel {
+  margin: 0.5em 0em 0.5em 0em;
+  border: 1px dotted scale-color(red, $lightness: 50%);
+  h1{
+    color: #455E7F;
+  }
+}
+
+
+textarea {
+  resize: vertical;
+}
+
+////////////////
+// Forms styling
+////////////////
+
+.prefix, .postfix {
+  font-size: 0.70em;
+  border-top: solid 2px scale-color($input-top-border, $lightness: 30%) !important;
+
+}
+
+input[type="submit"] {
+  margin-top: 1em;
+}
+input[type="text"],
+textarea,
+input[type="number"],
+input[type="email"],
+input[type="password"],
+select {
+  border: none;
+  border-top: solid 2px scale-color($input-top-border, $lightness: 30%);
+  transition: border 0.3s;
+  @include transparent($input-background-color, 0.8);
+  // background: @include transparent($input-background-color, 0.9);
+  // background: $input-background-color;
+  color: $input-text-color;
+  box-shadow: none;
+}
+input[type="password"],
+input[type="email"] {
+  margin-bottom: 0.2em;
+}
+
+input[type="text"],
+// input[type="password"],
+// input[type="email"],
+textarea,
+input[type="number"],
+select {
+  padding: 0px 0px 0px 10px;
+  margin-bottom: 0.2em;
+}
+input[type="text"]:focus,
+input[type="text"].focus,
+textarea:focus,
+textarea.focus,
+input[type="email"]:focus,
+input[type="email"].focus,
+input[type="password"]:focus,
+input[type="password"].focus,
+input[type="number"]:focus,
+input[type="number"].focus {
+  border: none;
+  border-top: solid 2px $input-top-border;
+  background: $input-background-color;
+  // background: #2C3838;
+  box-shadow: inset 0 2px 2px rgba(0,0,0,0.2);
+  color: $input-text-color;
+}
+
+select:hover,
+select.hover {
+  border: none;
+  border-top: solid 2px $input-top-border;
+  background: $input-background-color;
+  box-shadow: none;
+  color: $input-text-color;
+}
+
+
+// placeholder styling
+$placeholder-color: scale-color($input-background-color, $lightness: -30%);
+
+::-webkit-input-placeholder {
+   color: $placeholder-color;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: $placeholder-color;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: $placeholder-color;  
+}
+
+:-ms-input-placeholder {  
+   color: $placeholder-color;  
+}
+
+//////////
+// Radio and Checkbox styling
+//////////
+
+// RADIO
+/*
+  Hide radio button (the round disc)
+  we will use just the label to create pushbutton effect
+*/
+input[type=radio] {
+    display:none; 
+    margin:10px;
+}
+ 
+/*
+  Change the look'n'feel of labels (which are adjacent to radiobuttons).
+  Add some margin, padding to label
+*/
+input[type=radio] + label {
+    display:inline-block;
+    transition: color 0.5s;
+    transition: background-color 0.5s;
+    transition: border 0.5s;
+    margin: 0px -2px 0px -2px;
+    padding: 4px 12px;
+    background-color: scale-color($input-background-color, $lightness: 80%);
+    border: 1px solid scale-color($input-background-color, $lightness: 30%);
+    color: #7f7f7f;
+}
+
+
+
+/*
+ Change background color for label next to checked radio button
+ to make it look like highlighted button
+*/
+input[type=radio]:checked + label { 
+  background-image: none;
+  background-color: scale-color($input-background-color, $lightness: 30%);
+  border: 1px solid scale-color($input-background-color, $lightness: -80%);
+  color: #000;
+    
+}
+input[type=radio] + label:hover ,
+input[type=radio]+ label:active  {
+  color: #000;
+}
+
+// CHECKBOX
+
+// ON EDIT SCREENS
+.editform {
+
+  /*
+    Hide checkbox
+    we will use just the label to create pushbutton effect
+  */
+
+  input[type=checkbox] {
+    display:none; 
+    margin:10px;
+  }
+
+
+  /*
+    Change the look'n'feel of labels (which are adjacent to radiobuttons).
+    Add some margin, padding to label
+  */
+  input[type=checkbox] + label {
+    display:inline-block;
+    transition: color 0.5s;
+    transition: background-color 0.5s;
+    transition: border 0.5s;  
+    margin: 2px;
+    padding: 4px 12px;
+    background-color: scale-color($input-background-color, $lightness: 80%);
+    border: 1px solid scale-color($input-background-color, $lightness: 30%);
+    // background-color:#969696;
+    // border-color: #ddd;    
+    color: #7f7f7f;
+    width: 100%;
+  }
+  input[type=checkbox] + label:hover ,
+  input[type=checkbox]+ label:active  {
+    color: #000;
+  }
+
+  /*
+   Change background color for label next to checked radio button
+   to make it look like highlighted button
+  */
+  input[type=checkbox]:checked + label { 
+    background-image: none;
+    background-color: scale-color($input-background-color, $lightness: 30%);
+    border: 1px solid scale-color($input-background-color, $lightness: -80%);
+    color: #000;
+    // background-color: #e7e7e7;
+  }
+
+}
+
+// ON FILTER FORM (FOR MATCHES)
+
+.filterform {
+
+  /*
+    Hide checkbox
+    we will use just the label to create pushbutton effect
+  */
+
+  & input[type=checkbox] {
+    display:none; 
+    margin:10px;
+  }
+
+
+  /*
+    Change the look'n'feel of labels (which are adjacent to radiobuttons).
+    Add some margin, padding to label
+  */
+  input[type=checkbox] + label {
+    display:inline-block;
+    transition: color 0.5s;
+    transition: background-color 0.5s;
+    transition: border 0.5s;  
+    margin: 2px;
+    padding: 4px 12px;
+    background-color: scale-color($landing-blue, $lightness: 80%);
+    border: 1px solid scale-color($landing-blue, $lightness: 30%);
+    border-radius: 10px;
+    color: #7f7f7f;
+    width: 100%;
+    font-size: 0.65em;
+  }
+  input[type=checkbox] + label:hover ,
+  input[type=checkbox]+ label:active  {
+    color: #000;
+  }
+
+  /*
+   Change background color for label next to checked radio button
+   to make it look like highlighted button
+  */
+  input[type=checkbox]:checked + label { 
+    background-image: none;
+    background-color: scale-color($landing-blue, $lightness: 30%);
+    border: 1px solid scale-color($landing-blue, $lightness: -20%);
+    border-radius: 10px;
+    color: #000;
+    // background-color: #e7e7e7;
+  }
+
+}
+
+.top-bar input[type=checkbox] {
+  top: 0px;
+}
+
+.customchanneldisplay {
+  padding: 4px 12px;
+  border: 1px dotted scale-color($input-background-color, $lightness: -80%);
+  background-color: scale-color($input-background-color, $lightness: 30%);
+  color: #000;
+  margin: 2px;
+}
+
+#customchannellist {
+ /*
+    Hide checkbox
+    we will use just the label to create pushbutton effect
+  */
+
+  input[type=checkbox] {
+    display:none; 
+    margin:10px;
+  }
+
+  /*
+    Change the look'n'feel of labels (which are adjacent to radiobuttons).
+    Add some margin, padding to label
+  */
+  input[type=checkbox] + label {
+    display:inline-block;
+    transition: color 0.5s;
+    transition: background-color 0.5s;
+    transition: border 0.5s;  
+    margin: 2px;
+    padding: 4px 12px;
+    background-color: scale-color($input-background-color, $lightness: 80%);
+    border: 1px solid scale-color($input-background-color, $lightness: 30%);
+    // background-color:#969696;
+    // border-color: #ddd;    
+    color: #7f7f7f;
+    width: 100%;
+  }
+  input[type=checkbox] + label:hover ,
+  input[type=checkbox]+ label:active  {
+    color: #000;
+  }
+
+  /*
+   Change background color for label next to checked radio button
+   to make it look like highlighted button
+  */
+  input[type=checkbox]:checked + label { 
+    background-image: none;
+    background-color: scale-color($input-background-color, $lightness: 30%);
+    border: 1px solid scale-color($input-background-color, $lightness: -80%);
+    color: #000;
+    // background-color: #e7e7e7;
+  }
+
+
+}
+
+.productmarketingtype {
+  // border: 1px solid scale-color($input-background-color, $lightness: -80%);
+  // background-color: scale-color($input-background-color, $lightness: 30%);
+  &::before { 
+    content: "\2611";    
+  }
+  &.off {
+    color: #adadad;
+    // border: 1px dotted scale-color($input-background-color, $lightness: -80%);
+    background-color: transparent;
+    &::before { 
+    content: "\2610";    
+    }
+  }
+}
+
+////////////////
+// AUTOCOMPLETE STYLES
+////////////////
+
+.autocomplete-suggestions { 
+  font-weight: 200;
+  font-size: small;
+  border: 1px solid #999; 
+  background: $body-bg; 
+  overflow: auto; 
+}
+.autocomplete-suggestion { 
+  font-weight: 200;
+  font-size: small;
+  padding: 2px 5px; 
+  white-space: nowrap; 
+  overflow: hidden; 
+}
+.autocomplete-selected { 
+  background: scale-color($link-color, $lightness: 80%);
+  // color: $body-bg;
+}
+.autocomplete-suggestions strong { 
+  font-weight: 400; 
+  font-size: small;
+  color: $link-color;
+}
+
+//////////////
+// ONBOARD NAV
+//////////////
+
+$onboard-nav-radius: 4px;
+
+.onboard-nav {
+  padding-top: 0.75em;
+  li {
+    font-size: 0.85em;
+    // border: 1px solid $body-font-color;
+    background: $landing-light-gray;
+    // width: 2em;
+    padding: 0.5em 1em;
+    text-align: center;
+    margin-bottom: 0.2em;
+    margin-left: auto;
+    margin-right: auto;
+    list-style-type: none;
+    display:inline-block;
+    border-radius: $onboard-nav-radius; 
+    &.active {
+      background-color: scale-color($link-color, $lightness: 30%);
+      color: white;
+    }
+    &:hover:not(.active) {
+      background-color: $link-color;
+      color: white;
+    }
+    &.navdone:hover {
+      background-color: transparent;
+      color: $body-font-color;;
+    }    
+  }
+  a {
+      color: $body-font-color;
+  }
+}
+
+// Styling for submit button on Admin Pages
+.text-submit {
+  margin-bottom: 1em;
+  @include formlinkstyle($link-color, 1.5em)
+
+}
+
+// FRONT PAGE AND NEW SESSION PAGE SUBMIT LINK STYLING
+
+#submit-login {
+  background-color: transparent;
+  text-decoration: none;
+  border: none;
+  color: $link-color;
+  cursor: pointer;
+  font-size: 1em;
+  margin-top: 0.3em !important;
+}
+
+#new-user-submit-link {
+  // margin-top: rem-calc(10);
+  background-color: transparent;
+  border: 1px solid $landing-orange;
+  color: $landing-orange;
+  font-weight: 700;
+}
+#new-user-submit {
+  background-color: $landing-orange;
+  color: white;
+}
+#new-user-decline {
+  background-color: $landing-light-gray;
+  color: $landing-dark-gray;
+}
+
+
+// Onboarding Info Text
+.onboard-instructions {
+  // border: 1px dotted scale-color($link-color, $lightness: 70%);
+  border-radius: 8px;
+  padding: 1em;
+  color: $body-font-color;
+  margin-bottom: 1em;
+  // @include transparent($landing-blue, 0.3);
+  background: scale-color($landing-blue, $lightness: 70%);
+  &.smaller {
+    font-size: 0.75em;
+    line-height: 1.5em;
+  }
+}
+
+// Profile Edit Form
+
+.profile-edit-form {
+  // border-radius: 3px; 
+  // border: 1px dotted scale-color($link-color, $lightness: 50%);
+  padding: 0em 1em;
+  margin: 0.5em 0em 1.5em 0em;
+  background: white;
+  h1 {
+    padding-bottom: 0.4em;
+    font-weight: 100;
+  }
+}
+
+.profile-edit-form-onboard {
+  border-radius: 3px; 
+
+  // border: 1px dotted scale-color($link-color, $lightness: 50%);
+  padding: 0em 1em;
+  margin: 0.5em 0em 1.5em 0em;
+  h1 {
+    padding-bottom: 0.4em;
+    margin-bottom: 0.7em;
+    font-weight: 100;
+    border-bottom: 1px solid $landing-dark-gray;
+  }
+  background: white;
+}
+
+// Preview Tiles
+// Distributor/Brand Profile CSS
+
+.profile-item {
+  border: 1px solid grey;
+}
+
+.onboard-submit-footer {
+  background: #efefef; 
+  margin-top: 1em; 
+  border-radius: 0px 0px 3px 3px; 
+  border-top: 1px solid $landing-middle-gray;
+  padding: 0.6em 0em;
+}
+
+.profile-outer-tile {
+  border: 1px solid scale-color($landing-blue, $lightness: 70%);
+  @include transparent(#fff, 0.95);
+  margin: 0.5em;
+}
+
+
+.previewtile {
+  // margin: 1em 0em;
+  padding: 0.5em 0.5em;
+  line-height: 1.25em;
+  // border: 1px dotted scale-color($link-color, $lightness: 70%);
+  // div {
+  //   padding: 0.25em 0.5em;
+  // }
+  .preview-data {
+    // border: 1px solid #547DB2;
+    // border-radius: 4px;
+    font-size: 0.85em;
+    padding: 0.5em 1em;
+  }
+  .preview-data-title {
+    background-color: $link-color;
+    color: white;
+  }
+  .preview-data-tile-title {
+    color: $landing-dark-gray;
+    font-size: 0.85em;
+    font-weight: 200;
+    margin-bottom: rem-calc(10);
+    padding: rem-calc(2) 0;
+    border-bottom: 1px solid $landing-middle-gray;
+  }  
+}
+
+#profile-name {
+  font-size:3em;
+  font-weight:bold;
+  line-height:1em;
+  padding-left: 1em;
+  margin-top: 0.5em;
+}
+#profile-year-established {
+  font-size:2em;
+  padding-left: 1em;
+}
+#profile-website {
+  font-size:1em;
+  padding-left: 1em;
+}
+#profile-country {
+  font-size: 2em;
+}
+
+
+// profile-icons
+
+// .tabs dd > a {
+//   border: 1px solid $body-font-color;
+//   background-color: white;
+// }
+
+// .tabs dd > a:hover {
+
+//   .factory,
+//   .employees,
+//   .globe,
+//   .globeinner,
+//   .shipping,
+//   .channel,
+//   .sector,
+//   .sku,
+//   .press,
+//   .tradeshow,
+//   .patent,
+//   .trademark,
+//   .certification,
+//   .marketing,
+//   .sales,
+//   .brand-portfolio,
+//   .calendar {
+//       transition: 0.2s;
+//       // border: 1px solid $link-color;
+//       fill: $link-color;
+//       #globeoutline,
+//       #shippingglobeoutline,
+//       #factoryoutline {
+//         stroke: scale-color($link-color, $lightness: 20%);
+//       }
+//       background-color: white;
+//   }
+//   .profile-icon-label {
+//     border: 1px solid $link-color;
+//     background-color: $link-color;
+//     color: white;
+//     font-weight: bold;
+//   }
+
+// }
+
+.factory,
+.employees,
+.globe,
+.globeinner,
+.shipping,
+.channel,
+.sector,
+.sku,
+.press,
+.tradeshow,
+.patent,
+.trademark,
+.certification,
+.marketing,
+.sales,
+.brand-portfolio,
+.calendar {
+  // background-color: red;
+  transition: 0.2s;
+  fill: $body-font-color;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  &:hover {
+    fill: scale-color($body-font-color, $lightness: 20%);
+  }
+  // .active & {
+  //   fill: $link-color;
+  // }
+}
+
+
+.profile-icon-label {
+  transition: 0.2s;
+  font-size: 70%;
+  text-align: right;
+  height: 4em;
+  color: $body-font-color;
+  border: 1px solid $body-font-color;
+  .active & {
+    transition: 0.2s;
+    border: 1px solid $link-color;
+    background-color: $link-color;
+    color: white;
+    font-weight: bold;
+  }
+}
+
+// SVG Wrapper
+.svgwrapper {
+  max-width: 6em;
+  min-width: 3.8em;
+  max-height: 6em;
+  min-height: 3.8em;
+  // border: 1px dotted scale-color($body-font-color, $lightness: 20%);
+}
+
+
+// // TABS STYLING
+
+.tabs dd > a, .tabs .tab-title > a {
+  // padding: 2px 2px;
+  // width: 4.7rem;
+  border-radius: 5px 5px 0px 0px;
+}
+.tabs {
+  border-bottom: 1px solid $landing-middle-gray;
+}
+
+// dl.tabs {
+//   text-align: right;
+//   padding: 100;
+// }
+
+// // override default tab content padding
+// .tabs-content > .content {
+//   padding: 0em;
+// }
+
+
+// Front Page Styling
+
+.front-top-panel {
+  margin-top:2em;
+  min-height: 100%;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: initial; 
+}
+
+#front-footer {
+  background-color: $landing-dark-gray;
+  padding-top: 2em;
+  color: $landing-light-gray;
+}
+
+
+// .front-middle-panel {
+//   min-height: 100%;
+//   width: 100%;
+//   margin-left: auto;
+//   margin-right: auto;
+//   padding-top: 5em;
+//   @include transparent(black, 0.3);
+
+  
+// }
+
+// .front-bottom-panel {
+//   min-height: 100%;
+//   width: 100%;
+//   margin-left: auto;
+//   margin-right: auto;  
+//   padding-top: 5em;
+// }
+
+// Subnav Styling Override (change color of inactive items)
+
+.sub-nav dt a, .sub-nav dd a, .sub-nav li a {
+  background-color: white;
+  // border-radius: 0px 0px 8px 3px;
+}
+
+
+// Dashboard Styles
+
+// dashboard panels inside a foundation panel
+.dashboard-innerpanel {
+  border: 1px dotted red;
+  padding: 1em;
+  margin: 1em;
+}
+
+// Partial Spacer 
+
+.listspacer {
+  border-top: 1px solid $body-font-color;
+  margin: 1em;
+
+}
+
+// Adjust spacing of anchors
+a.anchor {
+  display: block; 
+  position: relative; 
+  top: -80px; 
+  visibility: hidden;
+}
+
+
+// Match Pages Styling
+
+.matchcount {
+  font-size: 0.7em;
+}
+
+.deactivate {
+  border: 1px dotted #a6a6a6; 
+  a { 
+    color: #a6a6a6;
+    pointer-events: none;
+    cursor: default;
+   }
+}
+
+.filter-form-panel {
+  margin: 0em 1em;
+}
+
+// Speech Bubbles
+
+
+$them-color: scale-color($landing-middle-gray, $lightness: 70%);
+$them-border: scale-color($landing-middle-gray, $lightness: 50%);
+$you-color: scale-color($landing-blue, $lightness: 90%);
+$you-border: scale-color($landing-blue, $lightness: 70%);
+$bubble-font-size: 0.8em;
+
+.bubble-container {
+  margin-top: rem-calc(10);
+  margin-bottom: rem-calc(10);
+  border-top: 0px solid transparent;
+}
+
+#message-input {
+  background-color: scale-color($landing-blue, $lightness: 95%);
+  border: none;
+}
+
+.bubble-them
+{
+& p {font-size: $bubble-font-size;}
+position: relative;
+width: 98%;
+// min-height: 100px;
+padding: rem-calc(10);
+// margin: rem-calc(10);
+background: $them-color;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+border: 2px solid $them-border;
+}
+
+.bubble-them:before 
+{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 15px 15px 15px 0;
+border-color: transparent $them-color;
+display: block;
+width: 0;
+z-index: 2;
+left: -13px;
+top: 10px;
+}
+
+.bubble-them:after 
+{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 15px 15px 15px 0;
+border-color: transparent $them-border;
+display: block;
+width: 0;
+z-index: 1;
+left: -15px;
+top: 10px;
+}
+
+
+.bubble-you
+{
+& p {font-size: $bubble-font-size;}
+position: relative;
+width: 98%;
+// min-height: 100px;
+padding: rem-calc(10);
+background: $you-color;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+border: 2px solid $you-border;
+}
+
+.bubble-you:before 
+{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 15px 0 15px 15px;
+border-color: transparent $you-color;
+display: block;
+width: 0;
+z-index: 2;
+right: -13px;
+top: 10px;
+}
+.bubble-you:after 
+{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 15px 0 15px 15px;
+border-color: transparent $you-border;
+display: block;
+width: 0;
+z-index: 1;
+right: -15px;
+top: 10px;
+}
+#message-list {
+  // max-height: 200px;
+  // overflow-y: scroll;
+}
+
+#unread-message-badge {
+  font-weight: 900;
+  font-size: 1.5em;
+  color: red !important;
+}
+
+#mc-new-contacts, #mc-unread-messages {
+  // border: 1px solid red;
+  margin: 1em 0em;
+  padding-bottom: 1em;
+  border: 1px solid $landing-middle-gray;
+  #mc-unread-messages-inner, #mc-new-contacts-inner {
+    padding: 1em;
+  }
+}
+
+.profile-list-tile {
+   border: 1px solid $landing-middle-gray;
+   border-radius: 1em;
+   background: white;
+   padding: 1em;
+   margin: 0.5em;
+   min-height: rem-calc(200);
+
+}
+
+.profile-list-tile-small {
+  position: relative;
+  border-bottom: 1px solid $landing-middle-gray;
+  // border-radius: 1em;
+  background: white;
+  padding: rem-calc(10);
+  margin-bottom: rem-calc(5);
+  .country {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background: $landing-light-gray;
+  }
+}
+
+.profile-list-tile-small-sq {
+  width: rem-calc(275);  
+   // border: 1px solid $landing-middle-gray;
+   // width: rem-calc(225);
+   // min-height: rem-calc(300);
+   margin: 0.5em;   
+}
+
+.profile-list-tile-small-sq-top {
+  position: relative;
+  // width: rem-calc(300);
+  height: rem-calc(180);
+  // border-right: 1px solid $landing-middle-gray;
+  @include transparent(#000, 0.4);
+  background-image: url("/images/crate.jpg");
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: center;
+
+  .profile-list-tile-small-sq-top-countries-sectors {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    @include transparent(#000, 0.4);
+    padding: rem-calc(5);
+    color: $landing-light-gray;
+    font-weight: 100;
+    // border-bottom: 1px solid $landing-light-gray;
+    // border-right: 1px solid white;
+  }
+
+}
+
+.profile-list-tile-small-sq-top-companyname {
+  // width: rem-calc(225);  
+  // @include transparent(#000, 0.6);
+  // border-top: 1px solid white;
+  // border-left: 1px solid white;
+  // background: white;
+  height: rem-calc(60);
+  @include transparent(#000, 0.6);
+  padding: rem-calc(10);
+  a {color: white; display: block;}
+  h3 {margin: 0;color: white;}
+}
+
+
+
+
+.profile-list-tile-small-sq-middle {
+   height: rem-calc(125);
+   // width: rem-calc(225);   
+   background: white;
+   padding: rem-calc(5);
+}
+
+.profile-logo-area {
+  height: rem-calc(80);
+  // margin-top: rem-calc(15);
+  img.uploaded-logo  {
+    width: auto !important;
+    max-height: 80px;
+  }
+}
+.profile-list-tile-small-sq-bottom {
+  height: rem-calc(70);
+  // width: rem-calc(225);
+  background: white;
+  padding: rem-calc(15) rem-calc(5);
+}
+
+.profile-indicators {
+  // padding: rem-calc(5);
+}
+
+
+
+.message-index-indicator {
+  @include label(
+    // This options sets label padding
+    $padding:rem-calc(4 8 6),
+    // This option sets label text-size
+    $text-size:rem-calc(11),
+    // This option sets label background-color
+    $bg:$landing-middle-gray,
+    // This option sets the radius of the label
+    $radius:2px
+  );  
+}
+
+.plt-indicator-info {
+  @include label(
+    // This options sets label padding
+    $padding:rem-calc(4 8 6),
+    // This option sets label text-size
+    $text-size:rem-calc(11),
+    // This option sets label background-color
+    $bg:$landing-light-gray,
+    // This option sets the radius of the label
+    $radius:2px
+  );
+  margin-bottom: 0.5em;
+}
+
+.plt-indicator-action-on {
+  @include label(
+    // This options sets label padding
+    $padding:rem-calc(4 8 6),
+    // This option sets label text-size
+    $text-size:rem-calc(11),
+    // This option sets label background-color
+    $bg:$landing-blue,
+    // This option sets the radius of the label
+    $radius:2px
+  );
+  margin-bottom: 0.5em;
+}
+.plt-indicator-action-off {
+  @include label(
+    // This options sets label padding
+    $padding:rem-calc(4 8 6),
+    // This option sets label text-size
+    $text-size:rem-calc(11),
+    // This option sets label background-color
+    $bg:scale-color($landing-blue, $lightness: 50%),
+    // This option sets the radius of the label
+    $radius:2px
+  );
+  margin-bottom: 0.5em;
+}
+.plt-indicator-alert {
+  @include label(
+    // This options sets label padding
+    $padding:rem-calc(4 8 6),
+    // This option sets label text-size
+    $text-size:rem-calc(11),
+    // This option sets label background-color
+    $bg:$landing-orange,
+    // This option sets the radius of the label
+    $radius:2px
+  );
+  margin-bottom: 0.5em;
+}
+
+.view-match-company-info {
+  // border: 1px solid $landing-middle-gray;
+  background: white; 
+  border-radius: 2px;
+  padding: 0.7em;
+}
+
+// CONTROL DISPLAY OF TEXT UNDER TOPBAR LOGIN
+.top-bar-login-text {
+  color: $landing-light-gray;
+  font-size: 0.7em;
+
+}
+
+
+
+// STYLE FILE UPLOAD
+.fileUpload {
+  position: relative;
+  overflow: hidden;
+  margin: 10px;
+}
+.fileUpload input.upload {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+
+// DASHBOARD STYLES
+
+$dashboard-marketplace-color: $landing-blue;
+$dashboard-insights-color: $landing-yellow;
+$dashboard-agency-color: $landing-teal;
+
+.dashboard-container {
+  // margin-bottom: rem-calc(20);
+}
+
+#dashboard-marketplace-container, #dashboard-insights-container, #dashboard-agency-container {
+  padding: 0;
+  background-color: white;
+}
+#dashboard-marketplace-content, #dashboard-insights-content, #dashboard-agency-content {
+  padding: rem-calc(10);
+  hr {
+     // border: 1px solid $landing-middle-gray;
+     border-color: $landing-middle-gray;
+     margin-top: 0px;
+  }
+}
+.insights-panel {
+  padding: 0 rem-calc(10);
+}
+.agency-panel {
+  padding: 0 rem-calc(10);
+}
+.dashboard-messages-panel {
+  position: relative;
+  padding: 0 rem-calc(10);
+  .dashboard-messages-badge {
+    position: absolute;
+    top: 0px;
+    right: 65px;
+  }
+  .dashboard-messages-preview-list {
+    background-color: $landing-light-gray;
+    border-radius: 3px;
+    margin: 0 rem-calc(2);
+    padding: rem-calc(2) 0;
+  }
+
+}
+.dashboard-profile-panel {
+  padding: 0 rem-calc(10); 
+}
+
+#dashboard-marketplace-header, #dashboard-insights-header, #dashboard-agency-header {
+  padding-left: rem-calc(10);
+  // min-height: rem-calc(30);
+  h3 {
+    color: white;
+    font-weight: 400;
+    padding: rem-calc(10);
+  }
+}
+
+
+.image-credits-content {
+  font-size:0.2em;
+  padding-left: 2px;
+}
+
+.insights-panel-image {
+  position: relative;
+  .insights-panel-image-label {
+    position: absolute;
+    color: #4D4D4D;
+    background-color: $landing-yellow;
+    bottom: 0;
+    left: 0;
+    padding: rem-calc(5) rem-calc(10);
+    font-size: 0.75em;
+    font-weight: 600;
+    width: rem-calc(150);
+  }
+}
+.insights-panel-text{
+  font-size: 0.6em;
+  padding: rem-calc(10) 0;
+  font-weight: 200;
+  line-height: 1.2;
+}
+
+#dashboard-marketplace-header {
+  background-color: $dashboard-marketplace-color;
+}
+#dashboard-insights-header {
+  background-color: $dashboard-insights-color;
+}
+#dashboard-agency-header {
+  background-color: $dashboard-agency-color;
+}
+#menu-dashboard {
+  color: $landing-orange;
+  font-weight: 700;
+  .active & {
+    color: $landing-dark-gray;
+  }
+}
+
+#menu-dashboard a:hover {
+  color: red !important;
+}
+
+.breadcrumbs.marketplace {
+  background-color: $dashboard-marketplace-color;
+}
+.breadcrumbs.insights {
+  background-color: $dashboard-insights-color;
+}
+.breadcrumbs.agency {
+  background-color: $dashboard-agency-color;
+}
+
+.dashboard-section-title {
+  font-weight: 300;
+  padding-left: rem-calc(3);
+}
+
+
+// MARKETPLACE STYLES
+
+.marketplace-header {
+  background-color: $landing-blue;
+  padding-left: rem-calc(50);
+  margin-top: rem-calc(15);
+}
+
+.marketplace-content {
+  border: 1px dotted $landing-middle-gray;
+  &.padded {
+    padding: rem-calc(15);
+  }
+}
+
+// PROFILE STYLING (UPDATED)
+
+.profile-container {
+  padding: 0;
+  background-color: white;
+}
+.profile-content {
+  padding: rem-calc(10);
+  hr {
+     // border: 1px solid $landing-middle-gray;
+     border-color: $landing-middle-gray;
+     margin-top: 0px;
+  }
+  &.gallery-window {
+    height: 400px;
+    // height: 66vh;
+    overflow-y: scroll;
+
+  }
+}
+
+.profile-header {
+  padding: rem-calc(9) rem-calc(10) rem-calc(5) rem-calc(10);
+  background-color: $landing-light-gray;
+  h4 {
+    color: $landing-dark-gray;
+    font-weight: 100;
+  }
+  &#profile-main-top {
+    border-top: 1px solid $landing-middle-gray;
+    border-bottom: 1px solid $landing-middle-gray;
+  }
+  &#profile-main-bottom {
+    border-top: 1px solid $landing-middle-gray;
+    // border-bottom: 1px solid $landing-middle-gray;
+    background-color: white;
+  }  
+
+}
+
+
+.profile-section-title {
+  font-weight: 300;
+  padding-left: rem-calc(3);
+}
+
+
+// CONVERSATIONS INDEX STYLING (UPDATED)
+
+.conversations-container {
+  padding: 0;
+  margin: 0 rem-calc(20) rem-calc(20) rem-calc(20);
+  // background-color: $landing-middle-gray;
+}
+.conversations-content {
+  padding: rem-calc(10);
+  // background: white;
+  color: $landing-dark-gray;
+  h2 {
+    color: $landing-dark-gray;
+  }
+  hr {
+     // border: 1px solid $landing-middle-gray;
+     border-color: $landing-light-gray;
+     margin-top: 0px;
+  }
+}
+
+.conversations-header {
+  padding: rem-calc(9) rem-calc(10) rem-calc(5) rem-calc(10);
+  // background-color: $landing-light-gray;
+  border-bottom: 1px solid $landing-dark-gray;
+  h2 {
+    color: $landing-dark-gray;
+    font-weight: 100;
+  }
+}
+
+
+// AJAX OVERLAY AND WAIT MODAL
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  background-color: rgba(0,0,0,0.5);
+  display: none;
+}
+
+.modal {
+    width: 200px;
+    height: 100px;
+    line-height: 100px;
+    position: fixed;
+    top: 50%; 
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -100px;
+    background-color: $landing-orange;
+    border-radius: 5px;
+    text-align: center;
+    z-index: 11; /* 1px higher than the overlay layer */
+    display: none;
+    color: white;
+    font-weight: 700;
+}
+
+
+// NEW SEARCH START PAGE
+
+// .matchback {
+//   position: fixed;
+//   background: transparent url("/images/map.svg") fixed center;
+//   background-size: 75%;
+//   background-repeat: no-repeat;
+//   top: 20px;
+//   left: 0px;
+//   height: 100%;
+//   width: 100%;
+//   z-index: -11;
+//   pointer-events: none;
+// }
+
+.marketplace-subpage-header  {
+  background: white;
+  margin: 0;
+  padding: rem-calc(9) rem-calc(10) rem-calc(5) rem-calc(10);
+  border-bottom: 1px solid $landing-middle-gray;
+  h1 {
+    // color: $landing-blue;
+    font-weight: 100; 
+  }
+}
+
+
+#side-nav-container {
+  background: $landing-light-gray;
+  border-radius: 9px 0px 0px 9px;
+}
+
+#side-nav-content {
+  border: 1px solid $landing-light-gray;
+  border-radius: 9px;
+  background: scale-color($landing-blue, $lightness: 50%);
+  padding: 1em;
+  margin-bottom: 2em;
+  min-height: 80vh;
+}
+#page-content {
+  // border: 1px solid $landing-light-gray;
+  // border-radius: 9px;
+  // background: scale-color($landing-blue, $lightness: 50%);
+  // padding: 1em;
+  // margin-bottom: 2em;
+  // min-height: 80vh;
+}
+
+// BRAND->DISTRIBUTOR SEARCH START
+
+#match-map-header {
+  // position: relative;
+  background: white url("/images/searchmap.svg");
+  // background-position:  top;
+  background-size: 25%;
+  background-repeat: no-repeat;
+}
+
+#match-map-container {
+  position: relative;
+  background: transparent url("/images/searchmap.svg");
+  background-position:  center;
+  background-size: 95%;
+  background-repeat: no-repeat;
+}
+.match-map-overlay {
+  @include transparent(#fff, 0.4);
+  height: 100%
+}
+
+#match-russia, {
+  position: absolute;
+  left: 69%;
+  top: 18%;
+}
+#match-china {
+  position: absolute;
+  left: 72%;
+  top: 34%;
+}
+#match-korea {
+  position: absolute;
+  left: 83%;
+  top: 31%;
+}
+#match-india {
+  position: absolute;
+  left: 63%;
+  top: 47%;
+}
+#match-brazil {
+  position: absolute;
+  left: 32%;
+  top: 65%;
+}
+#match-uk {
+  position: absolute;
+  left: 37%;
+  top: 25%;
+}
+
+
+// DISTRIBUTOR->BRAND SEARCH START
+
+#match-sectors-container {
+  position: relative;
+  height: rem-calc(300);
+  // background: transparent url("/images/searchmap.svg");
+  // background-position:  center;
+  // background-size: 95%;
+  // background-repeat: no-repeat;
+}
+
+
+/* ID names generated on distributor_search_start partial, based on the sector name */
+#match-baby-kids, #match-fashion-accessories, #match-other, #match-personal-care {
+  position: relative;
+  top: rem-calc(50);
+  height:200px;
+  background-position: center;
+  background-size: 100%;
+}
+#match-baby-kids {
+  background: transparent url("/images/landing_sector_baby_kids.svg") no-repeat;
+}
+#match-fashion-accessories {
+  background: transparent url("/images/landing_sector_fashion_accessories.svg") no-repeat;
+}
+#match-personal-care {
+  background: transparent url("/images/landing_sector_personal_care.svg") no-repeat;
+}
+#match-other {
+  background: transparent url("/images/landing_sector_other.svg") no-repeat;
+}
+
+
+#match-title {
+  position: absolute;
+  left: 5%;
+  top: 2%;
+  background: rgba(255,255,255,0.6);  
+}
+
+
+#match-list {
+  // position: relative;
+  padding: 0em;
+  // top: 75px;
+  // left: 5%;
+  width:100%;
+  z-index: 10;
+  // border: 1px dotted rgba(0,0,0,0.2);
+  margin-bottom: 5em;
+}
+
+a.match-map {
+  color:white;
+  background: $landing-orange;
+  padding: rem-calc(4);
+  padding-top: rem-calc(4) !important;
+  font-weight: 400;
+  font-size: rem-calc(11);
+  border-radius: 3px;
+}
+
+a.match-map:hover {
+  background: $landing-orange;
+  border: 1px solid black;
+}
+
+.saved-contacted-match-list {
+  // @include transparent(#fff, 0.4);
+  // border: 5px solid rgba(0,0,0,0.2);
+  // position: absolute;
+  padding-top:0px;
+  top: 0;
+}
+
+.saved-contacted-match-header {
+  // background: rgba(255,255,255,0.6);
+  padding: 1em;
+}
+
+.match-empty {
+  // background: $landing-middle-gray;
+  border: 1px dotted $landing-middle-gray;
+  margin-top: 0px;
+  padding: 2em;
+  width: 100%;
+  height: 100%;
+}
+
+
+// SIDE NAV STYLING
+// .side-nav li.active {
+//   background: gray;
+// }
+
+.side-nav li.active > a {
+  color: red !important;
+}
+
+
+// MESSAGE CENTER STYES
+.messages-panel {
+  padding: rem-calc(15);
+  background: $landing-middle-gray;
+  border: 1px solid $landing-light-gray;
+}
+
+// FILE UPLOAD CONTROL HIDE/STYLE
+
+.hide-upload{
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  -moz-opacity: 0;
+  -khtml-opacity: 0;
+  opacity: 0;
+}
+
+.galleria-brand-photos{height:400px}
+
+.galleria-product-photos{height:300px}
+
+// PAGINATION STYLES
+@import "foundation/components/buttons";
+.pagination {
+  margin: rem-calc(5) 0;
+  height: rem-calc(20);
+  font-size: 0.75em;
+  a { 
+    color: $landing-light-gray; 
+  }  
+  .first, .prev, .next, .last, .page {
+    margin: rem-calc(2);
+    
+    // border: 1px solid $landing-middle-gray;
+
+    @include button(
+      // $padding - Used to build padding for buttons Default: $button-med or rem-calc(12)
+      $padding: rem-calc(6),
+      // Background color. We can set $bg:false for a transparent background. Default: $primary-color.
+      $bg: $landing-middle-gray,
+      // If true, set to button radius which is $global-radius or explicitly set radius amount in px (ex. $radius:10px). Default:false.
+      $radius: 0,
+      // We can set $full-width:true to remove side padding extend width. Default:false
+      $full-width: false,
+      // We can set $disabled:true to create a disabled transparent button. Default:false
+      $disabled: false
+      // $is-input - <input>s and <button>s take on strange padding. We added this to help fix that. Default:false
+      // $is-input: false
+    );    
+  }
+  .page{
+    &.current{
+      @include button(
+        // $padding - Used to build padding for buttons Default: $button-med or rem-calc(12)
+        $padding: rem-calc(6),
+        // Background color. We can set $bg:false for a transparent background. Default: $primary-color.
+        $bg: $landing-dark-gray,
+        // If true, set to button radius which is $global-radius or explicitly set radius amount in px (ex. $radius:10px). Default:false.
+        $radius: 0,
+        // We can set $full-width:true to remove side padding extend width. Default:false
+        $full-width: false,
+        // We can set $disabled:true to create a disabled transparent button. Default:false
+        $disabled: false
+        // $is-input - <input>s and <button>s take on strange padding. We added this to help fix that. Default:false
+        // $is-input: false
+      ); 
+    }
+  }
+}
+

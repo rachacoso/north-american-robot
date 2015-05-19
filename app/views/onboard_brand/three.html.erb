@@ -1,0 +1,49 @@
+<%= render partial: "shared/topbar" %>
+
+
+
+<%= render layout: "shared/panel" do %>
+
+
+	<div class="row">
+		<div class="medium-12 columns">
+			
+		<div class="row">
+			<div class="small-12 columns">
+				<h1>Brand Story</h1>
+			</div>
+		</div>
+
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="medium-10 columns push-2">
+			<br>
+			<div class="onboard-instructions">
+<p>Tell us what makes your brand (and products) special and unique. </p>
+
+<p style="font-size: 0.7em;"><em>EXAMPLE: <br>O.R.G Skincare is dedicated to bringing the best traditions from Asia to the U.S. market and beyond. Our trend spotters, skincare experts, and makeup artists work with our product development team to identify leading beauty technology from Asia. We then tailor formulas for the global consumer. O.R.G’s simple but effective system is a preventative care line, designed for individuals who want beautiful skin at every age.</em></p>
+
+			</div>
+		</div>
+	</div>
+
+	<%= form_for @brand, url: brand_url do |f| %>
+	<%= hidden_field_tag :redirect, 'four' %>
+	<div class="row">
+		<div class="medium-10 columns push-2">
+			<%= f.text_area :brand_positioning, rows: 4, label: "Brand Story", placeholder: 'Brand Story' %>
+		</div>
+	</div>
+	<br><br>
+	<div class="row onboard-submit-footer">
+		<div class="medium-12 columns text-right">	
+			<%= f.submit 'Next', class: "tiny radius alert button right" %>
+	<% end %>
+			<%= render "shared/profileform/return_later" %>
+		</div>
+	
+	</div>
+
+<% end %>

@@ -1,0 +1,52 @@
+<% matchtype = @current_user.type? == "distributor" ? "Brands" : "Distributors" %>
+<%= render partial: "shared/topbar" %>
+
+
+<div class="row collapse">
+	<div class="small-12 columns" id="page-content">
+
+<% if @current_user.subscriber? %>
+
+	<% if @matches_accepted.blank? && @matches_waiting.blank? %>
+
+		<%= render "no_matches" %>
+
+	<% else %>
+
+		<% unless @matches_accepted.blank? %>
+		<div class="messages-panel">
+		<h2>In Conversation</h2>
+		<small><strong><%= render partial: "counts", locals: {matches: @matches_accepted} %></strong></small>
+		<hr>		
+		<div class="saved-contacted-match-list">
+		<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: @matches_accepted} %>
+		</div>
+		</div>
+		<% end %>
+
+		<% unless @matches_accepted.blank? || @matches_waiting.blank? %>
+		<hr>
+		<% end %>
+
+		<% unless @matches_waiting.blank? %>
+		<div class="messages-panel">
+		<h2>Awaiting Their Response</h2>
+		<small><strong><%= render partial: "counts", locals: {matches: @matches_waiting} %></strong></small>
+		<hr>
+		<div class="saved-contacted-match-list">
+		<%= render partial: "#{@current_user.type?}_match_list", locals: {matches: @matches_waiting} %>
+		</div>
+		</div>
+		<% end %>
+
+	<% end %>
+
+<% else %>
+	<div class="row">
+  <div class="small-11 small-centered text-center columns">
+    <h1>Available to subscribers only</h1>
+  </div><!--/.small-11 small-centered text-center-->
+	</div><!--/.row-->
+<% end %>
+	</div><!--/.medium-10-->
+</div>

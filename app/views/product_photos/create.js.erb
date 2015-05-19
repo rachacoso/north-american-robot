@@ -1,0 +1,6 @@
+$('#product-photo-grid-<%= @product.id %>').hide().html("<%= j ( render partial: "shared/product_photo_grid", locals: {cb: @product} ) %>").fadeIn(1000);
+
+
+$(document).foundation();
+$(document).foundation('accordion', 'reflow');
+
