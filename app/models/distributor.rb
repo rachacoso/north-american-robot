@@ -20,9 +20,10 @@ class Distributor
 	field :linkedin, type: String
 	field :rating, type: Integer, default: 0 # validation rating 0-7 based on validation criterion
 	field :completeness, type: Integer, default: 0 # 0-3 depending on completeness of profile fields
-
+	embeds_one :address, as: :addressable
  	has_many :contacts, as: :contactable, dependent: :destroy
-	accepts_nested_attributes_for :contacts
+ 	
+	accepts_nested_attributes_for :address
 
 	has_mongoid_attached_file :logo, 
   	# :path => ':attachment/:id/:style.:extension',

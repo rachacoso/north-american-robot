@@ -1,0 +1,33 @@
+<div class="row">
+	<div class="small-12 columns text-right">
+		<div class="onboard-nav">
+			<ul>
+			<%= link_to onboard_brand_one_url do %>
+				<%= content_tag(:li, "Company Info", class: (action_name == 'one') ? "active" : '') %>
+			<% end %>
+			<%= link_to onboard_brand_two_url do %>
+				<%= content_tag(:li, "Sectors / Channels", class: (action_name == 'two') ? "active" : '') %>
+			<% end %>
+			<%= link_to onboard_brand_three_url do %>
+				<%= content_tag(:li, "Brand Story", class: (action_name == 'three') ? "active" : '') %>
+			<% end %>		
+			<%= link_to onboard_brand_four_url do %>
+				<%= content_tag(:li, "Product Portfolio", class: (action_name == 'four') ? "active" : '') %>
+			<% end %>
+			<%= link_to onboard_brand_five_url do %>
+				<%= content_tag(:li, "Marketing", class: (action_name == 'five') ? "active" : '') %>
+			<% end %>
+			<%= link_to onboard_brand_six_url do %>
+				<%= content_tag(:li, "Capacities", class: (action_name == 'six') ? "active" : '') %>
+			<% end %>
+			<%= link_to onboard_brand_seven_url do %>
+				<%= content_tag(:li, "Export Countries", class: (action_name == 'seven') ? "active" : '') %>
+			<% end %>
+			<%= link_to onboard_brand_eight_url do %>
+				<%= content_tag(:li, "Patents/Trademarks/Compliance", class: (action_name == 'eight') ? "active" : '') %>
+			<% end %>
+			<%#= content_tag(:li, "done!", class: 'navdone') %>
+			</ul>
+		</div>
+	</div>
+</div>

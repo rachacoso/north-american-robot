@@ -1,0 +1,71 @@
+<% d.rating ||= 0 %>
+<% d.completeness ||= 0 %>
+
+<span data-tooltip aria-haspopup="true" class="has-tip" title="Rating: <%= (d.rating + d.completeness) / 2.0 %> <br><small>Ratings are based on completion of profile and independent verification of distributor qualifications.<br>[completion: <%= d.completeness / 2.0 %> of 1.5]<br>
+[verification: <%= d.rating / 2.0 %> of 3.5]</span>">
+<% case d.rating + d.completeness %>
+<% when 0 %>
+	<% 5.times do %>
+		<%= image_tag 'ratings_gray.svg' %>
+	<% end %>
+<% when 1 %>
+	<%= image_tag 'ratings_half.svg' %>
+	<% 4.times do %>
+		<%= image_tag 'ratings_gray.svg' %>
+	<% end %>
+<% when 2 %>
+	<%= image_tag 'ratings_full.svg' %>
+	<% 4.times do %>
+		<%= image_tag 'ratings_gray.svg' %>
+	<% end %>
+<% when 3 %>
+	<%= image_tag 'ratings_full.svg' %>
+	<%= image_tag 'ratings_half.svg' %>
+	<% 3.times do %>
+		<%= image_tag 'ratings_gray.svg' %>
+	<% end %>
+<% when 4 %>
+	<% 2.times do %>
+		<%= image_tag 'ratings_full.svg' %>
+	<% end %>
+	<% 3.times do %>
+		<%= image_tag 'ratings_gray.svg' %>
+	<% end %>
+<% when 5 %>
+	<% 2.times do %>
+		<%= image_tag 'ratings_full.svg' %>
+	<% end %>
+	<%= image_tag 'ratings_half.svg' %>
+	<% 2.times do %>
+		<%= image_tag 'ratings_gray.svg' %>
+	<% end %>
+<% when 6 %>
+	<% 3.times do %>
+		<%= image_tag 'ratings_full.svg' %>
+	<% end %>
+	<% 2.times do %>
+		<%= image_tag 'ratings_gray.svg' %>
+	<% end %>
+<% when 7 %>
+	<% 3.times do %>
+		<%= image_tag 'ratings_full.svg' %>
+	<% end %>
+	<%= image_tag 'ratings_half.svg' %>
+	<%= image_tag 'ratings_gray.svg' %>
+<% when 8 %>
+	<% 4.times do %>
+		<%= image_tag 'ratings_full.svg' %>
+	<% end %>
+	<%= image_tag 'ratings_gray.svg' %>
+<% when 9 %>
+	<% 4.times do %>
+		<%= image_tag 'ratings_full.svg' %>
+	<% end %>
+	<%= image_tag 'ratings_half.svg' %>
+<% when 10 %>
+	<% 5.times do %>
+		<%= image_tag 'ratings_full.svg' %>
+	<% end %>
+<% end %>
+</span>
+<br>

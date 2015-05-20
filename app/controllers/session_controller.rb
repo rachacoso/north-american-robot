@@ -7,7 +7,7 @@ class SessionController < ApplicationController
 			redirect_to dashboard_url
 		else
 			@newuser = User.new
-			@newuser.build_user_profile
+			@newuser.build_contact
 			render layout: "front"
 		end
 	end

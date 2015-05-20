@@ -8,7 +8,6 @@ class Brand
 	# LOGINS/USERS WHO CAN ACT ON BEHALF OF BRAND
 	has_many :users
 
-
   #####################
 	### Profile
 	#####################
@@ -20,9 +19,10 @@ class Brand
 	field :website, type: String
 	field :facebook, type: String
 	field :linkedin, type: String
-
- 	has_many :contacts, as: :contactable, dependent: :destroy
-	accepts_nested_attributes_for :contacts
+	embeds_one :address, as: :addressable
+	has_many :contacts, as: :contactable, dependent: :destroy
+	
+	accepts_nested_attributes_for :contacts, :address
 
 	has_mongoid_attached_file :logo, 
   	# :path => ':attachment/:id/:style.:extension',

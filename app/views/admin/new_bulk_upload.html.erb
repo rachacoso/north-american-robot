@@ -1,0 +1,51 @@
+<%= render partial: "shared/topbar_admin" %>
+
+<br>
+
+<div class="row">
+	<div class="small-6 columns">
+		<div class="panel">
+		<h3>Distributor Upload</h3>
+		<%= form_tag new_bulk_upload_url, method: 'post', action: :upload, multipart: true do %>
+			<%= hidden_field_tag "user_type", "distributor" %>
+			<%= label_tag(:sector, "Upload to this SECTOR") %>
+			<%= select_tag(:sector, options_from_collection_for_select(Sector.all, :id, :name)) %>
+			<br>
+			<br>
+			<%= file_field_tag(:file) %>
+			<%= submit_tag("Load") %>
+
+		<% end %>
+		</div>
+	</div>
+</div>
+
+<hr>
+
+
+<div class="row">
+	<div class="small-6 columns">
+		<div class="panel">
+		<h3>Brand Upload</h3>
+		<%= form_tag new_bulk_upload_url, method: 'post', action: :upload, multipart: true do %>
+		<%= hidden_field_tag "user_type", "brand" %>
+		<%= label_tag(:sector, "Upload to this SECTOR") %>
+		<%= select_tag(:sector, options_from_collection_for_select(Sector.all, :id, :name)) %>
+		<br>
+		<br>
+		<%= file_field_tag(:file) %>
+		<%= submit_tag("Load") %>
+
+		<% end %>
+		</div>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="small-12 columns">
+		<div id="file-folder">
+
+		</div>
+	</div>
+</div>

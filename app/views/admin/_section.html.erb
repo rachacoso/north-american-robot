@@ -1,0 +1,73 @@
+<div class="row">
+	<div class="medium-9 medium-centered columns">
+		<div class="ldpanel">
+
+		<h1><%= profile_section_name %></h1>
+		
+		<table width="100%">
+		<tr><th>Name</th><th></th><th>&nbsp;</th></tr>
+		<% profile_section.each do |s| %>
+			<tr>
+			<%= form_for s do |f| %>
+			<td><%= f.text_field :name, label: false %></td>
+
+			<% if profile_section.model_name.human == "Channel" %>
+				<td>&nbsp;</td><td>&nbsp;</td>
+				</tr>
+				<tr><td colspan="3">
+				<%= f.text_area :description, rows: 2, placeholder: "Description", label: false %>
+				</td></tr>
+				<tr>
+				<td>&nbsp;</td>
+			<% end %>
+
+			<td><%= link_to 'update', "#", :onclick => "$('#edit_#{dom_id(s)}').submit()".html_safe, class: "itemformlink" %></td>
+			<td><%= link_to 'delete', s, :method => :delete, data: { :confirm => "Are you sure you want to delete #{s.name}?"}, class: "itemformlink" %></td>
+			</tr>
+			<% end %>
+		<% end %>
+		<% if flash[:sector_error] %>
+			test
+		<% end %>
+		<% if flash[:"#{profile_section.name.downcase}_error"] %>
+			<tr><td colspan="3"><div data-alert class="alert-box alert">
+				<% flash[:"#{profile_section.name.downcase}_error"].each do |k,v| %>
+					<%= k %> <%= v %> <br>
+				<% end %>
+			  <a href="#" class="close">&times;</a>
+  			</div>
+			</td></tr>
+		<% end %>
+		<tr>
+			<td colspan="3">
+				<hr>
+			</td>
+		</tr>
+		<%= form_for new_profile_section do |f| %>
+		<tr>
+			<td>
+				<%= f.text_field :name, :placeholder => "Name", label: false %>
+			</td>
+
+			<% if profile_section.model_name.human == "Channel" %>
+				<td>&nbsp;</td><td>&nbsp;</td>
+				</tr>
+				<tr><td colspan="3">
+				<%= f.text_area :description, rows: 2, placeholder: "Description", label: false %>
+				</td></tr>
+				<tr>
+				<td>&nbsp;</td>
+			<% end %>
+
+			<td colspan="2">
+
+				<%= f.submit "ADD", class: "text-submit" %>
+			</td>
+		</tr>
+		<% end %>
+		</table>
+
+
+		</div>
+	</div>
+</div>

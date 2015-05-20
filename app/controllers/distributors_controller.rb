@@ -221,11 +221,7 @@ class DistributorsController < ApplicationController
       :verified_location,
       :verified_brand_display,
       :verification_notes,
-      contact_info_attributes: [ 
-        :contact_name,
-        :contact_title,
-        :email,
-        :phone,
+      address_attributes: [ 
         :address1,
         :address2,
         :city,

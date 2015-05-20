@@ -1,0 +1,24 @@
+<% if @export_countries && !@export_countries.empty? %>
+	<% @export_countries.sort_by{ |m| m.country }.each do |cb| %>
+	<div class="rowitem">
+	<div class="row">
+		<div class="medium-12 columns">
+			<%= form_for cb do |f| %>
+			
+				<div class="row">
+					<div class="medium-8 columns text-right">
+						<%= cb.country %>
+					</div>
+					<div class="medium-4 columns text-left">
+						<%= link_to 'Delete', cb, :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.country}?"}, remote: true %>
+					</div>
+				</div>
+
+			<% end %>
+		</div>
+	</div>
+	</div>
+	<% end %>
+<% else %>
+	<h5>( No Countries )</h5>
+<% end %>

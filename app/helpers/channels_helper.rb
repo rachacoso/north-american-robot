@@ -1,2 +1,2 @@
-module ChannelHelper
+module ChannelsHelper
 end

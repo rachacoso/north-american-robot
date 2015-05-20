@@ -1,0 +1,3 @@
+<%= hidden_field_tag "distributor[#{field}]", false, id: '' %>
+<%= check_box_tag "distributor[#{field}]", true, (@distributor.send(field) rescue false) ? true : false %>
+<%= label_tag("distributor[#{field}]", label) %>

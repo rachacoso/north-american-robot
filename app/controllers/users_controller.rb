@@ -88,6 +88,7 @@ class UsersController < ApplicationController
    
           # prepopulate contact info with user info (user can change later)
           brand_or_distributor = user.send(params[:user_type])
+          brand_or_distributor.create_address
           brand_or_distributor.contacts << Contact.new(
             firstname: params[:user][:contact_attributes][:firstname], 
             lastname: params[:user][:contact_attributes][:lastname], 
@@ -121,7 +122,7 @@ class UsersController < ApplicationController
     @admins = User.where(administrator: true)
 
     @newuser = User.new
-    @newuser.build_user_profile
+    @newuser.build_contact
 
     if params[:page_admins]
       @admins = @admins.page(params[:page_admins]).per(20)

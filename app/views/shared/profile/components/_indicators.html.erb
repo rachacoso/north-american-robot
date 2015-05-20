@@ -1,0 +1,57 @@
+<div class="profile-indicators">
+		<div class="row collapse">
+			<div class="small-12 columns">
+
+
+
+				<% if @current_user.subscriber? && action_name != "public_profile"  %>
+
+					<% m = this_match(match) %>		
+					<% has_unread, count = unread_count_from_match(match) %>
+					<% if has_unread %>
+						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="NEW MESSAGE">
+						<%= image_tag "match_profile_icons_message.svg" %></span>
+					<% end %>
+					<% if m %>
+					<% if !m.accepted && !i_contacted(m) %>
+						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="NEW CONTACT REQUEST">
+						<%= image_tag "match_profile_icons_newrequest.svg" %></span>
+					<% end %>
+					<% end %>	
+
+					<% if m %>
+						<% if m.messages.blank? && i_contacted(m) %>
+							<span data-tooltip aria-haspopup="true" class="has-tip radius" title="AWAITING THEIR RESPONSE<BR> <SMALL> CONTACTED ON <%= m.c_at.strftime("%d %B %Y").upcase %></SMALL>">
+							<%= image_tag "match_profile_icons_waiting.svg" %></span>
+						<% end %>
+						<% if !m.messages.blank? && i_contacted(m) %>
+							<span data-tooltip aria-haspopup="true" class="has-tip radius" title="IN CONVERSATION<BR> <SMALL>YOU CONTACTED THEM</SMALL>">
+							<%= image_tag "match_profile_icons_conversation_outgoing.svg" %></span>
+						<% elsif !m.messages.blank? && !i_contacted(m) %>
+							<span data-tooltip aria-haspopup="true" class="has-tip radius" title="IN CONVERSATION<BR> <SMALL>THEY CONTACTED YOU</SMALL>">
+								<%= image_tag "match_profile_icons_conversation_incoming.svg" %></span>
+						<% end %>
+					<% end %>
+
+
+					<% if match.user.last_login %>
+						<% case last_activity(match.user.last_login) %>
+						<% when "day" %>
+								<span data-tooltip aria-haspopup="true" class="has-tip radius" title="<small>ACTIVE IN PAST</small> <br>DAY">
+								<%= image_tag "match_profile_icons_day.svg" %></span>
+						<% when "week" %>
+							<span data-tooltip aria-haspopup="true" class="has-tip radius" title="<small>ACTIVE IN PAST</small> <br>WEEK">
+							<%= image_tag "match_profile_icons_week.svg" %></span>
+						<% else %>
+							<span data-tooltip aria-haspopup="true" class="has-tip radius" title="<small>ACTIVE IN PAST</small> <br>MONTH OR LONGER">
+							<%= image_tag "match_profile_icons_month.svg" %></span>
+						<% end %>
+					<% end %>
+
+				<% end %>
+
+
+
+			</div><!--/.small-12-->
+	</div><!--/.row-->
+</div>

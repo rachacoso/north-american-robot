@@ -1,0 +1,12 @@
+<div class="row">
+	<div class="medium-10 medium-centered columns">
+		<div class="profile-edit-form-onboard clearfix">
+
+<%= (controller_name == "onboard_brand") ? (render partial: "shared/onboardnav_brand") : "" %>
+<%= (controller_name == "onboard_distributor") ? (render partial: "shared/onboardnav_distributor") : "" %>
+
+<%= yield %>
+
+		</div>
+	</div>
+</div>

@@ -1,0 +1,325 @@
+
+<div class="previewtile">
+
+<div class="row">
+	<div class="small-12 columns">
+		
+		<div class="row">
+
+			<div class="medium-4 columns">
+
+				<div class="profile-container">
+					<div class="profile-header" id="profile-main-top">
+						<h2><%= profile.company_name %></h2>
+					</div>
+					<div class="profile-content">
+						<%= render partial: "shared/profile/distributor_rating", locals: {d: profile} %>
+						<br>
+
+				<%#= image_tag profile.logo.url, width: "100", height: "100", alt: "Logo" %>
+				<% if profile.logo_file_name %>
+					<%= image_tag profile.logo.url(:medium), width: "100", height: "100", alt: "Logo" %>
+				<% else %>
+					<% if !profile.facebook.blank? && fb_picture(profile.facebook) %>
+						<%= image_tag fb_picture(profile.facebook) %>
+					<% else %>
+						<%= image_tag profile.logo.url(:medium), width: "100", height: "100", alt: "Logo" %>
+					<% end %>					
+				<% end %>
+
+						<h3>
+						<% unless profile.website.blank? %>
+						<%= link_to "website", "//#{clean_url(profile.website)}" %>
+						<% end %>
+						<% unless profile.facebook.blank? %>
+						<%= profile.website.blank? ? "" : "/" %>
+							<%= link_to "facebook", "//#{clean_url(profile.facebook)}" %>
+						<% end %>
+						<% unless profile.linkedin.blank? %>
+						<%= profile.website.blank? && profile.website.blank? ? "" : "/" %>
+							<%= link_to "linkedin", "//#{clean_url(profile.linkedin)}" %>
+						<% end %>
+						</h3>
+					</div>
+					<div class="profile-indicators text-right">
+						<%= render partial: "shared/profile/components/indicators", locals: {match: profile} %>
+					</div>
+				</div>
+
+				<% if controller_name == "matches" %>
+				<div class="profile-container">
+					<div class="profile-header" id="profile-main-bottom">
+						<div class="text-right">
+
+								<%= render partial: "matches/contactbutton", locals: {profile: @match} %> <%= render partial: "shared/profile/components/savebutton", locals: {profile: @match} %>
+
+						</div>
+					</div>
+				</div>
+				<% end %>
+
+				<br>
+
+				<div class="profile-container">
+					<div class="profile-header">
+						<h4>GENERAL INFO</h4>
+					</div>
+					<div class="profile-content">
+
+						<div class="row collapse">
+							<div class="small-6 columns">
+								<% unless profile.country_of_origin.blank? %>
+								<div class="preview-data">
+									<span class="preview-data-tile-title">Headquarters</span><br>
+									<strong><%= profile.country_of_origin %></strong>
+								</div>
+								<% end %>
+							</div><!--/.small-6-->
+							<div class="small-6 columns">
+								<% unless profile.company_size.blank? %>
+								<div class="preview-data">
+									<span class="preview-data-tile-title">Company Size</span><br>
+									<strong><%= CompanySize.find(profile.company_size).name rescue nil %></strong>
+								</div>
+								<% end %>
+							</div><!--/.small-6-->
+						</div><!--/.row-->
+
+
+						<div class="row collapse">
+							<div class="small-6 columns">
+								<% unless profile.year_established.blank? %>
+								<div class="preview-data">
+									<span class="preview-data-tile-title">Year Established</span><br>
+									<strong><%= profile.year_established.strftime("%Y") rescue nil %></strong>
+								</div>
+								<% end %>
+							</div><!--/.small-6-->
+							<div class="small-6 columns">
+								<% unless profile.export_countries.blank? %>
+								<div class="preview-data">
+									<span class="preview-data-tile-title">Countries of Distribution</span><br>
+									<strong>
+										<% profile.export_countries.sort_by{ |m| m.country.downcase }.each do |ec| %>
+											<%= ec.country %><br>
+										<% end %>
+									</strong>
+								</div>
+								<% end %>
+							</div><!--/.small-6-->
+						</div><!--/.row-->
+
+
+						<div class="row collapse">
+							<div class="small-12 columns">
+								<% unless profile.sectors.blank? %>
+								<div class="preview-data">
+									<span class="preview-data-tile-title">Sectors</span><br>
+									<% profile.sectors.each do |s| %>
+										<strong><%= s.name %></strong><br>
+									<% end %>
+								</div>
+								<% end %>
+							</div><!--/.small-12-->
+						</div>
+						<div class="row collapse">
+							<div class="small-12 columns">
+								<% unless profile.channels.blank? %>
+								<div class="preview-data">
+									<span class="preview-data-tile-title">Channels</span><br>
+									<% profile.channels.each do |ch| %>
+										<strong><%= ch.name %></strong><br>
+									<% end %>
+									<% if profile.channel_capacities.where(channel_id: 0).length > 0 %>
+										<% profile.channel_capacities.where(channel_id: 0).each do |cch| %>
+											<strong><%= cch.custom_channel_name %> *</strong><br>
+										<% end %>
+										<small>(* Custom Channels)</small>
+									<% end %>
+								</div>
+								<% end %>
+							</div><!--/.small-12-->
+						</div><!--/.row-->
+
+						<div class="row collapse">
+							<div class="small-12 columns">
+								<div class="preview-data">
+									<span class="preview-data-tile-title">General Contact Information</span><br>
+									<% profile.contacts.each do |contact| %>
+									  <strong>
+										<%= contact.firstname.blank? ? "" : "#{contact.firstname}".html_safe %>
+										<%= contact.lastname.blank? ? "" : "#{contact.lastname}".html_safe %>
+										<%= contact.title.blank? ? "" : ",<br>#{contact.title}".html_safe %>
+									  </strong><br>
+									  <% if contact.address %>
+										  <%= contact.address.address1.blank? ? "" : "#{contact.address.address1}<br>".html_safe %>
+										  <%= contact.address.address2.blank? ? "" : "#{contact.address.address2}<br>".html_safe %>
+										  <%= contact.address.city.blank? ? "" : "#{contact.address.city}" %>
+										  <%= contact.address.state.blank? ? "" : "#{contact.address.state}" %>
+										  <%= contact.address.postcode.blank? ? "" : "#{contact.address.postcode}<br>".html_safe %>
+										  <%= contact.address.country.blank? ? "" : "#{contact.address.country}<br>".html_safe %>
+									  <% end %>
+									  <%= contact.phone.blank? ? "" : "#{contact.phone}<br>".html_safe %>
+									  <a href="mailto:<%= contact.email %>"><%= contact.email %></a>
+								  <% end %>
+								</div>		
+							</div><!--/.small-12-->
+						</div><!--/.row-->
+
+					</div>
+					
+				</div>
+
+			</div>
+
+			<div class="medium-8 columns">
+
+
+				<% if @messages && @current_user.subscriber? %>
+					<div class="profile-container">
+						<div class="profile-header">
+							<h4>CONVERSATION</h4>
+						</div>
+						<div class="profile-content">
+							<% if this_match(@match) %>
+								<% if i_contacted(this_match(@match)) %>
+									<%= render partial: "outgoing_contact" %>
+								<% else %>
+									<%= render partial: "incoming_contact" %>
+								<% end %>
+							<% end %>
+						</div>
+					</div>
+					<br>
+				<% end %>
+
+				<% if profile.distributor_brands.where(current: true).length > 0 %>
+				<div class="profile-container">
+					<div class="profile-header">
+						<h4>CURRENT BRAND PORTFOLIO</h4>
+					</div>
+					<div class="profile-content">
+					<% profile.distributor_brands.where(current: true).each do |p| %>
+						<%= render partial: "shared/collections_view/distributor_brands", locals: {
+							collitem: p
+						} %>
+					<% end %>
+					</div>
+				</div>
+				<br>
+				<% end %>
+				
+
+				<% if profile.distributor_brands.where(current: false).length > 0 %>
+				<div class="profile-container">
+					<div class="profile-header">
+						<h4>PAST BRAND PORTFOLIO</h4>
+					</div>
+					<div class="profile-content">
+					<% profile.distributor_brands.where(current: false).each do |p| %>
+						<%= render partial: "shared/collections_view/distributor_brands", locals: {
+							collitem: p
+						} %>
+					<% end %>
+					</div>
+				</div>
+				<br>
+				<% end %>
+
+
+				<div class="profile-container">
+						
+					<div class="profile-header">
+						<h4>SALES AND MARKETING INFO</h4>
+					</div>
+					<div class="profile-content">
+
+						<div class="row">
+							<div class="small-6 columns">
+								<% unless profile.inside_sales_size.blank? && profile.outside_sales_size.blank? %>
+								<div class="preview-data">
+									<span class="preview-data-tile-title">Sales &amp; Education</span><br>
+									<% unless profile.inside_sales_size.blank? %>
+									<h6>Inside Sales Force: <strong><%= profile.inside_sales_size %></strong></h6>
+									<% end %>
+									<% unless profile.outside_sales_size.blank? %>
+									<h6>Outside Sales Force: <strong><%= profile.outside_sales_size %></strong></h6>								
+									<% end %>
+								</div>
+								<% end %>
+							</div><!--/.small-6-->
+
+							<div class="small-6 columns">
+								<% unless profile.channels.blank? %>
+								<div class="preview-data">
+									<span class="preview-data-tile-title">Channel Capacities</span>
+										
+										<% profile.channels.each do |ch| %>
+											<h6><%= ch.name  %> :	<strong><%= profile.channel_capacities.where(channel_id: ch.id).first.capacity %></strong></h6>
+										<% end %>
+
+										<% if profile.channel_capacities.where(channel_id: 0).length > 0 %>
+											<% profile.channel_capacities.where(channel_id: 0).each do |cch| %>
+												<h6><%= cch.custom_channel_name %> <small>(Custom Channel)</small> : <strong><%= cch.capacity %></strong></h6>
+											<% end %>
+										<% end %>								
+									</div>
+									<% end %>
+							</div><!--/.small-6-->
+						</div><!--/.row-->
+
+						<div class="row">
+							<div class="small-12 columns">
+								<div class="preview-data">
+								<span class="preview-data-tile-title">Marketing &amp; PR</span><br>
+								<% unless profile.internal_marketing_size.blank? %>
+								<h6>Internal Marketing/ PR Team Size: <strong><%= profile.internal_marketing_size %></strong></h6>
+								<% end %>
+								
+								<h6><strong><%= profile.employ_pr_agency ? "Has" : "No" %></strong> External Marketing/PR</h6>
+								
+								<% unless profile.customer_database_size.blank? %>
+								<h6>Customer Database Size: <strong><%= profile.customer_database_size %></strong></h6>
+								<% end %>
+								<h6>Product Marketing:</h6>
+								</div>
+							</div><!--/.small-12-->
+							<div class="small-6 columns">
+								<div class="preview-data">
+								<strong>
+								<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Print" ,p: profile.marketing_via_print}%>
+								<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Online" ,p: profile.marketing_via_online}%>
+								<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Email" ,p: profile.marketing_via_email}%>
+								<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Outdoor" ,p: profile.marketing_via_outdoor}%>
+								</strong>
+								</div>					
+							</div><!--/.small-6-->
+							<div class="small-6 columns">
+								<div class="preview-data">
+								<strong>
+								<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Events" ,p: profile.marketing_via_events}%>
+								<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Direct Mail" ,p: profile.marketing_via_direct_mail}%>
+								<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Classes" ,p: profile.marketing_via_classes}%>		
+								</strong>
+								</div>			
+							</div><!--/.small-6-->
+
+						</div><!--/.row-->
+
+
+						
+													
+
+					</div>
+
+				</div>
+
+
+			</div>
+
+		</div>
+	</div><!--/.small-11 small-centered-->
+</div><!--/.row-->
+
+</div><!--/.previewtile-->
+

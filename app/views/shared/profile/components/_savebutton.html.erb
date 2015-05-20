@@ -1,0 +1,43 @@
+
+<% if @current_user.subscriber? %>	
+
+	<% if action_name == "index" || action_name == "view_match" || action_name == "contact_match" || action_name == "index_incoming_matches" || action_name == "index_contacted_matches"%>
+
+<!-- 		<div class="row">
+			<div class="small-12 columns text-right"> -->
+
+					<% if @current_user.send(@current_user.type?).saved_matches.find(profile.id) %>
+					<span id="pst_<%= profile.id %>">
+						<%= link_to unsave_match_url(profile.id,"false"), remote: true do %>
+							<span class="plt-indicator-action-on">Saved</span>
+						<% end %>
+					</span>
+					<% else %>
+					<span id="pst_<%= profile.id %>">
+						<%= link_to save_match_url(profile.id), remote: true do %>
+							<span class="plt-indicator-action-off">Save</span>
+						<% end %>
+					</span>
+					<% end %>
+
+<!-- 			</div>
+		</div> -->
+
+	<% elsif action_name == "index_saved_matches" %>
+
+<!-- 		<div class="row">
+			<div class="small-12 columns"> -->
+				<span id="pst_<%= profile.id %>">
+					<%= link_to unsave_match_url(profile.id,"true"), remote: true do %>
+						<span class="plt-indicator-action-on">Saved</span>
+					<% end %>
+				</span>
+<!-- 			</div>
+		</div> -->
+
+
+	<% end %>
+
+
+<% end %>
+

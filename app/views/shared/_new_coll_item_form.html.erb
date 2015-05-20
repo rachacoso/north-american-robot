@@ -1,0 +1,33 @@
+<% iscurrent ||= nil %>
+<% form_id, collection_name = get_collection_variables(newitem, iscurrent) %>
+
+
+
+	<div id="<%= collection_name %><%= iscurrent == "true" ? "-current" : "" %>-addnew" class="reveal-modal medium" data-reveal>
+		<div class="row">
+			<div class="small-12 columns">
+				<h2><%= titletext %></h2>
+<%= form_for newitem, :html => { :id => "#{form_id}", :class => "ajax-form" }, remote: true do |f| %>
+<%= iscurrent.nil? ?  "" : (f.hidden_field :current, value: iscurrent) %>
+<%= (controller.controller_name == "onboard_distributor") || (controller.controller_name == "onboard_brand") ? (hidden_field_tag :ob, "true") : "" %>				
+				<%= render partial: "shared/collections/#{collection_name}", locals: {f: f } %>
+				<%= f.submit "#{titletext}", class: "tiny radius alert button right" %>
+<% end %>				
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+	</div>
+
+
+	<div class="row collapse">
+		<div class="medium-6 columns">
+			&nbsp;
+		</div>
+		<div class="medium-6 columns text-right">
+			<div class="addnewformsubmit">
+				<a href="#" data-reveal-id="<%= collection_name %><%= iscurrent == "true" ? "-current" : "" %>-addnew" class="radius button alert small"><%= titletext %></a>
+			<%#= f.submit "#{titletext}", class: "tiny radius alert button right" %>
+			<%#= link_to 'Add', "#", :onclick => "$('##{form_id}').submit()".html_safe %>
+			</div>
+		</div>
+	</div>
+

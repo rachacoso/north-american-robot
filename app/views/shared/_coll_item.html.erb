@@ -1,0 +1,89 @@
+<% ob ||= false %>
+<% urlstring = cb.class.name.tableize.singularize + "_url(cb" + (ob ? ", :ob => 'true'" : "") + ")" %>
+	<div id="delete-collitem-<%= cb.id %>">
+		<a class="anchor" id="a-<%= cb.id %>"></a>
+		<div class="rowitem">
+		<div class="row">
+			<div class="medium-12 columns">
+				<dl class="accordion" data-accordion>
+				  <dd id="a_head_<%= cb.id %>" class="accordion-navigation <%= collection_item_active(cb.id) %>">
+				    <a href="#a_<%= cb.id %>"><%= cb.send(identifier).empty? ? "( No Name )" : cb.send(identifier)  %>
+			    	<% if has_picture_list(cb) %>
+					   	<% if cb.product_photos %>
+								<% cb.product_photos.each do |photo| %>
+									<%= image_tag photo.photo.url(:small), :width => '25', :height => '25' %>
+								<% end %>
+							<% end %>
+						<% end %>
+						<%= cb.class.name == "PressHit" ? cb.date.strftime("// %B %d %Y") : "" rescue nil %>
+				    <span class="right" style="color: #4D94DB;">(click to edit)</span></a>
+				    <div id="a_<%= cb.id %>" class="content <%= collection_item_active(cb.id) %>">
+							<%= form_for cb, remote: true do |f| %>
+							<%= ob ? (hidden_field_tag :ob, "true") : "" %>
+							<div class="updateform">
+								<%= render partial: "shared/collections/#{cb.class.name.tableize}", locals: {f: f, cb: cb} %>
+							</div>
+							<div class="row">
+								<div class="small-12 columns text-right">
+									<span id="update-collitem-<%= cb.id %>" style="color: red;"></span> &nbsp;
+									<%= f.submit 'Update', class: "button alert radius tiny" %>
+									<%#= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
+									<%= link_to 'Delete', eval(urlstring), :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.send(identifier)}?", :remote => true }, class: "button success radius tiny" %>
+								</div>
+							</div>
+							<% end %>
+
+							<%#  PICTURE ADD for BRAND PRODUCTS %>
+							<% if has_picture_list(cb) %>
+							<div class="row">
+								<div class="small-12 columns">
+									<hr>
+									<div class="row collapse">
+						        <div class="small-12 columns">
+											<h2>Photos</h2>
+										</div>
+									</div>
+									<% if cb.product_photos %>
+										<% photourlstring =  "product_photo_delete_url(photo" + ( ob ? ", :ob => 'true'" : "") + ")" %>
+										<ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
+										<% cb.product_photos.each do |photo| %>
+												<li>
+													<%= image_tag photo.photo.url(:small) %>
+													<%= link_to 'X', eval(photourlstring), :method => 'delete', data: { :confirm => 'Are you sure you want to delete this photo?'}  %>
+												</li>
+										<% end %>
+										</ul>
+									<% end %>
+								</div>
+							</div>
+							<div class="row collapse">
+								<div class="small-12 columns">
+									<%= form_for ProductPhoto.new do |f| %>
+										<%= hidden_field_tag 'product_id', cb.id %>
+										<%= ob ? (hidden_field_tag :ob, "true") : "" %>
+							      <div class="row">
+							        <div class="small-12 columns text-right">
+
+							        	<%= f.file_field :photo, label: false, accept: 'image/png,image/gif,image/jpeg' %>
+							          <%= f.submit 'Add Product Photo', :class=> 'button tiny' %>
+							        </div>
+							      </div>
+
+										
+										
+									<% end %>
+
+								</div>
+							</div>
+							<% end %>
+
+						</div>
+					</dd>
+				</dl>
+
+			</div>
+		</div>
+		</div>
+	</div>
+
+

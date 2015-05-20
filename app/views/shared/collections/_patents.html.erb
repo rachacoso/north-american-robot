@@ -1,0 +1,21 @@
+<div class="row">
+	<div class="medium-12 columns">
+		<%= f.text_field :product, label: "Product", placeholder: 'Product' %>
+	</div>								
+</div>
+<div class="row">
+	<div class="medium-4 columns">
+<%= f.text_field :country, class: "country-autocomplete", label: "Country", placeholder: 'Country' %>
+	</div>
+	<div class="medium-4 columns">
+<%= f.text_field :date, label: "Date", placeholder: 'Date' , class: "datepick" %>
+	</div>
+	<div class="medium-4 columns">
+<%= f.select(:status, options_for_select([['Granted', 'Granted'], ['Filed', 'Filed']], defined?(cb) ? cb.status : ""), label: "Status", prompt: "Select Status") %>
+	</div>
+</div>
+<div class="row">					
+	<div class="medium-12 columns">
+		<%= f.text_area :patent_description, label: "Patent Description", placeholder: 'Patent Description'%>
+	</div>				
+</div>

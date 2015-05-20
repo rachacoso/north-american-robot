@@ -1,0 +1,54 @@
+<%= render partial: "shared/topbar_admin" %>
+
+<div class="row">
+	<div class="small-12 columns">
+
+	<% case @user_type 
+
+		when "distributor" %>
+
+<h3>Distributor</h3>
+		<% @list.each do |l| %>
+			<p>
+			Sector: <%= @sector %><br>
+			Founded: <%= l[0] %><br>
+			Company Name: <%= l[1] %><br>
+			Addr: <%= l[2] %><br>
+			Addr 2: <%= l[3] %><br>
+			City: <%= l[4] %><br>
+			Zip: <%= l[5] %><br>
+			Country: <%= l[6] %><br>
+			Email: <%= l[7] %><br>
+			Website: <%= l[8] %><br>
+			LinkedIn: <%= l[9] %><br>
+			Facebook: <%= l[10] %><br>
+			Status?: <%= l[11] %>
+			</p>
+		<% end %>
+
+	<% when "brand" %>
+
+<h3>Brand</h3>
+		<% @list.each do |l| %>
+			<p>
+			Sector: <%= @sector %><br>
+			Founded: <%= l[0] %><br>
+			Company Name: <%= l[1] %><br>
+			Website: <%= l[2] %><br>
+			Email: <%= l[3] %><br>
+			City: <%= l[4] %><br>
+			State: <%= l[5] %><br>
+			LinkedIn: <%= l[6] %><br>
+			Facebook: <%= l[7] %><br>
+			Status?: <%= l[8] %>
+			</p>
+		<% end %>
+
+	<% else %>
+		
+		<h3>NO UPLOAD</h3>
+		
+	<% end %>
+
+	</div>
+</div>

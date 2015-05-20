@@ -1,0 +1,20 @@
+<table style="width:100%;">
+	<thead>
+		<tr>
+			<th>First Name</th><th>Last Name</th><th>Title</th><th>Email</th><th>Phone</th><th></th>
+		</tr>
+	</thead>
+	<tbody>
+		
+		<% brand_or_distributor.contacts.each do |contact| %>
+			<tr>
+				<td><%= contact.firstname.blank? ? "" : "#{contact.firstname}".html_safe %></td>
+				<td><%= contact.lastname.blank? ? "" : "#{contact.lastname}".html_safe %></td>
+				<td><%= contact.title.blank? ? "n/a" : "#{contact.title}".html_safe %></td>
+				<td><%= contact.email.blank? ? "(no email)" : "#{contact.email}<br>".html_safe %></td>
+				<td><%= contact.phone.blank? ? "(no phone)" : "#{contact.phone}<br>".html_safe %></td>
+				<td><%= link_to 'delete', contact_url(contact), :method => 'delete', :remote => true, data: { :confirm => 'Are you sure you want to delete this contact?'}  %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
