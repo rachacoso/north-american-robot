@@ -1,3 +1,2 @@
-$('#contacts_list').hide().html("<%= j (render partial: '/contacts/contacts_list', locals:{brand_or_distributor:@current_user.send(@current_user.type?)}) %>").fadeIn(500);
-$('#new_contact').hide().html("");
+$('#contacts_list').hide().html("<%= j (render partial: '/contacts/contacts_list', locals:{b_or_d:@current_user.get_parent}) %>").fadeIn(500);
 $(document).foundation();

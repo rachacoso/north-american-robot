@@ -1,4 +1,6 @@
 
+
+
 <div class="previewtile">
 
 <div class="row">
@@ -13,12 +15,10 @@
 						<h2><%= profile.company_name %></h2>
 					</div>
 					<div class="profile-content">
-						<%= render partial: "shared/profile/distributor_rating", locals: {d: profile} %>
-						<br>
 
 				<%#= image_tag profile.logo.url, width: "100", height: "100", alt: "Logo" %>
 				<% if profile.logo_file_name %>
-					<%= image_tag profile.logo.url(:medium), width: "100", height: "100", alt: "Logo" %>
+					<%= image_tag profile.logo.url(:medium), alt: "Logo" %>
 				<% else %>
 					<% if !profile.facebook.blank? && fb_picture(profile.facebook) %>
 						<%= image_tag fb_picture(profile.facebook) %>
@@ -27,32 +27,29 @@
 					<% end %>					
 				<% end %>
 
+
+						<%= simple_format(profile.brand_positioning) %>
+						
 						<h3>
 						<% unless profile.website.blank? %>
-							<%= link_to "website", "//#{clean_url(profile.website)}" %>
+						<%= link_to "website", "//#{clean_url(profile.website)}" %>
 						<% end %>
 						<% unless profile.facebook.blank? %>
-							<%= !profile.website.blank? ? "/" : "" %>
+						<%= profile.website.blank? ? "" : "/" %>
 							<%= link_to "facebook", "//#{clean_url(profile.facebook)}" %>
 						<% end %>
 						<% unless profile.linkedin.blank? %>
-							<%= !profile.website.blank? || !profile.facebook.blank? ? "/" : "" %>
+						<%= profile.website.blank? && profile.website.blank? ? "" : "/" %>
 							<%= link_to "linkedin", "//#{clean_url(profile.linkedin)}" %>
 						<% end %>
-						<% unless profile.twitter.blank? %>
-							<%= !profile.website.blank? || !profile.facebook.blank? || !profile.linkedin.blank? ? "/" : "" %>
-							<%= link_to "twitter", "//#{clean_url(profile.twitter)}" %>
-						<% end %>
-						<% unless profile.instagram.blank? %>
-							<%= !profile.website.blank? || !profile.facebook.blank? || !profile.linkedin.blank? || !profile.twitter.blank? ? "/" : "" %>
-							<%= link_to "instagram", "//#{clean_url(profile.instagram)}" %>
-						<% end %>						
 						</h3>
+						
 					</div>
 					<div class="profile-indicators text-right">
 						<%= render partial: "shared/profile/components/indicators", locals: {match: profile} %>
 					</div>
 				</div>
+
 
 				<% if controller_name == "matches" %>
 				<div class="profile-container">
@@ -76,35 +73,28 @@
 
 						<div class="row collapse">
 							<div class="small-6 columns">
-								<% unless profile.country_of_origin.blank? %>
 								<div class="preview-data">
 									<span class="preview-data-tile-title">Headquarters</span><br>
 									<strong><%= profile.country_of_origin %></strong>
-								</div>
-								<% end %>
+								</div>							
 							</div><!--/.small-6-->
 							<div class="small-6 columns">
-								<% unless profile.company_size.blank? %>
 								<div class="preview-data">
 									<span class="preview-data-tile-title">Company Size</span><br>
 									<strong><%= CompanySize.find(profile.company_size).name rescue nil %></strong>
 								</div>
-								<% end %>
 							</div><!--/.small-6-->
 						</div><!--/.row-->
 
 
 						<div class="row collapse">
 							<div class="small-6 columns">
-								<% unless profile.year_established.blank? %>
 								<div class="preview-data">
 									<span class="preview-data-tile-title">Year Established</span><br>
 									<strong><%= profile.year_established.strftime("%Y") rescue nil %></strong>
-								</div>
-								<% end %>
+								</div>						
 							</div><!--/.small-6-->
 							<div class="small-6 columns">
-								<% unless profile.export_countries.blank? %>
 								<div class="preview-data">
 									<span class="preview-data-tile-title">Countries of Distribution</span><br>
 									<strong>
@@ -113,26 +103,22 @@
 										<% end %>
 									</strong>
 								</div>
-								<% end %>
 							</div><!--/.small-6-->
 						</div><!--/.row-->
 
 
 						<div class="row collapse">
 							<div class="small-12 columns">
-								<% unless profile.sectors.blank? %>
 								<div class="preview-data">
 									<span class="preview-data-tile-title">Sectors</span><br>
 									<% profile.sectors.each do |s| %>
 										<strong><%= s.name %></strong><br>
 									<% end %>
-								</div>
-								<% end %>
+								</div>					
 							</div><!--/.small-12-->
 						</div>
 						<div class="row collapse">
 							<div class="small-12 columns">
-								<% unless profile.channels.blank? %>
 								<div class="preview-data">
 									<span class="preview-data-tile-title">Channels</span><br>
 									<% profile.channels.each do |ch| %>
@@ -145,7 +131,6 @@
 										<small>(* Custom Channels)</small>
 									<% end %>
 								</div>
-								<% end %>
 							</div><!--/.small-12-->
 						</div><!--/.row-->
 
@@ -182,152 +167,214 @@
 
 			<div class="medium-8 columns">
 
-
-				<% if @messages && @current_user.subscriber? %>
+				<% if @gallery %>
 					<div class="profile-container">
-						<div class="profile-header">
-							<h4>CONVERSATION</h4>
-						</div>
-						<div class="profile-content">
-							<% if this_match(@match) %>
-								<% if i_contacted(this_match(@match)) %>
-									<%= render partial: "outgoing_contact" %>
-								<% else %>
-									<%= render partial: "incoming_contact" %>
-								<% end %>
-							<% end %>
+						<div class="profile-content gallery-window">
+							<div id="profile_gallery" class="final-tiles-gallery effect-dezoom effect-fade-out effect-frame caption-top">
+								<div class="ftg-items">
+									
+									<% @gallery.each do |item| %>
+							    <div class="tile">
+							        <a class="tile-inner" href="photos/1.jpg">
+							            <img class="item" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="<%=item.photo %>" />
+							        </a>
+							    </div>
+									<% end %>
+
+								</div>
+							</div>
 						</div>
 					</div>
 					<br>
 				<% end %>
 
-				<% if profile.distributor_brands.where(current: true).length > 0 %>
+				<% if @messages && @current_user.subscriber? %>
 				<div class="profile-container">
 					<div class="profile-header">
-						<h4>CURRENT BRAND PORTFOLIO</h4>
+						<h4>CONVERSATION</h4>
 					</div>
 					<div class="profile-content">
-					<% profile.distributor_brands.where(current: true).each do |p| %>
-						<%= render partial: "shared/collections_view/distributor_brands", locals: {
-							collitem: p
-						} %>
-					<% end %>
+						<% if this_match(@match) %>
+							<% if i_contacted(this_match(@match)) %>
+								<%= render partial: "outgoing_contact" %>
+							<% else %>
+								<%= render partial: "incoming_contact" %>
+							<% end %>
+						<% end %>
 					</div>
 				</div>
 				<br>
 				<% end %>
+
+				<% if profile.products.where(current: true).length > 0 %>
+				<div class="profile-container">
+					<div class="profile-header">
+						<h4>CURRENT PRODUCTS</h4>
+					</div><!--.profile-header-->
+					<div class="profile-content">
+
+					<% profile.products.where(current: true).each do |p| %>
+						<%= render partial: "shared/collections_view/products", locals: {
+							collitem: p
+						} %>
+					<% end %>
+
+					</div><!--.profile-content-->
+				</div><!--.profile-container-->
+				<br>
+				<% end %>
+
+
+				<% if profile.products.where(current: false).length > 0 %>				
+				<div class="profile-container">
+					<div class="profile-header">
+						<h4>UPCOMING PRODUCTS</h4>
+					</div><!--.profile-header-->
+					<div class="profile-content">
+
+					<% profile.products.where(current: false).each do |p| %>																
+						<%= render partial: "shared/collections_view/products", locals: {
+							collitem: p
+						} %>
+					<% end %>
+
+					</div><!--.profile-content-->
+				</div><!--.profile-container-->
+				<br>
+				<% end %>
+
+
+				<% unless profile.brand_photos.blank? %>
+
+
+				<div class="profile-container">
+					<div class="profile-header">
+						<h4>BRAND GALLERY</h4>
+					</div><!--.profile-header-->
+					<div class="profile-content">
 				
+						<div class="galleria-brand-photos">
+							<% profile.brand_photos.each do |photo| %>
+								<%= link_to photo.photo.url(:large) do %>
+									<%= image_tag photo.photo.url(:small) %>
+								<% end %>
+					    <% end %>
+							<% content_for :javascript_foot do %>
+								<% javascript_tag do %>
+								initializeGallery(".galleria-brand-photos")
+								<% end %>
+							<% end %>					    
+						</div>
 
-				<% if profile.distributor_brands.where(current: false).length > 0 %>
+
+
+					</div><!--.profile-content-->
+				</div><!--.profile-container-->
+				<br>
+
+
+
+				<% end %>
+
+				<% if profile.press_hits.length > 0 %>
 				<div class="profile-container">
 					<div class="profile-header">
-						<h4>PAST BRAND PORTFOLIO</h4>
-					</div>
+						<h4>PRESS CLIPS</h4>
+					</div><!--.profile-header-->
 					<div class="profile-content">
-					<% profile.distributor_brands.where(current: false).each do |p| %>
-						<%= render partial: "shared/collections_view/distributor_brands", locals: {
+										
+					<% profile.press_hits.each do |p| %>
+						<%= render partial: "shared/collections_view/press_hits", locals: {
 							collitem: p
 						} %>
 					<% end %>
-					</div>
-				</div>
+
+					</div><!--.profile-content-->
+				</div><!--.profile-container-->
 				<br>
 				<% end %>
 
 
+				<% if profile.trade_shows.length > 0 %>
 				<div class="profile-container">
-						
 					<div class="profile-header">
-						<h4>SALES AND MARKETING INFO</h4>
-					</div>
+						<h4>TRADE SHOWS</h4>
+					</div><!--.profile-header-->
 					<div class="profile-content">
 
-						<div class="row">
-							<div class="small-6 columns">
-								<% unless profile.inside_sales_size.blank? && profile.outside_sales_size.blank? %>
-								<div class="preview-data">
-									<span class="preview-data-tile-title">Sales &amp; Education</span><br>
-									<% unless profile.inside_sales_size.blank? %>
-									<h6>Inside Sales Force: <strong><%= profile.inside_sales_size %></strong></h6>
-									<% end %>
-									<% unless profile.outside_sales_size.blank? %>
-									<h6>Outside Sales Force: <strong><%= profile.outside_sales_size %></strong></h6>								
-									<% end %>
-								</div>
-								<% end %>
-							</div><!--/.small-6-->
-
-							<div class="small-6 columns">
-								<% unless profile.channels.blank? %>
-								<div class="preview-data">
-									<span class="preview-data-tile-title">Channel Capacities</span>
-										
-										<% profile.channels.each do |ch| %>
-											<h6><%= ch.name  %> :	<strong><%= profile.channel_capacities.where(channel_id: ch.id).first.capacity %></strong></h6>
-										<% end %>
-
-										<% if profile.channel_capacities.where(channel_id: 0).length > 0 %>
-											<% profile.channel_capacities.where(channel_id: 0).each do |cch| %>
-												<h6><%= cch.custom_channel_name %> <small>(Custom Channel)</small> : <strong><%= cch.capacity %></strong></h6>
-											<% end %>
-										<% end %>								
-									</div>
-									<% end %>
-							</div><!--/.small-6-->
-						</div><!--/.row-->
-
-						<div class="row">
-							<div class="small-12 columns">
-								<div class="preview-data">
-								<span class="preview-data-tile-title">Marketing &amp; PR</span><br>
-								<% unless profile.internal_marketing_size.blank? %>
-								<h6>Internal Marketing/ PR Team Size: <strong><%= profile.internal_marketing_size %></strong></h6>
-								<% end %>
-								
-								<h6><strong><%= profile.employ_pr_agency ? "Has" : "No" %></strong> External Marketing/PR</h6>
-								
-								<% unless profile.customer_database_size.blank? %>
-								<h6>Customer Database Size: <strong><%= profile.customer_database_size %></strong></h6>
-								<% end %>
-								<h6>Product Marketing:</h6>
-								</div>
-							</div><!--/.small-12-->
-							<div class="small-6 columns">
-								<div class="preview-data">
-								<strong>
-								<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Print" ,p: profile.marketing_via_print}%>
-								<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Online" ,p: profile.marketing_via_online}%>
-								<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Email" ,p: profile.marketing_via_email}%>
-								<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Outdoor" ,p: profile.marketing_via_outdoor}%>
-								</strong>
-								</div>					
-							</div><!--/.small-6-->
-							<div class="small-6 columns">
-								<div class="preview-data">
-								<strong>
-								<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Events" ,p: profile.marketing_via_events}%>
-								<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Direct Mail" ,p: profile.marketing_via_direct_mail}%>
-								<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Classes" ,p: profile.marketing_via_classes}%>		
-								</strong>
-								</div>			
-							</div><!--/.small-6-->
-
-						</div><!--/.row-->
-
-
-						
 													
+						<% profile.trade_shows.each do |p| %>
+							<%= render partial: "shared/collections_view/trade_shows", locals: {
+								collitem: p
+							} %>
+						<% end %>
+													
+					</div><!--.profile-content-->
+				</div><!--.profile-container-->
+				<br>
+				<% end %>
 
-					</div>
 
-				</div>
+				<% if profile.patents.length > 0 %>
+				<div class="profile-container">
+					<div class="profile-header">
+						<h4>PATENTS</h4>
+					</div><!--.profile-header-->
+					<div class="profile-content">
+
+					<% profile.patents.each do |p| %>
+						<%= render partial: "shared/collections_view/patents", locals: {
+							collitem: p
+						} %>
+					<% end %>
+													
+					</div><!--.profile-content-->
+				</div><!--.profile-container-->
+				<br>
+				<% end %>
 
 
-			</div>
+				<% if profile.trademarks.length > 0 %>
+				<div class="profile-container">
+					<div class="profile-header">
+						<h4>TRADEMARKS</h4>
+					</div><!--.profile-header-->
+					<div class="profile-content">
+													
+					<% profile.trademarks.each do |p| %>
+						<%= render partial: "shared/collections_view/trademarks", locals: {
+							collitem: p
+						} %>
+					<% end %>
 
-		</div>
+					</div><!--.profile-content-->
+				</div><!--.profile-container-->
+				<br>
+				<% end %>
+
+
+				<% if profile.compliances.length > 0 %>
+				<div class="profile-container">
+					<div class="profile-header">
+						<h4>CERTIFICATIONS</h4>
+					</div><!--.profile-header-->
+					<div class="profile-content">
+
+					<% profile.compliances.each do |p| %>
+						<%= render partial: "shared/collections_view/compliances", locals: {
+							collitem: p
+						} %>
+					<% end %>
+
+					</div><!--.profile-content-->
+				</div><!--.profile-container-->
+				<% end %>
+
+
+			</div><!--/.medium-8-->
+		</div><!--/.row-->
+
 	</div><!--/.small-11 small-centered-->
 </div><!--/.row-->
 
 </div><!--/.previewtile-->
-

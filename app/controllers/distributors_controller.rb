@@ -177,6 +177,8 @@ class DistributorsController < ApplicationController
       :website,
       :facebook,
       :linkedin,
+      :twitter,
+      :instagram,
       :logo,
       :company_size,
       :current_lines,

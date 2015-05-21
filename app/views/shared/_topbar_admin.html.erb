@@ -1,0 +1,57 @@
+<% content_for :user_head do %>
+
+<div class="contain-to-grid fixed">
+
+	<nav class="top-bar" data-topbar role="navigation">
+
+
+	  <ul class="title-area">
+	    <li class="name">
+
+				<h1>
+				<%= link_to admin_url do %>
+				<%= render "shared/imageswap/landing_logo" %>
+				<% end %>
+				</h1>      
+	    </li>
+	     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+	    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+	  </ul>
+		
+		
+
+<section class="top-bar-section">
+  <!-- Right Nav Section -->
+  <ul class="right">
+    <% if @current_user && show_top_menu %>
+    <li class="has-dropdown">
+      <a href="#">
+				(Administrator)    	      	
+				<%= @current_user.contact.firstname.blank? ? "Welcome" : @current_user.contact.firstname %>
+      </a>
+      <ul class="dropdown">       	
+        <li>
+					<%= link_to 'Admin', admin_url %>
+        </li>
+				<li>
+					<%= link_to 'Users', users_url %>
+				</li>
+				<li>
+					<%= link_to 'Upload', new_bulk_upload_url %>
+				</li>	          
+
+        <li><%= link_to 'Logout', logout_url %></li>
+      </ul>
+    </li>
+    <% end %>
+		<% if !@current_user %>
+		<%= render partial: "shared/login_widget" %>
+		<% end %>	      
+  </ul>
+</section>
+
+	</nav>
+
+</div>
+	
+<% end %>

@@ -260,7 +260,7 @@ textarea {
 
 .prefix, .postfix {
   font-size: 0.70em;
-  border-top: solid 2px scale-color($input-top-border, $lightness: 30%) !important;
+  // border-top: solid 2px scale-color($input-top-border, $lightness: 30%) !important;
 
 }
 
@@ -274,7 +274,7 @@ input[type="email"],
 input[type="password"],
 select {
   border: none;
-  border-top: solid 2px scale-color($input-top-border, $lightness: 30%);
+  // border-top: solid 2px scale-color($input-top-border, $lightness: 30%);
   transition: border 0.3s;
   @include transparent($input-background-color, 0.8);
   // background: @include transparent($input-background-color, 0.9);
@@ -294,7 +294,7 @@ textarea,
 input[type="number"],
 select {
   padding: 0px 0px 0px 10px;
-  margin-bottom: 0.2em;
+  // margin-bottom: 0.2em;
 }
 input[type="text"]:focus,
 input[type="text"].focus,
@@ -307,8 +307,8 @@ input[type="password"].focus,
 input[type="number"]:focus,
 input[type="number"].focus {
   border: none;
-  border-top: solid 2px $input-top-border;
-  background: $input-background-color;
+  // border-top: solid 2px $input-top-border;
+  background: $landing-blue;
   // background: #2C3838;
   box-shadow: inset 0 2px 2px rgba(0,0,0,0.2);
   color: $input-text-color;
@@ -317,7 +317,7 @@ input[type="number"].focus {
 select:hover,
 select.hover {
   border: none;
-  border-top: solid 2px $input-top-border;
+  // border-top: solid 2px $input-top-border;
   background: $input-background-color;
   box-shadow: none;
   color: $input-text-color;

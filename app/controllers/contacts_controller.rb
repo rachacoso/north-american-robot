@@ -2,16 +2,6 @@ class ContactsController < ApplicationController
 
 	# before_action :set_parameters
 
-  def new
-
-  	@new_contact = Contact.new
-  	
-	  respond_to do |format|
-		  format.html
-		  format.js
-	  end
-  end
-
   def create
 
 			u = @current_user.send(@current_user.type?)
@@ -34,8 +24,14 @@ class ContactsController < ApplicationController
 
   def destroy
 
-  	contact = Contact.find(params[:id])
-  	contact.destroy
+  	@brand_or_distributor = @current_user.get_parent
+
+  	if @brand_or_distributor.contacts.count > 1
+	  	contact = Contact.find(params[:id])
+			@brand_or_distributor.contacts.delete(contact)	  	
+	  	# contact.destroy
+	  end
+
 	  respond_to do |format|
 		  format.html
 		  format.js

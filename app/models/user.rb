@@ -61,5 +61,9 @@ class User
 			return false
 		end
 	end
+
+	def get_parent
+		return self.send(self.type?)
+	end
   
 end

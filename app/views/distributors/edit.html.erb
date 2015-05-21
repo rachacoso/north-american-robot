@@ -64,7 +64,6 @@
 
 				<div class="row">
 					<div class="medium-12 columns">
-						<hr>
 						<h3>General Info</h3>
 					</div>
 				</div>
@@ -119,14 +118,14 @@
 
 							</div>
 							<div class="medium-6 columns">
-								<%#= label_tag(:company_size, "Company Size") %>
-								<%= f.collection_select(:company_size, CompanySize.all, :id, :name) %>
+								<%= label_tag(:company_size, "Company Size") %>
+								<%= f.collection_select(:company_size, CompanySize.all, :id, :name, :label => false) %>
 							</div>
 						</div>
 
+						<hr>
 						<div class="row">
 							<div class="small-12 columns">
-								<br>
 								<span style="font-size: 0.875rem;color: #646464;display: block;font-weight: normal;line-height: 1.5;margin-bottom: 0;">Social Media ( <%= @current_user.distributor.verified_social_media ? "Verified" : "Not Verified" %> )</span>
 							</div><!--/.small-12-->							
 							<div class="medium-6 columns">
@@ -137,29 +136,38 @@
 								<%= label_tag(:linkedin, "LinkedIn") %>
 								<%= f.text_field :linkedin, label: false %>
 							</div>
+							<div class="medium-6 columns">
+								<%= label_tag(:twitter, "Twitter") %>
+								<%= f.text_field :twitter, label: false %>
+							</div>
+							<div class="medium-6 columns">
+								<%= label_tag(:instagram, "Instagram") %>
+								<%= f.text_field :instagram, label: false %>
+							</div>
 						</div>	
-<hr>
-				
-				<div class="row">
-					<%= f.fields_for :address do |ff| %>
-					<div class="small-12 columns">					
-						<%= ff.text_field :address1, label: "Address" %>
-						<%= ff.text_field :address2, label: "Address (cont'd)" %>
-					</div>
-					<div class="medium-4 columns">
-						<%= ff.text_field :city %>
-					</div>
-					<div class="medium-4 columns">
-						<%= ff.text_field :state %>
-					</div>
-					<div class="medium-4 columns">
-						<%= ff.text_field :postcode %>
-					</div>
-					<div class="medium-6 columns">
-						<%= ff.text_field :country, class: "country-autocomplete", placeholder: 'Country' %>
-					</div>
-					<% end %>
-				</div>
+
+
+						<hr>
+						<div class="row">
+							<%= f.fields_for :address do |ff| %>
+							<div class="small-12 columns">					
+								<%= ff.text_field :address1, label: "Address" %>
+								<%= ff.text_field :address2, label: "Address (cont'd)" %>
+							</div>
+							<div class="medium-4 columns">
+								<%= ff.text_field :city %>
+							</div>
+							<div class="medium-4 columns">
+								<%= ff.text_field :state %>
+							</div>
+							<div class="medium-4 columns">
+								<%= ff.text_field :postcode %>
+							</div>
+							<div class="medium-6 columns">
+								<%= ff.text_field :country, class: "country-autocomplete", placeholder: 'Country' %>
+							</div>
+							<% end %>
+						</div>
 				
 
 
@@ -170,38 +178,31 @@
 				<%= f.submit 'Update Company Info', class: "tiny radius alert button right"  %>
 
 				<% end %>
-				<hr>
 
 
-						<div class="row">
-							<div class="medium-12 columns">
-								<h3>Company Contacts</h3>
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="medium-12 columns">
-								<div id="contacts_list">
-									<%= render partial: "/contacts/contacts_list", locals: {brand_or_distributor: @distributor} %>
-								</div>
-								<div id="new_contact"></div>
-							</div>
-						</div>
-						
-
-						<div class="row">
-							<div class="medium-12 columns">
-								<small><%= link_to "Add New Contact", new_contact_path(:p => @distributor.id), remote: true %></small>
-							</div>
-						</div>
-<!-- 						<div class="row">
-							<div class="medium-12 columns">
-								<div id="new_contact"></div>
-							</div>
-						</div> -->
-
-<br>
+			<br>
 			<% end %>
+
+			<%= render layout: "shared/panel_fulledit" do %>
+
+				<div class="row">
+					<div class="medium-12 columns">
+						<h1>Company Contacts</h1>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="medium-12 columns">
+						<div id="contacts_list">
+							<%= render partial: "/contacts/contacts_list", locals: {b_or_d: @distributor} %>
+						</div>
+					</div>
+				</div>
+				
+
+			<br>
+			<% end %>
+
 
 			</div>
 		</div>

@@ -11,19 +11,20 @@ class AdminController < ApplicationController
   def index
   	@sector = Sector.all
   	@channel = Channel.all
-  	@country = Country.all
+  	# @country = Country.all
     @company_size = CompanySize.all
 
   	@new_sector = Sector.new
   	@new_channel = Channel.new
-  	@new_country = Country.new
+  	# @new_country = Country.new
     @new_company_size = CompanySize.new
 
-		if Display.all.first.blank?
-			@display_info = Display.new
-	  else
-			@display_info = Display.all.first
-		end
+		# if Display.all.first.blank?
+		# 	@display_info = Display.new
+	 #  else
+		# 	@display_info = Display.all.first
+		# end
+    
   end
 
   def new_bulk_upload

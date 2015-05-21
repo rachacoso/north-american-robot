@@ -19,6 +19,8 @@ class Brand
 	field :website, type: String
 	field :facebook, type: String
 	field :linkedin, type: String
+	field :twitter, type: String
+	field :instagram, type: String
 	embeds_one :address, as: :addressable
 	has_many :contacts, as: :contactable, dependent: :destroy
 	

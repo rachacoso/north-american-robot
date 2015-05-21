@@ -158,6 +158,8 @@ class BrandsController < ApplicationController
 			:website,
 			:facebook,
 			:linkedin,
+			:twitter,
+			:instagram,
 			:logo,
 			:countries_where_exported,
 			:brand_positioning,
