@@ -396,7 +396,12 @@ function initialize () {
   $('#user_distributor_attributes_logo, #user_brand_attributes_logo').change(function() { 
       // select the form and submit
       $('#user-update-logo-upload').submit(); 
+  });
+  $('#brand_photo_photo').change(function() { 
+      // select the form and submit
+      $('#brand-photo-upload').submit(); 
   });   
+
 
 }
 

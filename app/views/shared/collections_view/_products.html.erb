@@ -1,0 +1,52 @@
+
+<hr>
+			<div class="row" data-equalizer>
+						
+
+				<div class="medium-4 columns preview-data" data-equalizer-watch>
+
+					<h3><strong style="color: #5f5f5f;"><%= collitem.name.empty? ? "( No Name )" : collitem.name  %></strong><br></h3>
+					<small>MSRP:</small><br>
+					$<%= collitem.msrp %><hr>
+					<small>Country of Manufacture:</small><br>
+					<%= collitem.country_of_manufacture %><hr>
+
+				</div>	
+
+				<div class="medium-8 columns" data-equalizer-watch>
+
+
+					<div class="galleria-product-photos" id="galleria-product-photos-<%=collitem.id%>">
+					<% if !collitem.product_photos.blank? %>
+
+						<% collitem.product_photos.each do |photo| %>
+							<%= link_to photo.photo.url(:large) do %>
+								<%= image_tag photo.photo.url(:small) %>
+							<% end %>
+				    <% end %>
+						<% content_for :javascript_foot do %>
+							<% javascript_tag do %>
+							initializeGallery("#galleria-product-photos-<%=collitem.id%>",300)
+							<% end %>
+						<% end %>		
+						
+					<% else %>
+						<%= image_tag Display.all.first.default_product_photo.url(:large) %></li>
+					<% end %>
+					</div>
+
+				</div>
+				<div class="small-12 columns">
+										<small>Description:</small><br>
+					<%= simple_format(collitem.description) %>
+					<small>Key Benefits:</small><br>
+					<%= simple_format(collitem.key_benefits) %>
+				</div><!--/.small-12-->
+
+			</div>
+
+
+
+
+		
+	

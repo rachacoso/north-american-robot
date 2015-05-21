@@ -1,0 +1,37 @@
+
+<dl class="accordion" data-accordion>
+  <dd class="accordion-navigation">
+    <a href="#a_<%= collitem.id %>"><strong style="color: #5f5f5f;"><%= collitem.product.empty? ? "( No Name )" : collitem.product  %></strong>
+    <span class="right" style="color: #aaa;"><small>(more)</small></span></a>
+    <div id="a_<%= collitem.id %>" class="content">
+
+<div class="row">
+	<div class="medium-12 columns">
+		<small>Country:</small><br>
+		<%= collitem.country %>
+	</div>
+</div>
+<div class="row">
+	<div class="medium-12 columns">
+		<small>Description:</small><br>
+		<%= simple_format(collitem.trademark_description) %>
+	</div>									
+</div>
+
+<div class="row">						
+	<div class="medium-12 columns">
+		<small>Date:</small><br>
+		<%= collitem.date %>
+	</div>				
+</div>
+
+<div class="row">						
+	<div class="medium-12 columns">
+		<small>Status:</small><br>
+		<%= collitem.status %>
+	</div>				
+</div>
+
+		</div>
+	</dd>
+</dl>

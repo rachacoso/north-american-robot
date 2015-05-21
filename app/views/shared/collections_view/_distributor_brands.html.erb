@@ -1,0 +1,40 @@
+	
+
+	    
+<hr>
+			<div class="row" data-equalizer>
+						
+
+				<div class="medium-4 columns preview-data" data-equalizer-watch>
+
+					<h3><strong style="color: #5f5f5f;"><%= collitem.brand.empty? ? "( No Name )" : collitem.brand  %></strong><br></h3>
+					<small>Category:</small><br>
+					<%= !collitem.category.blank? ? Sector.find(collitem.category).name : "No Category Selected" %><hr>
+					<small>Country of Manufacture:</small><br>
+					<%= collitem.country_of_manufacture %><hr>
+					<small>Website:</small><br>
+					<%= collitem.website %>
+				</div>	
+
+				<div class="medium-8 columns" data-equalizer-watch>
+					<ul class="small-block-grid-2 medium-block-grid-3 ">
+					<% if !collitem.product_photos.blank? %>
+						<% collitem.product_photos.each do |photo| %>
+							<li>
+							<a data-dropdown="d_<%= photo.id %>" href="#"><%= image_tag photo.photo.url(:small) %></a>
+							<div id="d_<%= photo.id %>" data-dropdown-content class="f-dropdown content medium" aria-hidden="true" tabindex="-1">
+							  <%= image_tag photo.photo.url(:large), width: "400"%>
+							</div>
+							</li>
+						<% end %>
+					<% else %>
+						<li><%= image_tag Display.all.first.default_product_photo.url(:large) %></li>
+					<% end %>
+					</ul>
+				</div>
+
+
+			</div>
+
+
+

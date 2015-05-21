@@ -151,8 +151,8 @@
 						<div class="row">
 							<%= f.fields_for :address do |ff| %>
 							<div class="small-12 columns">					
-								<%= ff.text_field :address1, label: "Address" %>
-								<%= ff.text_field :address2, label: "Address (cont'd)" %>
+								<%= ff.text_field :address1, label: "Address line 1" %>
+								<%= ff.text_field :address2, label: "Address line 2" %>
 							</div>
 							<div class="medium-4 columns">
 								<%= ff.text_field :city %>

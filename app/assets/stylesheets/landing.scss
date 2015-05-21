@@ -308,7 +308,7 @@ input[type="number"]:focus,
 input[type="number"].focus {
   border: none;
   // border-top: solid 2px $input-top-border;
-  background: $landing-blue;
+  background: scale-color($landing-blue, $lightness: 30%);
   // background: #2C3838;
   box-shadow: inset 0 2px 2px rgba(0,0,0,0.2);
   color: $input-text-color;
