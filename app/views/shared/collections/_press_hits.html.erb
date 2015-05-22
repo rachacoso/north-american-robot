@@ -22,9 +22,9 @@
 	</div>
 	<div class="medium-4 columns">
 		<% if defined?(cb) && cb.date %>
-			<%= f.text_field :date, label: "Date", value: cb.date.strftime("%d-%m-%Y"), placeholder: 'Date' , class: "datepick_full" %>
+			<%= f.text_field :date, label: "Date", value: cb.date.strftime("%m-%d-%Y"), placeholder: 'Date' , class: "datepick" %>
 		<% else %>
-			<%= f.text_field :date, label: "Date", value: DateTime.now.strftime("%d-%m-%Y"), placeholder: 'Date' , class: "datepick_full" %>
+			<%= f.text_field :date, label: "Date", value: DateTime.now.strftime("%m-%d-%Y"), placeholder: 'Date' , class: "datepick" %>
 		<% end %>
 	</div>									
 </div>

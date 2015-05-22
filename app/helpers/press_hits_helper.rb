@@ -1,2 +1,2 @@
-module PressHitsHelper
+module PressHitsHelper	
 end

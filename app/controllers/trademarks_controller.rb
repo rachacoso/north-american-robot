@@ -3,6 +3,7 @@ class TrademarksController < ApplicationController
 	def create
 		u = @current_user.distributor || @current_user.brand
 		new_item = u.trademarks.create!(trademark_parameters)
+		save_date(params[:trademark]['date(1i)'], params[:trademark]['date(2i)'], new_item)
 		@identifier = 'product'
 		@new_item_id = new_item.id
 		@collection = u.trademarks
@@ -17,7 +18,7 @@ class TrademarksController < ApplicationController
 		u = @current_user.distributor || @current_user.brand
 		collitem = u.trademarks.find(params[:id])
 		collitem.update!(trademark_parameters)
-
+		save_date(params[:trademark]['date(1i)'], params[:trademark]['date(2i)'], collitem)
 		@identifier = 'product'
 		@new_item_id = collitem.id
 		@collection = u.trademarks
@@ -55,7 +56,7 @@ class TrademarksController < ApplicationController
 			:product,
 			:trademark_description,
 			:country,
-			:date,
+			# :date,
 			:status
 		)
 	end		

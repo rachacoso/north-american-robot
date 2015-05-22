@@ -4,7 +4,7 @@ class CompliancesController < ApplicationController
 		u = @current_user.distributor || @current_user.brand
 
 		new_item = u.compliances.create!(compliance_parameters)
-		
+		save_date(params[:compliance]['date(1i)'], params[:compliance]['date(2i)'], new_item)
 		@identifier = 'product_or_category'
 		@new_item_id = new_item.id
 		@collection = u.compliances
@@ -19,7 +19,7 @@ class CompliancesController < ApplicationController
 		u = @current_user.distributor || @current_user.brand
 		collitem = u.compliances.find(params[:id])
 		collitem.update!(compliance_parameters)
-
+		save_date(params[:compliance]['date(1i)'], params[:compliance]['date(2i)'], collitem)
 		@identifier = 'product_or_category'
 		@new_item_id = collitem.id
 		@collection = u.compliances
@@ -57,7 +57,7 @@ class CompliancesController < ApplicationController
 			:product_or_category,
 			:compliance_description,
 			:country,
-			:date,
+			# :date,
 			:status
 		)
 	end		

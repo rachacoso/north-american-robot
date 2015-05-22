@@ -3,6 +3,7 @@ class TradeShowsController < ApplicationController
 	def create
 		u = @current_user.distributor || @current_user.brand
 		new_item = u.trade_shows.create!(trade_show_parameters)
+		save_date(params[:trade_show]['date(1i)'], params[:trade_show]['date(2i)'], new_item)
 		@identifier = 'name'
 		@new_item_id = new_item.id
 		@collection = u.trade_shows
@@ -23,10 +24,16 @@ class TradeShowsController < ApplicationController
 		u = @current_user.distributor || @current_user.brand
 		collitem = u.trade_shows.find(params[:id])
 		collitem.update!(trade_show_parameters)
+		save_date(params[:trade_show]['date(1i)'], params[:trade_show]['date(2i)'], collitem)
 
 		@identifier = 'name'
 		@new_item_id = collitem.id
 		@collection = u.trade_shows
+
+		# update COMPLETENESS
+		if @current_user.distributor
+			u.update_completeness
+		end
 
 		respond_to do |format|
 			format.html
@@ -64,7 +71,7 @@ class TradeShowsController < ApplicationController
   def trade_show_parameters
     params.require(:trade_show).permit(
 			:name,
-			:date,
+			# :date,
 			:country,
 			:years_participated,
 			:website

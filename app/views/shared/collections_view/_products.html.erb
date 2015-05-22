@@ -31,7 +31,13 @@
 						<% end %>		
 						
 					<% else %>
-						<%= image_tag Display.all.first.default_product_photo.url(:large) %></li>
+						<% if Display.all.first.default_product_photo_file_name %>
+							<% if Display.all.first.default_product_photo_content_type == "image/svg+xml" %>
+								<%= image_tag Display.all.first.default_product_photo.url(:original) %>
+							<% else %>
+								<%= image_tag Display.all.first.default_product_photo.url(:medium) %>
+							<% end %>
+						<% end %>
 					<% end %>
 					</div>
 

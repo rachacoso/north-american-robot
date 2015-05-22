@@ -41,7 +41,7 @@
 					<% end %>
 				</div>
 				<div class="medium-4 columns end">
-				<%= f.file_field :background_photo, label: "&nbsp;".html_safe, accept: 'image/png,image/gif,image/jpeg' %>
+				<%= f.file_field :background_photo, label: "&nbsp;".html_safe, accept: 'image/png,image/gif,image/jpeg,image/svg+xml' %>
 				<%= @display_info.background_photo_file_name ? (link_to "Delete This Photo", display_delete_url(@display_info,"background"), :method => 'put', data: { :confirm => 'Are you sure you want to remove the background photo?'}) : ""  %>
 				</div>				
 			</div>
@@ -58,14 +58,18 @@
 					<%= f.label :default_product_photo do %>
 					<h3>Default Product Photo</h3>
 					<% if @display_info.default_product_photo_file_name %>
-						<%= image_tag @display_info.default_product_photo.url(:small) %>
+						<% if Display.all.first.default_product_photo_content_type == "image/svg+xml" %>
+							<%= image_tag Display.all.first.default_product_photo.url(:original) %>
+						<% else %>
+							<%= image_tag Display.all.first.default_product_photo.url(:medium) %>
+						<% end %>
 					<% else %>
 						<strong>No Default Product Photo</strong>
 					<% end %>
 					<% end %>
 				</div>
 				<div class="medium-4 columns end">
-				<%= f.file_field :default_product_photo, label: "&nbsp;".html_safe, accept: 'image/png,image/gif,image/jpeg' %>
+				<%= f.file_field :default_product_photo, label: "&nbsp;".html_safe, accept: 'image/png,image/gif,image/jpeg,image/svg+xml' %>
 				<%= @display_info.default_product_photo_file_name ? (link_to "Delete This Photo", display_delete_url(@display_info,"product"), :method => 'put', data: { :confirm => 'Are you sure you want to remove the default product photo?'}) : ""  %>
 				</div>				
 			</div>

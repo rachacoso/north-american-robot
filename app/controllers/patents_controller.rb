@@ -3,9 +3,9 @@ class PatentsController < ApplicationController
 	def create
 		u = @current_user.distributor || @current_user.brand
 		new_item = u.patents.create!(patent_parameters)
+		save_date(params[:patent]['date(1i)'], params[:patent]['date(2i)'], new_item)
 		@identifier = 'product'
 		@new_item_id = new_item.id
-		
 		@collection = u.patents
 
 		respond_to do |format|
@@ -19,6 +19,7 @@ class PatentsController < ApplicationController
 		u = @current_user.distributor || @current_user.brand
 		collitem = u.patents.find(params[:id])
 		collitem.update!(patent_parameters)
+		save_date(params[:patent]['date(1i)'], params[:patent]['date(2i)'], collitem)
 
 		@identifier = 'product'
 		@new_item_id = collitem.id
@@ -58,7 +59,7 @@ class PatentsController < ApplicationController
 			:product,
 			:patent_description,
 			:country,
-			:date,
+			# :date,
 			:status
 		)
 	end		
@@ -76,5 +77,6 @@ class PatentsController < ApplicationController
 		end
 
 	end
+
 
 end

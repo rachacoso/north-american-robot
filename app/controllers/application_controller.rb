@@ -8,6 +8,18 @@ class ApplicationController < ActionController::Base
   before_action :get_unread_message_count
   before_action :administrator_redirect
 
+
+
+  # DATE SAVING (used for collections date [trade show, trademarks, patents, compliances])
+  def save_date(year, month, item)
+    unless year.empty? && month.empty?
+      item.date = Date.strptime("#{month}-#{year}", '%m-%Y')
+      item.save
+    end 
+  end
+
+
+
 	private
   def get_current_user
   	if cookies[:auth_token]
