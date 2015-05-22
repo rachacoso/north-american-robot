@@ -377,14 +377,17 @@ function initialize () {
 
   // FILE UPLOAD
 
+  // FOR VERIFICATION IMAGES UPLOAD
   $('#distributor_verification_business_certificate').change(function() { 
       // select the form and submit
       $('#business-registration-form').submit(); 
   });
+  // FOR VERIFICATION IMAGES UPLOAD
   $('#distributor_verification_location_photo').change(function() { 
       // select the form and submit
       $('#location-form').submit(); 
   });
+  // FOR VERIFICATION IMAGES UPLOAD
   $('#distributor_verification_brand_display_photo').change(function() { 
       // select the form and submit
       $('#brand-display-form').submit(); 
@@ -397,11 +400,17 @@ function initialize () {
       // select the form and submit
       $('#user-update-logo-upload').submit(); 
   });
+  // FOR BRAND PHOTO UPLOAD
   $('#brand_photo_photo').change(function() { 
       // select the form and submit
       $('#brand-photo-upload').submit(); 
-  });   
-
+  });
+  // FOR PRODUCT PHOTO UPLOAD
+  $('.product-photo-photo').change(function() { 
+      // select the form and submit
+      var thisForm = $(this).parents('form');
+      $(thisForm).submit(); 
+  });
 
 }
 
