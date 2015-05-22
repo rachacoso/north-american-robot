@@ -16,3 +16,68 @@
 
 <%#= render partial: "section", locals: {profile_section: @country, new_profile_section: @new_country, profile_section_name: 'Countries'} %>
 
+
+<div class="row">
+	<div class="medium-9 medium-centered columns">
+		<div class="ldpanel">
+			<h1>Display</h1>
+
+			<% if flash[:"displays_error"] %>
+				<% flash[:"displays_error"].each do |k,v| %>
+					<%= k %> <%= v %> <br>
+				<% end %>
+			<% end %>
+
+			<%= form_for @display_info do |f| %>
+			<div class="row">
+				<div class="medium-5 columns">
+					<%= f.label :background_photo do %>
+						<h3>Background Photo</h3>
+						<% if @display_info.background_photo_file_name %>
+							<%= image_tag @display_info.background_photo.url(:small) %>
+						<% else %>
+							<strong>No Background Photo</strong>
+						<% end %>
+					<% end %>
+				</div>
+				<div class="medium-4 columns end">
+				<%= f.file_field :background_photo, label: "&nbsp;".html_safe, accept: 'image/png,image/gif,image/jpeg' %>
+				<%= @display_info.background_photo_file_name ? (link_to "Delete This Photo", display_delete_url(@display_info,"background"), :method => 'put', data: { :confirm => 'Are you sure you want to remove the background photo?'}) : ""  %>
+				</div>				
+			</div>
+			<hr>
+			<div class="row">
+				<div class="medium-9 columns clearfix">
+					<h3>Background Color</h3>
+					<%= f.text_field :background_color, class: "color" %>
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="medium-5 columns">
+					<%= f.label :default_product_photo do %>
+					<h3>Default Product Photo</h3>
+					<% if @display_info.default_product_photo_file_name %>
+						<%= image_tag @display_info.default_product_photo.url(:small) %>
+					<% else %>
+						<strong>No Default Product Photo</strong>
+					<% end %>
+					<% end %>
+				</div>
+				<div class="medium-4 columns end">
+				<%= f.file_field :default_product_photo, label: "&nbsp;".html_safe, accept: 'image/png,image/gif,image/jpeg' %>
+				<%= @display_info.default_product_photo_file_name ? (link_to "Delete This Photo", display_delete_url(@display_info,"product"), :method => 'put', data: { :confirm => 'Are you sure you want to remove the default product photo?'}) : ""  %>
+				</div>				
+			</div>
+
+			<div class="row">
+				<div class="medium-12 columns clearfix">			
+				<%= f.submit class: "text-submit right"  %>
+				</div>
+			</div>
+			<% end %>
+
+
+		</div>
+	</div>
+</div>

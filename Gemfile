@@ -4,7 +4,7 @@ ruby '2.1.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.3'
+# gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
@@ -45,8 +45,8 @@ gem "mongoid-paperclip", :require => "mongoid_paperclip"
 gem 'aws-sdk', '~> 1.3.4'
 
 
-
-gem 'foundation-rails', '5.4.5'
+gem 'foundation-rails', '5.5.2.1'
+# gem 'foundation-rails', '5.4.5'
 # gem 'foundation-rails'
 # gem 'foundation-rails', '5.4.3.1'
 gem 'foundation_rails_helper'

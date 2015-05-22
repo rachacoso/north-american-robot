@@ -32,16 +32,24 @@
 						
 						<h3>
 						<% unless profile.website.blank? %>
-						<%= link_to "website", "//#{clean_url(profile.website)}" %>
+							<%= link_to "website", "//#{clean_url(profile.website)}" %>
 						<% end %>
 						<% unless profile.facebook.blank? %>
-						<%= profile.website.blank? ? "" : "/" %>
+							<%= !profile.website.blank? ? "/" : "" %>
 							<%= link_to "facebook", "//#{clean_url(profile.facebook)}" %>
 						<% end %>
 						<% unless profile.linkedin.blank? %>
-						<%= profile.website.blank? && profile.website.blank? ? "" : "/" %>
+							<%= !profile.website.blank? || !profile.facebook.blank? ? "/" : "" %>
 							<%= link_to "linkedin", "//#{clean_url(profile.linkedin)}" %>
 						<% end %>
+						<% unless profile.twitter.blank? %>
+							<%= !profile.website.blank? || !profile.facebook.blank? || !profile.linkedin.blank? ? "/" : "" %>
+							<%= link_to "twitter", "//#{clean_url(profile.twitter)}" %>
+						<% end %>
+						<% unless profile.instagram.blank? %>
+							<%= !profile.website.blank? || !profile.facebook.blank? || !profile.linkedin.blank? || !profile.twitter.blank? ? "/" : "" %>
+							<%= link_to "instagram", "//#{clean_url(profile.instagram)}" %>
+						<% end %>						
 						</h3>
 						
 					</div>

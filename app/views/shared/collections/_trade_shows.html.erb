@@ -3,7 +3,7 @@
 		<%= f.text_field :name, label: "Trade Show Name", placeholder: 'Trade Show Name' %>
 	</div>
 	<div class="medium-3 columns">
-		<%= f.text_field :date, label: "Date", placeholder: 'Date' , class: "datepick" %>
+		<%= f.text_field :date, label: "Date", placeholder: 'Date', value: DateTime.now.strftime("%d-%m-%Y") , class: "datepick" %>
 	</div>
 	<div class="medium-4 columns">
 		<%= f.text_field :country, class: "country-autocomplete", label: "Country", placeholder: 'Country' %>

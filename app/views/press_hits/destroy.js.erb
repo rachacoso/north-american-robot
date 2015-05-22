@@ -1,4 +1,4 @@
-$('#collection-<%= @collection_name %>').hide().html("<%= j (render(partial: "shared/coll_item", collection:  @collection , as: :cb, locals: {identifier: @identifier }) || "<h5>( #{@no_item_message} )</h5>".html_safe) %>").fadeIn(1000);
+$('#collection-<%= @collection_name %>').hide().html("<%= j (render(partial: "shared/coll_item", collection:  @collection , as: :cb, locals: {identifier: @identifier }) || "<div class='row'><div class='small-12 columns'><h5>( #{@no_item_message} )</h5></div></div>".html_safe) %>").fadeIn(1000);
 
 $(document).foundation();
 $(document).foundation('accordion', 'reflow');

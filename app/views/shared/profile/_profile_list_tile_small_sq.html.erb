@@ -1,0 +1,131 @@
+
+<div class="profile-list-tile-small-sq">
+
+
+	
+	<div class="profile-list-tile-small-sq-top" id="profile_sq_top_<%=profile_item.id%><%= set ? "_#{set.gsub(/[^a-z,A-Z]/, '').downcase}" : "" %>">
+
+		<% if @current_user.type? == "distributor" %>
+
+			<% if !profile_item.brand_photos.empty? || !profile_item.products.all? { |p| p.product_photos.blank? } %>
+				<% content_for :javascript_foot do %>
+					<%= javascript_tag do %>
+					  $("#profile_sq_top_<%=profile_item.id%><%= set ? "_#{set.gsub(/[^a-z,A-Z]/, '').downcase}" : "" %>").backstretch([
+						<% profile_item.brand_photos.each do |photo| %>
+					    "<%= photo.photo.url(:profile_tile) %>",
+					  <% end %>
+					  <% profile_item.products.each do |product| %>
+						  <% product.product_photos.each do |photo| %>
+								"<%= photo.photo.url(:profile_tile) %>",
+						  <% end %>
+					  <% end %>
+					   ], {duration: 3000, fade: 750});
+					<% end %>
+			  <% end %>
+		  <% end %>
+
+		<% elsif @current_user.type? == "brand" %>
+
+			<% content_for :javascript_foot do %>
+				<%= javascript_tag do %>
+				  $("#profile_sq_top_<%=profile_item.id%><%= set ? "_#{set.gsub(/[^a-z,A-Z]/, '').downcase}" : "" %>").backstretch([
+
+					<% profile_item.export_countries.each do |ec| %>
+						"/images/marketplace_<%= ec.country.gsub(/\s+/, "").downcase %>.jpg",
+					<% end %>
+
+				  <% profile_item.distributor_brands.each do |product| %>
+					  <% product.product_photos.each do |photo| %>
+							"<%= photo.photo.url(:profile_tile) %>",
+					  <% end %>
+				  <% end %>		
+
+				   ], {duration: 3000, fade: 750});
+				<% end %>
+		  <% end %>
+
+		<% end %>
+
+
+		<div class="profile-list-tile-small-sq-top-countries-sectors">
+			<% if @current_user.brand %>
+				<% profile_item.export_countries.each do |ec| %>
+					<%= ec.country %><br>
+				<% end %>
+			<% elsif @current_user.distributor %>
+				<% profile_item.sectors.sort_by{|s| s.name}.each do |s| %>
+					<% case s.name
+						when 'Baby / Kids' %>
+						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="<small>sector</small><br>BABY / KIDS">
+						<%= image_tag "match_profile_icons_sector_baby.svg" %></span>
+						<% when 'Fashion / Accessories' %>
+						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="<small>sector</small><br>FASHION / ACCESSORIES">
+						<%= image_tag "match_profile_icons_sector_fashionaccessories.svg" %></span>
+						<% when 'Personal Care' %>
+						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="<small>sector</small><br>PERSONAL CARE">
+						<%= image_tag "match_profile_icons_sector_personalcare.svg" %></span>
+						<% when 'Other' %>
+						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="<small>sector</small><br>OTHER">
+						<%= image_tag "match_profile_icons_sector_other.svg" %></span>			
+					<% end %>
+				<% end %>
+			<% end %>	
+		</div>
+
+
+
+	</div>
+
+
+	
+	<div class="profile-list-tile-small-sq-top-companyname">
+		<% if @current_user.subscriber? && action_name != "public_profile" %>		
+			<h3><%= link_to profile_item.company_name,  view_match_url(profile_item.id, action_name)  %></h3>
+		<% else %>
+			<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= profile_item.class.to_s %> name hidden. Subscribe to view full profile">
+			<%= ("&blk12;" * profile_item.company_name.length).html_safe %>
+			</span>
+		<% end %>
+	</div>
+
+
+
+	<div class="profile-list-tile-small-sq-middle">	
+
+		<% if @current_user.brand %>
+			<div style="margin-bottom: 5px;"><%= render partial: "shared/profile/distributor_rating", locals: {d: profile_item} %></div>
+		<% end %>
+		<% if @current_user.subscriber? && action_name != "public_profile"  %>
+		<div class="profile-logo-area text-center">
+			<% if profile_item.logo_file_name %>
+				<%= link_to view_match_url(profile_item.id, action_name) do %>
+					<%= image_tag profile_item.logo.url(:medium), alt: "Logo", class: "uploaded-logo" %>
+				<% end %>
+			<% else %>
+				<% if !profile_item.facebook.blank? && fb_picture(profile_item.facebook) %>
+					<%= link_to view_match_url(profile_item.id, action_name) do %>
+						<%= image_tag fb_picture(profile_item.facebook), class: "facebook" %>
+					<% end %>
+				<% end %>
+			<% end %>
+		</div>
+		<% else %>
+		<div class="profile-logo-area text-center">
+			<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= profile_item.class.to_s %> logo hidden. Subscribe to view full profile"><%= image_tag profile_item.logo.url(:medium), width: "40", height: "40", alt: "Logo" %></span>
+		</div>
+		<% end %>
+
+		<% if @current_user.distributor && !profile_item.brand_positioning.blank? %>
+			<h5><%= truncate(profile_item.brand_positioning, :length => 100, :separator => ' ') %><small><%= link_to "more", view_match_url(profile_item.id, action_name) %> </small></h5>
+		<% end %>
+	</div>
+
+	<div class="profile-list-tile-small-sq-bottom text-right">
+		<%= render partial:"shared/profile/components/indicators", locals:{match: profile_item} %>
+	</div>
+
+
+</div>
+
+
+

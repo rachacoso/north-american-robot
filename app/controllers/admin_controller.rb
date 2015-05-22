@@ -19,11 +19,11 @@ class AdminController < ApplicationController
   	# @new_country = Country.new
     @new_company_size = CompanySize.new
 
-		# if Display.all.first.blank?
-		# 	@display_info = Display.new
-	 #  else
-		# 	@display_info = Display.all.first
-		# end
+		if Display.all.first.blank?
+			@display_info = Display.new
+	  else
+			@display_info = Display.all.first
+		end
     
   end
 

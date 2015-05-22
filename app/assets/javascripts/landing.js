@@ -315,18 +315,19 @@ function initializeGallery (className,galleryHeight) {
   // })    
 }
 
+/*ALL ITEMS IN HERE ARE RE-INITIALIZED UPON AJAX RETURN*/
 function initialize () {
   // Date Picker
  
   $('.datepick').fdatepicker({
-    format: "mm/yyyy",
-    startView: 2,
+    format: "mm-yyyy",
+    startView: 0,
     minViewMode: 2
   });
 
   $('.datepick_full').fdatepicker({
-    format: "mm/dd/yyyy",
-    startView: 2,
+    format: "dd-mm-yyyy",
+    startView: 0,
     minViewMode: 2
   });
 
