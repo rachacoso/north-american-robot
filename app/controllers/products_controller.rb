@@ -22,6 +22,12 @@ class ProductsController < ApplicationController
 			@ob = false
 		end
 
+		# PRODUCT TAGS
+		@product_tags = Hash.new
+		brand.products.each do |product|
+			@product_tags[product.id] = product.tags
+		end
+
 		# @iscurrent ||= false
 		respond_to do |format|
 			format.html
@@ -41,6 +47,13 @@ class ProductsController < ApplicationController
 		@identifier = 'name'
 		@iscurrent = collitem.current
 		@new_item_id = collitem.id
+
+		# PRODUCT TAGS
+		@product_tags = Hash.new
+		brand.products.each do |product|
+			@product_tags[product.id] = product.tags
+		end
+
 
 		if @iscurrent
 			@collection = brand.products.where(current: true)
@@ -71,6 +84,13 @@ class ProductsController < ApplicationController
 		d.destroy
 
 		@identifier = 'name'
+
+		# PRODUCT TAGS
+		brand = @current_user.brand
+		@product_tags = Hash.new
+		brand.products.each do |product|
+			@product_tags[product.id] = product.tags
+		end
 
 		brand = @current_user.brand
 		if @iscurrent 

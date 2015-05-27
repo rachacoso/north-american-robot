@@ -178,6 +178,29 @@
 			<br>
 			<% end %>
 
+
+			<%= render layout: "shared/panel_fulledit" do %>
+
+				<div class="row">
+					<div class="medium-12 columns">
+						<h1>Company Tags</h1>
+					</div>
+				</div>
+				<% tid = SecureRandom.uuid %>
+				<%= render partial: "shared/tags/tags_list", locals: {
+					list: @tags,
+					tid: tid
+				} %>
+				<br>
+				<%= render partial: "shared/tags/tags_input", locals: {
+					type: 'd',
+					tid: tid
+				} %>
+
+			<% end %>
+
+
+
 			<%= render layout: "shared/panel_fulledit" do %>
 
 				<div class="row">

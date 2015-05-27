@@ -9,6 +9,7 @@ class Product
  	field :current, type: Mongoid::Boolean
 
  	has_many :product_photos, as: :photographable, dependent: :destroy
+	has_many :tags, as: :taggable, dependent: :destroy
 
  	belongs_to :brand
   

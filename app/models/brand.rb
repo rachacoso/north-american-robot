@@ -23,7 +23,8 @@ class Brand
 	field :instagram, type: String
 	embeds_one :address, as: :addressable
 	has_many :contacts, as: :contactable, dependent: :destroy
-	
+	has_many :tags, as: :taggable, dependent: :destroy
+
 	accepts_nested_attributes_for :contacts, :address
 
 	has_mongoid_attached_file :logo, 

@@ -1,0 +1,18 @@
+<% cb ||= nil %>
+<%= form_for Tag.new, remote: true do |f| %>
+<div class="row">
+	<div class="small-12 columns">
+		<div class="row collapse">
+			<div class="small-10 columns">
+				<%= hidden_field_tag 'type', type %>
+				<%= hidden_field_tag 'tid', tid %>
+				<%= cb ? (hidden_field_tag 'product_id', cb.id) : "" %>
+				<%= f.text_field :name, placeholder: 'Tag', label: false, id: "tags-input-#{tid}" %>
+			</div><!--/.small-11-->
+			<div class="small-2 columns">
+				<%= f.submit 'Add Tag', class: 'postfix button tiny alert' %>
+			</div><!--/.small-2-->		
+		</div><!--/.row-->
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<% end %>

@@ -1,0 +1,16 @@
+<div class="row">
+	<div class="small-12 columns">
+		<% unless !list || list.count == 0 %>
+			<% list.each do |tag| %>
+				<% unless !tag.id %>
+					<%= link_to tag_url(tag, tid: tid), :method => 'delete', data: { :confirm => 'Delete Tag?'}, remote: true do %>
+						<span class="label"><%= tag.name %> <small style="color: gray;margin: auto;">x</small></span>
+					<% end %>
+				<% end %>
+				<%#= link_to 'X', library_document_delete_url(doc), :method => 'delete', data: { :confirm => 'Delete Tag?'}  %>
+			<% end %>
+		<% else %>
+			<h3>(No Tags)</h3>
+		<% end %>
+	</div><!--/.small-12-->
+</div><!--/.row-->

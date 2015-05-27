@@ -1,0 +1,5 @@
+$('#tags-list-<%= @tid %>').hide().html('<%= j (render partial: "shared/tags/tags_list_content", locals: {list: @tags, tid: @tid}) %>').fadeIn(1000);
+
+$(document).foundation();
+$(document).foundation('equalizer', 'reflow');  
+initialize();

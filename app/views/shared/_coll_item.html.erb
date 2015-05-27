@@ -33,6 +33,59 @@
 							</div>
 							<% end %>
 
+
+							<%#  TAGS for PRODUCT and DISTRIBUTOR BRAND %>
+
+							<% if cb.class.to_s == "Product" %>
+							<div class="row">
+								<div class="small-12 columns">
+									<hr>
+									<div class="row collapse">
+						        <div class="small-12 columns">
+											<h2>Tags</h2>
+										</div>
+									</div>									
+									<% tid = SecureRandom.uuid %>
+									<%# list = (@product_tags ? @product_tags[cb.id] : nil) %> 
+									<%= render partial: "shared/tags/tags_list", locals: {
+										list: @product_tags[cb.id],
+										tid: tid
+									} %>
+									<br>
+									<%= render partial: "shared/tags/tags_input", locals: {
+										type: 'p',
+										tid: tid,
+										cb: cb
+									} %>									
+								</div><!--/.small-12-->
+							</div><!--/.row-->
+							<% end %>
+
+							<% if cb.class.to_s == "DistributorBrand" %>
+							<div class="row">
+								<div class="small-12 columns">
+									<hr>
+									<div class="row collapse">
+						        <div class="small-12 columns">
+											<h2>Tags</h2>
+										</div>
+									</div>									
+									<% tid = SecureRandom.uuid %>
+									<%# list = (@product_tags ? @product_tags[cb.id] : nil) %> 
+									<%= render partial: "shared/tags/tags_list", locals: {
+										list: @product_tags[cb.id],
+										tid: tid
+									} %>
+									<br>
+									<%= render partial: "shared/tags/tags_input", locals: {
+										type: 'db',
+										tid: tid,
+										cb: cb
+									} %>									
+								</div><!--/.small-12-->
+							</div><!--/.row-->
+							<% end %>
+
 							<%#  PICTURE ADD for BRAND PRODUCTS %>
 							<% if has_picture_list(cb) %>
 							<div class="row">

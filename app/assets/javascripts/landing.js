@@ -331,7 +331,7 @@ function initialize () {
   // Select all on focus (note: makes it so that one can't select a part of an input, 
   // but can only ever select all... shouldn't be a problem, hopefully??)
 
-  // for autocomplete
+  // for COUNTRY autocomplete
   var countriesArray = $.map(countries, function (value, key) { return { value: value, data: key }; });
 
   $('.country-autocomplete, .country-autocomplete-multi').on('focus',

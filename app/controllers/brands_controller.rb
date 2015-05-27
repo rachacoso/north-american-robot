@@ -33,6 +33,16 @@ class BrandsController < ApplicationController
 		@export_countries = @brand.export_countries rescue nil
 		@new_export_country = ExportCountry.new				
 
+		#FOR TAGS
+		@tags = @brand.tags rescue nil
+
+		# BUILD 'PRODUCT_TAGS' HASH WITH PRODUCT'S TAGS
+		@product_tags = Hash.new
+		@brand.products.each do |product|
+			@product_tags[product.id] = product.tags
+		end
+		
+
 	end
 
 	def public_profile

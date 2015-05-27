@@ -24,6 +24,7 @@ class Distributor
 	field :completeness, type: Integer, default: 0 # 0-3 depending on completeness of profile fields
 	embeds_one :address, as: :addressable
  	has_many :contacts, as: :contactable, dependent: :destroy
+ 	has_many :tags, as: :taggable, dependent: :destroy
  	
 	accepts_nested_attributes_for :address
 

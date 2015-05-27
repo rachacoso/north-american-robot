@@ -21,6 +21,15 @@ class DistributorsController < ApplicationController
     @export_countries = @distributor.export_countries rescue nil
     @new_export_country = ExportCountry.new   
 
+    @tags = @distributor.tags rescue nil
+
+    # BUILD 'PRODUCT_TAGS' HASH WITH DISTRIBUTOR BRAND'S TAGS
+    @product_tags = Hash.new
+    @distributor.distributor_brands.each do |product|
+      @product_tags[product.id] = product.tags
+    end
+
+
   end
 
   def public_profile

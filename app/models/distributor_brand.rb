@@ -8,5 +8,7 @@ class DistributorBrand
 
   belongs_to :distributor
 
-	has_many :product_photos, as: :photographable, dependent: :destroy  
+	has_many :product_photos, as: :photographable, dependent: :destroy
+	has_many :tags, as: :taggable, dependent: :destroy
+	
 end

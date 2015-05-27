@@ -1,0 +1,6 @@
+$('#tags-list-<%= @tid %>').hide().html('<%= j (render partial: "shared/tags/tags_list_content", locals: {list: @tags, tid: @tid}) %>').fadeIn(1000);
+$('#tags-input-<%= @tid %>').val('');
+
+$(document).foundation();
+$(document).foundation('equalizer', 'reflow');  
+initialize();

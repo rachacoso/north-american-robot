@@ -16,6 +16,12 @@ class DistributorBrandsController < ApplicationController
 
 		@new_item_id = new_item.id
 
+		# PRODUCT TAGS
+		@product_tags = Hash.new
+		distributor.distributor_brands.each do |product|
+			@product_tags[product.id] = product.tags
+		end
+
 		if params[:ob]
 			@ob = true
 		else
@@ -40,6 +46,13 @@ class DistributorBrandsController < ApplicationController
 		@identifier = 'brand'
 		@iscurrent = collitem.current
 		@new_item_id = collitem.id
+
+		# PRODUCT TAGS
+		@product_tags = Hash.new
+		distributor.distributor_brands.each do |product|
+			@product_tags[product.id] = product.tags
+		end
+
 
 		if @iscurrent
 			@collection = distributor.distributor_brands.where(current: true)
@@ -71,6 +84,14 @@ class DistributorBrandsController < ApplicationController
 		@identifier = 'brand'
 
 		distributor = @current_user.distributor
+
+		# PRODUCT TAGS
+		@product_tags = Hash.new
+		distributor.distributor_brands.each do |product|
+			@product_tags[product.id] = product.tags
+		end
+
+
 		if @iscurrent 
 			@collection = distributor.distributor_brands.where(current: true)
 			@no_item_message = 'No Current Brands'
