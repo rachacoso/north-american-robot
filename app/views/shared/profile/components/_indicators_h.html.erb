@@ -30,8 +30,10 @@
 					<% end %>
 
 
-					<% if match.user.last_login %>
-						<% case last_activity(match.user.last_login) %>
+					<% last_login = get_last_login(match) %>
+
+					<% if last_login %>
+						<% case last_activity(last_login) %>
 						<% when "day" %>
 								<span data-tooltip aria-haspopup="true" class="has-tip radius" title="<small>ACTIVE IN PAST</small> <br>DAY">
 								<%= image_tag "match_profile_icons_day.svg" %></span>
