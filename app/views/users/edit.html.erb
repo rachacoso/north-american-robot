@@ -190,17 +190,21 @@
 										Company Name: 
 										<h3><%= @user.distributor.company_name %></h3>
 										 Contact Information:
+										 <% @user.distributor.contacts.each do |contact| %>
 										 <h3>
-										  <%= @user.distributor.contact_info.contact_name %>,<br> <%= @user.distributor.contact_info.contact_title %><br>
-										  <%= @user.distributor.contact_info.address1 %><br>
-										  <%= @user.distributor.contact_info.address2 %><br>
-										  <% unless @user.distributor.contact_info.city.blank? && @user.distributor.contact_info.state.blank? && @user.distributor.contact_info.postcode.blank? %>
-										  <%= @user.distributor.contact_info.city %> <%= @user.distributor.contact_info.state %> <%= @user.distributor.contact_info.postcode %><br>
+										  <%= contact.firstname %> <%= contact.lastname %>,<br> <%= contact.title %><br>
+										  <% unless !contact.address %>
+											  <%= contact.address.address1 %><br>
+											  <%= contact.address.address2 %><br>
+											  <% unless contact.address.city.blank? && contact.address.state.blank? && contact.address.postcode.blank? %>
+											  <%= contact.address.city %> <%= contact.address.state %> <%= contact.address.postcode %><br>
+											  <% end %>
+											  <%= contact.address.country %><br>
 										  <% end %>
-										  <%= @user.distributor.contact_info.country %><br>
-										  <%= @user.distributor.contact_info.phone %><br>
-										  <a href="mailto:<%= @user.distributor.contact_info.email %>"><%= @user.distributor.contact_info.email %></a>
+										  <%= contact.phone %><br>
+										  <a href="mailto:<%= contact.email %>"><%= contact.email %></a>
 										</h3>
+										<% end %>
 								</div>
 							</div>
 
