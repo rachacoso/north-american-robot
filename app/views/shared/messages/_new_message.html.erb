@@ -1,0 +1,10 @@
+	<% m = @messages.last %>
+	<div class="row">
+		<div class="small-11 small-centered columns">
+			<div class=<%= m.recipient == @current_user.type? ? "bubble-them" : "bubble-you" %>>
+				<%= m.text %>
+			</div>
+			<small>Sent <%= m.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%d %b %Y at %H:%M %Z") %></small>	
+		</div>
+	</div>
+	
