@@ -22,12 +22,10 @@ class User
 	belongs_to :distributor
 	belongs_to :brand
 
-	# has_one :brand, dependent: :destroy
-	# has_one :distributor, dependent: :destroy
 
 	accepts_nested_attributes_for :contact
-	# accepts_nested_attributes_for :brand
-	# accepts_nested_attributes_for :distributor
+	accepts_nested_attributes_for :brand
+	accepts_nested_attributes_for :distributor
 
 	scope :is_subscriber, ->{where(subscriber: true)}
 
