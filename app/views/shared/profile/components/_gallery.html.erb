@@ -1,0 +1,16 @@
+<div class="gallery-window" >
+	<% if gallery.count > 0 %>
+	<div id="profile_gallery" class="final-tiles-gallery effect-dezoom effect-fade-out caption-top">
+		<div class="ftg-items">
+			<% gallery.shuffle.each do |item| %>
+	    <div class="tile">
+	        <a class="tile-inner" href="<%= item.photo.url(:medium) %>">
+	            <img class="item" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="<%= item.photo.url(:medium) %>" />
+	            <span class='title'><%= item.class.to_s == "BrandPhoto" ? item.brand.company_name : item.photographable.name %></span>
+	        </a>
+	    </div>
+			<% end %>
+		</div>
+	</div>
+	<% end %>
+</div>
