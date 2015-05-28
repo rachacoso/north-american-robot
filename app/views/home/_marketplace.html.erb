@@ -58,33 +58,28 @@
 <% end %>
 <div id="dashboard-marketplace-content">
 
-			<div class="row">
-				<div class="small-4 columns">
-				<% @galleryA.each do |item| %>
-						<%= link_to view_match_path(item.photographable.brand.id, "na") do %>
-						<%= image_tag item.photo %>
-						<% end %>
-						<br><br>
-				<% end %>
-				</div><!--/.small-4-->
-				<div class="small-4 columns">
-				<% @galleryB.each do |item| %>
-						<%= link_to view_match_path(item.photographable.brand.id, "na") do %>
-						<%= image_tag item.photo %>
-						<% end %>
-						<br><br>
-				<% end %>
-				</div><!--/.small-4-->
-				<div class="small-4 columns">
-				<% @galleryC.each do |item| %>
-						<%= link_to view_match_path(item.photographable.brand.id, "na") do %>
-						<%= image_tag item.photo %>
-						<% end %>
-						<br><br>
-				<% end %>
-				</div><!--/.small-4-->
-			</div><!--/.row-->
+<% if @gallery %>
+<div class="row collapse">
+	<div class="small-11 small-centered columns">
+		<div class="profile-content gallery-window">
+			<div id="profile_gallery" class="final-tiles-gallery effect-dezoom effect-fade-out caption-top">
+				<div class="ftg-items">
+					
+					<% @gallery.each do |item| %>
+			    <div class="tile">
+		        <a class="tile-inner" href="<%= view_match_path(item.photographable.brand.id, 'na') %>">
+	            <img class="item" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="<%= item.photo.url(:medium) %>" />
+		        </a>
+			    </div>
+					<% end %>
 
+				</div>
+			</div>
+		</div>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<% end %>
+2
 <div class="row">
 	<div class="small-12 columns text-center">
 <%= link_to "MORE", gallery_url, class: "button tiny" %>		

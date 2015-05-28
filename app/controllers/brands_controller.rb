@@ -51,6 +51,13 @@ class BrandsController < ApplicationController
 
 	def full_profile
 		@profile = @current_user.brand
+
+		# GALLERY
+    @product_list = @profile.products.pluck(:id)
+    @product_photos = ProductPhoto.where(:photographable_id.in => @product_list)
+    @brand_photos = @profile.brand_photos
+    @gallery = @product_photos.concat @brand_photos
+
 	end
 
 	def update

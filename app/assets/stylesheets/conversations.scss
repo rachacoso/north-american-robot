@@ -1,0 +1,128 @@
+@import "foundation/functions";
+@import "foundation/components/labels";
+@import "global_variables";
+@import "mixins";
+
+// CONVERSATIONS
+
+$them-color: scale-color($landing-middle-gray, $lightness: 70%);
+$them-border: scale-color($landing-middle-gray, $lightness: 50%);
+$you-color: scale-color($landing-blue, $lightness: 90%);
+$you-border: scale-color($landing-blue, $lightness: 70%);
+$bubble-font-size: 0.8em;
+
+.bubble-container {
+  margin-top: rem-calc(10);
+  margin-bottom: rem-calc(10);
+  border-top: 0px solid transparent;
+}
+
+#message-input {
+  background-color: scale-color($landing-blue, $lightness: 95%);
+  border: none;
+}
+
+.bubble-them
+{
+& p {font-size: $bubble-font-size;}
+position: relative;
+width: 98%;
+// min-height: 100px;
+padding: rem-calc(10);
+// margin: rem-calc(10);
+background: $them-color;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+border: 2px solid $them-border;
+}
+
+.bubble-them:before 
+{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 15px 15px 15px 0;
+border-color: transparent $them-color;
+display: block;
+width: 0;
+z-index: 2;
+left: -13px;
+top: 10px;
+}
+
+.bubble-them:after 
+{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 15px 15px 15px 0;
+border-color: transparent $them-border;
+display: block;
+width: 0;
+z-index: 1;
+left: -15px;
+top: 10px;
+}
+
+
+.bubble-you
+{
+& p {font-size: $bubble-font-size;}
+position: relative;
+width: 98%;
+// min-height: 100px;
+padding: rem-calc(10);
+background: $you-color;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+border: 2px solid $you-border;
+}
+
+.bubble-you:before 
+{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 15px 0 15px 15px;
+border-color: transparent $you-color;
+display: block;
+width: 0;
+z-index: 2;
+right: -13px;
+top: 10px;
+}
+.bubble-you:after 
+{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 15px 0 15px 15px;
+border-color: transparent $you-border;
+display: block;
+width: 0;
+z-index: 1;
+right: -15px;
+top: 10px;
+}
+#message-list {
+  // max-height: 200px;
+  // overflow-y: scroll;
+}
+
+#unread-message-badge {
+  font-weight: 900;
+  font-size: 1.5em;
+  color: red !important;
+}
+
+#mc-new-contacts, #mc-unread-messages {
+  // border: 1px solid red;
+  margin: 1em 0em;
+  padding-bottom: 1em;
+  border: 1px solid $landing-middle-gray;
+  #mc-unread-messages-inner, #mc-new-contacts-inner {
+    padding: 1em;
+  }
+}

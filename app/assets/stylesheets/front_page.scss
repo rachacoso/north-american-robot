@@ -1,0 +1,21 @@
+@import "foundation/functions";
+@import "foundation/components/labels";
+@import "global_variables";
+@import "mixins";
+
+// FRONT PAGE
+
+.front-top-panel {
+  margin-top:2em;
+  min-height: 100%;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: initial; 
+}
+
+#front-footer {
+  background-color: $landing-dark-gray;
+  padding-top: 2em;
+  color: $landing-light-gray;
+}

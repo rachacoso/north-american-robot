@@ -1,0 +1,208 @@
+@import "foundation/functions";
+@import "foundation/components/labels";
+@import "global_variables";
+@import "mixins";
+
+
+// MATCH PAGES
+
+.matchcount {
+  font-size: 0.7em;
+}
+
+.deactivate {
+  border: 1px dotted #a6a6a6; 
+  a { 
+    color: #a6a6a6;
+    pointer-events: none;
+    cursor: default;
+   }
+}
+
+.filter-form-panel {
+  margin: 0em 1em;
+}
+
+
+
+.profile-list-tile {
+   border: 1px solid $landing-middle-gray;
+   border-radius: 1em;
+   background: white;
+   padding: 1em;
+   margin: 0.5em;
+   min-height: rem-calc(200);
+
+}
+
+.profile-list-tile-small {
+  position: relative;
+  border-bottom: 1px solid $landing-middle-gray;
+  // border-radius: 1em;
+  background: white;
+  padding: rem-calc(10);
+  margin-bottom: rem-calc(5);
+  .country {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background: $landing-light-gray;
+  }
+}
+
+.profile-list-tile-small-sq {
+  width: rem-calc(275);  
+   // border: 1px solid $landing-middle-gray;
+   // width: rem-calc(225);
+   // min-height: rem-calc(300);
+   margin: 0.5em;   
+}
+
+.profile-list-tile-small-sq-top {
+  position: relative;
+  // width: rem-calc(300);
+  height: rem-calc(180);
+  // border-right: 1px solid $landing-middle-gray;
+  @include transparent(#000, 0.4);
+  background-image: url("/images/crate.jpg");
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: center;
+
+  .profile-list-tile-small-sq-top-countries-sectors {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    @include transparent(#000, 0.4);
+    padding: rem-calc(5);
+    color: $landing-light-gray;
+    font-weight: 100;
+    // border-bottom: 1px solid $landing-light-gray;
+    // border-right: 1px solid white;
+  }
+
+}
+
+.profile-list-tile-small-sq-top-companyname {
+  // width: rem-calc(225);  
+  // @include transparent(#000, 0.6);
+  // border-top: 1px solid white;
+  // border-left: 1px solid white;
+  // background: white;
+  height: rem-calc(60);
+  @include transparent(#000, 0.6);
+  padding: rem-calc(10);
+  a {color: white; display: block;}
+  h3 {margin: 0;color: white;}
+}
+
+
+
+
+.profile-list-tile-small-sq-middle {
+   height: rem-calc(125);
+   // width: rem-calc(225);   
+   background: white;
+   padding: rem-calc(5);
+}
+
+.profile-logo-area {
+  height: rem-calc(80);
+  // margin-top: rem-calc(15);
+  img.uploaded-logo  {
+    width: auto !important;
+    max-height: 80px;
+  }
+}
+.profile-list-tile-small-sq-bottom {
+  height: rem-calc(70);
+  // width: rem-calc(225);
+  background: white;
+  padding: rem-calc(15) rem-calc(5);
+}
+
+.profile-indicators {
+  // padding: rem-calc(5);
+}
+
+
+
+.message-index-indicator {
+  @include label(
+    // This options sets label padding
+    $padding:rem-calc(4 8 6),
+    // This option sets label text-size
+    $text-size:rem-calc(11),
+    // This option sets label background-color
+    $bg:$landing-middle-gray,
+    // This option sets the radius of the label
+    $radius:2px
+  );  
+}
+
+.plt-indicator-info {
+  @include label(
+    // This options sets label padding
+    $padding:rem-calc(4 8 6),
+    // This option sets label text-size
+    $text-size:rem-calc(11),
+    // This option sets label background-color
+    $bg:$landing-light-gray,
+    // This option sets the radius of the label
+    $radius:2px
+  );
+  margin-bottom: 0.5em;
+}
+
+.plt-indicator-action-on {
+  @include label(
+    // This options sets label padding
+    $padding:rem-calc(4 8 6),
+    // This option sets label text-size
+    $text-size:rem-calc(20),
+    // This option sets label background-color
+    $bg:$landing-blue,
+    // This option sets the radius of the label
+    $radius:2px
+  );
+  font-weight: 100;
+  margin-bottom: rem-calc(20);
+  margin-top: rem-calc(20);
+}
+.plt-indicator-action-off {
+  @include label(
+    // This options sets label padding
+    $padding:rem-calc(4 8 6),
+    // This option sets label text-size
+    $text-size:rem-calc(20),
+    // This option sets label background-color
+    $bg:scale-color($landing-blue, $lightness: 50%),
+    // This option sets the radius of the label
+    $radius:2px
+  );
+  font-weight: 100;
+  margin-bottom: rem-calc(20);
+  margin-top: rem-calc(20);
+}
+.plt-indicator-alert {
+  @include label(
+    // This options sets label padding
+    $padding:rem-calc(4 8 6),
+    // This option sets label text-size
+    $text-size:rem-calc(11),
+    // This option sets label background-color
+    $bg:$landing-orange,
+    // This option sets the radius of the label
+    $radius:2px
+  );
+  margin-bottom: 0.5em;
+}
+
+.view-match-company-info {
+  // border: 1px solid $landing-middle-gray;
+  background: white; 
+  border-radius: 2px;
+  padding: 0.7em;
+}

@@ -39,7 +39,7 @@
 //= require countries
 //= require dropzone
 //= require jquery.finaltilesgallery
-
+//= require jquery.vide.min
 //= require_tree .
 
 $(function(){ $(document).foundation(); });

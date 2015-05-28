@@ -1,0 +1,84 @@
+@import "foundation/functions";
+@import "foundation/components/labels";
+@import "global_variables";
+@import "mixins";
+
+/////////////
+// EDIT PANELS
+/////////////
+
+.headpanel {
+  margin: 0.5em 0em 0.5em 0em;
+  border: 1px dotted scale-color(red, $lightness: 50%);
+  h1{
+    color: #455E7F;
+  }
+}
+
+.groupwrapper {
+  background-color: transparent;
+  padding: 0.5em;
+  margin: 0.5em 0em;
+  // border: 2px solid #455E80;
+  vertical-align: bottom;
+
+}
+
+.addnewform {
+  background-color: scale-color($body-font-color-analogue, $lightness: 10%);
+  .addnewforminputs {
+    padding: 0em 1em;
+  }
+  .addnewformsubmit {
+    margin: 0.5em 1em;
+  }
+}
+.updateform {
+  padding: 0em 1em;
+}
+
+a.itemformlink {
+  @include formlinkstyle
+}
+
+a.itemformlink.profilelink {
+  @include formlinkstyle($link-color, 120%)
+}
+.rowitem {
+  padding: 0em;
+  margin: 0em 0em 0.25em 0em;
+  a {
+    @include formlinkstyle;
+  }
+
+  // styling for the collection accordions
+  .accordion-navigation > a {
+    border: none;
+    transition: 0.2s;
+    // padding: 0.1em 0.4em;
+    border-radius: 0px;
+    font-size: 1.25em;
+    font-weight: 100;
+    // border-bottom: 2px solid scale-color(#ABBACC, $lightness: -30%);
+    &:hover {
+      background-color: $landing-dark-gray;
+      // border-bottom: 2px solid #efefef;
+      color: white;
+    }
+  }
+
+  .accordion-navigation.active > a {
+    color: white;
+  }
+
+  .rowheadback {
+    background-color: #ABBACC;
+    padding: 0.5em;
+    margin: 0em 0em 1em 0em;
+    color: white;
+    border-bottom: 2px solid scale-color(#ABBACC, $lightness: -30%);
+    &.addnew {
+      background-color: scale-color(#ABBACC, $lightness: -50%);
+    }
+  }
+}

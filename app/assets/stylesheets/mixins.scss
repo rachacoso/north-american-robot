@@ -1,0 +1,41 @@
+/////////////
+// MIXINS
+/////////////
+
+// Transparent backgrounds
+
+@mixin transparent($color, $alpha) {
+  $rgba: rgba($color, $alpha);
+  // $rgb: rgb($color);
+  $ie-hex-str: ie-hex-str($rgba);
+  /* Fallback for web browsers that doesn't support RGBa */
+  // background: $rgb;
+  background: $color;
+  /* RGBa with opacity */
+  background: $rgba;
+  /* For IE 5.5 - 7*/
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str},endColorstr=#{$ie-hex-str});
+  /* For IE 8*/
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str}, endColorstr=#{$ie-hex-str})";
+}
+
+
+// Button Styled Text Link 
+
+@mixin formlinkstyle($color: $link-color, $font-size: 0.65em) {
+  border: 1px solid $color;
+  transition: 0.2s;
+  padding: 0.1em 0.4em;
+  border-radius: 5px;
+  font-size: $font-size;
+  background-color: white;
+  color: $color;
+  &:hover {
+    background-color: $color;
+    color: white;
+  }
+  &.active {
+    background-color: $color;
+    color: white;
+  }    
+}

@@ -8,7 +8,7 @@ class ProductPhoto
 	  # :url => ":s3_domain_url",
 	  :styles => {
 	    :small    => ['100x100'],
-	    :medium		=> ['400'],
+	    :medium		=> ['400x400'],
 	    :large    => ['800>'],
 	    :profile_tile    => ['275x180', :jpg]
 	  },

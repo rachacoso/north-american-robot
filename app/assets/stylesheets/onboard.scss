@@ -1,0 +1,94 @@
+@import "foundation/functions";
+@import "foundation/components/labels";
+@import "global_variables";
+@import "mixins";
+
+//////////////
+// ONBOARD NAV
+//////////////
+
+$onboard-nav-radius: 4px;
+
+.onboard-nav {
+  padding-top: 0.75em;
+  li {
+    font-size: 0.85em;
+    // border: 1px solid $body-font-color;
+    background: $landing-light-gray;
+    // width: 2em;
+    padding: 0.5em 1em;
+    text-align: center;
+    margin-bottom: 0.2em;
+    margin-left: auto;
+    margin-right: auto;
+    list-style-type: none;
+    display:inline-block;
+    border-radius: $onboard-nav-radius; 
+    &.active {
+      background-color: scale-color($link-color, $lightness: 30%);
+      color: white;
+    }
+    &:hover:not(.active) {
+      background-color: $link-color;
+      color: white;
+    }
+    &.navdone:hover {
+      background-color: transparent;
+      color: $body-font-color;;
+    }    
+  }
+  a {
+      color: $body-font-color;
+  }
+}
+
+// Styling for submit button on Admin Pages
+.text-submit {
+  margin-bottom: 1em;
+  @include formlinkstyle($link-color, 1.5em)
+
+}
+
+// FRONT PAGE AND NEW SESSION PAGE SUBMIT LINK STYLING
+
+#submit-login {
+  background-color: transparent;
+  text-decoration: none;
+  border: none;
+  color: $link-color;
+  cursor: pointer;
+  font-size: 1em;
+  margin-top: 0.3em !important;
+}
+
+#new-user-submit-link {
+  // margin-top: rem-calc(10);
+  background-color: transparent;
+  border: 1px solid $landing-orange;
+  color: $landing-orange;
+  font-weight: 700;
+}
+#new-user-submit {
+  background-color: $landing-orange;
+  color: white;
+}
+#new-user-decline {
+  background-color: $landing-light-gray;
+  color: $landing-dark-gray;
+}
+
+
+// Onboarding Info Text
+.onboard-instructions {
+  // border: 1px dotted scale-color($link-color, $lightness: 70%);
+  border-radius: 8px;
+  padding: 1em;
+  color: $body-font-color;
+  margin-bottom: 1em;
+  // @include transparent($landing-blue, 0.3);
+  background: scale-color($landing-blue, $lightness: 70%);
+  &.smaller {
+    font-size: 0.75em;
+    line-height: 1.5em;
+  }
+}

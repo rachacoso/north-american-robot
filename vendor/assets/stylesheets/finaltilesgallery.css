@@ -181,10 +181,10 @@
   transition: all .5s;
 }
 .final-tiles-gallery.caption-top .tile span.title {
-  font-weight: 900;
+  font-weight: 100;
   top: 10px;
   letter-spacing: 1px;
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
 }
 .final-tiles-gallery.caption-top .tile span.subtitle {
   top: 70px;
@@ -222,7 +222,7 @@
   font-weight: 900;
   bottom: 70px;
   letter-spacing: 1px;
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
 }
 .final-tiles-gallery.caption-bottom .tile span.subtitle {
   bottom: 0px;

@@ -7,6 +7,7 @@ class BrandPhoto
 		# :url => ":s3_domain_url",  
 	  :styles => {
 	    :small    => ['100x100',   :jpg],
+	    :medium		=> ['400x400'],
 	    :large    => ['640',   :jpg],
 	    :profile_tile    => ['275x180', :jpg]
 	    

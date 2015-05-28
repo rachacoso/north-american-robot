@@ -4,12 +4,17 @@ var bgDefaultColor = "#E5E5E5";
 
 $( document ).ready(function() {
 
+// ADJUST HEIGHT OF PROFILE GALLERY AND INFO
+
+  // profileGalleryHeight(); 
+
 // FINAL TILES
 
   $('#profile_gallery').finalTilesGallery({
     margin:  2,
-    // imageSizeFactor: [[4000, .5],[1024, .4],[800, .3],[600, .2],[480, .1]],
-    gridSize: 200
+    imageSizeFactor: [[4000, .5],[1024, .5],[800, .5],[600, .5],[480, .5]],
+    gridSize: 50,
+    allowEnlargement: true
   });
 
 // MODIFICATIONS FOR NO SVG SUPPORT
@@ -302,6 +307,15 @@ function addCheckbox(name) {
 }
 
 // INITIALIZE GALLERIA SLIDESHOW
+function profileGalleryHeight () {
+  var topBarHeight = $('.top-bar').height();
+  var subHeaderHeight = $('.marketplace-header').height();
+  var windowHeight = $(window).height();
+  var minHeight = windowHeight - (topBarHeight + subHeaderHeight);
+  $('.gallery-window').css( "min-height", minHeight );  
+}
+
+// INITIALIZE GALLERIA SLIDESHOW
 function initializeGallery (className,galleryHeight) {
   galleryHeight = (typeof galleryHeight === 'undefined') ? 400 : galleryHeight;
   Galleria.run(className, {
@@ -314,6 +328,8 @@ function initializeGallery (className,galleryHeight) {
   //     height: 400
   // })    
 }
+
+
 
 /*ALL ITEMS IN HERE ARE RE-INITIALIZED UPON AJAX RETURN*/
 function initialize () {

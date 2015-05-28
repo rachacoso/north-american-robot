@@ -9,15 +9,15 @@
 
   <%= csrf_meta_tags %>
 
-<script src="//use.typekit.net/aaw2ric.js"></script>
-<script>try{Typekit.load();}catch(e){}</script>
+<%#= <script src="//use.typekit.net/aaw2ric.js"></script> %>
+<%#= <script>try{Typekit.load();}catch(e){}</script> %>
 
   <%= content_for?(:javascript_head) ? yield(:javascript_head) : "" %>
 
 
 
 </head>
-<body>
+<body data-vide-bg="mp4: /video/Landing.mp4" data-vide-options="loop: true, muted: true, position: 0% 0%">
 
 <%= content_for?(:user_head) ? yield(:user_head) : "" %>
 

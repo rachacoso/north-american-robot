@@ -1,0 +1,28 @@
+@import "foundation/functions";
+@import "foundation/components/labels";
+@import "global_variables";
+@import "mixins";
+
+/////////////
+// ERRORS/ALERTS STYLES
+/////////////
+
+
+// Error/Validation styling
+
+.errornotice {
+  color: red;
+  font-size: 0.80em;
+  margin-bottom: 0.3em;
+  padding: 0.2em;
+  // border: 1px solid transparent;
+  &.error-on {
+    // border: 1px solid red;
+  }
+}
+
+// Alerts
+
+.information {
+  color: $info-color;
+}

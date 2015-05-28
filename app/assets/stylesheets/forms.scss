@@ -1,0 +1,356 @@
+@import "foundation/functions";
+@import "foundation/components/labels";
+@import "global_variables";
+@import "mixins";
+
+////////////////
+// Forms styling
+////////////////
+
+
+textarea {
+  resize: vertical;
+}
+
+
+.prefix, .postfix {
+  font-size: 0.70em;
+}
+
+input[type="submit"] {
+  // margin-top: 1em;
+}
+input[type="text"],
+textarea,
+input[type="number"],
+input[type="email"],
+input[type="password"],
+select {
+  border: none;
+  // border-top: solid 2px scale-color($input-top-border, $lightness: 30%);
+  transition: border 0.3s;
+  @include transparent($input-background-color, 0.8);
+  // background: @include transparent($input-background-color, 0.9);
+  // background: $input-background-color;
+  color: $input-text-color;
+  box-shadow: none;
+}
+input[type="password"],
+input[type="email"] {
+  margin-bottom: 0.2em;
+}
+
+input[type="text"],
+// input[type="password"],
+// input[type="email"],
+textarea,
+input[type="number"],
+select {
+  padding: 0px 0px 0px 10px;
+  // margin-bottom: 0.2em;
+}
+input[type="text"]:focus,
+input[type="text"].focus,
+textarea:focus,
+textarea.focus,
+input[type="email"]:focus,
+input[type="email"].focus,
+input[type="password"]:focus,
+input[type="password"].focus,
+input[type="number"]:focus,
+input[type="number"].focus {
+  border: none;
+  // border-top: solid 2px $input-top-border;
+  background: scale-color($landing-blue, $lightness: 30%);
+  // background: #2C3838;
+  box-shadow: inset 0 2px 2px rgba(0,0,0,0.2);
+  color: $input-text-color;
+}
+
+select:hover,
+select.hover {
+  border: none;
+  // border-top: solid 2px $input-top-border;
+  background: $input-background-color;
+  box-shadow: none;
+  color: $input-text-color;
+}
+
+
+// placeholder styling
+$placeholder-color: scale-color($input-background-color, $lightness: -30%);
+
+::-webkit-input-placeholder {
+   color: $placeholder-color;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: $placeholder-color;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: $placeholder-color;  
+}
+
+:-ms-input-placeholder {  
+   color: $placeholder-color;  
+}
+
+//////////
+// Radio and Checkbox styling
+//////////
+
+// RADIO
+/*
+  Hide radio button (the round disc)
+  we will use just the label to create pushbutton effect
+*/
+input[type=radio] {
+    display:none; 
+    margin:10px;
+}
+ 
+/*
+  Change the look'n'feel of labels (which are adjacent to radiobuttons).
+  Add some margin, padding to label
+*/
+input[type=radio] + label {
+    display:inline-block;
+    transition: color 0.5s;
+    transition: background-color 0.5s;
+    transition: border 0.5s;
+    margin: 0px -2px 0px -2px;
+    padding: 4px 12px;
+    background-color: scale-color($input-background-color, $lightness: 80%);
+    border: 1px solid scale-color($input-background-color, $lightness: 30%);
+    color: #7f7f7f;
+}
+
+
+
+/*
+ Change background color for label next to checked radio button
+ to make it look like highlighted button
+*/
+input[type=radio]:checked + label { 
+  background-image: none;
+  background-color: scale-color($input-background-color, $lightness: 30%);
+  border: 1px solid scale-color($input-background-color, $lightness: -80%);
+  color: #000;
+    
+}
+input[type=radio] + label:hover ,
+input[type=radio]+ label:active  {
+  color: #000;
+}
+
+// CHECKBOX
+
+// ON EDIT SCREENS
+.editform {
+
+  /*
+    Hide checkbox
+    we will use just the label to create pushbutton effect
+  */
+
+  input[type=checkbox] {
+    display:none; 
+    margin:10px;
+  }
+
+
+  /*
+    Change the look'n'feel of labels (which are adjacent to radiobuttons).
+    Add some margin, padding to label
+  */
+  input[type=checkbox] + label {
+    display:inline-block;
+    transition: color 0.5s;
+    transition: background-color 0.5s;
+    transition: border 0.5s;  
+    margin: 2px;
+    padding: 4px 12px;
+    background-color: scale-color($input-background-color, $lightness: 80%);
+    border: 1px solid scale-color($input-background-color, $lightness: 30%);
+    // background-color:#969696;
+    // border-color: #ddd;    
+    color: #7f7f7f;
+    width: 100%;
+  }
+  input[type=checkbox] + label:hover ,
+  input[type=checkbox]+ label:active  {
+    color: #000;
+  }
+
+  /*
+   Change background color for label next to checked radio button
+   to make it look like highlighted button
+  */
+  input[type=checkbox]:checked + label { 
+    background-image: none;
+    background-color: scale-color($input-background-color, $lightness: 30%);
+    border: 1px solid scale-color($input-background-color, $lightness: -80%);
+    color: #000;
+    // background-color: #e7e7e7;
+  }
+
+}
+
+// ON FILTER FORM (FOR MATCHES)
+
+.filterform {
+
+  /*
+    Hide checkbox
+    we will use just the label to create pushbutton effect
+  */
+
+  & input[type=checkbox] {
+    display:none; 
+    margin:10px;
+  }
+
+
+  /*
+    Change the look'n'feel of labels (which are adjacent to radiobuttons).
+    Add some margin, padding to label
+  */
+  input[type=checkbox] + label {
+    display:inline-block;
+    transition: color 0.5s;
+    transition: background-color 0.5s;
+    transition: border 0.5s;  
+    margin: 2px;
+    padding: 4px 12px;
+    background-color: scale-color($landing-blue, $lightness: 80%);
+    border: 1px solid scale-color($landing-blue, $lightness: 30%);
+    border-radius: 10px;
+    color: #7f7f7f;
+    width: 100%;
+    font-size: 0.65em;
+  }
+  input[type=checkbox] + label:hover ,
+  input[type=checkbox]+ label:active  {
+    color: #000;
+  }
+
+  /*
+   Change background color for label next to checked radio button
+   to make it look like highlighted button
+  */
+  input[type=checkbox]:checked + label { 
+    background-image: none;
+    background-color: scale-color($landing-blue, $lightness: 30%);
+    border: 1px solid scale-color($landing-blue, $lightness: -20%);
+    border-radius: 10px;
+    color: #000;
+    // background-color: #e7e7e7;
+  }
+
+}
+
+.top-bar input[type=checkbox] {
+  top: 0px;
+}
+
+.customchanneldisplay {
+  padding: 4px 12px;
+  border: 1px dotted scale-color($input-background-color, $lightness: -80%);
+  background-color: scale-color($input-background-color, $lightness: 30%);
+  color: #000;
+  margin: 2px;
+}
+
+#customchannellist {
+ /*
+    Hide checkbox
+    we will use just the label to create pushbutton effect
+  */
+
+  input[type=checkbox] {
+    display:none; 
+    margin:10px;
+  }
+
+  /*
+    Change the look'n'feel of labels (which are adjacent to radiobuttons).
+    Add some margin, padding to label
+  */
+  input[type=checkbox] + label {
+    display:inline-block;
+    transition: color 0.5s;
+    transition: background-color 0.5s;
+    transition: border 0.5s;  
+    margin: 2px;
+    padding: 4px 12px;
+    background-color: scale-color($input-background-color, $lightness: 80%);
+    border: 1px solid scale-color($input-background-color, $lightness: 30%);
+    // background-color:#969696;
+    // border-color: #ddd;    
+    color: #7f7f7f;
+    width: 100%;
+  }
+  input[type=checkbox] + label:hover ,
+  input[type=checkbox]+ label:active  {
+    color: #000;
+  }
+
+  /*
+   Change background color for label next to checked radio button
+   to make it look like highlighted button
+  */
+  input[type=checkbox]:checked + label { 
+    background-image: none;
+    background-color: scale-color($input-background-color, $lightness: 30%);
+    border: 1px solid scale-color($input-background-color, $lightness: -80%);
+    color: #000;
+    // background-color: #e7e7e7;
+  }
+
+
+}
+
+.productmarketingtype {
+  // border: 1px solid scale-color($input-background-color, $lightness: -80%);
+  // background-color: scale-color($input-background-color, $lightness: 30%);
+  &::before { 
+    content: "\2611";    
+  }
+  &.off {
+    color: #adadad;
+    // border: 1px dotted scale-color($input-background-color, $lightness: -80%);
+    background-color: transparent;
+    &::before { 
+    content: "\2610";    
+    }
+  }
+}
+
+////////////////
+// AUTOCOMPLETE STYLES
+////////////////
+
+.autocomplete-suggestions { 
+  font-weight: 200;
+  font-size: small;
+  border: 1px solid #999; 
+  background: $body-bg; 
+  overflow: auto; 
+}
+.autocomplete-suggestion { 
+  font-weight: 200;
+  font-size: small;
+  padding: 2px 5px; 
+  white-space: nowrap; 
+  overflow: hidden; 
+}
+.autocomplete-selected { 
+  background: scale-color($link-color, $lightness: 80%);
+  // color: $body-bg;
+}
+.autocomplete-suggestions strong { 
+  font-weight: 400; 
+  font-size: small;
+  color: $link-color;
+}
