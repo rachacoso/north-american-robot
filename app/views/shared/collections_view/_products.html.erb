@@ -1,55 +1,63 @@
+<div class="row">
+	<div class="small-12 columns">
+		<div class="collections-view-product-top">
+			<div class="galleria-product-photos" id="galleria-product-photos-<%=collitem.id%>">
+			<% if !collitem.product_photos.blank? %>
 
-<hr>
-			<div class="row" data-equalizer>
-						
-
-				<div class="medium-4 columns preview-data" data-equalizer-watch>
-
-					<h3><strong style="color: #5f5f5f;"><%= collitem.name.empty? ? "( No Name )" : collitem.name  %></strong><br></h3>
-					<small>MSRP:</small><br>
-					$<%= collitem.msrp %><hr>
-					<small>Country of Manufacture:</small><br>
-					<%= collitem.country_of_manufacture %><hr>
-
-				</div>	
-
-				<div class="medium-8 columns" data-equalizer-watch>
-
-
-					<div class="galleria-product-photos" id="galleria-product-photos-<%=collitem.id%>">
-					<% if !collitem.product_photos.blank? %>
-
-						<% collitem.product_photos.each do |photo| %>
-							<%= link_to photo.photo.url(:large) do %>
-								<%= image_tag photo.photo.url(:small) %>
-							<% end %>
-				    <% end %>
-						<% content_for :javascript_foot do %>
-							<% javascript_tag do %>
-							initializeGallery("#galleria-product-photos-<%=collitem.id%>",300)
-							<% end %>
-						<% end %>		
-						
-					<% else %>
-						<% if Display.all.first.default_product_photo_file_name %>
-							<% if Display.all.first.default_product_photo_content_type == "image/svg+xml" %>
-								<%= image_tag Display.all.first.default_product_photo.url(:original) %>
-							<% else %>
-								<%= image_tag Display.all.first.default_product_photo.url(:medium) %>
-							<% end %>
-						<% end %>
+				<% collitem.product_photos.each do |photo| %>
+					<%= link_to photo.photo.url(:large) do %>
+						<%= image_tag photo.photo.url(:small) %>
 					<% end %>
-					</div>
-
-				</div>
-				<div class="small-12 columns">
-										<small>Description:</small><br>
-					<%= simple_format(collitem.description) %>
-					<small>Key Benefits:</small><br>
-					<%= simple_format(collitem.key_benefits) %>
-				</div><!--/.small-12-->
-
+		    <% end %>
+				<% content_for :javascript_foot do %>
+					<% javascript_tag do %>
+					initializeGallery("#galleria-product-photos-<%=collitem.id%>",300)
+					<% end %>
+				<% end %>		
+				
+			<% else %>
+				<% if Display.all.first.default_product_photo_file_name %>
+					<% if Display.all.first.default_product_photo_content_type == "image/svg+xml" %>
+						<%= image_tag Display.all.first.default_product_photo.url(:original) %>
+					<% else %>
+						<%= image_tag Display.all.first.default_product_photo.url(:medium) %>
+					<% end %>
+				<% end %>
+			<% end %>
 			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="small-12 columns">
+		<h2><strong style="color: #5f5f5f;"><%= collitem.name.empty? ? "( No Name )" : collitem.name  %></strong><br>
+		<% unless collitem.country_of_manufacture.blank? %>
+			<small>Manufactured in <%= collitem.country_of_manufacture %></small>
+		<% end %>
+		</h2>
+	</div>
+	<div class="small-12 columns">
+		<% unless collitem.msrp.blank? %>
+			<h4>$<%= collitem.msrp %> MSRP</h4>
+		<% end %>
+	</div>	
+	<div class="small-12 columns">
+		<% collitem.tags.each do |tag| %>
+			<span class="label"><%= tag.name %></span>
+		<% end %>
+		<br><br>
+	</div><!--/.small-12-->	
+	<div class="small-12 columns">
+		<% unless collitem.description.blank? %>
+			<%= simple_format(collitem.description) %>
+		<% end %>
+		<% unless collitem.key_benefits.blank? %>
+			<%= simple_format(collitem.key_benefits) %>
+		<% end %>		
+	</div><!--/.small-12-->
+</div><!--/.row-->
 
 
 

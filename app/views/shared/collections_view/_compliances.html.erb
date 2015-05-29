@@ -1,37 +1,21 @@
-<dl class="accordion" data-accordion>
-  <dd class="accordion-navigation">
-    <a href="#a_<%= collitem.id %>"><strong style="color: #5f5f5f;"><%= collitem.product_or_category.empty? ? "( No Name )" : collitem.product_or_category  %></strong>
-    <span class="right" style="color: #aaa;"><small>(more)</small></span></a>
-    <div id="a_<%= collitem.id %>" class="content">
-
+<div class="panel" data-equalizer-watch>
+<h2><strong style="color: #5f5f5f;"><%= collitem.product_or_category.empty? ? "( No Name )" : collitem.product_or_category  %></strong></h2>
 <div class="row">
 	<div class="medium-12 columns">
-		<small>Country:</small><br>
-		<%= collitem.country %>
+
+		<h4><strong><%= collitem.country %></strong> <small>/</small> <%= collitem.date.strftime("%B %d %Y") %> <small>/</small> 
+			<% if collitem.status == "Compliant" %>
+				<span style="color: green;"><strong><%= collitem.status %></strong></span>
+			<% else %>
+				<span style="color: gray;"><strong><%= collitem.status %></strong></span>
+			<% end %>
+		</h4>
 
 	</div>									
 </div>
 <div class="row">						
 	<div class="medium-12 columns">
-		<small>Description:</small><br>
-		<%= collitem.compliance_description %>
+		<%= simple_format(collitem.compliance_description) %>
 	</div>				
 </div>
-
-<div class="row">						
-	<div class="medium-12 columns">
-		<small>Date:</small><br>
-		<%= collitem.date %>
-	</div>				
 </div>
-
-<div class="row">						
-	<div class="medium-12 columns">
-		<small>Status:</small><br>
-		<%= collitem.status %>
-	</div>				
-</div>
-
-		</div>
-	</dd>
-</dl>

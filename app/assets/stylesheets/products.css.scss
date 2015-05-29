@@ -1,3 +1,19 @@
+@import "foundation/functions";
+@import "foundation/components/labels";
+@import "global_variables";
+@import "mixins";
+
 // Place all the styles related to the Products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.collections-view-product-top {
+	border: 1px solid black;
+	@include transparent($landing-middle-gray, 0.6);
+	// background-color: black;
+}
+.collections-view-product-bottom {
+	padding: rem-calc(5);
+	border: 1px solid black;
+}

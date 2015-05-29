@@ -212,12 +212,13 @@
 				<% if profile.products.where(current: true).length > 0 %>
 				<div class="profile-container">
 					<div class="profile-header">
-						<h4>CURRENT PRODUCTS</h4>
+						<h1>CURRENT PRODUCTS</h1>
 					</div><!--.profile-header-->
 					<div class="profile-content">
 
-					<ul class="small-block-grid-1 medium-block-grid-3">
-					<% profile.products.where(current: true).each do |p| %>
+					<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
+
+					<% profile.products.where(current: true).order_by(:description.desc, :key_benefits.desc).each do |p| %>
 						<li><%= render partial: "shared/collections_view/products", locals: {
 							collitem: p
 						} %></li>
@@ -233,12 +234,12 @@
 				<% if profile.products.where(current: false).length > 0 %>				
 				<div class="profile-container">
 					<div class="profile-header">
-						<h4>UPCOMING PRODUCTS</h4>
+						<h1>UPCOMING PRODUCTS</h1>
 					</div><!--.profile-header-->
 					<div class="profile-content">
 
-					<ul class="small-block-grid-1 medium-block-grid-3">
-					<% profile.products.where(current: false).each do |p| %>																
+					<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
+					<% profile.products.where(current: false).order_by(:description.desc, :key_benefits.desc).each do |p| %>																
 						<li><%= render partial: "shared/collections_view/products", locals: {
 							collitem: p
 						} %></li>
@@ -256,7 +257,7 @@
 
 				<div class="profile-container">
 					<div class="profile-header">
-						<h4>BRAND GALLERY</h4>
+						<h1>BRAND GALLERY</h1>
 					</div><!--.profile-header-->
 					<div class="profile-content">
 				
@@ -286,12 +287,12 @@
 				<% if profile.press_hits.length > 0 %>
 				<div class="profile-container">
 					<div class="profile-header">
-						<h4>PRESS CLIPS</h4>
+						<h1>PRESS CLIPS</h1>
 					</div><!--.profile-header-->
 					<div class="profile-content">
 
-					<ul class="small-block-grid-1 medium-block-grid-3">
-					<% profile.press_hits.each do |p| %>
+					<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
+					<% profile.press_hits.order_by(:date.desc).each do |p| %>
 						<li><%= render partial: "shared/collections_view/press_hits", locals: {
 							collitem: p
 						} %></li>
@@ -307,12 +308,12 @@
 				<% if profile.trade_shows.length > 0 %>
 				<div class="profile-container">
 					<div class="profile-header">
-						<h4>TRADE SHOWS</h4>
+						<h1>TRADE SHOWS</h1>
 					</div><!--.profile-header-->
 					<div class="profile-content">
 
-						<ul class="small-block-grid-1 medium-block-grid-3">
-						<% profile.trade_shows.each do |p| %>
+						<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
+						<% profile.trade_shows.order_by(:date.desc).each do |p| %>
 							<li><%= render partial: "shared/collections_view/trade_shows", locals: {
 								collitem: p
 							} %></li>
@@ -328,12 +329,12 @@
 				<% if profile.patents.length > 0 %>
 				<div class="profile-container">
 					<div class="profile-header">
-						<h4>PATENTS</h4>
+						<h1>PATENTS</h1>
 					</div><!--.profile-header-->
 					<div class="profile-content">
 					
-					<ul class="small-block-grid-1 medium-block-grid-3">
-					<% profile.patents.each do |p| %>
+					<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
+					<% profile.patents.order_by(:country.asc, :date.desc).each do |p| %>
 						<li><%= render partial: "shared/collections_view/patents", locals: {
 							collitem: p
 						} %></li>
@@ -349,12 +350,12 @@
 				<% if profile.trademarks.length > 0 %>
 				<div class="profile-container">
 					<div class="profile-header">
-						<h4>TRADEMARKS</h4>
+						<h1>TRADEMARKS</h1>
 					</div><!--.profile-header-->
 					<div class="profile-content">
 					
-					<ul class="small-block-grid-1 medium-block-grid-3">
-					<% profile.trademarks.each do |p| %>
+					<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
+					<% profile.trademarks.order_by(:country.asc, :date.desc).each do |p| %>
 						<li><%= render partial: "shared/collections_view/trademarks", locals: {
 							collitem: p
 						} %></li>
@@ -370,12 +371,12 @@
 				<% if profile.compliances.length > 0 %>
 				<div class="profile-container">
 					<div class="profile-header">
-						<h4>CERTIFICATIONS</h4>
+						<h1>CERTIFICATIONS</h1>
 					</div><!--.profile-header-->
 					<div class="profile-content">
 
-					<ul class="small-block-grid-1 medium-block-grid-3">
-					<% profile.compliances.each do |p| %>
+					<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
+					<% profile.compliances.order_by(:country.asc, :date.desc).each do |p| %>
 						<li><%= render partial: "shared/collections_view/compliances", locals: {
 							collitem: p
 						} %></li>
