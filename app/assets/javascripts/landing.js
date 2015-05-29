@@ -25,6 +25,14 @@ $( document ).ready(function() {
     });
   }
 
+// FOR PROFILE DIV BACKGROUND
+
+$("#gallery-distributor").backstretch( '/images/distributor.jpg', {fade: 500});
+$(".galleria-product-photos.distributor-default").backstretch( '/images/distributor.jpg', {fade: 500});
+
+$("#gallery-brand").backstretch( '/images/brand.jpg', {fade: 500});
+$(".galleria-product-photos.brand-default").backstretch( '/images/brand.jpg', {fade: 500});
+
 // FOR AJAX FORM SUBMIT LOADING MODAL
 
 /* STILL NOT WORKING NEED TO FIX */

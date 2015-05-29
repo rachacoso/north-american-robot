@@ -1,5 +1,6 @@
+
+<% if gallery && gallery.count > 0 %>
 <div class="gallery-window" >
-	<% if gallery.count > 0 %>
 	<div id="profile_gallery" class="final-tiles-gallery effect-dezoom effect-fade-out caption-top">
 		<div class="ftg-items">
 			<% gallery.shuffle.each do |item| %>
@@ -12,5 +13,9 @@
 			<% end %>
 		</div>
 	</div>
-	<% end %>
 </div>
+<% else %>
+<div class="gallery-window" id="gallery-<%= @current_user.type? == 'distributor' ? 'brand' : 'distributor' %>">
+	&nbsp;
+</div>
+<% end %>

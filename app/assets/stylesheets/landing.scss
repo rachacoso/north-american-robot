@@ -338,6 +338,11 @@ $dashboard-agency-color: $landing-teal;
   // background-color: $landing-middle-gray;
   // border-right: 1px solid $landing-middle-gray;
   // border-bottom: 1px solid $landing-middle-gray;
+  &#gallery-distributor, &#gallery-brand {
+    height: 75%;
+    height: 75vh;
+    background-color: $landing-middle-gray;
+  }
 }
 .tags-window {
   padding: rem-calc(10);

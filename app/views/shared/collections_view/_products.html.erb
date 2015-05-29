@@ -3,26 +3,20 @@
 		<div class="collections-view-product-top">
 			<div class="galleria-product-photos" id="galleria-product-photos-<%=collitem.id%>">
 			<% if !collitem.product_photos.blank? %>
-
-				<% collitem.product_photos.each do |photo| %>
-					<%= link_to photo.photo.url(:large) do %>
-						<%= image_tag photo.photo.url(:small) %>
-					<% end %>
-		    <% end %>
-				<% content_for :javascript_foot do %>
-					<% javascript_tag do %>
-					initializeGallery("#galleria-product-photos-<%=collitem.id%>",300)
-					<% end %>
-				<% end %>		
-				
+				<div class="galleria-product-photos" id="galleria-product-photos-<%=collitem.id%>">
+					<% collitem.product_photos.each do |photo| %>
+						<%= link_to photo.photo.url(:large) do %>
+							<%= image_tag photo.photo.url(:small) %>
+						<% end %>
+			    <% end %>
+					<% content_for :javascript_foot do %>
+						<% javascript_tag do %>
+						initializeGallery("#galleria-product-photos-<%=collitem.id%>",300)
+						<% end %>
+					<% end %>		
+				</div>	
 			<% else %>
-				<% if Display.all.first.default_product_photo_file_name %>
-					<% if Display.all.first.default_product_photo_content_type == "image/svg+xml" %>
-						<%= image_tag Display.all.first.default_product_photo.url(:original) %>
-					<% else %>
-						<%= image_tag Display.all.first.default_product_photo.url(:medium) %>
-					<% end %>
-				<% end %>
+			<div class="galleria-product-photos brand-default"></div>
 			<% end %>
 			</div>
 		</div>
