@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe TagsController, type: :controller do
 
+
   describe "GET #new" do
     it "returns http success" do
       get :new

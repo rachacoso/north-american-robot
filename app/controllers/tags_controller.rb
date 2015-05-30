@@ -1,12 +1,21 @@
 class TagsController < ApplicationController
 
 	def new
-		@taglist = Tags.all.uniq
 
-	  respond_to do |format|
-	    format.html
-	    format.js
-	  end 		
+		if !params[:query].blank?
+			@taglist = Tag.any_of({"name": /#{params[:query]}/i}).pluck(:name).uniq
+		else
+			@taglist = Tag.pluck(:name).uniq
+		end
+
+		@list = Hash.new
+		@list['suggestions'] = @taglist
+		render json: @list
+
+	  # respond_to do |format|
+	  #   format.html
+	  #   format.js
+	  # end 		
 	end
 
 

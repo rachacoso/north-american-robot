@@ -396,6 +396,16 @@ function initialize () {
     tabDisabled: true
   });
 
+  $('.tags-input').devbridgeAutocomplete({
+    serviceUrl: '/tags/new',
+    minChars: 0,
+    delimiter: ', ',
+    // showNoSuggestionNotice: true,
+    // noSuggestionNotice: 'Sorry, no matching results',
+    triggerSelectOnValidInput: false,
+    tabDisabled: true
+  });
+
   // FILE UPLOAD
 
   // FOR VERIFICATION IMAGES UPLOAD
