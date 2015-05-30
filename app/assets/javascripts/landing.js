@@ -25,13 +25,6 @@ $( document ).ready(function() {
     });
   }
 
-// FOR PROFILE DIV BACKGROUND
-
-$("#gallery-distributor").backstretch( '/images/crate.jpg', {fade: 500});
-$(".galleria-product-photos.distributor-default").backstretch( '/images/crate.jpg', {fade: 500});
-
-$("#gallery-brand").backstretch( '/images/brand.jpg', {fade: 500});
-$(".galleria-product-photos.brand-default").backstretch( '/images/brand.jpg', {fade: 500});
 
 // FOR AJAX FORM SUBMIT LOADING MODAL
 
@@ -341,6 +334,15 @@ function initializeGallery (className,galleryHeight) {
 
 /*ALL ITEMS IN HERE ARE RE-INITIALIZED UPON AJAX RETURN*/
 function initialize () {
+
+  // FOR PROFILE DIV BACKGROUND
+
+  $("#gallery-distributor").backstretch( '/images/crate.jpg', {fade: 500});
+  $(".galleria-product-photos.distributor-default").backstretch( '/images/crate.jpg', {fade: 500});
+
+  $("#gallery-brand").backstretch( '/images/brand.jpg', {fade: 500});
+  $(".galleria-product-photos.brand-default").backstretch( '/images/brand.jpg', {fade: 500});
+
   // Date Picker
 
   $('.datepick').fdatepicker({
