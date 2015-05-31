@@ -2,13 +2,13 @@
 <%= render partial: "shared/topbar" %>
 
 <div class="row collapse">
-	<div class="small-11 small-centered columns marketplace-header">
+	<div class="small-12 columns marketplace-header">
 		<%= image_tag "logo_header_marketplace.svg" %>
 	</div>
 </div>
 
 <div class="row">
-	<div class="small-11 small-centered columns marketplace-subpage-header">
+	<div class="small-12 columns marketplace-subpage-header">
 	<h1>SAVED <%= @current_user.type_inverse?.upcase %>S</h1>
 	<h3><%=@current_user.type_inverse?.capitalize %>s to contact later.</h3>
 	
@@ -17,7 +17,7 @@
 
 
 <div class="row collapse">
-	<div class="small-11 small-centered columns" id="page-content">
+	<div class="small-12 columns" id="page-content">
 
 		
 

@@ -2,20 +2,32 @@
 
 
 <div class="row collapse">
-	<div class="small-11 small-centered columns marketplace-header">
+	<div class="small-12 columns marketplace-header">
 		<%= image_tag "logo_header_marketplace.svg" %>
 	</div>
 </div>
 
 <div class="row">
-	<div class="small-11 small-centered columns marketplace-subpage-header">
-	<h1>YOUR PROFILE</h1>
-	<h3>Preview &amp; Edit your marketplace profile.</h3>
+	<div class="small-12 columns marketplace-subpage-header">
+		<div class="medium-6 columns" id="your-profile-header">
+			<h1>YOUR PROFILE</h1>
+			<h3>Preview &amp; Edit your marketplace profile.</h3>			
+		</div><!--/.medium-6-->		
+		<div class="medium-6 columns">
+			<div class="row">
+				<div class="small-6 columns">
+					<h2>Edit Profile</h2>
+					<small><span data-tooltip aria-haspopup="true" class="has-tip radius" title="Edit your profile. [Helpful profile tips here]">What is this?</span></small>							
+				</div>
+				<div class="small-6 columns">
+				</div>		
+			</div>
+		</div><!--/.medium-6-->
 	</div>
 </div>
 
 <div class="row collapse">
-	<div class="small-11 small-centered columns marketplace-content">
+	<div class="small-12 columns marketplace-content">
 
 
 
@@ -27,20 +39,6 @@
   <li><%= link_to 'FULL Profile', distributor_full_profile_url, class: "tiny button secondary" %></li>
   <li><%= link_to 'EDIT Profile', "#", class: "tiny button info"%></li>
   </ul>
-
-	<div class="panel">
-		<div class="row">
-			<div class="small-6 columns">
-				<h2>Edit Profile</h2>
-				<small><span data-tooltip aria-haspopup="true" class="has-tip radius" title="Edit your profile. [Helpful profile tips here]">What is this?</span></small>							
-			</div>
-			<div class="small-6 columns">					
-				
-			</div>		
-		</div>
-	</div>
- 
-
 </div>
 </div>
 

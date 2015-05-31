@@ -2,59 +2,54 @@
 <%= render partial: "shared/topbar" %>
 
 <div class="row collapse">
-	<div class="small-11 small-centered columns marketplace-header">
+	<div class="small-12 columns marketplace-header">
 		<%= image_tag "logo_header_marketplace.svg" %>
 	</div>
 </div>
 
-<div class="row">
-	<div class="small-11 small-centered columns marketplace-subpage-header">
-	<h1>YOUR PROFILE</h1>
-	<h3>Preview &amp; Edit your marketplace profile.</h3>
-	</div>
-</div>
-
 <div class="row collapse">
-	<div class="small-11 small-centered columns marketplace-content">
-
-
-		<div class="row collapse">
-			<div class="medium-6 push-6 columns">
-				<ul class="button-group even-3">
-			  <li><%= link_to 'PUBLIC Profile', "#", class: "tiny button info"%></li>
-			  <li><%= link_to 'FULL Profile', brand_full_profile_url, class: "tiny button secondary" %></li>
-			  <li><%= link_to 'EDIT Profile', brand_url, class: "tiny button secondary" %></li>
-			  </ul>
-
-				<div class="panel">
-					<div class="row">
-						<div class="small-6 columns">
-							<h2>Public Profile</h2>
-							<small><span data-tooltip aria-haspopup="true" class="has-tip radius" title="Your public profile is viewable by all registered distributors. It displays limited publicly available information, including your country of origin, year established, product sector and retail channels.">What is this?</span></small>						
-						</div>
-						<div class="small-6 columns">					
-							<div class="row">
-								<div class="small-12 columns text-center">
-									<% percent = check_brand_public_profile %>
-									<div class="progress small-12 round <%= percent == 100 ? "success" : "" %>" style="margin: auto;">
-									  <span class="meter" style="width: <%= percent %>%"></span>
-									</div>
-									<small>Your Public Profile is <%= percent == 100 ? "" : "#{percent}%" %> Complete!</small>
+	<div class="small-12 columns marketplace-subpage-header">
+		<div class="row">
+			
+			<div class="medium-6 columns" id="your-profile-header">
+				<h1>YOUR PROFILE</h1>
+				<h3>Preview &amp; Edit your marketplace profile.</h3>
+			
+			</div><!--/.medium-6-->
+			<div class="medium-6 columns">
+				<div class="row">
+					<div class="small-4 columns">
+						<h2 style="margin-bottom: 0; padding-bottom:0;">Public Profile</h2>
+						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="Your public profile is viewable by all registered distributors. It displays limited publicly available information, including your country of origin, year established, product sector and retail channels."><small>What is this?</small></span>
+					</div>
+					<div class="small-8 columns" id="profile-completeness">
+						<div class="row">
+							<div class="small-12 columns text-center">
+								<% percent = check_brand_public_profile %>
+								<div class="progress small-12 round <%= percent == 100 ? "success" : "" %>" style="margin: auto;">
+								  <span class="meter" style="width: <%= percent %>%"></span>
 								</div>
+								<small>Your Public Profile is <%= percent == 100 ? "" : "#{percent}%" %> Complete!</small>
 							</div>
 						</div>
 					</div>
 				</div>
+			</div><!--/.medium-6-->
+		</div><!--/.row-->
+	</div>
+</div>
 
-			</div>
-			<div class="medium-6 pull-6 columns">
-
-
-
-
+<div class="row collapse">
+	<div class="small-12 columns marketplace-content">
+		<div class="row collapse">
+			<div class="medium-6 push-6 columns">
+				<ul class="button-group even-3">
+				<li><%= link_to 'PUBLIC Profile', "#", class: "tiny button info"%></li>
+				<li><%= link_to 'FULL Profile', brand_full_profile_url, class: "tiny button secondary" %></li>
+				<li><%= link_to 'EDIT Profile', brand_url, class: "tiny button secondary" %></li>
+				</ul>
 			</div>
 		</div>
-
 		<%= render partial: "/shared/profile/brand_public_profile", locals: {profile: @profile} %>
 		<br>
 	</div>

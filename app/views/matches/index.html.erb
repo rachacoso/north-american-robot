@@ -1,13 +1,13 @@
 <%= render partial: "shared/topbar" %>
 
 <div class="row collapse">
-	<div class="small-11 small-centered columns marketplace-header">
+	<div class="small-12 columns marketplace-header">
 		<%= image_tag "logo_header_marketplace.svg" %>
 	</div>
 </div>
 
 <div class="row collapse">
-	<div class="small-11 small-centered columns">
+	<div class="small-12 columns">
 
 
 <% if @current_user.send(@current_user.type?).sectors.blank? %>

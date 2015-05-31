@@ -7,6 +7,14 @@
 // EDIT PANELS
 /////////////
 
+#your-profile-header {
+  border-right: 1px solid $landing-middle-gray;
+}
+
+#profile-completeness {
+  padding-top: rem-calc(10);
+}
+
 .headpanel {
   margin: 0.5em 0em 0.5em 0em;
   border: 1px dotted scale-color(red, $lightness: 50%);
