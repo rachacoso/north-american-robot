@@ -672,24 +672,24 @@
 							<%= form_for @distributor, :html => {id: 'business-registration-form'}, url: distributor_url do |f| %>
 								<%= hidden_field_tag "redirect_anchor", "a-verification" %>
 								<%= f.label :verification_business_certificate do %>
-								Business Certificate <br>
-								<div class="text-center">
-								<div style="height: 200px; width: 200px;">
-									<% if @distributor.verification_business_certificate.exists? %>
-										<br>
-										<%= image_tag 'document.png', style: 'height:100px;' %><br>
-										<small><%= @distributor.verification_business_certificate_file_name %></small><br>
-										<%= link_to "View", @distributor.verification_business_certificate.url, :target => "_blank" %>
-									<% else %>
-										<%= image_tag 'https://s3.amazonaws.com/landingintl-us/defaults/Default_Logo.png' %>
-									<% end %>
-								</div>
+									<div class="text-center">
+									<div style="height: 200px; width: 200px;">
+										<% if @distributor.verification_business_certificate.exists? %>
+											<br>
+											<%= image_tag 'document.png', style: 'height:100px;' %><br>
+											<small><%= @distributor.verification_business_certificate_file_name %></small><br>
+											<%= link_to "View", @distributor.verification_business_certificate.url, :target => "_blank", class: "itemformlink" %>
+											<%= link_to 'Delete', distributor_validation_delete_path(type: "bc"), :method => :delete, data: { :confirm => "Are you sure you want to delete this item?"}, class: "itemformlink" %>
+										<% else %>
+											<br>
+											<%= image_tag '/images/image_add.svg' %><br>
+											<small>Upload Business Certificate</small>
+										<% end %>
+									</div>
 								<% end %>
-								<br>
-								
 								<%= f.file_field :verification_business_certificate, class: 'hide-upload', label: false, accept: 'application/pdf,application/vnd.ms-powerpoint,application/msword,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/jpeg,image/pngimage/gif' %>
 									
-								</div>								
+								</div>
 							<% end %>
 						</div><!--/.medium-4-->
 						<div class="medium-4 columns">
@@ -698,9 +698,18 @@
 							<%= form_for @distributor, :html => {id: 'location-form'}, url: distributor_url do |f| %>
 								<%= hidden_field_tag "redirect_anchor", "a-verification" %>
 								<%= f.label :verification_location_photo do %>
-								Location Photo <br>
-								<%= image_tag @distributor.verification_location_photo.url(:medium), alt: "Location Photo"%>
-								<%= @distributor.verification_location_photo.exists? ? (link_to "View Larger", @distributor.verification_location_photo.url(:large), :target => "_blank") : "" %>
+									<div class="text-center">
+										<% if @distributor.verification_location_photo.exists? %>
+											<br>
+											<%= image_tag @distributor.verification_location_photo.url(:medium), alt: "Location Photo"%><br>
+											<%= link_to "View", @distributor.verification_location_photo.url, :target => "_blank", class: "itemformlink" %>
+											<%= link_to 'Delete', distributor_validation_delete_path(type: "lp"), :method => :delete, data: { :confirm => "Are you sure you want to delete this item?"}, class: "itemformlink" %>
+										<% else %>
+											<br>
+											<%= image_tag '/images/image_add.svg' %><br>
+											<small>Upload Location Photo</small>
+										<% end %>
+									</div>
 								<% end %>
 								<br>
 								<%= f.file_field :verification_location_photo, class: 'hide-upload', label: false, accept: 'image/png,image/gif,image/jpeg' %>
@@ -712,9 +721,18 @@
 							<%= form_for @distributor, :html => {id: 'brand-display-form'}, url: distributor_url do |f| %>
 								<%= hidden_field_tag "redirect_anchor", "a-verification" %>
 								<%= f.label :verification_brand_display_photo do %>
-								Brand Display Photo <br>
-								<%= image_tag @distributor.verification_brand_display_photo.url(:medium), alt: "Brand Display Photo"%>
-								<%= @distributor.verification_brand_display_photo.exists? ? (link_to "View Larger", @distributor.verification_brand_display_photo.url(:large), :target => "_blank") : "" %>
+									<div class="text-center">
+										<% if @distributor.verification_brand_display_photo.exists? %>
+											<br>
+											<%= image_tag @distributor.verification_brand_display_photo.url(:medium), alt: "Brand Display Photo"%><br>
+											<%= link_to "View", @distributor.verification_brand_display_photo.url, :target => "_blank", class: "itemformlink" %>
+											<%= link_to 'Delete', distributor_validation_delete_path(type: "bd"), :method => :delete, data: { :confirm => "Are you sure you want to delete this item?"}, class: "itemformlink" %>
+										<% else %>
+											<br>
+											<%= image_tag '/images/image_add.svg' %><br>
+											<small>Upload Brand Display Photo</small>
+										<% end %>
+									</div>
 								<% end %>
 								<br>
 								<%= f.file_field :verification_brand_display_photo, class: 'hide-upload', label: false, accept: 'image/png,image/gif,image/jpeg' %>

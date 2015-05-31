@@ -35,8 +35,8 @@
 
 			<% if defined?(cb) && cb.file.exists? %>
 			<h3><small><strong><%= cb.file_file_name %></strong></small></h3>
-			<%= link_to "View", cb.file.url, :target => "_blank" %> 
-			<%= link_to 'Delete', eval(deleteclip_urlstring), :method => :delete, data: { :confirm => "Are you sure you want to delete this clipping?"}%>
+			<%= link_to "View", cb.file.url, :target => "_blank", class: "itemformlink" %> 
+			<%= link_to 'Delete', eval(deleteclip_urlstring), :method => :delete, data: { :confirm => "Are you sure you want to delete this clipping?"}, class: "itemformlink" %>
 			<hr>
 			<% end %>
 

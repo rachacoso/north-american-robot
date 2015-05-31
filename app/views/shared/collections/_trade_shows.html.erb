@@ -10,11 +10,18 @@
 	</div>
 </div>
 <div class="row">
-	<div class="medium-4 columns">
-		<%= f.text_field :years_participated, label: "Years Participated", placeholder: 'Years participated' %>
+	<div class="medium-3 columns">
+		<div class="row collapse">
+			<%= label_tag(:years_participated, "Participant for") %>
+			<div class="small-8 columns">
+				<%= f.text_field :years_participated, label: false, placeholder: '#' %>		
+			</div><!--/.small-8-->
+			<div class="small-4 columns">
+				<span class="postfix">years</span>
+			</div><!--/.small-4-->
+		</div><!--/.row-->
 	</div>
-	<div class="medium-8 columns">
-
+	<div class="medium-9 columns">
 		<div class="row collapse">
 			<%= label_tag(:website, "Website") %>
 			<div class="small-2 columns">

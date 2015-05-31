@@ -177,6 +177,21 @@ class DistributorsController < ApplicationController
 
   end
 
+  def validation_delete
+    unless params[:type].blank?
+      distributor = @current_user.distributor
+      case params[:type]
+      when 'bc' #business certificate
+        distributor.verification_business_certificate.destroy
+      when 'lp' #location photo
+        distributor.verification_location_photo.destroy
+      when 'bd' #brand display
+        distributor.verification_brand_display_photo.destroy
+      end
+    end
+    redirect_to distributor_url + "#a-verification" 
+  end
+
   private
   def distributor_parameters
     params.require(:distributor).permit(

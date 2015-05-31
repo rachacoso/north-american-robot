@@ -1,19 +1,22 @@
 <div class="panel" data-equalizer-watch>
 <h2><strong style="color: #5f5f5f;"><%= collitem.source.empty? ? "( No Name )" : collitem.source  %></strong>
-<small style="color: #5f5f5f;"> <%= collitem.date ? collitem.date.strftime("%b %d %Y") : "" %></small></h2>
-<div class="row">
-	<div class="small-12 columns">
-		<% unless collitem.link.blank? %>
-			<%= link_to "//#{clean_url(collitem.link)}" do %>
-				<i class="fi-link"></i>
-			<% end %>
+
+	<% unless collitem.link.blank? %>
+		<%= link_to "//#{clean_url(collitem.link)}" do %>
+			<i class="fi-link"></i>
 		<% end %>
-		<% if collitem.file.exists? %>
+	<% end %>
+	<% if collitem.file.exists? %>
 		<%= link_to collitem.file.url, target: "blank" do %>
 			<i class="fi-page"></i>
 		<% end %>
-		<% end %>
+	<% end %>
 
+
+</h2>
+<div class="row">
+	<div class="small-12 columns">
+		<h4> <%= collitem.date ? collitem.date.strftime("%b %d %Y") : "" %></h4>
 		<br>
 	</div>
 </div>

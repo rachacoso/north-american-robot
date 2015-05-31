@@ -23,8 +23,9 @@ class TagsController < ApplicationController
 
 		type = params[:type]
 		tid = params[:tid]
-		name = params[:tag][:name]
-		
+		# name = params[:tag][:name].split.map(&:capitalize).join(' ')
+		name = params[:tag][:name].split.map{ |x| (x==x.upcase ? x : x.capitalize) }.join(' ')
+
 		case type
 		when 'b'
 			to_be_tagged = @current_user.brand

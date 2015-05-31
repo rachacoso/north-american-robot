@@ -60,6 +60,8 @@ Rails.application.routes.draw do
   patch  '/distributors' => 'distributors#update'
   patch  '/distributor_brands' => 'distributor_brands#update'
   patch  '/distributors/validation/:id' => 'distributors#validationupdate', as: 'distributor_validation'
+  delete '/distributors/validation/delitem' => 'distributors#validation_delete', as: 'distributor_validation_delete'
+
   
   get    '/brands' => 'brands#edit', as: 'brand'
   get    '/brands/public_profile' => 'brands#public_profile', as: 'brand_public_profile'
