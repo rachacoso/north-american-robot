@@ -1,49 +1,36 @@
-
-	
 <% if @current_user.subscriber? %>
-<!-- 		<div class="row">
-			<div class="small-12 columns text-right"> -->
 
-				<% if !this_match(profile) %>
-				<span id="pct_<%= profile.id %>">
-					
-						
-						<%= link_to "#", :data => {:'reveal-id' => "contactModal"} do %>
-							<span class="plt-indicator-action-off">Contact</span>
-						<% end %>						
-					
-				</span>
-				<div id="contactModal" class="reveal-modal small" data-reveal>
+	<% if !this_match(profile) %>
+	<span id="pct_<%= profile.id %>">
+		
+			
+			<%= link_to "#", :data => {:'reveal-id' => "contactModal"} do %>
+				<span class="plt-indicator-action-off">Contact</span>
+			<% end %>						
+		
+	</span>
+	<div id="contactModal" class="reveal-modal small" data-reveal>
 
-				  <h2>Contact<br><strong><%= profile.company_name %></strong></h2>
-				  <p>Send them a message</p>
+	  <h2>Contact<br><strong><%= profile.company_name %></strong></h2>
+	  <p>Send them a message</p>
 
-					<%= form_tag contact_match_url, method: 'get', remote: true do %>
-						<%= hidden_field_tag(:match_id, profile.id) %>
-					  <%= label_tag(:m, "Message:") %>
-					  <%= text_area_tag(:m, nil, rows: "5") %>
-					  <%= submit_tag("Contact") %>
-					<% end %> 
+		<%= form_tag contact_match_url, method: 'get', remote: true do %>
+			<%= hidden_field_tag(:match_id, profile.id) %>
+		  <%= label_tag(:m, "Message:") %>
+		  <%= text_area_tag(:m, nil, rows: "5") %>
+		  <%= submit_tag("Contact") %>
+		<% end %> 
 
-				  <a class="close-reveal-modal">&#215;</a>
-				</div>					
-				<% end %>
-
-<!-- 			</div>
-		</div> -->
+	  <a class="close-reveal-modal">&#215;</a>
+	</div>					
+	<% end %>
 
 <% else %>	
 
-<!-- 	<div class="row">
-		<div class="small-12 columns"> -->
-<!-- 			<div> -->
-			<span class="profile-save-tile text-center deactivate">
-				<span data-tooltip aria-haspopup="true" class="has-tip" title="Available only to Subscribers" style>
-				<%= link_to 'Contact', "#" %>
-				</span>
-			</span>
-<!-- 			</div> -->
-<!-- 		</div>
-	</div> -->
+	<span class="profile-save-tile text-center deactivate">
+		<span data-tooltip aria-haspopup="true" class="has-tip" title="Available only to Subscribers" style>
+		<%= link_to 'Contact', "#" %>
+		</span>
+	</span>
 
 <% end %>

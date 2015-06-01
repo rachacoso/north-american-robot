@@ -163,24 +163,29 @@
 
 <br>
 
-
+<% if controller_name == "matches" %>
 <div class="row collapse">
 	<div class="small-12 columns">
-		<% if controller_name == "matches" %>
 		<div class="profile-container">
-			<div class="profile-header" id="profile-main-bottom">
-				<div class="text-center">
-
-						<%= render partial: "matches/contactbutton", locals: {profile: profile} %> <%= render partial: "shared/profile/components/savebutton", locals: {profile: profile} %>
-
-				</div>
+		<div class="profile-content">
+			<div class="row">
+				<div class="medium-3 hide-for-small-only columns">&nbsp;</div><!--/.medium-3 hide-for-small-only-->
+				<div class="medium-3 columns text-center">
+					<%= render partial: "matches/contactbutton", locals: {profile: profile} %> 
+					this <%= @current_user.type_inverse?.capitalize %>
+				</div><!--/.medium-3-->
+				<div class="medium-3 columns text-center">
+					<%= render partial: "shared/profile/components/savebutton", locals: {profile: profile} %>
+					this <%= @current_user.type_inverse?.capitalize %>
+				</div><!--/.medium-3-->
+				<div class="medium-3 hide-for-small-only columns">&nbsp;</div><!--/.medium-3 hide-for-small-only-->
 			</div>
 		</div>
-		<% end %>
-	</div>
-</div>
-
+		</div>
+	</div><!--/.small-12-->
+</div><!--/.row collapse-->
 <br>
+<% end %>
 
 <div class="row collapse">
 	<div class="small-12 columns">

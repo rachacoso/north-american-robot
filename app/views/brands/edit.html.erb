@@ -65,8 +65,18 @@
 						<div class="row">
 							<div class="medium-12 columns">
 								<%= f.label :logo do %>
-								Company logo <br>
-								<%= image_tag @brand.logo.url(:medium), alt: "Logo", id: "logo-preview" %>
+									Company logo <br>
+									<div class="text-center">
+										<% if @brand.logo.exists? %>
+											<br>
+											<%= image_tag @brand.logo.url(:medium), width: "200", height: "200", alt: "Logo", id: "logo-preview"%>
+											<br>
+										<% else %>
+											<br>
+											<%= image_tag '/images/image_add.svg' %><br>
+											<small>Upload a Logo</small>
+										<% end %>
+									</div>
 								<% end %>
 								<br>
 								<%= f.file_field :logo, class: 'hide-upload', label: false, accept: 'image/png,image/gif,image/jpeg' %>
