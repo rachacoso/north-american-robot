@@ -143,7 +143,13 @@
 								</div>		
 							</div><!--/.small-12-->
 						</div><!--/.row-->
-
+						<div class="row">
+							<div class="small-12 columns">
+								<br>
+								<h3><%= render partial: "shared/profile/components/savebutton", locals: {profile: profile} %>
+										<strong><%= profile.company_name %></strong> to your SAVED <%= @current_user.type_inverse?.upcase %>S</h3>
+							</div><!--/.small-12-->
+						</div><!--/.row-->
 					</div>
 					
 				</div>			
@@ -153,38 +159,11 @@
 
 <br>
 
-<% if controller_name == "matches" %>
-<div class="row collapse">
-	<div class="small-12 columns">
-		<div class="profile-container">
-		<div class="profile-content">
-			<div class="row">
-				<div class="medium-3 hide-for-small-only columns">&nbsp;</div><!--/.medium-3 hide-for-small-only-->
-				<div class="medium-3 columns text-center">
-					<%= render partial: "matches/contactbutton", locals: {profile: profile} %> 
-					this <%= @current_user.type_inverse?.capitalize %>
-				</div><!--/.medium-3-->
-				<div class="medium-3 columns text-center">
-					<%= render partial: "shared/profile/components/savebutton", locals: {profile: profile} %>
-					this <%= @current_user.type_inverse?.capitalize %>
-				</div><!--/.medium-3-->
-				<div class="medium-3 hide-for-small-only columns">&nbsp;</div><!--/.medium-3 hide-for-small-only-->
-			</div>
-		</div>
-		</div>
-	</div><!--/.small-12-->
-</div><!--/.row collapse-->
-<br>
-<% end %>
-
-
+<%= render partial: "matches/contact_start", locals: {profile: profile} %>
 
 <div class="row collapse">
 	<div class="small-12 columns">
 		
-
-
-
 				<% if @messages && @current_user.subscriber? %>
 					<div class="profile-container">
 						<div class="profile-header">
