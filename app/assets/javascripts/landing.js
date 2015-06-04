@@ -4,18 +4,12 @@ var bgDefaultColor = "#E5E5E5";
 
 $( document ).ready(function() {
 
+
 // ADJUST HEIGHT OF PROFILE GALLERY AND INFO
 
   // profileGalleryHeight(); 
 
-// FINAL TILES
 
-  $('#profile_gallery').finalTilesGallery({
-    margin:  2,
-    imageSizeFactor: [[4000, .5],[1024, .5],[800, .5],[600, .5],[480, .5]],
-    gridSize: 50,
-    allowEnlargement: true
-  });
 
 // MODIFICATIONS FOR NO SVG SUPPORT
   if(!Modernizr.svg) {
@@ -334,6 +328,15 @@ function initializeGallery (className,galleryHeight) {
 
 /*ALL ITEMS IN HERE ARE RE-INITIALIZED UPON AJAX RETURN*/
 function initialize () {
+
+  // FINAL TILES
+
+  $('#profile_gallery').finalTilesGallery({
+    margin:  2,
+    imageSizeFactor: [[4000, .5],[1024, .5],[800, .5],[600, .5],[480, .5]],
+    gridSize: 50,
+    allowEnlargement: true
+  });
 
   // FOR PROFILE DIV BACKGROUND
 

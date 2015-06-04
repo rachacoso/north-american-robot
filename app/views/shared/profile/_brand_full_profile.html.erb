@@ -40,11 +40,11 @@
 							<h3>
 							<% unless profile.website.blank? %>
 								<%= link_to "//#{clean_url(profile.website)}" do %> 
-								<strong>W W W</strong>
+								<i class="fi-laptop" style="font-size: 3em;"></i> 
 								<% end %>
 							<% end %>
 							<% unless profile.facebook.blank? %>
-								<%= !profile.website.blank? ? "/" : "" %>
+								<%#= !profile.website.blank? ? "/" : "" %>
 								<%= link_to "//#{clean_url(profile.facebook)}" do %>
 								<i class="fi-social-facebook" style="font-size: 3em;"></i> 
 								<% end %>

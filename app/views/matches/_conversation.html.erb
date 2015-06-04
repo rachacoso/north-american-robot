@@ -6,6 +6,14 @@
 						<%= javascript_tag do %>
 							$('#conversation-info-<%= get_conversation_stage(this_match(profile)) %>').show();
 							$('#conversation-<%= get_conversation_stage(this_match(profile)) %>').show();
+
+							$('#conversation-<%= get_conversation_stage(this_match(profile)) %>').show();		
+							$('#contact-toggle').on('click', function(e){
+								e.preventDefault();
+								$('#conversation-info-contact').toggle(1000);
+								$('#conversation-contact').toggle(1000);
+							});
+
 						<% end %>
 					<% end %>
 
@@ -50,34 +58,34 @@
 								<div class="medium-5 hide-for-small-only columns">
 										&nbsp;
 								</div><!--/.medium-5-->
-								<div class="medium-1 columns text-center"><h4>CONTACT</h4></div><!--/.medium-5-->
+								<div class="medium-1 columns text-center"><h4><%= link_to 'CONTACT', '#', id: "contact-toggle", style: "color:black;" %></h4></div><!--/.medium-5-->
 								<div class="medium-6 hide-for-small-only columns" >
 										&nbsp;
 								</div><!--/.medium-5-->
 							</div><!--/.small-12-->
 						</div>
 
-						<div class="row collapse" data-equalizer>
+						<div class="row collapse" >
 							<div class="medium-5 columns">
-								<div class="conversation-left-info-column" data-equalizer-watch>
+								<div class="conversation-left-info-column">
 									<div id="conversation-info-contact">
 										<h2>Make a connection and find new international partners</h2>
 										<p> Here are some terms you may run into during your conversation: <br>
 										Term 1: definition <br>
 										</p>
 
-										<% if match && !match.messages.blank? %>
+										<% if match && !match.messages.blank? && match.stage == "contact" %>
 											<%= link_to 'Would you like to...', match_stage_url(:stage => 'prepare', :mid => match.id  ), class: "button", remote: true %>
 										<% end %>
 									</div>
 								</div>
 							</div><!--/.medium-5-->
 							<div class="medium-1 hide-for-small-only columns text-center">
-								<div style="width:2px; background: black; margin:auto;" data-equalizer-watch>
+								<div style="width:2px; background: black; margin:auto;" >
 									&nbsp;
 								</div>
 							</div><!--/.medium-5-->
-							<div class="medium-6 columns" data-equalizer-watch>
+							<div class="medium-6 columns" >
 								<div class="conversation-right-message-column">
 									<div id="conversation-contact">
 										<%= render partial: "conversation_message_block", locals: {match: match, stage: "contact"} %>
@@ -106,7 +114,7 @@
 										<p> Here are some terms you may run into during your conversation: <br>
 										Term 1: definition <br>
 										</p>
-										<% if match && !match.messages.blank? %>
+										<% if match && !match.messages.blank? && match.stage == "prepare"  %>
 											<%= link_to 'Would you like to...', match_stage_url(:stage => 'terms', :mid => match.id  ), class: "button", remote: true %>
 										<% end %>
 										</div>
@@ -147,7 +155,7 @@
 										<p> Here are some terms you may run into during your conversation: <br>
 										Term 1: definition <br>
 										</p>
-										<% if match && !match.messages.blank? %>
+										<% if match && !match.messages.blank? && match.stage == "terms"  %>
 											<%= link_to 'Would you like to...', match_stage_url(:stage => 'order', :mid => match.id  ), class: "button", remote: true %>
 										<% end %>
 									</div>

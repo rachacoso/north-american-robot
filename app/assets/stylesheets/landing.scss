@@ -22,6 +22,11 @@ p {
 i {
   font-size: rem-calc(20);
 }
+
+.shadow-text{
+    -webkit-filter: drop-shadow( 1px 1px 2px $landing-dark-gray );
+            filter: drop-shadow( 1px 1px 2px $landing-dark-gray ); /* Same syntax as box-shadow */  
+}
 // div {
 //   border: 1px solid red; 
 // }
@@ -89,7 +94,7 @@ i {
 	border: 1px dotted scale-color($link-color, $lightness: 50%);
   padding: 0.5em 1em;
   margin: 0.5em 0em 1.5em 0em;
-  @include transparent(#fff, 1);
+  @include transparent(#fff, 0.8);
   h1 {
     padding: 0em 0.4em;
     background-color: $body-font-color;

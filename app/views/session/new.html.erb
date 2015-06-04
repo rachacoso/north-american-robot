@@ -1,20 +1,16 @@
-<%= render partial: "shared/topbar" %>
 
-<% content_for :javascript_head do %>
-	<% if @display %>
-		<%= javascript_tag do %>
-			<% if @display.background_photo_file_name %>
-			var bgImage = <%= "\"#{@display.background_photo.url(:large)}\"".html_safe %>;
-			<% end %>
-			var bgColor = <%= "\"\##{@display.background_color}\"".html_safe %>;
-		<% end %>
-	<% end %>
-<% end %>
+
+<div id="front-logo">
+	<%= link_to root_url do %><h4 style="color:white;"><%= image_tag '/images/landing_page_LOGO.svg', class: "shadow", width: 50  %> go back</h4><% end %>
+</div>
 
 <div class="front-top-panel">
 	<div class="row" data-equalizer>
 		<div class="small-10 medium-5 small-centered columns">
 
+			<br><br><br>
+
+			<div class="text-center"><h1 class="shadow" style="color:white;"><strong>Welcome Back!</strong></h1></div>
 			<div class="ldpanel">
 
 			  <div class="row">
@@ -63,13 +59,19 @@
 				<div class="row">
 					<div class="medium-6 medium-centered columns text-center">
 						<small><%= link_to 'forgot password?', '#' %></small>
-						<br><br>
-						<small><%= link_to "Become a member!", root_url %></small>
-						<br><br>
 					</div>
 				</div>
-		
 			</div>
+			
+			<div class="row">
+			<div class="small-12 columns">
+				<div class="text-center">
+				<%= link_to root_url do %><h2 style="color:white;" class="shadow-text">not yet a member? <br><strong> JOIN US </strong></h2><% end %>
+				</div>
+			</div><!--/.small-12-->	
+			</div><!--/.row-->
+			
+
 
 		</div><!--/.medium-5 columns -->
 
@@ -77,19 +79,3 @@
 
 </div>
 
-<div id="front-footer">
-	<div class="row">
-
-		<div class="medium-12 columns" >
-
-			
-				<p>Developing solve frontline; worldwide, public sector measures emergency response efficient future inspire social change. Raise awareness; resourceful political save lives scalable. </p>
-
-				<p>Nelson Mandela; combat HIV/AIDS rights-based approach transform the world long-term, agenda, Martin Luther King Jr. storytelling save the world Bill and Melinda Gates civic engagement reduce carbon emissions plumpy'nut justice. </p>
-
-				<p>Global; enable strengthen democracy development international development immunize, participatory monitoring Cesar Chavez shifting landscape. Local life-saving underprivileged, human being, sanitation; legitimize; Gandhi Rockefeller. </p>				
-			
-		</div>
-	
-	</div> <!-- /.row -->
-</div>
