@@ -1,6 +1,6 @@
 
 
-<%#= render partial: "shared/topbar" %>
+
 
 <% content_for :javascript_head do %>
 	<% if @display %>
@@ -13,19 +13,32 @@
 	<% end %>
 <% end %>
 
+
 <div style="height: 100%; position: relative;">
-<div style="position: absolute;top: 10px; background-color: white; width: 100%"><h1>Landing International</h1></div>	
-<div style="position: absolute;bottom: 40px; left: 100px; background-color: white;"><h1>Making Global Easy</h1></div>
+<div style="position: absolute;bottom: 50px; right: 50px;"><%= image_tag 'landing_page_MGE.svg' %> <%= image_tag '/images/landing_page_LOGO.svg' %></div>	
 </div>
+<%= render partial: "shared/topbar_front" %>
 
 <div class="front-top-panel">
-
-
 		<div class="row">
 			<div class="medium-11 medium-centered columns">
-				
-				<%= render partial: "shared/login_widget" %>
 
+				<div class="medium-6 columns">
+					<div class="ldpanel">
+						<h2 class="text-justify">We are on a mission to spread cool new brands across the world. Whether you are a brand owner or overseas distributor, we want to help grow your business with curated, qualified partners. We’ve curated the coolest new brands in the fastest growing consumer categories and selected qualified distributors in the leading international markets for those products.  The result? Matches made in brand heaven. </h2>
+						<h2 class="text-justify">It’s absolutely free to sign up. You only pay if you see a Match you’d like to connect with.</h2>						
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+</div> <!-- /.front-top-panel -->
+
+<div class="front-top-panel">
+	<div class="row">
+		<div class="medium-11 medium-centered columns">
+			
 				<div class="medium-6 columns">
 					<div class="ldpanel">
 						<h2><strong>Sign Up...</strong></h2>
@@ -92,16 +105,8 @@
 					</div>
 				</div>
 
-				<div class="medium-6 columns">
-					<div class="ldpanel" style="display: none;">
-						<p class="text-justify">We are on a mission to spread cool new brands across the world. Whether you are a brand owner or overseas distributor, we want to help grow your business with curated, qualified partners. We’ve curated the coolest new brands in the fastest growing consumer categories and selected qualified distributors in the leading international markets for those products.  The result? Matches made in brand heaven. </p>
-						<p class="text-justify">It’s absolutely free to sign up. You only pay if you see a Match you’d like to connect with.</p>						
-					</div>
-				</div>
-
-			</div>
-		</div>
-
+		</div><!--/.medium-11 medium-centered-->
+	</div><!--/.row-->
 </div> <!-- /.front-top-panel -->
 
 
@@ -110,15 +115,15 @@
 <div id="front-footer">
 	<div class="row">
 
-		<div class="medium-12 columns" >
+		<div class="small-12 columns" >
 
-			
-				<p>Developing solve frontline; worldwide, public sector measures emergency response efficient future inspire social change. Raise awareness; resourceful political save lives scalable. </p>
+		<i class="fi-social-facebook" style="font-size: 3em;"></i> 
+		<i class="fi-social-linkedin" style="font-size: 3em;"></i> 
+		<i class="fi-social-twitter" style="font-size: 3em;"></i> 
+		<i class="fi-social-instagram" style="font-size: 3em;"></i>
 
-				<p>Nelson Mandela; combat HIV/AIDS rights-based approach transform the world long-term, agenda, Martin Luther King Jr. storytelling save the world Bill and Melinda Gates civic engagement reduce carbon emissions plumpy'nut justice. </p>
 
-				<p>Global; enable strengthen democracy development international development immunize, participatory monitoring Cesar Chavez shifting landscape. Local life-saving underprivileged, human being, sanitation; legitimize; Gandhi Rockefeller. </p>				
-			
+		<br>
 		</div>
 	
 	</div> <!-- /.row -->

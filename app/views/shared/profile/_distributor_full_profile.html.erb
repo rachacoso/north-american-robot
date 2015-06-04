@@ -29,23 +29,33 @@
 <%= render partial: "shared/profile/components/indicators", locals: {match: profile} %>
 							<h3>
 							<% unless profile.website.blank? %>
-								<%= link_to "website", "//#{clean_url(profile.website)}" %>
+								<%= link_to "//#{clean_url(profile.website)}" do %> 
+								<strong>website</strong>
+								<% end %>
 							<% end %>
 							<% unless profile.facebook.blank? %>
 								<%= !profile.website.blank? ? "/" : "" %>
-								<%= link_to "facebook", "//#{clean_url(profile.facebook)}" %>
+								<%= link_to "//#{clean_url(profile.facebook)}" do %>
+								<i class="fi-social-facebook" style="font-size: 3em;"></i> 
+								<% end %>
 							<% end %>
 							<% unless profile.linkedin.blank? %>
-								<%= !profile.website.blank? || !profile.facebook.blank? ? "/" : "" %>
-								<%= link_to "linkedin", "//#{clean_url(profile.linkedin)}" %>
+								<%#= !profile.website.blank? || !profile.facebook.blank? ? "/" : "" %>
+								<%= link_to "//#{clean_url(profile.linkedin)}" do %>
+									<i class="fi-social-linkedin" style="font-size: 3em;"></i> 
+								<% end %>
 							<% end %>
 							<% unless profile.twitter.blank? %>
-								<%= !profile.website.blank? || !profile.facebook.blank? || !profile.linkedin.blank? ? "/" : "" %>
-								<%= link_to "twitter", "//#{clean_url(profile.twitter)}" %>
+								<%#= !profile.website.blank? || !profile.facebook.blank? || !profile.linkedin.blank? ? "/" : "" %>
+								<%= link_to "//#{clean_url(profile.twitter)}" do %>
+									<i class="fi-social-twitter" style="font-size: 3em;"></i> 
+								<% end %>
 							<% end %>
 							<% unless profile.instagram.blank? %>
-								<%= !profile.website.blank? || !profile.facebook.blank? || !profile.linkedin.blank? || !profile.twitter.blank? ? "/" : "" %>
-								<%= link_to "instagram", "//#{clean_url(profile.instagram)}" %>
+								<%#= !profile.website.blank? || !profile.facebook.blank? || !profile.linkedin.blank? || !profile.twitter.blank? ? "/" : "" %>
+								<%= link_to "//#{clean_url(profile.instagram)}" do %>
+									<i class="fi-social-instagram" style="font-size: 3em;"></i> 
+								<% end %>
 							<% end %>						
 							</h3>
 						</div>
