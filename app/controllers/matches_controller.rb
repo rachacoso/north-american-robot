@@ -336,6 +336,22 @@ class MatchesController < ApplicationController
 
   end
 
+
+  def match_stage
+    if params[:mid] && (['contact','prepare','terms','order'].include? params[:stage])
+
+
+
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
+  end
+
+
   private
 
   def get_countries

@@ -5,6 +5,10 @@
 		$('#contact-start-trigger').on('click', function(e){
 			e.preventDefault();
 			$('#contact-start').slideToggle(1000);
+			$(document.body).animate({
+			    'scrollTop':   $('#contact-start-trigger').offset().top - 100
+			}, 1000);
+
 		});
 	<% end %>
 <% end %>
@@ -16,12 +20,12 @@
 		<div class="profile-content">
 			<div class="row">
 				<div class="medium-6 columns small-text-center medium-text-right">
-					<h2>Make a connection and find new international partners</h2>
+					<h2 id="contact-banner-text">Make a connection and find new international partners</h2>
 				</div><!--/.medium-6 -->
 				<div class="medium-6 columns text-center">
 					<% if @current_user.subscriber? %>
 						<%= link_to "#", :id => "contact-start-trigger" do %>
-							<h3><span class="plt-indicator-action-off">Contact</span><strong> <%= profile.company_name %></strong></h3>
+							<h3><span class="plt-indicator-action-off">Contact <strong><%= profile.company_name %></strong></span></h3>
 						<% end %>						
 					<% else %>	
 						<span class="profile-save-tile text-center deactivate">

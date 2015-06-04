@@ -159,28 +159,14 @@
 
 <br>
 
-<%= render partial: "matches/contact_start", locals: {profile: profile} %>
+<%= render partial: "matches/conversation_start", locals: {profile: profile} %>
 
 <div class="row collapse">
 	<div class="small-12 columns">
 		
-				<% if @messages && @current_user.subscriber? %>
-					<div class="profile-container">
-						<div class="profile-header">
-							<h1>CONVERSATION</h1>
-						</div>
-						<div class="profile-content">
-							<% if this_match(@match) %>
-								<% if i_contacted(this_match(@match)) %>
-									<%= render partial: "outgoing_contact" %>
-								<% else %>
-									<%= render partial: "incoming_contact" %>
-								<% end %>
-							<% end %>
-						</div>
-					</div>
-					<br>
-				<% end %>
+				<div id="profile-conversation">
+				<%= render partial: "conversation", locals: {profile: profile} %>
+				</div>
 
 				<% if profile.distributor_brands.where(current: true).length > 0 %>
 					<div class="profile-container">

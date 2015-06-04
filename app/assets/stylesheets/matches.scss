@@ -156,6 +156,10 @@
   margin-bottom: 0.5em;
 }
 
+h2#contact-banner-text {
+  margin-bottom: rem-calc(25);
+  margin-top: rem-calc(25);    
+}
 .plt-indicator-action-on {
   @include label(
     // This options sets label padding
@@ -168,8 +172,8 @@
     $radius:2px
   );
   font-weight: 100;
-  margin-bottom: rem-calc(20);
-  margin-top: rem-calc(20);
+  margin-bottom: rem-calc(40);
+  margin-top: rem-calc(40);
 }
 .plt-indicator-action-off {
   @include label(
@@ -183,8 +187,8 @@
     $radius:2px
   );
   font-weight: 100;
-  margin-bottom: rem-calc(20);
-  margin-top: rem-calc(20);
+  margin-bottom: rem-calc(40);
+  margin-top: rem-calc(40);
 }
 .plt-indicator-alert {
   @include label(

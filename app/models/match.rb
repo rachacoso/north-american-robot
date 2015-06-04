@@ -10,6 +10,7 @@ class Match
   # is the match accepted by contactee
   field :accepted, type: Mongoid::Boolean
   field :intro_message, type: String
+  field :stage, type: String, default: "contact"  # stage: [contact,prepare,terms,order]
 
   has_many :messages, dependent: :destroy
 end

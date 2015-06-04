@@ -1,5 +1,12 @@
 module MatchesHelper
 
+
+	def get_conversation_stage(match)
+		# stage = match.stage
+		# stage ||= 'contact'
+		return match.stage
+	end
+
 	def get_last_login(match)
 
 		login_list = Array.new

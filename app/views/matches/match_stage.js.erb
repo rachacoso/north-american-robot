@@ -1,0 +1,4 @@
+$('#profile-conversation').hide().html("<%= j (render partial: 'conversation', locals:{matches:@matches}) %>").prepend("You searched for '<%= @query %>'").fadeIn(500);
+
+$(document).foundation();
+$(document).foundation('tooltip', 'reflow');

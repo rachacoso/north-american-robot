@@ -126,3 +126,53 @@ top: 10px;
     padding: 1em;
   }
 }
+
+.conversation-left-info-column, .conversation-right-message-column {
+
+}
+.conversation-left-info-column {
+  padding: rem-calc(10);
+}
+
+.conversation-right-message-column {
+
+}
+
+.conversation-header {
+  background-color: $landing-middle-gray;
+  &.active {
+    background-color: $landing-blue;
+  }
+}
+
+// CONVERSATIONS INDEX STYLING (UPDATED)
+
+.conversations-container {
+  padding: 0;
+  margin: 0 rem-calc(20) rem-calc(20) rem-calc(20);
+  // background-color: $landing-middle-gray;
+}
+.conversations-content {
+  padding: rem-calc(10);
+  // background: white;
+  color: $landing-dark-gray;
+  h2 {
+    color: $landing-dark-gray;
+  }
+  hr {
+     // border: 1px solid $landing-middle-gray;
+     border-color: $landing-light-gray;
+     margin-top: 0px;
+  }
+}
+
+#conversation-info-contact, 
+#conversation-info-prepare, 
+#conversation-info-terms, 
+#conversation-info-order,
+#conversation-contact, 
+#conversation-prepare, 
+#conversation-terms, 
+#conversation-order {
+  // display: none;
+}

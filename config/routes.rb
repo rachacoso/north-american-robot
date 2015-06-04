@@ -97,6 +97,7 @@ Rails.application.routes.draw do
   get '/matches/view/:match_id/:referrer' => 'matches#view_match', as: 'view_match'
   get '/matches/contact/:match_id' => 'matches#contact_match', as: 'contact_match'
   get '/matches/search' => 'matches#search', as: 'search'
+  get '/matches/stage' => 'matches#match_stage', as: 'match_stage'
   get '/gallery' => 'matches#gallery', as: 'gallery'
 
   resources :messages, only: [:create, :index]

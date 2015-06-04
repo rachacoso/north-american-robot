@@ -1,0 +1,215 @@
+<% if @messages && @current_user.subscriber? %>
+
+					<% match = this_match(profile) %>
+
+					<% content_for :javascript_foot do %>
+						<%= javascript_tag do %>
+							$('#conversation-info-<%= get_conversation_stage(this_match(profile)) %>').show();
+							$('#conversation-<%= get_conversation_stage(this_match(profile)) %>').show();
+						<% end %>
+					<% end %>
+
+				<div class="row">
+					<div class="small-11 small-centered columns">
+		
+
+					<div class="profile-container">
+
+						<div class="profile-header text-center">
+							<h1>YOUR CONVERSATION with <strong><%=profile.company_name %></strong></h1>
+						</div>
+
+						<div class="row collapse">
+						<div class="row">
+							<div class="small-12 columns text-center">
+								<% if i_contacted(match) %>
+									<% if !match.messages.blank? %>
+										<h4>You started a conversation with <strong><%= profile.company_name %></strong><span data-tooltip aria-haspopup="true" class="has-tip radius" title="IN CONVERSATION<BR> <SMALL>YOU CONTACTED THEM</SMALL>"><%= image_tag "match_profile_icons_conversation_outgoing.svg" %></span></h4>
+									<% else %>
+										<h4><span data-tooltip aria-haspopup="true" class="has-tip radius" title="AWAITING THEIR RESPONSE<BR> <SMALL> CONTACTED ON <%= match.c_at.strftime("%d %B %Y").upcase %></SMALL>">
+							<%= image_tag "match_profile_icons_waiting.svg" %></span>You have requested a conversation with <strong><%= profile.company_name %></strong> and are awaiting a response</h4>
+									<% end %> 								
+								<% else %>
+									<% if !match.messages.blank? %>
+									<h4><span data-tooltip aria-haspopup="true" class="has-tip radius" title="IN CONVERSATION<BR> <SMALL>THEY CONTACTED YOU</SMALL>"><%= image_tag "match_profile_icons_conversation_incoming.svg" %></span><strong><%= profile.company_name %></strong> started a conversation with you</h4>
+									<% else %>
+									<h4><span data-tooltip aria-haspopup="true" class="has-tip radius" title="NEW CONTACT REQUEST">
+						<%= image_tag "match_profile_icons_newrequest.svg" %></span><strong><%= profile.company_name %></strong> would like to have a conversation with you</h4>
+									<% end %>
+								<% end %>
+							</div>
+						</div>
+
+							<div class="small-12 columns conversation-header active">
+								<div class="medium-5 hide-for-small-only columns">
+										&nbsp;
+								</div><!--/.medium-5-->
+								<div class="medium-1 columns text-center"><h4>CONTACT</h4></div><!--/.medium-5-->
+								<div class="medium-6 hide-for-small-only columns" >
+										&nbsp;
+								</div><!--/.medium-5-->
+							</div><!--/.small-12-->
+						</div>
+
+						<div class="row collapse" data-equalizer>
+							<div class="medium-5 columns">
+								<div class="conversation-left-info-column" data-equalizer-watch>
+									<div id="conversation-info-contact">
+										<h2>Make a connection and find new international partners</h2>
+										<p> Here are some terms you may run into during your conversation: <br>
+										Term 1: definition <br>
+										</p>
+
+										<% if match && !match.messages.blank? %>
+											<%= link_to 'Would you like to...', match_stage_url(:stage => 'prepare', :mid => match.id  ), class: "button" %>
+										<% end %>
+									</div>
+								</div>
+							</div><!--/.medium-5-->
+							<div class="medium-1 hide-for-small-only columns text-center">
+								<div style="width:2px; background: black; margin:auto;" data-equalizer-watch>
+									&nbsp;
+								</div>
+							</div><!--/.medium-5-->
+							<div class="medium-6 columns" data-equalizer-watch>
+								<div class="conversation-right-message-column">
+									<div id="conversation-contact">
+										<%= render partial: "conversation_message_block", locals: {match: match, stage: "contact"} %>
+									</div>
+								</div>
+							</div><!--/.medium-5-->
+						</div>
+
+						<div class="row collapse">
+							<div class="small-12 columns conversation-header">
+								<div class="medium-5 hide-for-small-only columns">
+										&nbsp;
+								</div><!--/.medium-5-->
+								<div class="medium-1 columns text-center"><h4>PREPARE</h4></div><!--/.medium-5-->
+								<div class="medium-6 hide-for-small-only columns" >
+										&nbsp;
+								</div><!--/.medium-5-->
+							</div><!--/.small-12-->
+						</div>
+
+						<div class="row collapse" data-equalizer>
+							<div class="medium-5 columns">
+								<div class="conversation-left-info-column" data-equalizer-watch>
+									<div id="conversation-info-prepare">
+										<h2>Prepare stuff</h2>
+										<p> Here are some terms you may run into during your conversation: <br>
+										Term 1: definition <br>
+										</p>
+										<% if match && !match.messages.blank? %>
+											<%= link_to 'Would you like to...', match_stage_url(:stage => 'terms', :mid => match.id  ), class: "button" %>
+										<% end %>
+										</div>
+								</div>
+							</div><!--/.medium-5-->
+							<div class="medium-1 hide-for-small-only columns text-center">
+								<div style="width:2px; background: black; margin:auto;" data-equalizer-watch>
+									&nbsp;
+								</div>
+							</div><!--/.medium-5-->
+							<div class="medium-6 columns" data-equalizer-watch>
+								<div class="conversation-right-message-column">
+									<div id="conversation-prepare">
+										<%= render partial: "conversation_message_block", locals: {match: match, stage: "prepare"} %>
+									</div>
+								</div>
+							</div><!--/.medium-5-->
+						</div>
+
+						<div class="row collapse">
+							<div class="small-12 columns conversation-header">
+								<div class="medium-5 hide-for-small-only columns">
+										&nbsp;
+								</div><!--/.medium-5-->
+								<div class="medium-1 columns text-center"><h4>TERMS</h4></div><!--/.medium-5-->
+								<div class="medium-6 hide-for-small-only columns" >
+										&nbsp;
+								</div><!--/.medium-5-->
+							</div><!--/.small-12-->
+						</div>
+
+
+						<div class="row collapse" data-equalizer>
+							<div class="medium-5 columns">
+								<div class="conversation-left-info-column" data-equalizer-watch>
+									<div id="conversation-info-terms">
+										<h2>Negotiate Terms</h2>
+										<p> Here are some terms you may run into during your conversation: <br>
+										Term 1: definition <br>
+										</p>
+										<% if match && !match.messages.blank? %>
+											<%= link_to 'Would you like to...', match_stage_url(:stage => 'order', :mid => match.id  ), class: "button" %>
+										<% end %>
+									</div>
+								</div>
+							</div><!--/.medium-5-->
+							<div class="medium-1 hide-for-small-only columns text-center">
+								<div style="width:2px; background: black; margin:auto;" data-equalizer-watch>
+									&nbsp;
+								</div>
+							</div><!--/.medium-5-->
+							<div class="medium-6 columns" data-equalizer-watch>
+								<div class="conversation-right-message-column">
+									<div id="conversation-terms">
+										<%= render partial: "conversation_message_block", locals: {match: match, stage: "terms"} %>
+									</div>
+								</div>
+							</div><!--/.medium-5-->
+						</div>
+
+
+						<div class="row collapse">
+							<div class="small-12 columns conversation-header">
+								<div class="medium-5 hide-for-small-only columns">
+										&nbsp;
+								</div><!--/.medium-5-->
+								<div class="medium-1 columns text-center"><h4>ORDER</h4></div><!--/.medium-5-->
+								<div class="medium-6 hide-for-small-only columns" >
+										&nbsp;
+								</div><!--/.medium-5-->
+							</div><!--/.small-12-->
+						</div>
+
+
+						<div class="row collapse" data-equalizer>
+							<div class="medium-5 columns">
+								<div class="conversation-left-info-column" data-equalizer-watch>
+									<div id="conversation-info-order">
+										<h2>Prepare Orders</h2>
+										<p> 
+											Start your ordering
+										</p>
+										<% if match && !match.messages.blank? %>
+											<%= link_to 'Would you like to...', match_stage_url(:stage => 'terms', :mid => match.id  ), class: "button" %>
+										<% end %>
+									</div>
+								</div>
+							</div><!--/.medium-5-->
+							<div class="medium-1 hide-for-small-only columns text-center">
+								<div style="width:2px; background: black; margin:auto;" data-equalizer-watch>
+									&nbsp;
+								</div>
+							</div><!--/.medium-5-->
+							<div class="medium-6 columns" data-equalizer-watch>
+								<div class="conversation-right-message-column">
+									<div id="conversation-order">
+										<%= render partial: "conversation_message_block", locals: {match: match, stage: "order"} %>
+									</div>
+								</div>
+							</div><!--/.medium-5-->
+						</div>
+
+					</div>
+
+
+	</div><!--/.small-11 small-centered-->
+</div><!--/.row-->
+
+
+					<br>
+
+<% end %>

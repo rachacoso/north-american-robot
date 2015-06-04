@@ -1,21 +1,21 @@
 	
-<!-- Unread Messages (from view helper [for this conversaton]): <%= unread_count_from_messages(@messages) %><br>
-Unread Messages (from application controller [for all conversations]): <%= @messages_unread %><Br> -->
 
-<% umc = unread_count_from_messages(@messages) %>
+<% stage_messages = @messages.where(stage: stage) %>
+<% umc = unread_count_from_messages(stage_messages) %>
 <% max = 3 > umc ? 3 : umc %>
 
-<% if @messages.count > max %>
+
+<% if stage_messages.count > max %>
 <div class="row">
 	<div class="small-10 small-centered columns text-center" style="font-size: 0.8em;">
 		<%= link_to all_messages_url(this_match(@match).id), class: "button tiny round secondary", remote: true do %>
-			View entire conversation [<%= @messages.count - max %> Oldest Messages Hidden]
+			View entire conversation [<%= stage_messages.count - max %> Oldest Messages Hidden]
 		<% end %>
 	</div>
 </div>
 <% end %>
 
-<% @messages.desc('c_at').limit(max).reverse_each do |m| %>
+<% stage_messages.desc('c_at').limit(max).reverse_each do |m| %>
 <div class="row">
 	<div class="small-11 small-centered <%= m.recipient == @current_user.type? ? "medium-9 medium-pull-1" : "medium-9 medium-push-1" %> columns">
 		<div class="bubble-container">
