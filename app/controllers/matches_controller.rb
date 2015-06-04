@@ -338,9 +338,15 @@ class MatchesController < ApplicationController
 
 
   def match_stage
+
     if params[:mid] && (['contact','prepare','terms','order'].include? params[:stage])
+      match = Match.find(params[:mid])
+      match.stage = params[:stage]
+      match.save!
+      @profile = match.send(@current_user.type_inverse?)
 
-
+      @stage = params[:stage]
+      @messages = match.messages rescue nil
 
     end
 

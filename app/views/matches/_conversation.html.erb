@@ -11,7 +11,6 @@
 
 				<div class="row">
 					<div class="small-11 small-centered columns">
-		
 
 					<div class="profile-container">
 
@@ -24,23 +23,30 @@
 							<div class="small-12 columns text-center">
 								<% if i_contacted(match) %>
 									<% if !match.messages.blank? %>
-										<h4>You started a conversation with <strong><%= profile.company_name %></strong><span data-tooltip aria-haspopup="true" class="has-tip radius" title="IN CONVERSATION<BR> <SMALL>YOU CONTACTED THEM</SMALL>"><%= image_tag "match_profile_icons_conversation_outgoing.svg" %></span></h4>
+										<h4>You started a conversation with <%= image_tag match.send(@current_user.type_inverse?).logo.url(:medium), width: 50 %> <strong><%= profile.company_name %></strong></h4>
 									<% else %>
 										<h4><span data-tooltip aria-haspopup="true" class="has-tip radius" title="AWAITING THEIR RESPONSE<BR> <SMALL> CONTACTED ON <%= match.c_at.strftime("%d %B %Y").upcase %></SMALL>">
-							<%= image_tag "match_profile_icons_waiting.svg" %></span>You have requested a conversation with <strong><%= profile.company_name %></strong> and are awaiting a response</h4>
+							<%= image_tag "match_profile_icons_waiting.svg" %></span>You have requested a conversation with <%= image_tag match.send(@current_user.type_inverse?).logo.url(:medium), width: 50 %> <strong><%= profile.company_name %></strong> and are awaiting a response</h4>
 									<% end %> 								
 								<% else %>
 									<% if !match.messages.blank? %>
-									<h4><span data-tooltip aria-haspopup="true" class="has-tip radius" title="IN CONVERSATION<BR> <SMALL>THEY CONTACTED YOU</SMALL>"><%= image_tag "match_profile_icons_conversation_incoming.svg" %></span><strong><%= profile.company_name %></strong> started a conversation with you</h4>
+									<h4><%= image_tag match.send(@current_user.type_inverse?).logo.url(:medium), width: 50 %> <strong><%= profile.company_name %></strong> started a conversation with you</h4>
 									<% else %>
-									<h4><span data-tooltip aria-haspopup="true" class="has-tip radius" title="NEW CONTACT REQUEST">
-						<%= image_tag "match_profile_icons_newrequest.svg" %></span><strong><%= profile.company_name %></strong> would like to have a conversation with you</h4>
+									<div class="row">
+										<div class="medium-6 small-centered columns">
+											
+												<h4><%= image_tag match.send(@current_user.type_inverse?).logo.url(:medium), width: 50 %> <strong><%= profile.company_name %></strong> would like to have a conversation with you</h4>		
+											
+										</div><!--/.small-6-->
+									</div><!--/.row-->
+
+									
 									<% end %>
 								<% end %>
 							</div>
 						</div>
 
-							<div class="small-12 columns conversation-header active">
+							<div class="small-12 columns conversation-header <%= match.stage == "contact" ? "active" : "" %>">
 								<div class="medium-5 hide-for-small-only columns">
 										&nbsp;
 								</div><!--/.medium-5-->
@@ -61,7 +67,7 @@
 										</p>
 
 										<% if match && !match.messages.blank? %>
-											<%= link_to 'Would you like to...', match_stage_url(:stage => 'prepare', :mid => match.id  ), class: "button" %>
+											<%= link_to 'Would you like to...', match_stage_url(:stage => 'prepare', :mid => match.id  ), class: "button", remote: true %>
 										<% end %>
 									</div>
 								</div>
@@ -81,7 +87,7 @@
 						</div>
 
 						<div class="row collapse">
-							<div class="small-12 columns conversation-header">
+							<div class="small-12 columns conversation-header <%= match.stage == "prepare" ? "active" : "" %>">
 								<div class="medium-5 hide-for-small-only columns">
 										&nbsp;
 								</div><!--/.medium-5-->
@@ -101,7 +107,7 @@
 										Term 1: definition <br>
 										</p>
 										<% if match && !match.messages.blank? %>
-											<%= link_to 'Would you like to...', match_stage_url(:stage => 'terms', :mid => match.id  ), class: "button" %>
+											<%= link_to 'Would you like to...', match_stage_url(:stage => 'terms', :mid => match.id  ), class: "button", remote: true %>
 										<% end %>
 										</div>
 								</div>
@@ -121,7 +127,7 @@
 						</div>
 
 						<div class="row collapse">
-							<div class="small-12 columns conversation-header">
+							<div class="small-12 columns conversation-header <%= match.stage == "terms" ? "active" : "" %>">
 								<div class="medium-5 hide-for-small-only columns">
 										&nbsp;
 								</div><!--/.medium-5-->
@@ -142,7 +148,7 @@
 										Term 1: definition <br>
 										</p>
 										<% if match && !match.messages.blank? %>
-											<%= link_to 'Would you like to...', match_stage_url(:stage => 'order', :mid => match.id  ), class: "button" %>
+											<%= link_to 'Would you like to...', match_stage_url(:stage => 'order', :mid => match.id  ), class: "button", remote: true %>
 										<% end %>
 									</div>
 								</div>
@@ -163,7 +169,7 @@
 
 
 						<div class="row collapse">
-							<div class="small-12 columns conversation-header">
+							<div class="small-12 columns conversation-header <%= match.stage == "order" ? "active" : "" %>">
 								<div class="medium-5 hide-for-small-only columns">
 										&nbsp;
 								</div><!--/.medium-5-->
@@ -183,9 +189,7 @@
 										<p> 
 											Start your ordering
 										</p>
-										<% if match && !match.messages.blank? %>
-											<%= link_to 'Would you like to...', match_stage_url(:stage => 'terms', :mid => match.id  ), class: "button" %>
-										<% end %>
+
 									</div>
 								</div>
 							</div><!--/.medium-5-->

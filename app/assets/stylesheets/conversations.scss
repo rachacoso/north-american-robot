@@ -12,8 +12,8 @@ $you-border: scale-color($landing-blue, $lightness: 70%);
 $bubble-font-size: 0.8em;
 
 .bubble-container {
-  margin-top: rem-calc(10);
-  margin-bottom: rem-calc(10);
+  margin-top: 0;
+  margin-bottom: rem-calc(40);
   border-top: 0px solid transparent;
 }
 
@@ -174,5 +174,5 @@ top: 10px;
 #conversation-prepare, 
 #conversation-terms, 
 #conversation-order {
-  // display: none;
+  display: none;
 }

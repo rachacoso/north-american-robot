@@ -56,10 +56,15 @@ class MessagesController < ApplicationController
 
 	def all_messages
 
-		if !params[:match_id].blank?
+		if !params[:match_id].blank? && !params[:stage].blank?
 			user = @current_user.distributor || @current_user.brand
 			match = user.matches.find(params[:match_id])		
 			@messages = match.messages
+			if ['contact','prepare','terms','order'].include? params[:stage]
+				@stage = params[:stage]
+			else
+				@stage = match.stage
+			end
 		end
 
 	  respond_to do |format|

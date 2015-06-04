@@ -1,3 +1,4 @@
+<br>
 <% if match %>
 
 	<% if i_contacted(match) %>
@@ -5,13 +6,23 @@
 
 		<% if stage == "contact" %>
 			<div class="row">
-				<div class="small-11 small-centered medium-9 medium-push-1 columns">
-					<div class="bubble-container">
-						<div class="bubble-you">
-							<%= simple_format(match.intro_message) %>
+				<div class="medium-2 medium-push-10 hide-for-small-only columns">
+					<%= image_tag @current_user.send(@current_user.type?).logo.url(:medium) %>
+				</div>				
+				<div class="small-11 medium-10 medium-pull-2 columns">
+
+					<div class="row">
+						<div class="small-11 small-push-1 columns">
+							<div class="bubble-container">
+								<div class="bubble-you">
+									<%= simple_format(match.intro_message) %>
+								</div>
+								<div class="text-right"><small>Sent <%= match.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%d %b %Y at %H:%M %Z") %></small></div>
+							</div>
 						</div>
-						<div class="text-right"><small>Sent <%= match.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%d %b %Y at %H:%M %Z") %></small></div>
 					</div>
+
+
 				</div>	
 			</div>
 		<% end %>
@@ -28,13 +39,22 @@
 		<%#= render partial: "incoming_contact" %>
 		<% if stage == "contact" %>
 			<div class="row">
-				<div class="small-11 small-centered medium-9 medium-pull-1 columns">
-					<div class="bubble-container">
-						<div class="bubble-them">
-							<%= simple_format(match.intro_message) %>
+				<div class="medium-2 hide-for-small-only columns">
+					<%= image_tag match.send(@current_user.type_inverse?).logo.url(:medium) %>
+				</div>				
+				<div class="small-11 medium-10 columns">
+
+					<div class="row">
+						<div class="small-11 columns">					
+							<div class="bubble-container">
+								<div class="bubble-them">
+									<%= simple_format(match.intro_message) %>
+								</div>
+								<small>Sent <%= match.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%d %b %Y at %H:%M %Z") %></small>	
+							</div>
 						</div>
-						<small>Sent <%= match.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%d %b %Y at %H:%M %Z") %></small>	
 					</div>
+
 				</div>
 			</div>
 		<% end %>
