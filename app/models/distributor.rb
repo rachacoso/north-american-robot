@@ -4,7 +4,9 @@ class Distributor
 	include Mongoid::Paperclip
 
 	field :subscriber, type: Mongoid::Boolean
+	field :active, type: Mongoid::Boolean, default: true
 	
+	# LOGINS/USERS WHO CAN ACT ON BEHALF OF BRAND
 	has_many :users
 
  	#####################
@@ -158,6 +160,7 @@ class Distributor
 	validates_attachment_size :verification_business_certificate, :in => 0.megabytes..2.megabytes
 
 	scope :subscribed, ->{where(subscriber: true)}
+	scope :activated, ->{where(active: true)}
 
 ################
 # MODEL METHODS
