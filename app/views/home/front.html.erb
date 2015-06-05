@@ -187,7 +187,6 @@
 										<% end %>
 									</div>
 								</div>
-								<div class="errornotice <%= flash[:error] ? "error-on" : "" %>"><%= flash[:error] ? flash[:error].upcase.html_safe : "&nbsp;".html_safe %></div>
 								<div class="row collapse">
 									<%= f.fields_for :contact do |ff| %>
 									<div class="medium-6 columns">

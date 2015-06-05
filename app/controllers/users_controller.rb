@@ -100,9 +100,9 @@ class UsersController < ApplicationController
         cookies[:auth_token] = user.auth_token
 
         if params[:user_type] == 'distributor'
-          redirect_to distributor
+          redirect_to distributor_url
         elsif params[:user_type] == 'brand'
-          redirect_to brand
+          redirect_to brand_url
         else
           redirect_to dashboard_url
         end
@@ -232,7 +232,8 @@ class UsersController < ApplicationController
       redirect_to users_url
     else
       # redirect_to root_url
-      render 'home/front'
+      # render 'home/front'
+      render 'users/new'
     end
   end
 

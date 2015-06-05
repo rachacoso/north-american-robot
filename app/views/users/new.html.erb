@@ -1,51 +1,118 @@
 
-<% content_for :javascript_head do %>
-	<%= javascript_tag do %>
-		var bgColor = "#D1E0ff";
-	<% end %>
-<% end %>
 
-<div class="row">
-	<div class="medium-5 columns">
-		
-			<h2><strong>Register</strong></h2>
-			<div class="row">
-				<div class="small-12 columns text-right">
-					<% if flash[:notice] %>
-						<div data-alert class="alert-box alert">
-							<%= flash[:notice] %>
-						  <a href="#" class="close">&times;</a>
-						</div>
-					<% end %>
-
-					<p>
-					<%= form_for @newuser, url: users_path do |f| %>
-					<%= radio_button_tag(:user_type, "brand", selected: true) %>
-					<%= label_tag(:user_type_brand, "I am a Brand") %>
-					<%= radio_button_tag(:user_type, "distributor") %>
-					<%= label_tag(:user_type_distributor, "I am a Distributor") %>
-					</p>
-
-					<%= f.fields_for :user_profile do |ff| %>
-						<%= ff.text_field :firstname, :placeholder => 'First Name', :label => false  %>
-						<%= ff.text_field :lastname, :placeholder => 'Last Name', :label => false  %>
-					<% end %>
-					<br>
-					<%= f.text_field :email, :placeholder => 'Email (will be used as your login)', :label => false %>
-					<br>
-					<%= f.password_field :password, :placeholder => 'Password', :label => false %>
-					<%= f.password_field :password_confirmation, :placeholder => 'Password (repeat)', :label => false %>
-					<%= link_to 'Cancel', root_path, class: "tiny radius info button"  %> <%= f.submit 'Next', class: "tiny radius success button" %>
-					<% end %>
-				</div>
-			</div>
-		
-	</div>
+<div id="front-logo">
+	<%= link_to root_url do %><h4 style="color:white;"><%= image_tag '/images/landing_page_LOGO.svg', class: "shadow", width: 50  %> go back</h4><% end %>
 </div>
 
+<div class="front-top-panel">
+	<div class="row" data-equalizer>
+		<div class="small-10 medium-5 small-centered columns">
 
-<% content_for :admin_footer do %>
- 
+					<div class="ldpanel" id="sign-up">
+						<h2><strong>Join Us</strong></h2>
+						<div class="row">
+							<div class="medium-12 columns text-right">
+								
+								<%= form_for @newuser, url: users_path do |f| %>
+								<div class="row" style="margin-bottom: 1em;">
+									<div class="medium-12 columns" id="type-selector">
+										<% if @user_type == 'brand' || !@user_type %>
+											<%= radio_button_tag(:user_type, "brand", selected: true) %>
+											<%= label_tag(:user_type_brand, "as a Brand") %>
+											<%= radio_button_tag(:user_type, "distributor") %>
+											<%= label_tag(:user_type_distributor, "as a Distributor") %>
+										<% elsif @user_type == 'distributor' %>
+											<%= radio_button_tag(:user_type, "brand") %>
+											<%= label_tag(:user_type_brand, "as a Brand") %>
+											<%= radio_button_tag(:user_type, "distributor", selected: true) %>
+											<%= label_tag(:user_type_distributor, "as a Distributor") %>
+										<% end %>
+									</div>
+								</div>
+								<div class="errornotice <%= flash[:error] ? "error-on" : "" %>"><%= flash[:error] ? flash[:error].upcase.html_safe : "&nbsp;".html_safe %></div>
+								<div class="row collapse">
+									<%= f.fields_for :contact do |ff| %>
+									<div class="medium-6 columns">
+										<%= ff.text_field :firstname, :placeholder => 'FIRST NAME', :value => @user_firstname, :label => false  %>
+									</div>
+									<div class="medium-6 columns">
+										<%= ff.text_field :lastname, :placeholder => 'LAST NAME', :value => @user_lastname, :label => false  %>
+									</div>
+									<% end %>
+								
+									<div class="medium-12 columns">
+									<%= f.text_field :email, :placeholder => 'EMAIL (will be used as your login)', :value => @user_email, :label => false %>
+									</div>
+									<div class="medium-12 columns">
+									<%= f.password_field :password, :placeholder => 'PASSWORD', :label => false %>
+									</div>
+									<div class="medium-12 columns">
+									<%= f.password_field :password_confirmation, :placeholder => 'PASSWORD (repeat)', :label => false %>
+									</div>
+									<div class="medium-12 columns">
+										<br>
+										<a href="#" data-reveal-id="newUserConfirm" class="button small" id="new-user-submit-link">JOIN!</a>
+									
+									</div>
+								</div>
+								
+								
+								<div id="newUserConfirm" class="reveal-modal small" data-reveal>
+								  <h2><strong>You are signing up as a <span id="user-type" style="text-transform: uppercase;">brand</span>.</strong> <br> Is this correct?</h2>
+								  <a class="close-reveal-modal">x</a>
+								  <div class="text-right">
+								  <%= link_to 'Yes', '#', class: "button tiny radius", id: "new-user-submit"%>
+								  <%= link_to 'No! I made a mistake!', '#', class: "button tiny radius", id: "new-user-decline"%>
+									</div>
+								</div>
+								<% end %>
 
 
+							</div>
+						</div>
+					</div>
+			
+			<div class="row">
+			<div class="small-12 columns">
+				<div class="text-center">
+				<%= link_to root_url do %><h2 style="color:white;" class="shadow-text">not yet a member? <br><strong> JOIN US </strong></h2><% end %>
+				</div>
+			</div><!--/.small-12-->	
+			</div><!--/.row-->
+			
+
+
+		</div><!--/.medium-5 columns -->
+
+	</div><!-- /.row -->
+
+</div>
+
+<% content_for :javascript_foot do %>
+	<%= javascript_tag do %>
+
+	
+		$( document ).ready(function() {
+			var selectedVal = "";
+			var selected = $("#type-selector input[type='radio']:checked");
+			if (selected.length > 0) {
+			    selectedVal = selected.val();
+			    $('#user-type').html(selectedVal);
+			}
+		});
+		$('#new-user-submit').on('click', function(e) {
+			e.preventDefault();
+			$('#new_user').submit();
+			$('#newUserConfirm').foundation('reveal', 'close');
+		});
+		$('#new-user-decline').on('click', function(e) {
+			e.preventDefault();
+			$('#newUserConfirm').foundation('reveal', 'close');
+		});
+		$('input[name="user_type"]').on('change', function(e) {
+			$('#user-type').html($(this).val());
+		});
+
+
+	<% end %>
 <% end %>
