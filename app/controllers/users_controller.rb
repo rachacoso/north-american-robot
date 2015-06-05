@@ -100,9 +100,9 @@ class UsersController < ApplicationController
         cookies[:auth_token] = user.auth_token
 
         if params[:user_type] == 'distributor'
-          redirect_to onboard_distributor_one_url
+          redirect_to distributor
         elsif params[:user_type] == 'brand'
-          redirect_to onboard_brand_one_url
+          redirect_to brand
         else
           redirect_to dashboard_url
         end
