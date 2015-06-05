@@ -39,31 +39,31 @@
 							</p>
 							<h3>
 							<% unless profile.website.blank? %>
-								<%= link_to "//#{clean_url(profile.website)}" do %> 
+								<%= link_to "//#{clean_url(profile.website)}", target: "blank" do %> 
 								<i class="fi-laptop" style="font-size: 3em;"></i> 
 								<% end %>
 							<% end %>
 							<% unless profile.facebook.blank? %>
 								<%#= !profile.website.blank? ? "/" : "" %>
-								<%= link_to "//#{clean_url(profile.facebook)}" do %>
+								<%= link_to "//#{clean_url(profile.facebook)}", target: "blank" do %>
 								<i class="fi-social-facebook" style="font-size: 3em;"></i> 
 								<% end %>
 							<% end %>
 							<% unless profile.linkedin.blank? %>
 								<%#= !profile.website.blank? || !profile.facebook.blank? ? "/" : "" %>
-								<%= link_to "//#{clean_url(profile.linkedin)}" do %>
+								<%= link_to "//#{clean_url(profile.linkedin)}", target: "blank" do %>
 									<i class="fi-social-linkedin" style="font-size: 3em;"></i> 
 								<% end %>
 							<% end %>
 							<% unless profile.twitter.blank? %>
 								<%#= !profile.website.blank? || !profile.facebook.blank? || !profile.linkedin.blank? ? "/" : "" %>
-								<%= link_to "//#{clean_url(profile.twitter)}" do %>
+								<%= link_to "//#{clean_url(profile.twitter)}", target: "blank" do %>
 									<i class="fi-social-twitter" style="font-size: 3em;"></i> 
 								<% end %>
 							<% end %>
 							<% unless profile.instagram.blank? %>
 								<%#= !profile.website.blank? || !profile.facebook.blank? || !profile.linkedin.blank? || !profile.twitter.blank? ? "/" : "" %>
-								<%= link_to "//#{clean_url(profile.instagram)}" do %>
+								<%= link_to "//#{clean_url(profile.instagram)}", target: "blank" do %>
 									<i class="fi-social-instagram" style="font-size: 3em;"></i> 
 								<% end %>
 							<% end %>						
@@ -189,7 +189,7 @@
 
 
 				<div id="profile-conversation">
-				<%= render partial: "conversation", locals: {profile: profile} %>
+				<%= render partial: "matches/conversation", locals: {profile: profile} %>
 				</div>
 
 
