@@ -1,35 +1,32 @@
-<div class="groupwrapper">
 
-	<div id="export-countries-list">	
-		
-		<%= render "shared/profileform/export_countries_list" %>
+<div id="export-countries-list">	
+	
+	<%= render "shared/profileform/export_countries_list" %>
 
-	</div>					
+</div>					
 
-	<div class="rowitem">
-		<div class="row">
-			<div class="medium-12 columns">
-				<hr>
-				<%= form_for @new_export_country, :html => { :id => "new_export_country" }, remote: true do |f| %>
-				
-					<div class="row">
-						<div class="small-12 columns">
-							<h3>Add a Country</h3>
-						</div>
-					</div>
-				
+<div class="rowitem">
+	<div class="row">
+		<div class="medium-12 columns">
+			<hr>
+			<%= form_for @new_export_country, :html => { :id => "new_export_country" }, remote: true do |f| %>
+			
 				<div class="row">
-					<div class="medium-8 columns">
-						<%= f.text_field :country, class: "country-autocomplete", id: "export-countries-input", label: false, placeholder: 'Country' %>
+					<div class="small-12 columns">
+						<h3>Add a Country</h3>
 					</div>
-					<div class="medium-4 columns text-left">
-						<%= f.submit "ADD", class: "tiny alert button submit radius", style: "margin-top: 0;" %>
-						<%#= link_to 'Add', "#", :onclick => "$('#new_export_country').submit()".html_safe %>
-					</div>
-				</div>				
-				<% end %>
-			</div>
+				</div>
+			
+			<div class="row">
+				<div class="medium-8 columns">
+					<%= f.text_field :country, class: "country-autocomplete", id: "export-countries-input", label: false, placeholder: 'Country' %>
+				</div>
+				<div class="medium-4 columns text-left">
+					<%= f.submit "ADD", class: "tiny alert button submit radius", style: "margin-top: 0;" %>
+					<%#= link_to 'Add', "#", :onclick => "$('#new_export_country').submit()".html_safe %>
+				</div>
+			</div>				
+			<% end %>
 		</div>
 	</div>
-
-</div> <!-- /.groupwrapper -->
+</div>
