@@ -3,14 +3,25 @@
 <div class="row">
 	<div class="small-12 columns">
 
+<h3>Rejects</h3>
+
+<% @rejected.each do |r| %>
+	<%= r %><br>
+<% end %>
+
 	<% case @user_type 
 
 		when "distributor" %>
 
 <h3>Distributor</h3>
 		<% @list.each do |l| %>
+			<%= l %><br>
 			<p>
-			Sector: <%= @sector %><br>
+			<% l.each_with_index do |ll, index| %>
+				<%= index%>: <%= ll %><br>
+			<% end %>
+			
+			Sector: <%= Sector.find(@sector).name %><br>
 			Founded: <%= l[0] %><br>
 			Company Name: <%= l[1] %><br>
 			Addr: <%= l[2] %><br>
@@ -31,7 +42,7 @@
 <h3>Brand</h3>
 		<% @list.each do |l| %>
 			<p>
-			Sector: <%= @sector %><br>
+			Sector: <%= Sector.find(@sector).name %><br>
 			Founded: <%= l[0] %><br>
 			Company Name: <%= l[1] %><br>
 			Website: <%= l[2] %><br>

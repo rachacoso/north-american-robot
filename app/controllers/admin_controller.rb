@@ -33,104 +33,51 @@ class AdminController < ApplicationController
 
   def do_bulk_upload
     if params[:file] && params[:user_type] && params[:sector]
-
       @user_type = params[:user_type]
       @sector = params[:sector]
       uploaded_file = params[:file]
       @list = []
-
+      @rejected = []
       case @user_type
       when "distributor"
-
         uploaded_file.open.each_line do |line|
           data = line.split(/\t/)
-          ufounded, ucompany_name, uaddr1, uaddr2, ucity, uzip, ucountry, uemail, uwebsite, ulinkedin, ufacebook = data.map { |p| p }
-
-          if User.where(email: uemail).first
+          emailcheck = data[7]
+          if emailcheck.blank? || !emailcheck[/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i] #skip line if no email or not an email address
+            @rejected << data
+            next 
+          end
+          # ufounded, ucompany_name, uaddr1, uaddr2, ucity, uzip, ucountry, uemail, uwebsite, ulinkedin, ufacebook = data.map { |p| p }
+          if User.where(email: emailcheck).first
             data << "skipped!"
             @list << data          
             next
           else
-
-            user = User.new
-            
-            user.build_user_profile
-            user.email = uemail
-            user.password = "GlobalGoods"
-            user.password_confirmation = "GlobalGoods"
-            user.save!
-            user.create_distributor
-
-            d = user.distributor
-
-            cinfo = d.contact_info
-            cinfo.email = uemail
-            cinfo.address1 = uaddr1
-            cinfo.address2 = uaddr2
-            cinfo.city = ucity
-            cinfo.postcode = uzip
-            cinfo.country = ucountry
-            cinfo.save
-            d.sectors << Sector.find(@sector)
-            d.update(year_established: Date.new(ufounded.to_i), company_name: ucompany_name, country_of_origin: ucountry, website: uwebsite, facebook: ufacebook, linkedin: ulinkedin)
-
-            d.export_countries.find_or_initialize_by(country: ucountry)
-            
-            user.save!
-            d.save!
-
-            data << "created!"
+            create_user('distributor', data)
+            data << "created!#{data[7]}"
             @list << data
           end
-
         end
-
       when "brand"                           
-
         uploaded_file.open.each_line do |line|
           data = line.split(/\t/)
-          ufounded, ucompany_name, uwebsite, uemail, ucity, ustate, ulinkedin, ufacebook = data.map { |p| p }
-
-            # data << "test!"
-            # @list << data    
-
-          if User.where(email: uemail).first
+          emailcheck = data[3]
+          if emailcheck.blank? || !emailcheck[/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i] #skip line if no email or not an email address
+            @rejected << data
+            next 
+          end
+          # ufounded, ucompany_name, uwebsite, uemail, ucity, ustate, ulinkedin, ufacebook = data.map { |p| p }
+          if User.where(email: emailcheck).first
             data << "skipped!"
             @list << data          
             next
           else
-
-            user = User.new
-            
-            user.build_user_profile
-            user.email = uemail
-            user.password = "GlobalGoods"
-            user.password_confirmation = "GlobalGoods"
-            user.save!
-            user.create_brand
-
-            b = user.brand
-
-            cinfo = b.contact_info
-            cinfo.email = uemail
-            cinfo.city = ucity
-            cinfo.country = "United States"
-            cinfo.save
-            b.sectors << Sector.find(@sector) #baby/kids (HEROKU)
-            b.update(year_established: Date.new(ufounded.to_i), company_name: ucompany_name, country_of_origin: "United States", website: uwebsite, facebook: ufacebook, linkedin: ulinkedin)
-            
-            user.save!
-            b.save!
-
+            create_user('brand', data)
             data << "created!"
             @list << data
           end
-
         end
-
-
       end
-    
     end
 
     # respond_to do |format|
@@ -145,6 +92,36 @@ class AdminController < ApplicationController
   def administrators_only
     unless @current_user.administrator
       redirect_to dashboard_url
+    end
+  end
+
+  def create_user(usertype, data)
+    if usertype == 'distributor' || usertype == 'brand' # restrict to only allowed values
+      case usertype
+      when 'distributor'
+        ufounded, ucompany_name, uaddr1, uaddr2, ucity, uzip, ucountry, uemail, uwebsite, ulinkedin, ufacebook = data.map { |p| p }
+        ustate = nil
+      when 'brand'
+        ufounded, ucompany_name, uwebsite, uemail, ucity, ustate, ulinkedin, ufacebook = data.map { |p| p }
+        uaddr1 = nil
+        uaddr2 = nil
+        uzip = nil
+        ucountry = "United States"
+      end
+      user = User.new
+      user.build_contact
+      user.email = uemail
+      user.password = "waterorangeeaglehill"
+      user.password_confirmation = "waterorangeeaglehill"
+      createusertype = "create_" + usertype
+      brand_or_distributor = user.send(createusertype) # create relation
+      brand_or_distributor.create_address
+      brand_or_distributor.contacts << Contact.new(email: uemail)
+      brand_or_distributor.sectors << Sector.find(@sector)
+      brand_or_distributor.update(year_established: Date.new(ufounded.to_i), company_name: ucompany_name, country_of_origin: ucountry, website: uwebsite, facebook: ufacebook, linkedin: ulinkedin)
+      usertype == 'distributor' ? brand_or_distributor.export_countries.find_or_initialize_by(country: ucountry) : ""
+      brand_or_distributor.create_address(address1: uaddr1, address2: uaddr2, city: ucity, postcode: uzip, country: ucountry, state: ustate)
+      user.save!
     end
   end
 
