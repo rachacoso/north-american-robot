@@ -1,0 +1,25 @@
+<%= form_for @distributor, url: distributor_url do |f| %>
+<%= f.hidden_field :company_name %>
+<%= hidden_field_tag "redirect_anchor", "a-sectors" %>
+<div class="row">
+	<div class="small-12 columns">
+		<a class="anchor" id="a-sectors"></a>
+		<h1>Sectors</h1>
+	</div>
+</div>
+
+<div class="row editform">	
+	<div class="medium-10 push-2 columns">		
+		<% Sector.each do |sc| %>
+			<%= check_box_tag "sectors[#{sc.id}]", sc.id, (@distributor.sectors.find(sc) rescue false) ? true : false %>
+			<%= label_tag("sectors[#{sc.id}]", sc.name) %>
+	  <% end %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="medium-10 push-2 columns">
+		<%= f.submit 'Update Sectors', class: "tiny radius alert button right" %>
+	</div>
+</div>
+<% end %>

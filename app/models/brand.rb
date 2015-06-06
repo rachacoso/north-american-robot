@@ -41,6 +41,13 @@ class Brand
 	  :default_style => :medium
 	validates_attachment_content_type :logo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
 
+	# SOCIAL IMPACT
+
+	field :social_causes, type: String
+	field :social_organizations, type: String
+	field :social_give_back, type: String
+
+
   has_and_belongs_to_many :sectors, inverse_of: nil 
 	has_and_belongs_to_many :channels, inverse_of: nil 
   

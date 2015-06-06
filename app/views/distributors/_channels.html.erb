@@ -1,0 +1,56 @@
+<%= form_for @distributor, url: distributor_url do |f| %>
+	<%= f.hidden_field :company_name %>
+	<%= hidden_field_tag "redirect_anchor", "a-channels" %>
+	<div class="row">
+		<div class="small-12 columns">
+			<a class="anchor" id="a-channels"></a>
+			<h1>Channels</h1>
+		</div>
+	</div>
+
+	<div class="row editform">
+		<div class="medium-10 push-2 columns">						
+			<h3>Standard Channels</h3>
+			<% Channel.each do |ch| %>
+				<%= check_box_tag "channels[#{ch.id}]", ch.id, (@distributor.channels.find(ch) rescue false) ? true : false  %>
+				<%= label_tag "channels[#{ch.id}]" do %>
+					<%= ch.name %><br>
+					<%= simple_format(ch.description, {style: "font-size: 0.75em; margin-left: 2em;"}, wrapper_tag: "div") %>
+				<% end %>
+		  <% end %>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="medium-10 push-2 columns">
+			<%= f.submit 'Update Standard Channels', class: "tiny radius alert button right" %>
+		</div>
+	</div>
+<% end %>
+
+<div id="custom-channels-list">
+	<%= render partial: 'shared/profileform/custom_channels_list', locals:{u: @distributor} %>
+</div>
+
+<div class="row">
+	<div class="medium-10 push-2 columns">
+		<div class="groupwrapper">
+			<%= form_for @new_channel_capacity, :html => { :id => "new_channel_capacity" }, remote: true do |f| %>
+				<div class="row">
+					<div class="medium-12 columns">
+						<h3>Add Custom Channel</h3>
+					</div>
+				</div>
+				<div class="row">
+					<div class="medium-9 columns">
+						<%= f.text_field :custom_channel_name, label: false, placeholder: 'Custom Channel Name' %>
+					</div>
+					<div class="medium-3 columns text-right" >
+						<%= f.submit 'ADD', class: "tiny radius alert button right", style: "margin-top: 0;" %>
+						<%#= link_to 'add', "#", :onclick => "$('#new_channel_capacity').submit()".html_safe, class: "itemformlink" %>
+					</div>
+				</div>
+			<% end %>	
+		</div>
+	</div>
+</div>

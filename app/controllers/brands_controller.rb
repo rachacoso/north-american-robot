@@ -180,6 +180,9 @@ class BrandsController < ApplicationController
 			:logo,
 			:countries_where_exported,
 			:brand_positioning,
+			:social_causes,
+			:social_organizations,
+			:social_give_back,
 			contact_info_attributes: [ 
 				:contact_name,
 				:contact_title,

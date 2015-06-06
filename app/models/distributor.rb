@@ -44,6 +44,12 @@ class Distributor
 	validates_attachment_content_type :logo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
 
 
+	# SOCIAL IMPACT
+
+	field :social_causes, type: String
+	field :social_organizations, type: String
+	field :social_give_back, type: String
+
 	# Countries of Distribution
 	embeds_many :export_countries, as: :exportable
 

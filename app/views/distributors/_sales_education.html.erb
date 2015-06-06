@@ -1,0 +1,26 @@
+<div class="row">
+	<div class="small-12 columns">
+		<a class="anchor" id="a-sales"></a>
+		<h1>Sales / Education Capabilities</h1>
+	</div>
+</div>
+<br>
+<%= form_for @distributor, url: distributor_url do |f| %>
+	<%= hidden_field_tag "redirect_anchor", "a-sales" %>
+	<div class="row">
+		<div class="medium-12 columns">
+			<%= render partial: "shared/numeric_field", locals: {f: f, field: :outside_sales_size, fieldlabel: 'Outside Sales Force Size' } %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="medium-12 columns">
+			<%= render partial: "shared/numeric_field", locals: {f: f, field: :inside_sales_size, fieldlabel: 'Inside Sales Force Size' } %>	
+		</div>
+	</div>
+	<div class="row">
+		<div class="medium-12 columns">
+			<hr>
+			<%= f.submit 'Update Sales/Education Capabilities', class: "tiny radius alert button right" %>
+		</div>
+	</div>
+<% end %>

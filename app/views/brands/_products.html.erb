@@ -1,0 +1,33 @@
+<div class="row">
+	<div class="small-12 columns">
+		<h1>Product Portfolio</h1>
+	</div>
+</div>
+<div class="row">
+	<div class="small-12 columns">
+		<h3>Current Products</h3>
+		<hr>
+	</div>
+</div>
+<%= render partial: "shared/editcollblock", locals: {
+	coll: @current_products,
+	identifier: "name",
+	no_item_message: "No Current Products",
+	coll_new_item: @new_product,
+	coll_new_item_text: "Add a Current Product",
+	iscurrent: "true"
+} %>
+<div class="row">
+	<div class="small-12 columns">
+		<h3>Upcoming Products</h3>
+		<hr>
+	</div>
+</div>
+<%= render partial: "shared/editcollblock", locals: {
+	coll: @past_products,
+	identifier: "name",
+	no_item_message: "No Upcoming Products",
+	coll_new_item: @new_product,
+	coll_new_item_text: "Add Upcoming Product",
+	iscurrent: "false"
+} %>
