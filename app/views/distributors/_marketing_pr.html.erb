@@ -9,11 +9,6 @@
 	<%= hidden_field_tag "redirect_anchor", "a-marketing" %>
 	<div class="row">
 		<div class="small-12 columns">
-			<h3>Internal Marketing/PR</h3>
-		</div>
-	</div>
-	<div class="row">
-		<div class="small-12 columns">
 			<%= render partial: "shared/numeric_field", locals: {f: f, field: :internal_marketing_size, fieldlabel: 'Internal Marketing/Design Team Size' } %>
 		</div>
 	</div>
@@ -51,11 +46,6 @@
 		</div>
 	</div>	
 	<hr>
-	<div class="row">
-		<div class="small-12 columns">
-			<h3>Customer Database</h3>
-		</div>
-	</div>
 	<div class="row">
 		<div class="small-12 columns">
 			<%= render partial: "shared/numeric_field", locals: {f: f, field: :customer_database_size, fieldlabel: 'Customer Database Size' } %>	
