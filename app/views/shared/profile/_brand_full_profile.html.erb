@@ -164,11 +164,11 @@
 							</div><!--/.small-12-->
 						</div><!--/.row-->
 
+
 						<div class="row">
 							<div class="small-12 columns">
 								<br>
-								<h3><%= render partial: "shared/profile/components/savebutton", locals: {profile: profile} %>
-										<strong><%= profile.company_name %></strong> to your SAVED <%= @current_user.type_inverse?.upcase %>S</h3>
+								<%= render partial: "shared/profile/components/savebutton", locals: {profile: profile} %>										
 							</div><!--/.small-12-->
 						</div><!--/.row-->
 
