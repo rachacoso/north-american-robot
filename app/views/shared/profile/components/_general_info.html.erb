@@ -1,0 +1,114 @@
+<div class="profile-container">
+	<div class="profile-content">
+
+		<div class="row collapse">
+			<div class="small-6 columns">
+				<div class="preview-data">
+					<% unless profile.country_of_origin.blank? %>
+					<span class="preview-data-tile-title">Headquarters</span><br>
+					<strong><%= profile.country_of_origin %></strong>
+					<% end %>
+				</div>							
+			</div><!--/.small-6-->
+			<div class="small-6 columns">
+				<div class="preview-data">
+					<% unless profile.company_size.blank? %>
+					<span class="preview-data-tile-title">Company Size</span><br>
+					<strong><%= CompanySize.find(profile.company_size).name rescue nil %></strong>
+					<% end %>
+				</div>
+			</div><!--/.small-6-->
+		</div><!--/.row-->
+
+
+		<div class="row collapse">
+			<div class="small-6 columns">
+				<div class="preview-data">
+					<% unless profile.year_established.blank? %>
+					<span class="preview-data-tile-title">Year Established</span><br>
+					<strong><%= profile.year_established.strftime("%Y") rescue nil %></strong>
+					<% end %>
+				</div>						
+			</div><!--/.small-6-->
+			<div class="small-6 columns">
+				<div class="preview-data">
+					<% unless profile.export_countries.blank? %>
+					<span class="preview-data-tile-title">Countries of Distribution</span><br>
+						<% profile.export_countries.sort_by{ |m| m.country.downcase }.each do |ec| %>
+							<strong><%= ec.country %></strong><br>
+						<% end %>
+					<% end %>
+				</div>
+			</div><!--/.small-6-->
+		</div><!--/.row-->
+
+
+		<div class="row collapse">
+			<div class="small-12 columns">
+				<div class="preview-data">
+					<% unless profile.sectors.blank? %>
+					<span class="preview-data-tile-title">Sectors</span><br>
+					<% profile.sectors.each do |s| %>
+						<strong><%= s.name %></strong><br>
+					<% end %>
+					<% end %>
+				</div>
+			</div><!--/.small-12-->
+		</div>
+		<div class="row collapse">
+			<div class="small-12 columns">
+				<div class="preview-data">
+					<% unless profile.channels.blank? %>
+					<span class="preview-data-tile-title">Channels</span><br>
+					<% profile.channels.each do |ch| %>
+						<strong><%= ch.name %></strong><br>
+					<% end %>
+					<% if profile.channel_capacities.where(channel_id: 0).length > 0 %>
+						<% profile.channel_capacities.where(channel_id: 0).each do |cch| %>
+							<strong><%= cch.custom_channel_name %> *</strong><br>
+						<% end %>
+						<small>(* Custom Channels)</small>
+					<% end %>
+					<% end %>
+				</div>
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+
+		<div class="row collapse">
+			<div class="small-12 columns">
+				<div class="preview-data">
+					<span class="preview-data-tile-title">General Contact Information</span><br>
+					<% profile.contacts.each do |contact| %>
+						<% unless contact.firstname.blank? && contact.lastname.blank? && contact.title.blank? %>
+					  <strong>
+						<%= contact.firstname.blank? ? "" : "#{contact.firstname}".html_safe %>
+						<%= contact.lastname.blank? ? "" : "#{contact.lastname}".html_safe %>
+						<%= contact.title.blank? ? "" : ",<br>#{contact.title}".html_safe %>
+					  </strong><br>
+					  <% end %>
+					  <% if contact.address %>
+						  <%= contact.address.address1.blank? ? "" : "#{contact.address.address1}<br>".html_safe %>
+						  <%= contact.address.address2.blank? ? "" : "#{contact.address.address2}<br>".html_safe %>
+						  <%= contact.address.city.blank? ? "" : "#{contact.address.city}" %>
+						  <%= contact.address.state.blank? ? "" : "#{contact.address.state}" %>
+						  <%= contact.address.postcode.blank? ? "" : "#{contact.address.postcode}<br>".html_safe %>
+						  <%= contact.address.country.blank? ? "" : "#{contact.address.country}<br>".html_safe %>
+					  <% end %>
+					  <%= contact.phone.blank? ? "" : "#{contact.phone}<br>".html_safe %>
+					  <a href="mailto:<%= contact.email %>"><%= contact.email %></a><br>
+				  <% end %>
+				</div>		
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+
+
+		<div class="row">
+			<div class="small-12 columns">
+				<br>
+				<%= render partial: "shared/profile/components/savebutton", locals: {profile: profile} %>										
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+
+	</div>
+	
+</div>	
