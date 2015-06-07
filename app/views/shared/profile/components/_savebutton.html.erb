@@ -1,4 +1,4 @@
-
+<hr>
 <% if @current_user.subscriber? %>
 
 	<% if action_name == "index" || action_name == "view_match" || action_name == "contact_match" || action_name == "index_incoming_matches" || action_name == "index_contacted_matches" || action_name == "index_saved_matches" %>
@@ -24,7 +24,7 @@
 				<% end %>
 			</span>
 		<% end %>
-		<strong><%= profile.company_name %></strong> to your SAVED <%= @current_user.type_inverse?.upcase %>S</h3>
+		to your SAVED <%= profile.class.to_s.upcase %>S list</h3>
 	<% end %>
 
 <% end %>
