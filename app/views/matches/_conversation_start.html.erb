@@ -6,7 +6,7 @@
 			e.preventDefault();
 			$('#contact-start').slideToggle(1000);
 			$(document.body).animate({
-			    'scrollTop':   $('#contact-start-trigger').offset().top - 100
+			    'scrollTop':   $('#contact-start-trigger').offset().top - 220
 			}, 1000);
 
 		});
@@ -15,18 +15,21 @@
 
 <div id="pct_<%= profile.id %>">
 <div class="row collapse">
-	<div class="medium-8 large-6 medium-centered columns">
+	<div class="medium-8 large-7 medium-centered columns">
 		<div class="profile-container">
 		<div class="profile-content">
 			<div class="row">
-				<div class="medium-6 columns small-text-center medium-text-right">
-					<h2 id="contact-banner-text">Make a connection and find new international partners</h2>
-				</div><!--/.medium-6 -->
-				<div class="medium-6 columns text-center">
+				<div class="small-12 medium-6 columns small-text-center medium-text-right">
+					<h2 id="contact-banner-text">Ready to make a connection with a new international partner?</h2>
+				</div><!--/.small-12 medium-6-->
+				<div class="small-12 medium-6 columns text-center">
 					<% if @current_user.subscriber? %>
 						<%= link_to "#", :id => "contact-start-trigger" do %>
-							<h3><span class="plt-indicator-action-off">Contact <strong><%= profile.company_name %></strong></span></h3>
-						<% end %>						
+							<div id="contact-start-button">
+								Contact
+								<h2><strong><%= profile.company_name %></strong></h2>
+							</div>
+						<% end %>
 					<% else %>	
 						<span class="profile-save-tile text-center deactivate">
 							<span data-tooltip aria-haspopup="true" class="has-tip" title="Available only to Subscribers" style>
@@ -34,7 +37,7 @@
 							</span>
 						</span>
 					<% end %>
-				</div><!--/.medium-6-->
+				</div><!--/.small-12 medium-6-->
 			</div>
 			<div class="row">
 				<div class="small-12 columns">
@@ -43,7 +46,9 @@
 						<br>
 						<hr>
 						<br>
-					  <h2>Send <strong><%= profile.company_name %></strong> a message
+					  <h2>
+					  	Send a message to<br>
+						  <strong><%= profile.company_name %></strong> 
 					  </h2>
 						<%= form_tag contact_match_url, method: 'get', remote: true do %>
 							<%= hidden_field_tag(:match_id, profile.id) %>

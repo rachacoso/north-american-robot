@@ -172,8 +172,6 @@ h2#contact-banner-text {
     $radius:2px
   );
   font-weight: 100;
-  margin-bottom: rem-calc(40);
-  margin-top: rem-calc(40);
 }
 .plt-indicator-action-off {
   @include label(
@@ -187,8 +185,7 @@ h2#contact-banner-text {
     $radius:2px
   );
   font-weight: 100;
-  margin-bottom: rem-calc(40);
-  margin-top: rem-calc(40);
+  padding: rem-calc(10) rem-calc(20);
 }
 .plt-indicator-alert {
   @include label(
@@ -209,4 +206,17 @@ h2#contact-banner-text {
   background: white; 
   border-radius: 2px;
   padding: 0.7em;
+}
+
+#contact-start-button {
+  background-color: scale-color($landing-blue, $lightness: 50%);
+  font-weight: 100;
+  font-size: rem-calc(20);
+  border-radius: 2px;
+  color: black;
+  padding: rem-calc(10) rem-calc(20);
+  h2 {
+    margin-bottom: 0;
+  }
+  margin: rem-calc(30) rem-calc(10);
 }
