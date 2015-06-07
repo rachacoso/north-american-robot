@@ -5,7 +5,7 @@
 	<% sectors = Sector.all %>
 
 	<div class="row">
-		<% sectors.order_by{|s| s.id }.each do |s| %>
+		<% sectors.order_by(:name.asc).each do |s| %>
 		<%= link_to all_matches_url(:sector => s.id) do %>
 		<div class="medium-3 columns hide-for-small-only text-center" id="match-<%=s.name.downcase.tr("/"," ").squish.tr(" ","-") %>">
 		</div>

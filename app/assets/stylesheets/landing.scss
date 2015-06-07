@@ -564,7 +564,7 @@ $dashboard-agency-color: $landing-teal;
 
 
 /* ID names generated on distributor_search_start partial, based on the sector name */
-#match-baby-kids, #match-fashion-accessories, #match-other, #match-personal-care {
+#match-baby-kids, #match-fashion-accessories, #match-other, #match-personal-care, #match-beauty-personal-care {
   position: relative;
   top: rem-calc(50);
   height:200px;
@@ -577,7 +577,7 @@ $dashboard-agency-color: $landing-teal;
 #match-fashion-accessories {
   background: transparent url("/images/landing_sector_fashion_accessories.svg") no-repeat;
 }
-#match-personal-care {
+#match-personal-care, #match-beauty-personal-care {
   background: transparent url("/images/landing_sector_personal_care.svg") no-repeat;
 }
 #match-other {
