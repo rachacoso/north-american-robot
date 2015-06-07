@@ -64,6 +64,9 @@
 						<% when 'Personal Care' %>
 						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="<small>sector</small><br>PERSONAL CARE">
 						<%= image_tag "match_profile_icons_sector_personalcare.svg" %></span>
+						<% when 'Beauty / Personal Care' %>
+						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="<small>sector</small><br>PERSONAL CARE">
+						<%= image_tag "match_profile_icons_sector_personalcare.svg" %></span>
 						<% when 'Other' %>
 						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="<small>sector</small><br>OTHER">
 						<%= image_tag "match_profile_icons_sector_other.svg" %></span>			
@@ -81,10 +84,10 @@
 	<div class="profile-list-tile-small-sq-top-companyname">
 		<% if @current_user.subscriber? && action_name != "public_profile" %>		
 			<h3><%= link_to profile_item.company_name,  view_match_url(profile_item.id, action_name)  %></h3>
-							<% profile_item.tags.each do |tag| %>
-								<span class="label"><%= tag.name %></span>
-							<% end %>
-			
+			<% profile_item.tags.each do |tag| %>
+				<span class="label"><%= tag.name %></span>
+			<% end %>
+
 		<% else %>
 			<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= profile_item.class.to_s %> name hidden. Subscribe to view full profile">
 			<%= ("&blk12;" * profile_item.company_name.length).html_safe %>
