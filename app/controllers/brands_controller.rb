@@ -183,18 +183,14 @@ class BrandsController < ApplicationController
 			:social_causes,
 			:social_organizations,
 			:social_give_back,
-			contact_info_attributes: [ 
-				:contact_name,
-				:contact_title,
-				:email,
-				:phone,
- 				:address1,
- 				:address2,
- 				:city,
- 				:state,
- 				:postcode,
- 				:country
-			]
+      address_attributes: [ 
+        :address1,
+        :address2,
+        :city,
+        :state,
+        :postcode,
+        :country
+      ]
 		)
 	end
 	def check_usertype(type)
