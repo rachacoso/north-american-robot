@@ -323,21 +323,7 @@ $dashboard-agency-color: $landing-teal;
   }
 }
 
-// PROFILE STYLING (UPDATED)
 
-.profile-container {
-  padding: 0;
-  background-color: white;
-}
-.profile-content {
-  padding: rem-calc(10);
-  hr {
-     // border: 1px solid $landing-middle-gray;
-     border-color: $landing-middle-gray;
-     margin-top: 0px;
-  }
-
-}
 
 .gallery-window {
   padding-top: rem-calc(20);

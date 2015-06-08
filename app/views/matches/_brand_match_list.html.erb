@@ -20,7 +20,7 @@
 		<% when "sq" %>
 			<div class="row" style="padding: 0px;">
 				<div class="small-12 columns">
-					<ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-3 ">
+					<ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-2 ">
 						<% matches.each do |match| %>
 						<li><%= render partial: "shared/profile/profile_list_tile_small_sq", locals: {profile_item: match, set: set} %></li>
 						<% end %>
