@@ -1,35 +1,154 @@
-<%= form_for Contact.new, remote: true do |f| %>
-<table style="width:100%;">
-	<thead>
-		<tr>
-			<th>First Name</th><th>Last Name</th><th>Title</th><th>Email</th><th>Phone</th><th></th>
-		</tr>
-	</thead>
-	<tbody>
-		
-		<% b_or_d.contacts.each do |contact| %>
-			<tr>
-				<td><%= contact.firstname.blank? ? "(nameless)" : "#{contact.firstname}".html_safe %></td>
-				<td><%= contact.lastname.blank? ? "(nameless)" : "#{contact.lastname}".html_safe %></td>
-				<td><%= contact.title.blank? ? "(no title)" : "#{contact.title}".html_safe %></td>
-				<td><%= contact.email.blank? ? "(no email)" : "#{contact.email}<br>".html_safe %></td>
-				<td><%= contact.phone.blank? ? "(no phone)" : "#{contact.phone}<br>".html_safe %></td>
-				<td>
-					<% if b_or_d.contacts.count > 1 %>
-					<%= link_to 'delete', contact_url(contact), :method => 'delete', :remote => true, data: { :confirm => 'Are you sure you want to delete this contact?'}, class: "itemformlink" %>
-					<% end %>
-				</td>
-			</tr>
-		<% end %>
 
-		<tr style="background: #eee;">
-			<td><%= f.text_field :firstname, label: false, placeholder: "First", style: "margin-top: 0; margin-bottom: 0;"  %></td>
-			<td><%= f.text_field :lastname, label: false, placeholder: "Last", style: "margin-top: 0; margin-bottom: 0;"  %></td>
-			<td><%= f.text_field :title, label: false, placeholder: "Title", style: "margin-top: 0; margin-bottom: 0;"  %></td>
-			<td><%= f.text_field :email, label: false, placeholder: "Email", style: "margin-top: 0; margin-bottom: 0;"  %></td>
-			<td><%= f.text_field :phone, label: false, placeholder: "Phone", style: "margin-top: 0; margin-bottom: 0;"  %></td>
-			<td><%= f.submit "Add", class: "tiny radius alert button", style: "margin-top: 0; margin-bottom: 0;" %></td>
-		</tr>
-	</tbody>
-</table>
+
+<div class="row collapse">
+<div class="small-12 columns">
+	
+
+<div class="row collapse">
+	<div class="medium-2 columns">
+		<div class="contacts-table">
+			First Name
+		</div>
+	</div><!--/.medium-2-->
+	<div class="medium-2 columns">
+		<div class="contacts-table">
+		Last Name
+		</div>
+	</div><!--/.medium-2-->
+	<div class="medium-2 columns">
+		<div class="contacts-table">
+		Title
+		</div>
+	</div><!--/.medium-2-->
+	<div class="medium-2 columns">
+		<div class="contacts-table">
+		Email
+		</div>
+	</div><!--/.medium-2-->
+	<div class="medium-2 columns">
+		<div class="contacts-table">
+		Phone
+		</div>
+	</div><!--/.medium-2-->
+	<div class="medium-2 columns">
+		<div class="contacts-table">
+		&nbsp;
+		</div>
+	</div><!--/.medium-2-->
+</div><!--/.row-->
+
+<% b_or_d.contacts.each do |contact| %>
+<div class="row collapse contact-view" id="contact-view-<%=contact.id%>">
+	<div class="medium-2 columns">
+		<div class="contacts-table item">
+			<%= contact.firstname.blank? ? "(nameless)" : "#{contact.firstname}".html_safe %>
+		</div>
+	</div><!--/.medium-2-->
+	<div class="medium-2 columns">
+		<div class="contacts-table item">
+			<%= contact.lastname.blank? ? "(nameless)" : "#{contact.lastname}".html_safe %>
+		</div>
+	</div><!--/.medium-2-->
+	<div class="medium-2 columns">
+		<div class="contacts-table item">
+			<%= contact.title.blank? ? "(no title)" : "#{contact.title}".html_safe %>
+		</div>
+	</div><!--/.medium-2-->
+	<div class="medium-2 columns">
+		<div class="contacts-table item">
+			<%= contact.email.blank? ? "(no email)" : "#{contact.email}<br>".html_safe %>
+		</div>
+	</div><!--/.medium-2-->
+	<div class="medium-2 columns">
+		<div class="contacts-table item">
+			<%= contact.phone.blank? ? "(no phone)" : "#{contact.phone}<br>".html_safe %>
+		</div>
+	</div><!--/.medium-2-->
+	<div class="medium-2 columns">
+		<div class="contacts-table item">
+			<%= link_to "edit", "#", class: "itemformlink contact-edit-link", data: {link: "#{contact.id}"} %>
+			<% if b_or_d.contacts.count > 1 %>
+				<%= link_to 'delete', contact_url(contact), :method => 'delete', :remote => true, data: { :confirm => 'Are you sure you want to delete this contact?'}, class: "itemformlink" %>
+			<% end %>			
+		</div>
+	</div><!--/.medium-2-->
+</div><!--/.row-->
+
+<%= form_for contact, remote: true do |f| %>
+<div class="row collapse contact-edit" id="contact-edit-<%=contact.id%>">
+	<div class="medium-2 columns">
+		<div class="contacts-table item">
+			<%= f.text_field :firstname, label: false, placeholder: "First Name" %>
+		</div>
+	</div><!--/.medium-2-->
+	<div class="medium-2 columns">
+		<div class="contacts-table item">
+			<%= f.text_field :lastname, label: false, placeholder: "Last Name"%>
+		</div>
+	</div><!--/.medium-2-->
+	<div class="medium-2 columns">
+		<div class="contacts-table item">
+			<%= f.text_field :title, label: false, placeholder: "Title" %>
+		</div>
+	</div><!--/.medium-2-->
+	<div class="medium-2 columns">
+		<div class="contacts-table item">
+			<%= f.text_field :email, label: false, placeholder: "Email" %>
+		</div>
+	</div><!--/.medium-2-->
+	<div class="medium-2 columns">
+		<div class="contacts-table item">
+			<%= f.text_field :phone, label: false, placeholder: "Phone" %>
+		</div>
+	</div><!--/.medium-2-->
+	<div class="medium-2 columns">
+		<div class="contacts-table item">
+			<%#= f.submit "UPDATE", class: "button tiny alert" %>
+			<%= link_to "UPDATE", "#", class: "itemformlink contact-update-submit", data: {link: "#{contact.id}"} %>
+			<%= link_to "cancel", "#", class: "itemformlink contact-edit-link", data: {link: "#{contact.id}"} %>
+		</div>
+	</div><!--/.medium-2-->
+</div><!--/.row-->
 <% end %>
+
+<% end %>
+
+
+<%= form_for Contact.new, remote: true do |f| %>
+<div class="row collapse">
+	<div class="medium-2 columns">
+		<div class="contacts-table item">
+			<%= f.text_field :firstname, label: false, placeholder: "First", style: "margin-top: 0; margin-bottom: 0;"  %>
+		</div>
+	</div><!--/.medium-2-->
+	<div class="medium-2 columns">
+		<div class="contacts-table item">
+			<%= f.text_field :lastname, label: false, placeholder: "Last", style: "margin-top: 0; margin-bottom: 0;"  %>
+		</div>
+	</div><!--/.medium-2-->
+	<div class="medium-2 columns">
+		<div class="contacts-table item">
+			<%= f.text_field :title, label: false, placeholder: "Title", style: "margin-top: 0; margin-bottom: 0;"  %>
+		</div>
+	</div><!--/.medium-2-->
+	<div class="medium-2 columns">
+		<div class="contacts-table item">
+			<%= f.text_field :email, label: false, placeholder: "Email", style: "margin-top: 0; margin-bottom: 0;"  %>
+		</div>
+	</div><!--/.medium-2-->
+	<div class="medium-2 columns">
+		<div class="contacts-table item">
+			<%= f.text_field :phone, label: false, placeholder: "Phone", style: "margin-top: 0; margin-bottom: 0;"  %>
+		</div>
+	</div><!--/.medium-2-->
+	<div class="medium-2 columns">
+		<div class="contacts-table item">
+			<%= f.submit "Add", class: "tiny radius alert button", style: "margin-top: 0; margin-bottom: 0;" %>
+		</div>
+	</div><!--/.medium-2-->
+</div><!--/.row-->
+<% end %>
+
+</div><!--/.small-12-->
+</div><!--/.row-->
+

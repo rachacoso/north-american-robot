@@ -1,2 +1,3 @@
-<h1>Contacts#update</h1>
-<p>Find me in app/views/contacts/update.html.erb</p>
+$('#contacts_list').hide().html("<%= j (render partial: '/contacts/contacts_list', locals:{b_or_d:@brand_or_distributor}) %>").fadeIn(500);
+initializeContacts();
+$(document).foundation();

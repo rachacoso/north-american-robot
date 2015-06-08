@@ -4,8 +4,8 @@ class ContactsController < ApplicationController
 
   def create
 
-			u = @current_user.send(@current_user.type?)
-			u.contacts.create!(contact_parameters)
+			@brand_or_distributor = @current_user.send(@current_user.type?)
+			@brand_or_distributor.contacts.create!(contact_parameters)
 
 
 	  respond_to do |format|
@@ -15,6 +15,11 @@ class ContactsController < ApplicationController
   end
 
   def update
+
+		contact = Contact.find(params[:id])
+		contact.update(contact_parameters)
+		contact.save!
+		@brand_or_distributor = @current_user.get_parent
 
 	  respond_to do |format|
 		  format.html
