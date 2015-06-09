@@ -1,0 +1,4 @@
+<% if @tag %>
+	<small>filtered by tag: </small><%= link_to matches_path(sector: @sector, country: @country) do %><span class="label"><%= @tag %></span><% end %>
+	<br><br>
+<% end %>

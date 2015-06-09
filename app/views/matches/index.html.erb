@@ -53,10 +53,7 @@
 
 	<div class="marketplace-content padded">
 		<h1><%= @country_proper.upcase %></h1>
-		<% if @tag %>
-			<span class="label"><%= @tag %></span>
-			<br><br>
-		<% end %>
+		<%= render "tag_filter_label" %>
 		<strong><%= render partial: "counts", locals: {matches: @matches} %></strong>
 				<div class="row">
 					<div class="small-6 columns">
@@ -81,10 +78,7 @@
 
 	<div class="marketplace-content padded">
 		<h1>ALL COUNTRIES</h1>
-		<% if @tag %>
-			<span class="label"><%= @tag %></span>
-			<br><br>
-		<% end %>
+		<%= render "tag_filter_label" %>
 		<strong><%= render partial: "counts", locals: {matches: @matches} %></strong>
 				<div class="row">
 					<div class="small-6 columns">
@@ -138,10 +132,7 @@
 		<% if @sector %>	
 			<div class="marketplace-content padded">
 				<h1><%= Sector.find(@sector).name %></h1>
-				<% if @tag %>
-					<span class="label"><%= @tag %></span>
-					<br><br>
-				<% end %>
+				<%= render "tag_filter_label" %>
 				<strong><%= render partial: "counts", locals: {matches: @matches} %></strong>
 				<div class="row">
 					<div class="small-6 columns">
@@ -165,10 +156,7 @@
 
 			<div class="marketplace-content padded">
 				<h1>ALL SECTORS</h1>
-				<% if @tag %>
-					<span class="label"><%= @tag %></span>
-					<br><br>
-				<% end %>
+				<%= render "tag_filter_label" %>
 				<strong><%= render partial: "counts", locals: {matches: @matches} %></strong>
 				<div class="row">
 					<div class="small-6 columns">
