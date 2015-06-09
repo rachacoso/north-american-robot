@@ -229,9 +229,11 @@ h2#contact-banner-text {
 // NEW PROFILE TILES
 
 .profile-wrapper {
+  display: none;
+}
+.profile-sq-wrapper {
   background: white;
 }
-
 .profile-sq-left, .profile-sq-right {
   min-height: rem-calc(280);
   position: relative;
@@ -247,7 +249,9 @@ h2#contact-banner-text {
 }
 
 .profile-sq-left {
-  background-image: url("/images/crate.jpg");
+  // background-image: url("/images/crate.jpg");
+  background-image: url("/images/SECTORS_personalcare.svg");
+  
   -moz-background-size: cover;
   -o-background-size: cover;
   -webkit-background-size: cover;

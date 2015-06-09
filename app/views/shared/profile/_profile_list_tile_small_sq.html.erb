@@ -1,118 +1,123 @@
-<div class="profile-wrapper text-right">
+<div class="profile-wrapper">
+<div class="profile-sq-wrapper text-right">
+	<div class="row collapse">
+		<div class="medium-5 columns profile-sq-left" id="profile-sq-top-<%=profile_item.id%><%= set ? "-#{set.gsub(/[^a-z,A-Z]/, '').downcase}" : "" %>">
+			&nbsp;
+			<% if @current_user.type? == "distributor" %>
+				
+					<% content_for :javascript_foot do %>
+						<%= javascript_tag do %>
+						  $("#profile-sq-top-<%=profile_item.id%><%= set ? "-#{set.gsub(/[^a-z,A-Z]/, '').downcase}" : "" %>").backstretch([
+							<% if profile_item.brand_photos.empty? && profile_item.products.all? { |p| p.product_photos.blank? } %>
+								<% profile_item.sectors.each do |sector| %>
+									"/images/SECTORS_<%= sector.name.gsub(/\s+/, "").gsub(/\//, "").downcase %>.svg",
+								<% end %>
+							<% else %>
+								<% profile_item.brand_photos.each do |photo| %>
+							    "<%= photo.photo.url(:profile_tile) %>",
+							  <% end %>
+							  <% profile_item.products.each do |product| %>
+								  <% product.product_photos.each do |photo| %>
+										"<%= photo.photo.url(:profile_tile) %>",
+								  <% end %>
+							  <% end %>
+						  <% end %>
+						   ], {duration: 3000, fade: 750});
+						<% end %>
+				  <% end %>
 
-<div class="row collapse">
-	<div class="medium-5 columns profile-sq-left" id="profile-sq-top-<%=profile_item.id%><%= set ? "-#{set.gsub(/[^a-z,A-Z]/, '').downcase}" : "" %>">
-		&nbsp;
-		<% if @current_user.type? == "distributor" %>
-			<% if !profile_item.brand_photos.empty? || !profile_item.products.all? { |p| p.product_photos.blank? } %>
+			<% elsif @current_user.type? == "brand" %>
+
 				<% content_for :javascript_foot do %>
 					<%= javascript_tag do %>
 					  $("#profile-sq-top-<%=profile_item.id%><%= set ? "-#{set.gsub(/[^a-z,A-Z]/, '').downcase}" : "" %>").backstretch([
-						<% profile_item.brand_photos.each do |photo| %>
-					    "<%= photo.photo.url(:profile_tile) %>",
-					  <% end %>
-					  <% profile_item.products.each do |product| %>
+
+						<% profile_item.export_countries.each do |ec| %>
+							"/images/marketplace_<%= ec.country.gsub(/\s+/, "").downcase %>.jpg",
+						<% end %>
+
+					  <% profile_item.distributor_brands.each do |product| %>
 						  <% product.product_photos.each do |photo| %>
 								"<%= photo.photo.url(:profile_tile) %>",
 						  <% end %>
-					  <% end %>
+					  <% end %>		
+
 					   ], {duration: 3000, fade: 750});
 					<% end %>
 			  <% end %>
-		  <% end %>
 
-		<% elsif @current_user.type? == "brand" %>
-
-			<% content_for :javascript_foot do %>
-				<%= javascript_tag do %>
-				  $("#profile-sq-top-<%=profile_item.id%><%= set ? "-#{set.gsub(/[^a-z,A-Z]/, '').downcase}" : "" %>").backstretch([
-
+			<% end %>
+			<div class="profile-sq-sectors-country">
+				<% if @current_user.brand %>
 					<% profile_item.export_countries.each do |ec| %>
-						"/images/marketplace_<%= ec.country.gsub(/\s+/, "").downcase %>.jpg",
+						<%= ec.country %><br>
 					<% end %>
+				<% elsif @current_user.distributor %>
+					<% profile_item.sectors.sort_by{|s| s.name}.each do |s| %>
+						<% case s.name
+							when 'Baby / Kids' %>
+							<span data-tooltip aria-haspopup="true" class="has-tip radius" title="<small>sector</small><br>BABY / KIDS">
+							<%= image_tag "match_profile_icons_sector_baby.svg" %></span>
+							<% when 'Fashion / Accessories' %>
+							<span data-tooltip aria-haspopup="true" class="has-tip radius" title="<small>sector</small><br>FASHION / ACCESSORIES">
+							<%= image_tag "match_profile_icons_sector_fashionaccessories.svg" %></span>
+							<% when 'Personal Care' %>
+							<span data-tooltip aria-haspopup="true" class="has-tip radius" title="<small>sector</small><br>PERSONAL CARE">
+							<%= image_tag "match_profile_icons_sector_personalcare.svg" %></span>
+							<% when 'Beauty / Personal Care' %>
+							<span data-tooltip aria-haspopup="true" class="has-tip radius" title="<small>sector</small><br>PERSONAL CARE">
+							<%= image_tag "match_profile_icons_sector_personalcare.svg" %></span>
+							<% when 'Other' %>
+							<span data-tooltip aria-haspopup="true" class="has-tip radius" title="<small>sector</small><br>OTHER">
+							<%= image_tag "match_profile_icons_sector_other.svg" %></span>			
+						<% end %>
+					<% end %>
+				<% end %>	
+			</div>
+		</div><!--/.medium-6-->
+		<div class="medium-7 columns profile-sq-right">
 
-				  <% profile_item.distributor_brands.each do |product| %>
-					  <% product.product_photos.each do |photo| %>
-							"<%= photo.photo.url(:profile_tile) %>",
-					  <% end %>
-				  <% end %>		
-
-				   ], {duration: 3000, fade: 750});
-				<% end %>
-		  <% end %>
-
-		<% end %>
-		<div class="profile-sq-sectors-country">
 			<% if @current_user.brand %>
-				<% profile_item.export_countries.each do |ec| %>
-					<%= ec.country %><br>
+				<div style="margin-bottom: 5px;"><%= render partial: "shared/profile/distributor_rating", locals: {d: profile_item} %></div>
+			<% end %>
+			
+			<% if @current_user.subscriber? && action_name != "public_profile" %>
+				<h2><%= link_to profile_item.company_name,  view_match_url(profile_item.id, action_name)  %></h2>
+			<% else %>
+				<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= profile_item.class.to_s %> name hidden. Subscribe to view full profile">
+				<%= ("&blk12;" * profile_item.company_name.length).html_safe %>
+				</span>
+			<% end %>
+
+			<br>
+			<% if profile_item.logo_file_name %>
+				<%= link_to view_match_url(profile_item.id, action_name) do %>
+					<%= image_tag profile_item.logo.url(:medium), alt: "Logo", class: "uploaded-logo" %>
 				<% end %>
-			<% elsif @current_user.distributor %>
-				<% profile_item.sectors.sort_by{|s| s.name}.each do |s| %>
-					<% case s.name
-						when 'Baby / Kids' %>
-						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="<small>sector</small><br>BABY / KIDS">
-						<%= image_tag "match_profile_icons_sector_baby.svg" %></span>
-						<% when 'Fashion / Accessories' %>
-						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="<small>sector</small><br>FASHION / ACCESSORIES">
-						<%= image_tag "match_profile_icons_sector_fashionaccessories.svg" %></span>
-						<% when 'Personal Care' %>
-						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="<small>sector</small><br>PERSONAL CARE">
-						<%= image_tag "match_profile_icons_sector_personalcare.svg" %></span>
-						<% when 'Beauty / Personal Care' %>
-						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="<small>sector</small><br>PERSONAL CARE">
-						<%= image_tag "match_profile_icons_sector_personalcare.svg" %></span>
-						<% when 'Other' %>
-						<span data-tooltip aria-haspopup="true" class="has-tip radius" title="<small>sector</small><br>OTHER">
-						<%= image_tag "match_profile_icons_sector_other.svg" %></span>			
+			<% else %>
+				<% if !profile_item.facebook.blank? && fb_picture(profile_item.facebook) %>
+					<%= link_to view_match_url(profile_item.id, action_name) do %>
+						<%= image_tag fb_picture(profile_item.facebook), class: "facebook" %>
 					<% end %>
 				<% end %>
-			<% end %>	
-		</div>
-	</div><!--/.medium-6-->
-	<div class="medium-7 columns profile-sq-right">
-
-		<% if @current_user.brand %>
-			<div style="margin-bottom: 5px;"><%= render partial: "shared/profile/distributor_rating", locals: {d: profile_item} %></div>
-		<% end %>
-		
-		<% if @current_user.subscriber? && action_name != "public_profile" %>
-			<h2><%= link_to profile_item.company_name,  view_match_url(profile_item.id, action_name)  %></h2>
-		<% else %>
-			<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= profile_item.class.to_s %> name hidden. Subscribe to view full profile">
-			<%= ("&blk12;" * profile_item.company_name.length).html_safe %>
-			</span>
-		<% end %>
-
-		<br>
-		<% if profile_item.logo_file_name %>
-			<%= link_to view_match_url(profile_item.id, action_name) do %>
-				<%= image_tag profile_item.logo.url(:medium), alt: "Logo", class: "uploaded-logo" %>
 			<% end %>
-		<% else %>
-			<% if !profile_item.facebook.blank? && fb_picture(profile_item.facebook) %>
-				<%= link_to view_match_url(profile_item.id, action_name) do %>
-					<%= image_tag fb_picture(profile_item.facebook), class: "facebook" %>
-				<% end %>
+
+			<% if @current_user.distributor && !profile_item.brand_positioning.blank? %>
+				<h5><%= truncate(profile_item.brand_positioning, :length => 100, :separator => ' ') %><small><%= link_to "more", view_match_url(profile_item.id, action_name) %> </small></h5>
 			<% end %>
-		<% end %>
 
-		<% if @current_user.distributor && !profile_item.brand_positioning.blank? %>
-			<h5><%= truncate(profile_item.brand_positioning, :length => 100, :separator => ' ') %><small><%= link_to "more", view_match_url(profile_item.id, action_name) %> </small></h5>
-		<% end %>
+			<div class="profile-sq-indicators">
+			<%= render partial:"shared/profile/components/indicators", locals:{match: profile_item} %>
+			</div>
 
-		<div class="profile-sq-indicators">
-		<%= render partial:"shared/profile/components/indicators", locals:{match: profile_item} %>
-		</div>
-
-	</div><!--/.medium-6-->
-</div><!--/.row-->
+		</div><!--/.medium-6-->
+	</div><!--/.row-->
 </div>
-
 <div class="tags-list text-right">
 <% if @current_user.subscriber? && action_name != "public_profile" %>
 	<% profile_item.tags.each do |tag| %>
 		<span class="label"><%= tag.name %></span>
 	<% end %>
 <% end %>
+</div>
 </div>
