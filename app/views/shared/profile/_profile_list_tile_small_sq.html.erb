@@ -1,7 +1,8 @@
 <div class="profile-wrapper">
 <div class="profile-sq-wrapper text-right">
 	<div class="row collapse">
-		<div class="medium-5 columns profile-sq-left" id="profile-sq-top-<%=profile_item.id%><%= set ? "-#{set.gsub(/[^a-z,A-Z]/, '').downcase}" : "" %>">
+		<div class="medium-5 columns">
+			<%= link_to view_match_url(profile_item.id, action_name), class: "profile-sq-left", id:"profile-sq-top-#{profile_item.id}#{ set ? "-#{set.gsub(/[^a-z,A-Z]/, '').downcase}" : "" }" do %>
 			&nbsp;
 			<% if @current_user.type? == "distributor" %>
 				
@@ -74,6 +75,7 @@
 					<% end %>
 				<% end %>	
 			</div>
+			<% end %>
 		</div><!--/.medium-6-->
 		<div class="medium-7 columns profile-sq-right">
 

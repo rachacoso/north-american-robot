@@ -234,6 +234,9 @@ h2#contact-banner-text {
 .profile-sq-wrapper {
   background: white;
 }
+a.profile-sq-left {
+  display: block;
+}
 .profile-sq-left, .profile-sq-right {
   min-height: rem-calc(280);
   position: relative;
