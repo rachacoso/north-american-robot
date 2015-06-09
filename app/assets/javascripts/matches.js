@@ -1,5 +1,5 @@
-$( document ).ready(function() {
+// $( document ).ready(function() {
 
-	$('.profile-wrapper').slideDown(750);
+// 	$('.profile-wrapper').slideDown(750);
 
-});
+// });
