@@ -3,25 +3,25 @@ class TagsController < ApplicationController
 	def new
 
 		seed = [
-			"Certified Organic",
-			"Handcrafted",
-			"BPA-free",
-			"Pthalate-free",
-			"Sulfate-free",
-			"All Natural",
-			"No Synthetic Color",
-			"Gluten-free",
-			"Wheat-free",
-			"Nut-free",
-			"Fragrance-free",
-			"No Animal Testing",
-			"Halal",
-			"GMO-free",
-			"Recycled / Green Packaging",
-			"Made In America",
-			"Handcrafted",
-			"Certified Organic",
-			"All-natural Fabrics & Dyes"
+			"CERTIFIED ORGANIC",
+			"HANDCRAFTED",
+			"BPA-FREE",
+			"PTHALATE-FREE",
+			"SULFATE-FREE",
+			"ALL NATURAL",
+			"NO SYNTHETIC COLOR",
+			"GLUTEN-FREE",
+			"WHEAT-FREE",
+			"NUT-FREE",
+			"FRAGRANCE-FREE",
+			"NO ANIMAL TESTING",
+			"HALAL",
+			"GMO-FREE",
+			"RECYCLED / GREEN PACKAGING",
+			"MADE IN AMERICA",
+			"HANDCRAFTED",
+			"CERTIFIED ORGANIC",
+			"ALL-NATURAL FABRICS & DYES"
 		]
 
 		if !params[:query].blank?
@@ -34,7 +34,7 @@ class TagsController < ApplicationController
 		end
 
 		@taglist = tagset_seed.to_a | tagset_users.to_a
-		@taglist.sort_by!{ |m| m.downcase }
+		@taglist.sort_by!{ |m| m.upcase }
 		@list = Hash.new
 		@list['suggestions'] = @taglist
 		render json: @list
@@ -53,7 +53,7 @@ class TagsController < ApplicationController
 		tid = params[:tid]
 		# name = params[:tag][:name].split.map{ |x| (x==x.upcase ? x : x.capitalize) }.join(' ')
 
-		name = params[:tag][:name].split.map{ |x| (x[0]==x[0].upcase ? x : x.capitalize) }.join(' ')
+		name = params[:tag][:name].split.map{ |x| x.upcase }.join(' ')
 
 		case type
 		when 'b'

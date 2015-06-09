@@ -24,16 +24,16 @@
 <div class="row">
 	<div class="small-10 small-centered columns">
 		<ul class="tabs right" data-tab>
-		  <li class="tab-title"><a href="#panel1">Administrators</a></li>
-		  <li class="tab-title active"><a href="#panel2">Distributors</a></li>
-		  <li class="tab-title"><a href="#panel3">Brands</a></li>
+		  <li class="tab-title <%= @active_section == 'admin' ? 'active' : '' %>"><a href="#panel1">Administrators</a></li>
+		  <li class="tab-title <%= !@active_section ? "active" : "" %><%= @active_section == 'distributors' ? 'active' : '' %>"><a href="#panel2">Distributors</a></li>
+		  <li class="tab-title <%= @active_section == 'brands' ? 'active' : '' %>"><a href="#panel3">Brands</a></li>
 		</ul>
 	</div>
 </div>
 
 <div class="tabs-content">
 
-  <div class="content" id="panel1">
+  <div class="content <%= @active_section == 'admin' ? 'active' : '' %>" id="panel1">
 		<div class="row">
 			<div class="small-10 small-centered columns panel">
 				<h3><strong>Administrators</strong></h3><hr>
@@ -78,10 +78,19 @@
 
 	</div>
 
-	<div class="content active" id="panel2">
+	<div class="content <%= !@active_section ? "active" : "" %><%= @active_section == 'distributors' ? 'active' : '' %>" id="panel2">
 		<div class="row">
 			<div class="small-10 small-centered columns panel">
-				<h3><strong>Distributors</strong></h3>
+				<%= form_tag(users_url, method: 'get') do %>
+					<div class="row">
+						<div class="medium-6 columns">
+							<h3><strong>Distributors</strong></h3>		
+						</div><!--/.medium-6-->
+						<div class="medium-6 columns">
+							<%= text_field_tag('search_distributors', "", {:placeholder => 'SEARCH'}) %>			
+						</div><!--/.medium-6-->
+					</div><!--/.row-->
+				<% end %>
 				<% if !@distributors.empty? %>
 				<%= paginate @distributors, :param_name => :page_distributors %>
 				<hr>
@@ -94,10 +103,19 @@
 		</div>
 	</div>
 
-	<div class="content" id="panel3">
+	<div class="content <%= @active_section == 'brands' ? 'active' : '' %>" id="panel3">
 		<div class="row">
 			<div class="small-10 small-centered columns panel">
-				<h3><strong>Brands</strong></h3>
+				<%= form_tag(users_url, method: 'get') do %>
+					<div class="row">
+						<div class="medium-6 columns">
+							<h3><strong>Brands</strong></h3>		
+						</div><!--/.medium-6-->
+						<div class="medium-6 columns">
+							<%= text_field_tag('search_brands', "", {:placeholder => 'SEARCH'}) %>			
+						</div><!--/.medium-6-->
+					</div><!--/.row-->
+				<% end %>
 				<% if !@brands.empty? %>
 				<%= paginate @brands, :param_name => :page_brands %>
 				<hr>
