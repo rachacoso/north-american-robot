@@ -20,7 +20,7 @@ class MatchesController < ApplicationController
         @country_proper = countries_map[@country]
         if params[:tag]
           tag = Tag.where(name: params[:tag], taggable_type: 'Distributor').pluck(:taggable_id)
-          @matches = @all_matches.in(:id => tag)
+          @matches = @matches.in(:id => tag)
           @tag = params[:tag]
         end
       elsif params[:tag]
