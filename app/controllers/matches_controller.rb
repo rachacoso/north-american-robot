@@ -14,13 +14,19 @@ class MatchesController < ApplicationController
       # exclude any that are in contact already
       @all_matches = @all_matches.not_in(_id: @profile.matches.pluck(:distributor_id)) 
       if params[:country]
-
         countries_map = get_countries()
-
         @country = params[:country]
-
         @matches = @all_matches.in("export_countries.country" => countries_map[@country])
         @country_proper = countries_map[@country]
+        if params[:tag]
+          tag = Tag.where(name: params[:tag], taggable_type: 'Distributor').pluck(:taggable_id)
+          @matches = @all_matches.in(:id => tag)
+          @tag = params[:tag]
+        end
+      elsif params[:tag]
+        tag = Tag.where(name: params[:tag], taggable_type: 'Distributor').pluck(:taggable_id)
+        @matches = @all_matches.in(:id => tag)
+        @tag = params[:tag]
       else
         @matches = @all_matches
       end
@@ -44,9 +50,15 @@ class MatchesController < ApplicationController
       if params[:sector]
         @sector = params[:sector]
         @matches = all_matches.in(sector_ids: @sector)
-      # elsif @profile.sectors.length == 1
-      #   @sector = @profile.sectors.first.id
-      #   @matches = all_matches.in(sector_ids: @sector)
+        if params[:tag]
+          tag = Tag.where(name: params[:tag], taggable_type: 'Brand').pluck(:taggable_id)
+          @matches = all_matches.in(:id => tag)
+          @tag = params[:tag]
+        end
+      elsif params[:tag]
+        tag = Tag.where(name: params[:tag], taggable_type: 'Brand').pluck(:taggable_id)
+        @matches = all_matches.in(:id => tag)
+        @tag = params[:tag]
       else
         @matches = all_matches
       end

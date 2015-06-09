@@ -116,7 +116,9 @@
 <div class="tags-list text-right">
 <% if @current_user.subscriber? && action_name != "public_profile" %>
 	<% profile_item.tags.each do |tag| %>
-		<span class="label"><%= tag.name %></span>
+		<%= link_to matches_path(tag: tag.name, sector: @sector, country: @country) do %>
+			<span class="label"><%= tag.name %></span>
+		<% end %>
 	<% end %>
 <% end %>
 </div>
