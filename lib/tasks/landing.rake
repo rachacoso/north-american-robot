@@ -24,3 +24,12 @@ task :set_distributor_ratings => :environment do
 		puts d.completeness
 	end	
 end
+
+task :set_all_tags_upcase => :environment do
+	tags = Tag.all
+	tags.each do |t|
+		t.name = t.name.upcase
+		t.save
+	end
+end
+
