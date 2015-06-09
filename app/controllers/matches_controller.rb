@@ -259,6 +259,8 @@ class MatchesController < ApplicationController
     else # is a brand
       @match = Distributor.find(params[:match_id])
       @messages = @current_user.brand.matches.where(distributor_id: @match.id).first.messages rescue nil
+      @brands_list = @match.distributor_brands.pluck(:id)
+      @gallery = ProductPhoto.where(:photographable_id.in => @brands_list)
     end
 
     @referrer = params[:referrer]

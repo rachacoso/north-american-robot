@@ -1,21 +1,53 @@
 
 <% if gallery && gallery.count > 0 %>
-<div class="gallery-window" >
-	<div id="profile_gallery" class="final-tiles-gallery effect-dezoom effect-fade-out caption-top">
-		<div class="ftg-items">
-			<% gallery.shuffle.each do |item| %>
-	    <div class="tile">
-	        <a class="tile-inner" href="<%= item.photo.url(:medium) %>">
-	            <img class="item" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="<%= item.photo.url(:medium) %>" />
-	            <span class='title'><%= item.class.to_s == "BrandPhoto" ? item.brand.company_name : item.photographable.name %></span>
-	        </a>
-	    </div>
-			<% end %>
+	<div class="gallery-window" >
+		<div id="profile_gallery" class="final-tiles-gallery effect-dezoom effect-fade-out caption-top">
+			<div class="ftg-items">
+				<% gallery.shuffle.each do |item| %>
+		    <div class="tile">
+					<a class="tile-inner" href="<%= item.photo.url(:medium) %>">
+						<img class="item" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="<%= item.photo.url(:medium) %>" />
+						<% if profile.class.to_s.downcase == 'brand' %>
+						<span class='title'><%= item.class.to_s == "BrandPhoto" ? item.brand.company_name : item.photographable.name %></span>
+						<% else %>
+						<span class='title'><%= item.photographable.brand %></span>
+						<% end %>
+					</a>
+		    </div>
+				<% end %>
+			</div>
 		</div>
 	</div>
-</div>
 <% else %>
-<div class="gallery-window" id="gallery-<%= @current_user.type? == 'distributor' ? 'brand' : 'distributor' %>">
-	&nbsp;
-</div>
+	<% if profile.class.to_s.downcase == 'distributor' %>
+		<div class="gallery-window" id="gallery-distributor">
+			&nbsp;
+		</div>
+
+		<% content_for :javascript_foot do %>
+			<%= javascript_tag do %>
+			  $("#gallery-distributor").backstretch([
+					<% profile.export_countries.each do |ec| %>
+						"/images/marketplace_<%= ec.country.gsub(/\s+/, "").downcase %>.jpg",
+					<% end %>
+			   ], {duration: 3000, fade: 750});
+			<% end %>
+	  <% end %>
+
+	<% else %>
+		<div class="gallery-window" id="gallery-brand">
+			&nbsp;
+		</div>
+
+		<% content_for :javascript_foot do %>
+			<%= javascript_tag do %>
+			  $("#gallery-brand").backstretch([
+					<% profile.sectors.each do |sector| %>
+						"/images/SECTORS_<%= sector.name.gsub(/\s+/, "").gsub(/\//, "").downcase %>.svg",
+					<% end %>
+			   ], {duration: 3000, fade: 750});
+			<% end %>
+	  <% end %>
+
+	<% end %>
 <% end %>
