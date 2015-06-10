@@ -193,15 +193,6 @@ class MatchesController < ApplicationController
 
     if @current_user.type? == "distributor"
       @gallery = ProductPhoto.where(photographable_type: "Product")
-
-      # every nth
-      n = 4
-      @gallery1 = 0.step(@gallery.size - 1, n).map { |i| @gallery[i] }
-      @gallery2 = 1.step(@gallery.size - 1, n).map { |i| @gallery[i] }
-      @gallery3 = 2.step(@gallery.size - 1, n).map { |i| @gallery[i] }
-      @gallery4 = 3.step(@gallery.size - 1, n).map { |i| @gallery[i] }
-      # @gallery5 = 4.step(@gallery.size - 1, n).map { |i| @gallery[i] }    
-
     else
       redirect_to all_matches_url
     end

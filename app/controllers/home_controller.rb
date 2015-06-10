@@ -33,17 +33,8 @@ class HomeController < ApplicationController
 
 		case @current_user.type?
 		when "distributor"
-
 			@sector = @profile.sector_ids.to_s
-
-  
-	  	@gallery = ProductPhoto.where(photographable_type: "Product").limit(12)
-	  	# every nth
-	  	n = 3
-	  	@galleryA = 0.step(@gallery.count(true) - 1, n).map { |i| @gallery[i] }
-	  	@galleryB = 1.step(@gallery.count(true) - 1, n).map { |i| @gallery[i] }
-	  	@galleryC = 2.step(@gallery.count(true) - 1, n).map { |i| @gallery[i] }
-
+	  	@gallery = ProductPhoto.where(photographable_type: "Product").shuffle[0..4]
 		when "brand"
 
 			@all_matches = Distributor.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "", export_countries: nil)
