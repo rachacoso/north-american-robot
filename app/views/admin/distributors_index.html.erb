@@ -2,7 +2,7 @@
 
 		<% if !@distributors.empty? %>
 			<%= paginate @distributors %><br>
-			<%= render partial: 'b_or_d', collection: @distributors, as: :b_or_d %>
+			<%= render partial: 'b_or_d', collection: @distributors, as: :b_or_d, spacer_template: "shared/indexspacer"  %>
 		<% else %>
 			<hr>
 			<h3><em>No Distributors</em></h3>
