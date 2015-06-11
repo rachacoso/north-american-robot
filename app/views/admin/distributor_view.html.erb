@@ -1,0 +1,234 @@
+<%= render partial: "shared/topbar_admin" %>
+
+
+<% if flash[:notice] %>
+<div class="row">
+	<div class="small-12 columns panel">
+		
+				<div data-alert class="alert-box alert round">
+			  	<%= flash[:notice] %>
+				  <a href="#" class="close">&times;</a>
+				</div>
+		
+	</div>
+</div>
+<% end %>
+
+
+<div class="row">
+	<div class="small-12 columns">
+		<div class="panel">
+			<h2><%= @distributor.company_name %></h2>
+		</div>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="medium-6 columns">
+		
+		<div class="row">
+			
+			<div class="small-12 columns">
+				<div class="panel">
+				<h2>Upload Logo</h2>
+
+					<%= form_for @distributor, :html => {id: 'b-or-d-admin-update-logo-upload'}, url: distributor_admin_update_path(@distributor) do |f| %>
+						<%= f.label :logo do %>
+						Company logo <br>
+						<%= image_tag @distributor.logo.url(:medium), alt: "Logo", id: "logo-preview"%>
+						<% end %>
+						<br>
+						<%= f.file_field :logo, class: 'hide-upload', label: false, accept: 'image/png,image/gif,image/jpeg' %>
+
+					<% end %>
+
+					<h2>Logo Finding Links</h2>
+
+					<% if !@distributor.facebook.blank? %>
+
+						<h3><%= link_to "Facebook", "//#{clean_url(@distributor.facebook)}", target: "blank" %></h3>
+						<% if facebook_id = fb_picture(@distributor.facebook) %>
+							<%= image_tag facebook_id %>
+							<h4><%= facebook_id %></h4>
+						<% end %>
+
+					<% else %>
+
+						<h3> NO Facebook </h3>
+
+					<% end %>
+
+
+					<h3><%= !@distributor.linkedin.blank? ? (link_to "LinkedIn", "//#{clean_url(@distributor.linkedin)}", target: "blank") : "NO LinkedIn" %></h3>
+
+					<h3><%= !@distributor.website.blank? ? (link_to "Website", "//#{clean_url(@distributor.website)}", target: 'blank') : "NO Website" %></h3>
+
+				</div>
+			</div>
+
+		</div>
+
+
+	</div><!--/.medium-6-->
+
+<%= form_for @distributor, url: distributor_admin_update_path(@distributor) do |f| %>
+	<div class="medium-6 columns">
+		<div class="row">
+			
+			<div class="small-12 columns">
+			<div class="panel">
+				<h2>Subscriber Status</h2>
+				<div class="row">
+					<div class="small-12 columns">
+						<%= f.check_box :subscriber %>
+					</div>
+				</div>
+			</div>
+			<div class="panel">
+				<h2>Validation</h2>
+				<div class="row">
+					<div class="small-12 columns">
+						<%= f.text_area :verification_notes, label: ' Notes (only visible to administrators)'  %>		
+					</div><!--/.small-12-->
+				</div><!--/.row-->
+<hr>				
+
+				<div class="row">
+					<div class="small-4 columns">
+						<%= f.check_box :verified_website, label: ' Website'  %>		
+					</div><!--/.small-4-->
+					<div class="small-8 columns">
+						<% if @distributor.website.blank?  %>
+							<h3> NO WEBSITE </h3>
+						<% else %>						
+							<h3><%= link_to @distributor.website.sub(/^https?\:\/\//, '').sub(/^www./,''), "//#{@distributor.website.sub(/^https?\:\/\//, '').sub(/^www./,'')}", target: 'blank' %></h3>
+						<% end %>
+					</div><!--/.small-8-->
+				</div><!--/.row-->
+<hr>				
+				<div class="row">
+					<div class="small-4 columns">
+						<%= f.check_box :verified_social_media, label: ' Social Media'  %>		
+					</div><!--/.small-4-->
+					<div class="small-8 columns">
+						<% if @distributor.facebook.blank? && @distributor.linkedin.blank? %>
+						<h3> NO SOCIAL MEDIA </h3>
+						<% end %>
+						<% unless @distributor.facebook.blank? %>
+						<h3><%= link_to "Facebook", @distributor.facebook.sub(/^https?\:\/\//, '').sub(/^www./,'') %></h3>
+						<h3><%= @distributor.facebook.sub(/^https?\:\/\//, '').sub(/^www./,'') %></h3>
+						<% end %>
+						<% unless @distributor.linkedin.blank? %>
+						<h3><%= link_to "LinkedIn", @distributor.linkedin.sub(/^https?\:\/\//, '').sub(/^www./,'') %></h3>
+						<% end %>
+
+					</div><!--/.small-8-->
+				</div><!--/.row-->					
+<hr>			
+				<div class="row">
+					<div class="small-4 columns">
+						<%= f.check_box :verified_business_registration, label: ' Business Registration'  %>		
+					</div><!--/.small-4-->
+					<div class="small-8 columns">
+
+							<div class="row">
+								<div class="small-12 columns">
+										Company Name: 
+										<h3><%= @distributor.company_name %></h3>
+										 Contact Information:
+										 <% @distributor.contacts.each do |contact| %>
+										 <h3>
+										  <%= contact.firstname %> <%= contact.lastname %>,<br> <%= contact.title %><br>
+										  <% unless !contact.address %>
+											  <%= contact.address.address1 %><br>
+											  <%= contact.address.address2 %><br>
+											  <% unless contact.address.city.blank? && contact.address.state.blank? && contact.address.postcode.blank? %>
+											  <%= contact.address.city %> <%= contact.address.state %> <%= contact.address.postcode %><br>
+											  <% end %>
+											  <%= contact.address.country %><br>
+										  <% end %>
+										  <%= contact.phone %><br>
+										  <a href="mailto:<%= contact.email %>"><%= contact.email %></a>
+										</h3>
+										<% end %>
+								</div>
+							</div>
+
+					</div><!--/.small-8-->
+				</div><!--/.row-->			
+<hr>		
+				<div class="row">
+					<div class="small-4 columns">
+						<%= f.check_box :verified_client_brand, label: ' Client Brand'  %>		
+					</div><!--/.small-4-->
+					<div class="small-8 columns">
+						<h3>Current Brands</h3>
+						<% @distributor.distributor_brands.where(current: true).each do |b| %>
+							<%= b.brand %><br>
+							<small><%= b.website %></small>
+						<% end %>
+						<br>
+						<h3>Past Brands</h3>
+						<% @distributor.distributor_brands.where(current: false).each do |b| %>
+							<%= b.brand %> ( <small><%= link_to b.website, "//#{b.website}", target: 'blank' %></small> )
+						<% end %>						
+					</div><!--/.small-8-->
+				</div><!--/.row-->							
+<hr>
+				<div class="row">
+					<div class="small-4 columns">
+						<%= f.check_box :verified_business_certificate, label: ' Business Certificate'  %>		
+					</div><!--/.small-4-->
+					<div class="small-8 columns">
+						<% if @distributor.verification_business_certificate.exists? %>
+							<%= image_tag 'document.png', style: 'height:100px;' %><br>
+							<small><%= @distributor.verification_business_certificate_file_name %></small><br>
+							<%= link_to "View", @distributor.verification_business_certificate.url, :target => "_blank" %>
+						<% end %>					
+					</div><!--/.small-8-->
+				</div><!--/.row-->		
+
+<hr>
+				<div class="row">
+					<div class="small-4 columns">
+						<%= f.check_box :verified_location, label: ' Location'  %>		
+					</div><!--/.small-4-->
+					<div class="small-8 columns">
+								Location Photo <br>
+								<%= image_tag @distributor.verification_location_photo.url(:medium), alt: "Location Photo"%>
+								<%= @distributor.verification_location_photo.exists? ? (link_to "View Larger", @distributor.verification_location_photo.url(:large), :target => "_blank") : "" %>					
+					</div><!--/.small-8-->
+				</div><!--/.row-->		
+
+				<hr>
+				<div class="row">
+					<div class="small-4 columns">
+						<%= f.check_box :verified_brand_display, label: ' Brand Display' %>		
+					</div><!--/.small-4-->
+					<div class="small-8 columns">
+						Brand Display Photo <br>
+						<%= image_tag @distributor.verification_brand_display_photo.url(:medium), alt: "Brand Display Photo"%>
+						<%= @distributor.verification_brand_display_photo.exists? ? (link_to "View Larger", @distributor.verification_brand_display_photo.url(:large), :target => "_blank") : "" %>					
+					</div><!--/.small-8-->
+				</div><!--/.row-->		
+
+				
+
+
+				</div>
+			</div>
+
+		</div>
+	</div><!--/.medium-6-->	
+	<div class="small-12 columns text-right">
+		<div class="panel">
+		<%= f.submit 'Update Distributor', class: 'button tiny alert' %>
+		</div>
+	</div><!--/.small-12-->
+<% end %>
+
+</div><!--/.row-->
+
+<br>
+<br>

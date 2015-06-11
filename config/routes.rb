@@ -10,10 +10,13 @@ Rails.application.routes.draw do
   get   '/dashboard' => 'home#dashboard', as: 'dashboard'
 
   get   '/admin' => 'admin#index', as: 'admin'
-  
-
   get   '/admin/new_bulk_upload' => 'admin#new_bulk_upload', as: 'new_bulk_upload'
   post   '/admin/new_bulk_upload' => 'admin#do_bulk_upload'
+  get   '/admin/distributors' => 'admin#distributors_index', as: 'admin_distributors_index'
+  get   '/admin/brands' => 'admin#brands_index', as: 'admin_brands_index'
+  get   '/admin/distributors/:id' => 'admin#distributor_view', as: 'admin_distributor_view'
+  get   '/admin/brands/:id' => 'admin#brand_view', as: 'admin_brand_view'  
+
 
   resources :sectors, only: [:create, :update, :destroy]
   resources :channels, only: [:create, :update, :destroy]
@@ -59,7 +62,7 @@ Rails.application.routes.draw do
   get    '/distributors/full_profile' => 'distributors#full_profile', as: 'distributor_full_profile'
   patch  '/distributors' => 'distributors#update'
   patch  '/distributor_brands' => 'distributor_brands#update'
-  patch  '/distributors/validation/:id' => 'distributors#validationupdate', as: 'distributor_validation'
+  patch  '/distributors/adminupdate/:id' => 'distributors#adminupdate', as: 'distributor_admin_update'
   delete '/distributors/validation/delitem' => 'distributors#validation_delete', as: 'distributor_validation_delete'
 
   
@@ -67,6 +70,7 @@ Rails.application.routes.draw do
   get    '/brands/public_profile' => 'brands#public_profile', as: 'brand_public_profile'
   get    '/brands/full_profile' => 'brands#full_profile', as: 'brand_full_profile'
   patch  '/brands' => 'brands#update'
+  patch  '/brands/adminupdate/:id' => 'brands#adminupdate', as: 'brand_admin_update'
 
   get '/onboard/distributor/one' => 'onboard_distributor#one', as: 'onboard_distributor_one'
   get '/onboard/distributor/two' => 'onboard_distributor#two', as: 'onboard_distributor_two'

@@ -27,6 +27,24 @@ class AdminController < ApplicationController
     
   end
 
+  def brands_index
+    brands = Brand.all.sort_by{ |b| b.company_name }
+    @brands = do_kaminari_array(brands, params[:page])
+  end
+
+  def brand_view
+    @brand = Brand.find(params[:id])
+  end
+
+  def distributors_index
+    distributors = Distributor.all.sort_by{ |d| d.company_name }
+    @distributors = do_kaminari_array(distributors, params[:page])
+  end
+
+  def distributor_view
+    @distributor = Distributor.find(params[:id])
+  end
+
   def new_bulk_upload
 
   end
@@ -93,6 +111,10 @@ class AdminController < ApplicationController
     unless @current_user.administrator
       redirect_to dashboard_url
     end
+  end
+
+  def do_kaminari_array(collection, page = 1)
+    return Kaminari.paginate_array(collection).page(page).per(20)
   end
 
   def create_user(usertype, data)

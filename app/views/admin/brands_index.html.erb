@@ -1,0 +1,11 @@
+<%= render layout: "index_layout" do %>
+
+		<% if !@brands.empty? %>
+			<%= paginate @brands %><br>
+			<%= render partial: 'b_or_d', collection: @brands, as: :b_or_d %>
+		<% else %>
+			<hr>
+			<h3><em>No Brands</em></h3>
+		<% end %>
+
+<% end %>

@@ -1,0 +1,16 @@
+<%= render partial: "shared/topbar_admin" %>
+<div class="row collapse">
+	<div class="small-12 columns">
+		<div class="panel">
+			<%= @distributors ? "Distributors" : "" %>
+			<%= @brands ? "Brands" : "" %>
+		</div>
+	</div>
+</div>
+<div class="row collapse">
+	<div class="small-12 columns">
+		<div class="panel">
+			<%= yield %>
+		</div>	
+	</div><!--/.small-12-->
+</div><!--/.row-->

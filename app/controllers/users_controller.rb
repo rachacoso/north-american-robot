@@ -134,25 +134,25 @@ class UsersController < ApplicationController
     end   
 
     if params[:page_distributors]
-      @distributors = do_kaminari_array(@distributors)
+      @distributors = do_kaminari_array(@distributors,params[:page_distributors])
       @active_section = 'distributors'
     elsif params[:search_distributors]
       @distributors = User.where(email: /#{params[:search_distributors]}/i ).reject{ |r| r.distributor.nil?}.reject{ |r| r.distributor.company_name.nil? }.sort_by{|i| i.distributor.company_name}
-      @distributors = do_kaminari_array(@distributors)
+      @distributors = do_kaminari_array(@distributors, 1)
       @active_section = 'distributors'
     else
-      @distributors = do_kaminari_array(@distributors)
+      @distributors = do_kaminari_array(@distributors, 1)
     end
 
     if params[:page_brands]
-      @brands = do_kaminari_array(@brands)
+      @brands = do_kaminari_array(@brands, params[:page_brands])
       @active_section = 'brands'
     elsif params[:search_brands]
       @brands = User.where(email: /#{params[:search_brands]}/i ).reject{ |r| r.brand.nil? }.reject{ |r| r.brand.company_name.nil? }.sort_by{|i| i.brand.company_name}
-      @brands = do_kaminari_array(@brands)
+      @brands = do_kaminari_array(@brands, 1)
       @active_section = 'brands'      
     else
-      @brands = do_kaminari_array(@brands)
+      @brands = do_kaminari_array(@brands, 1)
     end   
 
 
@@ -272,7 +272,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def do_kaminari_array(users)
-    return Kaminari.paginate_array(users).page(params[:page_distributors]).per(20)
+  def do_kaminari_array(users, page)
+    return Kaminari.paginate_array(users).page(page).per(20)
   end
 end

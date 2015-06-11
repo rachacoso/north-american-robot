@@ -1,8 +1,6 @@
 class DistributorsController < ApplicationController
 
-  before_action do
-    check_usertype("distributor")
-  end  
+  before_action :check_usertype, only: [:edit, :public_profile, :full_profile, :update]
 
   def edit
 
@@ -43,7 +41,6 @@ class DistributorsController < ApplicationController
   def update
 
     distributor = @current_user.distributor
-
 
     # set general fields
     distributor.update(distributor_parameters)
@@ -146,7 +143,7 @@ class DistributorsController < ApplicationController
 
   end
 
-  def validationupdate
+  def adminupdate
     distributor = Distributor.find(params[:id])
 
 
@@ -173,7 +170,7 @@ class DistributorsController < ApplicationController
     distributor.rating = new_rating
     distributor.save!   
 
-    redirect_to edit_user_url(distributor.user)
+    redirect_to admin_distributor_view_url(distributor)
 
   end
 
@@ -188,6 +185,7 @@ class DistributorsController < ApplicationController
       when 'bd' #brand display
         distributor.verification_brand_display_photo.destroy
       end
+      distributor.save
     end
     redirect_to distributor_url + "#a-verification" 
   end
@@ -250,6 +248,7 @@ class DistributorsController < ApplicationController
       :verified_location,
       :verified_brand_display,
       :verification_notes,
+      :subscriber,
       address_attributes: [ 
         :address1,
         :address2,
@@ -260,10 +259,11 @@ class DistributorsController < ApplicationController
       ]
     )
   end
-  def check_usertype(type)
-    if @current_user.type? != type
+
+  def check_usertype
+    if @current_user.type? != "distributor"
       redirect_to dashboard_url
     end
-  end
+  end  
 
 end

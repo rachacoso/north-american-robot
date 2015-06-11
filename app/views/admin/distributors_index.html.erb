@@ -1,0 +1,11 @@
+<%= render layout: "index_layout" do %>
+
+		<% if !@distributors.empty? %>
+			<%= paginate @distributors %><br>
+			<%= render partial: 'b_or_d', collection: @distributors, as: :b_or_d %>
+		<% else %>
+			<hr>
+			<h3><em>No Distributors</em></h3>
+		<% end %>
+
+<% end %>

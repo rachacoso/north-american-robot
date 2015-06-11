@@ -1,0 +1,92 @@
+<%= render partial: "shared/topbar_admin" %>
+
+
+<% if flash[:notice] %>
+<div class="row">
+	<div class="small-12 columns panel">
+		
+				<div data-alert class="alert-box alert round">
+			  	<%= flash[:notice] %>
+				  <a href="#" class="close">&times;</a>
+				</div>
+		
+	</div>
+</div>
+<% end %>
+
+
+<div class="row">
+	<div class="small-12 columns">
+		<div class="panel">
+			<h2><%= @brand.company_name %></h2>
+		</div>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="medium-6 columns">
+		<div class="panel">
+			<h2>Upload Logo</h2>
+
+			<%= form_for @brand, :html => {id: 'b-or-d-admin-update-logo-upload'}, url: brand_admin_update_path(@brand) do |f| %>
+				<%= f.label :logo do %>
+				Company logo <br>
+				<%= image_tag @brand.logo.url(:medium), alt: "Logo", id: "logo-preview"%>
+				<% end %>
+				<br>
+				<%= f.file_field :logo, class: 'hide-upload', label: false, accept: 'image/png,image/gif,image/jpeg' %>
+
+			<% end %>
+
+			<h2>Logo Finding Links</h2>
+
+			<% if !@brand.facebook.blank? %>
+
+				<h3><%= link_to "Facebook", "//#{clean_url(@brand.facebook)}", target: "blank" %></h3>
+				<% if facebook_id = fb_picture(@brand.facebook) %>
+					<%= image_tag facebook_id %>
+					<h4><%= facebook_id %></h4>
+				<% end %>
+
+			<% else %>
+
+				<h3> NO Facebook </h3>
+
+			<% end %>
+
+
+			<h3><%= !@brand.linkedin.blank? ? (link_to "LinkedIn", "//#{clean_url(@brand.linkedin)}", target: "blank") : "NO LinkedIn" %></h3>
+
+			<h3><%= !@brand.website.blank? ? (link_to "Website", "//#{clean_url(@brand.website)}", target: 'blank') : "NO Website" %></h3>
+
+		</div><!--/.panel -->
+	</div><!--/.medium-6-->
+
+	<div class="medium-6 columns">
+
+<%= form_for @brand, url: brand_admin_update_path(@brand) do |f| %>
+	
+		<div class="row">
+			<div class="small-12 columns">
+				<div class="panel">
+					<h2>Subscriber Status</h2>
+					<%= f.check_box :subscriber %>
+				</div>
+			</div><!--/.small-12-->	
+		</div><!--/.row-->	
+
+	</div><!--/.medium-6-->
+</div><!--/.row-->
+
+<div class="row">
+	<div class="small-12 columns text-right">
+		<div class="panel">
+		<%= f.submit 'Update Brand', class: 'button tiny alert' %>
+		</div>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
+<% end %>
+<br>
+<br>

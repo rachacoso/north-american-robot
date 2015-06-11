@@ -1,8 +1,7 @@
 class BrandsController < ApplicationController
 
-	before_action do
-		check_usertype("brand")
-	end
+	before_action :check_usertype, only: [:edit, :public_profile, :full_profile, :update]
+
 
 	def edit
 
@@ -165,6 +164,12 @@ class BrandsController < ApplicationController
 
 	end	
 
+  def adminupdate
+    brand = Brand.find(params[:id])
+    brand.update!(brand_parameters)
+    redirect_to admin_brand_view_url(brand)
+  end
+
   private
   def brand_parameters
     params.require(:brand).permit(
@@ -183,6 +188,7 @@ class BrandsController < ApplicationController
 			:social_causes,
 			:social_organizations,
 			:social_give_back,
+			:subscriber,
       address_attributes: [ 
         :address1,
         :address2,
@@ -193,8 +199,8 @@ class BrandsController < ApplicationController
       ]
 		)
 	end
-	def check_usertype(type)
-		if @current_user.type? != type
+	def check_usertype
+		if @current_user.type? != "brand"
 			redirect_to dashboard_url
 		end
 	end
