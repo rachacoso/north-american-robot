@@ -38,16 +38,20 @@ class User
 	def type?
 		if self.brand
 			return "brand"
-		else
+		elsif self.distributor
 			return "distributor"
+		elsif self.administrator
+			return "administrator"
 		end
 	end
 
 	def type_inverse?
 		if self.brand
 			return "distributor"
-		else
+		elsif self.distributor
 			return "brand"
+		elsif self.administrator
+			return nil
 		end
 	end
 
