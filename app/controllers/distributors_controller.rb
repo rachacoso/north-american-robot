@@ -147,7 +147,7 @@ class DistributorsController < ApplicationController
     distributor = Distributor.find(params[:id])
 
 
-    distributor.update!(distributor_parameters)
+    distributor.update!(admin_distributor_parameters)
 
     # update rating
 
@@ -192,6 +192,66 @@ class DistributorsController < ApplicationController
 
   private
   def distributor_parameters
+    params.require(:distributor).permit(
+      :company_name,
+      :country_of_origin,
+      :countries_of_distribution,
+      :website,
+      :facebook,
+      :linkedin,
+      :twitter,
+      :instagram,
+      :logo,
+      :company_size,
+      :current_lines,
+      :major_competitors,
+      :social_causes,
+      :social_organizations,
+      :social_give_back,      
+      :capacity_directly_operated_sites,
+      :capacity_department_stores,
+      :capacity_salons,
+      :capacity_specialty_retailers,
+      :capacity_home_shopping_networks,
+      :capacity_online_malls,
+      :capacity_social_commerce_sites,
+      :outside_sales_size,
+      :inside_sales_size,
+      :sales_manager_name,
+      :sales_manager_email,
+      :education_manager_name,
+      :education_manager_email,
+      :education_provided_to,
+      :sell_via_website,
+      :sell_via_online_mall,
+      :sell_via_social,
+      :internal_marketing,
+      :internal_marketing_size,
+      :employ_pr_agency,
+      :marketing_via_print,
+      :marketing_via_online,
+      :marketing_via_email,
+      :marketing_via_outdoor,
+      :marketing_via_events,
+      :marketing_via_direct_mail,
+      :marketing_via_email,
+      :marketing_via_classes,
+      :customer_database_size,
+      :verification_location_photo,
+      :verification_brand_display_photo,
+      :verification_business_certificate,
+      address_attributes: [ 
+        :address1,
+        :address2,
+        :city,
+        :state,
+        :postcode,
+        :country
+      ]
+    )
+  end
+
+  def admin_distributor_parameters
     params.require(:distributor).permit(
       :company_name,
       :country_of_origin,

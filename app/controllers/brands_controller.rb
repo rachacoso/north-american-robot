@@ -166,12 +166,39 @@ class BrandsController < ApplicationController
 
   def adminupdate
     brand = Brand.find(params[:id])
-    brand.update!(brand_parameters)
+    brand.update!(admin_brand_parameters)
     redirect_to admin_brand_view_url(brand)
   end
 
   private
   def brand_parameters
+    params.require(:brand).permit(
+			:company_name,
+			:country_of_origin,
+			:year_established,
+			:company_size,
+			:website,
+			:facebook,
+			:linkedin,
+			:twitter,
+			:instagram,
+			:logo,
+			:countries_where_exported,
+			:brand_positioning,
+			:social_causes,
+			:social_organizations,
+			:social_give_back,
+      address_attributes: [ 
+        :address1,
+        :address2,
+        :city,
+        :state,
+        :postcode,
+        :country
+      ]
+		)
+	end
+  def admin_brand_parameters
     params.require(:brand).permit(
 			:company_name,
 			:country_of_origin,
@@ -198,7 +225,7 @@ class BrandsController < ApplicationController
         :country
       ]
 		)
-	end
+	end	
 	def check_usertype
 		if @current_user.type? != "brand"
 			redirect_to dashboard_url
