@@ -4,7 +4,11 @@ class HomeController < ApplicationController
 
 	def front
 		if @current_user
-			redirect_to dashboard_url
+			if @current_user.administrator
+				redirect_to admin_url
+			else
+				redirect_to dashboard_url
+			end
 		else
 			@newuser = User.new
 			@newuser.build_contact
