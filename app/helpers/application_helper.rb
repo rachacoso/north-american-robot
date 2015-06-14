@@ -55,7 +55,7 @@ module ApplicationHelper
 
 		# NEED TO do
 
-		return 50
+		return @profile.completeness_percentage
 
 	end
 

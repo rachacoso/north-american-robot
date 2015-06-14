@@ -22,6 +22,7 @@ class Brand
 	field :linkedin, type: String
 	field :twitter, type: String
 	field :instagram, type: String
+	field :completeness, type: Integer, default: 0 # 0-3 depending on completeness of profile fields
 	embeds_one :address, as: :addressable
 	has_many :contacts, as: :contactable, dependent: :destroy
 	has_many :tags, as: :taggable, dependent: :destroy
@@ -103,5 +104,86 @@ class Brand
 
 	scope :subscribed, ->{where(subscriber: true)}
 	scope :activated, ->{where(active: true)}
+
+
+################
+# MODEL METHODS
+################
+
+	def completeness_percentage
+
+		# items to test for present-ness (i.e. field exists AND has content)
+		items_present = [
+		 	:company_name,
+			:country_of_origin,
+			:year_established,
+			:company_size,
+			:website,
+			:logo_file_name,			
+		 	:export_countries,
+		 	:sectors,
+		 	:channels,
+		 	:brand_photos,
+		 	:products,
+		 	:press_hits,
+		 	:patents,
+		 	:trademarks,
+		 	:compliances,
+		 	:trade_shows
+		]
+
+		items_passed = 0
+
+		puts "xxxxxxx"
+
+		# check social media (only need one)
+		if self.facebook.present? || self.linkedin.present?
+			items_passed += 1
+		end
+
+		# check channel capacities (all must be complete)
+		cc_incomplete = self.channel_capacities.where(capacity: nil).count
+		puts "incomplete channel capacities: #{cc_incomplete}"
+		unless cc_incomplete > 0
+			items_passed += 1
+		end
+
+		# PRESENT test
+		items_present.each do |item|
+			if self.send(item).present?
+				items_passed += 1
+				puts "#{item} YES"
+			else
+				puts "#{item} NO"
+			end
+		end
+		puts "yyyyyyyy"
+		
+		total_items = items_present.count + 2 # add 1 for SOCIAL MEDIA test and 1 for CHANNEL CAPACITIES test
+
+		total_percent = (items_passed.to_f / total_items) * 100
+		puts total_percent
+
+		return total_percent.round
+		
+	end
+
+	def update_completeness
+
+		percent = self.completeness_percentage
+		case percent
+		when 50..75
+			completeness_level = 1
+		when 75..99
+			completeness_level = 2
+		when 100..(1.0/0.0)
+			completeness_level = 3
+		else
+			completeness_level = 0
+		end
+		self.completeness = completeness_level
+		self.save
+
+	end
 
 end

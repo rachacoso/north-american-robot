@@ -121,6 +121,9 @@ class BrandsController < ApplicationController
 		if brand.save
 			# successful
 
+      # update completeness
+      brand.update_completeness
+
 			# allow redirect via passed parameter only if in this array else redirect to the first onboard screen
 			allowable_redirect = [
 				'two',

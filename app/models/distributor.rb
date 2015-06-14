@@ -249,7 +249,7 @@ class Distributor
 		total_percent = (items_passed.to_f / total_items) * 100
 		puts total_percent
 
-		return total_percent
+		return total_percent.round
 		
 	end
 
