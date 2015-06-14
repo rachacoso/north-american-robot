@@ -25,6 +25,16 @@ task :set_distributor_ratings => :environment do
 	end	
 end
 
+task :set_brand_completeness => :environment do
+	brand_completeness = Brand.all
+	puts brand_completeness.count
+	brand_completeness.each do |b|
+		b.update_completeness
+		b.save
+		puts b.completeness
+	end	
+end
+
 task :set_all_tags_upcase => :environment do
 	tags = Tag.all
 	tags.each do |t|
