@@ -28,7 +28,7 @@ class AdminController < ApplicationController
   end
 
   def brands_index
-    brands = Brand.all.sort_by{ |b| b.company_name }
+    brands = Brand.all.sort_by{ |b| b.company_name.to_s }
     @brands = do_kaminari_array(brands, params[:page])
   end
 
@@ -37,7 +37,7 @@ class AdminController < ApplicationController
   end
 
   def distributors_index
-    distributors = Distributor.all.sort_by{ |d| d.company_name }
+    distributors = Distributor.all.sort_by{ |d| d.company_name.to_s }
     @distributors = do_kaminari_array(distributors, params[:page])
   end
 
