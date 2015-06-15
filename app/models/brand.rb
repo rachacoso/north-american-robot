@@ -129,7 +129,7 @@ class Brand
 		 	:patents,
 		 	:trademarks,
 		 	:compliances,
-		 	:trade_shows
+			:trade_shows
 		]
 
 		items_passed = 0
