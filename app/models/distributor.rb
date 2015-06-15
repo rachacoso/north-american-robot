@@ -24,6 +24,7 @@ class Distributor
 	field :instagram, type: String
 	field :rating, type: Integer, default: 0 # validation rating 0-7 based on validation criterion
 	field :completeness, type: Integer, default: 0 # 0-3 depending on completeness of profile fields
+	field :last_login, type: DateTime
 	embeds_one :address, as: :addressable
  	has_many :contacts, as: :contactable, dependent: :destroy
  	has_many :tags, as: :taggable, dependent: :destroy

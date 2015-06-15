@@ -32,7 +32,7 @@ class MatchesController < ApplicationController
       end
 
       #set ordering
-      @matches = @matches.order_by(:rating.desc, :completeness.desc, :country.asc, :company_name.asc)
+      @matches = @matches.order_by(:rating.desc, :completeness.desc, :last_login.desc, :country.asc, :company_name.asc)
 
       #pagination
       if params[:page]
@@ -68,7 +68,7 @@ class MatchesController < ApplicationController
       end
 
       #set ordering
-      @matches = @matches.order_by(:completeness.desc, :company_name.asc)
+      @matches = @matches.order_by(:completeness.desc, :last_login.desc, :company_name.asc)
 
       #pagination
       if params[:page]

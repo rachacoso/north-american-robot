@@ -27,8 +27,12 @@ class ApplicationController < ActionController::Base
     		@current_user = a
          # update last login (if hasn't been updated in the last hour)
         unless (1.hours.ago..DateTime.now).cover?(a.last_login)
-          a.last_login = DateTime.now
+          now = DateTime.now
+          a.last_login = now
           a.save!
+          b_or_d = a.send(a.type?)
+          b_or_d.last_login = now
+          b_or_d.save!
         end
       else
        cookies.delete :auth_token
