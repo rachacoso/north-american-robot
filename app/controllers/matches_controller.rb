@@ -10,7 +10,7 @@ class MatchesController < ApplicationController
       ### Full match set is all brands in the Distributor's sectors minus any countries that have not declared a country 
       ### or Countries of Distribution
       ### (will be updated to be all countries with completed profiles)
-      @all_matches = Distributor.in(sector_ids: @profile.sector_ids).not_in(export_countries: [nil,[]], country_of_origin: nil, company_name: ["",nil])
+      @all_matches = Distributor.activated.in(sector_ids: @profile.sector_ids).not_in(export_countries: [nil,[]], country_of_origin: nil, company_name: ["",nil])
       # exclude any that are in contact already
       @all_matches = @all_matches.not_in(_id: @profile.matches.pluck(:distributor_id)) 
       if params[:country]
@@ -47,7 +47,7 @@ class MatchesController < ApplicationController
       ### Full match set is all brands in the Distributor's sectors minus any countries that have not declared a country 
       ### (will be updated to be all countries with completed profiles)
       # @all_matches = Brand.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "")
-      match_set = Brand.all.not_in(company_name: ["",nil], sector_ids: [nil,[]])
+      match_set = Brand.activated.not_in(company_name: ["",nil], sector_ids: [nil,[]])
       # exclude any that are in contact already
       all_matches = match_set.not_in(_id: @profile.matches.pluck(:brand_id))
 

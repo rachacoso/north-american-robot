@@ -191,6 +191,7 @@ class BrandsController < ApplicationController
 			:social_causes,
 			:social_organizations,
 			:social_give_back,
+			:active,
       address_attributes: [ 
         :address1,
         :address2,
@@ -219,6 +220,7 @@ class BrandsController < ApplicationController
 			:social_organizations,
 			:social_give_back,
 			:subscriber,
+			:active,
       address_attributes: [ 
         :address1,
         :address2,

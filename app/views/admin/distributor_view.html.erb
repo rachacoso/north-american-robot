@@ -79,11 +79,14 @@
 			<div class="small-12 columns">
 			<div class="panel">
 				<h2>Subscriber Status</h2>
-				<div class="row">
-					<div class="small-12 columns">
-						<%= f.check_box :subscriber %>
-					</div>
-				</div>
+				<small><span data-tooltip aria-haspopup="true" class="has-tip" title="This controls whether this profile has access to the subscriber functionality.">What is this?</span></small><br>
+				<%= f.check_box :subscriber %>
+			</div>
+			<div class="panel">
+				<h2>Active/Visibility Status</h2>
+				<small><span data-tooltip aria-haspopup="true" class="has-tip" title="This controls whether this profile is visible/available for matching.">What is this?</span></small><br>
+				
+				<%= f.check_box :active, label: false %><%= f.label :active, "Active/Visible for matching" %>
 			</div>
 			<div class="panel">
 				<h2>Validation</h2>

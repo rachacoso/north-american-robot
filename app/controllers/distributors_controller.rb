@@ -240,6 +240,7 @@ class DistributorsController < ApplicationController
       :verification_location_photo,
       :verification_brand_display_photo,
       :verification_business_certificate,
+      :active,
       address_attributes: [ 
         :address1,
         :address2,
@@ -309,6 +310,7 @@ class DistributorsController < ApplicationController
       :verified_brand_display,
       :verification_notes,
       :subscriber,
+      :active,
       address_attributes: [ 
         :address1,
         :address2,
