@@ -28,7 +28,12 @@ class AdminController < ApplicationController
   end
 
   def brands_index
-    brands = Brand.all.sort_by{ |b| b.company_name.to_s }
+    brands = Brand.all
+    if params[:q] && !params[:q].blank?
+      @query = params[:q]
+      brands = brands.where(company_name: /#{@query}/i )
+    end
+    brands = brands.sort_by{ |d| d.company_name.to_s }
     @brands = do_kaminari_array(brands, params[:page])
   end
 
@@ -37,7 +42,12 @@ class AdminController < ApplicationController
   end
 
   def distributors_index
-    distributors = Distributor.all.sort_by{ |d| d.company_name.to_s }
+    distributors = Distributor.all
+    if params[:q] && !params[:q].blank?
+      @query = params[:q]
+      distributors = distributors.where(company_name: /#{@query}/i )
+    end
+    distributors = distributors.sort_by{ |d| d.company_name.to_s }
     @distributors = do_kaminari_array(distributors, params[:page])
   end
 

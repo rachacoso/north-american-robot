@@ -2,8 +2,30 @@
 <div class="row collapse">
 	<div class="small-12 columns">
 		<div class="panel">
-			<%= @distributors ? "Distributors" : "" %>
-			<%= @brands ? "Brands" : "" %>
+			<h2>
+				<%= @distributors ? "Distributors" : "" %>
+				<%= @brands ? "Brands" : "" %>
+			</h2>
+		</div>
+	</div>
+</div>
+<div class="row collapse">
+	<div class="small-12 columns">
+		<div class="panel">
+			<%= form_tag(eval("admin_#{@distributors ? "distributors" : "brands"}_index_path"), method: "get") do %>
+			<div class="row collapse">
+			<div class="small-1 columns">
+				<span class="prefix"><i class="fi-magnifying-glass"></i></span>
+			</div><!--/.small-1-->
+			<div class="small-11 columns">
+				<%= text_field_tag(:q, "", :placeholder => 'Search by Company Name', :value => @query) %>
+				<% if @query %>
+					<small><%= link_to "Clear Search", eval("admin_#{@distributors ? "distributors" : "brands"}_index_path") %></small>
+				<% end %>
+			</div><!--/.small-11-->
+
+			</div><!--/.row-->
+			<% end %>
 		</div>
 	</div>
 </div>
