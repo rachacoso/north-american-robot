@@ -1,14 +1,14 @@
 <div class="row">
 	<div class="small-12 columns">
 		<a class="anchor" id="a-marketing"></a>
-		<h1>Marketing Activities</h1>
+		<h1>Company Introduction <br><small>(50-100 words)</small></h1>
 	</div>
 </div>
 <div class="row">
 	<%= form_for @brand, url: brand_url do |f| %>
 	<%= hidden_field_tag "redirect_anchor", "a-marketing" %>
 		<div class="small-12 columns">
-			<%= f.text_area :brand_positioning, rows: 10, label: "Brand Positioning", placeholder: 'Brand Positioning' %>
+			<%= f.text_area :brand_positioning, rows: 10, label: false, placeholder: 'Brand Positioning' %>
 			<%= f.submit 'Update Marketing Activities', class: "tiny radius alert button right" %>
 		</div>
 	<% end %>
