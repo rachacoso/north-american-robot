@@ -27,6 +27,11 @@
 							<% end %>
 							<br><br>
 							<%= render partial: "shared/profile/components/indicators", locals: {match: profile} %>
+
+							<p>
+							<%= simple_format(profile.company_introduction) %>
+							</p>
+
 							<h3>
 							<% unless profile.website.blank? %>
 								<%= link_to "//#{clean_url(profile.website)}", target: "blank" do %> 

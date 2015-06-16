@@ -5,10 +5,10 @@
 	</div>
 </div>
 <div class="row">
-	<%= form_for @brand, url: brand_url do |f| %>
+	<%= form_for @distributor, url: distributor_url do |f| %>
 	<%= hidden_field_tag "redirect_anchor", "a-company-introduction" %>
 		<div class="small-12 columns">
-			<%= f.text_area :brand_positioning, rows: 10, label: false, placeholder: 'Company Introduction' %>
+			<%= f.text_area :company_introduction, rows: 10, label: false, placeholder: 'Company Introduction' %>
 			<%= f.submit 'Update Marketing Activities', class: "tiny radius alert button right" %>
 		</div>
 	<% end %>

@@ -22,6 +22,8 @@ class Brand
 	field :linkedin, type: String
 	field :twitter, type: String
 	field :instagram, type: String
+	field :brand_positioning, type: String # now referenced as "company introduction" in ui
+
 	field :completeness, type: Integer, default: 0 # 0-3 depending on completeness of profile fields
 	field :last_login, type: DateTime
 	embeds_one :address, as: :addressable
@@ -61,7 +63,6 @@ class Brand
 	has_many :products, dependent: :destroy
 
 	# Marketing Acivities
-	field :brand_positioning, type: String
 	has_many :press_hits, dependent: :destroy
 	has_many :trade_shows, dependent: :destroy
 
