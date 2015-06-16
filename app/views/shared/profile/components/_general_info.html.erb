@@ -83,7 +83,7 @@
 					  <strong>
 						<%= contact.firstname.blank? ? "" : "#{contact.firstname}".html_safe %>
 						<%= contact.lastname.blank? ? "" : "#{contact.lastname}".html_safe %>
-						<%= contact.title.blank? ? "" : ",<br>#{contact.title}".html_safe %>
+						<%= contact.title.blank? ? "" : "| #{contact.title}".html_safe %>
 					  </strong><br>
 					  <% end %>
 					  <% if contact.address %>
@@ -95,7 +95,7 @@
 						  <%= contact.address.country.blank? ? "" : "#{contact.address.country}<br>".html_safe %>
 					  <% end %>
 					  <%= contact.phone.blank? ? "" : "#{contact.phone}<br>".html_safe %>
-					  <a href="mailto:<%= contact.email %>"><%= contact.email %></a><br>
+					  
 				  <% end %>
 				</div>		
 			</div><!--/.small-12-->
