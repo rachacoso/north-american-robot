@@ -143,8 +143,8 @@ class AdminController < ApplicationController
       user = User.new
       user.build_contact
       user.email = uemail
-      user.password = "waterorangeeaglehill"
-      user.password_confirmation = "waterorangeeaglehill"
+      user.password = ENV['BULK_UPLOAD_PWD']
+      user.password_confirmation = ENV['BULK_UPLOAD_PWD']
       createusertype = "create_" + usertype
       brand_or_distributor = user.send(createusertype) # create relation
       brand_or_distributor.create_address
