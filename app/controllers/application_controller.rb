@@ -30,9 +30,11 @@ class ApplicationController < ActionController::Base
           now = DateTime.now
           a.last_login = now
           a.save!
-          b_or_d = a.send(a.type?)
-          b_or_d.last_login = now
-          b_or_d.save!
+          unless a.administrator
+            b_or_d = a.send(a.type?)
+            b_or_d.last_login = now
+            b_or_d.save!
+          end
         end
       else
        cookies.delete :auth_token
