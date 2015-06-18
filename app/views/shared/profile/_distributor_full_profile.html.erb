@@ -91,7 +91,7 @@
 							<h1>CURRENT BRAND PORTFOLIO</h1>
 						</div>
 						<div class="profile-content">
-						<ul class="small-block-grid-1 medium-block-grid-4" data-equalizer>
+						<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
 						<% profile.distributor_brands.where(current: true).each do |p| %>
 							<li><%= render partial: "shared/collections_view/distributor_brands", locals: {
 								collitem: p
@@ -110,7 +110,7 @@
 							<h1>PAST BRAND PORTFOLIO</h1>
 						</div>
 						<div class="profile-content">
-						<ul class="small-block-grid-1 medium-block-grid-4" data-equalizer>
+						<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
 						<% profile.distributor_brands.where(current: false).each do |p| %>
 							<li><%= render partial: "shared/collections_view/distributor_brands", locals: {
 								collitem: p
