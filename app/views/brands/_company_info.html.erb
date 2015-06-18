@@ -93,17 +93,17 @@
 			<div class="row">
 				<%= f.fields_for :address do |ff| %>
 				<div class="small-12 columns">					
-					<%= ff.text_field :address1, label: "Address line 1" %>
-					<%= ff.text_field :address2, label: "Address line 2" %>
+					<%= ff.text_field :address1, label: "Street Address" %>
+					<%= ff.text_field :address2, label: false %>
 				</div>
 				<div class="medium-4 columns">
-					<%= ff.text_field :city %>
+					<%= ff.text_field :city, label: "<small>City/Town/Department</small>".html_safe %>
 				</div>
-				<div class="medium-4 columns">
-					<%= ff.text_field :state %>
+				<div class="medium-5 columns">
+					<%= ff.text_field :state, label: "<small>State/Province/Region/County</small>".html_safe %>
 				</div>
-				<div class="medium-4 columns">
-					<%= ff.text_field :postcode %>
+				<div class="medium-3 columns">
+					<%= ff.text_field :postcode, label: "<small>Zip/Postal Code</small>".html_safe %>
 				</div>
 				<div class="medium-6 columns">
 					<%= ff.text_field :country, class: "country-autocomplete", placeholder: 'Country' %>
