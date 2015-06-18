@@ -211,3 +211,14 @@
 
 <br><br><br>
 
+
+<%# set default distributor brand photo %>
+<% content_for :javascript_foot do %>
+	<%= javascript_tag do %>
+	  $(".distributor-default").backstretch([
+			<% profile.export_countries.each do |ec| %>
+				"/images/marketplace_<%= ec.country.gsub(/\s+/, "").downcase %>.jpg",
+			<% end %>
+	   ], {duration: 3000, fade: 750});
+	<% end %>
+<% end %>

@@ -338,11 +338,11 @@ function initialize () {
     allowEnlargement: true
   });
 
-  // FOR PROFILE DIV BACKGROUND
+  // // FOR PROFILE DIV BACKGROUND
 
-  $(".galleria-product-photos.distributor-default").backstretch( '/images/crate.jpg', {fade: 500});
+  // $(".galleria-product-photos.distributor-default").backstretch( '/images/crate.jpg', {fade: 500});
 
-  $(".galleria-product-photos.brand-default").backstretch( '/images/brand.jpg', {fade: 500});
+  // $(".galleria-product-photos.brand-default").backstretch( '/images/brand.jpg', {fade: 500});
 
   // Date Picker
 

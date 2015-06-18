@@ -272,3 +272,15 @@
 	</div><!--/.small-11 small-centered-->
 </div><!--/.row-->
 
+		
+<%# set default product photo %>
+<% content_for :javascript_foot do %>
+	<%= javascript_tag do %>
+	  $(".brand-default").backstretch([
+		<% profile.sectors.each do |sector| %>
+			"/images/SECTORS_<%= sector.name.gsub(/\s+/, "").gsub(/\//, "").downcase %>.svg",
+		<% end %>
+	   ], {duration: 3000, fade: 750});
+	<% end %>
+<% end %>
+
