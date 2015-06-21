@@ -50,7 +50,7 @@
 					  	Send a message to<br>
 						  <strong><%= profile.company_name %></strong> 
 					  </h2>
-						<%= form_tag contact_match_url, method: 'get', remote: true do %>
+						<%= form_tag contact_match_url, method: 'get' do %>
 							<%= hidden_field_tag(:match_id, profile.id) %>
 						  <%= text_area_tag(:m, nil, rows: "5", label: false, placeholder: "Message") %>
 						  <%= submit_tag("Contact", class: "button tiny alert") %>

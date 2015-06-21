@@ -323,10 +323,12 @@ class MatchesController < ApplicationController
       
     end
 
-    respond_to do |format|
-      format.html
-      format.js
-    end
+
+    redirect_to view_match_url(@match.id, "na")
+    # respond_to do |format|
+    #   format.html
+    #   format.js
+    # end
 
   end
 
