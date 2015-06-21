@@ -334,10 +334,19 @@ $dashboard-agency-color: $landing-teal;
   // background-color: $landing-middle-gray;
   // border-right: 1px solid $landing-middle-gray;
   // border-bottom: 1px solid $landing-middle-gray;
-  &#gallery-distributor, &#gallery-brand {
+  &.gallery-distributor, &.gallery-brand {
+    height: 75%;
+    height: 75vh;  
+  }
+  &.gallery-distributor#uk {
     height: 75%;
     height: 75vh;
-    background-color: $landing-middle-gray;
+    background: transparent url("/images/SECTORS_babykids.svg") center;
+    background-size: cover;
+  }
+  &.gallery-brand#fashionaccessories {
+    background: transparent url("/images/SECTORS_fashionaccessories.svg") center;
+    background-size: cover;
   }
 }
 .tags-window {

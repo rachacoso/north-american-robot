@@ -20,34 +20,12 @@
 	</div>
 <% else %>
 	<% if profile.class.to_s.downcase == 'distributor' %>
-		<div class="gallery-window" id="gallery-distributor">
+		<div class="gallery-window gallery-distributor">
 			&nbsp;
 		</div>
-
-		<% content_for :javascript_foot do %>
-			<%= javascript_tag do %>
-			  $("#gallery-distributor").backstretch([
-					<% profile.export_countries.each do |ec| %>
-						"/images/marketplace_<%= ec.country.gsub(/\s+/, "").downcase %>.jpg",
-					<% end %>
-			   ], {duration: 3000, fade: 750});
-			<% end %>
-	  <% end %>
-
 	<% else %>
-		<div class="gallery-window" id="gallery-brand">
+		<div class="gallery-window gallery-brand">
 			&nbsp;
 		</div>
-
-		<% content_for :javascript_foot do %>
-			<%= javascript_tag do %>
-			  $("#gallery-brand").backstretch([
-					<% profile.sectors.each do |sector| %>
-						"/images/SECTORS_<%= sector.name.gsub(/\s+/, "").gsub(/\//, "").downcase %>.svg",
-					<% end %>
-			   ], {duration: 3000, fade: 750});
-			<% end %>
-	  <% end %>
-
 	<% end %>
 <% end %>

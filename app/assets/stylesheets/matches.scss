@@ -3,6 +3,37 @@
 @import "global_variables";
 @import "mixins";
 
+// PROFILE DISPLAY
+
+.profile-tabs {
+  padding-top: rem-calc(5);
+  h2 {
+    display: inline;
+    cursor: pointer;
+    padding: 0 rem-calc(5) rem-calc(2) rem-calc(5);
+    border-top: 1px dotted $landing-middle-gray;
+    border-left: 1px dotted $landing-middle-gray;
+    border-right: 1px dotted $landing-middle-gray;
+    background: $landing-middle-gray;
+    color: white;
+    &:hover {
+      background: $landing-light-gray;
+      color: black;
+    }
+    &.active {
+      background: white;
+      color: black;
+    }
+    &.active:hover {
+      cursor: text;
+    }
+  }
+}
+
+#profile-profile, #profile-conversation {
+  // display: none;
+}
+
 
 // MATCH PAGES
 

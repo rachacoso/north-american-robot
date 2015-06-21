@@ -2,6 +2,14 @@ var hasBG = typeof bgImage != 'undefined';
 var bgDefaultColor = "#E5E5E5";
 
 
+function doBackstretch (location, photos, durationTime, fadeTime) {
+   durationTime = typeof durationTime !== 'undefined' ? durationTime : 3000;
+   fadeTime = typeof fadeTime !== 'undefined' ? fadeTime : 750;
+  $(location).backstretch(
+    photos
+   , {duration: durationTime, fade: fadeTime});
+}
+
 $( document ).ready(function() {
 
 
