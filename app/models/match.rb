@@ -12,5 +12,8 @@ class Match
   field :intro_message, type: String
   field :stage, type: String, default: "contact"  # stage: [contact,prepare,terms,order]
 
+  field :shared_product_pricing, type: Mongoid::Boolean
+  field :shared_country_requirements, type: Mongoid::Boolean
+
   has_many :messages, dependent: :destroy
 end

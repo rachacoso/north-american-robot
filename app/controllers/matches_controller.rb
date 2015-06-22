@@ -351,6 +351,33 @@ class MatchesController < ApplicationController
 
   end
 
+  def match_share
+    if params[:mid] && params[:sharetype] && (['pp','cr'].include? params[:sharetype])
+      match = Match.find(params[:mid])
+
+      case params[:sharetype]
+      when "pp" # PRODUCT & PRICING (BRAND)
+        unless !@current_user.brand
+
+          match.shared_product_pricing = true
+        end
+      when "cr" # COUNTRY REQUIREMENTS (DISTRIBUTOR)
+        unless !@current_user.distributor
+          
+          match.shared_country_requirements = true
+        end
+      end
+      match.save!
+      @profile = match.send(@current_user.type_inverse?)
+      @stage = params[:stage]
+      @messages = match.messages rescue nil
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
+    end    
+  end
 
   def match_stage
 
@@ -359,10 +386,8 @@ class MatchesController < ApplicationController
       match.stage = params[:stage]
       match.save!
       @profile = match.send(@current_user.type_inverse?)
-
       @stage = params[:stage]
       @messages = match.messages rescue nil
-
     end
 
     respond_to do |format|

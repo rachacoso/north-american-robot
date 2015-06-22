@@ -102,6 +102,7 @@ Rails.application.routes.draw do
   get '/matches/contact/:match_id' => 'matches#contact_match', as: 'contact_match'
   get '/matches/search' => 'matches#search', as: 'search'
   get '/matches/stage' => 'matches#match_stage', as: 'match_stage'
+  get '/matches/share' => 'matches#match_share', as: 'match_share'
   get '/gallery' => 'matches#gallery', as: 'gallery'
 
   resources :messages, only: [:create, :index]
