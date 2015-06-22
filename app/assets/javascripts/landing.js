@@ -323,13 +323,9 @@ function initializeGallery (className,galleryHeight) {
   galleryHeight = (typeof galleryHeight === 'undefined') ? 400 : galleryHeight;
   Galleria.run(className, {
       showInfo: false,
-      height: galleryHeight
+      height: galleryHeight,
+      wait: true
   })  
-  // '.galleria-brand-photos'
-  // Galleria.run('.galleria-product-photos', {
-  //     showInfo: false,
-  //     height: 400
-  // })    
 }
 
 
