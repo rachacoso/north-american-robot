@@ -17,14 +17,14 @@
 
 <% stage_messages.desc('c_at').limit(max).reverse_each do |m| %>
 	<div class="row">
-		<div class="<%= m.recipient == @current_user.type? ? "medium-2" : "medium-2 medium-push-10" %> hide-for-small-only columns">
+		<div class="<%= m.recipient == @current_user.type? ? "small-2" : "small-2 small-push-10" %> columns">
 			<% if m.recipient == @current_user.type? %>
 				<%= image_tag m.match.send(@current_user.type_inverse?).logo.url(:medium) %>
 			<% else %>
 				<%= image_tag @current_user.send(@current_user.type?).logo.url(:medium) %>
 			<% end %>
 		</div>
-		<div class="small-11 medium-10 <%= m.recipient == @current_user.type? ? " " : "medium-pull-2" %> columns">
+		<div class="small-10 <%= m.recipient == @current_user.type? ? " " : "small-pull-2" %> columns">
 			<div class="row">
 				<div class="small-11 <%= m.recipient == @current_user.type? ? " " : "small-push-1" %> columns">
 					

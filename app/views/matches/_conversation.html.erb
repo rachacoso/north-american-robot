@@ -72,7 +72,21 @@
 										</p>
 
 										<% if match && !match.messages.blank? && match.stage == "contact" %>
-											<%= link_to 'Would you like to...', match_stage_url(:stage => 'prepare', :mid => match.id  ), class: "button", remote: true %>
+											<% if @current_user.brand %>
+												<h2>Would you like to share your <br>PRODUCT &amp; PRICING information with <%= profile.company_name %>?</h2>
+												<p>These include the Products List, FOB Pricing and Tiered Pricing Schedule you have uploaded (link to them?)</p>
+												<p>After sharing, your conversation with <%= profile.company_name %> will proceed to the next stage (PREPARE)</p>
+												<%= link_to "YES, share PRODUCT &amp; PRICING <br>information with #{profile.company_name}".html_safe, match_share_url(:sharetype => 'pp', :mid => match.id  ), class: "button alert expand", remote: true %>
+											<% elsif @current_user.distributor %>
+												<h2>Would you like to share your country’s requirements for this brand and their products?</h2>
+												<p>These include the Regulatory Compliance, Labeling Requirements, Product Tariffs, etc.</p>
+												<p>After sharing, your conversation with <%= profile.company_name %> will proceed to the next stage (PREPARE)</p>
+												<%= link_to "YES, share COUNTRY REQUIREMENTS <br>information with #{profile.company_name}".html_safe, match_share_url(:sharetype => 'cr', :mid => match.id  ), class: "button alert expand", remote: true %>
+											<% end %>
+
+											<% if match.shared_product_pricing && match.shared_country_requirements %>
+												<%= link_to "YES, proceed to PREPARE".html_safe, match_stage_url(:stage => 'prepare', :mid => match.id  ), class: "button alert expand", remote: true %>
+											<% end %>
 										<% end %>
 									</div>
 								</div>
