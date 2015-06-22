@@ -2,18 +2,15 @@
 
 					<% match = this_match(profile) %>
 
+					<% content_for :javascript_head do %>
+						<%= javascript_tag do %>
+							var conversationStage = "<%= get_conversation_stage(this_match(profile)) %>";
+						<% end %>
+					<% end %>
+
 					<% content_for :javascript_foot do %>
 						<%= javascript_tag do %>
-							$('#conversation-info-<%= get_conversation_stage(this_match(profile)) %>').show();
-							$('#conversation-<%= get_conversation_stage(this_match(profile)) %>').show();
-
-							$('#conversation-<%= get_conversation_stage(this_match(profile)) %>').show();		
-							$('#contact-toggle').on('click', function(e){
-								e.preventDefault();
-								$('#conversation-info-contact').toggle(1000);
-								$('#conversation-contact').toggle(1000);
-							});
-
+							initConversations();
 						<% end %>
 					<% end %>
 
@@ -58,7 +55,7 @@
 								<div class="medium-5 hide-for-small-only columns">
 										&nbsp;
 								</div><!--/.medium-5-->
-								<div class="medium-1 columns text-center"><h4><%= link_to 'CONTACT', '#', id: "contact-toggle", style: "color:black;" %></h4></div><!--/.medium-5-->
+								<div class="medium-1 columns text-center"><h1><%= link_to 'CONTACT', '#', id: "contact-toggle", style: "color:black;" %></h1></div><!--/.medium-5-->
 								<div class="medium-6 hide-for-small-only columns" >
 										&nbsp;
 								</div><!--/.medium-5-->
@@ -66,7 +63,7 @@
 						</div>
 
 						<div class="row collapse" >
-							<div class="medium-5 columns">
+							<div class="medium-4 columns">
 								<div class="conversation-left-info-column">
 									<div id="conversation-info-contact">
 										<h2>Make a connection and find new international partners</h2>
@@ -79,19 +76,14 @@
 										<% end %>
 									</div>
 								</div>
-							</div><!--/.medium-5-->
-							<div class="medium-1 hide-for-small-only columns text-center">
-								<div style="width:2px; background: black; margin:auto;" >
-									&nbsp;
-								</div>
-							</div><!--/.medium-5-->
-							<div class="medium-6 columns" >
+							</div><!--/.medium-4-->
+							<div class="medium-8 columns" >
 								<div class="conversation-right-message-column">
 									<div id="conversation-contact">
 										<%= render partial: "conversation_message_block", locals: {match: match, stage: "contact"} %>
 									</div>
 								</div>
-							</div><!--/.medium-5-->
+							</div><!--/.medium-8-->
 						</div>
 
 						<div class="row collapse">
@@ -99,16 +91,16 @@
 								<div class="medium-5 hide-for-small-only columns">
 										&nbsp;
 								</div><!--/.medium-5-->
-								<div class="medium-1 columns text-center"><h4>PREPARE</h4></div><!--/.medium-5-->
+								<div class="medium-1 columns text-center"><h1><%= link_to 'PREPARE', '#', id: "prepare-toggle", style: "color:black;" %></h1></div><!--/.medium-5-->
 								<div class="medium-6 hide-for-small-only columns" >
 										&nbsp;
 								</div><!--/.medium-5-->
 							</div><!--/.small-12-->
 						</div>
 
-						<div class="row collapse" data-equalizer>
-							<div class="medium-5 columns">
-								<div class="conversation-left-info-column" data-equalizer-watch>
+						<div class="row collapse">
+							<div class="medium-4 columns">
+								<div class="conversation-left-info-column">
 									<div id="conversation-info-prepare">
 										<h2>Prepare stuff</h2>
 										<p> Here are some terms you may run into during your conversation: <br>
@@ -117,21 +109,16 @@
 										<% if match && !match.messages.blank? && match.stage == "prepare"  %>
 											<%= link_to 'Would you like to...', match_stage_url(:stage => 'terms', :mid => match.id  ), class: "button", remote: true %>
 										<% end %>
-										</div>
+									</div>
 								</div>
-							</div><!--/.medium-5-->
-							<div class="medium-1 hide-for-small-only columns text-center">
-								<div style="width:2px; background: black; margin:auto;" data-equalizer-watch>
-									&nbsp;
-								</div>
-							</div><!--/.medium-5-->
-							<div class="medium-6 columns" data-equalizer-watch>
+							</div><!--/.medium-4-->
+							<div class="medium-8 columns">
 								<div class="conversation-right-message-column">
 									<div id="conversation-prepare">
 										<%= render partial: "conversation_message_block", locals: {match: match, stage: "prepare"} %>
 									</div>
 								</div>
-							</div><!--/.medium-5-->
+							</div><!--/.medium-8-->
 						</div>
 
 						<div class="row collapse">
@@ -139,7 +126,7 @@
 								<div class="medium-5 hide-for-small-only columns">
 										&nbsp;
 								</div><!--/.medium-5-->
-								<div class="medium-1 columns text-center"><h4>TERMS</h4></div><!--/.medium-5-->
+								<div class="medium-1 columns text-center"><h1><%= link_to 'TERMS', '#', id: "terms-toggle", style: "color:black;" %></h1></div><!--/.medium-5-->
 								<div class="medium-6 hide-for-small-only columns" >
 										&nbsp;
 								</div><!--/.medium-5-->
@@ -147,9 +134,9 @@
 						</div>
 
 
-						<div class="row collapse" data-equalizer>
-							<div class="medium-5 columns">
-								<div class="conversation-left-info-column" data-equalizer-watch>
+						<div class="row collapse">
+							<div class="medium-4 columns">
+								<div class="conversation-left-info-column">
 									<div id="conversation-info-terms">
 										<h2>Negotiate Terms</h2>
 										<p> Here are some terms you may run into during your conversation: <br>
@@ -160,19 +147,14 @@
 										<% end %>
 									</div>
 								</div>
-							</div><!--/.medium-5-->
-							<div class="medium-1 hide-for-small-only columns text-center">
-								<div style="width:2px; background: black; margin:auto;" data-equalizer-watch>
-									&nbsp;
-								</div>
-							</div><!--/.medium-5-->
-							<div class="medium-6 columns" data-equalizer-watch>
+							</div><!--/.medium-4-->
+							<div class="medium-8 columns">
 								<div class="conversation-right-message-column">
 									<div id="conversation-terms">
 										<%= render partial: "conversation_message_block", locals: {match: match, stage: "terms"} %>
 									</div>
 								</div>
-							</div><!--/.medium-5-->
+							</div><!--/.medium-8-->
 						</div>
 
 
@@ -181,7 +163,7 @@
 								<div class="medium-5 hide-for-small-only columns">
 										&nbsp;
 								</div><!--/.medium-5-->
-								<div class="medium-1 columns text-center"><h4>ORDER</h4></div><!--/.medium-5-->
+								<div class="medium-1 columns text-center"><h1><%= link_to 'ORDER', '#', id: "order-toggle", style: "color:black;" %></h1></div><!--/.medium-5-->
 								<div class="medium-6 hide-for-small-only columns" >
 										&nbsp;
 								</div><!--/.medium-5-->
@@ -190,8 +172,8 @@
 
 
 						<div class="row collapse" data-equalizer>
-							<div class="medium-5 columns">
-								<div class="conversation-left-info-column" data-equalizer-watch>
+							<div class="medium-4 columns">
+								<div class="conversation-left-info-column">
 									<div id="conversation-info-order">
 										<h2>Prepare Orders</h2>
 										<p> 
@@ -200,19 +182,14 @@
 
 									</div>
 								</div>
-							</div><!--/.medium-5-->
-							<div class="medium-1 hide-for-small-only columns text-center">
-								<div style="width:2px; background: black; margin:auto;" data-equalizer-watch>
-									&nbsp;
-								</div>
-							</div><!--/.medium-5-->
-							<div class="medium-6 columns" data-equalizer-watch>
+							</div><!--/.medium-4-->
+							<div class="medium-8 columns">
 								<div class="conversation-right-message-column">
 									<div id="conversation-order">
 										<%= render partial: "conversation_message_block", locals: {match: match, stage: "order"} %>
 									</div>
 								</div>
-							</div><!--/.medium-5-->
+							</div><!--/.medium-8-->
 						</div>
 
 					</div>
@@ -221,7 +198,6 @@
 	</div><!--/.small-12-->
 </div><!--/.row-->
 
-
-					<br>
+<br>
 
 <% end %>
