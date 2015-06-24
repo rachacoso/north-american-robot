@@ -1,0 +1,13 @@
+<% id_ified = doc_type.downcase.gsub(/\s/, "-") %>
+
+<%= form_for(LibraryDocument.new, html: {id: "library-#{id_ified}-form"}) do |f| %>
+  <%= hidden_field_tag "document_type", doc_type %>
+  <%= label_tag "library-#{id_ified}-input"  do %>
+  <div class="text-center">
+    <%= image_tag '/images/image_add.svg' %><br>
+    <small>Upload a Document</small>
+  </div>
+  <% end %>
+  <br>
+  <%= f.file_field :file, class: 'hide-upload', id: "library-#{id_ified}-input", label: false, accept: 'application/pdf,application/vnd.ms-excel,application/vnd.ms-powerpoint,application/msword,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document' %>
+<% end %>

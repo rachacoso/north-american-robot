@@ -113,17 +113,18 @@
 	        	<label>MARKETPLACE</label>
 	        </li>
 	        <li>
-	        	<%= link_to 'PREVIEW PROFILE', eval("#{@current_user.type?}_full_profile_path"), class: 'text-right' %>
+	        	<%= link_to 'YOUR PROFILE - PREVIEW', eval("#{@current_user.type?}_full_profile_path"), class: 'text-right' %>
 	        </li>
 	        <li>
-	        	<%= link_to 'EDIT PROFILE', eval("#{@current_user.type?}_path"), class: 'text-right' %>
+	        	<%= link_to 'YOUR PROFILE - EDIT', eval("#{@current_user.type?}_path"), class: 'text-right' %>
+	        </li>
+	        <li>
+	        	<%= link_to 'GLOBAL TERMS & DOCUMENTS', library_documents_path, class: 'text-right' %>
 	        </li>
 	        <li>
 	        	<label>AGENCY</label>
 	        </li>
-	        <li>
-	        	<%= link_to 'EDIT GLOBAL TERMS', "#", class: 'text-right' %>
-	        </li>
+
 	        <li>
 	        	<label>INSIGHTS</label>
 	        </li>

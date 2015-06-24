@@ -1,0 +1,35 @@
+
+<div class="row collapse">
+	<div class="small-12 columns library-document">
+		<div class="medium-3 columns text-right">
+			<%= image_tag 'document.png' %>		
+		</div><!--/.medium-3-->
+		<div class="medium-9 columns text-left">
+			
+			<div class="row collapse">
+				<div class="small-12 columns">
+					<%= form_for library_document, remote: true do |f| %>
+						<%= f.text_field :filename, label: false, placeholder: "Display Name", class: "library-doc-display-name-input" %>
+					<% end %>
+				</div><!--/.small-12-->
+				<div class="small-12 columns">
+					<%= link_to library_document.file_file_name, library_document.file.url %>			
+				</div><!--/.small-12-->
+				<div class="small-12 columns">
+					<small>Uploaded at <%= library_document.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%d %b %Y at %H:%M %Z") %></small>
+				</div><!--/.small-12-->
+				<div class="small-12 columns">
+					<%= link_to 'DELETE', library_document_delete_url(library_document), :method => :delete, data: { :confirm => 'Are you sure you want to delete this document?'}, class: "itemformlink" %>
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+
+		</div><!--/.medium-9-->
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<br>
+	
+
+
+
+
+

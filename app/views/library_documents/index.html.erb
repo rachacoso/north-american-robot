@@ -1,39 +1,57 @@
 <%= render partial: "shared/topbar" %>
 
 <div class="row collapse">
-  <div class="small-12 columns" id="page-content">
+  <div class="small-12 columns marketplace-header">
+    <%= image_tag "logo_header_marketplace.svg" %>
+  </div>
+</div>
 
-<% if @current_user.subscriber? %>
 <div class="row">
-	<div class="medium-12 medium-centered columns">
+  <div class="small-12 columns marketplace-subpage-header">
+    <div class="small-12 columns" id="your-profile-header">
+      <h1>YOUR GLOBAL TERMS &amp; DOCUMENTS</h1>
+      <h3>Upload Documents</h3>     
+    </div><!--/.small-12-->   
+  </div>
+</div>
 
-<% user = @current_user.brand || @current_user.distributor %>
-
-<% user.library_documents.each do |doc| %>
-  
-    <%= link_to doc.file_file_name, doc.file.url %> | 
-    <%#= image_tag photo.photo.url(:small) %>
-    <%= link_to 'X', library_document_delete_url(doc), :method => 'delete', data: { :confirm => 'Are you sure you want to delete this document?'}  %>
-    <br>
-  <br>
-<% end %>
 
 <% if flash[:error] %>
   <%= flash[:error] %> <br>
 <% end %>
 
-<%= form_for(LibraryDocument.new) do |f| %>
-  <div class="row collapse">
-    <div class="small-6 columns">
-      <%= f.file_field :file, label: "&nbsp;".html_safe, accept: 'application/pdf,application/vnd.ms-excel,application/vnd.ms-powerpoint,application/msword,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document' %>
-    </div>
-    <div class="small-6 columns">
-      <%= f.submit 'Upload Document', :class=> 'button small postfix' %>
-    </div>
-  </div>
-<% end %>
+
+<div class="row collapse">
+  <div class="small-12 columns" id="page-content">
+
+<% if @current_user.subscriber? %>
+
+<div class="row">
+	<div class="medium-4 columns">
+
+    <div class="text-center"><h2>Products List </h2></div>
+    <%= render  @documents_products_list %>
+    <br>
+    <%= render partial: "upload_form", locals: {doc_type: "Products List"} %>
 
 	</div>
+  <div class="medium-4 columns">
+
+    <div class="text-center"><h2>FOB Pricing</h2></div>
+
+    <%= render @documents_fob_pricing %>
+    <br>
+    <%= render partial: "upload_form", locals: {doc_type: "FOB Pricing"} %>
+
+  </div>
+  <div class="medium-4 columns">
+
+    <div class="text-center"><h2>Tiered Pricing Schedule</h2></div>
+    <%= render @documents_tiered_pricing_schedule %>
+    <br>
+    <%= render partial: "upload_form", locals: {doc_type: "Tiered Pricing Schedule"} %>
+
+  </div>
 </div>
 
 <% else %>

@@ -45,7 +45,7 @@ Rails.application.routes.draw do
   resources :product_photos, only: [:create]
   delete '/product_photos/:id' => 'product_photos#destroy', as: 'product_photo_delete'
 
-  resources :library_documents, only: [:create, :index]
+  resources :library_documents, only: [:update, :create, :index]
   delete '/library_documents/:id' => 'library_documents#destroy', as: 'library_document_delete'
 
 
