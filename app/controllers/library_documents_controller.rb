@@ -34,7 +34,8 @@ class LibraryDocumentsController < ApplicationController
 	end
 
 	def update
-		library_document = LibraryDocument.find(params[:id])
+		@id = params[:id]
+		library_document = LibraryDocument.find(@id)
 		library_document.update(library_document_parameters)
 		respond_to do |format|
 			format.html

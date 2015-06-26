@@ -1,0 +1,4 @@
+$('#filename-update-alert-<%= @id %>').html("<small style='color:green;'>updated</small>").fadeIn();
+setTimeout(function(){
+  $('#filename-update-alert-<%= @id %>').fadeOut();
+}, 2000);

@@ -3,7 +3,19 @@
 @import "global_variables";
 @import "mixins";
 
+.library-document, .library-document-upload {
+	height: rem-calc(180);
+}
 .library-document {
 	background: white;
-	padding: rem-calc(10)
+	padding: rem-calc(10);
+}
+.library-document-upload {
+	padding-top: rem-calc(25);
+	border: 1px dotted $landing-middle-gray;
+}
+
+.library-document-header {
+	background: $landing-light-gray;
+	margin-bottom: rem-calc(10);
 }

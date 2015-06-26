@@ -1,4 +1,5 @@
 
+<li>
 <div class="row collapse">
 	<div class="small-12 columns library-document">
 		<div class="medium-3 columns text-right">
@@ -8,7 +9,11 @@
 			
 			<div class="row collapse">
 				<div class="small-12 columns">
+					
 					<%= form_for library_document, remote: true do |f| %>
+						<%= f.label :filename do %>
+							Display Name <strong><span id="filename-update-alert-<%= library_document.id %>" style="display:none;"></span></strong>
+						<% end %>
 						<%= f.text_field :filename, label: false, placeholder: "Display Name", class: "library-doc-display-name-input" %>
 					<% end %>
 				</div><!--/.small-12-->
@@ -26,7 +31,7 @@
 		</div><!--/.medium-9-->
 	</div><!--/.small-12-->
 </div><!--/.row-->
-<br>
+</li>
 	
 
 

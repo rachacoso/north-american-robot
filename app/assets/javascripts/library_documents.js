@@ -14,6 +14,5 @@ $( document ).ready(function() {
 
   $('.library-doc-display-name-input').change(function() {
   	$( this ).closest("form").submit();
-
   });
 });

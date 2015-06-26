@@ -10,7 +10,7 @@
   <div class="small-12 columns marketplace-subpage-header">
     <div class="small-12 columns" id="your-profile-header">
       <h1>YOUR GLOBAL TERMS &amp; DOCUMENTS</h1>
-      <h3>Upload Documents</h3>     
+      <h3>Your Documents and Contract Terms</h3>     
     </div><!--/.small-12-->   
   </div>
 </div>
@@ -26,33 +26,74 @@
 
 <% if @current_user.subscriber? %>
 
-<div class="row">
-	<div class="medium-4 columns">
+  <% if @current_user.brand %>
+  <div class="row collapse">
+   <div class="small-12 columns">
+    <div class="library-document-header">
+      <div class="row">
+        <div class="small-12 columns">
+          <h2>Products List </h2>
+        </div><!--/.small-12-->
+      </div><!--/.row-->
+    </div><!--/.library-document-header-->
+   </div><!--/.small-12-->
+  </div><!--/.row-->
+  <div class="row">
+    <div class="small-12 columns">
+      <ul class="small-block-grid-1 medium-block-grid-3">
+        <%= render  @documents_products_list %>
+        <li><%= render partial: "upload_form", locals: {doc_type: "Products List"} %></li>
+      </ul>    
+    </div><!--/.small-12-->
+  </div><!--/.row-->
 
-    <div class="text-center"><h2>Products List </h2></div>
-    <%= render  @documents_products_list %>
-    <br>
-    <%= render partial: "upload_form", locals: {doc_type: "Products List"} %>
+  <div class="row collapse">
+   <div class="small-12 columns">
+    <div class="library-document-header">
+      <div class="row">
+        <div class="small-12 columns">
+          <h2>FOB Pricing </h2>
+        </div><!--/.small-12-->
+      </div><!--/.row-->
+    </div><!--/.library-document-header-->
+   </div><!--/.small-12-->
+  </div><!--/.row-->
+  <div class="row">
+    <div class="small-12 columns">
+      <ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
+        <%= render  @documents_fob_pricing %>
+        <li><%= render partial: "upload_form", locals: {doc_type: "FOB Pricing"} %></li>
+      </ul>    
+    </div><!--/.small-12-->
+  </div><!--/.row-->
 
-	</div>
-  <div class="medium-4 columns">
+  <div class="row collapse">
+   <div class="small-12 columns">
+    <div class="library-document-header">
+      <div class="row">
+        <div class="small-12 columns">
+          <h2>Tiered Pricing Schedule </h2>
+        </div><!--/.small-12-->
+      </div><!--/.row-->
+    </div><!--/.library-document-header-->
+   </div><!--/.small-12-->
+  </div><!--/.row-->
+  <div class="row">
+    <div class="small-12 columns">
+      <ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
+        <%= render  @documents_tiered_pricing_schedule %>
+        <li><%= render partial: "upload_form", locals: {doc_type: "Tiered Pricing Schedule"} %></li>
+      </ul>    
+    </div><!--/.small-12-->
+  </div><!--/.row-->
 
-    <div class="text-center"><h2>FOB Pricing</h2></div>
+  <% elsif @current_user.distributor %>
 
-    <%= render @documents_fob_pricing %>
-    <br>
-    <%= render partial: "upload_form", locals: {doc_type: "FOB Pricing"} %>
 
-  </div>
-  <div class="medium-4 columns">
 
-    <div class="text-center"><h2>Tiered Pricing Schedule</h2></div>
-    <%= render @documents_tiered_pricing_schedule %>
-    <br>
-    <%= render partial: "upload_form", locals: {doc_type: "Tiered Pricing Schedule"} %>
 
-  </div>
-</div>
+
+  <% end %>
 
 <% else %>
 <div class="row">
