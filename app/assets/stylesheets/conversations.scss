@@ -138,11 +138,42 @@ top: 10px;
 
 }
 
+
+.convo-map {
+  background-color: $landing-light-gray;
+  height: rem-calc(50);
+  position: relative;
+}
+
+
+.convo-map.active {
+  background-color: $landing-blue;
+}
+.convo-map.done {
+  background-color: $landing-middle-gray;
+}
+
+.convo-map.active:after {
+  content: ' ';
+  height: 0;
+  position: absolute;
+  width: 0;
+
+  border: rem-calc(25) solid transparent;
+  border-left-color: $landing-blue;
+
+  top: 0px;
+  right: rem-calc(-50);
+  z-index: 1;
+}
+
 .conversation-header {
   background-color: $landing-middle-gray;
+  height: rem-calc(50);
   &.active {
     background-color: $landing-blue;
   }
+  position: relative;
 }
 
 // CONVERSATIONS INDEX STYLING (UPDATED)
