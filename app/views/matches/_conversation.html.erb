@@ -49,30 +49,38 @@
 
 						<div class="row collapse">
 							<div class="medium-3 columns text-center">
-								<div class="<%= contact_stage_indicator(match, "contact") %>"><h1><%= link_to 'CONTACT', '#', id: "contact-toggle", style: "color:black;" %></h1></div>
+								<div id="conversation-map-contact" class="<%= contact_stage_indicator(match, "contact") %>"><h1><%= link_to 'CONTACT', '#', id: "contact-toggle", style: "color:black;" %></h1></div>
 							</div><!--/.medium-5-->
 							<div class="medium-3 columns text-center">
-								<div class="<%= contact_stage_indicator(match, "prepare") %>"><h1><%= link_to 'PREPARE', '#', id: "prepare-toggle", style: "color:black;" %></h1></div>
+								<div id="conversation-map-prepare" class="<%= contact_stage_indicator(match, "prepare") %>"><h1><%= link_to 'PREPARE', '#', id: "prepare-toggle", style: "color:black;" %></h1></div>
 							</div><!--/.medium-5-->
 							<div class="medium-3 columns text-center">
-								<div class="<%= contact_stage_indicator(match, "terms") %>"><h1><%= link_to 'TERMS', '#', id: "terms-toggle", style: "color:black;" %></h1></div>
+								<div id="conversation-map-terms" class="<%= contact_stage_indicator(match, "terms") %>"><h1><%= link_to 'TERMS', '#', id: "terms-toggle", style: "color:black;" %></h1></div>
 							</div><!--/.medium-5-->
 							<div class="medium-3 columns text-center">
-								<div class="<%= contact_stage_indicator(match, "order") %>"><h1><%= link_to 'ORDER', '#', id: "order-toggle", style: "color:black;" %></h1></div>
+								<div id="conversation-map-order" class="<%= contact_stage_indicator(match, "order") %>"><h1><%= link_to 'ORDER', '#', id: "order-toggle", style: "color:black;" %></h1></div>
 							</div><!--/.medium-5-->
 						</div><!--/.row-->
 
 
 						</div>
 
-						<div class="row collapse" >
+						<div class="row collapse" id="conversation-contact-wrapper">
+							<div class="row collapse">
+								<div class="medium-3 end text-center columns">
+									<h2>Make a connection</h2>
+								</div><!--/.small-12 text-center-->
+							</div><!--/.row-->
 							<div class="medium-4 columns">
 								<div class="conversation-left-info-column">
 									<div id="conversation-info-contact">
-										<h2>Make a connection and find new international partners</h2>
-										<p> Here are some terms you may run into during your conversation: <br>
-										Term 1: definition <br>
+										
+									<div class="conversation-help">
+										<h4><strong>Tips for Making a Connection</strong></h4>
+										<p> 
+											[Helpful text here]
 										</p>
+									</div>
 
 										<% if match && !match.messages.blank? && match.stage == "contact" %>
 											<% if @current_user.brand %>
@@ -104,14 +112,24 @@
 						</div>
 
 
-						<div class="row collapse">
+						<div class="row collapse" id="conversation-prepare-wrapper">
+							<div class="row collapse">
+								<div class="medium-3 hide-for-small-only columns"><hr></div><!--/.medium-9-->
+								<div class="medium-3 end text-center columns">
+									<h2>Prepare for Export</h2>
+								</div><!--/.small-12 text-center-->
+							</div><!--/.row-->
 							<div class="medium-4 columns">
 								<div class="conversation-left-info-column">
 									<div id="conversation-info-prepare">
-										<h2>Prepare stuff</h2>
-										<p> Here are some terms you may run into during your conversation: <br>
-										Term 1: definition <br>
+
+									<div class="conversation-help">
+										<h4><strong>Tips for Preparing for Export</strong></h4>
+										<p> 
+											[Helpful text here]
 										</p>
+									</div>
+
 										<% if match && !match.messages.blank? && match.stage == "prepare"  %>
 											<%= link_to 'Would you like to...', match_stage_url(:stage => 'terms', :mid => match.id  ), class: "button", remote: true %>
 										<% end %>
@@ -128,14 +146,24 @@
 						</div>
 
 
-						<div class="row collapse">
+						<div class="row collapse" id="conversation-terms-wrapper">
+							<div class="row collapse">
+								<div class="medium-6 hide-for-small-only columns"><hr></div><!--/.medium-9-->
+								<div class="medium-3 end text-center columns">
+									<h2>Negotiate Terms</h2>
+								</div><!--/.small-12 text-center-->
+							</div><!--/.row-->
 							<div class="medium-4 columns">
 								<div class="conversation-left-info-column">
 									<div id="conversation-info-terms">
-										<h2>Negotiate Terms</h2>
-										<p> Here are some terms you may run into during your conversation: <br>
-										Term 1: definition <br>
+
+									<div class="conversation-help">
+										<h4><strong>Tips for Negotiating Terms</strong></h4>
+										<p> 
+											[Helpful text here]
 										</p>
+									</div>
+
 										<% if match && !match.messages.blank? && match.stage == "terms"  %>
 											<%= link_to 'Would you like to...', match_stage_url(:stage => 'order', :mid => match.id  ), class: "button", remote: true %>
 										<% end %>
@@ -152,14 +180,23 @@
 						</div>
 
 
-						<div class="row collapse" data-equalizer>
+						<div class="row collapse" id="conversation-order-wrapper">
+							<div class="row collapse">
+								<div class="medium-9 hide-for-small-only columns"><hr></div><!--/.medium-9-->
+								<div class="medium-3 text-center columns">
+									<h2>Complete Order</h2>
+								</div><!--/.small-12 text-center-->
+							</div><!--/.row-->
 							<div class="medium-4 columns">
 								<div class="conversation-left-info-column">
 									<div id="conversation-info-order">
-										<h2>Prepare Orders</h2>
+										
+									<div class="conversation-help">
+										<h4><strong>Tips for Completing Orders</strong></h4>
 										<p> 
-											Start your ordering
+											[Helpful text here]
 										</p>
+									</div>
 
 									</div>
 								</div>

@@ -1,56 +1,51 @@
 
 function initConversations() {
-	var conversationInfoID = '#conversation-info-' + conversationStage
-	var conversationID = '#conversation-' + conversationStage
-	$(conversationInfoID).show();
+	var conversationID = '#conversation-' + conversationStage + '-wrapper'
 	$(conversationID).show();
 
 	$('#contact-toggle').on('click', function(e){
 		e.preventDefault();
-		$('#conversation-info-contact').toggle(1000);
-		$('#conversation-contact').toggle(1000);
-		$('#conversation-info-prepare').hide(1000);
-		$('#conversation-prepare').hide(1000);
-		$('#conversation-info-terms').hide(1000);
-		$('#conversation-terms').hide(1000);
-		$('#conversation-info-order').hide(1000);
-		$('#conversation-order').hide(1000);		
+
+		$('#conversation-contact-wrapper').show(1000);
+		$('#conversation-prepare-wrapper').hide(1000);
+		$('#conversation-terms-wrapper').hide(1000);
+		$('#conversation-order-wrapper').hide(1000);
+
+		$('.convo-map').removeClass('viewing');
+		$('#conversation-map-contact').addClass('viewing');
 	});
 
 	$('#prepare-toggle').on('click', function(e){
 		e.preventDefault();
-		$('#conversation-info-contact').hide(1000);
-		$('#conversation-contact').hide(1000);
-		$('#conversation-info-prepare').toggle(1000);
-		$('#conversation-prepare').toggle(1000);
-		$('#conversation-info-terms').hide(1000);
-		$('#conversation-terms').hide(1000);
-		$('#conversation-info-order').hide(1000);
-		$('#conversation-order').hide(1000);	
+		$('#conversation-contact-wrapper').hide(1000);
+		$('#conversation-prepare-wrapper').show(1000);
+		$('#conversation-terms-wrapper').hide(1000);
+		$('#conversation-order-wrapper').hide(1000);
+
+		$('.convo-map').removeClass('viewing');
+		$('#conversation-map-prepare').addClass('viewing');
 	});
 
 	$('#terms-toggle').on('click', function(e){
 		e.preventDefault();
-		$('#conversation-info-contact').hide(1000);
-		$('#conversation-contact').hide(1000);
-		$('#conversation-info-prepare').hide(1000);
-		$('#conversation-prepare').hide(1000);
-		$('#conversation-info-terms').toggle(1000);
-		$('#conversation-terms').toggle(1000);
-		$('#conversation-info-order').hide(1000);
-		$('#conversation-order').hide(1000);		
+		$('#conversation-contact-wrapper').hide(1000);
+		$('#conversation-prepare-wrapper').hide(1000);
+		$('#conversation-terms-wrapper').show(1000);
+		$('#conversation-order-wrapper').hide(1000);
+
+		$('.convo-map').removeClass('viewing');
+		$('#conversation-map-terms').addClass('viewing');
 	});
 
 	$('#order-toggle').on('click', function(e){
 		e.preventDefault();
-		$('#conversation-info-contact').hide(1000);
-		$('#conversation-contact').hide(1000);
-		$('#conversation-info-prepare').hide(1000);
-		$('#conversation-prepare').hide(1000);
-		$('#conversation-info-terms').hide(1000);
-		$('#conversation-terms').hide(1000);
-		$('#conversation-info-order').toggle(1000);
-		$('#conversation-order').toggle(1000);	
+		$('#conversation-contact-wrapper').hide(1000);
+		$('#conversation-prepare-wrapper').hide(1000);
+		$('#conversation-terms-wrapper').hide(1000);
+		$('#conversation-order-wrapper').show(1000);
+
+		$('.convo-map').removeClass('viewing');
+		$('#conversation-map-order').addClass('viewing');
 	});		
 
 }

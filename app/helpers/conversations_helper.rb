@@ -6,25 +6,25 @@ module ConversationsHelper
 		case div
 		when "contact"
 			if stage == "contact"
-				c = "active"
+				c = "active viewing"
 			else 
 				c = "done"
 			end
 		when "prepare"
 			if stage == "prepare"
-				c = "active"
+				c = "active viewing"
 			elsif stage == "terms" || stage == "order"
 				c = "done"
 			end
 		when "terms"
 			if stage == "terms"
-				c = "active"
+				c = "active viewing"
 			elsif stage == "order"
 				c = "done"
 			end
 		when "order"
 			if stage == "order"
-				c = "active"
+				c = "active viewing end"
 			end
 		end
 
