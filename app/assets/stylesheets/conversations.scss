@@ -131,7 +131,8 @@ top: 10px;
 
 }
 .conversation-left-info-column {
-  padding: rem-calc(10);
+
+
 }
 
 .conversation-right-message-column {
@@ -205,17 +206,31 @@ top: 10px;
   }
 }
 
-.conversation-help {
+.conversation-help,
+.conversation-action {
   background: $landing-light-gray;
   border: 1px solid $landing-light-gray;
   padding: rem-calc(5);
-  border-radius: 5px;
+  border-radius: 0 5px 5px 0;
   margin-left: 0;
   margin-right: rem-calc(70);
+  margin-bottom: rem-calc(50);
 }
+
+// @media #{$small-only} {
+//   .conversation-help,
+//   .conversation-action {
+//     margin-right: rem-calc(70);
+//   }
+// }
+
 #conversation-contact-wrapper,
 #conversation-prepare-wrapper,
 #conversation-terms-wrapper,
-#conversation-order-wrapper {
+#conversation-order-wrapper,
+#conversation-map-contact-subhead,
+#conversation-map-prepare-subhead,
+#conversation-map-terms-subhead,
+#conversation-map-order-subhead {
   display: none;
 }
