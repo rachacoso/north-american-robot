@@ -17,10 +17,6 @@ $bubble-font-size: 0.8em;
   border-top: 0px solid transparent;
 }
 
-#message-input {
-  background-color: scale-color($landing-blue, $lightness: 95%);
-  border: none;
-}
 
 .bubble-them
 {
@@ -234,3 +230,46 @@ top: 10px;
 #conversation-map-order-subhead {
   display: none;
 }
+
+#profile-conversation-wrapper {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+#profile-profile-wrapper {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.conversation-block{
+  height: 75%;
+  overflow-y: scroll;
+  h3 {
+    color: white;
+  }
+  & #top {
+    height: 75%;
+    overflow-y: scroll;
+    border-left: 2px solid $landing-light-gray;
+    border-top: 2px solid $landing-light-gray;
+    border-bottom: 1px solid transparent;
+    padding: rem-calc(5);
+  }
+  & #bottom {
+    overflow-y: hidden; 
+    padding: rem-calc(10);
+    background: $landing-middle-gray;
+  }
+  & #message-input {
+    height: 5em;
+    background-color: scale-color($landing-blue, $lightness: 95%);
+    border: 1px solid scale-color($landing-blue, $lightness: 65%);
+  }  
+  & #message-submit {
+    height: 5em;
+    display: none;
+  }
+  & #message-cancel {
+    display: none;
+  }
+}
+

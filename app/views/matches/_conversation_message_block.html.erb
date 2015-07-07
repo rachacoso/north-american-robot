@@ -1,110 +1,106 @@
+
 <% if match %>
+	<div class="conversation-block">
 
-	<% if i_contacted(match) %>
-		<%#= render partial: "outgoing_contact" %>
+		<div id="top" class="expand">
+			<% if i_contacted(match) %>
+				<%#= render partial: "outgoing_contact" %>
 
-		<% if stage == "contact" %>
-			<div class="row">
-				<div class="small-2 small-push-10 columns">
-					<%= image_tag @current_user.send(@current_user.type?).logo.url(:medium) %>
-				</div>				
-				<div class="small-10 small-pull-2 columns">
-
+				<% if stage == "contact" %>
 					<div class="row">
-						<div class="small-11 small-push-1 columns">
-							<div class="bubble-container">
-								<div class="bubble-you">
-									<%= simple_format(match.intro_message) %>
+						<div class="small-2 small-push-10 columns">
+							<%= image_tag @current_user.send(@current_user.type?).logo.url(:medium) %>
+						</div>				
+						<div class="small-10 small-pull-2 columns">
+
+							<div class="row">
+								<div class="small-11 small-push-1 columns">
+									<div class="bubble-container">
+										<div class="bubble-you">
+											<%= simple_format(match.intro_message) %>
+										</div>
+										<div class="text-right"><small>Sent <%= match.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%d %b %Y at %H:%M %Z") %></small></div>
+									</div>
 								</div>
-								<div class="text-right"><small>Sent <%= match.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%d %b %Y at %H:%M %Z") %></small></div>
 							</div>
-						</div>
+
+						</div>	
 					</div>
+				<% end %>
+		 
 
-
-				</div>	
-			</div>
-		<% end %>
- 
-
-	 	<div id="message-list-<%=stage%>">
-		<% if !match.messages.blank? %>
-		<%= render partial: 'shared/messages/message_list', locals: {stage: stage} %>
-		<% end %>
-		</div>
-
-
-	<% else %>
-		<%#= render partial: "incoming_contact" %>
-		<% if stage == "contact" %>
-			<div class="row">
-				<div class="medium-2 hide-for-small-only columns">
-					<%= image_tag match.send(@current_user.type_inverse?).logo.url(:medium) %>
-				</div>				
-				<div class="small-11 medium-10 columns">
-
-					<div class="row">
-						<div class="small-11 columns">					
-							<div class="bubble-container">
-								<div class="bubble-them">
-									<%= simple_format(match.intro_message) %>
-								</div>
-								<small>Sent <%= match.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%d %b %Y at %H:%M %Z") %></small>	
-							</div>
-						</div>
-					</div>
-
+			 	<div id="message-list-<%=stage%>">
+				<% if !match.messages.blank? %>
+				<%= render partial: 'shared/messages/message_list', locals: {stage: stage} %>
+				<% end %>
 				</div>
-			</div>
-		<% end %>
-
-		<div id="message-list-<%=stage%>">
-		<% if !match.messages.blank? %>
-		<%= render partial: 'shared/messages/message_list', locals: {stage: stage} %>
-		<% end %>
-		</div>
-
-	<% end %>
 
 
-	<% if match.stage == stage %>
-		<% unless i_contacted(match) && match.messages.blank? %>
-			<div class="row">
-				
-				<div class="small-2 small-push-10 columns">
-					<%= image_tag @current_user.send(@current_user.type?).logo.url(:medium) %>
-				</div><!--/.small-12-->
-				<div class="small-10 small-pull-2 columns">
-					<div class="small-11 small-push-1 columns">	
-						<%= form_for Message.new, remote: true do |f| %>
-						<div class="bubble-container">
-						<div class="bubble-you">
+			<% else %>
+				<%#= render partial: "incoming_contact" %>
+				<% if stage == "contact" %>
+					<div class="row">
+						<div class="medium-2 hide-for-small-only columns">
+							<%= image_tag match.send(@current_user.type_inverse?).logo.url(:medium) %>
+						</div>				
+						<div class="small-11 medium-10 columns">
+
+							<div class="row">
+								<div class="small-11 columns">					
+									<div class="bubble-container">
+										<div class="bubble-them">
+											<%= simple_format(match.intro_message) %>
+										</div>
+										<small>Sent <%= match.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%d %b %Y at %H:%M %Z") %></small>	
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				<% end %>
+
+				<div id="message-list-<%=stage%>">
+				<% if !match.messages.blank? %>
+				<%= render partial: 'shared/messages/message_list', locals: {stage: stage} %>
+				<% end %>
+				</div>
+
+			<% end %>
+
+		</div><!--/.top-->
+
+
+		<div id="bottom">
+
+			<% if match.stage == stage %>
+				<% unless i_contacted(match) && match.messages.blank? %>
+					<%= form_for Message.new, remote: true do |f| %>				
 						<div class="row">
-							<div class="small-11 small-centered columns">
+							<div class="small-2 columns">
+								<h3>SEND MESSAGE</h3>
+							</div>
+							<div class="small-8 columns">
+
 								<%= f.text_area :text, label: false, id: "message-input", rows: "5" %>
-								<%#= f.hidden_field :recipient, value: (@current_user.type? == 'distributor' ? 'brand' : 'distributor') %>
 								<% if match.messages.blank? %>
-								<%= f.hidden_field :new_contact, value: 'true' %>
+									<%= f.hidden_field :new_contact, value: 'true' %>
 								<% end %>
 								<%= hidden_field_tag :match_id, match.id %>
 							</div>
+							<div class="small-2 columns">
+								<%= f.submit 'SEND MESSAGE', :class => "button tiny expand alert postfix", :id => 'message-submit'%>
+								<%#= image_tag @current_user.send(@current_user.type?).logo.url(:medium) %>
+								<%= link_to 'CANCEL', '#', :id => 'message-cancel', class: 'button secondary tiny' %>
+							</div><!--/.small-12-->	
 						</div>
-						</div>
-						</div>
-						<div class="row">
-							<div class="small-11 small-centered columns text-right">
-								<%= f.submit 'Send Message', :class => " button tiny expand alert", :style => "margin-top: 0;" %>
-							</div>
-						</div>
-						<% end %>
-					</div>
-					
-				</div>				
-			</div>
-		<% end %>
-	<% end %>
+					<% end %>
+				<% end %>
+			<% end %>
 
+		</div><!--/.bottom-->
 
+	</div><!--/.conversation-block -->
 <% end %>
 
 

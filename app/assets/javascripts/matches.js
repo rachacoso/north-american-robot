@@ -10,11 +10,13 @@ $( document ).ready(function() {
 				$('#tab-profile').removeClass('active');
 				$('#profile-profile-wrapper').hide();
 				$('#profile-conversation-wrapper').show();
+				setDivHeight('#profile-conversation-wrapper');
 			} else if (thisId == "tab-profile") {
 				$('#tab-conversation').removeClass('active');
 				$('#tab-profile').addClass('active');
 				$('#profile-conversation-wrapper').hide();
 				$('#profile-profile-wrapper').show();
+				setDivHeight('#profile-profile-wrapper');
 				initFullProfile(true);
 			}
 		}

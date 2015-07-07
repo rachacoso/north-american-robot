@@ -1,11 +1,30 @@
+$(window).on('resize', function(){
+	initConversations();
+});
+
+function setDivHeight(thisDiv) {
+	var viewportHeight = $(window).height(),
+	    elementOffset = $(thisDiv).offset().top,
+	    height      = (viewportHeight - elementOffset);
+  $(thisDiv).height(height);
+}
 
 function initConversations() {
 
-	var animationSpeed = 500;
-	var conversationID = '#conversation-' + conversationStage + '-wrapper'
-	var conversationMapID = '#conversation-map-' + conversationStage + '-subhead'
+	var animationSpeed = 500,
+			conversationID = '#conversation-' + conversationStage + '-wrapper',
+			conversationMapID = '#conversation-map-' + conversationStage + '-subhead';
 	$(conversationID).slideDown();
 	$(conversationMapID).slideDown();
+
+	setDivHeight('#profile-conversation-wrapper');
+	setDivHeight('#profile-profile-wrapper');
+	setDivHeight('.conversation-block');
+
+}
+
+$( document ).ready(function() {
+		var animationSpeed = 500
 
 	$('#contact-toggle').on('click', function(e){
 		e.preventDefault();
@@ -72,8 +91,6 @@ function initConversations() {
 		$('#conversation-map-order').addClass('viewing');
 	});		
 
-
-
 	$('#contact-action-toggle').on('click', function(e){
 		e.preventDefault();
 		$('#conversation-contact-wrapper .conversation-left-info-column').removeClass('medium-4').addClass('medium-6');
@@ -89,4 +106,22 @@ function initConversations() {
 		$('.conversation-action#contact-two').hide(animationSpeed);
 	});		
 
-}
+
+	$('#message-input').on('focus', function(){
+		$('.conversation-block #top').animate({height:'45%'});
+		$('.conversation-block #bottom').animate({height:'55%'});
+		$('.conversation-block #message-input').animate({height:'20em'});
+		$('#message-submit').show();
+		$('#message-cancel').show();
+	});
+
+	$('#message-cancel').on('click', function(e){
+		e.preventDefault();
+		$('.conversation-block #top').animate({height:'75%'});
+		$('.conversation-block #bottom').animate({height:'25%'});
+		$('.conversation-block #message-input').animate({height:'5em'});
+		$('#message-submit').hide();
+		$('#message-cancel').hide();
+	});
+
+});

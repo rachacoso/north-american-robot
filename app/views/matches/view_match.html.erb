@@ -1,16 +1,16 @@
 
-<%= render partial: "shared/topbar" %>
+<%#= render partial: "shared/topbar" %>
 
 <div class="row collapse">
 	<div class="small-12 columns marketplace-header">
-	<div class="small-4 columns">
-		<%= link_to all_matches_url do %>
-		<%= image_tag "logo_header_marketplace.svg" %> 
-		<% end %>
-	</div>
-	<div class="small-8 columns text-right">
-		<h2><%= @current_user.type_inverse?.capitalize %> profile</h2>
-	</div>
+		<div class="small-4 columns">
+			<%= link_to all_matches_url do %>
+			<%= image_tag "logo_header_marketplace.svg" %> 
+			<% end %>
+		</div>
+		<div class="small-8 columns text-right">
+			<h2><%= @current_user.type_inverse?.capitalize %> profile</h2>
+		</div>
 	</div>
 </div>
 
