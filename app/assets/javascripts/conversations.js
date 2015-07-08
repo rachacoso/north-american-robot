@@ -2,10 +2,12 @@ $(window).on('resize', function(){
 	initConversations();
 });
 
-function setDivHeight(thisDiv) {
+function setDivHeight(thisDiv, offset) {
+	offset = typeof offset !== 'undefined' ?  offset : 1;
+
 	var viewportHeight = $(window).height(),
 	    elementOffset = $(thisDiv).offset().top,
-	    height      = (viewportHeight - elementOffset - 5);
+	    height      = (viewportHeight - elementOffset - offset);
   $(thisDiv).height(height);
 }
 
@@ -19,7 +21,7 @@ function initConversations() {
 
 	setDivHeight('#profile-conversation-wrapper');
 	setDivHeight('#profile-profile-wrapper');
-	setDivHeight('.conversation-block');
+	setDivHeight('.conversation-block', 5);
 
 }
 
