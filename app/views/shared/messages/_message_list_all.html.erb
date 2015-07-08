@@ -1,5 +1,6 @@
+<% stage_messages = @messages.where(stage: stage) %>
 
-	<% @messages.each do |m| %>
+	<% stage_messages.each do |m| %>
 	<div class="row">
 		<div class="<%= m.recipient == @current_user.type? ? "medium-2" : "medium-2 medium-push-10" %> hide-for-small-only columns">
 			<% if m.recipient == @current_user.type? %>
