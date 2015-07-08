@@ -59,7 +59,7 @@ class MessagesController < ApplicationController
 		if !params[:match_id].blank? && !params[:stage].blank?
 			user = @current_user.distributor || @current_user.brand
 			match = user.matches.find(params[:match_id])		
-			@messages = match.messages
+			@messages = match.messages.order_by(:c_at.asc)
 			if ['contact','prepare','terms','order'].include? params[:stage]
 				@stage = params[:stage]
 			else
