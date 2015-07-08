@@ -258,7 +258,7 @@ class MatchesController < ApplicationController
 
     if @current_user.distributor 
       @match = Brand.find(params[:match_id])
-      @messages = @current_user.distributor.matches.where(brand_id: @match.id).first.messages rescue nil
+      @messages = @current_user.distributor.matches.where(brand_id: @match.id).first.messages.order_by(:c_at.asc) rescue nil
 
 
       # @gallery = Array.new
@@ -269,7 +269,7 @@ class MatchesController < ApplicationController
 
     else # is a brand
       @match = Distributor.find(params[:match_id])
-      @messages = @current_user.brand.matches.where(distributor_id: @match.id).first.messages rescue nil
+      @messages = @current_user.brand.matches.where(distributor_id: @match.id).first.messages.order_by(:c_at.asc) rescue nil
       @brands_list = @match.distributor_brands.pluck(:id)
       @gallery = ProductPhoto.where(:photographable_id.in => @brands_list)
     end

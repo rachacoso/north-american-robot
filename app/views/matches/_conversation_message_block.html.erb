@@ -31,7 +31,7 @@
 
 			 	<div id="message-list-<%=stage%>">
 				<% if !match.messages.blank? %>
-				<%= render partial: 'shared/messages/message_list', locals: {stage: stage} %>
+				<%= render partial: 'shared/messages/message_list_all', locals: {stage: stage} %>
 				<% end %>
 				</div>
 
@@ -62,7 +62,7 @@
 
 				<div id="message-list-<%=stage%>">
 				<% if !match.messages.blank? %>
-				<%= render partial: 'shared/messages/message_list', locals: {stage: stage} %>
+				<%= render partial: 'shared/messages/message_list_all', locals: {stage: stage} %>
 				<% end %>
 				</div>
 
