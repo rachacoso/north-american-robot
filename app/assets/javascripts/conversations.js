@@ -5,7 +5,7 @@ $(window).on('resize', function(){
 function setDivHeight(thisDiv) {
 	var viewportHeight = $(window).height(),
 	    elementOffset = $(thisDiv).offset().top,
-	    height      = (viewportHeight - elementOffset);
+	    height      = (viewportHeight - elementOffset - 5);
   $(thisDiv).height(height);
 }
 
@@ -110,9 +110,10 @@ $( document ).ready(function() {
 	$('#message-input').on('focus', function(){
 		$('.conversation-block #top').animate({height:'45%'});
 		$('.conversation-block #bottom').animate({height:'55%'});
-		$('.conversation-block #message-input').animate({height:'20em'});
-		$('#message-submit').show();
-		$('#message-cancel').show();
+		$('.conversation-block #message-input').animate({height:'15em'}, function() {
+			$('#message-submit').show();
+			$('#message-cancel').show();	
+		});
 	});
 
 	$('#message-cancel').on('click', function(e){
