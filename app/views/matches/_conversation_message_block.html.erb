@@ -1,5 +1,5 @@
 <% if match %>
-	<% if @messages.where(stage: stage).count > 0 %>
+	<% if @messages.where(stage: stage).count > 0 || match.stage == stage %>
 
 		<div class="conversation-block">
 
@@ -30,7 +30,7 @@
 					<% end %>
 			 
 
-				 	<div id="message-list-<%=stage%>">
+				 	<div id="message-list">
 					<% if !match.messages.blank? %>
 					<%= render partial: 'shared/messages/message_list_all', locals: {stage: stage} %>
 					<% end %>
@@ -61,7 +61,7 @@
 						</div>
 					<% end %>
 
-					<div id="message-list-<%=stage%>">
+					<div id="message-list">
 					<% if !match.messages.blank? %>
 					<%= render partial: 'shared/messages/message_list_all', locals: {stage: stage} %>
 					<% end %>

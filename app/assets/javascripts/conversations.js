@@ -25,6 +25,8 @@ function initConversations() {
 	setDivHeight('.conversation-block', 5);
 	setDivHeight('.conversation-left-info-column', 5);
 
+	$(".conversation-block #top").animate({ scrollTop: $(".conversation-block #top")[0].scrollHeight}, 1000);
+
 	$('#contact-action-toggle').on('click', function(e){
 		e.preventDefault();
 		$('#conversation-contact-wrapper .conversation-left-info-column').removeClass('medium-4').addClass('medium-6');
