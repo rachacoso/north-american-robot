@@ -1,5 +1,11 @@
 
-<%#= render partial: "shared/topbar" %>
+<%= render partial: "shared/topbar", locals: {hide_top_bar: true} %>
+	
+<% content_for :javascript_foot do %>
+	<%= javascript_tag do %>
+		toggleTopBar('general');
+	<% end %>
+<% end %>
 
 <div class="row collapse">
 	<div class="small-12 columns marketplace-header">
@@ -9,7 +15,7 @@
 			<% end %>
 		</div>
 		<div class="small-4 columns text-right">
-			<h2><%= @current_user.type_inverse?.capitalize %> profile <a href="#"><i class="fi-list"></i></a></h2>
+			<h2><%= @current_user.type_inverse?.capitalize %> profile <a href="#" id="toggle-topbar"><i class="fi-list"></i></a></h2>
 		</div>
 	</div>
 </div>

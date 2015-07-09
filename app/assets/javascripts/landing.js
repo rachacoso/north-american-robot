@@ -459,5 +459,17 @@ $(document)
     $('.ajax-wait').hide();
   });
 
+function toggleTopBar(thisOne) {
+  var thisBar = "#topbar-" + thisOne
+  console.log(thisBar);
+  $(thisBar).slideUp();
+  $('#toggle-topbar').on('click', function(e){
+    e.preventDefault();
+    $(thisBar).slideToggle();
+    setTimeout(function(){
+      $(thisBar).slideUp();
+    }, 5000);
+  })
+}
 
 
