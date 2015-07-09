@@ -24,7 +24,21 @@
 										<%#= link_to "SHARE PRODUCT &amp; PRICING <br>information with #{profile.company_name}".html_safe, match_share_url(:sharetype => 'pp', :mid => match.id  ), class: "button tiny alert expand", remote: true %>
 									</div>
 									<div class="conversation-action" id="contact-two" style="display: none;">
-										test
+											<h4><strong>Share your stuff</strong></h4>
+											<p>These include:</p>
+											<ul> 
+											<li>Products List</li>
+											<li>FOB Pricing</li>
+											<li>Tiered Pricing Schedule</li>
+											</ul>
+											<p>After sharing, your conversation with <%= profile.company_name %> will proceed to the next stage (PREPARE)</p>
+
+											<%= link_to '#', id: "contact-action-toggle", class: "button tiny alert expand" do %>
+												SHARE PRODUCT &amp; PRICING <br> with <%= profile.company_name %>
+											<% end %>
+											<%= link_to '#', id: "contact-action-cancel", class: "button tiny alert expand" do %>
+												Cancel
+											<% end %>
 									</div>
 									<% elsif @current_user.distributor %>
 										<div class="conversation-action" id="contact-one">

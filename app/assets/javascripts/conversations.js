@@ -29,6 +29,7 @@ function initConversations() {
 		e.preventDefault();
 		$('#conversation-contact-wrapper .conversation-left-info-column').removeClass('medium-4').addClass('medium-6');
 		$('#conversation-contact-wrapper .conversation-right-message-column').removeClass('medium-8').addClass('medium-6');
+		$('.conversation-help').hide(animationSpeed);
 		$('.conversation-action#contact-one').hide(animationSpeed);
 		$('.conversation-action#contact-two').show(animationSpeed);
 	});		
@@ -36,6 +37,7 @@ function initConversations() {
 		e.preventDefault();
 		$('#conversation-contact-wrapper .conversation-left-info-column').removeClass('medium-6').addClass('medium-4');
 		$('#conversation-contact-wrapper .conversation-right-message-column').removeClass('medium-6').addClass('medium-8');
+		$('.conversation-help').show(animationSpeed);
 		$('.conversation-action#contact-one').show(animationSpeed);
 		$('.conversation-action#contact-two').hide(animationSpeed);
 	});		
