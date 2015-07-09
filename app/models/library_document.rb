@@ -3,7 +3,7 @@ class LibraryDocument
   include Mongoid::Timestamps::Short
 	include Mongoid::Paperclip
 
-	field :filename, type: String
+	field :filename, type: String, default: "untitled"
 	field :type, type: String
   has_mongoid_attached_file :file
   	# :path => ':attachment/:id/:style.:extension',

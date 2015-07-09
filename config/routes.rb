@@ -105,6 +105,8 @@ Rails.application.routes.draw do
   get '/matches/share' => 'matches#match_share', as: 'match_share'
   get '/gallery' => 'matches#gallery', as: 'gallery'
 
+  post '/conversations/share' => 'conversations#share', as: 'conversation_share'
+
   resources :messages, only: [:create, :index]
 
   get 'messages/all/:match_id' => 'messages#all_messages', as: 'all_messages'

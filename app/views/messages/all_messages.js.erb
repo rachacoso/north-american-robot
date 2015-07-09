@@ -10,6 +10,10 @@ $('.conversation-map-subhead').hide(250);
 
 $("#conversation-map-<%=@stage%>-subhead").show(250);
 
+
+$('#conversation-contact-wrapper .conversation-left-info-column').removeClass('medium-6').addClass('medium-4');
+$('#conversation-contact-wrapper .conversation-right-message-column').removeClass('medium-6').addClass('medium-8');
+
 $('.convo-map').removeClass('viewing');
 $('#conversation-map-<%=@stage%>').addClass('viewing');
 

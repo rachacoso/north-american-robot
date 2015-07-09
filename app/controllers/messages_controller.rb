@@ -7,7 +7,7 @@ class MessagesController < ApplicationController
 			mm = user.matches
 			m = mm.find(params[:match_id])
 			m.messages << Message.new(recipient: @current_user.type_inverse?, text: params[:message][:text], stage: m.stage, read: false)
-			@messages = m.messages
+			@messages = m.messages.order_by(:c_at.asc)
 
 			# mark as accepted if this is first communication
 			if params[:message][:new_contact]
