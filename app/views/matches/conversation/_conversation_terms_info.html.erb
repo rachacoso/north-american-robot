@@ -1,0 +1,12 @@
+						<div class="conversation-help">
+							<h4><strong>Tips for Negotiating Terms</strong></h4>
+							<p> 
+								[Helpful text here]
+							</p>
+						</div>
+
+						<% if match && !match.messages.blank? && match.stage == "terms"  %>
+						<div class="conversation-action" id="contact-one">
+							<%= link_to 'Would you like to...', match_stage_url(:stage => 'order', :mid => match.id  ), class: "button", remote: true %>
+						</div>
+						<% end %>

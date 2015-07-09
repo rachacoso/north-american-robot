@@ -4,7 +4,7 @@
 
 	<% content_for :javascript_head do %>
 		<%= javascript_tag do %>
-			var conversationStage = "<%= get_conversation_stage(this_match(profile)) %>";
+			var conversationStage = "<%= @stage %>";
 		<% end %>
 	<% end %>
 
@@ -16,75 +16,73 @@
 
 <div class="row collapse">
 	<div class="small-12 columns">
-
 		<div class="profile-container">
 
+
 			<div class="row collapse">
-				<div class="row">
-					<div class="small-12 columns text-center">
-						<% if i_contacted(match) %>
-							<% if !match.messages.blank? %>
-								<h4>You started a conversation with <%= image_tag match.send(@current_user.type_inverse?).logo.url(:medium), width: 50 %> <strong><%= profile.company_name %></strong></h4>
-							<% else %>
-								<h4><span data-tooltip aria-haspopup="true" class="has-tip radius" title="AWAITING THEIR RESPONSE<BR> <SMALL> CONTACTED ON <%= match.c_at.strftime("%d %B %Y").upcase %></SMALL>">
-								<%= image_tag "match_profile_icons_waiting.svg" %></span>You have requested a conversation with <%= image_tag match.send(@current_user.type_inverse?).logo.url(:medium), width: 50 %> <strong><%= profile.company_name %></strong> and are awaiting a response</h4>
-							<% end %> 								
+				<div class="small-12 columns text-center">
+					<% if i_contacted(match) %>
+						<% if !match.messages.blank? %>
+							<h4>You started a conversation with <%= image_tag match.send(@current_user.type_inverse?).logo.url(:medium), width: 50 %> <strong><%= profile.company_name %></strong></h4>
 						<% else %>
-							<% if !match.messages.blank? %>
-							<h4><%= image_tag match.send(@current_user.type_inverse?).logo.url(:medium), width: 50 %> <strong><%= profile.company_name %></strong> started a conversation with you</h4>
-							<% else %>
-							<div class="row">
-								<div class="medium-6 small-centered columns">
-									
-										<h4><%= image_tag match.send(@current_user.type_inverse?).logo.url(:medium), width: 50 %> <strong><%= profile.company_name %></strong> would like to have a conversation with you</h4>		
-									
-								</div><!--/.small-6-->
-							</div><!--/.row-->
+							<h4><span data-tooltip aria-haspopup="true" class="has-tip radius" title="AWAITING THEIR RESPONSE<BR> <SMALL> CONTACTED ON <%= match.c_at.strftime("%d %B %Y").upcase %></SMALL>">
+							<%= image_tag "match_profile_icons_waiting.svg" %></span>You have requested a conversation with <%= image_tag match.send(@current_user.type_inverse?).logo.url(:medium), width: 50 %> <strong><%= profile.company_name %></strong> and are awaiting a response</h4>
+						<% end %> 								
+					<% else %>
+						<% if !match.messages.blank? %>
+						<h4><%= image_tag match.send(@current_user.type_inverse?).logo.url(:medium), width: 50 %> <strong><%= profile.company_name %></strong> started a conversation with you</h4>
+						<% else %>
+						<div class="row">
+							<div class="medium-6 small-centered columns">
+								
+									<h4><%= image_tag match.send(@current_user.type_inverse?).logo.url(:medium), width: 50 %> <strong><%= profile.company_name %></strong> would like to have a conversation with you</h4>		
+								
+							</div><!--/.small-6-->
+						</div><!--/.row-->
 
-							
-							<% end %>
+						
 						<% end %>
-					</div>
+					<% end %>
 				</div>
-
-				<div class="row collapse">
-					<div class="medium-3 columns text-center">
-						<div id="conversation-map-contact" class="<%= contact_stage_indicator(match, "contact") %>"><h1><%= link_to 'CONTACT', '#', id: "contact-toggle", style: "color:black;" %></h1></div>
-					</div><!--/.medium-5-->
-					<div class="medium-3 columns text-center">
-						<div id="conversation-map-prepare" class="<%= contact_stage_indicator(match, "prepare") %>"><h1><%= link_to 'PREPARE', '#', id: "prepare-toggle", style: "color:black;" %></h1></div>
-					</div><!--/.medium-5-->
-					<div class="medium-3 columns text-center">
-						<div id="conversation-map-terms" class="<%= contact_stage_indicator(match, "terms") %>"><h1><%= link_to 'TERMS', '#', id: "terms-toggle", style: "color:black;" %></h1></div>
-					</div><!--/.medium-5-->
-					<div class="medium-3 columns text-center">
-						<div id="conversation-map-order" class="<%= contact_stage_indicator(match, "order") %>"><h1><%= link_to 'ORDER', '#', id: "order-toggle", style: "color:black;" %></h1></div>
-					</div><!--/.medium-5-->
-				</div><!--/.row-->
-
-
 			</div>
+
+			<div class="row collapse">
+				<div class="medium-3 columns text-center">
+					<div id="conversation-map-contact" class="<%= contact_stage_indicator(match, "contact") %>"><h1><%= link_to 'CONTACT', all_messages_url(stage: 'contact'), style: "color:black;", remote: true %></h1></div>
+				</div><!--/.medium-5-->
+				<div class="medium-3 columns text-center">
+					<div id="conversation-map-prepare" class="<%= contact_stage_indicator(match, "prepare") %>"><h1><%= link_to 'PREPARE', all_messages_url(stage: 'prepare'), style: "color:black;", remote: true %></h1></div>
+				</div><!--/.medium-5-->
+				<div class="medium-3 columns text-center">
+					<div id="conversation-map-terms" class="<%= contact_stage_indicator(match, "terms") %>"><h1><%= link_to 'TERMS', all_messages_url(stage: 'terms'), style: "color:black;", remote: true %></h1></div>
+				</div><!--/.medium-5-->
+				<div class="medium-3 columns text-center">
+					<div id="conversation-map-order" class="<%= contact_stage_indicator(match, "order") %>"><h1><%= link_to 'ORDER', all_messages_url(stage: 'order'), style: "color:black;", remote: true %></h1></div>
+				</div><!--/.medium-5-->
+			</div><!--/.row-->
+
+
 
 
 			<!--CONVERSATION MAP SUBHEAD start-->
-			<div class="row collapse" id="conversation-map-contact-subhead">
+			<div class="row collapse conversation-map-subhead" id="conversation-map-contact-subhead">
 				<div class="medium-3 end text-center columns">
 					<h2>Make a connection</h2>
 				</div><!--/.small-12 text-center-->
 			</div><!--/.row-->
-			<div class="row collapse" id="conversation-map-prepare-subhead">
+			<div class="row collapse conversation-map-subhead" id="conversation-map-prepare-subhead">
 				<div class="medium-3 hide-for-small-only columns"><hr></div><!--/.medium-9-->
 				<div class="medium-3 end text-center columns">
 					<h2>Prepare for Export</h2>
 				</div><!--/.small-12 text-center-->
 			</div><!--/.row-->
-			<div class="row collapse" id="conversation-map-terms-subhead">
+			<div class="row collapse conversation-map-subhead" id="conversation-map-terms-subhead">
 				<div class="medium-6 hide-for-small-only columns"><hr></div><!--/.medium-9-->
 				<div class="medium-3 end text-center columns">
 					<h2>Negotiate Terms</h2>
 				</div><!--/.small-12 text-center-->
 			</div><!--/.row-->
-			<div class="row collapse" id="conversation-map-order-subhead">
+			<div class="row collapse conversation-map-subhead" id="conversation-map-order-subhead">
 				<div class="medium-9 hide-for-small-only columns"><hr></div><!--/.medium-9-->
 				<div class="medium-3 text-center columns">
 					<h2>Complete Order</h2>
@@ -93,186 +91,19 @@
 			<!--CONVERSATION MAP SUBHEAD end-->
 
 			<div class="row collapse" id="conversation-contact-wrapper">
-
 				<div class="medium-4 columns conversation-left-info-column">
-
-						<div id="conversation-info-contact">
-							
-							<% if match.stage == "contact" %>
-								<div class="conversation-help">
-									<h4><strong>Tips for Making a Connection</strong></h4>
-									<p> 
-										[Helpful text here]
-									</p>
-								</div>
-								<% if match && !match.messages.blank? && match.stage == "contact" %>
-									<% if @current_user.brand %>
-									<div class="conversation-action" id="contact-one">
-										<h4><strong>Would you like to share your <br>PRODUCT &amp; PRICING information with <%= profile.company_name %>?</strong></h4>
-										<p>These include these documents that you have uploaded to your Global Terms &amp; Documents:</p>
-										<ul>
-											<li>Products List</li>
-											<li>FOB Pricing</li>
-											<li>Tiered Pricing Schedule</li>
-										</ul>
-										<p>After sharing, your conversation with <%= profile.company_name %> will proceed to the next stage (PREPARE)</p>
-
-										<%= link_to '#', id: "contact-action-toggle", class: "button tiny alert expand" do %>
-											SHARE PRODUCT &amp; PRICING <br> with <%= profile.company_name %>
-										<% end %>
-
-										<%#= link_to "SHARE PRODUCT &amp; PRICING <br>information with #{profile.company_name}".html_safe, match_share_url(:sharetype => 'pp', :mid => match.id  ), class: "button tiny alert expand", remote: true %>
-									</div>
-									<div class="conversation-action" id="contact-two" style="display: none;">
-										test
-									</div>
-									<% elsif @current_user.distributor %>
-										<div class="conversation-action" id="contact-one">
-											<h4><strong>Would you like to share your country’s requirements for this brand and their products?</strong></h4>
-											<p>These include:</p>
-											<ul> 
-												<li>Regulatory Compliance</li>
-												<li>Labeling Requirements</li>
-												<li>Product Tariffs</li>
-											</ul>
-											<p>After sharing, your conversation with <%= profile.company_name %> will proceed to the next stage (PREPARE)</p>
-
-											<%= link_to '#', id: "contact-action-toggle", class: "button tiny alert expand" do %>
-												SHARE COUNTRY REQUIREMENTS <br> with <%= profile.company_name %>
-											<% end %>
-										</div>
-										<div class="conversation-action" id="contact-two" style="display: none;">
-											<h4><strong>Share your stuff</strong></h4>
-											<p>These include:</p>
-											<ul> 
-												<li>Regulatory Compliance</li>
-												<li>Labeling Requirements</li>
-												<li>Product Tariffs</li>
-											</ul>
-											<p>After sharing, your conversation with <%= profile.company_name %> will proceed to the next stage (PREPARE)</p>
-
-											<%= link_to '#', id: "contact-action-toggle", class: "button tiny alert expand" do %>
-												SHARE COUNTRY REQUIREMENTS <br> with <%= profile.company_name %>
-											<% end %>
-											<%= link_to '#', id: "contact-action-cancel", class: "button tiny alert expand" do %>
-												Cancel
-											<% end %>
-										</div>
-									<% end %>
-
-									<% if match.shared_product_pricing && match.shared_country_requirements %>
-										<%= link_to "YES, proceed to PREPARE".html_safe, match_stage_url(:stage => 'prepare', :mid => match.id  ), class: "button alert expand", remote: true %>
-									<% end %>
-								<% end %>
-							<% else %>
-								<div class="conversation-help">
-									<h4><strong>Archived Conversation</strong></h4>
-									<p> 
-										This is your archived CONTACT conversation.
-									</p>
-								</div>
-							<% end %>
-
+						<div id="conversation-info">
+							<%= render partial: "matches/conversation/conversation_#{@stage}_info", locals: {match: match, profile: profile} %>
 						</div>
-
 				</div><!--/.medium-4-->
 				<div class="medium-8 columns conversation-right-message-column">
-
-						<div id="conversation-contact">
-							<%= render partial: "conversation_message_block", locals: {match: match, stage: "contact"} %>
+						<div id="conversation-message-block">
+							<%= render partial: "matches/conversation_message_block", locals: {match: match, stage: @stage} %>
 						</div>
-
-				</div><!--/.medium-8-->
-			</div>
-
-			<div class="row collapse" id="conversation-prepare-wrapper">
-
-				<div class="medium-4 columns">
-					<div class="conversation-left-info-column">
-						<div id="conversation-info-prepare">
-
-						<div class="conversation-help">
-							<h4><strong>Tips for Preparing for Export</strong></h4>
-							<p> 
-								[Helpful text here]
-							</p>
-						</div>
-
-							<% if match && !match.messages.blank? && match.stage == "prepare"  %>
-								<%= link_to 'Would you like to...', match_stage_url(:stage => 'terms', :mid => match.id  ), class: "button", remote: true %>
-							<% end %>
-						</div>
-					</div>
-				</div><!--/.medium-4-->
-				<div class="medium-8 columns">
-					<div class="conversation-right-message-column">
-						<div id="conversation-prepare">
-							<%= render partial: "conversation_message_block", locals: {match: match, stage: "prepare"} %>
-						</div>
-					</div>
-				</div><!--/.medium-8-->
-			</div>
-
-
-
-
-			<div class="row collapse" id="conversation-terms-wrapper">
-				<div class="medium-4 columns">
-					<div class="conversation-left-info-column">
-						<div id="conversation-info-terms">
-
-						<div class="conversation-help">
-							<h4><strong>Tips for Negotiating Terms</strong></h4>
-							<p> 
-								[Helpful text here]
-							</p>
-						</div>
-
-							<% if match && !match.messages.blank? && match.stage == "terms"  %>
-								<%= link_to 'Would you like to...', match_stage_url(:stage => 'order', :mid => match.id  ), class: "button", remote: true %>
-							<% end %>
-						</div>
-					</div>
-				</div><!--/.medium-4-->
-				<div class="medium-8 columns">
-					<div class="conversation-right-message-column">
-						<div id="conversation-terms">
-							<%= render partial: "conversation_message_block", locals: {match: match, stage: "terms"} %>
-						</div>
-					</div>
-				</div><!--/.medium-8-->
-			</div>
-
-
-
-
-			<div class="row collapse" id="conversation-order-wrapper">
-				<div class="medium-4 columns">
-					<div class="conversation-left-info-column">
-						<div id="conversation-info-order">
-							
-						<div class="conversation-help">
-							<h4><strong>Tips for Completing Orders</strong></h4>
-							<p> 
-								[Helpful text here]
-							</p>
-						</div>
-
-						</div>
-					</div>
-				</div><!--/.medium-4-->
-				<div class="medium-8 columns">
-					<div class="conversation-right-message-column">
-						<div id="conversation-order">
-							<%= render partial: "conversation_message_block", locals: {match: match, stage: "order"} %>
-						</div>
-					</div>
 				</div><!--/.medium-8-->
 			</div>
 
 		</div>
-
-
 	</div><!--/.small-12-->
 </div><!--/.row-->
 

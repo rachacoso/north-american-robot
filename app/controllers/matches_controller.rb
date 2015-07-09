@@ -258,9 +258,8 @@ class MatchesController < ApplicationController
 
     if @current_user.distributor 
       @match = Brand.find(params[:match_id])
+      @stage = @current_user.distributor.matches.where(brand_id: params[:match_id]).first.stage rescue nil
       @messages = @current_user.distributor.matches.where(brand_id: @match.id).first.messages.order_by(:c_at.asc) rescue nil
-
-
       # @gallery = Array.new
       @product_list = @match.products.pluck(:id)
       @product_photos = ProductPhoto.where(:photographable_id.in => @product_list)
@@ -269,11 +268,13 @@ class MatchesController < ApplicationController
 
     else # is a brand
       @match = Distributor.find(params[:match_id])
+      @stage = @current_user.brand.matches.where(distributor_id: params[:match_id]).first.stage rescue nil
       @messages = @current_user.brand.matches.where(distributor_id: @match.id).first.messages.order_by(:c_at.asc) rescue nil
       @brands_list = @match.distributor_brands.pluck(:id)
       @gallery = ProductPhoto.where(:photographable_id.in => @brands_list)
     end
 
+    
     @referrer = params[:referrer]
 
   end 

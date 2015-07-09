@@ -1,97 +1,29 @@
 $(window).on('resize', function(){
+	// alert(conversationStage);
 	initConversations();
 });
 
 function setDivHeight(thisDiv, offset) {
 	offset = typeof offset !== 'undefined' ?  offset : 1;
-
 	var viewportHeight = $(window).height(),
 	    elementOffset = $(thisDiv).offset().top,
 	    height      = (viewportHeight - elementOffset - offset);
+	console.log(thisDiv, "viewport:", viewportHeight, "offset:", elementOffset, "height:", height);
   $(thisDiv).height(height);
 }
 
 function initConversations() {
 
 	var animationSpeed = 500,
-			conversationID = '#conversation-' + conversationStage + '-wrapper',
-			conversationMapID = '#conversation-map-' + conversationStage + '-subhead';
+		conversationID = '#conversation-' + conversationStage + '-wrapper',
+		conversationMapID = '#conversation-map-' + conversationStage + '-subhead';
 	$(conversationID).slideDown();
 	$(conversationMapID).slideDown();
 
 	setDivHeight('#profile-conversation-wrapper');
 	setDivHeight('#profile-profile-wrapper');
 	setDivHeight('.conversation-block', 5);
-
-}
-
-$( document ).ready(function() {
-		var animationSpeed = 500
-
-	$('#contact-toggle').on('click', function(e){
-		e.preventDefault();
-
-		$('#conversation-contact-wrapper').slideDown(animationSpeed);
-		$('#conversation-prepare-wrapper').slideUp(animationSpeed);
-		$('#conversation-terms-wrapper').slideUp(animationSpeed);
-		$('#conversation-order-wrapper').slideUp(animationSpeed);
-
-		$('#conversation-map-contact-subhead').show(animationSpeed);
-		$('#conversation-map-prepare-subhead').hide(animationSpeed);
-		$('#conversation-map-terms-subhead').hide(animationSpeed);
-		$('#conversation-map-order-subhead').hide(animationSpeed);
-
-		$('.convo-map').removeClass('viewing');
-		$('#conversation-map-contact').addClass('viewing');
-	});
-
-	$('#prepare-toggle').on('click', function(e){
-		e.preventDefault();
-		$('#conversation-contact-wrapper').slideUp(animationSpeed);
-		$('#conversation-prepare-wrapper').slideDown(animationSpeed);
-		$('#conversation-terms-wrapper').slideUp(animationSpeed);
-		$('#conversation-order-wrapper').slideUp(animationSpeed);
-
-		$('#conversation-map-contact-subhead').hide(animationSpeed);
-		$('#conversation-map-prepare-subhead').show(animationSpeed);
-		$('#conversation-map-terms-subhead').hide(animationSpeed);
-		$('#conversation-map-order-subhead').hide(animationSpeed);
-
-		$('.convo-map').removeClass('viewing');
-		$('#conversation-map-prepare').addClass('viewing');
-	});
-
-	$('#terms-toggle').on('click', function(e){
-		e.preventDefault();
-		$('#conversation-contact-wrapper').slideUp(animationSpeed);
-		$('#conversation-prepare-wrapper').slideUp(animationSpeed);
-		$('#conversation-terms-wrapper').slideDown(animationSpeed);
-		$('#conversation-order-wrapper').slideUp(animationSpeed);
-
-		$('#conversation-map-contact-subhead').hide(animationSpeed);
-		$('#conversation-map-prepare-subhead').hide(animationSpeed);
-		$('#conversation-map-terms-subhead').show(animationSpeed);
-		$('#conversation-map-order-subhead').hide(animationSpeed);
-
-		$('.convo-map').removeClass('viewing');
-		$('#conversation-map-terms').addClass('viewing');
-	});
-
-	$('#order-toggle').on('click', function(e){
-		e.preventDefault();
-		$('#conversation-contact-wrapper').slideUp(animationSpeed);
-		$('#conversation-prepare-wrapper').slideUp(animationSpeed);
-		$('#conversation-terms-wrapper').slideUp(animationSpeed);
-		$('#conversation-order-wrapper').slideDown(animationSpeed);
-
-		$('#conversation-map-contact-subhead').hide(animationSpeed);
-		$('#conversation-map-prepare-subhead').hide(animationSpeed);
-		$('#conversation-map-terms-subhead').hide(animationSpeed);
-		$('#conversation-map-order-subhead').show(animationSpeed);
-
-		$('.convo-map').removeClass('viewing');
-		$('#conversation-map-order').addClass('viewing');
-	});		
+	setDivHeight('.conversation-left-info-column', 5);
 
 	$('#contact-action-toggle').on('click', function(e){
 		e.preventDefault();
@@ -108,7 +40,6 @@ $( document ).ready(function() {
 		$('.conversation-action#contact-two').hide(animationSpeed);
 	});		
 
-
 	$('#message-input').on('focus', function(){
 		$('.conversation-block #top').animate({height:'45%'});
 		$('.conversation-block #bottom').animate({height:'55%'});
@@ -117,7 +48,6 @@ $( document ).ready(function() {
 			$('#message-cancel').show();	
 		});
 	});
-
 	$('#message-cancel').on('click', function(e){
 		e.preventDefault();
 		$('.conversation-block #top').animate({height:'75%'});
@@ -127,4 +57,4 @@ $( document ).ready(function() {
 		$('#message-cancel').hide();
 	});
 
-});
+}

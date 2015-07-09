@@ -57,14 +57,16 @@ class MessagesController < ApplicationController
 	def all_messages
 
 		if !params[:match_id].blank? && !params[:stage].blank?
-			user = @current_user.distributor || @current_user.brand
-			match = user.matches.find(params[:match_id])		
-			@messages = match.messages.order_by(:c_at.asc)
+			if @current_user.brand
+				@match = Distributor.find(params[:match_id])
+				@messages = @current_user.brand.matches.where(distributor_id: @match.id).first.messages.order_by(:c_at.asc) rescue nil
+			elsif @current_user.distributor
+				@match = Brand.find(params[:match_id])
+				@messages = @current_user.distributor.matches.where(brand_id: @match.id).first.messages.order_by(:c_at.asc) rescue nil
+			end
 			if ['contact','prepare','terms','order'].include? params[:stage]
 				@stage = params[:stage]
-			else
-				@stage = match.stage
-			end
+			end			
 		end
 
 	  respond_to do |format|

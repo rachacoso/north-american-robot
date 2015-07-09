@@ -1,0 +1,74 @@
+							<% if match.stage == "contact" %>
+								<div class="conversation-help">
+									<h4><strong>Tips for Making a Connection</strong></h4>
+									<p> 
+										[Helpful text here]
+									</p>
+								</div>
+								<% if match && !match.messages.blank? && match.stage == "contact" %>
+									<% if @current_user.brand %>
+									<div class="conversation-action" id="contact-one">
+										<h4><strong>Would you like to share your <br>PRODUCT &amp; PRICING information with <%= profile.company_name %>?</strong></h4>
+										<p>These include these documents that you have uploaded to your Global Terms &amp; Documents:</p>
+										<ul>
+											<li>Products List</li>
+											<li>FOB Pricing</li>
+											<li>Tiered Pricing Schedule</li>
+										</ul>
+										<p>After sharing, your conversation with <%= profile.company_name %> will proceed to the next stage (PREPARE)</p>
+
+										<%= link_to '#', id: "contact-action-toggle", class: "button tiny alert expand" do %>
+											SHARE PRODUCT &amp; PRICING <br> with <%= profile.company_name %>
+										<% end %>
+
+										<%#= link_to "SHARE PRODUCT &amp; PRICING <br>information with #{profile.company_name}".html_safe, match_share_url(:sharetype => 'pp', :mid => match.id  ), class: "button tiny alert expand", remote: true %>
+									</div>
+									<div class="conversation-action" id="contact-two" style="display: none;">
+										test
+									</div>
+									<% elsif @current_user.distributor %>
+										<div class="conversation-action" id="contact-one">
+											<h4><strong>Would you like to share your country’s requirements for this brand and their products?</strong></h4>
+											<p>These include:</p>
+											<ul> 
+												<li>Regulatory Compliance</li>
+												<li>Labeling Requirements</li>
+												<li>Product Tariffs</li>
+											</ul>
+											<p>After sharing, your conversation with <%= profile.company_name %> will proceed to the next stage (PREPARE)</p>
+
+											<%= link_to '#', id: "contact-action-toggle", class: "button tiny alert expand" do %>
+												SHARE COUNTRY REQUIREMENTS <br> with <%= profile.company_name %>
+											<% end %>
+										</div>
+										<div class="conversation-action" id="contact-two" style="display: none;">
+											<h4><strong>Share your stuff</strong></h4>
+											<p>These include:</p>
+											<ul> 
+												<li>Regulatory Compliance</li>
+												<li>Labeling Requirements</li>
+												<li>Product Tariffs</li>
+											</ul>
+											<p>After sharing, your conversation with <%= profile.company_name %> will proceed to the next stage (PREPARE)</p>
+
+											<%= link_to '#', id: "contact-action-toggle", class: "button tiny alert expand" do %>
+												SHARE COUNTRY REQUIREMENTS <br> with <%= profile.company_name %>
+											<% end %>
+											<%= link_to '#', id: "contact-action-cancel", class: "button tiny alert expand" do %>
+												Cancel
+											<% end %>
+										</div>
+									<% end %>
+
+									<% if match.shared_product_pricing && match.shared_country_requirements %>
+										<%= link_to "YES, proceed to PREPARE".html_safe, match_stage_url(:stage => 'prepare', :mid => match.id  ), class: "button alert expand", remote: true %>
+									<% end %>
+								<% end %>
+							<% else %>
+								<div class="conversation-help">
+									<h4><strong>Archived Conversation</strong></h4>
+									<p> 
+										This is your archived CONTACT conversation.
+									</p>
+								</div>
+							<% end %>

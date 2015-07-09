@@ -15,7 +15,7 @@
 <% end %>
 
 <% if @messages %>
-	$('#message-list-<%=@stage%>').hide().html("<%= j (render partial: 'shared/messages/message_list', locals:{stage:@stage}) %>").fadeIn(1000);
+	$('#message-list-<%=@stage%>').hide().html("<%= j (render partial: 'shared/messages/message_list_all', locals:{stage:@stage}) %>").fadeIn(1000);
 	$('.conversation-block #top').animate({height:'75%'});
 	$('.conversation-block #bottom').animate({height:'25%'});
 	$('.conversation-block #message-input').animate({height:'5em'});
