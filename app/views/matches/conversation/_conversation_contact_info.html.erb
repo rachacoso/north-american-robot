@@ -31,9 +31,9 @@
 
 
 													<ul> 
-													<li>Products List: <%= collection_select(:documents_list, :products_list, @current_user.brand.library_documents.where(type: "Products List"), :id, :filename) %></li>
-													<li>FOB Pricing: <%= collection_select(:documents_list, :fob_pricing, @current_user.brand.library_documents.where(type: "FOB Pricing"), :id, :filename) %></li>
-													<li>Tiered Pricing Schedule: <%= collection_select(:documents_list, :tiered_pricing_schedule, @current_user.brand.library_documents.where(type: "Tiered Pricing Schedule"), :id, :filename) %></li>
+													<li>Products List: <%= collection_select(:share_list, :products_list, @current_user.brand.library_documents.where(type: "Products List"), :id, :filename) %></li>
+													<li>FOB Pricing: <%= collection_select(:share_list, :fob_pricing, @current_user.brand.library_documents.where(type: "FOB Pricing"), :id, :filename) %></li>
+													<li>Tiered Pricing Schedule: <%= collection_select(:share_list, :tiered_pricing_schedule, @current_user.brand.library_documents.where(type: "Tiered Pricing Schedule"), :id, :filename) %></li>
 													</ul>
 													<p>After sharing, your conversation with <%= profile.company_name %> will proceed to the next stage (PREPARE)</p>
 
@@ -79,23 +79,27 @@
 												SHARE COUNTRY REQUIREMENTS <br> with <%= profile.company_name %>
 											<% end %>
 										</div>
-										<div class="conversation-action" id="contact-two" style="display: none;">
-											<h4><strong>Share your stuff</strong></h4>
-											<p>These include:</p>
-											<ul> 
-												<li>Regulatory Compliance</li>
-												<li>Labeling Requirements</li>
-												<li>Product Tariffs</li>
-											</ul>
-											<p>After sharing, your conversation with <%= profile.company_name %> will proceed to the next stage (PREPARE)</p>
 
-											<%= link_to '#', id: "contact-action-toggle", class: "button tiny alert expand" do %>
-												SHARE COUNTRY REQUIREMENTS <br> with <%= profile.company_name %>
-											<% end %>
-											<%= link_to '#', id: "contact-action-cancel", class: "button tiny alert expand" do %>
-												Cancel
+										<div class="conversation-action" id="contact-two" style="display: none;">
+											<%= form_tag conversation_share_path, remote: true do %>
+												<%= hidden_field_tag :match_id, match.id %>
+												<h4><strong>Enter the country requirements you'd like to share:</strong></h4>
+
+
+												<ul>
+												<li>Regulatory Compliance:<%= text_area_tag "share_list[regulatory_compliance]" %></li>
+												<li>Labeling Requirements:<%= text_area_tag "share_list[labeling_requirements]" %></li>
+												<li>Product Tariffs:<%= text_area_tag "share_list[product_tariffs]" %></li>													 
+												</ul>
+												<p>After sharing, your conversation with <%= profile.company_name %> will proceed to the next stage (PREPARE)</p>
+
+												<%= submit_tag "SHARE COUNTRY REQUIREMENTS", class: "button tiny alert expand" %>
+												<%= link_to '#', id: "contact-action-cancel", class: "button tiny secondary expand" do %>
+													Cancel
+												<% end %>
 											<% end %>
 										</div>
+
 									<% end %>
 
 									<% if match.shared_product_pricing && match.shared_country_requirements %>

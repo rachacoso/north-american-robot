@@ -23,6 +23,12 @@
 	$('#message-cancel').hide();
 	$('#message-input').val('');
 	$(".conversation-block #top").animate({ scrollTop: $(".conversation-block #top")[0].scrollHeight}, 1000);
+	
+	$('#conversation-contact-wrapper .conversation-left-info-column').removeClass('medium-6').addClass('medium-4');
+	$('#conversation-contact-wrapper .conversation-right-message-column').removeClass('medium-6').addClass('medium-8');
+	$('.conversation-help').show(1000);
+	$('.conversation-action#contact-one').show(1000);
+	$('.conversation-action#contact-two').hide(1000);	
 <% end %>
 
 $(document).foundation();
