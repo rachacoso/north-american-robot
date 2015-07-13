@@ -192,6 +192,20 @@ h2#contact-banner-text {
     $radius:2px
   );
   font-weight: 100;
+  &.tiny {
+
+    @include label(
+      // This options sets label padding
+      $padding:rem-calc(4 8 6),
+      // This option sets label text-size
+      $text-size:rem-calc(10),
+      // This option sets label background-color
+      $bg:$landing-blue,
+      // This option sets the radius of the label
+      $radius:2px
+    );
+
+  }
 }
 .plt-indicator-action-off {
   @include label(
@@ -205,6 +219,20 @@ h2#contact-banner-text {
     $radius:2px
   );
   font-weight: 100;
+  &.tiny {
+
+    @include label(
+      // This options sets label padding
+      $padding:rem-calc(4 8 6),
+      // This option sets label text-size
+      $text-size:rem-calc(10),
+      // This option sets label background-color
+      $bg:scale-color($landing-blue, $lightness: 50%),
+      // This option sets the radius of the label
+      $radius:2px
+    );
+
+  }
 }
 .plt-indicator-alert {
   @include label(

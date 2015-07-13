@@ -78,7 +78,8 @@
 			<% end %>
 		</div><!--/.medium-6-->
 		<div class="medium-7 columns profile-sq-right">
-
+			<%= render partial: "shared/profile/components/savebutton", locals: {profile: profile_item} %>
+			<br><br>
 			<% if @current_user.brand %>
 				<div style="margin-bottom: 5px;"><%= render partial: "shared/profile/distributor_rating", locals: {d: profile_item} %></div>
 			<% end %>
@@ -112,6 +113,7 @@
 			<%= render partial:"shared/profile/components/indicators", locals:{match: profile_item} %>
 			</div>
 
+			
 		</div><!--/.medium-6-->
 	</div><!--/.row-->
 </div>

@@ -33,8 +33,14 @@
 					<div class="profile-content">
 						<div class="row">
 							<div class="small-12 columns">
-								<%= render partial: "shared/profile/distributor_rating", locals: {d: profile} %><br>
-
+								<div class="row collapse">
+									<div class="small-6 columns">
+										<%= render partial: "shared/profile/distributor_rating", locals: {d: profile} %><br>
+									</div><!--/.small-6-->
+									<div class="small-6 columns text-right">
+										<%= render partial: "shared/profile/components/savebutton", locals: {profile: profile} %>
+									</div><!--/.small-6-->
+								</div><!--/.row-->
 								<h1><%= profile.company_name %></h1>
 									<% if profile.logo_file_name %>
 										<%= image_tag profile.logo.url(:medium), alt: "Logo" %>
