@@ -14,18 +14,21 @@ function setDivHeight(thisDiv, offset) {
 
 function initConversations() {
 
-	var animationSpeed = 500,
-		conversationID = '#conversation-' + conversationStage + '-wrapper',
-		conversationMapID = '#conversation-map-' + conversationStage + '-subhead';
-	$(conversationID).slideDown();
-	$(conversationMapID).slideDown();
+	if (typeof conversationStage !== 'undefined') {
+		var animationSpeed = 500,
+			conversationID = '#conversation-' + conversationStage + '-wrapper',
+			conversationMapID = '#conversation-map-' + conversationStage + '-subhead';
+		$(conversationID).slideDown();
+		$(conversationMapID).slideDown();
 
-	setDivHeight('#profile-conversation-wrapper');
-	setDivHeight('#profile-profile-wrapper');
-	setDivHeight('.conversation-block', 5);
-	setDivHeight('.conversation-left-info-column', 5);
+		setDivHeight('#profile-conversation-wrapper');
+		setDivHeight('#profile-profile-wrapper');
+		setDivHeight('.conversation-block', 5);
+		setDivHeight('.conversation-left-info-column', 5);		
 
-	$(".conversation-block #top").animate({ scrollTop: $(".conversation-block #top")[0].scrollHeight}, 1000);
+		$(".conversation-block #top").animate({ scrollTop: $(".conversation-block #top")[0].scrollHeight}, 1000);
+
+	}
 
 	$('#contact-action-toggle').on('click', function(e){
 		e.preventDefault();
