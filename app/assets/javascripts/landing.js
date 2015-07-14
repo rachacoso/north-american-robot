@@ -28,15 +28,6 @@ $( document ).ready(function() {
   }
 
 
-// FOR AJAX FORM SUBMIT LOADING MODAL
-
-/* STILL NOT WORKING NEED TO FIX */
-
-// $('.ajax-form').on('submit', function(e) {
-//     $('#loading-modal').foundation('reveal', 'open');
-// });
-
-
 // for background map on matches
   var divWidth = $('#match-map-container').width();
   var setHeight = divWidth / 1.9;
