@@ -51,10 +51,10 @@
 					<div id="conversation-map-contact" class="<%= contact_stage_indicator(match, "contact") %>"><h1><%= link_to 'CONTACT', all_messages_url(stage: 'contact'), style: "color:black;", remote: true %></h1></div>
 				</div><!--/.medium-5-->
 				<div class="medium-3 columns text-center">
-					<div id="conversation-map-prepare" class="<%= contact_stage_indicator(match, "prepare") %>"><h1><%= link_to 'PREPARE', all_messages_url(stage: 'prepare'), style: "color:black;", remote: true %></h1></div>
+					<div id="conversation-map-propose" class="<%= contact_stage_indicator(match, "propose") %>"><h1><%= link_to 'PROPOSE', all_messages_url(stage: 'propose'), style: "color:black;", remote: true %></h1></div>
 				</div><!--/.medium-5-->
 				<div class="medium-3 columns text-center">
-					<div id="conversation-map-terms" class="<%= contact_stage_indicator(match, "terms") %>"><h1><%= link_to 'TERMS', all_messages_url(stage: 'terms'), style: "color:black;", remote: true %></h1></div>
+					<div id="conversation-map-prepare" class="<%= contact_stage_indicator(match, "prepare") %>"><h1><%= link_to 'PREPARE', all_messages_url(stage: 'prepare'), style: "color:black;", remote: true %></h1></div>
 				</div><!--/.medium-5-->
 				<div class="medium-3 columns text-center">
 					<div id="conversation-map-order" class="<%= contact_stage_indicator(match, "order") %>"><h1><%= link_to 'ORDER', all_messages_url(stage: 'order'), style: "color:black;", remote: true %></h1></div>
@@ -70,16 +70,16 @@
 					<h2>Make a connection</h2>
 				</div><!--/.small-12 text-center-->
 			</div><!--/.row-->
-			<div class="row collapse conversation-map-subhead" id="conversation-map-prepare-subhead">
+			<div class="row collapse conversation-map-subhead" id="conversation-map-propose-subhead">
 				<div class="medium-3 hide-for-small-only columns"><hr></div><!--/.medium-9-->
 				<div class="medium-3 end text-center columns">
-					<h2>Prepare for Export</h2>
+					<h2>Propose a deal</h2>
 				</div><!--/.small-12 text-center-->
 			</div><!--/.row-->
-			<div class="row collapse conversation-map-subhead" id="conversation-map-terms-subhead">
+			<div class="row collapse conversation-map-subhead" id="conversation-map-prepare-subhead">
 				<div class="medium-6 hide-for-small-only columns"><hr></div><!--/.medium-9-->
 				<div class="medium-3 end text-center columns">
-					<h2>Negotiate Terms</h2>
+					<h2>Prepare for Export</h2>
 				</div><!--/.small-12 text-center-->
 			</div><!--/.row-->
 			<div class="row collapse conversation-map-subhead" id="conversation-map-order-subhead">
@@ -90,7 +90,7 @@
 			</div><!--/.row-->
 			<!--CONVERSATION MAP SUBHEAD end-->
 
-			<div class="row collapse" id="conversation-contact-wrapper">
+			<div class="row collapse" id="conversation-wrapper">
 				<div class="medium-4 columns conversation-left-info-column">
 						<div id="conversation-info">
 							<%= render partial: "matches/conversation/conversation_#{@stage}_info", locals: {match: match, profile: profile} %>

@@ -10,6 +10,6 @@ class Message
   field :text, type: String
   field :read, type: Mongoid::Boolean
 
-  field :stage, type: String  # stage: [contact,prepare,terms,order]
+  field :stage, type: String  # stage: [contact,propose,prepare,order]
   
 end

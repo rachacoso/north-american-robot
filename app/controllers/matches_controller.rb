@@ -382,7 +382,7 @@ class MatchesController < ApplicationController
 
   def match_stage
 
-    if params[:mid] && (['contact','prepare','terms','order'].include? params[:stage])
+    if params[:mid] && (['contact','propose','prepare','order'].include? params[:stage])
       match = Match.find(params[:mid])
       match.stage = params[:stage]
       match.save!

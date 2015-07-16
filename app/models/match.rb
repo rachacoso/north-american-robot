@@ -10,7 +10,7 @@ class Match
   # is the match accepted by contactee
   field :accepted, type: Mongoid::Boolean
   field :intro_message, type: String
-  field :stage, type: String, default: "contact"  # stage: [contact,prepare,terms,order]
+  field :stage, type: String, default: "contact"  # stage: [contact,propose,prepare,order]
 
   field :shared_product_pricing, type: Mongoid::Boolean
   field :shared_country_requirements, type: Mongoid::Boolean

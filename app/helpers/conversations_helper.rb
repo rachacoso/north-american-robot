@@ -10,14 +10,14 @@ module ConversationsHelper
 			else 
 				c = "done"
 			end
-		when "prepare"
-			if stage == "prepare"
+		when "propose"
+			if stage == "propose"
 				c = "active viewing"
-			elsif stage == "terms" || stage == "order"
+			elsif stage == "prepare" || stage == "order"
 				c = "done"
 			end
-		when "terms"
-			if stage == "terms"
+		when "prepare"
+			if stage == "prepare"
 				c = "active viewing"
 			elsif stage == "order"
 				c = "done"
@@ -35,7 +35,7 @@ module ConversationsHelper
 
 	def has_all_docs(stage)
 		case stage
-		when 'contact'
+		when 'propose'
 			user = @current_user.brand
 			doc_list = [
 				'Products List', 

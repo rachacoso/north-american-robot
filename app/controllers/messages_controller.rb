@@ -64,7 +64,7 @@ class MessagesController < ApplicationController
 				@match = Brand.find(params[:match_id])
 				@messages = @current_user.distributor.matches.where(brand_id: @match.id).first.messages.order_by(:c_at.asc) rescue nil
 			end
-			if ['contact','prepare','terms','order'].include? params[:stage]
+			if ['contact','propose','prepare','order'].include? params[:stage]
 				@stage = params[:stage]
 			end			
 		end
