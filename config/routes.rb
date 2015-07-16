@@ -103,6 +103,7 @@ Rails.application.routes.draw do
   get '/matches/search' => 'matches#search', as: 'search'
   get '/matches/stage' => 'matches#match_stage', as: 'match_stage'
   get '/matches/share' => 'matches#match_share', as: 'match_share'
+  get '/matches/quickview/:match_id' => 'matches#quick_view', as: 'quick_view'
   get '/gallery' => 'matches#gallery', as: 'gallery'
 
   post '/conversations/share' => 'conversations#share', as: 'conversation_share'

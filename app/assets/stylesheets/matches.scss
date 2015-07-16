@@ -338,3 +338,30 @@ a.profile-sq-left {
   // border: 1px solid black;
   padding: rem-calc(5);
 }
+
+#quick-view {
+  position: fixed;
+  top: 15%;
+  left: 50%;
+  margin: 0 0 0 -37.5%;
+  width:75%;
+  height: 75%;
+  overflow-x: hidden;
+  overflow-y: scroll;    
+  background: white;
+  z-index: 11;
+  display: none;
+}
+#close-quick-view {
+  position: absolute;
+  top: rem-calc(-40);
+  right: rem-calc(10);
+  font-size: rem-calc(60);
+  font-weight: 900;
+  color: red;
+  z-index: 12;
+}
+// FOR TESTING ONLY
+// .overlay#quick-view-overlay {
+//   display: block;
+// }

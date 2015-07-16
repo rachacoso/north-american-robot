@@ -398,6 +398,20 @@ class MatchesController < ApplicationController
 
   end
 
+  def quick_view
+
+    if params[:match_id]
+
+      @match = Distributor.find(params[:match_id]) || Brand.find(params[:match_id])
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
+  end
+
 
   private
 

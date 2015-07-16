@@ -22,6 +22,19 @@ $( document ).ready(function() {
 		}
 	});
 
+	// $('#close-quick-view').on('click', function(e){
+	// 	// e.preventDefault();
+	// 	$('#quick-view').hide();
+	// 	$('.overlay').hide();
+	// });
+
+	$('.overlay#quick-view-overlay, a#close-quick-view').on('click', function(e){
+		e.preventDefault();
+		console.log("clicked");
+		$('#quick-view').fadeOut();
+		$('.overlay').fadeOut();
+	});	
+
 });
 
 function initFullProfile (reload) {

@@ -1,0 +1,16 @@
+<div class="row">
+	<div class="small-12 columns">
+	<h2><%= @match.company_name %></h2>
+	<h5><%= @match.year_established.strftime("Established %d/%m/%Y") %></h5>
+	<h5><%= CompanySize.find(@match.company_size).name rescue nil %></h5>
+	<% @match.sectors.each do |sector| %>
+		<h5><%= Sector.find(sector).name %></h5>
+	<% end %>
+	<% @match.channels.each do |channel| %>
+		<h5><%= Channel.find(channel).name %></h5>
+	<% end %>	
+	</div><!--/.small-12-->
+	<div class="small-12 columns">
+		<%= link_to 'FULL PROFILE', view_match_url(@match, 'na') %>
+	</div><!--/.small-12-->
+</div><!--/.row-->
