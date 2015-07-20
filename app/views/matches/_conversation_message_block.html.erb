@@ -2,8 +2,9 @@
 	<% if @messages.where(stage: stage).count > 0 || match.stage == stage %>
 
 		<div class="row collapse">
-			<div class="small-2 text-left columns">
+			<div class="small-2 text-right columns">
 				<div class="conversation-logo-them">
+					<h4><strong><%= match.send(@current_user.type_inverse?).company_name %></strong></h4>
 					<%= image_tag match.send(@current_user.type_inverse?).logo.url(:medium) %>
 				</div>
 			</div><!--/.small-2 text-left-->
@@ -27,8 +28,9 @@
 				</div><!--/.conversation-block -->
 
 			</div><!--/.small-8-->
-			<div class="small-2 text-right columns">
+			<div class="small-2 text-left columns">
 				<div class="conversation-logo-you">
+					<h4><strong><%= match.send(@current_user.type?).company_name %></strong></h4>
 					<%= image_tag @current_user.send(@current_user.type?).logo.url(:medium) %>
 				</div>
 			</div><!--/.small-2 text-right-->
