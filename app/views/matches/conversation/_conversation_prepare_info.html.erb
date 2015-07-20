@@ -1,20 +1,15 @@
 					<% if match.stage == "prepare" %>
 
-						<div class="conversation-help">
+						<div class="conversation-help-tile">
 							<h4><strong>Prepare for Export</strong></h4>
 							<p> 
 								[Helpful text here]
 							</p>
 						</div>
 
-						<% if match && !match.messages.blank? && match.stage == "prepare"  %>
-						<div class="conversation-action" id="contact-one">
-							<%= link_to 'Would you like to...', match_stage_url(:stage => 'order', :mid => match.id  ), class: "button", remote: true %>
-						</div>
-						<% end %>
-
 					<% elsif match.stage == "order" %>
-						<div class="conversation-help">
+
+						<div class="conversation-help-tile">
 							<h4><strong>Archived Conversation</strong></h4>
 							<p> 
 								This is your archived PREPARE conversation.
@@ -23,7 +18,7 @@
 
 					<% else %>
 
-						<div class="conversation-help">
+						<div class="conversation-help-tile">
 							<h4><strong>Preparing for Export</strong></h4>
 							<p> 
 								This is where you will prepare your products for export...

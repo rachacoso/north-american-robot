@@ -1,0 +1,9 @@
+					<% if match.stage == "prepare" %>
+
+						<% if match && !match.messages.blank? && match.stage == "prepare"  %>
+						<div class="conversation-action-tile" id="contact-one">
+							<%= link_to 'Would you like to...', match_stage_url(:stage => 'order', :mid => match.id  ), class: "button", remote: true %>
+						</div>
+						<% end %>			
+
+					<% end %>

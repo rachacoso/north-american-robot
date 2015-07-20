@@ -1,14 +1,14 @@
 <% conversation_info_partial = "matches/conversation/conversation_#{@stage}_info" %>
+<% conversation_action_partial = "matches/conversation/conversation_#{@stage}_action" %>
+<% conversation_subhead_partial = "matches/conversation/conversation_#{@stage}_subhead" %>
 <% conversation_message_block_partial = "matches/conversation_message_block" %>
 <% match = this_match(@match) %>
 
 $('#conversation-info').hide().html("<%= j (render partial: conversation_info_partial, locals: {match: match, profile: @match}) %>").fadeIn(1000);
+$('#conversation-action').hide().html("<%= j (render partial: conversation_action_partial, locals: {match: match, profile: @match}) %>").fadeIn(1000);
 $('#conversation-message-block').hide().html("<%= j (render partial: conversation_message_block_partial, locals: {match: match, stage: @stage}) %>").fadeIn(1000);
 
-
-$('.conversation-map-subhead').hide(250);
-
-$("#conversation-map-<%=@stage%>-subhead").show(250);
+$('.conversation-map-subhead').hide().html("<%= j (render partial: conversation_subhead_partial) %>").show(500);
 
 
 $('#conversation-propose-wrapper .conversation-left-info-column').removeClass('medium-6').addClass('medium-4');

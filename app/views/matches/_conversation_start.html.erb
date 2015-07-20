@@ -2,14 +2,7 @@
 
 <% content_for :javascript_foot do %>
 	<%= javascript_tag do %>
-		$('#contact-start-trigger').on('click', function(e){
-			e.preventDefault();
-			$('#contact-start').slideToggle(1000);
-			$(document.body).animate({
-			    'scrollTop':   $('#contact-start-trigger').offset().top - 150
-			}, 1000);
 
-		});
 	<% end %>
 <% end %>
 

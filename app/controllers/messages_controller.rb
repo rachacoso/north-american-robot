@@ -24,6 +24,7 @@ class MessagesController < ApplicationController
 
 			@new_contact_messages = mm.where(accepted: false, initial_contact_by: @current_user.type_inverse?).count
 			@stage = m.stage
+			@m = m
 
 		end
 

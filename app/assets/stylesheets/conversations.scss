@@ -5,27 +5,39 @@
 
 // CONVERSATIONS
 
-$them-color: scale-color($landing-middle-gray, $lightness: 70%);
-$them-border: scale-color($landing-middle-gray, $lightness: 50%);
-$you-color: scale-color($landing-blue, $lightness: 90%);
-$you-border: scale-color($landing-blue, $lightness: 70%);
+$you-color: scale-color($landing-middle-gray, $lightness: 70%);
+$you-border: scale-color($landing-middle-gray, $lightness: 50%);
+$them-color: scale-color($landing-blue, $lightness: 90%);
+$them-border: scale-color($landing-blue, $lightness: 70%);
 $bubble-font-size: 0.8em;
+$bubble-margin: 80;
 
 .bubble-container {
   margin-top: 0;
-  margin-bottom: rem-calc(40);
+  // margin-bottom: rem-calc(40);
   border-top: 0px solid transparent;
+  margin-left: rem-calc(5);
+  margin-right: rem-calc(5);
+  p{
+    margin-bottom: 0;
+  }
 }
 
+
+.bubble-them, 
+.bubble-you {
+  margin-bottom: rem-calc(10);
+}
 
 .bubble-them
 {
 & p {font-size: $bubble-font-size;}
 position: relative;
-width: 98%;
+// width: 98%;
 // min-height: 100px;
 padding: rem-calc(10);
-// margin: rem-calc(10);
+margin-right: rem-calc($bubble-margin);
+margin-left: rem-calc(8);
 background: $them-color;
 -webkit-border-radius: 10px;
 -moz-border-radius: 10px;
@@ -38,12 +50,12 @@ border: 2px solid $them-border;
 content: '';
 position: absolute;
 border-style: solid;
-border-width: 15px 15px 15px 0;
-border-color: transparent $them-color;
+border-width: 15px 15px 15px 15px;
+border-color: transparent $them-color transparent transparent;
 display: block;
 width: 0;
 z-index: 2;
-left: -13px;
+left: -27px;
 top: 10px;
 }
 
@@ -66,8 +78,8 @@ top: 10px;
 {
 & p {font-size: $bubble-font-size;}
 position: relative;
-width: 98%;
-// min-height: 100px;
+margin-left: rem-calc($bubble-margin);
+margin-right: rem-calc(9);
 padding: rem-calc(10);
 background: $you-color;
 -webkit-border-radius: 10px;
@@ -144,7 +156,9 @@ top: 10px;
   h1 a {color: $landing-middle-gray !important;}
 }
 
-
+.conversation-map-subhead {
+  border-bottom: 1px solid $landing-light-gray;
+}
 .convo-map.active {
   background-color: $landing-blue;
   h1 a {color: $landing-dark-gray !important;}
@@ -184,7 +198,6 @@ top: 10px;
 // CONVERSATIONS INDEX STYLING (UPDATED)
 
 .conversations-container {
-  padding: 0;
   margin: 0 rem-calc(20) rem-calc(20) rem-calc(20);
   // background-color: $landing-middle-gray;
 }
@@ -202,83 +215,120 @@ top: 10px;
   }
 }
 
-.conversation-help,
-.conversation-action {
+.conversation-help-tile,
+.conversation-action-tile {
+  padding: rem-calc(10);
+  border-radius: rem-calc(5);
+  margin: rem-calc(15) 0;
+}
+.conversation-help-tile {
   background: $landing-light-gray;
-  border: 1px solid $landing-light-gray;
-  border-left: 0px;
-  padding: rem-calc(5);
-  border-radius: 0 5px 5px 0;
-  margin-left: 0;
-  margin-right: rem-calc(70);
-}
-.conversation-help {
-  margin-bottom: rem-calc(50);
-}
-  
-.conversation-action {
-  border: 1px solid $landing-orange;
-  border-left: 0px;
+} 
+.conversation-action-tile {
+  border: 5px solid $landing-middle-gray;
+  background: white;
+  h4 {
+    margin-bottom: 0;
+  }    
+  &.active {
+    border: 5px solid $landing-orange;
+  }
+  #contact-accept {
+    margin-top: rem-calc(10);
+  }
+  // remove default padding for buttons
+  & .button{
+    margin: rem-calc(15) 0 0 0;
+  }
 }
 
-
-// @media #{$small-only} {
-//   .conversation-help,
-//   .conversation-action {
-//     margin-right: rem-calc(70);
-//   }
-// }
-
-// #conversation-contact-wrapper,
-// #conversation-prepare-wrapper,
-// #conversation-terms-wrapper,
-// #conversation-order-wrapper,
-#conversation-map-contact-subhead,
-#conversation-map-propose-subhead,
-#conversation-map-prepare-subhead,
-#conversation-map-order-subhead {
-  display: none;
-}
 
 #profile-conversation-wrapper {
-  overflow-x: hidden;
+  // overflow-x: hidden;
   overflow-y: hidden;
 }
 #profile-profile-wrapper {
-  overflow-x: hidden;
+  // overflow-x: hidden;
   overflow-y: scroll;
 }
 
+// div {
+//   border: 1px solid blue;
+// }
 .conversation-block{
-  height: 75%;
+  // height: 100%;
   overflow-y: scroll;
+  border-left: 1px dotted $landing-blue;
+  border-right: 1px dotted $landing-middle-gray;
+  padding: rem-calc(15) 0 0 0;
   h3 {
     color: white;
   }
-  & #top {
-    height: 75%;
-    overflow-y: scroll;
-    border-left: 2px solid $landing-light-gray;
-    border-top: 2px solid $landing-light-gray;
+  & #send-message {
+    background: white;
+    & .bubble-you
+    {
+    border: 2px solid $landing-orange;
+    // border: 2px solid scale-color($you-border, $lightness: -30%);
+    }
+    & .bubble-you:after 
+    {
+    border-color: transparent $landing-orange;
+    // border-color: transparent scale-color($you-border, $lightness: -30%);
+    }
+  }  
+  & #view-messages {
     border-bottom: 1px solid transparent;
-    padding: rem-calc(5);
   }
-  & #bottom {
-    overflow-y: hidden; 
-    padding: rem-calc(10);
-    background: $landing-middle-gray;
-  }
+
+  $convo-placeholder-color: $landing-dark-gray;
+
   & #message-input {
-    height: 5em;
-    background-color: scale-color($landing-blue, $lightness: 95%);
-    border: 1px solid scale-color($landing-blue, $lightness: 65%);
+    min-height: 1em;
+    background-color: $you-color;
+    // border: 1px solid scale-color($landing-blue, $lightness: 65%);
+    border: none;
+    overflow: auto;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    margin: rem-calc(20) 0;
+    padding-left: 0;
+    font-weight: 300;
+    &::-webkit-input-placeholder {
+       color: $convo-placeholder-color;
+    }
+    &:-moz-placeholder { /* Firefox 18- */
+       color: $convo-placeholder-color;  
+    }
+    &::-moz-placeholder {  /* Firefox 19+ */
+       color: $convo-placeholder-color;  
+    }
+    &:-ms-input-placeholder {  
+       color: $convo-placeholder-color;  
+    }    
   }  
   & #message-submit {
-    height: 5em;
+    // height: 5em;
     display: none;
+    margin: 0;
+    padding: rem-calc(5);
   }
   & #message-cancel {
+    // height: 5em;
     display: none;
+    color: white;
+    margin: auto;
+    padding: rem-calc(5);
   }
+}
+.conversation-logo-you, .conversation-logo-them {
+  padding: rem-calc(20);
+}
+.datetime {
+  & .you{
+    margin-right: rem-calc(40);
+  }  
 }
 

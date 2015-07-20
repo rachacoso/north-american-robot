@@ -16,8 +16,8 @@
 
 <% if @messages %>
 	$('#message-list').hide().html("<%= j (render partial: 'shared/messages/message_list_all', locals:{stage:@stage}) %>").fadeIn(500);
-	$('.conversation-block #top').animate({height:'75%'});
-	$('.conversation-block #bottom').animate({height:'25%'});
+	$('.conversation-block #view-messages').animate({height:'75%'});
+	$('.conversation-block #send-message').animate({height:'25%'});
 	$('.conversation-block #message-input').animate({height:'5em'});
 
 	$('#conversation-wrapper .conversation-left-info-column').removeClass('medium-6').addClass('medium-4');
@@ -29,7 +29,7 @@
 	$('#message-submit').hide();
 	$('#message-cancel').hide();
 	$('#message-input').val('');
-	$(".conversation-block #top").animate({ scrollTop: $(".conversation-block #top")[0].scrollHeight}, 500);
+	$(".conversation-block #view-messages").animate({ scrollTop: $(".conversation-block #top")[0].scrollHeight}, 500);
 <% end %>
 
 $(document).foundation();

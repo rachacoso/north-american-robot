@@ -3,12 +3,23 @@ $(window).on('resize', function(){
 	initConversations();
 });
 
+$( document ).ready(function() {
+	$('#contact-start-trigger').on('click', function(e){
+		e.preventDefault();
+		$('#contact-start').slideToggle(500);
+		$(document.body).animate({
+		    'scrollTop':   $('#contact-start-trigger').offset().top - 150
+		}, 500);
+
+	});
+});
+
 function setDivHeight(thisDiv, offset) {
-	offset = typeof offset !== 'undefined' ?  offset : 1;
+	offset = typeof offset !== 'undefined' ?  offset : 0;
 	var viewportHeight = $(window).height(),
 	    elementOffset = $(thisDiv).offset().top,
 	    height      = (viewportHeight - elementOffset - offset);
-	console.log(thisDiv, "viewport:", viewportHeight, "offset:", elementOffset, "height:", height);
+	// console.log(thisDiv, "viewport:", viewportHeight, "offset:", elementOffset, "height:", height);
   $(thisDiv).height(height);
 }
 
@@ -16,17 +27,15 @@ function initConversations() {
 
 	if (typeof conversationStage !== 'undefined') {
 		var animationSpeed = 500,
-			conversationID = '#conversation-' + conversationStage + '-wrapper',
-			conversationMapID = '#conversation-map-' + conversationStage + '-subhead';
+			conversationID = '#conversation-' + conversationStage + '-wrapper'
 		$(conversationID).slideDown();
-		$(conversationMapID).slideDown();
 
 		setDivHeight('#profile-conversation-wrapper');
 		setDivHeight('#profile-profile-wrapper');
-		setDivHeight('.conversation-block', 5);
-		setDivHeight('.conversation-left-info-column', 5);		
+		setDivHeight('.conversation-block', 25);
+		setDivHeight('.conversation-left-info-column');
 
-		$(".conversation-block #top").animate({ scrollTop: $(".conversation-block #top")[0].scrollHeight}, 1000);
+		// $(".conversation-block #top").animate({ scrollTop: $(".conversation-block #top")[0].scrollHeight}, 1000);
 
 	}
 
@@ -47,21 +56,34 @@ function initConversations() {
 		$('.conversation-action#action-two').hide(animationSpeed);
 	});		
 
+	$('#message-start').on('click', function(){
+		$('.conversation-block #view-messages').animate({height:'45%'});
+		$('.conversation-block #send-message').animate({height:'50%'});
+		// $('.conversation-block #old-messages-indicator').animate({height:'5%'});
+		$('.conversation-block #message-input').animate({height:'14em'}, function() {
+			$('#message-submit').show();
+			$('#message-cancel').show();	
+		});
+	});
+
 	$('#message-input').on('focus', function(){
-		$('.conversation-block #top').animate({height:'45%'});
-		$('.conversation-block #bottom').animate({height:'55%'});
-		$('.conversation-block #message-input').animate({height:'15em'}, function() {
+		// $('.conversation-block #view-messages').animate({height:'45%'});
+		// $('.conversation-block #send-message').animate({height:'50%'});
+		// $('.conversation-block #old-messages-indicator').animate({height:'5%'});
+		$('.conversation-block #message-input').animate({height:'14em'}, function() {
 			$('#message-submit').show();
 			$('#message-cancel').show();	
 		});
 	});
 	$('#message-cancel').on('click', function(e){
 		e.preventDefault();
-		$('.conversation-block #top').animate({height:'75%'});
-		$('.conversation-block #bottom').animate({height:'25%'});
-		$('.conversation-block #message-input').animate({height:'5em'});
+		// $('.conversation-block #view-messages').animate({height:'70%'});
+		// $('.conversation-block #send-message').animate({height:'25%'});
+		// $('.conversation-block #old-messages-indicator').animate({height:'5%'});
+		$('.conversation-block #message-input').animate({height:'1em'});
 		$('#message-submit').hide();
 		$('#message-cancel').hide();
+		// $(".conversation-block #top").animate({ scrollTop: $(".conversation-block #top")[0].scrollHeight}, 1000);
 	});
 
 }

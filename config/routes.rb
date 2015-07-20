@@ -101,9 +101,10 @@ Rails.application.routes.draw do
   get '/matches/view/:match_id/:referrer' => 'matches#view_match', as: 'view_match'
   get '/matches/contact/:match_id' => 'matches#contact_match', as: 'contact_match'
   get '/matches/search' => 'matches#search', as: 'search'
-  get '/matches/stage' => 'matches#match_stage', as: 'match_stage'
+  post '/matches/stage/:id/:stage' => 'matches#match_stage', as: 'match_stage'
   get '/matches/share' => 'matches#match_share', as: 'match_share'
   get '/matches/quickview/:match_id' => 'matches#quick_view', as: 'quick_view'
+  post '/matches/accept/:id' => 'matches#accept_match', as: 'accept_match'
   get '/gallery' => 'matches#gallery', as: 'gallery'
 
   post '/conversations/share' => 'conversations#share', as: 'conversation_share'

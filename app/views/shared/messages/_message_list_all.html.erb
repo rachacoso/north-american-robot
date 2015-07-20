@@ -1,35 +1,24 @@
 <% stage_messages = @messages.where(stage: stage) %>
 
-	<% stage_messages.each do |m| %>
-	<div class="row">
-		<div class="<%= m.recipient == @current_user.type? ? "medium-2" : "medium-2 medium-push-10" %> hide-for-small-only columns">
-			<% if m.recipient == @current_user.type? %>
-				<%= image_tag m.match.send(@current_user.type_inverse?).logo.url(:medium) %>
-			<% else %>
-				<%= image_tag @current_user.send(@current_user.type?).logo.url(:medium) %>
-			<% end %>
-		</div>
-		<div class="small-11 medium-10 <%= m.recipient == @current_user.type? ? " " : "medium-pull-2" %> columns">
-			<div class="row">
-				<div class="small-11 <%= m.recipient == @current_user.type? ? " " : "small-push-1" %> columns">
-					
-					<div class="bubble-container">
-						<div class=<%= m.recipient == @current_user.type? ? "bubble-them" : "bubble-you" %>>
-							<%= simple_format(auto_link(m.text)) %>
-						</div>
-						<div class=<%= m.recipient == @current_user.type? ? "" : "text-right" %>>
-							<small>Sent <%= m.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%d %b %Y at %H:%M %Z") %>
-							<span><%= m.read && m.recipient == @current_user.type_inverse? ? "read" : "" %></span>
-							<span style="color: red;"><%= !m.read && m.recipient == @current_user.type? ? "NEW!" : "" %></span>
-							</small>	
-						</div>
-					</div>
+<% stage_messages.order_by(:c_at.desc).each do |m| %>
+	<div class="row collapse">
+		<div class="small-12 columns">
 
-				</div><!--/.small-11 small-centered-->
-			</div><!--/.row-->
+			<div class="bubble-container">
+				<div class=<%= m.recipient == @current_user.type? ? "bubble-them" : "bubble-you" %>>
+					<%= simple_format(auto_link(m.text)) %>
+
+				<div class=<%= m.recipient == @current_user.type? ? "" : "text-right" %>>
+					<small>Sent <%= m.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%d %b %Y at %H:%M %Z") %>
+					<span><%= m.read && m.recipient == @current_user.type_inverse? ? "read" : "" %></span>
+					<span style="color: red;"><%= !m.read && m.recipient == @current_user.type? ? "NEW!" : "" %></span>
+					</small>	
+				</div>
+				
+				</div>
+			</div>
+
 		</div>
 	</div>
-	
 	<% mark_as_read(m) %>
-
-	<% end %>
+<% end %>

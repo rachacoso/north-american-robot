@@ -11,12 +11,8 @@
 <% end %>
 
 <div id="profile-conversation-wrapper">
-	<div class="row collapse" style="background-color: white;">
-		<div class="small-12 columns">
-					<div id="profile-conversation">
-					<%= render partial: "matches/conversation", locals: {profile: profile} %>
-					</div>
-		</div><!--/.small-12-->
+	<div id="profile-conversation">
+	<%= render partial: "matches/conversation", locals: {profile: profile} %>
 	</div>
 </div>
 

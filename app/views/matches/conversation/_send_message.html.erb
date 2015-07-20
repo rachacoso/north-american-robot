@@ -1,0 +1,32 @@
+<% if match.stage == stage %>
+	<% unless i_contacted(match) && match.messages.blank? %>
+
+		<div class="row collapse">
+			<div class="small-12 columns">
+				<div class="bubble-container">
+					<div class="bubble-you">
+						<%= form_for Message.new, remote: true do |f| %>				
+							<div class="row collapse">
+								<div class="small-12 columns">
+									<%= f.text_area :text, label: false, id: "message-input", placeholder: "SEND A MESSAGE", rows: "1" %>
+									<% if match.messages.blank? %>
+										<%= f.hidden_field :new_contact, value: 'true' %>
+									<% end %>
+									<%= hidden_field_tag :match_id, match.id %>
+								</div>
+							</div><!--/.row-->
+							<div class="row">
+								<div class="small-12 columns text-right">
+									<%= button_tag 'CANCEL', :id => 'message-cancel', :class => "button tiny secondary" %>
+									<%= f.submit 'SEND MESSAGE', :class => "button tiny alert", :id => 'message-submit'%>
+								</div>	
+							</div><!--/.row-->
+						<% end %>
+
+					</div>
+				</div>
+			</div>	
+		</div>
+
+	<% end %>
+<% end %>
