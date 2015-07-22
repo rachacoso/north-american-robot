@@ -101,7 +101,8 @@ Rails.application.routes.draw do
   get '/matches/view/:match_id/:referrer' => 'matches#view_match', as: 'view_match'
   get '/matches/contact/:match_id' => 'matches#contact_match', as: 'contact_match'
   get '/matches/search' => 'matches#search', as: 'search'
-  post '/matches/stage/:id/:stage' => 'matches#match_stage', as: 'match_stage'
+  post '/matches/stage/update/:id' => 'matches#match_stage_update', as: 'match_stage_update'
+  get '/matches/stage/view/:id/:stage' => 'matches#match_stage_view', as: 'match_stage_view'
   get '/matches/share' => 'matches#match_share', as: 'match_share'
   get '/matches/quickview/:match_id' => 'matches#quick_view', as: 'quick_view'
   post '/matches/accept/:id' => 'matches#accept_match', as: 'accept_match'
@@ -111,6 +112,6 @@ Rails.application.routes.draw do
 
   resources :messages, only: [:create, :index]
 
-  get 'messages/all/:match_id' => 'messages#all_messages', as: 'all_messages'
+  # get 'messages/all/:match_id' => 'messages#all_messages', as: 'all_messages'
 
 end

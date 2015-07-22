@@ -12,6 +12,9 @@ class Match
   field :intro_message, type: String
   field :stage, type: String, default: "contact"  # stage: [contact,propose,prepare,order]
 
+  field :brand_proceed_to_next_stage, type: Mongoid::Boolean
+  field :distributor_proceed_to_next_stage, type: Mongoid::Boolean
+
   field :shared_product_pricing, type: Mongoid::Boolean
   field :shared_country_requirements, type: Mongoid::Boolean
 

@@ -10,14 +10,14 @@ $you-border: scale-color($landing-middle-gray, $lightness: 50%);
 $them-color: scale-color($landing-blue, $lightness: 90%);
 $them-border: scale-color($landing-blue, $lightness: 70%);
 $bubble-font-size: 0.8em;
-$bubble-margin: 80;
+$bubble-margin: 85;
 
 .bubble-container {
   margin-top: 0;
   // margin-bottom: rem-calc(40);
   border-top: 0px solid transparent;
-  margin-left: rem-calc(5);
-  margin-right: rem-calc(5);
+  // margin-left: rem-calc(5);
+  // margin-right: rem-calc(5);
   p{
     margin-bottom: 0;
   }
@@ -37,7 +37,7 @@ position: relative;
 // min-height: 100px;
 padding: rem-calc(10);
 margin-right: rem-calc($bubble-margin);
-margin-left: rem-calc(8);
+margin-left: rem-calc(13);
 background: $them-color;
 -webkit-border-radius: 10px;
 -moz-border-radius: 10px;
@@ -79,7 +79,7 @@ top: 10px;
 & p {font-size: $bubble-font-size;}
 position: relative;
 margin-left: rem-calc($bubble-margin);
-margin-right: rem-calc(9);
+margin-right: rem-calc(14);
 padding: rem-calc(10);
 background: $you-color;
 -webkit-border-radius: 10px;
@@ -216,10 +216,14 @@ top: 10px;
 }
 
 .conversation-help-tile,
-.conversation-action-tile {
+.conversation-action-tile,
+.conversation-action-center-tile {
   padding: rem-calc(10);
   border-radius: rem-calc(5);
   margin: rem-calc(15) 0;
+  & .button{
+    margin: rem-calc(15) 0 0 0;
+  }  
 }
 .conversation-help-tile {
   background: $landing-light-gray;
@@ -237,11 +241,13 @@ top: 10px;
     margin-top: rem-calc(10);
   }
   // remove default padding for buttons
-  & .button{
-    margin: rem-calc(15) 0 0 0;
-  }
 }
 
+.conversation-action-center-tile {
+  position: relative;
+  border: 2px solid $landing-orange;
+  margin: 0 rem-calc(14) rem-calc(14) rem-calc(14);  
+}
 
 #profile-conversation-wrapper {
   // overflow-x: hidden;

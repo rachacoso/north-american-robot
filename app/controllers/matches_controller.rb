@@ -394,21 +394,63 @@ class MatchesController < ApplicationController
     end  
   end
 
-  def match_stage
+  def match_stage_update
 
-    if params[:mid] && (['contact','propose','prepare','order'].include? params[:stage])
-      match = Match.find(params[:mid])
-      match.stage = params[:stage]
-      match.save!
-      @profile = match.send(@current_user.type_inverse?)
-      @stage = params[:stage]
-      @messages = match.messages rescue nil
+    # stages = ['contact','propose','prepare','order']
+    # @brand_or_distributor = @current_user.get_parent
+
+    # if params[:id]
+    #   match = @brand_or_distributor.matches.find(params[:id])
+    #   if !match.brand_proceed_to_next_stage && !match.distributor_proceed_to_next_stage
+    #     flag_to_set = match.send("#{@current_user.type?}_proceed_to_next_stage")
+    #     flag_to_set = true
+    #     match.save!
+    #   elsif match.brand_proceed_to_next_stage || match.distributor_proceed_to_next_stage
+    #     current_stage = match.stage
+    #     current_stage_index = stages.find_index { |e| e.match( /current_stage/ ) }
+    #     unless current_stage_index == stages.length - 1 # i.e. is last stage
+    #       next_stage = stages[current_stage_index + 1]
+    #       match.stage = next_stage
+    #       match.brand_proceed_to_next_stage = false
+    #       match.distributor_proceed_to_next_stage = false
+    #       match.save!
+    #     end
+    #   end
+
+    #   @profile = match.send(@current_user.type_inverse?)
+    #   @stage = match.stage
+    #   @messages = match.messages rescue nil
+    #   @match = match
+   
+    # end
+
+    # respond_to do |format|
+    #   format.html
+    #   format.js
+    # end
+
+  end
+
+  def match_stage_view
+
+    if !params[:id].blank? && !params[:stage].blank?
+      @brand_or_distributor = @current_user.send(@current_user.type?)
+      if @current_user.brand
+        @match = @brand_or_distributor.matches.find(params[:id]).distributor
+        @messages = @brand_or_distributor.matches.where(distributor_id: @match.id).first.messages.order_by(:c_at.asc) rescue nil
+      elsif @current_user.distributor
+        @match = @brand_or_distributor.matches.find(params[:id]).brand
+        @messages = @brand_or_distributor.matches.where(brand_id: @match.id).first.messages.order_by(:c_at.asc) rescue nil
+      end
+      if ['contact','propose','prepare','order'].include? params[:stage]
+        @stage = params[:stage]
+      end     
     end
 
     respond_to do |format|
       format.html
       format.js
-    end
+    end 
 
   end
 

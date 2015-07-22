@@ -1,0 +1,16 @@
+<% if requestor = check_stage_proceed(match) %>
+	<% if requestor != @current_user.type_inverse? %>
+		<div class="conversation-action-tile active text-center">
+			<span data-tooltip aria-haspopup="true" class="has-tip radius" title="AWAITING THEIR RESPONSE">
+					<%= image_tag "match_profile_icons_waiting.svg" %></span>
+			<h4>You have requested to move to the next stage: <%= stage.upcase %>
+				<br><%=match.send(@current_user.type_inverse?).company_name%> must also agree to continue before you proceed
+			</h4>
+		</div>
+	<% end %>
+<% else %>
+	<div class="conversation-action-tile active text-center">
+		<h4>Stuff for proceeding</h4>
+		<%= button_to "PROCEED TO #{stage.upcase}" , match_stage_update_path(match), :class => "button tiny alert", remote: true %>
+	</div>
+<% end %>

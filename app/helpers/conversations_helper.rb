@@ -59,4 +59,16 @@ module ConversationsHelper
 		end
 	end
 
+	def check_stage_proceed(match)
+		if match.brand_proceed_to_next_stage
+			return 'brand'
+		elsif match.distributor_proceed_to_next_stage
+			return 'distributor'
+		else
+			return false
+		end
+	end
+
+
+
 end

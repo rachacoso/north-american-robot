@@ -1,7 +1,0 @@
-$('#profile-conversation').hide().html("<%= j (render partial: 'conversation', locals:{profile:@profile}) %>").fadeIn(500);
-$('#conversation-info-<%= @stage %>').show();
-$('#conversation-<%= @stage %>').show();
-initConversations();
-
-$(document).foundation();
-$(document).foundation('tooltip', 'reflow');

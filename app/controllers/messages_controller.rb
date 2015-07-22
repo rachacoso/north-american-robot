@@ -55,27 +55,27 @@ class MessagesController < ApplicationController
 
 	end
 
-	def all_messages
+	# def all_messages
 
-		if !params[:match_id].blank? && !params[:stage].blank?
-			if @current_user.brand
-				@match = Distributor.find(params[:match_id])
-				@messages = @current_user.brand.matches.where(distributor_id: @match.id).first.messages.order_by(:c_at.asc) rescue nil
-			elsif @current_user.distributor
-				@match = Brand.find(params[:match_id])
-				@messages = @current_user.distributor.matches.where(brand_id: @match.id).first.messages.order_by(:c_at.asc) rescue nil
-			end
-			if ['contact','propose','prepare','order'].include? params[:stage]
-				@stage = params[:stage]
-			end			
-		end
+	# 	if !params[:match_id].blank? && !params[:stage].blank?
+	# 		if @current_user.brand
+	# 			@match = Distributor.find(params[:match_id])
+	# 			@messages = @current_user.brand.matches.where(distributor_id: @match.id).first.messages.order_by(:c_at.asc) rescue nil
+	# 		elsif @current_user.distributor
+	# 			@match = Brand.find(params[:match_id])
+	# 			@messages = @current_user.distributor.matches.where(brand_id: @match.id).first.messages.order_by(:c_at.asc) rescue nil
+	# 		end
+	# 		if ['contact','propose','prepare','order'].include? params[:stage]
+	# 			@stage = params[:stage]
+	# 		end			
+	# 	end
 
-	  respond_to do |format|
-	    format.html
-	    format.js
-	  end 
+	#   respond_to do |format|
+	#     format.html
+	#     format.js
+	#   end 
 
-	end
+	# end
 
 
 end

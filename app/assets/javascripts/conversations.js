@@ -21,23 +21,27 @@ function setDivHeight(thisDiv, offset) {
 	    height      = (viewportHeight - elementOffset - offset);
 	// console.log(thisDiv, "viewport:", viewportHeight, "offset:", elementOffset, "height:", height);
   $(thisDiv).height(height);
+  console.log(viewportHeight, elementOffset, thisDiv, height);
 }
 
 function initConversations() {
 
 	if (typeof conversationStage !== 'undefined') {
-		var animationSpeed = 500,
-			conversationID = '#conversation-' + conversationStage + '-wrapper'
+		var conversationID = '#conversation-' + conversationStage + '-wrapper'
 		$(conversationID).slideDown();
-
 		setDivHeight('#profile-conversation-wrapper');
 		setDivHeight('#profile-profile-wrapper');
-		setDivHeight('.conversation-block', 25);
 		setDivHeight('.conversation-left-info-column');
 
-		// $(".conversation-block #top").animate({ scrollTop: $(".conversation-block #top")[0].scrollHeight}, 1000);
-
+		// hack to fix bug where map-subhead wasn't being factored in convo block resize
+		if (typeof addOffset !== 'undefined') { 
+			setDivHeight('.conversation-block', 25 + addOffset);
+		} else {
+			setDivHeight('.conversation-block', 25);
+		}
 	}
+
+	var animationSpeed = 500
 
 	$('#propose-action-toggle').on('click', function(e){
 		e.preventDefault();
