@@ -18,7 +18,7 @@
 										<% end %>
 									</div>
 									<div class="conversation-action-tile" id="action-two" style="display: none;">
-										<%= form_tag match_share_path, remote: true do %>
+										<%= form_tag match_share_path, class: 'conversation-share-form', remote: true do %>
 											<%= hidden_field_tag :match_id, match.id %>
 
 											<div class="row">
@@ -167,7 +167,7 @@
 								</div>
 
 								<div class="conversation-action-tile" id="action-two" style="display: none;">
-									<%= form_tag match_share_path, remote: true do %>
+									<%= form_tag match_share_path, class: 'conversation-share-form', remote: true do %>
 										<%= hidden_field_tag :match_id, match.id %>
 										
 										<div class="row">

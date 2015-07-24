@@ -486,6 +486,7 @@ class MatchesController < ApplicationController
             fields_message_text += "<h4><strong>#{k.gsub(/_/, " ").split.map(&:capitalize)*' '}:</strong></h4><p> #{v}</p>"
           end
         end
+
       end
 
       unless shared_docs_list.blank? && shared_fields_list.blank?
@@ -500,6 +501,15 @@ class MatchesController < ApplicationController
 
     mm = b_or_d.matches
     @m = mm.find(params[:match_id])
+
+    if !shared_docs_list.blank?
+      params[:share_list_docs].delete_if {|k,v| v.blank? }
+      @m.update(match_share_docs_parameters)
+    end
+    if !shared_fields_list.blank?
+      params[:share_list_fields].delete_if {|k,v| v.blank? }
+      @m.update(match_share_fields_parameters)
+    end
 
     # set flag to signal they've shared
     @m.send("#{@current_user.type?}_shared_propose=", true)
@@ -519,6 +529,34 @@ class MatchesController < ApplicationController
 
 
   private
+
+
+  def match_share_docs_parameters
+    params.require(:share_list_docs).permit(
+      :tiered_pricing_schedule,
+      :fob_pricing,
+      :products_list
+    )
+  end
+
+  def match_share_fields_parameters
+    params.require(:share_list_fields).permit(
+      :partnership_terms_length,
+      :payment_terms,
+      :grant_territory_exclusivity,
+      :requested_minimum_marketing_spend,
+      :marketing_requests_or_requirements,
+      :sales_channel_requests_or_requirements,
+      :brand_launch_plan,
+      :marketing_strategy,
+      :initial_channels,
+      :second_tier_channels,
+      :third_tier_channels,
+      :minimum_volume_year_one,
+      :minimum_volume_year_two,
+      :minimum_volume_year_three
+    )
+  end
 
   def get_countries
 
