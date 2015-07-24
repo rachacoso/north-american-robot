@@ -18,19 +18,8 @@
 	<div class="small-12 columns">
 		<div class="profile-container">
 
-			<div class="row collapse">
-				<div class="medium-3 columns text-center">
-					<div id="conversation-map-contact" class="<%= contact_stage_indicator(match, "contact") %>"><h1><%= link_to 'CONTACT', match_stage_view_url(match, 'contact'), style: "color:black;", remote: true %></h1></div>
-				</div><!--/.medium-5-->
-				<div class="medium-3 columns text-center">
-					<div id="conversation-map-propose" class="<%= contact_stage_indicator(match, "propose") %>"><h1><%= link_to 'PROPOSE', match_stage_view_url(match, 'propose'), style: "color:black;", remote: true %></h1></div>
-				</div><!--/.medium-5-->
-				<div class="medium-3 columns text-center">
-					<div id="conversation-map-prepare" class="<%= contact_stage_indicator(match, "prepare") %>"><h1><%= link_to 'PREPARE', match_stage_view_url(match, 'prepare'), style: "color:black;", remote: true %></h1></div>
-				</div><!--/.medium-5-->
-				<div class="medium-3 columns text-center">
-					<div id="conversation-map-order" class="<%= contact_stage_indicator(match, "order") %>"><h1><%= link_to 'ORDER', match_stage_view_url(match, 'order'), style: "color:black;", remote: true %></h1></div>
-				</div><!--/.medium-5-->
+			<div class="row collapse" id="conversation-map">
+				<%= render partial: "matches/conversation/conversation_map", locals: {match: match} %>
 			</div><!--/.row-->
 
 			<!--CONVERSATION MAP SUBHEAD start-->
@@ -39,19 +28,26 @@
 			</div><!--/.row-->
 			<!--CONVERSATION MAP SUBHEAD end-->
 
-			<div class="row" id="conversation-wrapper">
-			
-				<div class="small-2 columns conversation-left-info-column">
-					<div id="conversation-info">
-						<%= render partial: "matches/conversation/conversation_#{@stage}_info", locals: {match: match, profile: profile} %> 
+			<div class="row collapse hide-for-small-only">
+				<div class="medium-9 columns text-center">
+					<div id="conversation-section-header">
+						<h6>CONVERSATION</h6>
 					</div>
-				</div><!--/.medium-4-->
-				<div class="small-7 columns conversation-right-message-column">
+				</div><!--/.medium-9-->
+				<div class="medium-3 columns text-center">
+					<div id="action-section-header">
+						<h6>ACTIONS &amp; INFORMATION</h6>
+					</div>
+				</div><!--/.medium-3-->
+			</div><!--/.row-->
+
+			<div class="row" id="conversation-wrapper">
+				<div class="medium-9 columns conversation-right-message-column">
 						<div id="conversation-message-block">
 							<%= render partial: "matches/conversation_message_block", locals: {match: match, stage: @stage} %>
 						</div>
 				</div><!--/.medium-8-->
-				<div class="small-3 columns">
+				<div class="medium-3 columns">
 					<div id="conversation-action">
 						<%= render partial: "matches/conversation/conversation_#{@stage}_action", locals: {match: match, profile: profile} %> 
 					</div>

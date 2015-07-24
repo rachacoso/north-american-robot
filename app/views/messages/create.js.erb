@@ -26,15 +26,16 @@
 	
 	$('#conversation-contact-wrapper .conversation-left-info-column').removeClass('medium-6').addClass('medium-4');
 	$('#conversation-contact-wrapper .conversation-right-message-column').removeClass('medium-6').addClass('medium-8');
-	$('.conversation-help').show(1000);
+	// $('.conversation-help').show(1000);
 	<% conversation_action_partial = "matches/conversation/conversation_#{@stage}_action" %>
 	$('#conversation-action').hide().html("<%= j (render partial: conversation_action_partial, locals: {match: @m, profile: @match}) %>").fadeIn(1000);
-	$('.conversation-action#contact-one').show(1000);
-	$('.conversation-action#contact-two').hide(1000);	
+	// $('.conversation-action#contact-one').show(1000);
+	// $('.conversation-action#contact-two').hide(1000);	
 <% end %>
 
 $(document).foundation();
 $(document).foundation('tab', 'reflow');
 $(document).foundation('topbar', 'reflow');
+initConversations();
 
   

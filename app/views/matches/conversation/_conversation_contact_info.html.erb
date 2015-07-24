@@ -1,15 +1,5 @@
-<% if match.stage == "contact" %>
-	<div class="conversation-help-tile">
-		<h4><strong>Tips for Making a Connection</strong></h4>
-		<p> 
-			[Helpful text here]
-		</p>
-	</div>
-<% else %>
-	<div class="conversation-help-tile">
+<% if match.stage != "contact" %>
+	<div class="conversation-help-tile text-center">
 		<h4><strong>Archived Conversation</strong></h4>
-		<p> 
-			This is your archived CONTACT conversation.
-		</p>
 	</div>
 <% end %>

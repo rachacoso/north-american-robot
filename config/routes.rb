@@ -103,12 +103,12 @@ Rails.application.routes.draw do
   get '/matches/search' => 'matches#search', as: 'search'
   post '/matches/stage/update/:id' => 'matches#match_stage_update', as: 'match_stage_update'
   get '/matches/stage/view/:id/:stage' => 'matches#match_stage_view', as: 'match_stage_view'
-  get '/matches/share' => 'matches#match_share', as: 'match_share'
   get '/matches/quickview/:match_id' => 'matches#quick_view', as: 'quick_view'
   post '/matches/accept/:id' => 'matches#accept_match', as: 'accept_match'
   get '/gallery' => 'matches#gallery', as: 'gallery'
+  post '/matches/share' => 'matches#match_share', as: 'match_share'
 
-  post '/conversations/share' => 'conversations#share', as: 'conversation_share'
+  # post '/conversations/share' => 'conversations#share', as: 'conversation_share'
 
   resources :messages, only: [:create, :index]
 

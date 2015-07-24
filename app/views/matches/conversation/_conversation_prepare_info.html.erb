@@ -1,28 +1,5 @@
-					<% if match.stage == "prepare" %>
-
-						<div class="conversation-help-tile">
-							<h4><strong>Prepare for Export</strong></h4>
-							<p> 
-								[Helpful text here]
-							</p>
-						</div>
-
-					<% elsif match.stage == "order" %>
-
-						<div class="conversation-help-tile">
-							<h4><strong>Archived Conversation</strong></h4>
-							<p> 
-								This is your archived PREPARE conversation.
-							</p>
-						</div>
-
-					<% else %>
-
-						<div class="conversation-help-tile">
-							<h4><strong>Preparing for Export</strong></h4>
-							<p> 
-								This is where you will prepare your products for export...
-							</p>
-						</div>					
-
-					<% end %>
+<% if match.stage == "order" %>
+	<div class="conversation-help-tile text-center">
+		<h4><strong>Archived Conversation</strong></h4>
+	</div>
+<% end %>

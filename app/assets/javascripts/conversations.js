@@ -31,44 +31,48 @@ function initConversations() {
 		$(conversationID).slideDown();
 		setDivHeight('#profile-conversation-wrapper');
 		setDivHeight('#profile-profile-wrapper');
-		setDivHeight('.conversation-left-info-column');
 
 		// hack to fix bug where map-subhead wasn't being factored in convo block resize
 		if (typeof addOffset !== 'undefined') { 
-			setDivHeight('.conversation-block', 25 + addOffset);
+			setDivHeight('.conversation-block', 20 + addOffset);
+			setDivHeight('#conversation-action', 20 + addOffset);
 		} else {
-			setDivHeight('.conversation-block', 25);
+			setDivHeight('.conversation-block', 20);
+			setDivHeight('#conversation-action', 20);
 		}
 	}
 
 	var animationSpeed = 500
 
-	$('#propose-action-toggle').on('click', function(e){
+	$('#conversation-action-toggle').on('click', function(e){
 		e.preventDefault();
-		$('#conversation-wrapper .conversation-left-info-column').removeClass('medium-4').addClass('medium-6');
-		$('#conversation-wrapper .conversation-right-message-column').removeClass('medium-8').addClass('medium-6');
-		$('.conversation-help').hide(animationSpeed);
-		$('.conversation-action#action-one').hide(animationSpeed);
-		$('.conversation-action#action-two').show(animationSpeed);
+		// $('#conversation-wrapper .conversation-right-message-column').removeClass('medium-8').addClass('medium-6');
+		// $('#conversation-wrapper .conversation-action').removeClass('medium-3').addClass('medium-5');
+		$('.overlay#action-two').show();
+		// $('.conversation-help').hide(animationSpeed);
+		// $('.conversation-action-tile#action-one').hide(animationSpeed);
+		$('.conversation-action-tile#action-two').show(animationSpeed);
 	});		
-	$('#propose-action-cancel').on('click', function(e){
+	$('#conversation-action-cancel, .overlay#action-two').on('click', function(e){
 		e.preventDefault();
-		$('#conversation-wrapper .conversation-left-info-column').removeClass('medium-6').addClass('medium-4');
-		$('#conversation-wrapper .conversation-right-message-column').removeClass('medium-6').addClass('medium-8');
-		$('.conversation-help').show(animationSpeed);
-		$('.conversation-action#action-one').show(animationSpeed);
-		$('.conversation-action#action-two').hide(animationSpeed);
+		// $('#conversation-wrapper .conversation-right-message-column').removeClass('medium-6').addClass('medium-8');
+		// $('#conversation-wrapper .conversation-action').removeClass('medium-5').addClass('medium-3');
+		$('.overlay#action-two').hide();
+		// $('.conversation-help').show(animationSpeed);
+		// $('.conversation-action-tile#action-one').show(animationSpeed);
+		$('.conversation-action-tile#action-two').hide(animationSpeed);
 	});		
 
-	$('#message-start').on('click', function(){
-		$('.conversation-block #view-messages').animate({height:'45%'});
-		$('.conversation-block #send-message').animate({height:'50%'});
-		// $('.conversation-block #old-messages-indicator').animate({height:'5%'});
-		$('.conversation-block #message-input').animate({height:'14em'}, function() {
-			$('#message-submit').show();
-			$('#message-cancel').show();	
-		});
-	});
+
+	// $('#message-start').on('click', function(){
+	// 	$('.conversation-block #view-messages').animate({height:'45%'});
+	// 	$('.conversation-block #send-message').animate({height:'50%'});
+	// 	// $('.conversation-block #old-messages-indicator').animate({height:'5%'});
+	// 	$('.conversation-block #message-input').animate({height:'14em'}, function() {
+	// 		$('#message-submit').show();
+	// 		$('#message-cancel').show();	
+	// 	});
+	// });
 
 	$('#message-input').on('focus', function(){
 		// $('.conversation-block #view-messages').animate({height:'45%'});

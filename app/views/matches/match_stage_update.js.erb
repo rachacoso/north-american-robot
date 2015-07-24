@@ -1,6 +1,6 @@
-// $('#profile-conversation').hide().html("<%= j (render partial: 'conversation', locals:{profile:@profile}) %>").fadeIn(500);
 
-// initConversations();
+$('#profile-conversation').hide().html("<%= j(render partial: 'matches/conversation', locals: {profile: @profile}) %>").show();
 
 $(document).foundation();
 $(document).foundation('tooltip', 'reflow');
+initConversations();

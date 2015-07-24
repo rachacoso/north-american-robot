@@ -352,33 +352,21 @@ class MatchesController < ApplicationController
 
   end
 
-  def match_share
-    if params[:mid] && params[:sharetype] && (['pp','cr'].include? params[:sharetype])
-      match = Match.find(params[:mid])
+  def quick_view
 
-      case params[:sharetype]
-      when "pp" # PRODUCT & PRICING (BRAND)
-        unless !@current_user.brand
+    if params[:match_id]
 
-          match.shared_product_pricing = true
-        end
-      when "cr" # COUNTRY REQUIREMENTS (DISTRIBUTOR)
-        unless !@current_user.distributor
-          
-          match.shared_country_requirements = true
-        end
-      end
-      match.save!
-      @profile = match.send(@current_user.type_inverse?)
-      @stage = params[:stage]
-      @messages = match.messages rescue nil
+      @match = Distributor.find(params[:match_id]) || Brand.find(params[:match_id])
     end
 
     respond_to do |format|
       format.html
       format.js
-    end    
+    end
+
   end
+
+# CONVERSATIONS ACTIONS
 
   def accept_match
     if params[:id]
@@ -396,38 +384,38 @@ class MatchesController < ApplicationController
 
   def match_stage_update
 
-    # stages = ['contact','propose','prepare','order']
-    # @brand_or_distributor = @current_user.get_parent
+    stages = ['contact','propose','prepare','order']
+    @brand_or_distributor = @current_user.get_parent
 
-    # if params[:id]
-    #   match = @brand_or_distributor.matches.find(params[:id])
-    #   if !match.brand_proceed_to_next_stage && !match.distributor_proceed_to_next_stage
-    #     flag_to_set = match.send("#{@current_user.type?}_proceed_to_next_stage")
-    #     flag_to_set = true
-    #     match.save!
-    #   elsif match.brand_proceed_to_next_stage || match.distributor_proceed_to_next_stage
-    #     current_stage = match.stage
-    #     current_stage_index = stages.find_index { |e| e.match( /current_stage/ ) }
-    #     unless current_stage_index == stages.length - 1 # i.e. is last stage
-    #       next_stage = stages[current_stage_index + 1]
-    #       match.stage = next_stage
-    #       match.brand_proceed_to_next_stage = false
-    #       match.distributor_proceed_to_next_stage = false
-    #       match.save!
-    #     end
-    #   end
+    if params[:id]
+      match = @brand_or_distributor.matches.find(params[:id])
+      if !match.brand_proceed_to_next_stage && !match.distributor_proceed_to_next_stage
+        match.send("#{@current_user.type?}_proceed_to_next_stage=", true)
+        match.save!
+      elsif match.brand_proceed_to_next_stage || match.distributor_proceed_to_next_stage
+        current_stage = match.stage
+        current_stage_index = stages.index(current_stage)
+        unless current_stage_index == stages.length - 1 # i.e. is last stage
+          next_stage = stages[current_stage_index + 1]
+          match.stage = next_stage
+          match.brand_proceed_to_next_stage = false
+          match.distributor_proceed_to_next_stage = false
+          match.save!
+        end
+      end
 
-    #   @profile = match.send(@current_user.type_inverse?)
-    #   @stage = match.stage
-    #   @messages = match.messages rescue nil
-    #   @match = match
+      @profile = match.send(@current_user.type_inverse?)
+      @stage = match.stage
+      @messages = match.messages rescue nil
+      @match = match
+      @current_stage = current_stage_index
    
-    # end
+    end
 
-    # respond_to do |format|
-    #   format.html
-    #   format.js
-    # end
+    respond_to do |format|
+      format.html
+      format.js
+    end
 
   end
 
@@ -454,19 +442,80 @@ class MatchesController < ApplicationController
 
   end
 
-  def quick_view
+  def match_share
+    if (params[:share_list_docs] || params[:share_list_fields]) && params[:match_id]
+      
+      b_or_d = @current_user.brand || @current_user.distributor
 
-    if params[:match_id]
+      shared_docs_list = {}
+      shared_fields_list = {}
+      if params[:share_list_docs]
+        params[:share_list_docs].each do |k,v|
+          if doc = LibraryDocument.find(v)
+            shared_docs_list[doc.filename] = doc.file.url
+          end 
+        end
+      end
+      if params[:share_list_fields]
+        params[:share_list_fields].each do |k,v|
+          unless v.blank?
+            shared_fields_list[k] = v
+          end
+        end
+      end
 
-      @match = Distributor.find(params[:match_id]) || Brand.find(params[:match_id])
+      docs_message_text = "<h3>#{b_or_d.company_name} has shared the following documents:</h3>"
+      fields_message_text = "<h3>#{b_or_d.company_name} has shared the following information:</h3>"
+
+      if !shared_docs_list.blank?
+        shared_docs_list.each do |filename,url|
+          docs_message_text += "<h4><strong><a href='#{url}'>#{filename}</a></strong></h4>"
+        end
+      end
+
+      if !shared_fields_list.blank?
+        shared_fields_list.each do |k,v|
+          if k == "cbox"
+            v.each do |kk,vv|
+              fields_message_text += "<h4><strong>#{kk.gsub(/_/, " ").split.map(&:capitalize)*' '}:</strong></h4>"
+              vv.each do |kkk,vvv|
+                fields_message_text += "<p> #{kkk}</p>"
+              end
+            end
+          else 
+            fields_message_text += "<h4><strong>#{k.gsub(/_/, " ").split.map(&:capitalize)*' '}:</strong></h4><p> #{v}</p>"
+          end
+        end
+      end
+
+      unless shared_docs_list.blank? && shared_fields_list.blank?
+        message_text = ""
+        shared_docs_list.blank? ? "" : message_text += "#{docs_message_text}".html_safe
+        shared_fields_list.blank? ? "" : message_text += "#{fields_message_text}".html_safe
+        create_message(params[:match_id], message_text)
+      end
+
     end
+
+
+    mm = b_or_d.matches
+    @m = mm.find(params[:match_id])
+
+    # set flag to signal they've shared
+    @m.send("#{@current_user.type?}_shared_propose=", true)
+    @m.save!
+
+    @messages = @m.messages.order_by(:c_at.asc)
+    @stage = @m.stage
+    @profile = @m.send(@current_user.type_inverse?)
 
     respond_to do |format|
       format.html
       format.js
-    end
+    end 
 
   end
+
 
 
   private
@@ -501,6 +550,18 @@ class MatchesController < ApplicationController
     if params[:list_style]
       @list_style = params[:list_style]
     end
+  end
+
+  def create_message(match_id, text)
+
+      user = @current_user.distributor || @current_user.brand
+      mm = user.matches
+      m = mm.find(match_id)
+      m.messages << Message.new(recipient: @current_user.type_inverse?, text: text, stage: m.stage, read: false)
+      m.save!
+      # @messages = m.messages.order_by(:c_at.asc)
+      # @stage = m.stage
+
   end
 
 end

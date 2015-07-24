@@ -15,25 +15,17 @@
 <% end %>
 
 <% if @messages %>
-	$('#message-list').hide().html("<%= j (render partial: 'shared/messages/message_list_all', locals:{stage:@stage}) %>").fadeIn(500);
-	$('.conversation-block #view-messages').animate({height:'75%'});
-	$('.conversation-block #send-message').animate({height:'25%'});
-	$('.conversation-block #message-input').animate({height:'5em'});
-
-	$('#conversation-wrapper .conversation-left-info-column').removeClass('medium-6').addClass('medium-4');
-	$('#conversation-wrapper .conversation-right-message-column').removeClass('medium-6').addClass('medium-8');	
-	$('.conversation-help').show(500);
-	$('.conversation-action#action-one').show(500);
-	$('.conversation-action#action-two').hide(500);
-
-	$('#message-submit').hide();
-	$('#message-cancel').hide();
-	$('#message-input').val('');
-	$(".conversation-block #view-messages").animate({ scrollTop: $(".conversation-block #top")[0].scrollHeight}, 500);
+	<% conversation_action_partial = "matches/conversation/conversation_#{@stage}_action" %>
+	<% conversation_message_block_partial = "matches/conversation_message_block" %>
+	$('#conversation-action').hide().html("<%= j (render partial: conversation_action_partial, locals: {match: @m, profile: @profile}) %>").fadeIn(1000);
+	$('#conversation-message-block').hide().html("<%= j (render partial: conversation_message_block_partial, locals: {match: @m, stage: @stage}) %>").fadeIn(1000);
+	$('.overlay#action-two').hide();
+	$('.conversation-action-tile#action-two').hide();
 <% end %>
 
 $(document).foundation();
 $(document).foundation('tab', 'reflow');
 $(document).foundation('topbar', 'reflow');
+initConversations();
 
   

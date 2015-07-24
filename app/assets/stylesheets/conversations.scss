@@ -215,7 +215,12 @@ top: 10px;
   }
 }
 
-.conversation-help-tile,
+#conversation-action,
+#conversation-info {
+  overflow-y: scroll;
+}
+
+
 .conversation-action-tile,
 .conversation-action-center-tile {
   padding: rem-calc(10);
@@ -226,6 +231,9 @@ top: 10px;
   }  
 }
 .conversation-help-tile {
+  padding: rem-calc(5) rem-calc(20);
+  border-radius: rem-calc(5);
+  margin: rem-calc(2) 0;
   background: $landing-light-gray;
 } 
 .conversation-action-tile {
@@ -241,6 +249,20 @@ top: 10px;
     margin-top: rem-calc(10);
   }
   // remove default padding for buttons
+  
+  &#action-two {
+    position: fixed;
+    top: 15%;
+    left: 50%;
+    margin: 0 0 0 -37.5%;
+    width:75%;
+    height: 75%;
+    overflow-x: hidden;
+    overflow-y: scroll;    
+    background: white;
+    z-index: 11;
+    display: none;
+  }
 }
 
 .conversation-action-center-tile {
@@ -267,9 +289,6 @@ top: 10px;
   border-left: 1px dotted $landing-blue;
   border-right: 1px dotted $landing-middle-gray;
   padding: rem-calc(15) 0 0 0;
-  h3 {
-    color: white;
-  }
   & #send-message {
     background: white;
     & .bubble-you
@@ -338,3 +357,15 @@ top: 10px;
   }  
 }
 
+#conversation-section-header,
+#action-section-header {
+  h6 {
+    margin:0;
+  }
+}
+#conversation-section-header {
+  background: $landing-light-gray
+}
+#action-section-header {
+  background: $landing-middle-gray 
+}

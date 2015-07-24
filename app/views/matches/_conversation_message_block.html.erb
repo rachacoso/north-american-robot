@@ -9,13 +9,12 @@
 				</div>
 			</div><!--/.small-2 text-left-->
 			<div class="small-8 columns">
-
+				<%= render partial: "matches/conversation/conversation_#{stage}_info", locals: {match: match} %>
 				<div class="conversation-block">
 
 					<div id="send-message">
 						<%= match.accepted ? (render partial: "matches/conversation/proceed_stage_confirm", locals: {match: match, stage: stage}) : "" %>
 						<%= match.accepted ? (render partial: "matches/conversation/send_message", locals: {match: match, stage: stage}) : "" %>
-
 					</div><!--/#send-message-->
 
 					<div id="view-messages">

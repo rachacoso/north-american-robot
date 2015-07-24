@@ -2,11 +2,14 @@
 <% conversation_action_partial = "matches/conversation/conversation_#{@stage}_action" %>
 <% conversation_subhead_partial = "matches/conversation/conversation_#{@stage}_subhead" %>
 <% conversation_message_block_partial = "matches/conversation_message_block" %>
+<% conversation_map_partial = "matches/conversation/conversation_map" %>
 <% match = this_match(@match) %>
+
 
 $('#conversation-info').hide().html("<%= j (render partial: conversation_info_partial, locals: {match: match, profile: @match}) %>").fadeIn(1000);
 $('#conversation-action').hide().html("<%= j (render partial: conversation_action_partial, locals: {match: match, profile: @match}) %>").fadeIn(1000);
 $('#conversation-message-block').hide().html("<%= j (render partial: conversation_message_block_partial, locals: {match: match, stage: @stage}) %>").fadeIn(1000);
+$('#conversation-map').hide().html("<%= j (render partial: conversation_map_partial, locals: {match: match}) %>").fadeIn(1000);
 
 addOffset = $('.conversation-map-subhead').height(); // subhead height wasn't being factored in conversation block resizing
 $('.conversation-map-subhead').hide().html("<%= j (render partial: conversation_subhead_partial) %>").show(500);

@@ -69,6 +69,17 @@ module ConversationsHelper
 		end
 	end
 
+	def get_next_stage(match)
+		case match.stage
+		when 'contact'
+			next_stage = 'propose'
+		when 'propose'
+			next_stage = 'prepare'
+		when 'prepare'
+			next_stage = 'order'
+		end
+		return next_stage.upcase
+	end
 
 
 end

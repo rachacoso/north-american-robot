@@ -1,29 +1,5 @@
-					<% if match.stage == "propose" %>
-
-
-						<div class="conversation-help-tile">
-							<h4><strong>Propose</strong></h4>
-							<p> 
-								[Helpful text here]
-							</p>
-						</div>					
-
-					<% elsif match.stage == "prepare" || match.stage == "order" %>
-
-						<div class="conversation-help-tile">
-							<h4><strong>Archived Conversation</strong></h4>
-							<p> 
-								This is your archived PROPOSE conversation.
-							</p>
-						</div>
-					
-					<% else %>
-
-						<div class="conversation-help-tile">
-							<h4><strong>Proposing a deal</strong></h4>
-							<p> 
-								This is where you will begin negotiating a deal...
-							</p>
-						</div>					
-
-					<% end %>
+<% if match.stage == "prepare" || match.stage == "order" %>
+	<div class="conversation-help-tile text-center">
+		<h4><strong>Archived Conversation</strong></h4>
+	</div>
+<% end %>

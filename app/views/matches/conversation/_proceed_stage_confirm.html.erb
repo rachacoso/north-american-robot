@@ -1,12 +1,12 @@
 <% if requestor = check_stage_proceed(match) %>
 	<% if requestor != @current_user.type? %>
 		<div class="conversation-action-center-tile text-center">
-			<h4><%= @match.company_name %> would like to proceed to the next stage of conversation: PROPOSE</h4>
-			<%= button_to 'YES, PROCEED TO PROPOSE', match_stage_update_path(match,'propose'), :class => "button tiny alert", remote: true %>
+			<h4><%= @match.company_name %> would like to proceed to the next stage of conversation: <%= get_next_stage(match) %></h4>
+			<%= button_to "YES, PROCEED TO #{get_next_stage(match)}", match_stage_update_path(match), :class => "button tiny alert", remote: true %>
 		</div>
 	<% else %>
 		<div class="conversation-action-center-tile text-center">
-			<h4><small>[You have sent the follwing request]</small><br><%= @current_user.send(@current_user.type?).company_name %> would like to proceed to the next stage of conversation: PROPOSE</h4>
+			<h4><small>[You have sent the follwing request]</small><br><%= @current_user.send(@current_user.type?).company_name %> would like to proceed to the next stage of conversation: <%= get_next_stage(match) %></h4>
 		</div>
 	<% end %>
 <% end %>

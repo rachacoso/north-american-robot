@@ -1,38 +1,131 @@
+
 					<% if match.stage == "propose" %>			
 
 						<% if match && !match.messages.blank? && match.stage == "propose" %>
 							<% if @current_user.brand %>
 								<% if has_all_docs('propose') %>
-									<div class="conversation-action-tile" id="action-one">
-										<h4><strong>Would you like to share your <br>PRODUCT &amp; PRICING information with <%= profile.company_name %>?</strong></h4>
+									<div class="conversation-action-tile active" id="action-one">
+										<h4><strong>Would you like to share your <br>PRODUCT &amp; PRICING documents with <%= profile.company_name %>?</strong></h4>
 										<p>These include the following documents that you have uploaded to your Global Terms &amp; Documents:</p>
 										<ul>
 											<li>Products List</li>
 											<li>FOB Pricing</li>
 											<li>Tiered Pricing Schedule</li>
 										</ul>
-										<p>After sharing, your conversation with <%= profile.company_name %> will proceed to the next stage (PREPARE)</p>
 
-										<%= link_to '#', id: "propose-action-toggle", class: "button tiny alert expand" do %>
+										<%= link_to '#', id: "conversation-action-toggle", class: "button tiny alert expand" do %>
 											SHARE PRODUCT &amp; PRICING <br> with <%= profile.company_name %>
 										<% end %>
-										<%#= link_to "SHARE PRODUCT &amp; PRICING <br>information with #{profile.company_name}".html_safe, match_share_url(:sharetype => 'pp', :mid => match.id  ), class: "button tiny alert expand", remote: true %>
 									</div>
 									<div class="conversation-action-tile" id="action-two" style="display: none;">
-										<%= form_tag conversation_share_path, remote: true do %>
+										<%= form_tag match_share_path, remote: true do %>
 											<%= hidden_field_tag :match_id, match.id %>
-											<h4><strong>Select which Documents you'd like to share:</strong></h4>
-											<ul> 
-											<li>Products List: <%= collection_select(:share_list, :products_list, @current_user.brand.library_documents.where(type: "Products List"), :id, :filename) %></li>
-											<li>FOB Pricing: <%= collection_select(:share_list, :fob_pricing, @current_user.brand.library_documents.where(type: "FOB Pricing"), :id, :filename) %></li>
-											<li>Tiered Pricing Schedule: <%= collection_select(:share_list, :tiered_pricing_schedule, @current_user.brand.library_documents.where(type: "Tiered Pricing Schedule"), :id, :filename) %></li>
-											</ul>
-											<p>After sharing, your conversation with <%= profile.company_name %> will proceed to the next stage (PREPARE)</p>
 
-											<%= submit_tag "SHARE DOCUMENTS", class: "button tiny alert expand" %>
-											<%= link_to '#', id: "propose-action-cancel", class: "button tiny secondary expand" do %>
-												Cancel
-											<% end %>
+											<div class="row">
+												<div class="small-12 columns">
+													<h2>Select which Documents you'd like to share:</h2>
+												</div><!--/.small-12-->
+											</div><!--/.row-->
+											<div class="row">
+												<div class="small-4 columns text-right">
+													<%= label_tag 'share_list_docs_products_list', "Products List: " %>
+												</div><!--/.small-4-->
+												<div class="small-8 columns">
+													<%= collection_select(:share_list_docs, :products_list, @current_user.brand.library_documents.where(type: "Products List"), :id, :filename, :include_blank => "Select a Document") %>
+												</div><!--/.small-8-->
+											</div><!--/.row-->
+											<div class="row">
+												<div class="small-4 columns text-right">
+													<%= label_tag 'share_list_docs_fob_pricing', "FOB Pricing: " %>
+												</div><!--/.small-4-->
+												<div class="small-8 columns">
+													<%= collection_select(:share_list_docs, :fob_pricing, @current_user.brand.library_documents.where(type: "FOB Pricing"), :id, :filename, :include_blank => "Select a Document") %>
+												</div><!--/.small-8-->
+											</div><!--/.row-->
+											<div class="row">
+												<div class="small-4 columns text-right">
+													<%= label_tag 'share_list_docs_tiered_pricing_schedule', "Tiered Pricing Schedule: " %>
+												</div><!--/.small-4-->
+												<div class="small-8 columns">
+													<%= collection_select(:share_list_docs, :tiered_pricing_schedule, @current_user.brand.library_documents.where(type: "Tiered Pricing Schedule"), :id, :filename, :include_blank => "Select a Document") %>
+												</div><!--/.small-8-->
+											</div><!--/.row-->
+
+
+											<div class="row">
+												<div class="small-12 columns">
+													<h2>How long are you willing to grant these terms to your partner?</h2>
+												</div><!--/.small-12-->
+											</div><!--/.row-->
+											<div class="row">
+												<div class="small-12 columns">
+													<%= text_area_tag "share_list_fields[partnership_terms_length]", nil, placeholder: "Partnership Terms Length"  %>	
+												</div><!--/.small-12-->
+											</div><!--/.row-->
+											<div class="row">
+												<div class="small-12 columns">
+													<h2>What are your payment terms?</h2>
+												</div><!--/.small-12-->
+											</div><!--/.row-->
+											<div class="row">
+												<div class="small-12 columns">
+													<%= text_area_tag "share_list_fields[payment_terms]", nil, placeholder: "Payment Terms"  %>	
+												</div><!--/.small-12-->
+											</div><!--/.row-->
+											<div class="row">
+												<div class="small-12 columns">
+													<h2>Are you willing to grant territory exclusivity to your partner? </h2>
+												</div><!--/.small-12-->
+											</div><!--/.row-->
+											<div class="row">
+												<div class="small-12 columns">
+													<%= text_area_tag "share_list_fields[grant_territory_exclusivity]", nil, placeholder: "Territory Exclusivity"  %>	
+												</div><!--/.small-12-->
+											</div><!--/.row-->
+											<div class="row">
+												<div class="small-12 columns">
+													<h2>What is your requested minimum marketing spend by your partner? </h2>
+												</div><!--/.small-12-->
+											</div><!--/.row-->
+											<div class="row">
+												<div class="small-12 columns">
+													<%= text_area_tag "share_list_fields[requested_minimum_marketing_spend]", nil, placeholder: "Requested Minimum Marketing Spend"  %>	
+												</div><!--/.small-12-->
+											</div><!--/.row-->
+											<div class="row">
+												<div class="small-12 columns">
+													<h2>Do you have any marketing requests or requirements? </h2>
+												</div><!--/.small-12-->
+											</div><!--/.row-->
+											<div class="row">
+												<div class="small-12 columns">
+													<%= text_area_tag "share_list_fields[marketing_requests_or_requirements]", nil, placeholder: "Marketing Requests or Requirements"  %>	
+												</div><!--/.small-12-->
+											</div><!--/.row-->
+											<div class="row">
+												<div class="small-12 columns">
+													<h2>Do you have any sales channel requests or requirements? </h2>
+												</div><!--/.small-12-->
+											</div><!--/.row-->
+											<div class="row">
+												<div class="small-12 columns">
+													<%= text_area_tag "share_list_fields[sales_channel_requests_or_requirements]", nil, placeholder: "Sales Channel Requests or Requirements"  %>	
+												</div><!--/.small-12-->
+											</div><!--/.row-->
+
+
+
+											<div class="row">
+												<div class="small-4 columns">
+													<%= link_to '#', id: "conversation-action-cancel", class: "button tiny secondary expand" do %>
+														Cancel
+													<% end %>
+												</div><!--/.small-4-->
+												<div class="small-8 columns">
+													<%= submit_tag "SHARE INFORMATION", class: "button tiny alert expand" %>
+												</div><!--/.small-8-->
+											</div><!--/.row-->
+
 										<% end %>
 									</div>
 								<% else %>
@@ -56,47 +149,133 @@
 									</div>
 								<% end %>
 							<% elsif @current_user.distributor %>
-								<div class="conversation-action-tile" id="action-one">
-									<h4><strong>Would you like to share your country’s requirements for this brand and their products?</strong></h4>
+								<div class="conversation-action-tile active" id="action-one">
+									<h4><strong>Would you like to share your marketing plans for this brand and their products?</strong></h4>
 									<p>These include:</p>
 									<ul> 
-										<li>Regulatory Compliance</li>
-										<li>Labeling Requirements</li>
-										<li>Product Tariffs</li>
-									</ul>
-									<p>After sharing, your conversation with <%= profile.company_name %> will proceed to the next stage (PREPARE)</p>
+										<li>Brand Launch Plan</li>
+										<li>Marketing Strategy</li>
+										<li>Retail Channels</li>
+										<li>Minimum Purchase Volumes</li>
 
-									<%= link_to '#', id: "propose-action-toggle", class: "button tiny alert expand" do %>
-										SHARE COUNTRY REQUIREMENTS <br> with <%= profile.company_name %>
+									</ul>
+
+
+									<%= link_to '#', id: "conversation-action-toggle", class: "button tiny alert expand" do %>
+										SHARE MARKETING PLANS <br> with <%= profile.company_name %>
 									<% end %>
 								</div>
 
 								<div class="conversation-action-tile" id="action-two" style="display: none;">
-									<%= form_tag conversation_share_path, remote: true do %>
+									<%= form_tag match_share_path, remote: true do %>
 										<%= hidden_field_tag :match_id, match.id %>
-										<h4><strong>Enter the country requirements you'd like to share:</strong></h4>
+										
+										<div class="row">
+											<div class="small-12 columns">
+												<h2>Please summarize your brand launch plan</h2>
+											</div><!--/.small-12-->
+										</div><!--/.row-->
+										<div class="row">
+											<div class="small-12 columns">
+												<%= text_area_tag "share_list_fields[brand_launch_plan]", nil, placeholder: "Your Launch Plan"  %>	
+											</div><!--/.small-12-->
+										</div><!--/.row-->
 
+										<div class="row">
+											<div class="small-12 columns">
+												<h2>Please share how you plan to market the brand and its products</h2>
+											</div><!--/.small-12-->
+										</div><!--/.row-->
+										<div class="row">
+											<div class="small-12 columns">
+												<%= text_area_tag "share_list_fields[marketing_strategy]", nil, placeholder: "Your Marking Strategy" %>
+											</div><!--/.small-12-->
+										</div><!--/.row-->
 
-										<ul>
-										<li>Regulatory Compliance:<%= text_area_tag "share_list[regulatory_compliance]" %></li>
-										<li>Labeling Requirements:<%= text_area_tag "share_list[labeling_requirements]" %></li>
-										<li>Product Tariffs:<%= text_area_tag "share_list[product_tariffs]" %></li>													 
-										</ul>
-										<p>After sharing, your conversation with <%= profile.company_name %> will proceed to the next stage (PREPARE)</p>
+										<div class="row">
+											<div class="small-12 columns">
+												<h2>Please share what retail channels you plan to sell the brand's products</h2>
+											</div><!--/.small-12-->
+										</div><!--/.row-->
+										<div class="row">
+											<div class="medium-4 columns"><h4>Initial Channels</h4></div><!--/.small-4-->
+											<div class="medium-8 columns">
+												<% Channel.all.each do |channel| %>
+													<%= check_box_tag("share_list_fields[cbox[initial_channels[#{channel.name}]]]") %>
+													<%= label_tag("share_list_fields[cbox[initial_channels[#{channel.name}]]]", "#{channel.name}") %><br>
+												<% end %>	
+											</div><!--/.medium-8-->
+										</div><!--/.row-->
+										<div class="row">
+											<div class="medium-4 columns"><h4>Second Tier Channels</h4></div><!--/.small-4-->
+											<div class="medium-8 columns">
+												<% Channel.all.each do |channel| %>
+													<%= check_box_tag("share_list_fields[cbox[second_tier_channels[#{channel.name}]]]") %>
+													<%= label_tag("share_list_fields[cbox[second_tier_channels[#{channel.name}]]]", "#{channel.name}") %><br>
+												<% end %>
+											</div><!--/.medium-8-->
+										</div><!--/.row-->
+										<div class="row">
+											<div class="medium-4 columns"><h4>Third Tier Channels</h4></div><!--/.small-4-->
+											<div class="medium-8 columns">
+												<% Channel.all.each do |channel| %>
+													<%= check_box_tag("share_list_fields[cbox[third_tier_channels[#{channel.name}]]]") %>
+													<%= label_tag("share_list_fields[cbox[third_tier_channels[#{channel.name}]]]", "#{channel.name}") %><br>
+												<% end %>	
+											</div><!--/.medium-8-->
+										</div><!--/.row-->
 
-										<%= submit_tag "SHARE COUNTRY REQUIREMENTS", class: "button tiny alert expand" %>
-										<%= link_to '#', id: "propose-action-cancel", class: "button tiny secondary expand" do %>
-											Cancel
-										<% end %>
+											<div class="row">
+												<div class="small-12 columns">
+													<h2>What is the minimum purchase volume you can commit to over the next three years?</h2>
+												</div><!--/.small-12-->
+											</div><!--/.row-->
+											<div class="row">
+												<div class="small-4 columns">
+													<%= label_tag 'share_list_fields_minimum_volume_year_one', "Year One Sales Volume / Units" %>
+												</div><!--/.small-4-->
+												<div class="small-4 columns end">
+													<%= text_field_tag "share_list_fields[minimum_volume_year_one]" %>
+												</div><!--/.small-4-->
+											</div><!--/.row-->
+											<div class="row">
+												<div class="small-4 columns">
+													<%= label_tag 'share_list_fields_minimum_volume_year_two', "Year Two Sales Volume / Units" %>
+												</div><!--/.small-4-->
+												<div class="small-4 columns end">
+													<%= text_field_tag "share_list_fields[minimum_volume_year_two]" %>
+												</div><!--/.small-4-->
+											</div><!--/.row-->
+											<div class="row">
+												<div class="small-4 columns">
+													<%= label_tag 'share_list_fields_minimum_volume_year_three', "Year Three Sales Volume / Units" %>
+												</div><!--/.small-4-->
+												<div class="small-4 columns end">
+													<%= text_field_tag "share_list_fields[minimum_volume_year_three]" %>
+												</div><!--/.small-4-->
+											</div><!--/.row-->
+
+											<div class="row">
+												<div class="small-4 columns">
+													<%= link_to '#', id: "conversation-action-cancel", class: "button tiny secondary expand" do %>
+														Cancel
+													<% end %>
+												</div><!--/.small-4-->
+												<div class="small-8 columns">
+													<%= submit_tag "SHARE MARKETING PLANS", class: "button tiny alert expand" %>
+												</div><!--/.small-8-->
+											</div><!--/.row-->
+
 									<% end %>
 								</div>
 
 							<% end %>
 
-							<% if match.shared_product_pricing && match.shared_country_requirements %>
-								<%= link_to "YES, proceed to PREPARE".html_safe, match_stage_url(:stage => 'prepare', :mid => match.id  ), class: "button alert expand", remote: true %>
+							<% if match.brand_shared_propose && match.distributor_shared_propose %>
+								<%= render partial: "matches/conversation/proceed_stage_initial", locals: {match: match, stage: 'prepare'} %>
 							<% end %>
 
 						<% end %>		
-
+						<div class="overlay" id="action-two" style="display: none;">
+						</div>
 					<% end %>
