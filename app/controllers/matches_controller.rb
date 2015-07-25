@@ -467,9 +467,12 @@ class MatchesController < ApplicationController
           params[:match][k.to_sym] = params[:match][k].keys
         end 
       end
-      # set param as empty array if doesn't exist
-      are_checkboxes.each do |c|
-        params[:match][c.to_sym] ||= []
+
+      # set param as empty array if doesn't exist (so can delete all selections) [ONLY IF DISTRIBUTOR]
+      if @current_user.type? == 'distributor'
+        are_checkboxes.each do |c|
+          params[:match][c.to_sym] ||= []
+        end
       end
 
       # drop any that haven't been updated
