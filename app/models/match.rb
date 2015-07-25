@@ -36,13 +36,13 @@ class Match
   # text fields
   field :brand_launch_plan, type: String
   field :marketing_strategy, type: String
-  field :initial_channels, type: String
-  field :second_tier_channels, type: String
-  field :third_tier_channels, type: String
   field :minimum_volume_year_one, type: String
   field :minimum_volume_year_two, type: String
   field :minimum_volume_year_three, type: String
-
+  #checkboxes
+  field :initial_channels, type: Array
+  field :second_tier_channels, type: Array
+  field :third_tier_channels, type: Array
 
   has_many :messages, dependent: :destroy
 

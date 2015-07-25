@@ -448,21 +448,42 @@ class MatchesController < ApplicationController
       b_or_d = @current_user.brand || @current_user.distributor
       @m = b_or_d.matches.find(params[:match_id])
 
+      are_checkboxes = [
+        :initial_channels,
+        :second_tier_channels,
+        :third_tier_channels
+      ]
+      are_docs = [
+        :tiered_pricing_schedule,
+        :fob_pricing,
+        :products_list
+      ]
+
+      # some cleanup for the checkbox hashes
+      params[:match].each do |k,v|
+        if are_checkboxes.include?(k.to_sym)
+          # convert to array of keys
+          params[:match][k.to_sym] = params[:match][k].keys
+          # @m.update("#{k}" => "#{params[:match][k.to_sym]}")
+        end 
+      end
+
       # drop any that haven't been updated
-      params[:match].delete_if {|k,v| v.to_s.eql? @m.send(k).to_s } 
+      # params[:match].delete_if {|k,v| v.to_s.eql? @m.send(k).to_s }
+      params[:match].each do |k,v|
+        if are_checkboxes.include?(k.to_sym)
+          next
+        elsif v.to_s.eql? @m.send(k).to_s
+          params[:match].delete(k)
+        end
+      end
 
       unless params[:match].blank?
         @m.update(match_share_parameters)
-
         message_text_docs = ""
         message_text_fields = ""
         message_text = ""
           
-        are_docs = [
-          :tiered_pricing_schedule,
-          :fob_pricing,
-          :products_list
-        ]
         has_docs = false
         has_fields = false
 
@@ -474,6 +495,10 @@ class MatchesController < ApplicationController
               message_text_docs += "<h4><strong>#{k.gsub(/_/, " ").split.map(&:capitalize)*' '}</strong>:<br> [file has been withdrawn]</h4>"
             end
             has_docs = true
+          elsif are_checkboxes.include?(k.to_sym)
+            message_text_fields += "<h4><strong>#{k.gsub(/_/, " ").split.map(&:capitalize)*' '}:</strong></h4>"
+            message_text_fields += "<p>#{v.join('<br>')}</p>"
+            has_fields = true
           else
             message_text_fields += "<h4><strong>#{k.gsub(/_/, " ").split.map(&:capitalize)*' '}:</strong></h4>"
             message_text_fields += "<p>#{v}</p>"
@@ -525,12 +550,12 @@ class MatchesController < ApplicationController
       :sales_channel_requests_or_requirements,
       :brand_launch_plan,
       :marketing_strategy,
-      :initial_channels,
-      :second_tier_channels,
-      :third_tier_channels,
       :minimum_volume_year_one,
       :minimum_volume_year_two,
-      :minimum_volume_year_three
+      :minimum_volume_year_three,
+      :initial_channels => [],
+      :second_tier_channels => [],
+      :third_tier_channels => [],
     )
   end
 
