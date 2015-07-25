@@ -18,36 +18,38 @@
 										<% end %>
 									</div>
 									<div class="conversation-action-tile" id="action-two" style="display: none;">
-										<%= form_tag match_share_path, class: 'conversation-share-form', remote: true do %>
-											<%= hidden_field_tag :match_id, match.id %>
+										<%= form_for match, url: match_share_path(match), class: 'conversation-share-form', remote: true do |f| %>
+										<%#= form_tag match_share_path(match), class: 'conversation-share-form', remote: true do %>
+											
 
 											<div class="row">
 												<div class="small-12 columns">
-													<h2>Select which Documents you'd like to share:</h2>
+													<h2>Select any documents you'd like to share:</h2>
 												</div><!--/.small-12-->
 											</div><!--/.row-->
 											<div class="row">
 												<div class="small-4 columns text-right">
-													<%= label_tag 'share_list_docs_products_list', "Products List: " %>
+													<%= f.label :products_list, "Products List" %>
 												</div><!--/.small-4-->
 												<div class="small-8 columns">
-													<%= collection_select(:share_list_docs, :products_list, @current_user.brand.library_documents.where(type: "Products List"), :id, :filename, :include_blank => "Select a Document") %>
+													<%= f.collection_select(:products_list, @current_user.brand.library_documents.where(type: "Products List"), :id, :filename, :include_blank => "[NONE]", label: false) %>
+													<%#= collection_select(:share_list_docs, :products_list, @current_user.brand.library_documents.where(type: "Products List"), :id, :filename, :include_blank => "Select a Document") %>
 												</div><!--/.small-8-->
 											</div><!--/.row-->
 											<div class="row">
 												<div class="small-4 columns text-right">
-													<%= label_tag 'share_list_docs_fob_pricing', "FOB Pricing: " %>
+													<%= f.label :fob_pricing, "FOB Pricing" %>
 												</div><!--/.small-4-->
 												<div class="small-8 columns">
-													<%= collection_select(:share_list_docs, :fob_pricing, @current_user.brand.library_documents.where(type: "FOB Pricing"), :id, :filename, :include_blank => "Select a Document") %>
+													<%= f.collection_select(:fob_pricing, @current_user.brand.library_documents.where(type: "FOB Pricing"), :id, :filename, :include_blank => "[NONE]", label: false) %>
 												</div><!--/.small-8-->
 											</div><!--/.row-->
 											<div class="row">
 												<div class="small-4 columns text-right">
-													<%= label_tag 'share_list_docs_tiered_pricing_schedule', "Tiered Pricing Schedule: " %>
+													<%= f.label :tiered_pricing_schedule, "Tiered Pricing Schedule" %>
 												</div><!--/.small-4-->
 												<div class="small-8 columns">
-													<%= collection_select(:share_list_docs, :tiered_pricing_schedule, @current_user.brand.library_documents.where(type: "Tiered Pricing Schedule"), :id, :filename, :include_blank => "Select a Document") %>
+													<%= f.collection_select(:tiered_pricing_schedule, @current_user.brand.library_documents.where(type: "Tiered Pricing Schedule"), :id, :filename, :include_blank => "[NONE]", label: false) %>
 												</div><!--/.small-8-->
 											</div><!--/.row-->
 
@@ -58,9 +60,17 @@
 												</div><!--/.small-12-->
 											</div><!--/.row-->
 											<div class="row">
-												<div class="small-12 columns">
-													<%= text_area_tag "share_list_fields[partnership_terms_length]", nil, placeholder: "Partnership Terms Length"  %>	
-												</div><!--/.small-12-->
+												<div class="small-4 columns">
+													<div class="conversation-help-tile">
+													We strongly suggest establishing contracts of 3 years. While the agreement can be discontinued by either partner within the set requirements, this sets the expectation of a longer-term partnership and allows your partner to build sales momentum. This also incentivizes your partner to invest heavily in marketing and developing the brand to reap the benefits down the road.
+													</div>
+												</div><!--/.small-6-->
+												<div class="small-2 columns">
+													<%= f.select :partnership_terms_length, (1..10), selected: 3, label: false %>
+												</div><!--/.small-2-->
+												<div class="small-6 columns text-left">
+													years
+												</div><!--/.small-2-->
 											</div><!--/.row-->
 											<div class="row">
 												<div class="small-12 columns">
@@ -68,9 +78,17 @@
 												</div><!--/.small-12-->
 											</div><!--/.row-->
 											<div class="row">
-												<div class="small-12 columns">
-													<%= text_area_tag "share_list_fields[payment_terms]", nil, placeholder: "Payment Terms"  %>	
-												</div><!--/.small-12-->
+												<div class="small-4 columns">
+													<div class="conversation-help-tile">
+														Some Examples:<br>
+														At Time of Order Placement: % of total<br>
+														At Time of Shipment: % of total<br>
+														Net Terms: % of total and # of days (15, 30, 45, 60)<br>
+													</div>
+												</div><!--/.small-4-->
+												<div class="small-8 columns">
+													<%= f.text_area :payment_terms, placeholder: "Payment Terms", label: false  %>	
+												</div><!--/.small-8-->
 											</div><!--/.row-->
 											<div class="row">
 												<div class="small-12 columns">
@@ -78,9 +96,12 @@
 												</div><!--/.small-12-->
 											</div><!--/.row-->
 											<div class="row">
-												<div class="small-12 columns">
-													<%= text_area_tag "share_list_fields[grant_territory_exclusivity]", nil, placeholder: "Territory Exclusivity"  %>	
-												</div><!--/.small-12-->
+												<div class="small-4 columns text-right">
+													<%= f.label :grant_territory_exclusivity %>
+												</div><!--/.small-4-->
+												<div class="small-8 columns">
+													<%= f.text_area :grant_territory_exclusivity, placeholder: "Territory Exclusivity", label: false  %>	
+												</div><!--/.small-8-->
 											</div><!--/.row-->
 											<div class="row">
 												<div class="small-12 columns">
@@ -88,9 +109,12 @@
 												</div><!--/.small-12-->
 											</div><!--/.row-->
 											<div class="row">
-												<div class="small-12 columns">
-													<%= text_area_tag "share_list_fields[requested_minimum_marketing_spend]", nil, placeholder: "Requested Minimum Marketing Spend"  %>	
-												</div><!--/.small-12-->
+												<div class="small-4 columns text-right">
+													<%= f.label :requested_minimum_marketing_spend %>
+												</div><!--/.small-4-->
+												<div class="small-8 columns">
+													<%= f.text_area :requested_minimum_marketing_spend, placeholder: "Requested Minimum Marketing Spend", label: false  %>	
+												</div><!--/.small-8-->
 											</div><!--/.row-->
 											<div class="row">
 												<div class="small-12 columns">
@@ -98,9 +122,12 @@
 												</div><!--/.small-12-->
 											</div><!--/.row-->
 											<div class="row">
-												<div class="small-12 columns">
-													<%= text_area_tag "share_list_fields[marketing_requests_or_requirements]", nil, placeholder: "Marketing Requests or Requirements"  %>	
-												</div><!--/.small-12-->
+												<div class="small-4 columns text-right">
+													<%= f.label :marketing_requests_or_requirements %>
+												</div><!--/.small-4-->
+												<div class="small-8 columns">
+													<%= f.text_area :marketing_requests_or_requirements, placeholder: "Marketing Requests or Requirements", label: false  %>	
+												</div><!--/.small-8-->
 											</div><!--/.row-->
 											<div class="row">
 												<div class="small-12 columns">
@@ -108,9 +135,12 @@
 												</div><!--/.small-12-->
 											</div><!--/.row-->
 											<div class="row">
-												<div class="small-12 columns">
-													<%= text_area_tag "share_list_fields[sales_channel_requests_or_requirements]", nil, placeholder: "Sales Channel Requests or Requirements"  %>	
-												</div><!--/.small-12-->
+												<div class="small-4 columns text-right">
+													<%= f.label :sales_channel_requests_or_requirements %>
+												</div><!--/.small-4-->
+												<div class="small-8 columns">
+													<%= f.text_area :sales_channel_requests_or_requirements, placeholder: "Sales Channel Requests or Requirements", label: false  %>	
+												</div><!--/.small-8-->
 											</div><!--/.row-->
 
 
@@ -167,8 +197,8 @@
 								</div>
 
 								<div class="conversation-action-tile" id="action-two" style="display: none;">
-									<%= form_tag match_share_path, class: 'conversation-share-form', remote: true do %>
-										<%= hidden_field_tag :match_id, match.id %>
+									<%#= form_tag match_share_path(match), class: 'conversation-share-form', remote: true do %>
+									<%= form_for match, url: match_share_path(match), class: 'conversation-share-form', remote: true do |f| %>	
 										
 										<div class="row">
 											<div class="small-12 columns">
@@ -177,7 +207,7 @@
 										</div><!--/.row-->
 										<div class="row">
 											<div class="small-12 columns">
-												<%= text_area_tag "share_list_fields[brand_launch_plan]", nil, placeholder: "Your Launch Plan"  %>	
+												<%= f.text_area :brand_launch_plan, placeholder: "Your Launch Plan"  %>	
 											</div><!--/.small-12-->
 										</div><!--/.row-->
 
@@ -188,7 +218,8 @@
 										</div><!--/.row-->
 										<div class="row">
 											<div class="small-12 columns">
-												<%= text_area_tag "share_list_fields[marketing_strategy]", nil, placeholder: "Your Marking Strategy" %>
+												<%= f.text_area :marketing_strategy, placeholder: "Your Marketing Strategy"  %>
+												<%#= text_area_tag "share_list_fields[marketing_strategy]", nil, placeholder: "Your Marking Strategy" %>
 											</div><!--/.small-12-->
 										</div><!--/.row-->
 
@@ -232,26 +263,32 @@
 											</div><!--/.row-->
 											<div class="row">
 												<div class="small-4 columns">
-													<%= label_tag 'share_list_fields_minimum_volume_year_one', "Year One Sales Volume / Units" %>
+													<%= f.label :minimum_volume_year_one %>
+													<%#= label_tag 'share_list_fields_minimum_volume_year_one', "Year One Sales Volume / Units" %>
 												</div><!--/.small-4-->
 												<div class="small-4 columns end">
-													<%= text_field_tag "share_list_fields[minimum_volume_year_one]" %>
+													<%= f.text_field :minimum_volume_year_one %>
+													<%#= text_field_tag "share_list_fields[minimum_volume_year_one]" %>
 												</div><!--/.small-4-->
 											</div><!--/.row-->
 											<div class="row">
 												<div class="small-4 columns">
-													<%= label_tag 'share_list_fields_minimum_volume_year_two', "Year Two Sales Volume / Units" %>
+													<%= f.label :minimum_volume_year_two %>
+													<%#= label_tag 'share_list_fields_minimum_volume_year_two', "Year Two Sales Volume / Units" %>
 												</div><!--/.small-4-->
 												<div class="small-4 columns end">
-													<%= text_field_tag "share_list_fields[minimum_volume_year_two]" %>
+													<%= f.text_field :minimum_volume_year_two %>
+													<%#= text_field_tag "share_list_fields[minimum_volume_year_two]" %>
 												</div><!--/.small-4-->
 											</div><!--/.row-->
 											<div class="row">
 												<div class="small-4 columns">
-													<%= label_tag 'share_list_fields_minimum_volume_year_three', "Year Three Sales Volume / Units" %>
+													<%= f.label :minimum_volume_year_three %>
+													<%#= label_tag 'share_list_fields_minimum_volume_year_three', "Year Three Sales Volume / Units" %>
 												</div><!--/.small-4-->
 												<div class="small-4 columns end">
-													<%= text_field_tag "share_list_fields[minimum_volume_year_three]" %>
+													<%= f.text_field :minimum_volume_year_three %>
+													<%#= text_field_tag "share_list_fields[minimum_volume_year_three]" %>
 												</div><!--/.small-4-->
 											</div><!--/.row-->
 

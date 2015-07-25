@@ -25,7 +25,7 @@ class Match
   field :fob_pricing, type: String
   field :products_list, type: String
   # text fields
-  field :partnership_terms_length, type: String
+  field :partnership_terms_length, type: Integer
   field :payment_terms, type: String
   field :grant_territory_exclusivity, type: String
   field :requested_minimum_marketing_spend, type: String

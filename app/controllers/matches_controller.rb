@@ -443,77 +443,59 @@ class MatchesController < ApplicationController
   end
 
   def match_share
-    if (params[:share_list_docs] || params[:share_list_fields]) && params[:match_id]
+    if params[:match] && params[:match_id]
       
       b_or_d = @current_user.brand || @current_user.distributor
+      @m = b_or_d.matches.find(params[:match_id])
 
-      shared_docs_list = {}
-      shared_fields_list = {}
-      if params[:share_list_docs]
-        params[:share_list_docs].each do |k,v|
-          if doc = LibraryDocument.find(v)
-            shared_docs_list[doc.filename] = doc.file.url
-          end 
-        end
-      end
-      if params[:share_list_fields]
-        params[:share_list_fields].each do |k,v|
-          unless v.blank?
-            shared_fields_list[k] = v
-          end
-        end
-      end
+      # drop any that haven't been updated
+      params[:match].delete_if {|k,v| v.to_s.eql? @m.send(k).to_s } 
 
-      docs_message_text = "<h3>#{b_or_d.company_name} has shared the following documents:</h3>"
-      fields_message_text = "<h3>#{b_or_d.company_name} has shared the following information:</h3>"
+      unless params[:match].blank?
+        @m.update(match_share_parameters)
 
-      if !shared_docs_list.blank?
-        shared_docs_list.each do |filename,url|
-          docs_message_text += "<h4><strong><a href='#{url}'>#{filename}</a></strong></h4>"
-        end
-      end
-
-      if !shared_fields_list.blank?
-        shared_fields_list.each do |k,v|
-          if k == "cbox"
-            v.each do |kk,vv|
-              fields_message_text += "<h4><strong>#{kk.gsub(/_/, " ").split.map(&:capitalize)*' '}:</strong></h4>"
-              vv.each do |kkk,vvv|
-                fields_message_text += "<p> #{kkk}</p>"
-              end
-            end
-          else 
-            fields_message_text += "<h4><strong>#{k.gsub(/_/, " ").split.map(&:capitalize)*' '}:</strong></h4><p> #{v}</p>"
-          end
-        end
-
-      end
-
-      unless shared_docs_list.blank? && shared_fields_list.blank?
+        message_text_docs = ""
+        message_text_fields = ""
         message_text = ""
-        shared_docs_list.blank? ? "" : message_text += "#{docs_message_text}".html_safe
-        shared_fields_list.blank? ? "" : message_text += "#{fields_message_text}".html_safe
-        create_message(params[:match_id], message_text)
+          
+        are_docs = [
+          :tiered_pricing_schedule,
+          :fob_pricing,
+          :products_list
+        ]
+        has_docs = false
+        has_fields = false
+
+        params[:match].each do |k,v|
+          if are_docs.include?(k.to_sym)
+            if doc = LibraryDocument.find(v)
+              message_text_docs += "<h4><strong>#{k.gsub(/_/, " ").split.map(&:capitalize)*' '}</strong>:<br> <a href='#{doc.file.url}'>#{doc.filename}</a></h4>"
+            else
+              message_text_docs += "<h4><strong>#{k.gsub(/_/, " ").split.map(&:capitalize)*' '}</strong>:<br> [file has been withdrawn]</h4>"
+            end
+            has_docs = true
+          else
+            message_text_fields += "<h4><strong>#{k.gsub(/_/, " ").split.map(&:capitalize)*' '}:</strong></h4>"
+            message_text_fields += "<p>#{v}</p>"
+            has_fields = true
+          end
+        end
+        if has_docs
+          message_text += "<h3>#{b_or_d.company_name} has shared/updated the following documents:</h3><div class='conversation-shared-info'> #{message_text_docs} </div>"
+        end
+        if has_fields
+          message_text += "<h3>#{b_or_d.company_name} has shared/updated the following information:</h3><div class='conversation-shared-info'> #{message_text_fields} </div>"
+        end
+
+        create_message(params[:match_id], message_text.html_safe)
+
+        # set flag to signal they've shared
+        @m.send("#{@current_user.type?}_shared_propose=", true)
+        @m.save!
+
       end
 
     end
-
-
-    mm = b_or_d.matches
-    @m = mm.find(params[:match_id])
-
-    if !shared_docs_list.blank?
-      params[:share_list_docs].delete_if {|k,v| v.blank? }
-      @m.update(match_share_docs_parameters)
-    end
-    if !shared_fields_list.blank?
-      params[:share_list_fields].delete_if {|k,v| v.blank? }
-      @m.update(match_share_fields_parameters)
-    end
-
-    # set flag to signal they've shared
-    @m.send("#{@current_user.type?}_shared_propose=", true)
-    @m.save!
 
     @messages = @m.messages.order_by(:c_at.asc)
     @stage = @m.stage
@@ -530,17 +512,11 @@ class MatchesController < ApplicationController
 
   private
 
-
-  def match_share_docs_parameters
-    params.require(:share_list_docs).permit(
+  def match_share_parameters
+    params.require(:match).permit(
       :tiered_pricing_schedule,
       :fob_pricing,
-      :products_list
-    )
-  end
-
-  def match_share_fields_parameters
-    params.require(:share_list_fields).permit(
+      :products_list,
       :partnership_terms_length,
       :payment_terms,
       :grant_territory_exclusivity,

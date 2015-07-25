@@ -106,7 +106,8 @@ Rails.application.routes.draw do
   get '/matches/quickview/:match_id' => 'matches#quick_view', as: 'quick_view'
   post '/matches/accept/:id' => 'matches#accept_match', as: 'accept_match'
   get '/gallery' => 'matches#gallery', as: 'gallery'
-  post '/matches/share' => 'matches#match_share', as: 'match_share'
+  # post '/matches/share/:match_id' => 'matches#match_share', as: 'match_share'
+  patch '/matches/share/:match_id' => 'matches#match_share', as: 'match_share'
 
   # post '/conversations/share' => 'conversations#share', as: 'conversation_share'
 

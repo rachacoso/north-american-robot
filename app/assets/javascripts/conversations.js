@@ -95,23 +95,3 @@ function initConversations() {
 	});
 
 }
-
-
-// // var myForm = document.getElementById('my-form-id');
-// // myForm.onsubmit = ignoreEmptyFields(myForm);
-
-// $(".conversation-share-form").on('submit', function(){
-// 	// $(this).each(function(){
-// 		ignoreEmptyFields(this);
-// 	// });
-// });
-
-// function ignoreEmptyFields(thisForm) {
-//   var allInputs = thisForm.getElementsByTagName('input');
-//   var input, i;
-//   for(i = 0; input = allInputs[i]; i++) {
-//       if(input.getAttribute('name') && !input.value) {
-//           input.setAttribute('name', '');
-//       }
-//   }
-// }

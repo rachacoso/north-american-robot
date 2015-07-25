@@ -21,6 +21,14 @@ $bubble-margin: 85;
   p{
     margin-bottom: 0;
   }
+  h3 {
+    background: white;
+    padding: rem-calc(10);
+  }
+  & .conversation-shared-info {
+    padding: 0 0 0 rem-calc(20);
+    margin-bottom: rem-calc(25);
+  }
 }
 
 
@@ -235,6 +243,8 @@ top: 10px;
   border-radius: rem-calc(5);
   margin: rem-calc(2) 0;
   background: $landing-light-gray;
+  font-weight: 100;
+  font-size: rem-calc(12);
 } 
 .conversation-action-tile {
   border: 5px solid $landing-middle-gray;
@@ -262,6 +272,9 @@ top: 10px;
     background: white;
     z-index: 11;
     display: none;
+    textarea {
+      height: 10em;
+    }
   }
 }
 
