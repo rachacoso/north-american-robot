@@ -24,7 +24,7 @@
 
 											<div class="row">
 												<div class="small-12 columns">
-													<h2>Select any documents you'd like to share:</h2>
+													<h2>Select documents you'd like to share:</h2>
 												</div><!--/.small-12-->
 											</div><!--/.row-->
 											<div class="row">
@@ -65,12 +65,18 @@
 													We strongly suggest establishing contracts of 3 years. While the agreement can be discontinued by either partner within the set requirements, this sets the expectation of a longer-term partnership and allows your partner to build sales momentum. This also incentivizes your partner to invest heavily in marketing and developing the brand to reap the benefits down the road.
 													</div>
 												</div><!--/.small-6-->
-												<div class="small-2 columns">
-													<%= f.select :partnership_terms_length, (1..10), selected: 3, label: false %>
-												</div><!--/.small-2-->
-												<div class="small-6 columns text-left">
-													years
-												</div><!--/.small-2-->
+												<div class="small-8 columns">
+													<div class="row collapse">
+														<div class="small-1 columns">
+															<%#= f.select :partnership_terms_length, (1..10), selected: 3, label: false %>
+															<% selected_item = ( match.partnership_terms_length.blank? ? '3 years' : match.partnership_terms_length )  %>
+															<%= f.select :partnership_terms_length, (1..10).map { |n| [n, "#{n} years"] }, label: false, selected: selected_item %>
+														</div><!--/.small-1-->
+														<div class="small-2 columns end">
+															<span class="postfix">years</span>
+														</div><!--/.small-2-->
+													</div><!--/.row-->
+												</div><!--/.small-8-->
 											</div><!--/.row-->
 											<div class="row">
 												<div class="small-12 columns">
@@ -235,6 +241,19 @@
 											<%= f.text_area :marketing_strategy, placeholder: "Your Marketing Strategy", label: false  %>
 										</div><!--/.small-8-->
 									</div><!--/.row-->
+									<div class="row">
+										<div class="medium-4 columns text-right"><h4>Marketing Channels</h4></div><!--/.small-4-->
+										<div class="medium-8 columns">
+
+
+											<% [:print,:online,:email,:outdoor,:events,:direct_mail,:classes].each do |channel| %>
+												<% channel_name = channel.to_s.gsub(/_/, " ").split.map(&:capitalize)*' ' %>
+												<%= check_box_tag("match[marketing_channels][#{channel_name}]", 1, match.marketing_channels.include?(channel_name) ? true : false) %>
+												<%= label_tag("match[marketing_channels][#{channel_name}]", channel_name) %><br>
+											<% end %>	
+										</div><!--/.medium-8-->
+									</div><!--/.row-->
+
 
 									<div class="row">
 										<div class="small-12 columns">
@@ -245,7 +264,7 @@
 										<div class="medium-4 columns text-right"><h4>Initial Channels</h4></div><!--/.small-4-->
 										<div class="medium-8 columns">
 											<% Channel.all.each do |channel| %>
-												<%= check_box_tag("match[initial_channels][#{channel.name}]") %>
+												<%= check_box_tag("match[initial_channels][#{channel.name}]", 1, match.initial_channels.include?(channel.name) ? true : false) %>
 												<%= label_tag("match[initial_channels][#{channel.name}]", channel.name) %><br>
 											<% end %>	
 										</div><!--/.medium-8-->
@@ -254,7 +273,7 @@
 										<div class="medium-4 columns text-right"><h4>Second Tier Channels</h4></div><!--/.small-4-->
 										<div class="medium-8 columns">
 											<% Channel.all.each do |channel| %>
-												<%= check_box_tag("match[second_tier_channels][#{channel.name}]") %>
+												<%= check_box_tag("match[second_tier_channels][#{channel.name}]", 1, match.second_tier_channels.include?(channel.name) ? true : false) %>
 												<%= label_tag("match[second_tier_channels][#{channel.name}]", channel.name) %><br>
 											<% end %>
 										</div><!--/.medium-8-->
@@ -263,7 +282,7 @@
 										<div class="medium-4 columns text-right"><h4>Third Tier Channels</h4></div><!--/.small-4-->
 										<div class="medium-8 columns">
 											<% Channel.all.each do |channel| %>
-												<%= check_box_tag("match[third_tier_channels][#{channel.name}]") %>
+												<%= check_box_tag("match[third_tier_channels][#{channel.name}]", 1, match.third_tier_channels.include?(channel.name) ? true : false) %>
 												<%= label_tag("match[third_tier_channels][#{channel.name}]", channel.name) %><br>
 											<% end %>	
 										</div><!--/.medium-8-->

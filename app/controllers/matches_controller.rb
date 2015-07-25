@@ -451,7 +451,8 @@ class MatchesController < ApplicationController
       are_checkboxes = [
         :initial_channels,
         :second_tier_channels,
-        :third_tier_channels
+        :third_tier_channels,
+        :marketing_channels
       ]
       are_docs = [
         :tiered_pricing_schedule,
@@ -464,19 +465,15 @@ class MatchesController < ApplicationController
         if are_checkboxes.include?(k.to_sym)
           # convert to array of keys
           params[:match][k.to_sym] = params[:match][k].keys
-          # @m.update("#{k}" => "#{params[:match][k.to_sym]}")
         end 
+      end
+      # set param as empty array if doesn't exist
+      are_checkboxes.each do |c|
+        params[:match][c.to_sym] ||= []
       end
 
       # drop any that haven't been updated
-      # params[:match].delete_if {|k,v| v.to_s.eql? @m.send(k).to_s }
-      params[:match].each do |k,v|
-        if are_checkboxes.include?(k.to_sym)
-          next
-        elsif v.to_s.eql? @m.send(k).to_s
-          params[:match].delete(k)
-        end
-      end
+      params[:match].delete_if {|k,v| v.eql? @m.send(k) }
 
       unless params[:match].blank?
         @m.update(match_share_parameters)
@@ -497,11 +494,11 @@ class MatchesController < ApplicationController
             has_docs = true
           elsif are_checkboxes.include?(k.to_sym)
             message_text_fields += "<h4><strong>#{k.gsub(/_/, " ").split.map(&:capitalize)*' '}:</strong></h4>"
-            message_text_fields += "<p>#{v.join('<br>')}</p>"
+            message_text_fields += "<p>#{v.empty? ? '[none selected]' : v.join('<br>')}</p>"
             has_fields = true
           else
             message_text_fields += "<h4><strong>#{k.gsub(/_/, " ").split.map(&:capitalize)*' '}:</strong></h4>"
-            message_text_fields += "<p>#{v}</p>"
+            message_text_fields += "<p>#{v.blank? ? '[text has been deleted]' : v}</p>"
             has_fields = true
           end
         end
@@ -556,6 +553,7 @@ class MatchesController < ApplicationController
       :initial_channels => [],
       :second_tier_channels => [],
       :third_tier_channels => [],
+      :marketing_channels => []
     )
   end
 

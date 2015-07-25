@@ -25,7 +25,7 @@ class Match
   field :fob_pricing, type: String
   field :products_list, type: String
   # text fields
-  field :partnership_terms_length, type: Integer
+  field :partnership_terms_length, type: String
   field :payment_terms, type: String
   field :grant_territory_exclusivity, type: String
   field :requested_minimum_marketing_spend, type: String
@@ -40,9 +40,10 @@ class Match
   field :minimum_volume_year_two, type: String
   field :minimum_volume_year_three, type: String
   #checkboxes
-  field :initial_channels, type: Array
-  field :second_tier_channels, type: Array
-  field :third_tier_channels, type: Array
+  field :initial_channels, type: Array, default: []
+  field :second_tier_channels, type: Array, default: []
+  field :third_tier_channels, type: Array, default: []
+  field :marketing_channels, type: Array, default: []
 
   has_many :messages, dependent: :destroy
 
