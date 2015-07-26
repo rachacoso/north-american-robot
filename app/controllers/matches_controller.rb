@@ -520,7 +520,7 @@ class MatchesController < ApplicationController
         create_message(params[:match_id], message_text.html_safe)
 
         # set flag to signal they've shared
-        @m.send("#{@current_user.type?}_shared_propose=", true)
+        @m.send("#{@current_user.type?}_shared_#{@m.stage}=", true)
         @m.save!
 
       end
