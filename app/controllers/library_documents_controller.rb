@@ -6,6 +6,10 @@ class LibraryDocumentsController < ApplicationController
 		@documents_products_list = user.library_documents.where(type: 'Products List')
 		@documents_fob_pricing = user.library_documents.where(type: 'FOB Pricing')
 		@documents_tiered_pricing_schedule = user.library_documents.where(type: 'Tiered Pricing Schedule')
+		@documents_certification_information = user.library_documents.where(type: 'Certification Information')
+		@documents_patent_information = user.library_documents.where(type: 'Patent Information')
+		@documents_testing_information = user.library_documents.where(type: 'Testing Information')
+		@documents_ingredient_or_materials_list = user.library_documents.where(type: 'Ingredient or Materials List')
 	end
 
 	def create
@@ -16,7 +20,7 @@ class LibraryDocumentsController < ApplicationController
 		if newfile.nil?
 			flash[:error] = "Sorry, Please choose a file to upload"
 		else
-			if ['Products List','FOB Pricing','Tiered Pricing Schedule'].include? params[:document_type]
+			if ['Products List','FOB Pricing','Tiered Pricing Schedule','Certification Information','Patent Information','Testing Information','Ingredient or Materials List'].include? params[:document_type]
 				doc_type = params[:document_type]
 				new_document = LibraryDocument.new(file: newfile, type: doc_type)
 				user = @current_user.brand || @current_user.distributor

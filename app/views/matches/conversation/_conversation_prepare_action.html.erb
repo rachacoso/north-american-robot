@@ -1,7 +1,237 @@
 
-
 	<% if match.stage == "prepare" %>
-		<% if match && !match.messages.blank? && match.stage == "prepare"  %>
-			<%= render partial: "matches/conversation/proceed_stage_initial", locals: {match: match, stage: 'propose'} %>
-		<% end %>			
+
+		<% if match && !match.messages.blank? && match.stage == "prepare" %>
+
+
+
+
+			<% if @current_user.brand %>
+		
+
+
+
+				<% if has_all_docs('prepare') %>
+					<div class="conversation-action-tile active" id="action-one">
+						<h4><strong>Would you like to share your <br>PRODUCT documents with <%= profile.company_name %>?</strong></h4>
+						<p>These include the following documents that you have uploaded to your Global Terms &amp; Documents:</p>
+						<ul>
+							<li>Certification Information</li>
+							<li>Patent Information</li>
+							<li>Testing Information</li>
+							<li>Ingredient or Materials List</li>
+						</ul>
+
+						<%= link_to '#', id: "conversation-action-toggle", class: "button tiny alert expand" do %>
+							SHARE PRODUCT &amp; PRICING <br> with <%= profile.company_name %>
+						<% end %>
+					</div>
+					<div class="conversation-action-tile" id="action-two" style="display: none;">
+						<%= form_for match, url: match_share_path(match), class: 'conversation-share-form', remote: true do |f| %>
+						<%#= form_tag match_share_path(match), class: 'conversation-share-form', remote: true do %>
+							
+
+							<div class="row">
+								<div class="small-12 columns">
+									<h2>Select documents you'd like to share:</h2>
+								</div><!--/.small-12-->
+							</div><!--/.row-->
+							<div class="row">
+								<div class="small-4 columns text-right">
+									<%= f.label :certification_information_documents, "Certification Information" %>
+									<div class="conversation-help-tile text-right">
+									For example, if you have an organic product, your partner will need to see verification before they can market the product as such. 
+									</div>									
+								</div><!--/.small-4-->
+								<div class="small-8 columns">
+									<%= f.collection_select(:certification_information_documents, @current_user.brand.library_documents.where(type: "Certification Information"), :id, :filename, :include_blank => "[NONE]", label: false) %>
+								</div><!--/.small-8-->
+							</div><!--/.row-->
+							<div class="row">
+								<div class="small-4 columns text-right">
+									<%= f.label :patent_information_documents, "Patent Information" %>
+									<div class="conversation-help-tile text-right">
+									Share your relevant patent information.
+									</div>
+								</div><!--/.small-4-->
+								<div class="small-8 columns">
+									<%= f.collection_select(:patent_information_documents, @current_user.brand.library_documents.where(type: "Patent Information"), :id, :filename, :include_blank => "[NONE]", label: false) %>
+								</div><!--/.small-8-->
+							</div><!--/.row-->
+							<div class="row">
+								<div class="small-4 columns text-right">
+									<%= f.label :testing_information_documents, "Testing Information" %>
+									<div class="conversation-help-tile text-right">
+									Share your relevant testing documents.
+									</div>
+								</div><!--/.small-4-->
+								<div class="small-8 columns">
+									<%= f.collection_select(:testing_information_documents, @current_user.brand.library_documents.where(type: "Testing Information"), :id, :filename, :include_blank => "[NONE]", label: false) %>
+								</div><!--/.small-8-->
+							</div><!--/.row-->
+							<div class="row">
+								<div class="small-4 columns text-right">
+									<%= f.label :ingredient_or_materials_lists, "Ingredient or Materials List" %>
+									<div class="conversation-help-tile text-right">
+									Your partner will often need to register these documents in their market and will aslo need to determine whether your products require testing in their territory.
+									</div>
+								</div><!--/.small-4-->
+								<div class="small-8 columns">
+									<%= f.collection_select(:ingredient_or_materials_lists, @current_user.brand.library_documents.where(type: "Ingredient or Materials List"), :id, :filename, :include_blank => "[NONE]", label: false) %>
+								</div><!--/.small-8-->
+							</div><!--/.row-->
+
+							<div class="row">
+								<div class="small-4 columns">
+									<%= link_to '#', id: "conversation-action-cancel", class: "button tiny secondary expand" do %>
+										Cancel
+									<% end %>
+								</div><!--/.small-4-->
+								<div class="small-8 columns">
+									<%= submit_tag "SHARE INFORMATION", class: "button tiny alert expand" %>
+								</div><!--/.small-8-->
+							</div><!--/.row-->
+
+						<% end %>
+					</div>
+				<% else %>
+					<div class="conversation-action-tile" id="action-one">
+						<h4><strong><i class='fi-alert' style='color: red;'></i> To advance to the next stage of your conversation, you need to share your PRODUCT information with <%= profile.company_name %>.</strong></h4>
+						<p>Some of your PRODUCT &amp; PRICING information documents have yet to be uploaded to your
+							<%= link_to library_documents_path do %>
+								Global Terms &amp; Documents
+							<% end %>:</p>
+						<ul>
+							<li>Certification Information <%= check_docs('Certification Information').html_safe %></li>
+							<li>Patent Information <%= check_docs('Patent Information').html_safe %></li>
+							<li>Testing Information <strong> <%= check_docs('Testing Information').html_safe %></strong></li>
+							<li>Ingredient or Materials List <%= check_docs('Ingredient or Materials List').html_safe %></li>
+						</ul>
+						<h4><strong>Pleae upload all of these documents in your 
+							<%= link_to library_documents_path do %>
+								Global Terms &amp; Documents
+							<% end %>
+							in order to proceed to the next stage!
+						</strong></h4>
+					</div>
+				<% end %>
+
+
+
+
+			<% elsif @current_user.distributor %>
+
+
+
+				<div class="conversation-action-tile active" id="action-one">
+					<h4><strong>Would you like to share information to help this brand and their products prepare for international distribution?</strong></h4>
+					<p>These include:</p>
+					<ul> 
+
+						<li>Testing Information</li>
+						<li>Certification Information</li>
+						<li>Customs Information</li>
+						<li>Tariffs Information</li>
+						<li>Contract Authentication</li>
+
+					</ul>
+
+
+					<%= link_to '#', id: "conversation-action-toggle", class: "button tiny alert expand" do %>
+						SHARE PREPARATION INFORMATION <br> with <%= profile.company_name %>
+					<% end %>
+				</div>
+
+				<div class="conversation-action-tile" id="action-two" style="display: none;">
+					<%#= form_tag match_share_path(match), class: 'conversation-share-form', remote: true do %>
+					<%= form_for match, url: match_share_path(match), class: 'conversation-share-form', remote: true do |f| %>	
+
+					<div class="row">
+						<div class="small-12 columns">
+							<h2>Testing Information</h2>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="small-4 columns text-right">
+							<%= f.label :testing_information %>
+						</div><!--/.small-4-->
+						<div class="small-8 columns">
+							<%= f.text_area :testing_information, placeholder: "Testing Information", label: false  %>
+						</div><!--/.small-8-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="medium-4 columns text-right"><h4>Product SKUs</h4></div><!--/.small-4-->
+						<div class="medium-8 columns">
+
+							TBD
+
+						</div><!--/.medium-8-->
+					</div><!--/.row-->
+
+					<div class="row">
+						<div class="small-12 columns">
+							<h2>Certifications</h2>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="small-4 columns text-right">
+							<%= f.label :certification_information %>
+						</div><!--/.small-4-->
+						<div class="small-8 columns">
+							<%= f.text_area :certification_information, placeholder: "Certifications Needed", label: false  %>
+						</div><!--/.small-8-->
+					</div><!--/.row-->
+
+					<div class="row">
+						<div class="small-12 columns">
+							<h2>Tariffs</h2>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="small-4 columns text-right">
+							<%= f.label :tariffs_information %>
+						</div><!--/.small-4-->
+						<div class="small-8 columns">
+							<%= f.text_area :tariffs_information, placeholder: "Tariffs Information", label: false  %>
+						</div><!--/.small-8-->
+					</div><!--/.row-->
+
+					<div class="row">
+						<div class="small-12 columns">
+							<h2>Contract Authentication</h2>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="small-4 columns text-right">
+							<%= f.label :contract_authentication %>
+						</div><!--/.small-4-->
+						<div class="small-8 columns">
+							<%= f.text_area :contract_authentication, placeholder: "Contract Authentication", label: false  %>
+						</div><!--/.small-8-->
+					</div><!--/.row-->
+
+					<div class="row">
+						<div class="small-4 columns">
+							<%= link_to '#', id: "conversation-action-cancel", class: "button tiny secondary expand" do %>
+								Cancel
+							<% end %>
+						</div><!--/.small-4-->
+						<div class="small-8 columns">
+							<%= submit_tag "SHARE MARKETING PLANS", class: "button tiny alert expand" %>
+						</div><!--/.small-8-->
+					</div><!--/.row-->
+
+				<% end %>
+			</div>
+			<% end %>
+
+			<% if match.brand_shared_prepare && match.distributor_shared_prepare %>
+				<%= render partial: "matches/conversation/proceed_stage_initial", locals: {match: match, stage: 'order'} %>
+			<% end %>
+
+		<% end %>		
+		
+		<div class="overlay" id="action-two" style="display: none;">
+		</div>
+	
 	<% end %>

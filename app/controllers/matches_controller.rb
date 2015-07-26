@@ -457,22 +457,20 @@ class MatchesController < ApplicationController
       are_docs = [
         :tiered_pricing_schedule,
         :fob_pricing,
-        :products_list
+        :products_list,
+        :certification_information_documents,
+        :patent_information_documents,
+        :testing_information_documents,
+        :ingredient_or_materials_lists
       ]
 
-      # some cleanup for the checkbox hashes
+      # pre-processing for the checkbox hashes
       params[:match].each do |k,v|
         if are_checkboxes.include?(k.to_sym)
-          # convert to array of keys
-          params[:match][k.to_sym] = params[:match][k].keys
+          # convert to array of keys if checkbox selected .. empty hash if none selected
+          params[:match][k.to_sym] = params[:match][k].map{|k,v|v=='1' ? k : nil}.compact
+          # params[:match][k.to_sym] = params[:match][k].keys
         end 
-      end
-
-      # set param as empty array if doesn't exist (so can delete all selections) [ONLY IF DISTRIBUTOR]
-      if @current_user.type? == 'distributor'
-        are_checkboxes.each do |c|
-          params[:match][c.to_sym] ||= []
-        end
       end
 
       # drop any that haven't been updated
@@ -542,6 +540,15 @@ class MatchesController < ApplicationController
       :tiered_pricing_schedule,
       :fob_pricing,
       :products_list,
+      :certification_information_documents,
+      :patent_information_documents,
+      :testing_information_documents,
+      :ingredient_or_materials_lists,
+      :testing_information,
+      :certification_information,
+      :customs_information,
+      :tariffs_information,
+      :contract_authentication,
       :partnership_terms_length,
       :payment_terms,
       :grant_territory_exclusivity,

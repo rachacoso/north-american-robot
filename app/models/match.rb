@@ -17,28 +17,41 @@ class Match
 
   field :brand_shared_propose, type: Mongoid::Boolean
   field :distributor_shared_propose, type: Mongoid::Boolean
+  field :brand_shared_prepare, type: Mongoid::Boolean
+  field :distributor_shared_prepare, type: Mongoid::Boolean
 
   # CONTRACT FIELDS
   # BRAND
   # documents
-  field :tiered_pricing_schedule, type: String
-  field :fob_pricing, type: String
-  field :products_list, type: String
+  field :tiered_pricing_schedule, type: String, default: ""
+  field :fob_pricing, type: String, default: ""
+  field :products_list, type: String, default: ""
+  field :certification_information_documents, type: String, default: ""
+  field :patent_information_documents, type: String, default: ""
+  field :testing_information_documents, type: String, default: ""
+  field :ingredient_or_materials_lists, type: String, default: ""
+
   # text fields
-  field :partnership_terms_length, type: String
-  field :payment_terms, type: String
-  field :grant_territory_exclusivity, type: String
-  field :requested_minimum_marketing_spend, type: String
-  field :marketing_requests_or_requirements, type: String
-  field :sales_channel_requests_or_requirements, type: String
+  field :partnership_terms_length, type: String, default: ""
+  field :payment_terms, type: String, default: ""
+  field :grant_territory_exclusivity, type: String, default: ""
+  field :requested_minimum_marketing_spend, type: String, default: ""
+  field :marketing_requests_or_requirements, type: String, default: ""
+  field :sales_channel_requests_or_requirements, type: String, default: ""
 
   # DISTRIBUTOR
   # text fields
-  field :brand_launch_plan, type: String
-  field :marketing_strategy, type: String
-  field :minimum_volume_year_one, type: String
-  field :minimum_volume_year_two, type: String
-  field :minimum_volume_year_three, type: String
+  field :brand_launch_plan, type: String, default: ""
+  field :marketing_strategy, type: String, default: ""
+  field :minimum_volume_year_one, type: String, default: ""
+  field :minimum_volume_year_two, type: String, default: ""
+  field :minimum_volume_year_three, type: String, default: ""
+  field :testing_information, type: String, default: ""
+  field :certification_information, type: String, default: ""
+  field :customs_information, type: String, default: ""
+  field :tariffs_information, type: String, default: ""
+  field :contract_authentication, type: String, default: ""
+
   #checkboxes
   field :initial_channels, type: Array, default: []
   field :second_tier_channels, type: Array, default: []

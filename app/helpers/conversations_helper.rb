@@ -34,20 +34,27 @@ module ConversationsHelper
 	end	
 
 	def has_all_docs(stage)
+		user = @current_user.brand || @current_user.distributor
 		case stage
 		when 'propose'
-			user = @current_user.brand
 			doc_list = [
 				'Products List', 
 				'FOB Pricing', 
 				'Tiered Pricing Schedule'
 			]
-			test_count = 0
-			doc_list.each do |item|
-				test_count += user.library_documents.where(type: item).count > 0 ? 1 : 0
-			end
-			return test_count == doc_list.count ? true : false
+		when 'prepare'
+			doc_list = [
+				'Testing Information',
+				'Ingredient or Materials List',
+				'Patent Information',
+				'Certification Information'
+			]
 		end
+		test_count = 0
+		doc_list.each do |item|
+			test_count += user.library_documents.where(type: item).count > 0 ? 1 : 0
+		end
+		return test_count == doc_list.count ? true : false		
 	end
 
 	def check_docs(doctype)

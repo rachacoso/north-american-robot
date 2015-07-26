@@ -87,6 +87,88 @@
     </div><!--/.small-12-->
   </div><!--/.row-->
 
+
+  <div class="row collapse">
+   <div class="small-12 columns">
+    <div class="library-document-header">
+      <div class="row">
+        <div class="small-12 columns">
+          <h2>Certification Information </h2>
+        </div><!--/.small-12-->
+      </div><!--/.row-->
+    </div><!--/.library-document-header-->
+   </div><!--/.small-12-->
+  </div><!--/.row-->
+  <div class="row">
+    <div class="small-12 columns">
+      <ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
+        <%= render  @documents_certification_information %>
+        <li><%= render partial: "upload_form", locals: {doc_type: "Certification Information"} %></li>
+      </ul>    
+    </div><!--/.small-12-->
+  </div><!--/.row-->
+
+  <div class="row collapse">
+   <div class="small-12 columns">
+    <div class="library-document-header">
+      <div class="row">
+        <div class="small-12 columns">
+          <h2>Patent Information </h2>
+        </div><!--/.small-12-->
+      </div><!--/.row-->
+    </div><!--/.library-document-header-->
+   </div><!--/.small-12-->
+  </div><!--/.row-->
+  <div class="row">
+    <div class="small-12 columns">
+      <ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
+        <%= render  @documents_patent_information %>
+        <li><%= render partial: "upload_form", locals: {doc_type: "Patent Information"} %></li>
+      </ul>    
+    </div><!--/.small-12-->
+  </div><!--/.row-->
+
+  <div class="row collapse">
+   <div class="small-12 columns">
+    <div class="library-document-header">
+      <div class="row">
+        <div class="small-12 columns">
+          <h2>Testing Information </h2>
+        </div><!--/.small-12-->
+      </div><!--/.row-->
+    </div><!--/.library-document-header-->
+   </div><!--/.small-12-->
+  </div><!--/.row-->
+  <div class="row">
+    <div class="small-12 columns">
+      <ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
+        <%= render  @documents_testing_information %>
+        <li><%= render partial: "upload_form", locals: {doc_type: "Testing Information"} %></li>
+      </ul>    
+    </div><!--/.small-12-->
+  </div><!--/.row-->
+
+  <div class="row collapse">
+   <div class="small-12 columns">
+    <div class="library-document-header">
+      <div class="row">
+        <div class="small-12 columns">
+          <h2>Ingredient or Materials List </h2>
+        </div><!--/.small-12-->
+      </div><!--/.row-->
+    </div><!--/.library-document-header-->
+   </div><!--/.small-12-->
+  </div><!--/.row-->
+  <div class="row">
+    <div class="small-12 columns">
+      <ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
+        <%= render  @documents_ingredient_or_materials_list %>
+        <li><%= render partial: "upload_form", locals: {doc_type: "Ingredient or Materials List"} %></li>
+      </ul>    
+    </div><!--/.small-12-->
+  </div><!--/.row-->
+
+
   <% elsif @current_user.distributor %>
 
 

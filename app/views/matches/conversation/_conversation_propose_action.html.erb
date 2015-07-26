@@ -1,350 +1,356 @@
 
-					<% if match.stage == "propose" %>			
+	<% if match.stage == "propose" %>			
 
-						<% if match && !match.messages.blank? && match.stage == "propose" %>
-							<% if @current_user.brand %>
-								<% if has_all_docs('propose') %>
-									<div class="conversation-action-tile active" id="action-one">
-										<h4><strong>Would you like to share your <br>PRODUCT &amp; PRICING documents with <%= profile.company_name %>?</strong></h4>
-										<p>These include the following documents that you have uploaded to your Global Terms &amp; Documents:</p>
-										<ul>
-											<li>Products List</li>
-											<li>FOB Pricing</li>
-											<li>Tiered Pricing Schedule</li>
-										</ul>
+		<% if match && !match.messages.blank? && match.stage == "propose" %>
+			<% if @current_user.brand %>
+				<% if has_all_docs('propose') %>
+					<div class="conversation-action-tile active" id="action-one">
+						<h4><strong>Would you like to share your <br>PRODUCT &amp; PRICING documents with <%= profile.company_name %>?</strong></h4>
+						<p>These include the following documents that you have uploaded to your Global Terms &amp; Documents:</p>
+						<ul>
+							<li>Products List</li>
+							<li>FOB Pricing</li>
+							<li>Tiered Pricing Schedule</li>
+						</ul>
 
-										<%= link_to '#', id: "conversation-action-toggle", class: "button tiny alert expand" do %>
-											SHARE PRODUCT &amp; PRICING <br> with <%= profile.company_name %>
-										<% end %>
+						<%= link_to '#', id: "conversation-action-toggle", class: "button tiny alert expand" do %>
+							SHARE PRODUCT &amp; PRICING <br> with <%= profile.company_name %>
+						<% end %>
+					</div>
+					<div class="conversation-action-tile" id="action-two" style="display: none;">
+						<%= form_for match, url: match_share_path(match), class: 'conversation-share-form', remote: true do |f| %>
+						<%#= form_tag match_share_path(match), class: 'conversation-share-form', remote: true do %>
+							
+
+							<div class="row">
+								<div class="small-12 columns">
+									<h2>Select documents you'd like to share:</h2>
+								</div><!--/.small-12-->
+							</div><!--/.row-->
+							<div class="row">
+								<div class="small-4 columns text-right">
+									<%= f.label :products_list, "Products List" %>
+								</div><!--/.small-4-->
+								<div class="small-8 columns">
+									<%= f.collection_select(:products_list, @current_user.brand.library_documents.where(type: "Products List"), :id, :filename, :include_blank => "[NONE]", label: false) %>
+									<%#= collection_select(:share_list_docs, :products_list, @current_user.brand.library_documents.where(type: "Products List"), :id, :filename, :include_blank => "Select a Document") %>
+								</div><!--/.small-8-->
+							</div><!--/.row-->
+							<div class="row">
+								<div class="small-4 columns text-right">
+									<%= f.label :fob_pricing, "FOB Pricing" %>
+								</div><!--/.small-4-->
+								<div class="small-8 columns">
+									<%= f.collection_select(:fob_pricing, @current_user.brand.library_documents.where(type: "FOB Pricing"), :id, :filename, :include_blank => "[NONE]", label: false) %>
+								</div><!--/.small-8-->
+							</div><!--/.row-->
+							<div class="row">
+								<div class="small-4 columns text-right">
+									<%= f.label :tiered_pricing_schedule, "Tiered Pricing Schedule" %>
+								</div><!--/.small-4-->
+								<div class="small-8 columns">
+									<%= f.collection_select(:tiered_pricing_schedule, @current_user.brand.library_documents.where(type: "Tiered Pricing Schedule"), :id, :filename, :include_blank => "[NONE]", label: false) %>
+								</div><!--/.small-8-->
+							</div><!--/.row-->
+
+
+							<div class="row">
+								<div class="small-12 columns">
+									<h2>How long are you willing to grant these terms to your partner?</h2>
+								</div><!--/.small-12-->
+							</div><!--/.row-->
+							<div class="row">
+								<div class="small-4 columns">
+									<div class="conversation-help-tile text-right">
+									We strongly suggest establishing contracts of 3 years. While the agreement can be discontinued by either partner within the set requirements, this sets the expectation of a longer-term partnership and allows your partner to build sales momentum. This also incentivizes your partner to invest heavily in marketing and developing the brand to reap the benefits down the road.
 									</div>
-									<div class="conversation-action-tile" id="action-two" style="display: none;">
-										<%= form_for match, url: match_share_path(match), class: 'conversation-share-form', remote: true do |f| %>
-										<%#= form_tag match_share_path(match), class: 'conversation-share-form', remote: true do %>
-											
-
-											<div class="row">
-												<div class="small-12 columns">
-													<h2>Select documents you'd like to share:</h2>
-												</div><!--/.small-12-->
-											</div><!--/.row-->
-											<div class="row">
-												<div class="small-4 columns text-right">
-													<%= f.label :products_list, "Products List" %>
-												</div><!--/.small-4-->
-												<div class="small-8 columns">
-													<%= f.collection_select(:products_list, @current_user.brand.library_documents.where(type: "Products List"), :id, :filename, :include_blank => "[NONE]", label: false) %>
-													<%#= collection_select(:share_list_docs, :products_list, @current_user.brand.library_documents.where(type: "Products List"), :id, :filename, :include_blank => "Select a Document") %>
-												</div><!--/.small-8-->
-											</div><!--/.row-->
-											<div class="row">
-												<div class="small-4 columns text-right">
-													<%= f.label :fob_pricing, "FOB Pricing" %>
-												</div><!--/.small-4-->
-												<div class="small-8 columns">
-													<%= f.collection_select(:fob_pricing, @current_user.brand.library_documents.where(type: "FOB Pricing"), :id, :filename, :include_blank => "[NONE]", label: false) %>
-												</div><!--/.small-8-->
-											</div><!--/.row-->
-											<div class="row">
-												<div class="small-4 columns text-right">
-													<%= f.label :tiered_pricing_schedule, "Tiered Pricing Schedule" %>
-												</div><!--/.small-4-->
-												<div class="small-8 columns">
-													<%= f.collection_select(:tiered_pricing_schedule, @current_user.brand.library_documents.where(type: "Tiered Pricing Schedule"), :id, :filename, :include_blank => "[NONE]", label: false) %>
-												</div><!--/.small-8-->
-											</div><!--/.row-->
-
-
-											<div class="row">
-												<div class="small-12 columns">
-													<h2>How long are you willing to grant these terms to your partner?</h2>
-												</div><!--/.small-12-->
-											</div><!--/.row-->
-											<div class="row">
-												<div class="small-4 columns">
-													<div class="conversation-help-tile text-right">
-													We strongly suggest establishing contracts of 3 years. While the agreement can be discontinued by either partner within the set requirements, this sets the expectation of a longer-term partnership and allows your partner to build sales momentum. This also incentivizes your partner to invest heavily in marketing and developing the brand to reap the benefits down the road.
-													</div>
-												</div><!--/.small-6-->
-												<div class="small-8 columns">
-													<div class="row collapse">
-														<div class="small-1 columns">
-															<%#= f.select :partnership_terms_length, (1..10), selected: 3, label: false %>
-															<% selected_item = ( match.partnership_terms_length.blank? ? '3 years' : match.partnership_terms_length )  %>
-															<%= f.select :partnership_terms_length, (1..10).map { |n| [n, "#{n} years"] }, label: false, selected: selected_item %>
-														</div><!--/.small-1-->
-														<div class="small-2 columns end">
-															<span class="postfix">years</span>
-														</div><!--/.small-2-->
-													</div><!--/.row-->
-												</div><!--/.small-8-->
-											</div><!--/.row-->
-											<div class="row">
-												<div class="small-12 columns">
-													<h2>What are your payment terms?</h2>
-												</div><!--/.small-12-->
-											</div><!--/.row-->
-											<div class="row">
-												<div class="small-4 columns">
-													<div class="conversation-help-tile text-right">
-														Some Examples:<br>
-														At Time of Order Placement: % of total<br>
-														At Time of Shipment: % of total<br>
-														Net Terms: % of total and # of days (15, 30, 45, 60)<br>
-													</div>
-												</div><!--/.small-4-->
-												<div class="small-8 columns">
-													<%= f.text_area :payment_terms, placeholder: "Payment Terms", label: false  %>	
-												</div><!--/.small-8-->
-											</div><!--/.row-->
-											<div class="row">
-												<div class="small-12 columns">
-													<h2>Are you willing to grant territory exclusivity to your partner? </h2>
-												</div><!--/.small-12-->
-											</div><!--/.row-->
-											<div class="row">
-												<div class="small-4 columns text-right">
-													<div class="conversation-help-tile">
-														Many credible partners will require territory exclusivity since they anticipate investing in marketing and product inventory. However, you always have the right to grant non-exclusive rights to carry your product, if their offer does not satisfactorily meet your exclusivity requirements. 
-													</div>
-												</div><!--/.small-4-->
-												<div class="small-8 columns">
-													<%= f.text_area :grant_territory_exclusivity, placeholder: "Territory Exclusivity", label: false  %>	
-												</div><!--/.small-8-->
-											</div><!--/.row-->
-											<div class="row">
-												<div class="small-12 columns">
-													<h2>What is your requested minimum marketing spend by your partner? </h2>
-												</div><!--/.small-12-->
-											</div><!--/.row-->
-											<div class="row">
-												<div class="small-4 columns text-right">
-													<div class="conversation-help-tile">
-														We recommend a minimum of 5% of yearly inventory spend be devoted to marketing. Although in the earliers, marketing spend should exceed that amount. For example if they are purchasing $200,000 of inventory from you, they should spend a minimum of $10,000 in marketing. This can include website development, PR budget, advertising, collateral, trade shows, etc. 
-													</div>
-												</div><!--/.small-4-->
-												<div class="small-8 columns">
-													<%= f.text_area :requested_minimum_marketing_spend, placeholder: "Requested Minimum Marketing Spend", label: false  %>	
-												</div><!--/.small-8-->
-											</div><!--/.row-->
-											<div class="row">
-												<div class="small-12 columns">
-													<h2>Do you have any marketing requests or requirements? </h2>
-												</div><!--/.small-12-->
-											</div><!--/.row-->
-											<div class="row">
-												<div class="small-4 columns text-right">
-													<div class="conversation-help-tile">
-														For example, some brands feel strongly that their international partners attend at least one trade show or advertise in a minimum number of outlets. Please keep in mind that you don't want to be too strict in your marketing requirements. Credible international distributors are the experts of their territorities and have the most expertise on how to market your brand/products.  
-													</div>
-												</div><!--/.small-4-->
-												<div class="small-8 columns">
-													<%= f.text_area :marketing_requests_or_requirements, placeholder: "Marketing Requests or Requirements", label: false  %>	
-												</div><!--/.small-8-->
-											</div><!--/.row-->
-											<div class="row">
-												<div class="small-12 columns">
-													<h2>Do you have any sales channel requests or requirements? </h2>
-												</div><!--/.small-12-->
-											</div><!--/.row-->
-											<div class="row">
-												<div class="small-4 columns text-right">
-													<div class="conversation-help-tile">
-														For example, some brands only want their products sold in certain channels or perhaps do not want their products to be sold in other channels. 
-													</div>
-												</div><!--/.small-4-->
-												<div class="small-8 columns">
-													<%= f.text_area :sales_channel_requests_or_requirements, placeholder: "Sales Channel Requests or Requirements", label: false  %>	
-												</div><!--/.small-8-->
-											</div><!--/.row-->
-
-
-
-											<div class="row">
-												<div class="small-4 columns">
-													<%= link_to '#', id: "conversation-action-cancel", class: "button tiny secondary expand" do %>
-														Cancel
-													<% end %>
-												</div><!--/.small-4-->
-												<div class="small-8 columns">
-													<%= submit_tag "SHARE INFORMATION", class: "button tiny alert expand" %>
-												</div><!--/.small-8-->
-											</div><!--/.row-->
-
-										<% end %>
+								</div><!--/.small-6-->
+								<div class="small-8 columns">
+									<div class="row collapse">
+										<div class="small-1 columns">
+											<%#= f.select :partnership_terms_length, (1..10), selected: 3, label: false %>
+											<% selected_item = ( match.partnership_terms_length.blank? ? '3 years' : match.partnership_terms_length )  %>
+											<%= f.select :partnership_terms_length, (1..10).map { |n| [n, "#{n} years"] }, label: false, selected: selected_item %>
+										</div><!--/.small-1-->
+										<div class="small-2 columns end">
+											<span class="postfix">years</span>
+										</div><!--/.small-2-->
+									</div><!--/.row-->
+								</div><!--/.small-8-->
+							</div><!--/.row-->
+							<div class="row">
+								<div class="small-12 columns">
+									<h2>What are your payment terms?</h2>
+								</div><!--/.small-12-->
+							</div><!--/.row-->
+							<div class="row">
+								<div class="small-4 columns">
+									<div class="conversation-help-tile text-right">
+										Some Examples:<br>
+										At Time of Order Placement: % of total<br>
+										At Time of Shipment: % of total<br>
+										Net Terms: % of total and # of days (15, 30, 45, 60)<br>
 									</div>
-								<% else %>
-									<div class="conversation-action-tile" id="action-one">
-										<h4><strong><i class='fi-alert' style='color: red;'></i> To advance to the next stage of your conversation, you need to share your PRODUCT &amp; PRICING information with <%= profile.company_name %>.</strong></h4>
-										<p>Some of your PRODUCT &amp; PRICING information documents have yet to be uploaded to your
-											<%= link_to library_documents_path do %>
-												Global Terms &amp; Documents
-											<% end %>:</p>
-										<ul>
-											<li>Products List <strong> <%= check_docs('Products List').html_safe %></strong></li>
-											<li>FOB Pricing <%= check_docs('FOB Pricing').html_safe %></li>
-											<li>Tiered Pricing Schedule <%= check_docs('Tiered Pricing Schedule').html_safe %></li>
-										</ul>
-										<h4><strong>Pleae upload all of these documents in your 
-											<%= link_to library_documents_path do %>
-												Global Terms &amp; Documents
-											<% end %>
-											in order to proceed to the next stage!
-										</strong></h4>
+								</div><!--/.small-4-->
+								<div class="small-8 columns">
+									<%= f.text_area :payment_terms, placeholder: "Payment Terms", label: false  %>	
+								</div><!--/.small-8-->
+							</div><!--/.row-->
+							<div class="row">
+								<div class="small-12 columns">
+									<h2>Are you willing to grant territory exclusivity to your partner? </h2>
+								</div><!--/.small-12-->
+							</div><!--/.row-->
+							<div class="row">
+								<div class="small-4 columns text-right">
+									<div class="conversation-help-tile">
+										Many credible partners will require territory exclusivity since they anticipate investing in marketing and product inventory. However, you always have the right to grant non-exclusive rights to carry your product, if their offer does not satisfactorily meet your exclusivity requirements. 
 									</div>
-								<% end %>
-							<% elsif @current_user.distributor %>
-								<div class="conversation-action-tile active" id="action-one">
-									<h4><strong>Would you like to share your marketing plans for this brand and their products?</strong></h4>
-									<p>These include:</p>
-									<ul> 
-										<li>Brand Launch Plan</li>
-										<li>Marketing Strategy</li>
-										<li>Retail Channels</li>
-										<li>Minimum Purchase Volumes</li>
+								</div><!--/.small-4-->
+								<div class="small-8 columns">
+									<%= f.text_area :grant_territory_exclusivity, placeholder: "Territory Exclusivity", label: false  %>	
+								</div><!--/.small-8-->
+							</div><!--/.row-->
+							<div class="row">
+								<div class="small-12 columns">
+									<h2>What is your requested minimum marketing spend by your partner? </h2>
+								</div><!--/.small-12-->
+							</div><!--/.row-->
+							<div class="row">
+								<div class="small-4 columns text-right">
+									<div class="conversation-help-tile">
+										We recommend a minimum of 5% of yearly inventory spend be devoted to marketing. Although in the earliers, marketing spend should exceed that amount. For example if they are purchasing $200,000 of inventory from you, they should spend a minimum of $10,000 in marketing. This can include website development, PR budget, advertising, collateral, trade shows, etc. 
+									</div>
+								</div><!--/.small-4-->
+								<div class="small-8 columns">
+									<%= f.text_area :requested_minimum_marketing_spend, placeholder: "Requested Minimum Marketing Spend", label: false  %>	
+								</div><!--/.small-8-->
+							</div><!--/.row-->
+							<div class="row">
+								<div class="small-12 columns">
+									<h2>Do you have any marketing requests or requirements? </h2>
+								</div><!--/.small-12-->
+							</div><!--/.row-->
+							<div class="row">
+								<div class="small-4 columns text-right">
+									<div class="conversation-help-tile">
+										For example, some brands feel strongly that their international partners attend at least one trade show or advertise in a minimum number of outlets. Please keep in mind that you don't want to be too strict in your marketing requirements. Credible international distributors are the experts of their territorities and have the most expertise on how to market your brand/products.  
+									</div>
+								</div><!--/.small-4-->
+								<div class="small-8 columns">
+									<%= f.text_area :marketing_requests_or_requirements, placeholder: "Marketing Requests or Requirements", label: false  %>	
+								</div><!--/.small-8-->
+							</div><!--/.row-->
+							<div class="row">
+								<div class="small-12 columns">
+									<h2>Do you have any sales channel requests or requirements? </h2>
+								</div><!--/.small-12-->
+							</div><!--/.row-->
+							<div class="row">
+								<div class="small-4 columns text-right">
+									<div class="conversation-help-tile">
+										For example, some brands only want their products sold in certain channels or perhaps do not want their products to be sold in other channels. 
+									</div>
+								</div><!--/.small-4-->
+								<div class="small-8 columns">
+									<%= f.text_area :sales_channel_requests_or_requirements, placeholder: "Sales Channel Requests or Requirements", label: false  %>	
+								</div><!--/.small-8-->
+							</div><!--/.row-->
 
-									</ul>
 
 
-									<%= link_to '#', id: "conversation-action-toggle", class: "button tiny alert expand" do %>
-										SHARE MARKETING PLANS <br> with <%= profile.company_name %>
+							<div class="row">
+								<div class="small-4 columns">
+									<%= link_to '#', id: "conversation-action-cancel", class: "button tiny secondary expand" do %>
+										Cancel
 									<% end %>
-								</div>
+								</div><!--/.small-4-->
+								<div class="small-8 columns">
+									<%= submit_tag "SHARE INFORMATION", class: "button tiny alert expand" %>
+								</div><!--/.small-8-->
+							</div><!--/.row-->
 
-								<div class="conversation-action-tile" id="action-two" style="display: none;">
-									<%#= form_tag match_share_path(match), class: 'conversation-share-form', remote: true do %>
-									<%= form_for match, url: match_share_path(match), class: 'conversation-share-form', remote: true do |f| %>	
-
-									<div class="row">
-										<div class="small-12 columns">
-											<h2>Please summarize your brand launch plan</h2>
-										</div><!--/.small-12-->
-									</div><!--/.row-->
-									<div class="row">
-										<div class="small-4 columns text-right">
-											<%= f.label :brand_launch_plan %>
-										</div><!--/.small-4-->
-										<div class="small-8 columns">
-											<%= f.text_area :brand_launch_plan, placeholder: "Your Launch Plan", label: false  %>
-										</div><!--/.small-8-->
-									</div><!--/.row-->
-
-									<div class="row">
-										<div class="small-12 columns">
-											<h2>Please share how you plan to market the brand and its products</h2>
-										</div><!--/.small-12-->
-									</div><!--/.row-->
-									<div class="row">
-										<div class="small-4 columns text-right">
-											<%= f.label :marketing_strategy %>
-										</div><!--/.small-4-->
-										<div class="small-8 columns">
-											<%= f.text_area :marketing_strategy, placeholder: "Your Marketing Strategy", label: false  %>
-										</div><!--/.small-8-->
-									</div><!--/.row-->
-									<div class="row">
-										<div class="medium-4 columns text-right"><h4>Marketing Channels</h4></div><!--/.small-4-->
-										<div class="medium-8 columns">
-
-
-											<% [:print,:online,:email,:outdoor,:events,:direct_mail,:classes].each do |channel| %>
-												<% channel_name = channel.to_s.gsub(/_/, " ").split.map(&:capitalize)*' ' %>
-												<%= check_box_tag("match[marketing_channels][#{channel_name}]", 1, match.marketing_channels.include?(channel_name) ? true : false) %>
-												<%= label_tag("match[marketing_channels][#{channel_name}]", channel_name) %><br>
-											<% end %>	
-										</div><!--/.medium-8-->
-									</div><!--/.row-->
-
-
-									<div class="row">
-										<div class="small-12 columns">
-											<h2>Please share what retail channels you plan to sell the brand's products</h2>
-										</div><!--/.small-12-->
-									</div><!--/.row-->
-									<div class="row">
-										<div class="medium-4 columns text-right"><h4>Initial Channels</h4></div><!--/.small-4-->
-										<div class="medium-8 columns">
-											<% Channel.all.each do |channel| %>
-												<%= check_box_tag("match[initial_channels][#{channel.name}]", 1, match.initial_channels.include?(channel.name) ? true : false) %>
-												<%= label_tag("match[initial_channels][#{channel.name}]", channel.name) %><br>
-											<% end %>	
-										</div><!--/.medium-8-->
-									</div><!--/.row-->
-									<div class="row">
-										<div class="medium-4 columns text-right"><h4>Second Tier Channels</h4></div><!--/.small-4-->
-										<div class="medium-8 columns">
-											<% Channel.all.each do |channel| %>
-												<%= check_box_tag("match[second_tier_channels][#{channel.name}]", 1, match.second_tier_channels.include?(channel.name) ? true : false) %>
-												<%= label_tag("match[second_tier_channels][#{channel.name}]", channel.name) %><br>
-											<% end %>
-										</div><!--/.medium-8-->
-									</div><!--/.row-->
-									<div class="row">
-										<div class="medium-4 columns text-right"><h4>Third Tier Channels</h4></div><!--/.small-4-->
-										<div class="medium-8 columns">
-											<% Channel.all.each do |channel| %>
-												<%= check_box_tag("match[third_tier_channels][#{channel.name}]", 1, match.third_tier_channels.include?(channel.name) ? true : false) %>
-												<%= label_tag("match[third_tier_channels][#{channel.name}]", channel.name) %><br>
-											<% end %>	
-										</div><!--/.medium-8-->
-									</div><!--/.row-->
-
-											<div class="row">
-												<div class="small-12 columns">
-													<h2>What is the minimum purchase volume you can commit to over the next three years?</h2>
-												</div><!--/.small-12-->
-											</div><!--/.row-->
-											<div class="row">
-												<div class="small-4 columns text-right">
-													<%= f.label :minimum_volume_year_one %>
-													<%#= label_tag 'share_list_fields_minimum_volume_year_one', "Year One Sales Volume / Units" %>
-												</div><!--/.small-4-->
-												<div class="small-4 columns end">
-													<%= f.text_field :minimum_volume_year_one, label: false %>
-													<%#= text_field_tag "share_list_fields[minimum_volume_year_one]" %>
-												</div><!--/.small-4-->
-											</div><!--/.row-->
-											<div class="row">
-												<div class="small-4 columns text-right">
-													<%= f.label :minimum_volume_year_two %>
-													<%#= label_tag 'share_list_fields_minimum_volume_year_two', "Year Two Sales Volume / Units" %>
-												</div><!--/.small-4-->
-												<div class="small-4 columns end">
-													<%= f.text_field :minimum_volume_year_two, label: false %>
-													<%#= text_field_tag "share_list_fields[minimum_volume_year_two]" %>
-												</div><!--/.small-4-->
-											</div><!--/.row-->
-											<div class="row">
-												<div class="small-4 columns text-right">
-													<%= f.label :minimum_volume_year_three %>
-													<%#= label_tag 'share_list_fields_minimum_volume_year_three', "Year Three Sales Volume / Units" %>
-												</div><!--/.small-4-->
-												<div class="small-4 columns end">
-													<%= f.text_field :minimum_volume_year_three, label: false %>
-													<%#= text_field_tag "share_list_fields[minimum_volume_year_three]" %>
-												</div><!--/.small-4-->
-											</div><!--/.row-->
-
-											<div class="row">
-												<div class="small-4 columns">
-													<%= link_to '#', id: "conversation-action-cancel", class: "button tiny secondary expand" do %>
-														Cancel
-													<% end %>
-												</div><!--/.small-4-->
-												<div class="small-8 columns">
-													<%= submit_tag "SHARE MARKETING PLANS", class: "button tiny alert expand" %>
-												</div><!--/.small-8-->
-											</div><!--/.row-->
-
-									<% end %>
-								</div>
-
+						<% end %>
+					</div>
+				<% else %>
+					<div class="conversation-action-tile" id="action-one">
+						<h4><strong><i class='fi-alert' style='color: red;'></i> To advance to the next stage of your conversation, you need to share your PRODUCT &amp; PRICING information with <%= profile.company_name %>.</strong></h4>
+						<p>Some of your PRODUCT &amp; PRICING information documents have yet to be uploaded to your
+							<%= link_to library_documents_path do %>
+								Global Terms &amp; Documents
+							<% end %>:</p>
+						<ul>
+							<li>Products List <strong> <%= check_docs('Products List').html_safe %></strong></li>
+							<li>FOB Pricing <%= check_docs('FOB Pricing').html_safe %></li>
+							<li>Tiered Pricing Schedule <%= check_docs('Tiered Pricing Schedule').html_safe %></li>
+						</ul>
+						<h4><strong>Pleae upload all of these documents in your 
+							<%= link_to library_documents_path do %>
+								Global Terms &amp; Documents
 							<% end %>
+							in order to proceed to the next stage!
+						</strong></h4>
+					</div>
+				<% end %>
+			<% elsif @current_user.distributor %>
+				<div class="conversation-action-tile active" id="action-one">
+					<h4><strong>Would you like to share your marketing plans for this brand and their products?</strong></h4>
+					<p>These include:</p>
+					<ul> 
+						<li>Brand Launch Plan</li>
+						<li>Marketing Strategy</li>
+						<li>Retail Channels</li>
+						<li>Minimum Purchase Volumes</li>
 
-							<% if match.brand_shared_propose && match.distributor_shared_propose %>
-								<%= render partial: "matches/conversation/proceed_stage_initial", locals: {match: match, stage: 'prepare'} %>
-							<% end %>
+					</ul>
 
-						<% end %>		
-						<div class="overlay" id="action-two" style="display: none;">
-						</div>
+
+					<%= link_to '#', id: "conversation-action-toggle", class: "button tiny alert expand" do %>
+						SHARE MARKETING PLANS <br> with <%= profile.company_name %>
 					<% end %>
+				</div>
+
+				<div class="conversation-action-tile" id="action-two" style="display: none;">
+					<%#= form_tag match_share_path(match), class: 'conversation-share-form', remote: true do %>
+					<%= form_for match, url: match_share_path(match), class: 'conversation-share-form', remote: true do |f| %>	
+
+					<div class="row">
+						<div class="small-12 columns">
+							<h2>Please summarize your brand launch plan</h2>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="small-4 columns text-right">
+							<%= f.label :brand_launch_plan %>
+						</div><!--/.small-4-->
+						<div class="small-8 columns">
+							<%= f.text_area :brand_launch_plan, placeholder: "Your Launch Plan", label: false  %>
+						</div><!--/.small-8-->
+					</div><!--/.row-->
+
+					<div class="row">
+						<div class="small-12 columns">
+							<h2>Please share how you plan to market the brand and its products</h2>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="small-4 columns text-right">
+							<%= f.label :marketing_strategy %>
+						</div><!--/.small-4-->
+						<div class="small-8 columns">
+							<%= f.text_area :marketing_strategy, placeholder: "Your Marketing Strategy", label: false  %>
+						</div><!--/.small-8-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="medium-4 columns text-right"><h4>Marketing Channels</h4></div><!--/.small-4-->
+						<div class="medium-8 columns">
+
+
+							<% [:print,:online,:email,:outdoor,:events,:direct_mail,:classes].each do |channel| %>
+								<% channel_name = channel.to_s.gsub(/_/, " ").split.map(&:capitalize)*' ' %>
+								<%= hidden_field_tag "match[marketing_channels][#{channel_name}]", 0, id: '' %>
+								<%= check_box_tag("match[marketing_channels][#{channel_name}]", 1, match.marketing_channels.include?(channel_name) ? true : false) %>
+								<%= label_tag("match[marketing_channels][#{channel_name}]", channel_name) %><br>
+							<% end %>	
+						</div><!--/.medium-8-->
+					</div><!--/.row-->
+
+
+					<div class="row">
+						<div class="small-12 columns">
+							<h2>Please share what retail channels you plan to sell the brand's products</h2>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="medium-4 columns text-right"><h4>Initial Channels</h4></div><!--/.small-4-->
+						<div class="medium-8 columns">
+							<% Channel.all.each do |channel| %>
+								<%= hidden_field_tag "match[initial_channels][#{channel.name}]", 0, id: '' %>
+								<%= check_box_tag("match[initial_channels][#{channel.name}]", 1, match.initial_channels.include?(channel.name) ? true : false) %>
+								<%= label_tag("match[initial_channels][#{channel.name}]", channel.name) %><br>
+							<% end %>	
+						</div><!--/.medium-8-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="medium-4 columns text-right"><h4>Second Tier Channels</h4></div><!--/.small-4-->
+						<div class="medium-8 columns">
+							<% Channel.all.each do |channel| %>
+								<%= hidden_field_tag "match[second_tier_channels][#{channel.name}]", 0, id: '' %>
+								<%= check_box_tag("match[second_tier_channels][#{channel.name}]", 1, match.second_tier_channels.include?(channel.name) ? true : false) %>
+								<%= label_tag("match[second_tier_channels][#{channel.name}]", channel.name) %><br>
+							<% end %>
+						</div><!--/.medium-8-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="medium-4 columns text-right"><h4>Third Tier Channels</h4></div><!--/.small-4-->
+						<div class="medium-8 columns">
+							<% Channel.all.each do |channel| %>
+								<%= hidden_field_tag "match[third_tier_channels][#{channel.name}]", 0, id: '' %>
+								<%= check_box_tag("match[third_tier_channels][#{channel.name}]", 1, match.third_tier_channels.include?(channel.name) ? true : false) %>
+								<%= label_tag("match[third_tier_channels][#{channel.name}]", channel.name) %><br>
+							<% end %>	
+						</div><!--/.medium-8-->
+					</div><!--/.row-->
+
+							<div class="row">
+								<div class="small-12 columns">
+									<h2>What is the minimum purchase volume you can commit to over the next three years?</h2>
+								</div><!--/.small-12-->
+							</div><!--/.row-->
+							<div class="row">
+								<div class="small-4 columns text-right">
+									<%= f.label :minimum_volume_year_one %>
+									<%#= label_tag 'share_list_fields_minimum_volume_year_one', "Year One Sales Volume / Units" %>
+								</div><!--/.small-4-->
+								<div class="small-4 columns end">
+									<%= f.text_field :minimum_volume_year_one, label: false %>
+									<%#= text_field_tag "share_list_fields[minimum_volume_year_one]" %>
+								</div><!--/.small-4-->
+							</div><!--/.row-->
+							<div class="row">
+								<div class="small-4 columns text-right">
+									<%= f.label :minimum_volume_year_two %>
+									<%#= label_tag 'share_list_fields_minimum_volume_year_two', "Year Two Sales Volume / Units" %>
+								</div><!--/.small-4-->
+								<div class="small-4 columns end">
+									<%= f.text_field :minimum_volume_year_two, label: false %>
+									<%#= text_field_tag "share_list_fields[minimum_volume_year_two]" %>
+								</div><!--/.small-4-->
+							</div><!--/.row-->
+							<div class="row">
+								<div class="small-4 columns text-right">
+									<%= f.label :minimum_volume_year_three %>
+									<%#= label_tag 'share_list_fields_minimum_volume_year_three', "Year Three Sales Volume / Units" %>
+								</div><!--/.small-4-->
+								<div class="small-4 columns end">
+									<%= f.text_field :minimum_volume_year_three, label: false %>
+									<%#= text_field_tag "share_list_fields[minimum_volume_year_three]" %>
+								</div><!--/.small-4-->
+							</div><!--/.row-->
+
+							<div class="row">
+								<div class="small-4 columns">
+									<%= link_to '#', id: "conversation-action-cancel", class: "button tiny secondary expand" do %>
+										Cancel
+									<% end %>
+								</div><!--/.small-4-->
+								<div class="small-8 columns">
+									<%= submit_tag "SHARE MARKETING PLANS", class: "button tiny alert expand" %>
+								</div><!--/.small-8-->
+							</div><!--/.row-->
+
+					<% end %>
+				</div>
+
+			<% end %>
+
+			<% if match.brand_shared_propose && match.distributor_shared_propose %>
+				<%= render partial: "matches/conversation/proceed_stage_initial", locals: {match: match, stage: 'prepare'} %>
+			<% end %>
+
+		<% end %>		
+		
+		<div class="overlay" id="action-two" style="display: none;">
+		</div>
+
+	<% end %>
