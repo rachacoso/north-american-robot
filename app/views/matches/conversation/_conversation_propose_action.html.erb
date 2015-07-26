@@ -32,8 +32,7 @@
 									<%= f.label :products_list, "Products List" %>
 								</div><!--/.small-4-->
 								<div class="small-8 columns">
-									<%= f.collection_select(:products_list, @current_user.brand.library_documents.where(type: "Products List"), :id, :filename, :include_blank => "[NONE]", label: false) %>
-									<%#= collection_select(:share_list_docs, :products_list, @current_user.brand.library_documents.where(type: "Products List"), :id, :filename, :include_blank => "Select a Document") %>
+									<%= render partial: "matches/conversation/match_document_share_checkbox", locals: {match: match, doctype: "Products List", fieldname: "products_list"} %>
 								</div><!--/.small-8-->
 							</div><!--/.row-->
 							<div class="row">
@@ -41,7 +40,7 @@
 									<%= f.label :fob_pricing, "FOB Pricing" %>
 								</div><!--/.small-4-->
 								<div class="small-8 columns">
-									<%= f.collection_select(:fob_pricing, @current_user.brand.library_documents.where(type: "FOB Pricing"), :id, :filename, :include_blank => "[NONE]", label: false) %>
+									<%= render partial: "matches/conversation/match_document_share_checkbox", locals: {match: match, doctype: "FOB Pricing", fieldname: "fob_pricing"} %>
 								</div><!--/.small-8-->
 							</div><!--/.row-->
 							<div class="row">
@@ -49,7 +48,7 @@
 									<%= f.label :tiered_pricing_schedule, "Tiered Pricing Schedule" %>
 								</div><!--/.small-4-->
 								<div class="small-8 columns">
-									<%= f.collection_select(:tiered_pricing_schedule, @current_user.brand.library_documents.where(type: "Tiered Pricing Schedule"), :id, :filename, :include_blank => "[NONE]", label: false) %>
+									<%= render partial: "matches/conversation/match_document_share_checkbox", locals: {match: match, doctype: "Tiered Pricing Schedule", fieldname: "tiered_pricing_schedule"} %>
 								</div><!--/.small-8-->
 							</div><!--/.row-->
 

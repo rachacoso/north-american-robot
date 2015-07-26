@@ -464,11 +464,11 @@ class MatchesController < ApplicationController
         :ingredient_or_materials_lists
       ]
 
-      # pre-processing for the checkbox hashes
+      # pre-processing for the checkbox hashes (including the document share hashes)
       params[:match].each do |k,v|
-        if are_checkboxes.include?(k.to_sym)
+        if are_checkboxes.include?(k.to_sym) || are_docs.include?(k.to_sym)
           # convert to array of keys if checkbox selected .. empty hash if none selected
-          params[:match][k.to_sym] = params[:match][k].map{|k,v|v=='1' ? k : nil}.compact
+          params[:match][k] = params[:match][k].map{|k,v|v=='1' ? k : nil}.compact
           # params[:match][k.to_sym] = params[:match][k].keys
         end 
       end
@@ -487,10 +487,17 @@ class MatchesController < ApplicationController
 
         params[:match].each do |k,v|
           if are_docs.include?(k.to_sym)
-            if doc = LibraryDocument.find(v)
-              message_text_docs += "<h4><strong>#{k.gsub(/_/, " ").split.map(&:capitalize)*' '}</strong>:<br> <a href='#{doc.file.url}'>#{doc.filename}</a></h4>"
+            if !v.blank?
+              message_text_docs += "<h4><strong>#{k.gsub(/_/, " ").split.map(&:capitalize)*' '}</strong>:</h4>"
+              message_text_docs += "<h4>"
+              v.each do |vv|
+                if doc = LibraryDocument.find(vv)
+                  message_text_docs += "<a href='#{doc.file.url}'>#{doc.filename}</a><br>"
+                end
+              end
+              message_text_docs += "</h4>"
             else
-              message_text_docs += "<h4><strong>#{k.gsub(/_/, " ").split.map(&:capitalize)*' '}</strong>:<br> [file has been withdrawn]</h4>"
+              message_text_docs += "<h4><strong>#{k.gsub(/_/, " ").split.map(&:capitalize)*' '}</strong>:<br> [No Files Shared]</h4>"
             end
             has_docs = true
           elsif are_checkboxes.include?(k.to_sym)
@@ -537,13 +544,6 @@ class MatchesController < ApplicationController
 
   def match_share_parameters
     params.require(:match).permit(
-      :tiered_pricing_schedule,
-      :fob_pricing,
-      :products_list,
-      :certification_information_documents,
-      :patent_information_documents,
-      :testing_information_documents,
-      :ingredient_or_materials_lists,
       :testing_information,
       :certification_information,
       :customs_information,
@@ -560,6 +560,13 @@ class MatchesController < ApplicationController
       :minimum_volume_year_one,
       :minimum_volume_year_two,
       :minimum_volume_year_three,
+      :tiered_pricing_schedule => [],
+      :fob_pricing => [],
+      :products_list => [],
+      :certification_information_documents => [],
+      :patent_information_documents => [],
+      :testing_information_documents => [],
+      :ingredient_or_materials_lists => [],
       :initial_channels => [],
       :second_tier_channels => [],
       :third_tier_channels => [],

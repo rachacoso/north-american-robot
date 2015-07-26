@@ -23,13 +23,13 @@ class Match
   # CONTRACT FIELDS
   # BRAND
   # documents
-  field :tiered_pricing_schedule, type: String, default: ""
-  field :fob_pricing, type: String, default: ""
-  field :products_list, type: String, default: ""
-  field :certification_information_documents, type: String, default: ""
-  field :patent_information_documents, type: String, default: ""
-  field :testing_information_documents, type: String, default: ""
-  field :ingredient_or_materials_lists, type: String, default: ""
+  field :tiered_pricing_schedule, type: Array, default: []
+  field :fob_pricing, type: Array, default: []
+  field :products_list, type: Array, default: []
+  field :certification_information_documents, type: Array, default: []
+  field :patent_information_documents, type: Array, default: []
+  field :testing_information_documents, type: Array, default: []
+  field :ingredient_or_materials_lists, type: Array, default: []
 
   # text fields
   field :partnership_terms_length, type: String, default: "3 years"

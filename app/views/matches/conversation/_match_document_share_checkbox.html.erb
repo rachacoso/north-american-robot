@@ -1,0 +1,5 @@
+<% @current_user.brand.library_documents.where(type: "#{doctype}").each do |doc| %>
+	<%= hidden_field_tag "match[#{fieldname}][#{doc.id}]", 0, id: '' %>
+	<%= check_box_tag("match[#{fieldname}][#{doc.id}]", 1, match.send(fieldname).include?(doc.id.to_s) ? true : false) %>
+	<%= label_tag("match[#{fieldname}][#{doc.id}]", doc.filename) %><br>
+<% end %>
