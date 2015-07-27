@@ -28,6 +28,20 @@
 		    <% if @current_user && show_top_menu %>
 			    
 				<li class="divider"></li>
+
+				<% if @messages_unread > 0 || @new_contact_messages > 0 %>
+				<!-- MESSAGES Nav Section -->
+				<li>
+					<a href="#">
+						<%= link_to messages_path do %>
+							<span id="unread-message-badge"> <i class="fi-mail" style="margin: 0; padding: 0;"></i> </span> 
+			    	<% end %>
+					</a>
+				</li>
+				<li class="divider"></li>
+				<% end %>
+
+
 				<!-- MARKETS Nav Section -->
 				<li class="has-dropdown">
 					<a href="<%= all_matches_url %>"> 					
@@ -70,18 +84,6 @@
 		      </ul>
 
 				</li>
-
-				<% if @messages_unread > 0 || @new_contact_messages > 0 %>
-				<!-- MESSAGES Nav Section -->
-				<li class="divider"></li>
-				<li>
-					<a href="#">
-						<%= link_to messages_path do %>
-							<span id="unread-message-badge"> <i class="fi-mail" style="margin: 0; padding: 0;"></i> </span> 
-			    	<% end %>
-					</a>
-				</li>
-				<% end %>
 				
 				<li class="divider"></li>
 
