@@ -1,0 +1,35 @@
+<%# MATCH ACCEPT CONFIRMATION %>
+<% if !i_contacted(match) %>
+	<% if match.accepted %>
+	
+		<% if match.messages.blank? %>
+		<div class="conversation-action-center-tile <%= match.accepted? ? '' : 'active' %> text-center">
+			<h4>Send a message to <strong><%= match.send(@current_user.type_inverse?).company_name %></strong> to begin your conversation</h4>
+		</div>
+		<% end %>
+	
+	<% else %>
+
+		<div class="conversation-action-center-tile <%= match.accepted? ? '' : 'active' %> text-center">
+			<h4><strong><%= match.send(@current_user.type_inverse?).company_name %></strong> would like to have a conversation with you</h4>
+			<%= button_to 'ACCEPT', accept_match_path(match), :id => 'contact-accept', :class => "button tiny alert", remote: true %>
+		</div>
+
+	<% end %>
+<% end %>
+
+<%# STAGE PROCEED CONFIRMATION %>
+<% if match.accepted %>
+	<% if requestor = check_stage_proceed(match) %>
+		<% if requestor != @current_user.type? %>
+			<div class="conversation-action-center-tile text-center">
+				<h4><%= @match.company_name %> would like to proceed to the next stage of conversation: <%= get_next_stage(match) %></h4>
+				<%= button_to "YES, PROCEED TO #{get_next_stage(match)}", match_stage_update_path(match), :class => "button tiny alert", remote: true %>
+			</div>
+		<% else %>
+			<div class="conversation-action-center-tile text-center">
+				<h4><small>[You have sent the follwing request]</small><br><%= @current_user.send(@current_user.type?).company_name %> would like to proceed to the next stage of conversation: <%= get_next_stage(match) %></h4>
+			</div>
+		<% end %>
+	<% end %>
+<% end %>	

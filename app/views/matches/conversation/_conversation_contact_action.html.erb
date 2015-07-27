@@ -31,11 +31,6 @@
 				<% if !match.messages.blank? && match.stage == "contact" %>
 					<%= render partial: "matches/conversation/proceed_stage_initial", locals: {match: match, stage: 'propose'} %>
 				<% end %>		
-			<% else %>
-				<div class="conversation-action-tile <%= match.accepted? ? '' : 'active' %> text-center">
-					<h4><strong><%= profile.company_name %></strong> would like to have a conversation with you</h4>
-					<%= button_to 'ACCEPT', accept_match_path(match), :id => 'contact-accept', :class => "button tiny alert", remote: true %>
-				</div>
 			<% end %>
 
 

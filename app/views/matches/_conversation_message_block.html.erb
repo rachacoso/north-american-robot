@@ -12,8 +12,13 @@
 				<%= render partial: "matches/conversation/conversation_#{stage}_info", locals: {match: match} %>
 				<div class="conversation-block">
 
+					<div id="conversation-alerts">
+						<%= render partial: "matches/conversation/conversation_alerts", locals: {match: match, stage: stage} %>
+						<%= render partial: "matches/conversation/accept_match_confirm", locals: {match: match, stage: stage} %>
+						<%= render partial: "matches/conversation/proceed_stage_confirm", locals: {match: match, stage: stage} %>
+					</div>
+
 					<div id="send-message">
-						<%= match.accepted ? (render partial: "matches/conversation/proceed_stage_confirm", locals: {match: match, stage: stage}) : "" %>
 						<%= match.accepted ? (render partial: "matches/conversation/send_message", locals: {match: match, stage: stage}) : "" %>
 					</div><!--/#send-message-->
 
