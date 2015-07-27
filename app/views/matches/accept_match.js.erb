@@ -1,5 +1,4 @@
 $('#send-message').hide().html("<%= j (render partial: 'matches/conversation/send_message', locals: {match: @match, stage: 'contact'}) %>").fadeIn(1000);
-
 $('#conversation-action').hide().html("<%= j (render partial: 'matches/conversation/conversation_contact_action', locals: {match: @match, stage: 'contact', profile: @profile}) %>").fadeIn(1000);
-
+$('#conversation-alerts').hide().html("<%= j (render partial: 'matches/conversation/conversation_alerts', locals: {match: @match, stage: 'contact'}) %>").fadeIn(1000);
 initConversations();

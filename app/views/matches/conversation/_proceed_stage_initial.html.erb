@@ -10,7 +10,7 @@
 	<% end %>
 <% else %>
 	<div class="conversation-action-tile active text-center">
-		<h4>Stuff for proceeding</h4>
-		<%= button_to "PROCEED TO #{get_next_stage(match)}" , match_stage_update_path(match), :class => "button tiny alert", remote: true %>
+		<h4>Send a request to <%=match.send(@current_user.type_inverse?).company_name%> to proceed to the next stage <%= get_next_stage(match) %></h4>
+		<%= button_to "PROCEED TO #{get_next_stage(match)}" , match_stage_update_path(match), :class => "button tiny alert", data: {confirm: 'Yes, I want to send a request to proceed'}, remote: true %>
 	</div>
 <% end %>
