@@ -576,7 +576,19 @@ class MatchesController < ApplicationController
 
   end
 
+  def view_contract
 
+    if params[:match_id]
+      @m = @current_user.send(@current_user.type?).matches.find(params[:match_id])
+
+    end
+
+    respond_to do |format|
+      format.html { render "view_contract", :layout => false  } 
+      format.js
+    end 
+
+  end
 
   private
 

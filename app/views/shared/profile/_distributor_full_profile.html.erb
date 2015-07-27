@@ -1,15 +1,25 @@
 <% if @messages && @current_user.subscriber? %>
 <div class="row">
-	<div class="small-8 columns">
+	<div class="small-6 columns">
 		&nbsp;
-	</div><!--/.small-8-->
-	<div class="small-4 columns text-right profile-tabs">
+	</div><!--/.small-6-->
+	<div class="small-6 columns text-right profile-tabs">
+		<% if match = get_match(profile) %>
+		<h2 id="tab-contract" data-ajaxurl="<%= view_contract_url(match) %>">contract</h3>
+		<% end %>
 		<h2 class="active" id="tab-conversation">conversation</h3>
 		<h2 id="tab-profile">profile</h3>
-	</div><!--/.small-12-->
+	</div><!--/.small-6-->
 </div><!--/.row-->
 <% end %>
 
+
+<% if match = get_match(profile) %>
+<div id="profile-contract-wrapper">
+	<div id="profile-contract-data">
+	</div>
+</div>
+<% end %>
 
 <div id="profile-conversation-wrapper">
 	<div id="profile-conversation">

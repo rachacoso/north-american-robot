@@ -1,0 +1,189 @@
+<div class="row collapse">
+	<div class="small-12 columns">
+		<div class="profile-container">
+		
+			<div class="row">
+				<div class="small-12 columns">
+			<h1>Term Sheet</h1>
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+
+			<div class="row">
+				<div class="small-12 columns">
+					<h1>Agreement Commitments</h1>
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+					
+			<div class="row">
+				<div class="small-12 columns">
+				Commencement Date	/ Start of the agreement
+					</div><!--/.small-12-->
+			</div><!--/.row-->
+
+			<div class="row">
+				<div class="small-12 columns">
+				Initial Term	The duration of the initial term
+					</div><!--/.small-12-->
+			</div><!--/.row-->
+			<div class="row">
+				<div class="small-12 columns">
+				Renewal Term	The renewal terms
+					</div><!--/.small-12-->
+			</div><!--/.row-->
+			<div class="row">
+				<div class="small-12 columns">
+				Termination	How the agreement can be terminated
+					</div><!--/.small-12-->
+			</div><!--/.row-->
+			<div class="row">
+				<div class="small-12 columns">
+				Territory	The countries covered under the agreement
+					</div><!--/.small-12-->
+			</div><!--/.row-->
+			<div class="row">
+				<div class="small-12 columns">
+				Payment Terms	How the distributor will pay the brand
+					</div><!--/.small-12-->
+			</div><!--/.row-->
+			<div class="row">
+				<div class="small-12 columns">
+				Exclusivity	Terms of exclusivity
+					</div><!--/.small-12-->
+			</div><!--/.row-->
+			<div class="row">
+				<div class="small-12 columns">
+				Channel Rights	Which channels are covered by the agreement
+					</div><!--/.small-12-->
+			</div><!--/.row-->
+			<div class="row">
+				<div class="small-12 columns">
+				Marketing Commitments	How much distributor will commit to marketing the brand in the territory
+					</div><!--/.small-12-->
+			</div><!--/.row-->
+								
+					
+			<div class="row">
+				<div class="small-12 columns">
+					<h1>Pricing and Ordering</h1>
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+			<div class="row">
+				<div class="small-12 columns">
+					Product Pricing 	Amendments to Pricing Sheet
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+			<div class="row">
+				<div class="small-12 columns">
+					Annual Minimum<br>
+					Year 1	How much is the minimum buy for Year 1<br>
+					Year 2	How much is the minimum buy for Year 2<br>
+					Year 3	How much is the minimum buy for Year 3<br>
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+			<div class="row">
+				<div class="small-12 columns">
+					Order Turnaround	How long does it typically take to fulfill an order
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+			<div class="row">
+				<div class="small-12 columns">
+					Shipping	Method of shipping and who bears the cost
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+				
+					
+				
+			<div class="row">
+				<div class="small-12 columns">
+					<h1>Marketing Proposal</h1>
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+			<div class="row">
+				<div class="small-12 columns">
+					Brand Launch Plan	Summary of brand launch plan
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+			<div class="row">
+				<div class="small-12 columns">
+					Marketing	Summary of marketing channels and brand positioning
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+			<div class="row">
+				<div class="small-12 columns">
+					Retail Channels 	Summary of retail channel expansion and timing<br>
+					<% @m.initial_channels.each do |channel| %>
+						<%= channel %><br>
+					<% end %>
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+
+
+			<div class="row">
+				<div class="small-12 columns">
+					<h1>Country Considerations</h1>
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+			<div class="row">
+				<div class="small-3 columns">
+						<h3>Testing</h3>	
+						<h4>Does your country require testing for the brand's products? If so, please list which products require testing.</h4>
+						<h4>If yes, who will be responsible for testing</h4>
+				</div><!--/.small-12-->
+				<div class="small-9 columns">
+					<%= simple_format(@m.testing_information) %>
+				</div><!--/.small-9-->
+			</div><!--/.row-->
+			<div class="row">
+				<div class="small-12 columns">
+						Certifications	Do you require the brand to provide any certifications or documentation?
+							If yes, who  will be responsible for certifications
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+			<div class="row">
+				<div class="small-12 columns">
+						Tariffs	What are the tariffs associated with brand's product?
+							If yes, who will be responsible for tariffs
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+			<div class="row">
+				<div class="small-12 columns">
+					Labeling	Are there country-specific labeling requirements?
+						If yes, who will be responsible for country-specific label
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+			<div class="row">
+				<div class="small-12 columns">
+					Customs	What will be the customs process for the brand's products. Please indicate if this applies to the initial shipment, ongoing shipments or sporadic procedures.
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+					
+				
+			<div class="row">
+				<div class="small-12 columns">
+					<h1>Additional Contacts</h1>
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+			<div class="row">
+				<div class="small-12 columns">
+					Account Executive contact information	Contact Name / Contact Details / Address
+				</div><!--/.small-12-->
+			</div><!--/.row--><div class="row">
+				<div class="small-12 columns">
+					Warehouse Contact	Contact Name / Contact Details / Address
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+			<div class="row">
+				<div class="small-12 columns">
+					Freight Forwarder	Contact Name / Contact Details / Address
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+		</div>
+	</div>
+</div>
