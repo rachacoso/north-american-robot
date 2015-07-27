@@ -28,6 +28,9 @@ $bubble-margin: 85;
   & .conversation-shared-info {
     padding: 0 0 0 rem-calc(20);
     margin-bottom: rem-calc(25);
+    h4 {
+      margin-top: rem-calc(20);
+    }
   }
 }
 
@@ -387,5 +390,15 @@ top: 10px;
 .testing-text-input {
   .hide {
     display: none;    
+  }
+}
+.sku-testing-item {
+  margin-bottom: rem-calc(10);
+  h4 {
+    font-weight: 500;
+    text-decoration: underline;
+  }
+  p {
+    margin-left: rem-calc(10);
   }
 }
