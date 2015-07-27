@@ -57,6 +57,7 @@ class Match
   field :second_tier_channels, type: Array, default: []
   field :third_tier_channels, type: Array, default: []
   field :marketing_channels, type: Array, default: []
+  field :skus_for_testing, type: Hash, default: {}
 
   has_many :messages, dependent: :destroy
 

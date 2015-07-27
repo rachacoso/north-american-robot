@@ -157,20 +157,25 @@
 					</div><!--/.row-->
 					<div class="row">
 						<div class="small-4 columns text-right">
-							<%= f.label :testing_information %>
+							<%= f.label :testing_information, "General Testing Information" %>
 						</div><!--/.small-4-->
 						<div class="small-8 columns">
 							<%= f.text_area :testing_information, placeholder: "Testing Information", label: false  %>
 						</div><!--/.small-8-->
 					</div><!--/.row-->
 					<div class="row">
-						<div class="medium-4 columns text-right"><h4>Product SKUs</h4></div><!--/.small-4-->
+						<div class="medium-4 columns text-right"><h4>Detailed Testing Information per Product SKU<br>[Select SKUs that will require testing]</h4></div><!--/.small-4-->
 						<div class="medium-8 columns">
-
-							TBD
-
+							<% match.brand.products.where(current: true).each do |product| %>
+								<%= hidden_field_tag "match[skus_for_testing][#{product.id}]", "", id: '' %>
+								<%= check_box_tag("testing-#{product.id}-checkbox", 1, match.skus_for_testing.include?(product.id.to_s) ? true : false, data: {testing: "#{product.id}"}, class: "testing-selector") %>
+								<%= label_tag("testing-#{product.id}-checkbox", product.name) %><br>
+								<%= text_area_tag("match[skus_for_testing][#{product.id}]", "#{match.skus_for_testing.keys.include?(product.id.to_s) ? match.skus_for_testing[product.id.to_s] : nil}", id: "testing-#{product.id}-text", class: "testing-text-input #{match.skus_for_testing.keys.include?(product.id.to_s) ? '' : 'hide'}", disabled: (match.skus_for_testing.keys.include?(product.id.to_s) ? false : true)) %>
+							<% end %>
 						</div><!--/.medium-8-->
 					</div><!--/.row-->
+
+
 
 					<div class="row">
 						<div class="small-12 columns">

@@ -463,6 +463,9 @@ class MatchesController < ApplicationController
         :testing_information_documents,
         :ingredient_or_materials_lists
       ]
+      is_hash = [
+        :skus_for_testing
+      ]
 
       # pre-processing for the checkbox hashes (including the document share hashes)
       params[:match].each do |k,v|
@@ -470,13 +473,39 @@ class MatchesController < ApplicationController
           # convert to array of keys if checkbox selected .. empty hash if none selected
           params[:match][k] = params[:match][k].map{|k,v|v=='1' ? k : nil}.compact
           # params[:match][k.to_sym] = params[:match][k].keys
-        end 
+        end
       end
 
       # drop any that haven't been updated
       params[:match].delete_if {|k,v| v.eql? @m.send(k) }
 
+
+      # save hashes (strong params won't allow hash saving)
+      params[:match].each do |k,v|
+        if is_hash.include?(k.to_sym)
+          save_hash = @m.send("#{k}")
+          v.each do |kk,vv|           
+            if vv.blank?
+              if save_hash[kk]
+                save_hash.delete(kk)
+              else
+                params[:match][k].delete(kk)
+              end
+            elsif vv.eql? save_hash[kk] # if hasn't changed delete from params hash so doesn't show in messages
+              params[:match][k].delete(kk)
+            else
+              save_hash[kk] = vv
+            end
+          end
+          # delete from the params match if empty 
+          if params[:match][k].blank?
+            params[:match].delete(k)
+          end
+        end
+      end
+
       unless params[:match].blank?
+
         @m.update(match_share_parameters)
         message_text_docs = ""
         message_text_fields = ""
@@ -504,6 +533,14 @@ class MatchesController < ApplicationController
             message_text_fields += "<h4><strong>#{k.gsub(/_/, " ").split.map(&:capitalize)*' '}:</strong></h4>"
             message_text_fields += "<p>#{v.empty? ? '[none selected]' : v.join('<br>')}</p>"
             has_fields = true
+          elsif is_hash.include?(k.to_sym)
+            if k.to_sym == :skus_for_testing
+              message_text_fields += "<h4><strong>SKUs for Testing:</strong></h4>"
+              v.each do |kk,vv|
+                message_text_fields += "<p><em>SKU: #{@m.brand.products.find(kk).name}</em><br>#{vv.empty? ? '[removed]' : vv}</p>"
+              end
+              has_fields = true
+            end
           else
             message_text_fields += "<h4><strong>#{k.gsub(/_/, " ").split.map(&:capitalize)*' '}:</strong></h4>"
             message_text_fields += "<p>#{v.blank? ? '[text has been deleted]' : v}</p>"
@@ -570,7 +607,8 @@ class MatchesController < ApplicationController
       :initial_channels => [],
       :second_tier_channels => [],
       :third_tier_channels => [],
-      :marketing_channels => []
+      :marketing_channels => [],
+      # :skus_for_testing => {}
     )
   end
 

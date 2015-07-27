@@ -94,4 +94,17 @@ function initConversations() {
 		// $(".conversation-block #top").animate({ scrollTop: $(".conversation-block #top")[0].scrollHeight}, 1000);
 	});
 
+	$('.testing-selector').on('change', function(e){
+		id = $(this).data("testing");
+		thisOne = "#testing-" + id + "-text";
+    if($(this).is(':checked')) {
+    	$(thisOne).prop('disabled', false);
+      $(thisOne).show(500);
+    } else {
+    	$(thisOne).prop('disabled', true);
+			$(thisOne).hide(500);
+    }
+	});
+
+
 }
