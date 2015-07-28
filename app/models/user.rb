@@ -10,6 +10,9 @@ class User
   field :password_digest, type: String
   field :administrator, type: Mongoid::Boolean
   field :last_login, type: DateTime
+  # for password reset
+	field :password_reset_token, type: String 
+	field :password_reset_sent_at, type: DateTime
 
 	validates :email, presence: true, uniqueness: true
 
@@ -66,6 +69,13 @@ class User
 
 	def get_parent
 		return self.send(self.type?)
+	end
+  
+	def send_password_reset
+	  generate_token(:password_reset_token)
+	  self.password_reset_sent_at = Time.zone.now
+	  save!
+	  UserMailer.password_reset(self).deliver
 	end
   
 end

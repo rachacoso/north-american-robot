@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   root 'home#front'
 
 
@@ -113,7 +114,7 @@ Rails.application.routes.draw do
   # post '/conversations/share' => 'conversations#share', as: 'conversation_share'
 
   resources :messages, only: [:create, :index]
-
+  resources :password_resets
   # get 'messages/all/:match_id' => 'messages#all_messages', as: 'all_messages'
 
 end
