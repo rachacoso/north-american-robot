@@ -2,6 +2,7 @@ class PasswordResetsController < ApplicationController
 	skip_before_action :require_login
 
   def new
+  	render layout: "front"
   end
 
 	def create
@@ -12,6 +13,7 @@ class PasswordResetsController < ApplicationController
 
 	def edit
 	  @user = User.where(password_reset_token: params[:id]).first
+	  render layout: "front"
 	end
 
 	def update
@@ -24,6 +26,7 @@ class PasswordResetsController < ApplicationController
 	  else
 	    render :edit
 	  end
+	  render layout: "front"
 	end
 
 	private

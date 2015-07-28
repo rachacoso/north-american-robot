@@ -1,35 +1,65 @@
 
-<div class="row">
-  <div class="medium-8 columns medium-centered">
 
-    <% if @user %>
-      <h1>Reset Password</h1>
+<div id="front-logo">
+  <%= link_to root_url do %><h4 style="color:white;"><%= image_tag '/images/landing_page_LOGO.svg', class: "shadow", width: 50  %> go back</h4><% end %>
+</div>
 
-      <%= form_for @user, :url => password_reset_path(params[:id]) do |f| %>
-        <% if @user.errors.any? %>
-          <div class="error_messages">
-            <h2>Form is invalid</h2>
-            <ul>
-              <% for message in @user.errors.full_messages %>
-                <li><%= message %></li>
-              <% end %>
-            </ul>
+<div class="front-top-panel">
+  <div class="row">
+    <div class="small-12 columns">
+      <br><br><br>
+      <div class="text-center"><h1 class="shadow" style="color:white;">WELCOME 欢迎 환영 <br>BEM-VINDO स्वागत ДОБРО ПОЖАЛОВАТЬ</h1></div>
+    </div><!--/.small-8 small-centered-->
+  </div><!--/.row-->
+  <div class="row" data-equalizer>
+    <div class="small-10 medium-5 small-centered columns">
+      <div class="ldpanel">
+
+        <div class="row">
+          <div class="small-12 columns">
+            <h2><img src="/images/li_blue_round.png" width="50" height="50" alt="Landing International" /> Reset Password </h2>
           </div>
-        <% end %>
-        <div class="field">
-          <%= f.label :password %>
-          <%= f.password_field :password, label: false %>
         </div>
-        <div class="field">
-          <%= f.label :password_confirmation %>
-          <%= f.password_field :password_confirmation, label: false %>
-        </div>
-        <div class="actions"><%= f.submit "Update Password", class: "button alert tiny" %></div>
-      <% end %>
-    <% else %>
-      <h1>Invalid Password Reset URL</h1>
-      <%= link_to "Try Again", login_url %>
-    <% end %>
 
-  </div><!--/.medium-8-->
-</div><!--/.row-->
+        <div class="row">
+        <div class="small-8 columns small-centered">
+        
+          <% if @user %>
+            <%= form_for @user, :url => password_reset_path(params[:id]) do |f| %>
+              <% if @user.errors.any? %>
+                <div class="error_messages">
+                  <h2>Form is invalid</h2>
+                  <ul>
+                    <% for message in @user.errors.full_messages %>
+                      <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+              <div class="field">
+                <%= f.label :password %>
+                <%= f.password_field :password, label: false %>
+              </div>
+              <div class="field">
+                <%= f.label :password_confirmation %>
+                <%= f.password_field :password_confirmation, label: false %>
+              </div>
+              <div class="actions"><%= f.submit "Update Password", class: "button alert tiny" %></div>
+            <% end %>
+          <% else %>
+            <h1>Invalid Password Reset URL</h1>
+            <%= link_to "Try Again", login_url %>
+          <% end %>
+
+        </div><!--/.small-8-->
+        </div><!--/.row-->
+
+      </div>
+      
+
+    </div><!--/.medium-5 columns -->
+
+  </div><!-- /.row -->
+
+</div>
+
