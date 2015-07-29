@@ -13,8 +13,8 @@
 
 				<% if has_all_docs('prepare') %>
 					<div class="conversation-action-tile active" id="action-one">
-						<h4><strong>Would you like to share your <br>PRODUCT documents with <%= profile.company_name %>?</strong></h4>
-						<p>These include the following documents that you have uploaded to your Global Terms &amp; Documents:</p>
+						<h4><strong>SHARE DOCUMENTS with <%= profile.company_name %></strong></h4>
+						<p>You can share these documents you have uploaded to your Global Terms &amp; Documents:</p>
 						<ul>
 							<li>Certification Information</li>
 							<li>Patent Information</li>
@@ -23,7 +23,7 @@
 						</ul>
 
 						<%= link_to '#', id: "conversation-action-toggle", class: "button tiny alert expand" do %>
-							SHARE PRODUCT &amp; PRICING <br> with <%= profile.company_name %>
+							SHARE DOCUMENTS <br> with <%= profile.company_name %>
 						<% end %>
 					</div>
 					<div class="conversation-action-tile" id="action-two" style="display: none;">
@@ -33,66 +33,82 @@
 
 							<div class="row">
 								<div class="small-12 columns">
-									<h2>Select documents you'd like to share:</h2>
+									<h2>Select documents you'd like to share:<br>
+									<small>You can upload these documents to your <%= link_to "Global Terms &amp; Documents".html_safe, library_documents_path %></small>
+									</h2>
 								</div><!--/.small-12-->
 							</div><!--/.row-->
 							<div class="row">
-								<div class="small-4 columns text-right">
-									<%= f.label :certification_information_documents, "Certification Information" %>
-									<div class="conversation-help-tile text-right">
-									For example, if you have an organic product, your partner will need to see verification before they can market the product as such. 
-									</div>									
-								</div><!--/.small-4-->
-								<div class="small-8 columns">
-									<%#= f.collection_select(:certification_information_documents, @current_user.brand.library_documents.where(type: "Certification Information"), :id, :filename, :include_blank => "[NONE]", label: false) %>
-									<%= render partial: "matches/conversation/match_document_share_checkbox", locals: {match: match, doctype: "Certification Information", fieldname: "certification_information_documents"} %>
-								</div><!--/.small-8-->
+								<div class="prepare-action-tile">
+									<div class="small-4 columns text-right">
+										<%= f.label :certification_information_documents, "Certification Information" %>
+										<div class="conversation-share-info text-right">
+										For example, if you have an organic product, your partner will need to see verification before they can market the product as such. 
+										</div>
+									</div><!--/.small-4-->
+									<div class="small-8 columns">
+										<%= render partial: "matches/conversation/match_document_share_checkbox", locals: {match: match, doctype: "Certification Information", fieldname: "certification_information_documents"} %>
+									</div><!--/.small-8-->
+								</div>
 							</div><!--/.row-->
+							
 							<div class="row">
-								<div class="small-4 columns text-right">
-									<%= f.label :patent_information_documents, "Patent Information" %>
-									<div class="conversation-help-tile text-right">
-									Share your relevant patent information.
-									</div>
-								</div><!--/.small-4-->
-								<div class="small-8 columns">
-									<%#= f.collection_select(:patent_information_documents, @current_user.brand.library_documents.where(type: "Patent Information"), :id, :filename, :include_blank => "[NONE]", label: false) %>
-									<%= render partial: "matches/conversation/match_document_share_checkbox", locals: {match: match, doctype: "Patent Information", fieldname: "patent_information_documents"} %>
-								</div><!--/.small-8-->
+								<div class="prepare-action-tile">
+									<div class="small-4 columns text-right">
+										<%= f.label :patent_information_documents, "Patent Information" %>
+										<div class="conversation-share-info text-right">
+										Share your relevant patent information.
+										</div>
+									</div><!--/.small-4-->
+									<div class="small-8 columns">
+										<%= render partial: "matches/conversation/match_document_share_checkbox", locals: {match: match, doctype: "Patent Information", fieldname: "patent_information_documents"} %>
+									</div><!--/.small-8-->
+								</div>
 							</div><!--/.row-->
+							
 							<div class="row">
-								<div class="small-4 columns text-right">
-									<%= f.label :testing_information_documents, "Testing Information" %>
-									<div class="conversation-help-tile text-right">
-									Share your relevant testing documents.
-									</div>
-								</div><!--/.small-4-->
-								<div class="small-8 columns">
-									<%#= f.collection_select(:testing_information_documents, @current_user.brand.library_documents.where(type: "Testing Information"), :id, :filename, :include_blank => "[NONE]", label: false) %>
-									<%= render partial: "matches/conversation/match_document_share_checkbox", locals: {match: match, doctype: "Testing Information", fieldname: "testing_information_documents"} %>
-								</div><!--/.small-8-->
+								<div class="prepare-action-tile">
+									<div class="small-4 columns text-right">
+										<%= f.label :testing_information_documents, "Testing Information" %>
+										<div class="conversation-share-info text-right">
+										Share your relevant testing documents.
+										</div>
+									</div><!--/.small-4-->
+									<div class="small-8 columns">
+										<%= render partial: "matches/conversation/match_document_share_checkbox", locals: {match: match, doctype: "Testing Information", fieldname: "testing_information_documents"} %>
+									</div><!--/.small-8-->
+								</div>
 							</div><!--/.row-->
+							
 							<div class="row">
-								<div class="small-4 columns text-right">
-									<%= f.label :ingredient_or_materials_lists, "Ingredient or Materials List" %>
-									<div class="conversation-help-tile text-right">
-									Your partner will often need to register these documents in their market and will aslo need to determine whether your products require testing in their territory.
-									</div>
-								</div><!--/.small-4-->
-								<div class="small-8 columns">
-									<%#= f.collection_select(:ingredient_or_materials_lists, @current_user.brand.library_documents.where(type: "Ingredient or Materials List"), :id, :filename, :include_blank => "[NONE]", label: false) %>
-									<%= render partial: "matches/conversation/match_document_share_checkbox", locals: {match: match, doctype: "Ingredient or Materials List", fieldname: "ingredient_or_materials_lists"} %>
-								</div><!--/.small-8-->
+								<div class="prepare-action-tile">
+									<div class="small-4 columns text-right">
+										<%= f.label :ingredient_or_materials_lists, "Ingredient or Materials List" %>
+										<div class="conversation-share-info text-right">
+										Your partner will often need to register these documents in their market and will aslo need to determine whether your products require testing in their territory.
+										</div>
+									</div><!--/.small-4-->
+									<div class="small-8 columns">
+										<%= render partial: "matches/conversation/match_document_share_checkbox", locals: {match: match, doctype: "Ingredient or Materials List", fieldname: "ingredient_or_materials_lists"} %>
+									</div><!--/.small-8-->
+								</div>
 							</div><!--/.row-->
 
 							<div class="row">
 								<div class="small-4 columns">
-									<%= link_to '#', id: "conversation-action-cancel", class: "button tiny secondary expand" do %>
-										Cancel
-									<% end %>
+									&nbsp;
 								</div><!--/.small-4-->
 								<div class="small-8 columns">
-									<%= submit_tag "SHARE INFORMATION", class: "button tiny alert expand" %>
+									<div class="row">
+										<div class="small-8 columns">
+											<%= submit_tag "SHARE INFORMATION", class: "button tiny alert expand" %>
+										</div><!--/.small-8-->
+										<div class="small-4 columns">
+											<%= link_to '#', id: "conversation-action-cancel", class: "button tiny secondary expand" do %>
+												Cancel
+											<% end %>
+										</div><!--/.small-4-->
+									</div><!--/.row-->
 								</div><!--/.small-8-->
 							</div><!--/.row-->
 
@@ -128,8 +144,8 @@
 
 
 				<div class="conversation-action-tile active" id="action-one">
-					<h4><strong>Would you like to share information to help this brand and their products prepare for international distribution?</strong></h4>
-					<p>These include:</p>
+					<h4><strong>SHARE INFORMATION with <%= profile.company_name %></strong></h4>
+					<p>You can share information to help this brand and their products prepare for international distribution including:</p>
 					<ul> 
 
 						<li>Testing Information</li>
@@ -142,7 +158,7 @@
 
 
 					<%= link_to '#', id: "conversation-action-toggle", class: "button tiny alert expand" do %>
-						SHARE PREPARATION INFORMATION <br> with <%= profile.company_name %>
+						SHARE INFORMATION <br> with <%= profile.company_name %>
 					<% end %>
 				</div>
 
@@ -160,18 +176,22 @@
 							<%= f.label :testing_information, "General Testing Information" %>
 						</div><!--/.small-4-->
 						<div class="small-8 columns">
+							<div class="share-input-container">
 							<%= f.text_area :testing_information, placeholder: "Testing Information", label: false  %>
+							</div>
 						</div><!--/.small-8-->
 					</div><!--/.row-->
 					<div class="row">
 						<div class="medium-4 columns text-right"><h4>Detailed Testing Information per Product SKU<br>[Select SKUs that will require testing]</h4></div><!--/.small-4-->
 						<div class="medium-8 columns">
+							<div class="share-input-container">
 							<% match.brand.products.where(current: true).each do |product| %>
 								<%= hidden_field_tag "match[skus_for_testing][#{product.id}]", "", id: '' %>
 								<%= check_box_tag("testing-#{product.id}-checkbox", 1, match.skus_for_testing.include?(product.id.to_s) ? true : false, data: {testing: "#{product.id}"}, class: "testing-selector") %>
 								<%= label_tag("testing-#{product.id}-checkbox", product.name) %><br>
-								<%= text_area_tag("match[skus_for_testing][#{product.id}]", "#{match.skus_for_testing.keys.include?(product.id.to_s) ? match.skus_for_testing[product.id.to_s] : nil}", id: "testing-#{product.id}-text", class: "testing-text-input #{match.skus_for_testing.keys.include?(product.id.to_s) ? '' : 'hide'}", disabled: (match.skus_for_testing.keys.include?(product.id.to_s) ? false : true)) %>
+								<%= text_area_tag("match[skus_for_testing][#{product.id}]", "#{match.skus_for_testing.keys.include?(product.id.to_s) ? match.skus_for_testing[product.id.to_s] : nil}", id: "testing-#{product.id}-text", class: "testing-text-input #{match.skus_for_testing.keys.include?(product.id.to_s) ? '' : 'hide'}", disabled: (match.skus_for_testing.keys.include?(product.id.to_s) ? false : true), placeholder: "Detailed Tesing Information for #{product.name}") %>
 							<% end %>
+							</div>
 						</div><!--/.medium-8-->
 					</div><!--/.row-->
 
@@ -187,7 +207,9 @@
 							<%= f.label :certification_information %>
 						</div><!--/.small-4-->
 						<div class="small-8 columns">
+							<div class="share-input-container">
 							<%= f.text_area :certification_information, placeholder: "Certifications Needed", label: false  %>
+							</div>
 						</div><!--/.small-8-->
 					</div><!--/.row-->
 
@@ -201,7 +223,9 @@
 							<%= f.label :tariffs_information %>
 						</div><!--/.small-4-->
 						<div class="small-8 columns">
+							<div class="share-input-container">
 							<%= f.text_area :tariffs_information, placeholder: "Tariffs Information", label: false  %>
+							</div>
 						</div><!--/.small-8-->
 					</div><!--/.row-->
 
@@ -215,18 +239,27 @@
 							<%= f.label :contract_authentication %>
 						</div><!--/.small-4-->
 						<div class="small-8 columns">
+							<div class="share-input-container">
 							<%= f.text_area :contract_authentication, placeholder: "Contract Authentication", label: false  %>
+							</div>
 						</div><!--/.small-8-->
 					</div><!--/.row-->
 
 					<div class="row">
 						<div class="small-4 columns">
-							<%= link_to '#', id: "conversation-action-cancel", class: "button tiny secondary expand" do %>
-								Cancel
-							<% end %>
+							&nbsp;
 						</div><!--/.small-4-->
 						<div class="small-8 columns">
-							<%= submit_tag "SHARE MARKETING PLANS", class: "button tiny alert expand" %>
+							<div class="row">
+								<div class="small-8 columns">
+									<%= submit_tag "SHARE MARKETING PLANS", class: "button tiny alert expand" %>
+								</div><!--/.small-8-->
+								<div class="small-4 columns">
+									<%= link_to '#', id: "conversation-action-cancel", class: "button tiny secondary expand" do %>
+										Cancel
+									<% end %>
+								</div><!--/.small-4-->
+							</div><!--/.row-->
 						</div><!--/.small-8-->
 					</div><!--/.row-->
 

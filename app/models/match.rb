@@ -61,4 +61,7 @@ class Match
 
   has_many :messages, dependent: :destroy
 
+  def get_b_or_d(current_user)
+    return self.send(current_user.type_inverse?)
+  end
 end

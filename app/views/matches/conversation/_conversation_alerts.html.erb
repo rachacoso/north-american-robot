@@ -23,7 +23,7 @@
 	<% if requestor = check_stage_proceed(match) %>
 		<% if requestor != @current_user.type? %>
 			<div class="conversation-action-center-tile text-center">
-				<h4><%= @match.company_name %> would like to proceed to the next stage of conversation: <%= get_next_stage(match) %></h4>
+				<h4><%= match.get_b_or_d(@current_user).company_name %> would like to proceed to the next stage of conversation: <%= get_next_stage(match) %></h4>
 				<%= button_to "YES, PROCEED TO #{get_next_stage(match)}", match_stage_update_path(match), :class => "button tiny alert", remote: true %>
 			</div>
 		<% else %>

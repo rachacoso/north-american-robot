@@ -406,3 +406,21 @@ top: 10px;
     margin-left: rem-calc(10);
   }
 }
+.prepare-action-tile {
+  .conversation-help-tile {
+    margin-bottom: rem-calc(30);
+  }
+  hr {
+    border-color: $landing-middle-gray;
+  }
+}
+.conversation-share-info {
+  font-weight: 100;
+  font-size: rem-calc(12);
+}
+.share-input-container {
+  min-height: rem-calc(100);
+  border-left: 1px solid $landing-light-gray;
+  padding-left: rem-calc(10);
+  margin-bottom: rem-calc(20);
+}
