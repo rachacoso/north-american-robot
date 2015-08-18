@@ -353,7 +353,7 @@ class MatchesController < ApplicationController
 
   end
 
-  def quick_view
+  def profile_quick_view
 
     if params[:match_id]
 

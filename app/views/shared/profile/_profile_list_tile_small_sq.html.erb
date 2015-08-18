@@ -86,7 +86,7 @@
 			
 			<% if @current_user.subscriber? && action_name != "public_profile" %>
 				<h2><%= link_to profile_item.company_name,  view_match_url(profile_item.id, action_name)  %></h2>
-				<%= link_to 'Quick View', quick_view_url(profile_item), remote: true %>
+				<%= link_to 'Quick View', profile_quick_view_url(profile_item), remote: true %>
 			<% else %>
 				<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= profile_item.class.to_s %> name hidden. Subscribe to view full profile">
 				<%= ("&blk12;" * profile_item.company_name.length).html_safe %>

@@ -104,7 +104,7 @@ Rails.application.routes.draw do
   get '/matches/search' => 'matches#search', as: 'search'
   post '/matches/stage/update/:id' => 'matches#match_stage_update', as: 'match_stage_update'
   get '/matches/stage/view/:id/:stage' => 'matches#match_stage_view', as: 'match_stage_view'
-  get '/matches/quickview/:match_id' => 'matches#quick_view', as: 'quick_view'
+  get '/matches/profilequickview/:match_id' => 'matches#profile_quick_view', as: 'profile_quick_view'
   get '/matches/contract/:match_id' => 'matches#view_contract', as: 'view_contract'
   post '/matches/accept/:id' => 'matches#accept_match', as: 'accept_match'
   get '/gallery' => 'matches#gallery', as: 'gallery'
