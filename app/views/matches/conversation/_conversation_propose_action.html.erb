@@ -2,6 +2,15 @@
 	<% if match.stage == "propose" %>			
 
 		<% if match && !match.messages.blank? && match.stage == "propose" %>
+
+			<% if match = get_match(profile) %>
+			<div class="conversation-action-tile active">
+				<h4><strong>PREVIEW TERM SHEET</strong></h4>
+				<p>Preview the current terms between you and <%= profile.company_name %></p>
+				<a id="view-termsheet" class="button small alert expand" data-ajaxurl="<%= view_contract_url(match) %>">PREVIEW TERM SHEET</a>
+			</div>
+			<% end %>
+
 			<% if @current_user.brand %>
 				<% if has_all_docs('propose') %>
 					<div class="conversation-action-tile active" id="action-one">

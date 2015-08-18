@@ -66,6 +66,43 @@ function initConversations() {
 		$('#message-cancel').hide();
 	});
 
+	$('#view-termsheet').on('click', function(e){
+		e.preventDefault();
+
+		var ajaxURL = $(this).data("ajaxurl")
+
+		var getContract = $.get( ajaxURL, function( data ) {
+			// alert(ajaxURL);
+		  $('#quick-view-data').html(data);
+		})
+		  .done(function() {
+				$('.overlay#quick-view-overlay').fadeIn();
+				$('#quick-view').fadeIn();
+				// $('#tab-conversation').removeClass('active');
+				// $('#tab-profile').removeClass('active');
+				// $('#tab-contract').addClass('active');
+				// $('#profile-conversation-wrapper').hide();
+				// $('#profile-profile-wrapper').hide();
+				// $('#profile-contract-wrapper').show();
+				// setDivHeight('#profile-contract-wrapper');
+
+		  })
+		  // .fail(function() {
+		  //   alert( "error" );
+		  // })
+		  // .always(function() {
+		  //   alert( "finished" );
+		  // });
+		 
+		// Perform other work here ...
+		 
+		// Set another completion function for the request above
+		// getContract.always(function() {
+		//   alert( "second finished" );
+		// });
+	});
+
+
 	$('.testing-selector').on('change', function(e){
 		id = $(this).data("testing");
 		thisOne = "#testing-" + id + "-text";
