@@ -22,8 +22,8 @@ class ConversationsController < ApplicationController
 				end
 			end
 
-			docs_message_text = "<h3>#{b_or_d.company_name} has shared the following documents:</h3>"
-			fields_message_text = "<h3>#{b_or_d.company_name} has shared the following information:</h3>"
+			docs_message_text = "<h3>#{b_or_d.company_name} shared the following documents:</h3>"
+			fields_message_text = "<h3>#{b_or_d.company_name} shared the following information:</h3>"
 
 			if !shared_docs_list.blank?
 				shared_docs_list.each do |filename,url|

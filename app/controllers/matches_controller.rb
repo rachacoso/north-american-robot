@@ -549,10 +549,10 @@ class MatchesController < ApplicationController
           end
         end
         if has_docs
-          message_text += "<h3>#{b_or_d.company_name} has shared/updated the following documents:</h3><div class='conversation-shared-info'> #{message_text_docs} </div>"
+          message_text += "<h3>#{b_or_d.company_name} shared/updated the following documents:</h3><div class='conversation-shared-info'> #{message_text_docs} </div>"
         end
         if has_fields
-          message_text += "<h3>#{b_or_d.company_name} has shared/updated the following information:</h3><div class='conversation-shared-info'> #{message_text_fields} </div>"
+          message_text += "<h3>#{b_or_d.company_name} shared/updated the following information:</h3><div class='conversation-shared-info'> #{message_text_fields} </div>"
         end
 
         create_message(params[:match_id], message_text.html_safe)
