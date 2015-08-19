@@ -1,6 +1,6 @@
 <% datatype ||= nil %>
 <% data ||= nil %>
-<tr class="<%= data ? ' ': 'inactive' %>">
+<tr class="<%= !data || @m.send(data).empty? ? 'inactive': ' ' %>">
 	<td class="item"><h3><%= name %><br><small><%= subhead %></small></h3></td>
 	<td class="terms">
 	<% if datatype && data %>
