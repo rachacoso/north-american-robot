@@ -128,7 +128,7 @@ top: 10px;
 #message-list {
   // max-height: 200px;
   // overflow-y: scroll;
-  padding-bottom: rem-calc(50);
+  // padding-bottom: rem-calc(50);
 }
 
 #unread-message-badge {
@@ -326,6 +326,7 @@ top: 10px;
   }  
   & #view-messages {
     border-bottom: 1px solid transparent;
+    padding-bottom: rem-calc(50);
   }
 
   $convo-placeholder-color: $landing-dark-gray;
