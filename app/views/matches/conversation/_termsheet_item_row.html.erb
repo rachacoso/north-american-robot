@@ -1,0 +1,19 @@
+<% datatype ||= nil %>
+<% data ||= nil %>
+<tr class="<%= data ? ' ': 'inactive' %>">
+	<td class="item"><h3><%= name %><br><small><%= subhead %></small></h3></td>
+	<td class="terms">
+	<% if datatype && data %>
+	<% if datatype == "array" %>
+		<% @m.send(data).each do |item| %>
+			<%= item %><br>
+		<% end %>
+	<% elsif datatype == "text" %>
+		<%= simple_format(@m.send(data)) %>
+	<% end %>
+	<% end %>
+	</td>
+	<td class="notes"></td>
+	<td class="brandapproval"></td>
+	<td class="distributorapproval"></td>
+</tr>

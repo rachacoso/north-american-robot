@@ -1,0 +1,282 @@
+<div id="termsheet">
+	<div class="row collapse">
+		<div class="small-12 columns">
+			<div class="profile-container">
+			
+				<div id="termsheet-header">
+					<div class="row">
+						<div class="small-12 columns">
+							<h1>TERM SHEET - <%= @m.send(@current_user.type_inverse?).company_name %> &amp; <%= @current_user.send(@current_user.type?).company_name %></h1>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+				</div>
+				<div class="row">
+					<div class="small-12 columns">
+						<h1>Agreement Commitments</h1>
+					</div><!--/.small-12-->
+				</div><!--/.row-->
+						
+				<div class="row">
+					<div class="small-12 columns">
+						<table class="preview-termsheet-table">
+							<thead>
+								<tr>
+									<th>&nbsp;</th>
+									<th class="text-right">Terms</th>
+									<th class="text-right">Notes</th>
+									<th class="text-right">Brand Approval</th>
+									<th class="text-right">Distributor Approval</th>
+								</tr>
+							</thead>
+							<tbody>
+								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
+										name: "Commencement Date",
+										subhead: "Start date of the agreement",
+										}
+								%>
+								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
+										name: "Initial Term",
+										subhead: "The duration of the initial term",
+										}
+								%>
+								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
+										name: "Renewal Term",
+										subhead: "The renewal terms",
+										}
+								%>
+								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
+										name: "Termination",
+										subhead: "How the agreement can be terminated",
+										}
+								%>
+								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
+										name: "Territory",
+										subhead: "The countries covered under the agreement",
+										}
+								%>
+								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
+										name: "Payment Terms",
+										subhead: "How the distributor will pay the brand",
+										}
+								%>
+								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
+										name: "Exclusivity",
+										subhead: "Terms of exclusivity",
+										}
+								%>
+								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
+										name: "Channel Rights",
+										subhead: "Which channels are covered by the agreement",
+										}
+								%>
+								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
+										name: "Marketing Commitments",
+										subhead: "How much distributor will commit to marketing the brand in the territory",
+										}
+								%>
+							</tbody>
+						</table>
+					</div>
+				</div>
+									
+						
+				<div class="row">
+					<div class="small-12 columns">
+						<h1>Pricing and Ordering</h1>
+					</div><!--/.small-12-->
+				</div><!--/.row-->
+				<div class="row">
+					<div class="small-12 columns">
+						<table class="preview-termsheet-table">
+							<thead>
+								<tr>
+									<th>&nbsp;</th>
+									<th class="text-right">Terms</th>
+									<th class="text-right">Notes</th>
+									<th class="text-right">Brand Approval</th>
+									<th class="text-right">Distributor Approval</th>
+								</tr>
+							</thead>
+							<tbody>
+								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
+										name: "Product Pricing",
+										subhead: "Amendments to Pricing Sheet",
+										}
+								%>
+								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
+										name: "Annual Minimum Year 1",
+										subhead: "How much is the minimum buy for Year 1",
+										}
+								%>
+								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
+										name: "Annual Minimum Year 2",
+										subhead: "How much is the minimum buy for Year 2",
+										}
+								%>
+								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
+										name: "Annual Minimum Year 3",
+										subhead: "How much is the minimum buy for Year 3",
+										}
+								%>
+								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
+										name: "Order Turnaround",
+										subhead: "How long does it typically take to fulfill an order",
+										}
+								%>
+								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
+										name: "Shipping",
+										subhead: "How long does it typically take to fulfill an order",
+										}
+								%>
+							</tbody>
+						</table>
+					</div><!--/.small-12-->
+				</div><!--/.row-->					
+					
+				<div class="row">
+					<div class="small-12 columns">
+						<h1>Marketing Proposal</h1>
+					</div><!--/.small-12-->
+				</div><!--/.row-->
+				<div class="row">
+					<div class="small-12 columns">
+						<table class="preview-termsheet-table">
+							<thead>
+								<tr>
+									<th>&nbsp;</th>
+									<th class="text-right">Terms</th>
+									<th class="text-right">Notes</th>
+									<th class="text-right">Brand Approval</th>
+									<th class="text-right">Distributor Approval</th>
+								</tr>
+							</thead>
+							<tbody>
+								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
+										name: "Brand Launch Plan",
+										subhead: "Summary of brand launch plan",
+										}
+								%>
+								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
+										name: "Marketing",
+										subhead: "Summary of marketing channels and brand positioning",
+										datatype: "array",
+										data: "marketing_channels",
+										}
+								%>
+								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
+										name: "Retail Channels",
+										subhead: "Summary of retail channel expansion and timing",
+										}
+								%>
+							</tbody>
+						</table>
+					</div><!--/.small-12-->
+				</div><!--/.row-->
+
+				<div class="row">
+					<div class="small-12 columns">
+						<h1>Country Considerations</h1>
+					</div><!--/.small-12-->
+				</div><!--/.row-->
+				<div class="row">
+					<div class="small-12 columns">
+						
+						<table class="preview-termsheet-table">
+							<thead>
+								<tr>
+									<th>&nbsp;</th>
+									<th class="text-right">Terms</th>
+									<th class="text-right">Notes</th>
+									<th class="text-right">Brand Approval</th>
+									<th class="text-right">Distributor Approval</th>
+								</tr>
+							</thead>
+							<tbody>
+								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
+										name: "Testing",
+										subhead: "Does your country require testing for the brand's products?<br> If so, please list which products require testing.<br> If yes, who will be responsible for testing?".html_safe,
+										datatype: "text",
+										data: "testing_information"
+										}
+								%>
+								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
+										name: "Certifications",
+										subhead: "Do you require the brand to provide any certifications or documentation?<br>
+											If yes, who  will be responsible for certifications?".html_safe,
+											datatype: "text",
+											data: "certification_information"
+										}
+								%>
+								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
+										name: "Tariffs",
+										subhead: "What are the tariffs associated with brand's product?<br>
+											If yes, who will be responsible for tariffs?".html_safe,
+										datatype: "text",
+										data: "tariffs_information"
+										}
+								%>
+								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
+										name: "Labeling",
+										subhead: "Are there country-specific labeling requirements?<br>
+											If yes, who will be responsible for country-specific label?".html_safe,
+										}
+								%>
+								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
+										name: "Customs",
+										subhead: "What will be the customs process for the brand's products?<br>
+											Please indicate if this applies to the initial shipment, ongoing shipments or sporadic procedures.".html_safe,
+										}
+								%>
+							</tbody>
+						</table>
+
+					</div><!--/.small-12-->
+				</div><!--/.row-->
+						
+				<div class="row">
+					<div class="small-12 columns">
+						<h1>Additional Contacts</h1>
+					</div><!--/.small-12-->
+				</div><!--/.row-->
+
+				<div class="row">
+					<div class="small-12 columns">
+						
+						<table class="preview-termsheet-table">
+							<thead>
+								<tr>
+									<th>&nbsp;</th>
+									<th class="text-right">Name</th>
+									<th class="text-right">Details</th>
+									<th class="text-right">Address</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Account Executive</td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>Warehouse Contact</td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>Freight Forwarder</td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+
+					</div><!--/.small-12-->
+				</div><!--/.row-->
+
+			</div>
+		</div>
+	</div>
+</div>

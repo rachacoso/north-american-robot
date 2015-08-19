@@ -584,8 +584,8 @@ class MatchesController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { render "view_contract", :layout => false  } 
-      format.js
+      format.html { render "view_termsheet", :layout => false  } 
+      # format.js
     end 
 
   end

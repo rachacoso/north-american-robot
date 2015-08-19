@@ -32,11 +32,11 @@ function initConversations() {
 
 		// hack to fix bug where map-subhead wasn't being factored in convo block resize
 		if (typeof addOffset !== 'undefined') { 
-			setDivHeight('.conversation-block', 20 + addOffset);
-			setDivHeight('#conversation-action', 20 + addOffset);
+			setDivHeight('.conversation-block', addOffset);
+			setDivHeight('#conversation-action', addOffset);
 		} else {
-			setDivHeight('.conversation-block', 20);
-			setDivHeight('#conversation-action', 20);
+			setDivHeight('.conversation-block');
+			setDivHeight('#conversation-action');
 		}
 	}
 
@@ -78,13 +78,8 @@ function initConversations() {
 		  .done(function() {
 				$('.overlay#quick-view-overlay').fadeIn();
 				$('#quick-view').fadeIn();
-				// $('#tab-conversation').removeClass('active');
-				// $('#tab-profile').removeClass('active');
-				// $('#tab-contract').addClass('active');
-				// $('#profile-conversation-wrapper').hide();
-				// $('#profile-profile-wrapper').hide();
-				// $('#profile-contract-wrapper').show();
-				// setDivHeight('#profile-contract-wrapper');
+				
+				$(document).foundation('tooltip', 'reflow');
 
 		  })
 		  // .fail(function() {
