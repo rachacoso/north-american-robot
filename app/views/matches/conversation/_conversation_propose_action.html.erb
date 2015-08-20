@@ -6,26 +6,67 @@
 			<% if @current_user.brand %>
 				<% if has_all_docs('propose') %>
 					<div class="conversation-action-tile active" id="action-one">
-						<h4><strong>Would you like to share your <br>PRODUCT &amp; PRICING documents with <%= profile.company_name %>?</strong></h4>
-						<p>These include the following documents that you have uploaded to your Global Terms &amp; Documents:</p>
+						<h4><strong>SHARE INFORMATION with <%= profile.company_name %></strong></h4>
+
+						<p>Start your negotiations with <%= profile.company_name %> by sharing information that you will need to create your partnership agreement, including:</p>
+
+						<h3>Documents<br>
+							<small>[uploaded in your <%= link_to 'Global Terms &amp; Documents'.html_safe, library_documents_url %>]</small></h3>
 						<ul>
 							<li>Products List</li>
 							<li>FOB Pricing</li>
 							<li>Tiered Pricing Schedule</li>
 						</ul>
-
+					
+						<h3>Agreement Commitments</h3>
+						<ul>
+							<li>Initial Term</li>
+							<li>Renewal Terms</li>
+							<li>Termination</li>
+							<li>Payment Terms</li>
+							<li>Exclusivity</li>
+						</ul>
+						<h3>Pricing and Ordering</h3>
+						<ul>
+							<li>Product Pricing Amendments</li>
+							<li>Order Turnaround Time</li>
+						</ul>
+						<h3>Marketing Proposal</h3>
+						<ul>
+							<li>Marketing Spend Requests/Requirements</li>
+							<li>Marketing Requests/Requirements</li>
+							<li>Sales Channel Requests/Requirements</li>
+						</ul>
+						
 						<%= link_to '#', id: "conversation-action-toggle", class: "button tiny alert expand" do %>
-							SHARE PRODUCT &amp; PRICING <br> with <%= profile.company_name %>
-						<% end %>
+							SHARE INFORMATION <br>with <%= profile.company_name %>
+						<% end %>	
+						
 					</div>
 					<div class="conversation-action-tile" id="action-two" style="display: none;">
 						<%= form_for match, url: match_share_path(match), class: 'conversation-share-form', remote: true do |f| %>
 						<%#= form_tag match_share_path(match), class: 'conversation-share-form', remote: true do %>
 							
+							<div class="share-form-top-header">
+								<div class="row">
+									<div class="small-12 columns">
+										<h1>SHARE INFORMATION</h1>
+									</div><!--/.small-12-->
+								</div><!--/.row-->
+							</div>
+
+							<div class="share-form-header">
+								<div class="row">
+									<div class="small-12 columns">
+										<h2>DOCUMENTS</h2>
+									</div><!--/.small-12-->
+								</div><!--/.row-->
+							</div>
 
 							<div class="row">
 								<div class="small-12 columns">
-									<h2>Select documents you'd like to share:</h2>
+									<h2>Select Product &amp; Pricing documents you'd like to share:</h2>
+									<p>These include the following documents that you have uploaded to your <%= link_to 'Global Terms &amp; Documents'.html_safe, library_documents_url %></p>
 								</div><!--/.small-12-->
 							</div><!--/.row-->
 							<div class="row">
@@ -54,6 +95,14 @@
 							</div><!--/.row-->
 
 
+							<div class="share-form-header">
+								<div class="row">
+									<div class="small-12 columns">
+										<h2>AGREEMENT COMMITMENTS</h2>
+									</div><!--/.small-12-->
+								</div><!--/.row-->
+							</div>
+
 							<div class="row">
 								<div class="small-12 columns">
 									<h2>How long are you willing to grant these terms to your partner?</h2>
@@ -80,6 +129,46 @@
 									</div>
 								</div><!--/.small-8-->
 							</div><!--/.row-->
+
+							<div class="row">
+								<div class="small-12 columns">
+									<h2>What are your renewal terms?</h2>
+								</div><!--/.small-12-->
+							</div><!--/.row-->
+							<div class="row">
+								<div class="small-4 columns">
+									<div class="conversation-share-info text-right">
+										Example:<br>
+										Successive periods of one year<br>
+									</div>
+								</div><!--/.small-4-->
+								<div class="small-8 columns">
+									<div class="share-input-container">
+									<%= f.text_area :renewal_terms, placeholder: "Renewal Terms", label: false  %>	
+									</div>
+								</div><!--/.small-8-->
+							</div><!--/.row-->
+
+							<div class="row">
+								<div class="small-12 columns">
+									<h2>What are your termination terms?</h2>
+								</div><!--/.small-12-->
+							</div><!--/.row-->
+							<div class="row">
+								<div class="small-4 columns">
+									<div class="conversation-share-info text-right">
+										Example:<br>
+										Either party may terminate this agreement without cause by written notice given to the other not less than 30 days prior to the effective date of such notice.<br>
+									</div>
+								</div><!--/.small-4-->
+								<div class="small-8 columns">
+									<div class="share-input-container">
+									<%= f.text_area :termination_terms, placeholder: "Termination Terms", label: false  %>	
+									</div>
+								</div><!--/.small-8-->
+							</div><!--/.row-->
+
+
 							<div class="row">
 								<div class="small-12 columns">
 									<h2>What are your payment terms?</h2>
@@ -113,10 +202,69 @@
 								</div><!--/.small-4-->
 								<div class="small-8 columns">
 									<div class="share-input-container">
-									<%= f.text_area :grant_territory_exclusivity, placeholder: "Territory Exclusivity", label: false  %>
+									<%= f.text_area :territory_exclusivity_terms, placeholder: "Territory Exclusivity", label: false  %>
 									</div>
 								</div><!--/.small-8-->
 							</div><!--/.row-->
+
+							<div class="share-form-header">
+								<div class="row">
+									<div class="small-12 columns">
+										<h2>PRICING &AMP; ORDERING</h2>
+									</div><!--/.small-12-->
+								</div><!--/.row-->
+							</div>
+
+							<div class="row">
+								<div class="small-12 columns">
+									<h2>Are there andy Pricing Amendments? </h2>
+								</div><!--/.small-12-->
+							</div><!--/.row-->
+							<div class="row">
+								<div class="small-4 columns text-right">
+									<div class="conversation-share-info">
+										These are any amendments to the uploaded Pricing Sheet, for example:<br>
+										65% discount on orders over $5,000
+									</div>
+								</div><!--/.small-4-->
+								<div class="small-8 columns">
+									<div class="share-input-container">
+									<%= f.text_area :pricing_amendments, placeholder: "Pricing Amendments", label: false  %>
+									</div>
+								</div><!--/.small-8-->
+							</div><!--/.row-->
+
+
+							<div class="row">
+								<div class="small-12 columns">
+									<h2>What is your Order Turnaround Time? </h2>
+								</div><!--/.small-12-->
+							</div><!--/.row-->
+							<div class="row">
+								<div class="small-4 columns text-right">
+									<div class="conversation-share-info">
+										How long does it typically take to fulfill an order?<br>
+										Examples:<br>
+										Small Order : 5-7 days<br>
+										Medium Orders : 1-3 weeks<br>
+										Large Orders : 3-7 weeks
+									</div>
+								</div><!--/.small-4-->
+								<div class="small-8 columns">
+									<div class="share-input-container">
+									<%= f.text_area :order_turnaround, placeholder: "Order Turnaround", label: false  %>
+									</div>
+								</div><!--/.small-8-->
+							</div><!--/.row-->
+
+							<div class="share-form-header">
+								<div class="row">
+									<div class="small-12 columns">
+										<h2>MARKETING PROPOSAL</h2>
+									</div><!--/.small-12-->
+								</div><!--/.row-->
+							</div>
+
 							<div class="row">
 								<div class="small-12 columns">
 									<h2>What is your requested minimum marketing spend by your partner? </h2>
@@ -170,7 +318,6 @@
 							</div><!--/.row-->
 
 
-
 							<div class="row">
 								<div class="small-4 columns">
 									<%= link_to '#', id: "conversation-action-cancel", class: "button tiny secondary expand" do %>
@@ -206,19 +353,33 @@
 				<% end %>
 			<% elsif @current_user.distributor %>
 				<div class="conversation-action-tile active" id="action-one">
-					<h4><strong>Would you like to share your marketing plans for this brand and their products?</strong></h4>
-					<p>These include:</p>
+					<h4><strong>SHARE INFORMATION with <%= profile.company_name %></strong></h4>
+					<p>Start your negotiations with <%= profile.company_name %> by sharing information that you will need to create your partnership agreement, including:</p>					
+
+
+				<h3>Agreement Commitments</h3>
+					<ul> 
+						<li>Territory</li>
+						<li>Channel Rights</li>
+						<li>Marketing Commitments</li>
+					</ul>
+
+				<h3>Pricing and Ordering</h3>
+					<ul> 
+						<li>Annual Minimums</li>
+						<li>Shipping</li>
+					</ul>
+
+				<h3>Marketing Proposal</h3>					
 					<ul> 
 						<li>Brand Launch Plan</li>
 						<li>Marketing Strategy</li>
 						<li>Retail Channels</li>
-						<li>Minimum Purchase Volumes</li>
-
 					</ul>
 
 
 					<%= link_to '#', id: "conversation-action-toggle", class: "button tiny alert expand" do %>
-						SHARE MARKETING PLANS <br> with <%= profile.company_name %>
+						SHARE INFORMATION <br> with <%= profile.company_name %>
 					<% end %>
 				</div>
 
@@ -226,14 +387,169 @@
 					<%#= form_tag match_share_path(match), class: 'conversation-share-form', remote: true do %>
 					<%= form_for match, url: match_share_path(match), class: 'conversation-share-form', remote: true do |f| %>	
 
+					<div class="share-form-top-header">
+						<div class="row">
+							<div class="small-12 columns">
+								<h1>SHARE INFORMATION</h1>
+							</div><!--/.small-12-->
+						</div><!--/.row-->
+					</div>
+
+					<div class="share-form-header">
+						<div class="row">
+							<div class="small-12 columns">
+								<h2>AGREEMENT COMMITMENTS</h2>
+							</div><!--/.small-12-->
+						</div><!--/.row-->
+					</div>
+
 					<div class="row">
 						<div class="small-12 columns">
-							<h2>Please summarize your brand launch plan</h2>
+							<h2>Territory<br> What territory is covered by this agreement?</h2>
 						</div><!--/.small-12-->
 					</div><!--/.row-->
 					<div class="row">
 						<div class="small-4 columns text-right">
-							<%= f.label :brand_launch_plan %>
+							<h4>Territory</h4>
+						</div><!--/.small-4-->
+						<div class="small-8 columns">
+							<div class="share-input-container">
+							
+							<% @current_user.distributor.export_countries.each do |country| %>
+								<%# channel_name = channel.to_s.gsub(/_/, " ").split.map(&:capitalize)*' ' %>
+								<%= hidden_field_tag "match[territory][#{country.country}]", 0, id: '' %>
+								<%= check_box_tag("match[territory][#{country.country}]", 1, match.territory.include?(country.country) ? true : false) %>
+								<%= label_tag("match[territory][#{country.country}]", country.country) %><br>
+							<% end %>
+
+							</div>
+						</div><!--/.small-8-->
+					</div><!--/.row-->
+
+					<div class="row">
+						<div class="small-12 columns">
+							<h2>Channel Rights<br> Which channels are covered by the agreement?</h2>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="small-4 columns text-right">
+							<div class="conversation-share-info">
+								Example:<br>
+								Retail Channels, Direct-to-Consumer, Online Malls. No flash sites.
+							</div>
+						</div><!--/.small-4-->
+						<div class="small-8 columns">
+							<div class="share-input-container">
+							<%= f.text_area :channel_rights, placeholder: "Channel Rights", label: false  %>
+							</div>
+						</div><!--/.small-8-->
+					</div><!--/.row-->
+
+
+					<div class="row">
+						<div class="small-12 columns">
+							<h2>Marketing Commitments<br> How much will you commit to marketing the brand in the territory?</h2>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="small-4 columns text-right">
+							<div class="conversation-share-info">
+								Example:<br>
+								Distributor shall commit to marketing expenditures equal 5% of the annual sales, in addition to attending one trade show per year
+							</div>
+						</div><!--/.small-4-->
+						<div class="small-8 columns">
+							<div class="share-input-container">
+							<%= f.text_area :marketing_commitments, placeholder: "Marketing Commitments", label: false  %>
+							</div>
+						</div><!--/.small-8-->
+					</div><!--/.row-->
+
+					<div class="share-form-header">
+						<div class="row">
+							<div class="small-12 columns">
+								<h2>PRICING &AMP; ORDERING</h2>
+							</div><!--/.small-12-->
+						</div><!--/.row-->
+					</div>
+
+					<div class="row">
+						<div class="small-12 columns">
+							<h2>What is the minimum purchase volume you can commit to over the next three years?</h2>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="small-4 columns text-right">
+							<%= f.label :minimum_volume_year_one, "Year One<br> <small>Minimum Sales Volume / Units</small>".html_safe %>
+						</div><!--/.small-4-->
+						<div class="small-4 columns end">
+							<div class="share-input-container">
+							<%= f.text_field :minimum_volume_year_one, label: false %>
+							</div>
+						</div><!--/.small-4-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="small-4 columns text-right">
+							<%= f.label :minimum_volume_year_two, "Year Two<br> <small>Minimum Sales Volume / Units</small>".html_safe  %>
+						</div><!--/.small-4-->
+						<div class="small-4 columns end">
+							<div class="share-input-container">
+							<%= f.text_field :minimum_volume_year_two, label: false %>
+							</div>
+						</div><!--/.small-4-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="small-4 columns text-right">
+							<%= f.label :minimum_volume_year_three, "Year Three<br> <small>Minimum Sales Volume / Units</small>".html_safe  %>
+						</div><!--/.small-4-->
+						<div class="small-4 columns end">
+							<div class="share-input-container">
+							<%= f.text_field :minimum_volume_year_three, label: false %>
+							</div>
+						</div><!--/.small-4-->
+					</div><!--/.row-->
+
+
+					<div class="row">
+						<div class="small-12 columns">
+							<h2>What is the method of shipping and who bears the cost?</h2>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="small-4 columns text-right">
+							<div class="conversation-share-info">
+								Example:<br>
+								Freight, paid by distributor
+							</div>
+						</div><!--/.small-4-->
+						<div class="small-8 columns">
+							<div class="share-input-container">
+							<%= f.text_area :shipping, placeholder: "Shipping Information", label: false  %>
+							</div>
+						</div><!--/.small-8-->
+					</div><!--/.row-->
+
+
+					<div class="share-form-header">
+						<div class="row">
+							<div class="small-12 columns">
+								<h2>MARKETING PROPOSAL</h2>
+							</div><!--/.small-12-->
+						</div><!--/.row-->
+					</div>
+
+
+					<div class="row">
+						<div class="small-12 columns">
+							<h2>What is your brand launch plan?</h2>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="small-4 columns text-right">
+							<div class="conversation-share-info">
+								Example:<br>
+								Will hold special events to introduce brand as well as PR efforts in consumer magazines.
+							</div>
 						</div><!--/.small-4-->
 						<div class="small-8 columns">
 							<div class="share-input-container">
@@ -244,18 +560,28 @@
 
 					<div class="row">
 						<div class="small-12 columns">
-							<h2>Please share how you plan to market the brand and its products</h2>
+							<h2>How do you plan to market the brand and its products?</h2>
 						</div><!--/.small-12-->
 					</div><!--/.row-->
 					<div class="row">
 						<div class="small-4 columns text-right">
-							<%= f.label :marketing_strategy %>
+							<div class="conversation-share-info">
+								Example:<br>
+								Will promote through email list of 200,000 new moms as well as driving traffic to website.
+							</div>
 						</div><!--/.small-4-->
 						<div class="small-8 columns">
 							<div class="share-input-container">
 							<%= f.text_area :marketing_strategy, placeholder: "Your Marketing Strategy", label: false  %>
 							</div>
 						</div><!--/.small-8-->
+					</div><!--/.row-->
+
+
+					<div class="row">
+						<div class="small-12 columns">
+							<h2>What marketing channels will you use?</h2>
+						</div><!--/.small-12-->
 					</div><!--/.row-->
 					<div class="row">
 						<div class="medium-4 columns text-right"><h4>Marketing Channels</h4></div><!--/.small-4-->
@@ -274,7 +600,7 @@
 
 					<div class="row">
 						<div class="small-12 columns">
-							<h2>Please share what retail channels you plan to sell the brand's products</h2>
+							<h2>What retail channels you plan to sell the brand's products?</h2>
 						</div><!--/.small-12-->
 					</div><!--/.row-->
 					<div class="row">
@@ -314,52 +640,17 @@
 						</div><!--/.medium-8-->
 					</div><!--/.row-->
 
-							<div class="row">
-								<div class="small-12 columns">
-									<h2>What is the minimum purchase volume you can commit to over the next three years?</h2>
-								</div><!--/.small-12-->
-							</div><!--/.row-->
-							<div class="row">
-								<div class="small-4 columns text-right">
-									<%= f.label :minimum_volume_year_one, "Year One<br> <small>Minimum Sales Volume / Units</small>".html_safe %>
-								</div><!--/.small-4-->
-								<div class="small-4 columns end">
-									<div class="share-input-container">
-									<%= f.text_field :minimum_volume_year_one, label: false %>
-									</div>
-								</div><!--/.small-4-->
-							</div><!--/.row-->
-							<div class="row">
-								<div class="small-4 columns text-right">
-									<%= f.label :minimum_volume_year_two, "Year Two<br> <small>Minimum Sales Volume / Units</small>".html_safe  %>
-								</div><!--/.small-4-->
-								<div class="small-4 columns end">
-									<div class="share-input-container">
-									<%= f.text_field :minimum_volume_year_two, label: false %>
-									</div>
-								</div><!--/.small-4-->
-							</div><!--/.row-->
-							<div class="row">
-								<div class="small-4 columns text-right">
-									<%= f.label :minimum_volume_year_three, "Year Three<br> <small>Minimum Sales Volume / Units</small>".html_safe  %>
-								</div><!--/.small-4-->
-								<div class="small-4 columns end">
-									<div class="share-input-container">
-									<%= f.text_field :minimum_volume_year_three, label: false %>
-									</div>
-								</div><!--/.small-4-->
-							</div><!--/.row-->
+					<div class="row">
+						<div class="small-4 columns">
+							<%= link_to '#', id: "conversation-action-cancel", class: "button tiny secondary expand" do %>
+								Cancel
+							<% end %>
+						</div><!--/.small-4-->
+						<div class="small-8 columns">
+							<%= submit_tag "SHARE MARKETING PLANS", class: "button tiny alert expand" %>
+						</div><!--/.small-8-->
+					</div><!--/.row-->
 
-							<div class="row">
-								<div class="small-4 columns">
-									<%= link_to '#', id: "conversation-action-cancel", class: "button tiny secondary expand" do %>
-										Cancel
-									<% end %>
-								</div><!--/.small-4-->
-								<div class="small-8 columns">
-									<%= submit_tag "SHARE MARKETING PLANS", class: "button tiny alert expand" %>
-								</div><!--/.small-8-->
-							</div><!--/.row-->
 
 					<% end %>
 				</div>

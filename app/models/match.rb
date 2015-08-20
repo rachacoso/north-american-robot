@@ -32,12 +32,17 @@ class Match
   field :ingredient_or_materials_lists, type: Array, default: []
 
   # text fields
+  field :partnership_start_date, type: Date
   field :partnership_terms_length, type: String, default: "3 years"
+  field :renewal_terms, type: String, default: ""
+  field :termination_terms, type: String, default: ""
   field :payment_terms, type: String, default: ""
-  field :grant_territory_exclusivity, type: String, default: ""
+  field :territory_exclusivity_terms, type: String, default: ""
   field :requested_minimum_marketing_spend, type: String, default: ""
   field :marketing_requests_or_requirements, type: String, default: ""
   field :sales_channel_requests_or_requirements, type: String, default: ""
+  field :order_turnaround, type: String, default: ""
+  field :pricing_amendments, type: String, default: ""
 
   # DISTRIBUTOR
   # text fields
@@ -51,8 +56,12 @@ class Match
   field :customs_information, type: String, default: ""
   field :tariffs_information, type: String, default: ""
   field :contract_authentication, type: String, default: ""
+  field :shipping, type: String, default: ""
+  field :channel_rights, type: String, default: ""
+  field :marketing_commitments, type: String, default: ""
 
   #checkboxes
+  field :territory, type: Array, default: []
   field :initial_channels, type: Array, default: []
   field :second_tier_channels, type: Array, default: []
   field :third_tier_channels, type: Array, default: []

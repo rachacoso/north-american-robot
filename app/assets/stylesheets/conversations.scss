@@ -252,7 +252,7 @@ top: 10px;
   font-size: rem-calc(12);
 } 
 .conversation-action-tile {
-  border: 5px solid $landing-middle-gray;
+  border: 5px solid $landing-orange;
   background: white;
   h4 {
     margin-bottom: 0;
@@ -427,6 +427,21 @@ top: 10px;
   margin-bottom: rem-calc(20);
 }
 
+// SHARE FORM STYLES
+.share-form-header {
+  background: $landing-middle-gray;
+}
+.share-form-top-header {
+  background: $landing-blue;
+  padding: rem-calc(10) 0;
+  h1 {
+    color: white;
+    font-weight:100;
+    margin-top:rem-calc(10);
+  } 
+  margin-bottom: rem-calc(10);
+}
+
 // TERMSHEET STYLES
 
 #termsheet {
@@ -446,21 +461,28 @@ top: 10px;
 
 }
 
+.termsheet-info-panel {
+  padding: rem-calc(15);
+  border: 1px dotted $landing-light-gray;
+  margin-bottom: rem-calc(15);
+  background: $landing-light-gray;
+}
 
 table.preview-termsheet-table {
   width: 100%;
   h3{line-height: 1em;}
   th{font-weight: 100;}
   tr.inactive{background-color: $landing-middle-gray;}
+  td.active{background-color: $landing-light-gray;}
   td {font-weight: 100;border: 1px solid $landing-light-gray;vertical-align: top;}
   td.item {
     width: 20%;
   }
   td.terms {
-    width: 40%;
+    width: 30%;
   }
   td.notes {
-    width: 20%;
+    width: 30%;
   }
   td.brandapproval {
     width: 10%;

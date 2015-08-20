@@ -10,6 +10,56 @@
 						</div><!--/.small-12-->
 					</div><!--/.row-->
 				</div>
+
+				<div class="row">
+					<div class="small-12 columns">
+						<h1>Product &amp; Pricing Documents</h1>
+					</div><!--/.small-12-->
+				</div><!--/.row-->
+
+				<div class="row">
+					<div class="small-12 columns">
+						<table class="preview-termsheet-table">
+							<thead>
+								<tr>
+									<th>&nbsp;</th>
+									<th>&nbsp;</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Products List</td>
+									<td>
+										<% @m.products_list.each do |doc| %>
+											<% d = LibraryDocument.find(doc) %>
+											<%= link_to d.filename, d.file.url, target: "blank" %><br>
+										<% end %>
+									</td>
+								</tr>
+								<tr>
+									<td>FOB Pricing</td>
+									<td>
+										<% @m.fob_pricing.each do |doc| %>
+											<% d = LibraryDocument.find(doc) %>
+											<%= link_to d.filename, d.file.url, target: "blank" %><br>
+										<% end %>
+									</td>
+								</tr>
+								<tr>
+									<td>Tiered Pricing Schedule</td>
+									<td>
+										<% @m.tiered_pricing_schedule.each do |doc| %>
+											<% d = LibraryDocument.find(doc) %>
+											<%= link_to d.filename, d.file.url, target: "blank" %><br>
+										<% end %>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+
 				<div class="row">
 					<div class="small-12 columns">
 						<h1>Agreement Commitments</h1>
@@ -37,41 +87,57 @@
 								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
 										name: "Initial Term",
 										subhead: "The duration of the initial term",
+										datatype: "text",
+										data: "partnership_terms_length"
 										}
 								%>
 								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
-										name: "Renewal Term",
+										name: "Renewal Terms",
 										subhead: "The renewal terms",
+										datatype: "text",
+										data: "renewal_terms"
 										}
 								%>
 								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
 										name: "Termination",
 										subhead: "How the agreement can be terminated",
+										datatype: "text",
+										data: "termination_terms"
 										}
 								%>
 								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
 										name: "Territory",
 										subhead: "The countries covered under the agreement",
+										datatype: "array",
+										data: "territory"
 										}
 								%>
 								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
 										name: "Payment Terms",
 										subhead: "How the distributor will pay the brand",
+										datatype: "text",
+										data: "payment_terms"
 										}
 								%>
 								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
 										name: "Exclusivity",
 										subhead: "Terms of exclusivity",
+										datatype: "text",
+										data: "territory_exclusivity_terms"
 										}
 								%>
 								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
 										name: "Channel Rights",
 										subhead: "Which channels are covered by the agreement",
+										datatype: "text",
+										data: "channel_rights"
 										}
 								%>
 								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
 										name: "Marketing Commitments",
 										subhead: "How much distributor will commit to marketing the brand in the territory",
+										datatype: "text",
+										data: "marketing_commitments"
 										}
 								%>
 							</tbody>
@@ -101,31 +167,43 @@
 								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
 										name: "Product Pricing",
 										subhead: "Amendments to Pricing Sheet",
+										datatype: "text",
+										data: "pricing_amendments"
 										}
 								%>
 								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
 										name: "Annual Minimum Year 1",
 										subhead: "How much is the minimum buy for Year 1",
+										datatype: "text",
+										data: "minimum_volume_year_one"
 										}
 								%>
 								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
 										name: "Annual Minimum Year 2",
 										subhead: "How much is the minimum buy for Year 2",
+										datatype: "text",
+										data: "minimum_volume_year_two"
 										}
 								%>
 								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
 										name: "Annual Minimum Year 3",
 										subhead: "How much is the minimum buy for Year 3",
+										datatype: "text",
+										data: "minimum_volume_year_three"
 										}
 								%>
 								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
 										name: "Order Turnaround",
 										subhead: "How long does it typically take to fulfill an order",
+										datatype: "text",
+										data: "order_turnaround"
 										}
 								%>
 								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
 										name: "Shipping",
 										subhead: "How long does it typically take to fulfill an order",
+										datatype: "text",
+										data: "shipping"
 										}
 								%>
 							</tbody>
@@ -138,6 +216,7 @@
 						<h1>Marketing Proposal</h1>
 					</div><!--/.small-12-->
 				</div><!--/.row-->
+
 				<div class="row">
 					<div class="small-12 columns">
 						<table class="preview-termsheet-table">
@@ -151,23 +230,87 @@
 								</tr>
 							</thead>
 							<tbody>
-								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
-										name: "Brand Launch Plan",
-										subhead: "Summary of brand launch plan",
-										}
-								%>
-								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
-										name: "Marketing",
-										subhead: "Summary of marketing channels and brand positioning",
-										datatype: "array",
-										data: "marketing_channels",
-										}
-								%>
-								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
-										name: "Retail Channels",
-										subhead: "Summary of retail channel expansion and timing",
-										}
-								%>
+
+								<tr class="<%= @m.brand_launch_plan.blank? ? 'inactive' : ' ' %>">
+									<td class="item"><h3>Brand Launch Plan<br><small>Summary of brand launch plan</small></h3></td>
+									<td class="terms">
+										<% unless @m.brand_launch_plan.blank? %>
+											<%= simple_format(@m.brand_launch_plan) %>
+										<% end %>
+									</td>
+									<td class="notes"></td>
+									<td class="brandapproval"></td>
+									<td class="distributorapproval"></td>
+								</tr>
+
+								<tr class="<%= @m.marketing_strategy.blank? && @m.marketing_channels.blank? ? 'inactive' : ' ' %>">
+									<td class="item"><h3>Marketing<br><small>Summary of marketing channels and brand positioning</small></h3></td>
+									<td class="terms">
+										<% unless @m.marketing_strategy.blank? %>
+											<h3>Marketing Strategy</h3>
+											<%= simple_format(@m.marketing_strategy) %>
+										<% end %>
+										<% unless @m.marketing_channels.blank? %>
+											<h3>Marketing Channels</h3>
+											<ul>
+											<% @m.marketing_channels.each do |item| %>
+												<li><%= item %></li>
+											<% end %>
+											</ul>
+										<% end %>
+									</td>
+									<td class="notes <%= @m.requested_minimum_marketing_spend.blank? && @m.marketing_requests_or_requirements.blank? ? '' : 'active' %>">
+										<% unless @m.requested_minimum_marketing_spend.blank? %>
+											<h3><%= @m.brand.company_name %> Marketing Spend Requests/Requirements</h3>
+											<%= simple_format(@m.requested_minimum_marketing_spend) %>
+										<% end %>										
+										<% unless @m.marketing_requests_or_requirements.blank? %>
+											<h3><%= @m.brand.company_name %> Marketing Requests/Requirements</h3>
+											<%= simple_format(@m.marketing_requests_or_requirements) %>
+										<% end %>
+									</td>
+									<td class="brandapproval"></td>
+									<td class="distributorapproval"></td>
+								</tr>
+
+								<tr class="<%= @m.initial_channels.blank? && @m.second_tier_channels.blank? && @m.third_tier_channels.blank? ? 'inactive' : ' ' %>">
+									<td class="item"><h3>Retail Channels<br><small>Summary of retail channel expansion and timing</small></h3></td>
+									<td class="terms">
+										<% unless @m.initial_channels.blank? %>
+											<h3>Initial Channels</h3>
+											<ul>
+											<% @m.initial_channels.each do |item| %>
+												<li><%= item %></li>
+											<% end %>
+											</ul>
+										<% end %>
+										<% unless @m.second_tier_channels.blank? %>
+											<h3>Second Tier Channels</h3>
+											<ul>
+											<% @m.second_tier_channels.each do |item| %>
+												<li><%= item %></li>
+											<% end %>
+											</ul>
+										<% end %>
+										<% unless @m.third_tier_channels.blank? %>
+											<h3>Third Tier Channels</h3>
+											<ul>
+											<% @m.third_tier_channels.each do |item| %>
+												<li><%= item %></li>
+											<% end %>
+											</ul>
+										<% end %>
+									</td>
+									<td class="notes <%= @m.sales_channel_requests_or_requirements.blank? ? '' : 'active' %>">
+										<% unless @m.sales_channel_requests_or_requirements.blank? %>
+											<h3><%= @m.brand.company_name %> Sales Channel Requests/Requirements</h3>
+											<%= simple_format(@m.sales_channel_requests_or_requirements) %>
+										<% end %>
+									</td>
+									<td class="brandapproval"></td>
+									<td class="distributorapproval"></td>
+								</tr>
+
 							</tbody>
 						</table>
 					</div><!--/.small-12-->
