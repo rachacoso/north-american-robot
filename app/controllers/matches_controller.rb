@@ -559,7 +559,8 @@ class MatchesController < ApplicationController
         create_message(params[:match_id], message_text.html_safe)
 
         # set flag to signal they've shared
-        @m.send("#{@current_user.type?}_shared_#{@m.stage}=", true)
+        # @m.send("#{@current_user.type?}_shared_#{@m.stage}=", true)
+        set_shared_flag()
         @m.save!
 
       end
@@ -679,6 +680,61 @@ class MatchesController < ApplicationController
       # @messages = m.messages.order_by(:c_at.asc)
       # @stage = m.stage
 
+  end
+
+  def set_shared_flag()
+    b_or_d = @current_user.type?
+    stage = @m.stage
+
+    brand_propose = [
+      :tiered_pricing_schedule,
+      :fob_pricing,
+      :products_list,
+      :partnership_terms_length,
+      :renewal_terms,
+      :termination_terms,
+      :payment_terms,
+      :territory_exclusivity_terms,
+      :requested_minimum_marketing_spend,
+      :marketing_requests_or_requirements,
+      :retail_channel_requests_or_requirements,
+      :order_turnaround,
+      :pricing_amendments
+    ]
+    brand_prepare = []
+    distributor_propose = [
+      :brand_launch_plan,
+      :marketing_strategy,
+      :minimum_volume_year_one,
+      :minimum_volume_year_two,
+      :minimum_volume_year_three,
+      :shipping,
+      :channel_rights,
+      :marketing_commitments,
+      :territory,
+      :initial_channels,
+      :second_tier_channels,
+      :third_tier_channels,
+      :marketing_channels
+    ]
+    distributor_prepare = []
+
+    checkset = eval("#{b_or_d}_#{stage}")
+
+    all_are_shared = true
+    checkset.each do |item|
+      if @m.send(item).blank?
+        all_are_shared = false
+      end
+    end
+
+    if all_are_shared
+      @m.send("#{@current_user.type?}_shared_#{@m.stage}=", true)
+    else
+      @m.send("#{@current_user.type?}_shared_#{@m.stage}=", false)
+    end
+    @m.save!
+      
   end
 
 end

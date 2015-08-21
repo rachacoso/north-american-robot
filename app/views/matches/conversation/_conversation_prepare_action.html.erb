@@ -12,12 +12,12 @@
 
 						<h3>Product Documents<br>
 							<small>[uploaded in your <%= link_to 'Global Terms &amp; Documents'.html_safe, library_documents_url %>]</small></h3>
-						<ul>
-							<li>Certification Information</li>
-							<li>Patent Information</li>
-							<li>Testing Information</li>
-							<li>Ingredient or Materials List</li>
-						</ul>
+						<div class="shared-indicator-block">
+							<%= shared_indicator_list("Certification Information", :certification_information_documents, match) %>
+							<%= shared_indicator_list("Patent Information", :patent_information_documents, match) %>
+							<%= shared_indicator_list("Testing Information", :testing_information_documents, match) %>
+							<%= shared_indicator_list("Ingredient or Materials List", :ingredient_or_materials_lists, match) %>
+						</div>
 
 						<%= link_to '#', id: "conversation-action-toggle", class: "button tiny alert expand" do %>
 							SHARE DOCUMENTS <br> with <%= profile.company_name %>
@@ -160,20 +160,20 @@
 					<p>You can share information to help this brand and their products prepare for international distribution including:</p>
 
 					<h3>Country Considerations</h3>
-					<ul> 
-						<li>Testing Information</li>
-						<li>Certification Information</li>
-						<li>Customs Information</li>
-						<li>Tariffs Information</li>
-						<li>Contract Authentication</li>
-					</ul>
+					<div class="shared-indicator-block">
+						<%= shared_indicator_list("Testing Information", :testing_information, match) %>
+						<%= shared_indicator_list("Certification Information", :certification_information, match) %>
+						<%= shared_indicator_list("Customs Information", :customs_information, match) %>
+						<%= shared_indicator_list("Tariffs Information", :tariffs_information, match) %>
+						<%= shared_indicator_list("Contract Authentication", :contract_authentication, match) %>
+					</div>
 
 					<h3>Additional Contacts</h3>
-					<ul> 
-						<li>Account Executive</li>
-						<li>Warehouse Contact</li>
-						<li>Freight Forwarder</li>
-					</ul>
+					<div class="shared-indicator-block">
+						<%= shared_indicator_list("Account Executive", :account_executive, match) %>
+						<%= shared_indicator_list("Warehouse Contact", :warehouse_contact, match) %>
+						<%= shared_indicator_list("Freight Forwarder", :freight_forwarder, match) %>
+					</div>
 
 					<%= link_to '#', id: "conversation-action-toggle", class: "button tiny alert expand" do %>
 						SHARE INFORMATION <br> with <%= profile.company_name %>

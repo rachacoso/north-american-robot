@@ -93,5 +93,42 @@ module ConversationsHelper
 		return product
 	end
 
+	# def shared_indicator(item, match)
+	# 	if item.kind_of?(Array)
+	# 		all_shared = true
+	# 		item.each do |i|
+	# 			if match.send(i).blank?
+	# 				all_shared = false
+	# 			end
+	# 		end
+	# 		if all_shared
+	# 			return "<i class='fi-check' style='color: green; font-size:1em;'></i>".html_safe
+	# 		end
+	# 	else
+	# 		if !match.send(item).blank?
+	# 			return "<i class='fi-check' style='color: green; font-size:1em;'></i>".html_safe
+	# 		end
+	# 	end
+	# end
+
+	def shared_indicator_list(display_name, item, match)
+		all_shared = true
+		if item.kind_of?(Array)
+			item.each do |i|
+				if match.send(i).blank?
+					all_shared = false
+				end
+			end
+		else
+			if match.send(item).blank?
+				all_shared = false
+			end
+		end
+		if all_shared
+			return "<span class='shared-indicator-bullet'><i class='fi-check' style='color: green; font-size:1em;'></i></span> <span style='color: #b2b2b2;'>#{display_name}</span></br>".html_safe
+		else
+			return "<span class='shared-indicator-bullet'>&bull;</span> #{display_name}<br>".html_safe
+		end
+	end
 
 end

@@ -456,6 +456,15 @@ top: 10px;
   margin-top: 0; 
 }
 
+.shared-indicator-block {
+  font-size: rem-calc(12);
+  margin-left: rem-calc(10);
+}
+.shared-indicator-bullet{
+  display: inline-block;
+  width: rem-calc(15);
+  text-align: center;
+}
 
 // TERMSHEET STYLES
 
