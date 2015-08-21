@@ -2,18 +2,6 @@
 	$('#unread-message-badge').fadeOut(500)
 <% end %>	 
 
-<% if @messages_unread > 0 %>
-	$('#top-bar-messages-unread-number').html('<%= @messages_unread %>')
-<% else %>
-	$('#top-bar-messages-unread').hide()
-<% end %>
-
-<% if @new_contact_messages > 0 %>
-	$('#top-bar-new-contact-messages-number').html('<%= @new_contact_messages %>')
-<% else %>
-	$('#top-bar-new-contact-messages').hide()
-<% end %>
-
 <% if @messages %>
 	<% conversation_action_partial = "matches/conversation/conversation_#{@stage}_action" %>
 	<% conversation_message_block_partial = "matches/conversation_message_block" %>
