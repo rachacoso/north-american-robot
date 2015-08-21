@@ -353,8 +353,10 @@
 											<ul>
 											<% @m.skus_for_testing.each do |sku_id,text| %>
 												<% product = get_sku_info(sku_id, @m) %>
-												<li><h4><%= product.name %></h4>
-												<p><%= text %></p></li>
+												<li>
+													<h4><%= product.name %></h4>
+													<%= simple_format(text) %>
+												</li>
 											<% end %>
 											</ul>
 										<% end %>
@@ -481,7 +483,7 @@
 							<thead>
 								<tr>
 									<th>&nbsp;</th>
-									<th class="text-right">Name/Contact Info</th>
+									<th class="text-right">Contact Info</th>
 								</tr>
 							</thead>
 							<tbody>

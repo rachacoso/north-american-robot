@@ -7,8 +7,11 @@
 	
 				<% if has_all_docs('prepare') %>
 					<div class="conversation-action-tile active" id="action-one">
-						<h4><strong>SHARE DOCUMENTS with <%= profile.company_name %></strong></h4>
-						<p>You can share these documents you have uploaded to your Global Terms &amp; Documents:</p>
+						<h4><strong>SHARE INFORMATION with <%= profile.company_name %></strong></h4>
+						<p>You can share information to help prepare for international distribution</p>
+
+						<h3>Product Documents<br>
+							<small>[uploaded in your <%= link_to 'Global Terms &amp; Documents'.html_safe, library_documents_url %>]</small></h3>
 						<ul>
 							<li>Certification Information</li>
 							<li>Patent Information</li>
@@ -23,7 +26,22 @@
 					<div class="conversation-action-tile" id="action-two" style="display: none;">
 						<%= form_for match, url: match_share_path(match), class: 'conversation-share-form', remote: true do |f| %>
 						<%#= form_tag match_share_path(match), class: 'conversation-share-form', remote: true do %>
-							
+
+							<div class="share-form-top-header">
+								<div class="row">
+									<div class="small-12 columns">
+										<h1>SHARE INFORMATION</h1>
+									</div><!--/.small-12-->
+								</div><!--/.row-->
+							</div>							
+
+							<div class="share-form-header">
+								<div class="row">
+									<div class="small-12 columns">
+										<h2>DOCUMENTS</h2>
+									</div><!--/.small-12-->
+								</div><!--/.row-->
+							</div>
 
 							<div class="row">
 								<div class="small-12 columns">
@@ -140,16 +158,22 @@
 				<div class="conversation-action-tile active" id="action-one">
 					<h4><strong>SHARE INFORMATION with <%= profile.company_name %></strong></h4>
 					<p>You can share information to help this brand and their products prepare for international distribution including:</p>
-					<ul> 
 
+					<h3>Country Considerations</h3>
+					<ul> 
 						<li>Testing Information</li>
 						<li>Certification Information</li>
 						<li>Customs Information</li>
 						<li>Tariffs Information</li>
 						<li>Contract Authentication</li>
-
 					</ul>
 
+					<h3>Additional Contacts</h3>
+					<ul> 
+						<li>Account Executive</li>
+						<li>Warehouse Contact</li>
+						<li>Freight Forwarder</li>
+					</ul>
 
 					<%= link_to '#', id: "conversation-action-toggle", class: "button tiny alert expand" do %>
 						SHARE INFORMATION <br> with <%= profile.company_name %>
@@ -159,6 +183,22 @@
 				<div class="conversation-action-tile" id="action-two" style="display: none;">
 					<%#= form_tag match_share_path(match), class: 'conversation-share-form', remote: true do %>
 					<%= form_for match, url: match_share_path(match), class: 'conversation-share-form', remote: true do |f| %>	
+
+					<div class="share-form-top-header">
+						<div class="row">
+							<div class="small-12 columns">
+								<h1>SHARE INFORMATION</h1>
+							</div><!--/.small-12-->
+						</div><!--/.row-->
+					</div>
+
+					<div class="share-form-header">
+						<div class="row">
+							<div class="small-12 columns">
+								<h2>COUNTRY CONSIDERATIONS</h2>
+							</div><!--/.small-12-->
+						</div><!--/.row-->
+					</div>
 
 					<div class="row">
 						<div class="small-12 columns">
@@ -271,38 +311,58 @@
 						</div><!--/.small-8-->
 					</div><!--/.row-->
 
+					<div class="share-form-header">
+						<div class="row">
+							<div class="small-12 columns">
+								<h2>ADDITIONAL CONTACTS</h2>
+							</div><!--/.small-12-->
+						</div><!--/.row-->
+					</div>
+
 					<div class="row">
 						<div class="small-12 columns">
-							<h2>Additional Contacts</h2>
+							<h2>Account Executive</h2>
 						</div><!--/.small-12-->
 					</div><!--/.row-->
 					<div class="row">
 						<div class="small-4 columns text-right">
-							<%= f.label :account_executive, "Account Executive" %>
+							<%= f.label :account_executive, "Contact Info" %>
 						</div><!--/.small-4-->
 						<div class="small-8 columns">
 							<div class="share-input-container">
-								<%= f.text_area :account_executive, placeholder: "Account Executive Contact Info", label: false  %>
+								<%= f.text_area :account_executive, placeholder: "Name / Email / Phone / Address", label: false  %>
 							</div>
 						</div><!--/.small-8-->
 					</div><!--/.row-->
+
 					<div class="row">
-						<div class="small-4 columns text-right">
-							<%= f.label :warehouse_contact, "Warehouse Contact" %>
-						</div><!--/.small-4-->
-						<div class="small-8 columns">
-							<div class="share-input-container">
-								<%= f.text_area :warehouse_contact, placeholder: "Warehouse Contact Contact Info", label: false  %>
-							</div>
-						</div><!--/.small-8-->
+						<div class="small-12 columns">
+							<h2>Warehouse Contact</h2>
+						</div><!--/.small-12-->
 					</div><!--/.row-->
 					<div class="row">
 						<div class="small-4 columns text-right">
-							<%= f.label :freight_forwarder, "Freight Forwarder" %>
+							<%= f.label :warehouse_contact, "Contact Info" %>
 						</div><!--/.small-4-->
 						<div class="small-8 columns">
 							<div class="share-input-container">
-								<%= f.text_area :freight_forwarder, placeholder: "Freight Forwarder Contact Info", label: false  %>
+								<%= f.text_area :warehouse_contact, placeholder: "Name / Email / Phone / Address", label: false  %>
+							</div>
+						</div><!--/.small-8-->
+					</div><!--/.row-->
+
+					<div class="row">
+						<div class="small-12 columns">
+							<h2>Freight Forwarder</h2>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="small-4 columns text-right">
+							<%= f.label :freight_forwarder, "Contact Info" %>
+						</div><!--/.small-4-->
+						<div class="small-8 columns">
+							<div class="share-input-container">
+								<%= f.text_area :freight_forwarder, placeholder: "Name / Email / Phone / Address".html_safe, label: false  %>
 							</div>
 						</div><!--/.small-8-->
 					</div><!--/.row-->

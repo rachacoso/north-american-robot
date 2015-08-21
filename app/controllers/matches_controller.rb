@@ -539,13 +539,13 @@ class MatchesController < ApplicationController
             if k.to_sym == :skus_for_testing
               message_text_fields += "<h4><strong>SKUs for Testing:</strong></h4>"
               v.each do |kk,vv|
-                message_text_fields += "<div class='sku-testing-item'><h4>#{@m.brand.products.find(kk).name}</h4> <p>#{vv.empty? ? '[removed]' : simple_format(vv)}</p></div>"
+                message_text_fields += "<div class='sku-testing-item'><h4>#{@m.brand.products.find(kk).name}</h4> <p>#{vv.empty? ? '[removed]' : vv}</p></div>"
               end
               has_fields = true
             end
           else
             message_text_fields += "<h4><strong>#{k.gsub(/_/, " ").split.map(&:capitalize)*' '}:</strong></h4>"
-            message_text_fields += "<p>#{v.blank? ? '[text has been deleted]' : simple_format(v)}</p>"
+            message_text_fields += "<p>#{v.blank? ? '[text has been deleted]' : v}</p>"
             has_fields = true
           end
         end
