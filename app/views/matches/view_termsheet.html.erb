@@ -307,10 +307,10 @@
 											</ul>
 										<% end %>
 									</td>
-									<td class="notes <%= @m.sales_channel_requests_or_requirements.blank? ? '' : 'active' %>">
-										<% unless @m.sales_channel_requests_or_requirements.blank? %>
-											<h3><%= @m.brand.company_name %> Sales Channel Requests/Requirements</h3>
-											<%= simple_format(@m.sales_channel_requests_or_requirements) %>
+									<td class="notes <%= @m.retail_channel_requests_or_requirements.blank? ? '' : 'active' %>">
+										<% unless @m.retail_channel_requests_or_requirements.blank? %>
+											<h3><%= @m.brand.company_name %> Retail Channel Requests/Requirements</h3>
+											<%= simple_format(@m.retail_channel_requests_or_requirements) %>
 										<% end %>
 									</td>
 									<td class="brandapproval"></td>

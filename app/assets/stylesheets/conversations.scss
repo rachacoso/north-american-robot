@@ -278,6 +278,12 @@ top: 10px;
     z-index: 11;
     display: none;
     textarea {
+      height: 10em;
+    }
+    textarea.small {
+      height: 5em;
+    }
+    textarea.large {
       height: 15em;
     }
   }
@@ -442,6 +448,13 @@ top: 10px;
   margin-bottom: rem-calc(10);
 }
 
+.share-item-title{
+  font-weight: 600;
+  margin-bottom: 0;
+}
+.share-item-subhead{
+  margin-top: 0; 
+}
 // TERMSHEET STYLES
 
 #termsheet {

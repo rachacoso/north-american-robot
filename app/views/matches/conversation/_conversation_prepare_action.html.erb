@@ -38,7 +38,7 @@
 							<div class="share-form-header">
 								<div class="row">
 									<div class="small-12 columns">
-										<h2>DOCUMENTS</h2>
+										<h2>PRODUCT DOCUMENTS</h2>
 									</div><!--/.small-12-->
 								</div><!--/.row-->
 							</div>
@@ -46,7 +46,7 @@
 							<div class="row">
 								<div class="small-12 columns">
 									<h2>Select documents you'd like to share:<br>
-									<small>You can upload these documents to your <%= link_to "Global Terms &amp; Documents".html_safe, library_documents_path %></small>
+									<p>These include the following documents that you have uploaded to your <%= link_to 'Global Terms &amp; Documents'.html_safe, library_documents_url %></p>
 									</h2>
 								</div><!--/.small-12-->
 							</div><!--/.row-->
@@ -202,7 +202,7 @@
 
 					<div class="row">
 						<div class="small-12 columns">
-							<h2>Testing Information</h2>
+							<h2 class="share-item-title">Testing Information</h2>
 						</div><!--/.small-12-->
 					</div><!--/.row-->
 					<div class="row">
@@ -216,7 +216,7 @@
 						</div><!--/.small-8-->
 					</div><!--/.row-->
 					<div class="row">
-						<div class="medium-4 columns text-right"><h4>Detailed Testing Information per Product SKU<br>[Select SKUs that will require testing]</h4></div><!--/.small-4-->
+						<div class="medium-4 columns text-right"><h3>Detailed Testing Information<br> per Product SKU<br>[Select SKUs that will require testing]</h3></div><!--/.small-4-->
 						<div class="medium-8 columns">
 							<div class="share-input-container">
 							<% match.brand.products.where(current: true).each do |product| %>
@@ -233,7 +233,7 @@
 
 					<div class="row">
 						<div class="small-12 columns">
-							<h2>Certifications</h2>
+							<h2 class="share-item-title">Certifications</h2>
 						</div><!--/.small-12-->
 					</div><!--/.row-->
 					<div class="row">
@@ -249,7 +249,7 @@
 
 					<div class="row">
 						<div class="small-12 columns">
-							<h2>Tariffs</h2>
+							<h2 class="share-item-title">Tariffs</h2>
 						</div><!--/.small-12-->
 					</div><!--/.row-->
 					<div class="row">
@@ -265,7 +265,7 @@
 
 					<div class="row">
 						<div class="small-12 columns">
-							<h2>Labeling</h2>
+							<h2 class="share-item-title">Labeling</h2>
 						</div><!--/.small-12-->
 					</div><!--/.row-->
 					<div class="row">
@@ -281,7 +281,7 @@
 
 					<div class="row">
 						<div class="small-12 columns">
-							<h2>Customs</h2>
+							<h2 class="share-item-title">Customs</h2>
 						</div><!--/.small-12-->
 					</div><!--/.row-->
 					<div class="row">
@@ -297,7 +297,7 @@
 
 					<div class="row">
 						<div class="small-12 columns">
-							<h2>Contract Authentication</h2>
+							<h2 class="share-item-title">Contract Authentication</h2>
 						</div><!--/.small-12-->
 					</div><!--/.row-->
 					<div class="row">
@@ -321,7 +321,7 @@
 
 					<div class="row">
 						<div class="small-12 columns">
-							<h2>Account Executive</h2>
+							<h2 class="share-item-title">Account Executive</h2>
 						</div><!--/.small-12-->
 					</div><!--/.row-->
 					<div class="row">
@@ -330,14 +330,14 @@
 						</div><!--/.small-4-->
 						<div class="small-8 columns">
 							<div class="share-input-container">
-								<%= f.text_area :account_executive, placeholder: "Name / Email / Phone / Address", label: false  %>
+								<%= f.text_area :account_executive, placeholder: "Name / Email / Phone / Address", label: false, class: "small"  %>
 							</div>
 						</div><!--/.small-8-->
 					</div><!--/.row-->
 
 					<div class="row">
 						<div class="small-12 columns">
-							<h2>Warehouse Contact</h2>
+							<h2 class="share-item-title">Warehouse Contact</h2>
 						</div><!--/.small-12-->
 					</div><!--/.row-->
 					<div class="row">
@@ -346,14 +346,14 @@
 						</div><!--/.small-4-->
 						<div class="small-8 columns">
 							<div class="share-input-container">
-								<%= f.text_area :warehouse_contact, placeholder: "Name / Email / Phone / Address", label: false  %>
+								<%= f.text_area :warehouse_contact, placeholder: "Name / Email / Phone / Address", label: false, class: "small"  %>
 							</div>
 						</div><!--/.small-8-->
 					</div><!--/.row-->
 
 					<div class="row">
 						<div class="small-12 columns">
-							<h2>Freight Forwarder</h2>
+							<h2 class="share-item-title">Freight Forwarder</h2>
 						</div><!--/.small-12-->
 					</div><!--/.row-->
 					<div class="row">
@@ -362,7 +362,7 @@
 						</div><!--/.small-4-->
 						<div class="small-8 columns">
 							<div class="share-input-container">
-								<%= f.text_area :freight_forwarder, placeholder: "Name / Email / Phone / Address".html_safe, label: false  %>
+								<%= f.text_area :freight_forwarder, placeholder: "Name / Email / Phone / Address".html_safe, label: false, class: "small"  %>
 							</div>
 						</div><!--/.small-8-->
 					</div><!--/.row-->

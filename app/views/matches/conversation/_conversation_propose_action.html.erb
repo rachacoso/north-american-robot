@@ -34,8 +34,8 @@
 						<h3>Marketing Proposal</h3>
 						<ul>
 							<li>Marketing Spend Requests/Requirements</li>
-							<li>Marketing Requests/Requirements</li>
-							<li>Sales Channel Requests/Requirements</li>
+							<li>Marketing Strategy Requests/Requirements</li>
+							<li>Retail Channel Requests/Requirements</li>
 						</ul>
 						
 						<%= link_to '#', id: "conversation-action-toggle", class: "button tiny alert expand" do %>
@@ -58,10 +58,11 @@
 							<div class="share-form-header">
 								<div class="row">
 									<div class="small-12 columns">
-										<h2>DOCUMENTS</h2>
+										<h2>PRODUCT DOCUMENTS</h2>
 									</div><!--/.small-12-->
 								</div><!--/.row-->
 							</div>
+
 
 							<div class="row">
 								<div class="small-12 columns">
@@ -105,7 +106,8 @@
 
 							<div class="row">
 								<div class="small-12 columns">
-									<h2>How long are you willing to grant these terms to your partner?</h2>
+									<h2 class="share-item-title">Initial Term</h2>
+									<h2 class="share-item-subhead">How long are you willing to grant these terms to your partner?</h2>
 								</div><!--/.small-12-->
 							</div><!--/.row-->
 							<div class="row">
@@ -132,7 +134,8 @@
 
 							<div class="row">
 								<div class="small-12 columns">
-									<h2>What are your renewal terms?</h2>
+									<h2 class="share-item-title">Renewal Terms</h2>
+									<h2 class="share-item-subhead">What are your renewal terms?</h2>
 								</div><!--/.small-12-->
 							</div><!--/.row-->
 							<div class="row">
@@ -151,7 +154,8 @@
 
 							<div class="row">
 								<div class="small-12 columns">
-									<h2>What are your termination terms?</h2>
+									<h2 class="share-item-title">Termination</h2>
+									<h2 class="share-item-subhead">What are your termination terms?</h2>
 								</div><!--/.small-12-->
 							</div><!--/.row-->
 							<div class="row">
@@ -171,7 +175,8 @@
 
 							<div class="row">
 								<div class="small-12 columns">
-									<h2>What are your payment terms?</h2>
+									<h2 class="share-item-title">Payment Terms</h2>
+									<h2 class="share-item-subhead">What are your payment terms?</h2>
 								</div><!--/.small-12-->
 							</div><!--/.row-->
 							<div class="row">
@@ -191,7 +196,8 @@
 							</div><!--/.row-->
 							<div class="row">
 								<div class="small-12 columns">
-									<h2>Are you willing to grant territory exclusivity to your partner? </h2>
+									<h2 class="share-item-title">Exclusivity</h2>
+									<h2 class="share-item-subhead">Are you willing to grant territory exclusivity to your partner? </h2>
 								</div><!--/.small-12-->
 							</div><!--/.row-->
 							<div class="row">
@@ -217,7 +223,8 @@
 
 							<div class="row">
 								<div class="small-12 columns">
-									<h2>Are there andy Pricing Amendments? </h2>
+									<h2 class="share-item-title">Product Pricing</h2>
+									<h2 class="share-item-subhead">Are there andy Pricing Amendments? </h2>
 								</div><!--/.small-12-->
 							</div><!--/.row-->
 							<div class="row">
@@ -237,7 +244,8 @@
 
 							<div class="row">
 								<div class="small-12 columns">
-									<h2>What is your Order Turnaround Time? </h2>
+									<h2 class="share-item-title">Order Turnaround</h2>
+									<h2 class="share-item-subhead">What is your Order Turnaround Time? </h2>
 								</div><!--/.small-12-->
 							</div><!--/.row-->
 							<div class="row">
@@ -267,7 +275,8 @@
 
 							<div class="row">
 								<div class="small-12 columns">
-									<h2>What is your requested minimum marketing spend by your partner? </h2>
+									<h2 class="share-item-title">Marketing Spend Requests/Requirements</h2>
+									<h2 class="share-item-subhead">What is your requested minimum marketing spend by your partner? </h2>
 								</div><!--/.small-12-->
 							</div><!--/.row-->
 							<div class="row">
@@ -284,7 +293,8 @@
 							</div><!--/.row-->
 							<div class="row">
 								<div class="small-12 columns">
-									<h2>Do you have any marketing requests or requirements? </h2>
+									<h2 class="share-item-title">Marketing Strategy Requests/Requirements</h2>
+									<h2 class="share-item-subhead">Do you have any marketing requests or requirements? </h2>
 								</div><!--/.small-12-->
 							</div><!--/.row-->
 							<div class="row">
@@ -301,7 +311,8 @@
 							</div><!--/.row-->
 							<div class="row">
 								<div class="small-12 columns">
-									<h2>Do you have any sales channel requests or requirements? </h2>
+									<h2 class="share-item-title">Retail Channel Requests/Requirements</h2>
+									<h2 class="share-item-subhead">Do you have any retail channel requests or requirements? </h2>
 								</div><!--/.small-12-->
 							</div><!--/.row-->
 							<div class="row">
@@ -312,7 +323,7 @@
 								</div><!--/.small-4-->
 								<div class="small-8 columns">
 									<div class="share-input-container">
-									<%= f.text_area :sales_channel_requests_or_requirements, placeholder: "Sales Channel Requests or Requirements", label: false  %>
+									<%= f.text_area :retail_channel_requests_or_requirements, placeholder: "Retail Channel Requests or Requirements", label: false  %>
 									</div>
 								</div><!--/.small-8-->
 							</div><!--/.row-->
@@ -405,7 +416,8 @@
 
 					<div class="row">
 						<div class="small-12 columns">
-							<h2>Territory<br> What territory is covered by this agreement?</h2>
+							<h2 class="share-item-title">Territory</h2> 
+							<h2 class="share-item-subhead">What territory is covered by this agreement?</h2>
 						</div><!--/.small-12-->
 					</div><!--/.row-->
 					<div class="row">
@@ -428,7 +440,8 @@
 
 					<div class="row">
 						<div class="small-12 columns">
-							<h2>Channel Rights<br> Which channels are covered by the agreement?</h2>
+							<h2 class="share-item-title">Channel Rights</h2> 
+							<h2 class="share-item-subhead">Which channels are covered by the agreement?</h2>
 						</div><!--/.small-12-->
 					</div><!--/.row-->
 					<div class="row">
@@ -448,7 +461,8 @@
 
 					<div class="row">
 						<div class="small-12 columns">
-							<h2>Marketing Commitments<br> How much will you commit to marketing the brand in the territory?</h2>
+							<h2 class="share-item-title">Marketing Commitments</h2> 
+							<h2 class="share-item-subhead">How much will you commit to marketing the brand in the territory?</h2>
 						</div><!--/.small-12-->
 					</div><!--/.row-->
 					<div class="row">
@@ -475,7 +489,8 @@
 
 					<div class="row">
 						<div class="small-12 columns">
-							<h2>What is the minimum purchase volume you can commit to over the next three years?</h2>
+							<h2 class="share-item-title">Annual Minimum</h2>
+							<h2 class="share-item-subhead">What is the minimum purchase volume you can commit to over the next three years?</h2>
 						</div><!--/.small-12-->
 					</div><!--/.row-->
 					<div class="row">
@@ -512,7 +527,8 @@
 
 					<div class="row">
 						<div class="small-12 columns">
-							<h2>What is the method of shipping and who bears the cost?</h2>
+							<h2 class="share-item-title">Shipping</h2>
+							<h2 class="share-item-subhead">What is the method of shipping and who bears the cost?</h2>
 						</div><!--/.small-12-->
 					</div><!--/.row-->
 					<div class="row">
@@ -541,7 +557,8 @@
 
 					<div class="row">
 						<div class="small-12 columns">
-							<h2>What is your brand launch plan?</h2>
+							<h2 class="share-item-title">Brand Launch Plan</h2>
+							<h2 class="share-item-subhead">What is your brand launch plan?</h2>
 						</div><!--/.small-12-->
 					</div><!--/.row-->
 					<div class="row">
@@ -560,7 +577,8 @@
 
 					<div class="row">
 						<div class="small-12 columns">
-							<h2>How do you plan to market the brand and its products?</h2>
+							<h2 class="share-item-title">Marketing <small>- Marketing Strategy</small></h2>
+							<h2 class="share-item-subhead">How do you plan to market the brand and its products?</h2>
 						</div><!--/.small-12-->
 					</div><!--/.row-->
 					<div class="row">
@@ -580,7 +598,8 @@
 
 					<div class="row">
 						<div class="small-12 columns">
-							<h2>What marketing channels will you use?</h2>
+							<h2 class="share-item-title">Marketing <small>- Marketing Channels</small></h2>
+							<h2 class="share-item-subhead">What marketing channels will you use?</h2>
 						</div><!--/.small-12-->
 					</div><!--/.row-->
 					<div class="row">
@@ -600,7 +619,8 @@
 
 					<div class="row">
 						<div class="small-12 columns">
-							<h2>What retail channels you plan to sell the brand's products?</h2>
+							<h2 class="share-item-title">Retail Channels</h2>
+							<h2 class="share-item-subhead">What retail channels you plan to sell the brand's products?</h2>
 						</div><!--/.small-12-->
 					</div><!--/.row-->
 					<div class="row">

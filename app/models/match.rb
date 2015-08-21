@@ -40,7 +40,7 @@ class Match
   field :territory_exclusivity_terms, type: String, default: ""
   field :requested_minimum_marketing_spend, type: String, default: ""
   field :marketing_requests_or_requirements, type: String, default: ""
-  field :sales_channel_requests_or_requirements, type: String, default: ""
+  field :retail_channel_requests_or_requirements, type: String, default: ""
   field :order_turnaround, type: String, default: ""
   field :pricing_amendments, type: String, default: ""
 

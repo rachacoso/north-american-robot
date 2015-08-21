@@ -608,7 +608,7 @@ class MatchesController < ApplicationController
       :territory_exclusivity_terms,
       :requested_minimum_marketing_spend,
       :marketing_requests_or_requirements,
-      :sales_channel_requests_or_requirements,
+      :retail_channel_requests_or_requirements,
       :order_turnaround,
       :pricing_amendments,
       :brand_launch_plan,
