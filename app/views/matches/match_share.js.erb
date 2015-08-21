@@ -1,5 +1,6 @@
 <% unless @messages_unread > 0 || @new_contact_messages > 0 %>
 	$('#unread-message-badge').fadeOut(500)
+	$('#unread-message-badge-divider').fadeOut(500)
 <% end %>	 
 
 <% if @messages %>

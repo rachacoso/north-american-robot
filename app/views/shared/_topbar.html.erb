@@ -31,12 +31,12 @@
 
 				<% if @messages_unread > 0 || @new_contact_messages > 0 %>
 				<!-- MESSAGES Nav Section -->
-				<li>
+				<li id="unread-message-badge">
 					<%= link_to messages_path do %>
-						<span id="unread-message-badge"> <i class="fi-mail" style="margin: 0; padding: 0;"></i> </span> 
+						<span> <i class="fi-mail" style="margin: 0; padding: 0; color: red;"></i> </span> 
 					<% end %>
 				</li>
-				<li class="divider"></li>
+				<li class="divider" id="unread-message-badge-divider"></li>
 				<% end %>
 
 
