@@ -94,14 +94,14 @@
 								</div><!--/.small-4-->
 								<div class="small-8 columns">
 									<div class="row">
-										<div class="small-8 columns">
-											<%= submit_tag "SHARE INFORMATION", class: "button tiny alert expand" %>
-										</div><!--/.small-8-->
 										<div class="small-4 columns">
 											<%= link_to '#', id: "conversation-action-cancel", class: "button tiny secondary expand" do %>
 												Cancel
 											<% end %>
 										</div><!--/.small-4-->
+										<div class="small-8 columns">
+											<%= submit_tag "SHARE INFORMATION", class: "button tiny alert expand" %>
+										</div><!--/.small-8-->
 									</div><!--/.row-->
 								</div><!--/.small-8-->
 							</div><!--/.row-->
@@ -225,6 +225,38 @@
 
 					<div class="row">
 						<div class="small-12 columns">
+							<h2>Labeling</h2>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="small-4 columns text-right">
+							<%= f.label :labeling_information %>
+						</div><!--/.small-4-->
+						<div class="small-8 columns">
+							<div class="share-input-container">
+							<%= f.text_area :labeling_information, placeholder: "Labeling Information", label: false  %>
+							</div>
+						</div><!--/.small-8-->
+					</div><!--/.row-->
+
+					<div class="row">
+						<div class="small-12 columns">
+							<h2>Customs</h2>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="small-4 columns text-right">
+							<%= f.label :customs_information %>
+						</div><!--/.small-4-->
+						<div class="small-8 columns">
+							<div class="share-input-container">
+							<%= f.text_area :customs_information, placeholder: "Customs Information", label: false  %>
+							</div>
+						</div><!--/.small-8-->
+					</div><!--/.row-->
+
+					<div class="row">
+						<div class="small-12 columns">
 							<h2>Contract Authentication</h2>
 						</div><!--/.small-12-->
 					</div><!--/.row-->
@@ -240,19 +272,55 @@
 					</div><!--/.row-->
 
 					<div class="row">
+						<div class="small-12 columns">
+							<h2>Additional Contacts</h2>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="small-4 columns text-right">
+							<%= f.label :account_executive, "Account Executive" %>
+						</div><!--/.small-4-->
+						<div class="small-8 columns">
+							<div class="share-input-container">
+								<%= f.text_area :account_executive, placeholder: "Account Executive Contact Info", label: false  %>
+							</div>
+						</div><!--/.small-8-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="small-4 columns text-right">
+							<%= f.label :warehouse_contact, "Warehouse Contact" %>
+						</div><!--/.small-4-->
+						<div class="small-8 columns">
+							<div class="share-input-container">
+								<%= f.text_area :warehouse_contact, placeholder: "Warehouse Contact Contact Info", label: false  %>
+							</div>
+						</div><!--/.small-8-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="small-4 columns text-right">
+							<%= f.label :freight_forwarder, "Freight Forwarder" %>
+						</div><!--/.small-4-->
+						<div class="small-8 columns">
+							<div class="share-input-container">
+								<%= f.text_area :freight_forwarder, placeholder: "Freight Forwarder Contact Info", label: false  %>
+							</div>
+						</div><!--/.small-8-->
+					</div><!--/.row-->
+
+					<div class="row">
 						<div class="small-4 columns">
 							&nbsp;
 						</div><!--/.small-4-->
 						<div class="small-8 columns">
 							<div class="row">
-								<div class="small-8 columns">
-									<%= submit_tag "SHARE MARKETING PLANS", class: "button tiny alert expand" %>
-								</div><!--/.small-8-->
 								<div class="small-4 columns">
 									<%= link_to '#', id: "conversation-action-cancel", class: "button tiny secondary expand" do %>
 										Cancel
 									<% end %>
 								</div><!--/.small-4-->
+								<div class="small-8 columns">
+									<%= submit_tag "SHARE MARKETING PLANS", class: "button tiny alert expand" %>
+								</div><!--/.small-8-->
 							</div><!--/.row-->
 						</div><!--/.small-8-->
 					</div><!--/.row-->

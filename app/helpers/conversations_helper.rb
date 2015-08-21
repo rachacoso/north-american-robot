@@ -88,5 +88,10 @@ module ConversationsHelper
 		return next_stage.upcase
 	end
 
+	def get_sku_info(sku_id, match)
+		product = match.brand.products.find(sku_id)
+		return product
+	end
+
 
 end

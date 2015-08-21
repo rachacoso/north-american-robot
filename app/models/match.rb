@@ -54,11 +54,16 @@ class Match
   field :testing_information, type: String, default: ""
   field :certification_information, type: String, default: ""
   field :customs_information, type: String, default: ""
+  field :labeling_information, type: String, default: ""
   field :tariffs_information, type: String, default: ""
   field :contract_authentication, type: String, default: ""
   field :shipping, type: String, default: ""
   field :channel_rights, type: String, default: ""
   field :marketing_commitments, type: String, default: ""
+
+  field :account_executive, type: String, default: ""
+  field :warehouse_contact, type: String, default: ""
+  field :freight_forwarder, type: String, default: ""
 
   #checkboxes
   field :territory, type: Array, default: []

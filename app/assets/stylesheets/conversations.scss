@@ -472,8 +472,12 @@ table.preview-termsheet-table {
   width: 100%;
   h3{line-height: 1em;}
   th{font-weight: 100;}
-  tr.inactive{background-color: $landing-middle-gray;}
-  td.active{background-color: $landing-light-gray;}
+  tr.inactive{
+    color: $landing-middle-gray;
+    h3{color: $landing-middle-gray;small{color: $landing-middle-gray;}}
+    td.active{h3{color:black;}color: black;}
+  }
+  
   td {font-weight: 100;border: 1px solid $landing-light-gray;vertical-align: top;}
   td.item {
     width: 20%;

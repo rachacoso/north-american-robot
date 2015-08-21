@@ -22,13 +22,13 @@
 						<table class="preview-termsheet-table">
 							<thead>
 								<tr>
-									<th>&nbsp;</th>
-									<th>&nbsp;</th>
+									<th width="50%">&nbsp;</th>
+									<th width="50%">&nbsp;</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>Products List</td>
+								<tr class="<%= @m.products_list.blank? ? 'inactive': ' ' %>">
+									<td><h3>Products List</h3></td>
 									<td>
 										<% @m.products_list.each do |doc| %>
 											<% d = LibraryDocument.find(doc) %>
@@ -36,8 +36,8 @@
 										<% end %>
 									</td>
 								</tr>
-								<tr>
-									<td>FOB Pricing</td>
+								<tr class="<%= @m.fob_pricing.blank? ? 'inactive': ' ' %>">
+									<td><h3>FOB Pricing</h3></td>
 									<td>
 										<% @m.fob_pricing.each do |doc| %>
 											<% d = LibraryDocument.find(doc) %>
@@ -45,8 +45,8 @@
 										<% end %>
 									</td>
 								</tr>
-								<tr>
-									<td>Tiered Pricing Schedule</td>
+								<tr class="<%= @m.tiered_pricing_schedule.blank? ? 'inactive': ' ' %>">
+									<td><h3>Tiered Pricing Schedule</h3></td>
 									<td>
 										<% @m.tiered_pricing_schedule.each do |doc| %>
 											<% d = LibraryDocument.find(doc) %>
@@ -133,13 +133,23 @@
 										data: "channel_rights"
 										}
 								%>
-								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
-										name: "Marketing Commitments",
-										subhead: "How much distributor will commit to marketing the brand in the territory",
-										datatype: "text",
-										data: "marketing_commitments"
-										}
-								%>
+								<tr class="<%= @m.marketing_commitments.blank? ? 'inactive': ' ' %>">
+									<td class="item"><h3>Marketing Commitments<br><small>How much distributor will commit to marketing the brand in the territory</small></h3></td>
+									<td class="terms">
+										<% unless @m.marketing_commitments.blank? %>
+											<%= simple_format(@m.marketing_commitments) %>
+										<% end %>
+									</td>
+									<td class="notes <%= !@m.requested_minimum_marketing_spend.blank? ? 'active' : '' %>">
+										<% unless @m.requested_minimum_marketing_spend.blank? %>
+											<h3><%= @m.brand.company_name %> Marketing Spend Requests/Requirements</h3>
+											<%= simple_format(@m.requested_minimum_marketing_spend) %>
+										<% end %>		
+									</td>
+									<td class="brandapproval"></td>
+									<td class="distributorapproval"></td>
+								</tr>
+
 							</tbody>
 						</table>
 					</div>
@@ -259,11 +269,7 @@
 											</ul>
 										<% end %>
 									</td>
-									<td class="notes <%= @m.requested_minimum_marketing_spend.blank? && @m.marketing_requests_or_requirements.blank? ? '' : 'active' %>">
-										<% unless @m.requested_minimum_marketing_spend.blank? %>
-											<h3><%= @m.brand.company_name %> Marketing Spend Requests/Requirements</h3>
-											<%= simple_format(@m.requested_minimum_marketing_spend) %>
-										<% end %>										
+									<td class="notes <%= !@m.marketing_requests_or_requirements.blank? ? 'active' : '' %>">								
 										<% unless @m.marketing_requests_or_requirements.blank? %>
 											<h3><%= @m.brand.company_name %> Marketing Requests/Requirements</h3>
 											<%= simple_format(@m.marketing_requests_or_requirements) %>
@@ -335,13 +341,29 @@
 								</tr>
 							</thead>
 							<tbody>
-								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
-										name: "Testing",
-										subhead: "Does your country require testing for the brand's products?<br> If so, please list which products require testing.<br> If yes, who will be responsible for testing?".html_safe,
-										datatype: "text",
-										data: "testing_information"
-										}
-								%>
+								<tr class="<%= @m.testing_information.empty? ? 'inactive': ' ' %>">
+									<td class="item"><h3>Testing<br><small>Does your country require testing for the brand's products?<br> If so, please list which products require testing.<br> If yes, who will be responsible for testing?</small></h3></td>
+									<td class="terms">
+										<% unless @m.testing_information.blank? %>
+											<h3>General Testing Information</h3>
+											<%= simple_format(@m.testing_information) %>
+										<% end %>
+										<% unless @m.skus_for_testing.blank? %>
+											<h3>SKU specific Testing Information</h3>
+											<ul>
+											<% @m.skus_for_testing.each do |sku_id,text| %>
+												<% product = get_sku_info(sku_id, @m) %>
+												<li><h4><%= product.name %></h4>
+												<p><%= text %></p></li>
+											<% end %>
+											</ul>
+										<% end %>
+									</td>
+									<td class="notes"></td>
+									<td class="brandapproval"></td>
+									<td class="distributorapproval"></td>
+								</tr>
+
 								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
 										name: "Certifications",
 										subhead: "Do you require the brand to provide any certifications or documentation?<br>
@@ -362,12 +384,23 @@
 										name: "Labeling",
 										subhead: "Are there country-specific labeling requirements?<br>
 											If yes, who will be responsible for country-specific label?".html_safe,
+										datatype: "text",
+										data: "labeling_information"
 										}
 								%>
 								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
 										name: "Customs",
 										subhead: "What will be the customs process for the brand's products?<br>
 											Please indicate if this applies to the initial shipment, ongoing shipments or sporadic procedures.".html_safe,
+										datatype: "text",
+										data: "customs_information"
+										}
+								%>
+								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
+										name: "Contract Authentication",
+										subhead: " ".html_safe,
+										datatype: "text",
+										data: "contract_authentication"
 										}
 								%>
 							</tbody>
@@ -375,7 +408,66 @@
 
 					</div><!--/.small-12-->
 				</div><!--/.row-->
-						
+
+				<div class="row">
+					<div class="small-12 columns">
+						<h1>Preparation Documents</h1>
+					</div><!--/.small-12-->
+				</div><!--/.row-->
+
+				<div class="row">
+					<div class="small-12 columns">
+						<table class="preview-termsheet-table">
+							<thead>
+								<tr>
+									<th width="50%">&nbsp;</th>
+									<th width="50%">&nbsp;</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="<%= @m.certification_information_documents.blank? ? 'inactive': ' ' %>">
+									<td><h3>Certification Information</h3></td>
+									<td>
+										<% @m.certification_information_documents.each do |doc| %>
+											<% d = LibraryDocument.find(doc) %>
+											<%= link_to d.filename, d.file.url, target: "blank" %><br>
+										<% end %>
+									</td>
+								</tr>
+								<tr class="<%= @m.patent_information_documents.blank? ? 'inactive': ' ' %>">
+									<td><h3>Patent Information</h3></td>
+									<td>
+										<% @m.patent_information_documents.each do |doc| %>
+											<% d = LibraryDocument.find(doc) %>
+											<%= link_to d.filename, d.file.url, target: "blank" %><br>
+										<% end %>
+									</td>
+								</tr>
+								<tr class="<%= @m.testing_information_documents.blank? ? 'inactive': ' ' %>">
+									<td><h3>Testing Information</h3></td>
+									<td>
+										<% @m.testing_information_documents.each do |doc| %>
+											<% d = LibraryDocument.find(doc) %>
+											<%= link_to d.filename, d.file.url, target: "blank" %><br>
+										<% end %>
+									</td>
+								</tr>
+								<tr class="<%= @m.ingredient_or_materials_lists.blank? ? 'inactive': ' ' %>">
+									<td><h3>Ingredient or Materials Lists</h3></td>
+									<td>
+										<% @m.ingredient_or_materials_lists.each do |doc| %>
+											<% d = LibraryDocument.find(doc) %>
+											<%= link_to d.filename, d.file.url, target: "blank" %><br>
+										<% end %>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+
+
 				<div class="row">
 					<div class="small-12 columns">
 						<h1>Additional Contacts</h1>
@@ -389,29 +481,33 @@
 							<thead>
 								<tr>
 									<th>&nbsp;</th>
-									<th class="text-right">Name</th>
-									<th class="text-right">Details</th>
-									<th class="text-right">Address</th>
+									<th class="text-right">Name/Contact Info</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>Account Executive</td>
-									<td></td>
-									<td></td>
-									<td></td>
+								<tr class="<%= @m.account_executive.blank? ? 'inactive': ' ' %>">
+									<td><h3>Account Executive</h3></td>
+									<td>
+										<% unless @m.account_executive.blank? %>
+											<%= simple_format(@m.account_executive) %>
+										<% end %>
+									</td>
 								</tr>
-								<tr>
-									<td>Warehouse Contact</td>
-									<td></td>
-									<td></td>
-									<td></td>
+								<tr class="<%= @m.warehouse_contact.blank? ? 'inactive': ' ' %>">
+									<td><h3>Warehouse Contact</h3></td>
+									<td>
+										<% unless @m.warehouse_contact.blank? %>
+											<%= simple_format(@m.warehouse_contact) %>
+										<% end %>
+									</td>
 								</tr>
-								<tr>
-									<td>Freight Forwarder</td>
-									<td></td>
-									<td></td>
-									<td></td>
+								<tr class="<%= @m.freight_forwarder.blank? ? 'inactive': ' ' %>">
+									<td><h3>Freight Forwarder</h3></td>
+									<td>
+										<% unless @m.freight_forwarder.blank? %>
+											<%= simple_format(@m.freight_forwarder) %>
+										<% end %>
+									</td>
 								</tr>
 							</tbody>
 						</table>
