@@ -701,7 +701,12 @@ class MatchesController < ApplicationController
       :order_turnaround,
       :pricing_amendments
     ]
-    brand_prepare = []
+    brand_prepare = [
+      :certification_information_documents,
+      :patent_information_documents,
+      :testing_information_documents,
+      :ingredient_or_materials_lists
+    ]
     distributor_propose = [
       :brand_launch_plan,
       :marketing_strategy,
@@ -717,7 +722,17 @@ class MatchesController < ApplicationController
       :third_tier_channels,
       :marketing_channels
     ]
-    distributor_prepare = []
+    distributor_prepare = [
+      :testing_information,
+      :certification_information,
+      :customs_information,
+      :labeling_information,
+      :tariffs_information,
+      :contract_authentication,
+      :account_executive,
+      :warehouse_contact,
+      :freight_forwarder
+    ]
 
     checkset = eval("#{b_or_d}_#{stage}")
 
@@ -734,7 +749,7 @@ class MatchesController < ApplicationController
       @m.send("#{@current_user.type?}_shared_#{@m.stage}=", false)
     end
     @m.save!
-      
+
   end
 
 end
