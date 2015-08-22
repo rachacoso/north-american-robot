@@ -252,13 +252,13 @@ top: 10px;
   font-size: rem-calc(12);
 } 
 .conversation-action-tile {
-  border: 5px solid $landing-orange;
+  border: 2px solid $landing-middle-gray;
   background: white;
   h4 {
     margin-bottom: 0;
   }    
   &.active {
-    border: 5px solid $landing-orange;
+    border: 2px solid $landing-orange;
   }
   #contact-accept {
     margin-top: rem-calc(10);
