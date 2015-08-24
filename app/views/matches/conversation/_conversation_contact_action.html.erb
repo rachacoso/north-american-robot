@@ -3,10 +3,8 @@
 		<% if i_contacted(match) %>
 			<% if match.accepted %>
 				<div class="conversation-action-tile <%= match.accepted? ? '' : 'active' %> text-center">
-				<span data-tooltip aria-haspopup="true" class="has-tip radius" title="YOU CONTACTED THEM<BR> <SMALL> CONTACTED ON <%= match.c_at.strftime("%d %B %Y").upcase %></SMALL>">
-					<%= image_tag "match_profile_icons_conversation_outgoing.svg" %></span><br>
 					<% if !match.messages.blank? %>
-						<h4>You started a conversation with <strong><%= profile.company_name %></strong></h4>
+						<h4><span data-tooltip aria-haspopup="true" class="has-tip radius" title="YOU CONTACTED THEM<BR> <SMALL> CONTACTED ON <%= match.c_at.strftime("%d %B %Y").upcase %></SMALL>"><%= image_tag "match_profile_icons_conversation_outgoing.svg" %></span>You started a conversation with <strong><%= profile.company_name %></strong></h4>
 					<% else %>
 						<h4><strong><%= profile.company_name %></strong> accepted your request and should be messaging you shortly.</h4>
 					<% end %>
@@ -25,12 +23,19 @@
 			
 			<% if match.accepted %>
 				<div class="conversation-action-tile <%= match.accepted? ? '' : 'active' %> text-center">
-				<span data-tooltip aria-haspopup="true" class="has-tip radius" title="CONTACTED YOU<BR> <SMALL> CONTACTED ON <%= match.c_at.strftime("%d %B %Y").upcase %></SMALL>"><%= image_tag "match_profile_icons_conversation_incoming.svg" %></span><br>
-					<h4><strong><%= profile.company_name %></strong> started a conversation with you</h4>
+				
+					<h4><span data-tooltip aria-haspopup="true" class="has-tip radius" title="CONTACTED YOU<BR> <SMALL> CONTACTED ON <%= match.c_at.strftime("%d %B %Y").upcase %></SMALL>"><%= image_tag "match_profile_icons_conversation_incoming.svg" %></span><strong><%= profile.company_name %></strong> started a conversation with you</h4>
 				</div>
 				<% if !match.messages.blank? && match.stage == "contact" %>
 					<%= render partial: "matches/conversation/proceed_stage_initial", locals: {match: match, stage: 'propose'} %>
-				<% end %>		
+				<% end %>
+			<% else %>
+			
+				<div class="conversation-action-tile <%= match.accepted? ? '' : 'active' %> text-center">
+					<h4><strong><%= match.send(@current_user.type_inverse?).company_name %></strong> would like to have a conversation with you</h4>
+					<%= button_to 'ACCEPT', accept_match_path(match), :id => 'contact-accept', :class => "button tiny alert", remote: true %>
+				</div>
+
 			<% end %>
 
 

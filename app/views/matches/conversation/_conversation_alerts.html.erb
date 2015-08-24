@@ -8,13 +8,6 @@
 		</div>
 		<% end %>
 	
-	<% else %>
-
-		<div class="conversation-action-center-tile <%= match.accepted? ? '' : 'active' %> text-center">
-			<h4><strong><%= match.send(@current_user.type_inverse?).company_name %></strong> would like to have a conversation with you</h4>
-			<%= button_to 'ACCEPT', accept_match_path(match), :id => 'contact-accept', :class => "button tiny alert", remote: true %>
-		</div>
-
 	<% end %>
 <% end %>
 

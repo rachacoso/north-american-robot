@@ -11,7 +11,13 @@
 <% else %>
 	<div class="conversation-action-tile active">
 		<h4><strong>PROCEED to next stage</strong></h4>
-		<h4>Send a request to <%=match.send(@current_user.type_inverse?).company_name%> to proceed to the next stage <%= get_next_stage(match) %></h4>
+		<% if get_next_stage(match) == "PROPOSE" %>
+			<h4>After getting acquainted, you can proceed to the next stage of the conversation, <strong>PROPOSE</strong>, to start discussing the details of your potential partnership.</h4>
+		<% elsif get_next_stage(match) == "PREPARE" %>
+			<h4>After you've both agreed on the terms of your partnership, you can proceed to the next stage of the conversation, <strong>PREPARE</strong>, to make sure you're properly prepared to start international distribution.</h4>
+		<% end %>
+		<br>
+		<h4>Send a request to <%=match.send(@current_user.type_inverse?).company_name%> to proceed to the next stage <strong><%= get_next_stage(match) %></strong></h4>
 		<%= button_to "PROCEED TO #{get_next_stage(match)}" , match_stage_update_path(match), :class => "button tiny alert expand", data: {confirm: 'Yes, I want to send a request to proceed'}, remote: true %>
 	</div>
 <% end %>
