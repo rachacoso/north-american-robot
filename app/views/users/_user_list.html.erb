@@ -1,0 +1,63 @@
+<div class="row collapse">
+	<div class="small-12 columns">
+		
+		<div class="row collapse">
+			<div class="medium-4 columns">
+				<div class="contacts-table">
+				USERNAME
+				</div>
+			</div><!--/.medium-2-->
+			<div class="medium-2 columns">
+				<div class="contacts-table">
+				First Name
+				</div>
+			</div><!--/.medium-2-->
+			<div class="medium-2 columns">
+				<div class="contacts-table">
+				Last Name
+				</div>
+			</div><!--/.medium-2-->
+			<div class="medium-2 columns">
+				<div class="contacts-table">
+				Title
+				</div>
+			</div><!--/.medium-2-->
+			<div class="medium-2 columns">
+				<div class="contacts-table">
+				Phone
+				</div>
+			</div><!--/.medium-2-->
+		</div><!--/.row-->
+
+		<% b_or_d.users.each do |user| %>
+		<div class="row collapse contact-view" id="contact-view-<%=user.contact.id%>">
+			<div class="medium-4 columns">
+				<div class="contacts-table item">
+					<%= user.email.blank? ? "(no email)" : "#{user.email}<br>".html_safe %>
+				</div>
+			</div><!--/.medium-2-->
+			<div class="medium-2 columns">
+				<div class="contacts-table item">
+					<%= user.contact.firstname.blank? ? "(nameless)" : "#{user.contact.firstname}".html_safe %>
+				</div>
+			</div><!--/.medium-2-->
+			<div class="medium-2 columns">
+				<div class="contacts-table item">
+					<%= user.contact.lastname.blank? ? "(nameless)" : "#{user.contact.lastname}".html_safe %>
+				</div>
+			</div><!--/.medium-2-->
+			<div class="medium-2 columns">
+				<div class="contacts-table item">
+					<%= user.contact.title.blank? ? "(no title)" : "#{user.contact.title}".html_safe %>
+				</div>
+			</div><!--/.medium-2-->
+			<div class="medium-2 columns">
+				<div class="contacts-table item">
+					<%= user.contact.phone.blank? ? "(no phone)" : "#{user.contact.phone}<br>".html_safe %>
+				</div>
+			</div><!--/.medium-2-->
+		</div>
+		<% end %>
+
+	</div><!--/.small-12-->
+</div><!--/.row-->
