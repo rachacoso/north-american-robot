@@ -19,16 +19,15 @@
 					<div id="send-message">
 						<%= match.accepted ? (render partial: "matches/conversation/send_message", locals: {match: match, stage: stage}) : "" %>
 					</div><!--/#send-message-->
-
+										<div id="tour-conversation"></div>
 					<div id="view-messages">
 						<% if i_contacted(match) %>
 							<%= render partial: "matches/outgoing_contact", locals: {match: match, stage: stage} %>
 						<% else %>
 							<%= render partial: "matches/incoming_contact", locals: {match: match, stage: stage}  %>
 						<% end %>
-
 					</div><!--/#view-messages-->
-					
+
 				</div><!--/.conversation-block -->
 
 			</div><!--/.small-8-->

@@ -26,6 +26,7 @@
 //= require foundation/foundation.tooltip
 //= require foundation/foundation.dropdown
 //= require foundation/foundation.orbit
+//= require foundation/foundation.joyride
 
 
 // EXTRA 3rd PARTY JS

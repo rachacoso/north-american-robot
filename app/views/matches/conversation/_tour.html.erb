@@ -1,0 +1,55 @@
+<% content_for :javascript_foot do %>
+
+<!-- At the bottom of your page but inside of the body tag -->
+<ol class="joyride-list" data-joyride>
+  <li data-button="Start Tour" data-options="prev_button: false">
+    <h4>Welcome to Conversations</h4>
+    <p>This is where you will communicate with your potential partner.</p>
+  </li>
+  <li data-id="conversation-map-contact" data-text="Next" data-prev-text="Prev">
+    <h4>CONTACT</h4>
+    <p>At this stage, you'll simply be able to message each other to gauge each others interest in a partnership.</p>
+  </li>
+  <li data-id="conversation-map-propose" data-text="Next" data-prev-text="Prev">
+    <h4>PROPOSE</h4>
+    <p>If you decide to proceed with a potential partnership, during the PROPOSE stage you'll be able to share information with each other and pin down the terms of your partnership.</p>
+  </li>
+  <li data-id="conversation-map-prepare" data-text="Next" data-prev-text="Prev">
+    <h4>PREPARE</h4>
+    <p>After you've agreed on a partnership, during the PREPARE stage, you'll be able to share information regarding what you will both need to do to prepare for international distribution, including, testing, tariffs, registration, etc.</p>
+  </li>
+  <li data-id="conversation-map-order" data-text="Next" data-prev-text="Prev">
+    <h4>ORDER</h4>
+    <p>After you've completed preparations, you can proceed to ORDER, where you'll be able to talk about your orders.</p>
+  </li>
+  <li data-id="tour-conversation" data-text="Next" data-prev-text="Prev">
+    <h4>CONVERSATION</h4>
+    <p>This is where your conversation will take place.</p>
+  </li>
+  <li data-id="tour-action" data-text="End" data-options="tip_location: right; prev_button: false">
+    <h4>ACTION &amp; INFORMATION</h4>
+    <p>This is where any alerts or actions that you need to do are displayed.</p>
+  </li>
+</ol>
+
+	<%= javascript_tag do %>
+
+	$(document).foundation('joyride', 'start', 
+		{  
+		template : { // HTML segments for tip layout
+	    link        : '<a href="#close" class="joyride-close-tip">&times;</a>',
+	    timer       : '<div class="joyride-timer-indicator-wrap"><span class="joyride-timer-indicator"></span></div>',
+	    tip         : '<div class="joyride-tip-guide"><span class="joyride-nub"></span></div>',
+	    wrapper     : '<div class="joyride-content-wrapper"></div>',
+	    button      : '<a href="#" class="small button joyride-next-tip alert tiny"></a>',
+	    prev_button : '<a href="#" class="small button joyride-prev-tip tiny"></a>',
+	    modal       : '<div class="joyride-modal-bg"></div>',
+	    expose      : '<div class="joyride-expose-wrapper"></div>',
+	    expose_cover: '<div class="joyride-expose-cover"></div>'
+		  }
+		}
+	);
+
+	<% end %>
+
+<% end %>
