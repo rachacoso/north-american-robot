@@ -134,6 +134,8 @@
 		        <li class="divider"></li>
 		        <li><%= link_to 'SETTINGS', '#', class: 'text-right' %></li>
 		        <li><%= link_to 'LOGOUT', logout_url, class: 'text-right' %></li>
+		        <li class="divider"></li>
+		        <li><%= link_to "Logged in as #{@current_user.email}", class: 'text-right' %></li>
 		      </ul>
 		    </li>
 		    <% end %>
