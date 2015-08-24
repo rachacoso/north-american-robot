@@ -17,7 +17,7 @@
 <div class="row">
 	<div class="small-12 columns">
 		<div class="panel">
-			<h2><%= @brand.company_name %></h2>
+			<h2>[BRAND] <%= @brand.company_name %></h2>
 		</div>
 	</div>
 </div>
@@ -64,20 +64,42 @@
 
 	<div class="medium-6 columns">
 
+		<div class="row">
+			<div class="small-12 columns">
+				<div class="panel">
+					<h2>Users</h2>
+					<small><span data-tooltip aria-haspopup="true" class="has-tip" title="Usernames associated with this account.">What is this?</span></small><br>
+					<% @brand.users.each do |user| %>
+						<div class="row">
+							<div class="small-4 columns">
+							<h3><%= user.email %> (<%= link_to "edit", edit_user_path(user) %>)</h3>
+							</div><!--/.small-6-->
+							<div class="small-6 columns end">
+								<h4><%= user.contact.firstname %> <%= user.contact.lastname %></h4>
+							</div><!--/.small-6-->
+						</div><!--/.row-->
+					<% end %>
+				</div>
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+
 <%= form_for @brand, url: brand_admin_update_path(@brand) do |f| %>
 	
 		<div class="row">
 			<div class="small-12 columns">
 				<div class="panel">
 					<h2>Subscriber Status</h2>
+					<small><span data-tooltip aria-haspopup="true" class="has-tip" title="This controls whether this profile has access to the subscriber functionality.">What is this?</span></small><br>
 					<%= f.check_box :subscriber %>
 				</div>
 				<div class="panel">
 					<h2>Active/Visibility Status</h2>
+					<small><span data-tooltip aria-haspopup="true" class="has-tip" title="This controls whether this profile is visible/available for matching.">What is this?</span></small><br>
 					<%= f.check_box :active %>
 				</div>
 			</div><!--/.small-12-->	
 		</div><!--/.row-->	
+
 
 	</div><!--/.medium-6-->
 </div><!--/.row-->
@@ -91,5 +113,6 @@
 </div><!--/.row-->
 
 <% end %>
+
 <br>
 <br>

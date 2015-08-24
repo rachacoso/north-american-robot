@@ -225,6 +225,21 @@ class UsersController < ApplicationController
 
   def user_parameters
     params.require(:user).permit(
+      contact_attributes: [
+        :firstname,
+        :lastname,
+        :title,
+        :email,
+        :phone,
+        address_attributes: [
+          :address1,
+          :address2,
+          :city,
+          :state,
+          :postcode,
+          :country
+        ]
+      ],
       brand_attributes: [ 
         :subscriber
       ],

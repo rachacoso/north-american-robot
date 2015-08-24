@@ -18,7 +18,7 @@
 <div class="row">
 	<div class="small-12 columns">
 		<div class="panel">
-			<h2><%= @distributor.company_name %></h2>
+			<h2>[DISTRIBUTOR] <%= @distributor.company_name %></h2>
 		</div>
 	</div>
 </div>
@@ -69,13 +69,27 @@
 
 		</div>
 
-
 	</div><!--/.medium-6-->
 
 <%= form_for @distributor, url: distributor_admin_update_path(@distributor) do |f| %>
 	<div class="medium-6 columns">
+
+
 		<div class="row">
-			
+			<div class="small-12 columns">
+				<div class="panel">
+					<h2>Users</h2>
+					<small><span data-tooltip aria-haspopup="true" class="has-tip" title="Usernames associated with this account.">What is this?</span></small><br>
+					<% @distributor.users.each do |user| %>
+						<h3><%= user.email %></h3>
+						<h3><%= user.contact.firstname %> <%= user.contact.lastname %></h3>
+					<% end %>
+				</div>
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+
+
+		<div class="row">
 			<div class="small-12 columns">
 			<div class="panel">
 				<h2>Subscriber Status</h2>

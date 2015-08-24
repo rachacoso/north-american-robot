@@ -31,7 +31,50 @@
 
 <div class="row">
 	<div class="medium-6 columns">
-		
+
+		<div class="row">
+			<div class="small-12 columns">
+				<div class="panel">
+					<h3>User associated with <strong><%= link_to @user.send(@user.type?).company_name, eval("admin_#{@user.type?}_view_path(@user.send(@user.type?))") %></strong></h3>
+				</div>
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+
+		<div class="row">
+			
+			<div class="small-12 columns">
+				<div class="panel">
+				<h2>Change Contact Information</h2>
+					<%= form_for @user, url: user_path(@user) do |f| %>
+						<%= hidden_field_tag 'update_type', 'admin' %>
+						<%= f.fields_for :contact do |ff| %>
+						<div class="row">
+							<div class="medium-6 columns">
+								<%= ff.text_field :firstname, label: "First Name" %>
+							</div><!--/.small-6-->
+							<div class="medium-6 columns">
+								<%= ff.text_field :lastname, label: "Last Name" %>
+							</div><!--/.small-6-->
+						</div><!--/.row-->
+						<div class="row">
+							<div class="medium-4 columns">
+								<%= ff.text_field :title, label: "Title" %>
+							</div><!--/.medium-4-->
+							<div class="medium-4 columns">
+								<%= ff.text_field :email, label: "Email" %>
+							</div><!--/.medium-4-->
+							<div class="medium-4 columns">
+								<%= ff.text_field :phone, label: "Phone" %>
+							</div><!--/.medium-4-->
+						</div><!--/.row-->
+						<% end %>
+						<%= link_to 'Cancel', users_path, class: "tiny radius secondary button"  %> <%= f.submit 'Update Contact Information', class: "tiny radius alert button" %>
+					<% end %>
+				</div>
+			</div>
+
+		</div>
+
 		<div class="row">
 			
 			<div class="small-12 columns">
@@ -40,7 +83,7 @@
 					<%= form_for @user, url: user_path(@user) do |f| %>
 						<%= hidden_field_tag 'update_type', 'email' %>
 						<%= f.text_field :email %>
-						<%= f.submit 'Change email', class: "tiny radius success button" %> <%= link_to 'Cancel', users_path, class: "tiny radius info button"  %>
+						<%= link_to 'Cancel', users_path, class: "tiny radius secondary button"  %> <%= f.submit 'Change Email', class: "tiny radius alert button" %>
 					<% end %>
 				</div>
 			</div>
@@ -48,7 +91,7 @@
 		</div>
 
 		<div class="row">
-			
+
 			<div class="small-12 columns">
 				<div class="panel">
 				<h2>Change password</h2>
@@ -56,7 +99,7 @@
 						<%= hidden_field_tag 'update_type', 'password' %>
 						<%= f.password_field :new_password %>
 						<%= f.password_field :new_password_confirmation %>
-						<%= f.submit 'Change password', class: "tiny radius success button" %> <%= link_to 'Cancel', users_path, class: "tiny radius info button"  %>
+						<%= link_to 'Cancel', users_path, class: "tiny radius secondary button"  %> <%= f.submit 'Change Password', class: "tiny radius alert button" %>
 					<% end %>
 				</div>
 			</div>
@@ -64,216 +107,11 @@
 		</div>
 
 
-		<div class="row">
-			
-			<div class="small-12 columns">
-				<div class="panel">
-				<h2>Upload Logo</h2>
-				<% user_profile = @user.brand || @user.distributor %>
 
-					<%= form_for @user, :html => {id: 'user-update-logo-upload'}, url: user_path(@user) do |f| %>
-						<%= hidden_field_tag 'update_type', 'logo' %>
-						<%= f.fields_for @user.type? do |ff| %>
-
-								<%= ff.label :logo do %>
-								Company logo <br>
-								<%= image_tag user_profile.logo.url(:medium), alt: "Logo", id: "logo-preview"%>
-								<% end %>
-								<br>
-								<%= ff.file_field :logo, class: 'hide-upload', label: false, accept: 'image/png,image/gif,image/jpeg' %>
-						<% end %>
-						<%#= f.submit 'Upload Logo', class: "tiny radius success button" %>
-					<% end %>
-
-					<h2>Logo Finding Links</h2>
-
-					<% if !user_profile.facebook.blank? %>
-
-						<h3><%= link_to "Facebook", "//#{clean_url(user_profile.facebook)}", target: "blank" %></h3>
-						<% if facebook_id = fb_picture(user_profile.facebook) %>
-							<%= image_tag facebook_id %>
-							<h4><%= facebook_id %></h4>
-						<% end %>
-
-					<% else %>
-
-						<h3> NO Facebook </h3>
-
-					<% end %>
-
-
-					<h3><%= !user_profile.linkedin.blank? ? (link_to "LinkedIn", "//#{clean_url(user_profile.linkedin)}", target: "blank") : "NO LinkedIn" %></h3>
-
-					<h3><%= !user_profile.website.blank? ? (link_to "Website", "//#{clean_url(user_profile.website)}", target: 'blank') : "NO Website" %></h3>
-
-				</div>
-			</div>
-
-		</div>
-
-
-		<div class="row">
-			
-			<div class="small-12 columns">
-				<div class="panel">
-				<h2>Change status</h2>
-					<%= form_for @user, url: user_path(@user) do |f| %>
-						<%= hidden_field_tag 'update_type', 'adminsubscriber' %>
-						<%= f.fields_for (@user.distributor ? :distributor : :brand) do |ff| %>
-						<%= ff.check_box :subscriber %>
-						<% end %>
-
-						<%= f.submit 'update', class: "tiny radius success button" %> <%= link_to 'Cancel', users_path, class: "tiny radius info button"  %>
-					<% end %>
-				</div>
-			</div>
-
-		</div>
 
 	</div><!--/.medium-6-->
 	<div class="medium-6 columns">
-	<% if @user.distributor %>
-		<div class="row">
-			
-			<div class="small-12 columns">
-				<div class="panel">
-				<h2>Validation</h2>
-				<%= form_for @user.distributor, url: distributor_validation_path(@user.distributor) do |f| %>
 
-				<div class="row">
-					<div class="small-12 columns">
-						<%= f.text_area :verification_notes, label: ' Notes (only visible to administrators)'  %>		
-					</div><!--/.small-12-->
-				</div><!--/.row-->
-<hr>				
-
-				<div class="row">
-					<div class="small-4 columns">
-						<%= f.check_box :verified_website, label: ' Website'  %>		
-					</div><!--/.small-4-->
-					<div class="small-8 columns">
-						<% if @user.distributor.website.blank?  %>
-							<h3> NO WEBSITE </h3>
-						<% else %>						
-							<h3><%= link_to @user.distributor.website.sub(/^https?\:\/\//, '').sub(/^www./,''), "//#{@user.distributor.website.sub(/^https?\:\/\//, '').sub(/^www./,'')}", target: 'blank' %></h3>
-						<% end %>
-					</div><!--/.small-8-->
-				</div><!--/.row-->
-<hr>				
-				<div class="row">
-					<div class="small-4 columns">
-						<%= f.check_box :verified_social_media, label: ' Social Media'  %>		
-					</div><!--/.small-4-->
-					<div class="small-8 columns">
-						<% if @user.distributor.facebook.blank? && @user.distributor.linkedin.blank? %>
-						<h3> NO SOCIAL MEDIA </h3>
-						<% end %>
-						<% unless @user.distributor.facebook.blank? %>
-						<h3><%= link_to "Facebook", @user.distributor.facebook.sub(/^https?\:\/\//, '').sub(/^www./,'') %></h3>
-						<h3><%= @user.distributor.facebook.sub(/^https?\:\/\//, '').sub(/^www./,'') %></h3>
-						<% end %>
-						<% unless @user.distributor.linkedin.blank? %>
-						<h3><%= link_to "LinkedIn", @user.distributor.linkedin.sub(/^https?\:\/\//, '').sub(/^www./,'') %></h3>
-						<% end %>
-
-					</div><!--/.small-8-->
-				</div><!--/.row-->					
-<hr>			
-				<div class="row">
-					<div class="small-4 columns">
-						<%= f.check_box :verified_business_registration, label: ' Business Registration'  %>		
-					</div><!--/.small-4-->
-					<div class="small-8 columns">
-
-							<div class="row">
-								<div class="small-12 columns">
-										Company Name: 
-										<h3><%= @user.distributor.company_name %></h3>
-										 Contact Information:
-										 <% @user.distributor.contacts.each do |contact| %>
-										 <h3>
-										  <%= contact.firstname %> <%= contact.lastname %>,<br> <%= contact.title %><br>
-										  <% unless !contact.address %>
-											  <%= contact.address.address1 %><br>
-											  <%= contact.address.address2 %><br>
-											  <% unless contact.address.city.blank? && contact.address.state.blank? && contact.address.postcode.blank? %>
-											  <%= contact.address.city %> <%= contact.address.state %> <%= contact.address.postcode %><br>
-											  <% end %>
-											  <%= contact.address.country %><br>
-										  <% end %>
-										  <%= contact.phone %><br>
-										  <a href="mailto:<%= contact.email %>"><%= contact.email %></a>
-										</h3>
-										<% end %>
-								</div>
-							</div>
-
-					</div><!--/.small-8-->
-				</div><!--/.row-->			
-<hr>		
-				<div class="row">
-					<div class="small-4 columns">
-						<%= f.check_box :verified_client_brand, label: ' Client Brand'  %>		
-					</div><!--/.small-4-->
-					<div class="small-8 columns">
-						<h3>Current Brands</h3>
-						<% @user.distributor.distributor_brands.where(current: true).each do |b| %>
-							<%= b.brand %><br>
-							<small><%= b.website %></small>
-						<% end %>
-						<br>
-						<h3>Past Brands</h3>
-						<% @user.distributor.distributor_brands.where(current: false).each do |b| %>
-							<%= b.brand %> ( <small><%= link_to b.website, "//#{b.website}", target: 'blank' %></small> )
-						<% end %>						
-					</div><!--/.small-8-->
-				</div><!--/.row-->							
-<hr>
-				<div class="row">
-					<div class="small-4 columns">
-						<%= f.check_box :verified_business_certificate, label: ' Business Certificate'  %>		
-					</div><!--/.small-4-->
-					<div class="small-8 columns">
-						<% if @user.distributor.verification_business_certificate.exists? %>
-							<%= image_tag 'document.png', style: 'height:100px;' %><br>
-							<small><%= @user.distributor.verification_business_certificate_file_name %></small><br>
-							<%= link_to "View", @user.distributor.verification_business_certificate.url, :target => "_blank" %>
-						<% end %>					
-					</div><!--/.small-8-->
-				</div><!--/.row-->		
-
-<hr>
-				<div class="row">
-					<div class="small-4 columns">
-						<%= f.check_box :verified_location, label: ' Location'  %>		
-					</div><!--/.small-4-->
-					<div class="small-8 columns">
-								Location Photo <br>
-								<%= image_tag @user.distributor.verification_location_photo.url(:medium), alt: "Location Photo"%>
-								<%= @user.distributor.verification_location_photo.exists? ? (link_to "View Larger", @user.distributor.verification_location_photo.url(:large), :target => "_blank") : "" %>					
-					</div><!--/.small-8-->
-				</div><!--/.row-->		
-
-<hr>
-				<div class="row">
-					<div class="small-4 columns">
-						<%= f.check_box :verified_brand_display, label: ' Brand Display' %>		
-					</div><!--/.small-4-->
-					<div class="small-8 columns">
-						Brand Display Photo <br>
-						<%= image_tag @user.distributor.verification_brand_display_photo.url(:medium), alt: "Brand Display Photo"%>
-						<%= @user.distributor.verification_brand_display_photo.exists? ? (link_to "View Larger", @user.distributor.verification_brand_display_photo.url(:large), :target => "_blank") : "" %>					
-					</div><!--/.small-8-->
-				</div><!--/.row-->		
-
-				<%= f.submit %>
-
-				<% end %>
-				</div>
-			</div>
-
-		</div>
-	<% end %>
 	</div><!--/.medium-6-->	
 </div><!--/.row-->
 
