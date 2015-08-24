@@ -33,7 +33,13 @@
 		<div class="row collapse contact-view" id="contact-view-<%=user.contact.id%>">
 			<div class="medium-4 columns">
 				<div class="contacts-table item">
-					<%= user.email.blank? ? "(no email)" : "#{user.email}<br>".html_safe %>
+					<%= user.email.blank? ? "(no email)" : "#{user.email}".html_safe %>
+					<% if @current_user.administrator? %>
+					<%= link_to 'edit', edit_user_path(user), class: "itemformlink" %>
+					<% if b_or_d.users.count > 1 %>
+					<%= link_to 'delete', admin_delete_user_path(user), :method => 'delete', data: { :confirm => 'Are you sure you want to delete this user?'}, class: "itemformlink"  %>
+					<% end %>
+					<% end %>
 				</div>
 			</div><!--/.medium-2-->
 			<div class="medium-2 columns">

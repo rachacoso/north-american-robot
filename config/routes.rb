@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   get   '/admin/distributors' => 'admin#distributors_index', as: 'admin_distributors_index'
   get   '/admin/brands' => 'admin#brands_index', as: 'admin_brands_index'
   get   '/admin/distributors/:id' => 'admin#distributor_view', as: 'admin_distributor_view'
-  get   '/admin/brands/:id' => 'admin#brand_view', as: 'admin_brand_view'  
+  get   '/admin/brands/:id' => 'admin#brand_view', as: 'admin_brand_view'
+  post   '/admin/adduser/:id' => 'admin#add_user', as: 'admin_add_user'
+  delete   '/admin/deleteuser/:id' => 'admin#delete_user', as: 'admin_delete_user'
 
 
   resources :sectors, only: [:create, :update, :destroy]
@@ -55,7 +57,6 @@ Rails.application.routes.draw do
   # resources :sales_sizes, only: [:create, :update, :destroy]
   # resources :marketing_spends, only: [:create, :update, :destroy]
   
-
   resources :users, only: [:new, :create, :edit, :update, :destroy, :index]
   
   get    '/distributors' => 'distributors#edit', as: 'distributor'

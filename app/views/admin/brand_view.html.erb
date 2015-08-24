@@ -24,7 +24,7 @@
 
 
 <div class="row">
-	<div class="medium-6 columns">
+	<div class="medium-5 columns">
 		<div class="panel">
 			<h2>Upload Logo</h2>
 
@@ -60,24 +60,55 @@
 			<h3><%= !@brand.website.blank? ? (link_to "Website", "//#{clean_url(@brand.website)}", target: 'blank') : "NO Website" %></h3>
 
 		</div><!--/.panel -->
-	</div><!--/.medium-6-->
+	</div><!--/.medium-5-->
 
-	<div class="medium-6 columns">
+	<div class="medium-7 columns">
 
 		<div class="row">
 			<div class="small-12 columns">
 				<div class="panel">
 					<h2>Users</h2>
 					<small><span data-tooltip aria-haspopup="true" class="has-tip" title="Usernames associated with this account.">What is this?</span></small><br>
-					<% @brand.users.each do |user| %>
+					
+					<div class="admin-user-list">
+						<%= render partial: "/users/user_list", locals: {b_or_d: @brand} %>
+					</div>
+
+					<h5>Add User</h5>
+
+					<span class="error-message"><%= flash[:alert] %></span>
+
+					<%= form_for User.new, url: admin_add_user_path(@brand) do |f| %>
+					<div class="row">
+						<div class="medium-4 columns">
+						<%= f.text_field :email, label: false, placeholder: "Email (used as username)"  %>
+						</div><!--/.medium-4-->
+						<%= fields_for :contact do |ff| %>
+						<div class="medium-3 columns">
+							<%= ff.text_field :firstname, label: false, placeholder: "First Name" %>
+						</div><!--/.medium-4-->
+						<div class="medium-3 columns">
+							<%= ff.text_field :lastname, label: false, placeholder: "Last Name"  %>
+						</div><!--/.medium-4-->
+						<div class="medium-2 columns end">
+							<%= f.submit "Add", class: "button tiny alert" %>
+						</div>
+						<% end %>
+					</div><!--/.row-->
+
+					<hr>
+					<h2>Company Contacts</h2>
+					<% @brand.contacts.each do |contact| %>
 						<div class="row">
 							<div class="small-4 columns">
-							<h3><%= user.email %> (<%= link_to "edit", edit_user_path(user) %>)</h3>
+							<h3><%= contact.email %></h3>
 							</div><!--/.small-6-->
 							<div class="small-6 columns end">
-								<h4><%= user.contact.firstname %> <%= user.contact.lastname %></h4>
+								<h4><%= contact.firstname %> <%= contact.lastname %></h4>
 							</div><!--/.small-6-->
 						</div><!--/.row-->
+					<% end %>
+
 					<% end %>
 				</div>
 			</div><!--/.small-12-->
@@ -101,7 +132,7 @@
 		</div><!--/.row-->	
 
 
-	</div><!--/.medium-6-->
+	</div><!--/.medium-7-->
 </div><!--/.row-->
 
 <div class="row">

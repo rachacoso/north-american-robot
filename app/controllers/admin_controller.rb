@@ -115,6 +115,45 @@ class AdminController < ApplicationController
 
   end
 
+  def add_user
+    if params[:id]
+      id = params[:id]
+      b_or_d = Brand.find(id) || Distributor.find(id)
+      if !params[:user][:email].blank?
+
+        if User.where(email: params[:user][:email]).exists?
+          flash[:error] = "That email address is already in use"
+          redirect_to eval("admin_#{b_or_d.class.to_s.downcase}_view_path"), :alert => "That email/username is taken."
+        else        
+          pwd = SecureRandom.urlsafe_base64
+          user = User.new
+          user.build_contact
+          user.email = params[:user][:email]
+          user.password = pwd
+          user.password_confirmation = pwd
+          user.contact.firstname = params[:contact][:firstname]
+          user.contact.lastname = params[:contact][:lastname]
+          user.save!
+          b_or_d.users << user
+          redirect_to eval("admin_#{b_or_d.class.to_s.downcase}_view_path")
+        end
+
+      else
+        redirect_to eval("admin_#{b_or_d.class.to_s.downcase}_view_path"), :alert => "Enter an email address"
+      end
+
+    end
+  end
+
+  def delete_user
+    if params[:id]
+      if user = User.find(params[:id])
+        user.destroy
+      end
+    end
+    redirect_to :back
+  end
+
   private
   
   def administrators_only

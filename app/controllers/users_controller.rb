@@ -182,7 +182,7 @@ class UsersController < ApplicationController
         flash.now[:notice] = "Email has been changed from #{@user.email} to #{params[:user][:email]}"
         @user.email = params[:user][:email]
         @user.save!
-        redirect_to users_path
+        redirect_to :back
       end
 
     when 'password'
@@ -198,9 +198,9 @@ class UsersController < ApplicationController
       else
         @user.password = params[:user][:new_password]
         @user.password_confirmation = params[:user][:new_password_confirmation]
-        flash.now[:notice] = "You have changed your password"
+        flash[:notice] = "Password has been changed"
         @user.save!
-        redirect_to users_path
+        redirect_to :back
       end
     when 'admin'
       user = User.find(params[:id])

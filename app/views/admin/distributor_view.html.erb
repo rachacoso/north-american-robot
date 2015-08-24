@@ -25,7 +25,7 @@
 
 
 <div class="row">
-	<div class="medium-6 columns">
+	<div class="medium-5 columns">
 		
 		<div class="row">
 			
@@ -69,10 +69,9 @@
 
 		</div>
 
-	</div><!--/.medium-6-->
+	</div><!--/.medium-5-->
 
-<%= form_for @distributor, url: distributor_admin_update_path(@distributor) do |f| %>
-	<div class="medium-6 columns">
+	<div class="medium-7 columns">
 
 
 		<div class="row">
@@ -80,14 +79,52 @@
 				<div class="panel">
 					<h2>Users</h2>
 					<small><span data-tooltip aria-haspopup="true" class="has-tip" title="Usernames associated with this account.">What is this?</span></small><br>
-					<% @distributor.users.each do |user| %>
-						<h3><%= user.email %></h3>
-						<h3><%= user.contact.firstname %> <%= user.contact.lastname %></h3>
+					
+					<div class="admin-user-list">
+						<%= render partial: "/users/user_list", locals: {b_or_d: @distributor} %>
+					</div>
+
+					<h5>Add User</h5>
+
+					<span class="error-message"><%= flash[:alert] %></span>
+
+					<%= form_for User.new, url: admin_add_user_path(@distributor) do |f| %>
+					<div class="row">
+						<div class="medium-4 columns">
+						<%= f.text_field :email, label: false, placeholder: "Email (used as username)"  %>
+						</div><!--/.medium-4-->
+						<%= fields_for :contact do |ff| %>
+						<div class="medium-3 columns">
+							<%= ff.text_field :firstname, label: false, placeholder: "First Name" %>
+						</div><!--/.medium-4-->
+						<div class="medium-3 columns">
+							<%= ff.text_field :lastname, label: false, placeholder: "Last Name"  %>
+						</div><!--/.medium-4-->
+						<div class="medium-2 columns end">
+							<%= f.submit "Add", class: "button tiny alert" %>
+						</div>
+						<% end %>
+					</div><!--/.row-->
+
+					<hr>
+					<h2>Company Contacts</h2>
+					<% @distributor.contacts.each do |contact| %>
+						<div class="row">
+							<div class="small-4 columns">
+							<h3><%= contact.email %></h3>
+							</div><!--/.small-6-->
+							<div class="small-6 columns end">
+								<h4><%= contact.firstname %> <%= contact.lastname %></h4>
+							</div><!--/.small-6-->
+						</div><!--/.row-->
+					<% end %>
+
 					<% end %>
 				</div>
 			</div><!--/.small-12-->
 		</div><!--/.row-->
-
+		
+<%= form_for @distributor, url: distributor_admin_update_path(@distributor) do |f| %>
 
 		<div class="row">
 			<div class="small-12 columns">
@@ -237,7 +274,7 @@
 			</div>
 
 		</div>
-	</div><!--/.medium-6-->	
+	</div><!--/.medium-7-->	
 	<div class="small-12 columns text-right">
 		<div class="panel">
 		<%= f.submit 'Update Distributor', class: 'button tiny alert' %>
