@@ -202,16 +202,10 @@ class UsersController < ApplicationController
         @user.save!
         redirect_to users_path
       end
-
-    when 'logo'
-      profile = @user.brand || @user.distributor
-      logofile = params[:user]["#{@user.type?}_attributes".to_sym][:logo]
-      profile.logo = logofile
-      profile.save
-      redirect_to :back     
-    when 'adminsubscriber'
+    when 'admin'
       user = User.find(params[:id])
       user.update(user_parameters)
+      user.save!
       redirect_to :back
     end
 
