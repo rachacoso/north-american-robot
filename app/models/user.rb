@@ -25,8 +25,11 @@ class User
 	belongs_to :distributor
 	belongs_to :brand
 
-	# messages
+	# to identify who created messages
 	has_many :messages
+
+	# to identify who initiated matches
+	has_many :matches
 
 	accepts_nested_attributes_for :contact
 	accepts_nested_attributes_for :brand

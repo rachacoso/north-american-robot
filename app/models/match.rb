@@ -5,6 +5,9 @@ class Match
 	belongs_to :distributor
 	belongs_to :brand
 
+  # to identify who initiated
+  belongs_to :user
+
   field :initial_contact_by, type: String
 
   # is the match accepted by contactee

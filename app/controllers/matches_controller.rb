@@ -307,6 +307,7 @@ class MatchesController < ApplicationController
 
       u.matches << new_match
       @match.matches << new_match
+      @current_user.matches << new_match
 
       # get new data for the page refresh [NEED TO REFACTOR]
       if @current_user.distributor
