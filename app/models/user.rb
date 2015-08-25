@@ -25,6 +25,8 @@ class User
 	belongs_to :distributor
 	belongs_to :brand
 
+	# messages
+	has_many :messages
 
 	accepts_nested_attributes_for :contact
 	accepts_nested_attributes_for :brand

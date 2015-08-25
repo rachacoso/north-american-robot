@@ -675,10 +675,10 @@ class MatchesController < ApplicationController
       user = @current_user.distributor || @current_user.brand
       mm = user.matches
       m = mm.find(match_id)
-      m.messages << Message.new(recipient: @current_user.type_inverse?, text: text, stage: m.stage, read: false)
-      m.save!
-      # @messages = m.messages.order_by(:c_at.asc)
-      # @stage = m.stage
+      new_message = Message.new(recipient: @current_user.type_inverse?, text: text, stage: m.stage, read: false)
+      m.messages << new_message
+      @current_user.messages << new_message
+      # m.save!
 
   end
 

@@ -12,4 +12,7 @@ class Message
 
   field :stage, type: String  # stage: [contact,propose,prepare,order]
   
+  # log who sent it
+  belongs_to :user
+
 end
