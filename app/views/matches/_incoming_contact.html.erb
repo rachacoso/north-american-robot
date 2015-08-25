@@ -10,7 +10,7 @@
 			<div class="bubble-container">
 				<div class="bubble-them">
 					<%= simple_format(match.intro_message) %>
-					<small>Sent <%= match.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%d %b %Y at %H:%M %Z") %></small>
+					<small>Sent by <%= match.user.email %> at <%= match.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%d %b %Y at %H:%M %Z") %></small>
 				</div>	
 			</div>
 		</div>
