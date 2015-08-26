@@ -76,6 +76,14 @@ module ConversationsHelper
 		end
 	end
 
+	def show_proceed_stage_initial?(match)
+		if match.stage == "contact"
+			return match.messages.count > 1 ? true : false
+		else
+			return match.send("brand_shared_#{match.stage}") && match.send("distributor_shared_#{match.stage}") ? true : false
+		end
+	end
+
 	def get_next_stage(match)
 		case match.stage
 		when 'contact'
@@ -130,5 +138,6 @@ module ConversationsHelper
 			return "<span class='shared-indicator-bullet'>&bull;</span> #{display_name}<br>".html_safe
 		end
 	end
+
 
 end

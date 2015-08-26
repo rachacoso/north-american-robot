@@ -45,6 +45,8 @@
 								SHARE INFORMATION <br>with <%= profile.company_name %>
 							<% end %>	
 							
+							<%= render partial:"matches/conversation/preview_termsheet", locals: {profile: profile} %>
+
 						</div>
 						<div class="conversation-action-tile" id="action-two" style="display: none;">
 							<%= form_for match, url: match_share_path(match), class: 'conversation-share-form', remote: true do |f| %>
@@ -399,6 +401,9 @@
 						<%= link_to '#', id: "conversation-action-toggle", class: "button tiny alert expand" do %>
 							SHARE INFORMATION <br> with <%= profile.company_name %>
 						<% end %>
+
+						<%= render partial:"matches/conversation/preview_termsheet", locals: {profile: profile} %>
+
 					</div>
 
 					<div class="conversation-action-tile" id="action-two" style="display: none;">
@@ -686,11 +691,9 @@
 
 			<% end %>
 
-			<%= render partial:"matches/conversation/preview_termsheet", locals: {profile: profile} %>
+			<%#= render partial:"matches/conversation/preview_termsheet", locals: {profile: profile} %>
 
-			<% if match.brand_shared_propose && match.distributor_shared_propose %>
-				<%= render partial: "matches/conversation/proceed_stage_initial", locals: {match: match, stage: 'prepare'} %>
-			<% end %>
+			<%= render partial: "matches/conversation/proceed_stage_initial", locals: {match: match} %>
 
 		<% end %>		
 		

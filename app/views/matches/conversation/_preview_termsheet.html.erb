@@ -1,7 +1,7 @@
 <% if match = get_match(profile) %>
-<div class="conversation-action-tile active">
+<hr>
 	<h4><strong>PREVIEW TERM SHEET</strong></h4>
-	<p>Preview the current terms between you and <%= profile.company_name %></p>
+	<p>The information and documents you have been sharing are being saved in the Term Sheet. Preview the current terms between you and <%= profile.company_name %></p>
 	<a id="view-termsheet" class="button tiny alert expand" data-ajaxurl="<%= view_contract_url(match) %>">PREVIEW TERM SHEET</a>
-</div>
+
 <% end %>

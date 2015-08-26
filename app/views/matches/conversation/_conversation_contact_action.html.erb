@@ -9,11 +9,11 @@
 						<h4><strong><%= profile.company_name %></strong> accepted your request and should be messaging you shortly.</h4>
 					<% end %>
 				</div>
-				<% if !match.messages.blank? && match.stage == "contact" %>
-					<%= render partial: "matches/conversation/proceed_stage_initial", locals: {match: match, stage: 'propose'} %>
-				<% end %>
+
+				<%= render partial: "matches/conversation/proceed_stage_initial", locals: {match: match, stage: 'propose'} %>
+
 			<% else %>
-				<div class="conversation-action-tile <%= match.accepted? ? '' : 'active' %> text-center">
+				<div class="conversation-action-tile text-center">
 					<h4><span data-tooltip aria-haspopup="true" class="has-tip radius" title="AWAITING THEIR RESPONSE<BR> <SMALL> CONTACTED ON <%= match.c_at.strftime("%d %B %Y").upcase %></SMALL>">
 					<%= image_tag "match_profile_icons_waiting.svg" %></span><br>You have requested a conversation with <strong><%= profile.company_name %></strong> and are awaiting a response</h4>
 				</div>
@@ -26,9 +26,9 @@
 				
 					<h4><span data-tooltip aria-haspopup="true" class="has-tip radius" title="CONTACTED YOU<BR> <SMALL> CONTACTED ON <%= match.c_at.strftime("%d %B %Y").upcase %></SMALL>"><%= image_tag "match_profile_icons_conversation_incoming.svg" %></span><strong><%= profile.company_name %></strong> started a conversation with you</h4>
 				</div>
-				<% if !match.messages.blank? && match.stage == "contact" %>
+
 					<%= render partial: "matches/conversation/proceed_stage_initial", locals: {match: match, stage: 'propose'} %>
-				<% end %>
+
 			<% else %>
 			
 				<div class="conversation-action-tile <%= match.accepted? ? '' : 'active' %> text-center">
