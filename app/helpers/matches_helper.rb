@@ -28,10 +28,11 @@ module MatchesHelper
 
 		login_list = Array.new
 		match.users.each do |user|
-			login_list << user.last_login
+			if user.last_login
+				login_list << user.last_login
+			end
 		end
-
-		return login_list.sort!.first
+		return login_list.sort!.last
 
 	end
 
