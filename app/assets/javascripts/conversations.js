@@ -18,7 +18,7 @@ function setDivHeight(thisDiv, offset) {
 	var viewportHeight = $(window).height(),
 	    elementOffset = $(thisDiv).offset().top,
 	    height      = (viewportHeight - elementOffset - offset);
-  $(thisDiv).height(height);
+  $(thisDiv).css("min-height", height);
   console.log(viewportHeight, elementOffset, thisDiv, height);
 }
 
@@ -27,18 +27,19 @@ function initConversations() {
 	if (typeof conversationStage !== 'undefined') {
 		var conversationID = '#conversation-' + conversationStage + '-wrapper'
 		$(conversationID).slideDown();
-		setDivHeight('#profile-conversation-wrapper');
-		setDivHeight('#profile-profile-wrapper');
+		// setDivHeight('#profile-conversation-wrapper');
+		// setDivHeight('#profile-profile-wrapper');
 
 		// hack to fix bug where map-subhead wasn't being factored in convo block resize
-		if (typeof addOffset !== 'undefined') { 
-			setDivHeight('.conversation-block', addOffset);
-			setDivHeight('#conversation-action', addOffset);
-		} else {
-			setDivHeight('.conversation-block');
-			setDivHeight('#conversation-action');
-		}
+		// if (typeof addOffset !== 'undefined') { 
+		// 	setDivHeight('.conversation-block', addOffset);
+		// 	setDivHeight('#conversation-action', addOffset);
+		// } else {
+		// 	setDivHeight('.conversation-block');
+		// 	setDivHeight('#conversation-action');
+		// }
 	}
+
 
 	var animationSpeed = 500
 

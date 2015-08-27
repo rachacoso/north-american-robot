@@ -10,31 +10,17 @@ $( document ).ready(function() {
 				$('#tab-profile').removeClass('active');
 				$('#profile-conversation-wrapper').show();
 				$('#profile-profile-wrapper').hide();
-				if ($('#tab-contract').length) {
-					$('#tab-contract').removeClass('active');
-					$('#profile-contract-wrapper').hide();
-				}
-				setDivHeight('#profile-conversation-wrapper');
+				// setDivHeight('#profile-conversation-wrapper');
 			} else if (thisId == "tab-profile") {
 				$('#tab-conversation').removeClass('active');
 				$('#tab-profile').addClass('active');
 				$('#profile-conversation-wrapper').hide();
 				$('#profile-profile-wrapper').show();
-				if ($('#tab-contract').length) {
-					$('#tab-contract').removeClass('active');
-					$('#profile-contract-wrapper').hide();
-				}
-				setDivHeight('#profile-profile-wrapper');
+				// setDivHeight('#profile-profile-wrapper');
 				initFullProfile(true);
 			}
 		}
 	});
-
-	// $('#close-quick-view').on('click', function(e){
-	// 	// e.preventDefault();
-	// 	$('#quick-view').hide();
-	// 	$('.overlay').hide();
-	// });
 
 	$('.overlay#quick-view-overlay, a#close-quick-view').on('click', function(e){
 		e.preventDefault();
@@ -45,7 +31,7 @@ $( document ).ready(function() {
 
 });
 
-function initFullProfile (reload) {
+function initFullProfile(reload) {
 	var galleryDiv = ".gallery-" + profileType
 	var defaultCollectionDiv = "." + profileType + "-default"
 	doBackstretch(galleryDiv, bsPhotos, 3000, 0);

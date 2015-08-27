@@ -1,8 +1,7 @@
 <% hide_top_bar ||= false %>
 <% content_for :user_head do %>
 
-<div  id="topbar-general">
-	<div class="contain-to-grid <%= hide_top_bar ? "" : "fixed"%>">
+	<div class="contain-to-grid <%= hide_top_bar ? "" : "fixed"%>" id="topbar-general">
 
 		<nav class="top-bar" data-topbar role="navigation">
 
@@ -155,5 +154,4 @@
 		</nav>
 
 	</div>
-</div>
 <% end %>

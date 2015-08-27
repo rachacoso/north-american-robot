@@ -295,9 +295,14 @@ top: 10px;
   margin: 0 rem-calc(14) rem-calc(14) rem-calc(14);  
 }
 
+#conversation-wrapper {
+  min-height: 50vh;
+  background: white;
+}
+
 #profile-conversation-wrapper {
   // overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-y: scroll;
 }
 #profile-profile-wrapper {
   // overflow-x: hidden;
@@ -391,6 +396,10 @@ top: 10px;
   h6 {
     margin:0;
   }
+}
+
+#conversation-map {
+  border-top: rem-calc(20) solid white;
 }
 #conversation-section-header {
   background: $landing-light-gray
