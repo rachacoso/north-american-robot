@@ -126,13 +126,20 @@
 										data: "territory_exclusivity_terms"
 										}
 								%>
-								<%= render partial: "matches/conversation/termsheet_item_row", locals: {
-										name: "Channel Rights",
-										subhead: "Which channels are covered by the agreement",
-										datatype: "text",
-										data: "channel_rights"
-										}
-								%>
+								<tr class="<%= @m.channel_rights.blank? ? 'inactive': ' ' %>">
+									<td class="item"><h3>Channel Rights<br><small>Which channels are covered by the agreement</small></h3></td>
+									<td class="terms">
+										<%= simple_format(@m.channel_rights) %>
+									</td>
+									<td class="notes <%= @m.retail_channel_requests_or_requirements.blank? ? '' : 'active' %>">
+										<% unless @m.retail_channel_requests_or_requirements.blank? %>
+											<h3><%= @m.brand.company_name %> Retail Channel Requests/Requirements</h3>
+											<%= simple_format(@m.retail_channel_requests_or_requirements) %>
+										<% end %>
+									</td>
+									<td class="brandapproval"></td>
+									<td class="distributorapproval"></td>
+								</tr>
 								<tr class="<%= @m.marketing_commitments.blank? ? 'inactive': ' ' %>">
 									<td class="item"><h3>Marketing Commitments<br><small>How much distributor will commit to marketing the brand in the territory</small></h3></td>
 									<td class="terms">
@@ -307,12 +314,7 @@
 											</ul>
 										<% end %>
 									</td>
-									<td class="notes <%= @m.retail_channel_requests_or_requirements.blank? ? '' : 'active' %>">
-										<% unless @m.retail_channel_requests_or_requirements.blank? %>
-											<h3><%= @m.brand.company_name %> Retail Channel Requests/Requirements</h3>
-											<%= simple_format(@m.retail_channel_requests_or_requirements) %>
-										<% end %>
-									</td>
+									<td class="notes"></td>
 									<td class="brandapproval"></td>
 									<td class="distributorapproval"></td>
 								</tr>
