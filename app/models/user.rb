@@ -25,15 +25,16 @@ class User
 	belongs_to :distributor
 	belongs_to :brand
 
+	accepts_nested_attributes_for :brand
+	accepts_nested_attributes_for :distributor
+
 	# to identify who created messages
 	has_many :messages
 
 	# to identify who initiated matches
 	has_many :matches
 
-	accepts_nested_attributes_for :contact
-	accepts_nested_attributes_for :brand
-	accepts_nested_attributes_for :distributor
+
 
 	scope :is_subscriber, ->{where(subscriber: true)}
 
