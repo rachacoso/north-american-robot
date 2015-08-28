@@ -48,7 +48,7 @@
 				<div class="errornotice <%= flash[:error] ? "error-on" : "" %>"><%= flash[:error] ? flash[:error].upcase.html_safe : "&nbsp;".html_safe %></div>				
 				<%= form_for @newuser do |f| %>
 					<%= hidden_field_tag :administrator, 'true' %>
-					<%= f.fields_for :user_profile do |ff| %>
+					<%= f.fields_for :contact do |ff| %>
 					<div class="row collapse">
 					<div class="medium-6 columns">
 						<%= ff.text_field :firstname, :placeholder => 'First Name', :label => false  %>
