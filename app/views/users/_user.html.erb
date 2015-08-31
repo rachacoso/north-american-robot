@@ -14,12 +14,10 @@
 			</div><!--/.small-1-->
 
 			<div class="small-10 columns">
-
-		<% unless user.administrator %>
-		<strong><%= profile.company_name %></strong><br>
-		<% end %>
-		<%= user.email %>
-
+				<% unless user.administrator %>
+				<strong><%= profile.company_name %></strong> [<%= user.brand ? "BRAND" : "DISTRIBUTOR" %>]<br>
+				<% end %>
+				<%= user.email %>
 			</div><!--/.small-11-->
 
 		</div><!--/.row-->

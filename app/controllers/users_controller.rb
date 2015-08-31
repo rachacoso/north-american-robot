@@ -120,6 +120,7 @@ class UsersController < ApplicationController
     @brands = User.all.reject{ |r| r.brand.nil? }.reject{ |r| r.brand.company_name.nil? }.sort_by{|i| i.brand.company_name}
 
     @admins = User.where(administrator: true)
+    @users = User.where(:administrator.exists => false)
 
     @newuser = User.new
     @newuser.build_contact
@@ -133,28 +134,39 @@ class UsersController < ApplicationController
       @admins = @admins.page(1).per(20)
     end   
 
-    if params[:page_distributors]
-      @distributors = do_kaminari_array(@distributors,params[:page_distributors])
-      @active_section = 'distributors'
-    elsif params[:search_distributors]
-      @distributors = User.where(email: /#{params[:search_distributors]}/i ).reject{ |r| r.distributor.nil?}.reject{ |r| r.distributor.company_name.nil? }.sort_by{|i| i.distributor.company_name}
-      @distributors = do_kaminari_array(@distributors, 1)
-      @active_section = 'distributors'
-    else
-      @distributors = do_kaminari_array(@distributors, 1)
-    end
+    # if params[:page_distributors]
+    #   @distributors = do_kaminari_array(@distributors,params[:page_distributors])
+    #   @active_section = 'distributors'
+    # elsif params[:search_distributors]
+    #   @distributors = User.where(email: /#{params[:search_distributors]}/i ).reject{ |r| r.distributor.nil?}.reject{ |r| r.distributor.company_name.nil? }.sort_by{|i| i.distributor.company_name}
+    #   @distributors = do_kaminari_array(@distributors, 1)
+    #   @active_section = 'distributors'
+    # else
+    #   @distributors = do_kaminari_array(@distributors, 1)
+    # end
 
-    if params[:page_brands]
-      @brands = do_kaminari_array(@brands, params[:page_brands])
-      @active_section = 'brands'
-    elsif params[:search_brands]
-      @brands = User.where(email: /#{params[:search_brands]}/i ).reject{ |r| r.brand.nil? }.reject{ |r| r.brand.company_name.nil? }.sort_by{|i| i.brand.company_name}
-      @brands = do_kaminari_array(@brands, 1)
-      @active_section = 'brands'      
-    else
-      @brands = do_kaminari_array(@brands, 1)
-    end   
+    # if params[:page_brands]
+    #   @brands = do_kaminari_array(@brands, params[:page_brands])
+    #   @active_section = 'brands'
+    # elsif params[:search_brands]
+    #   @brands = User.where(email: /#{params[:search_brands]}/i ).reject{ |r| r.brand.nil? }.reject{ |r| r.brand.company_name.nil? }.sort_by{|i| i.brand.company_name}
+    #   @brands = do_kaminari_array(@brands, 1)
+    #   @active_section = 'brands'      
+    # else
+    #   @brands = do_kaminari_array(@brands, 1)
+    # end   
 
+    if params[:page_users]
+      @users = do_kaminari_array(@users, params[:page_users])
+      @active_section = 'users'
+    elsif params[:search_users]
+      @users = User.where(email: /#{params[:search_users]}/i ).reject{ |r| r.administrator }
+      @users = do_kaminari_array(@users, 1)
+      @active_section = 'users'
+      @active_search = 'true'
+    else
+      @users = do_kaminari_array(@users, 1)
+    end  
 
   end
 

@@ -25,8 +25,7 @@
 	<div class="small-10 small-centered columns">
 		<ul class="tabs right" data-tab>
 		  <li class="tab-title <%= @active_section == 'admin' ? 'active' : '' %>"><a href="#panel1">Administrators</a></li>
-		  <li class="tab-title <%= !@active_section ? "active" : "" %><%= @active_section == 'distributors' ? 'active' : '' %>"><a href="#panel2">Distributors</a></li>
-		  <li class="tab-title <%= @active_section == 'brands' ? 'active' : '' %>"><a href="#panel3">Brands</a></li>
+		  <li class="tab-title <%= !@active_section || @active_section == 'users' ? "active" : "" %>"><a href="#panel2">Users</a></li>
 		</ul>
 	</div>
 </div>
@@ -78,51 +77,36 @@
 
 	</div>
 
-	<div class="content <%= !@active_section ? "active" : "" %><%= @active_section == 'distributors' ? 'active' : '' %>" id="panel2">
+	<div class="content <%= !@active_section || @active_section == 'users' ? 'active' : '' %>" id="panel2">
 		<div class="row">
 			<div class="small-10 small-centered columns panel">
 				<%= form_tag(users_url, method: 'get') do %>
 					<div class="row">
 						<div class="medium-6 columns">
-							<h3><strong>Distributors</strong></h3>		
+							<h3><strong>Users</strong></h3>		
 						</div><!--/.medium-6-->
 						<div class="medium-6 columns">
-							<%= text_field_tag('search_distributors', "", {:placeholder => 'SEARCH'}) %>			
-						</div><!--/.medium-6-->
-					</div><!--/.row-->
-				<% end %>
-				<% if !@distributors.empty? %>
-				<%= paginate @distributors, :param_name => :page_distributors %>
-				<hr>
-				<%= render partial: @distributors.sort_by { |d| d.distributor.company_name }, spacer_template: "shared/indexspacer" %>
-				<% else %>
-				<hr>
-				<h3><em>No Distributors</em></h3>
-				<% end %>
-			</div>
-		</div>
-	</div>
 
-	<div class="content <%= @active_section == 'brands' ? 'active' : '' %>" id="panel3">
-		<div class="row">
-			<div class="small-10 small-centered columns panel">
-				<%= form_tag(users_url, method: 'get') do %>
-					<div class="row">
-						<div class="medium-6 columns">
-							<h3><strong>Brands</strong></h3>		
-						</div><!--/.medium-6-->
-						<div class="medium-6 columns">
-							<%= text_field_tag('search_brands', "", {:placeholder => 'SEARCH'}) %>			
+							<div class="row collapse">
+								<div class="small-2 columns">
+									<span class="prefix"><i class="fi-magnifying-glass"></i></span>
+								</div><!--/.small-2-->
+								<div class="small-10 columns">
+									<%= text_field_tag('search_users', "", {:placeholder => 'SEARCH', style: 'margin-bottom: 0;'}) %>
+									<h3><small><%= @active_search == 'true' ? (link_to 'Back to All Users', users_path) : ''%></small></h3>
+								</div><!--/.small-10-->
+							</div>
+
 						</div><!--/.medium-6-->
 					</div><!--/.row-->
 				<% end %>
-				<% if !@brands.empty? %>
-				<%= paginate @brands, :param_name => :page_brands %>
+				<% if !@users.empty? %>
+				<%= paginate @users, :param_name => :page_users %>
 				<hr>
-				<%= render partial: @brands.sort_by { |b| b.brand.company_name }, spacer_template: "shared/indexspacer" %>
+				<%= render partial: @users.sort_by { |b| b.email }, spacer_template: "shared/indexspacer" %>
 				<% else %>
 				<hr>
-				<h3><em>No Brands</em></h3>
+				<h3><em>No Users</em></h3>
 				<% end %>				
 			</div>
 		</div>

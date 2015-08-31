@@ -21,7 +21,7 @@
 		<div class="row">
 			<div class="small-12 columns">
 				<div class="panel">
-					<% if @current_user.administrator %>
+					<% if @user.administrator %>
 						<h3>User is an <strong>administrator</strong></h3>
 					<% else %>
 						<h3>User associated with <strong><%= link_to @user.send(@user.type?).company_name, eval("admin_#{@user.type?}_view_path(@user.send(@user.type?))") %></strong></h3>

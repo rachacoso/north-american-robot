@@ -3,8 +3,7 @@
 	<div class="small-12 columns">
 		<div class="panel">
 			<h2>
-				<%= @distributors ? "Distributors" : "" %>
-				<%= @brands ? "Brands" : "" %>
+				<%= @distributors ? "Distributors" : "Brands" %>
 			</h2>
 		</div>
 	</div>
@@ -18,9 +17,9 @@
 				<span class="prefix"><i class="fi-magnifying-glass"></i></span>
 			</div><!--/.small-1-->
 			<div class="small-11 columns">
-				<%= text_field_tag(:q, "", :placeholder => 'Search by Company Name', :value => @query) %>
+				<%= text_field_tag(:q, "", :placeholder => 'Search by Company Name', :value => @query, :style => "margin-bottom: 0;") %>
 				<% if @query %>
-					<small><%= link_to "Clear Search", eval("admin_#{@distributors ? "distributors" : "brands"}_index_path") %></small>
+					<small><%= link_to "BACK TO ALL #{@distributors ? "DISTRIBUTORS" : "BRANDS"} LIST", eval("admin_#{@distributors ? "distributors" : "brands"}_index_path") %></small>
 				<% end %>
 			</div><!--/.small-11-->
 
