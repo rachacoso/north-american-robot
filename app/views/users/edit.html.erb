@@ -108,6 +108,16 @@
 		</div>
 
 
+<div class="row">
+	<div class="small-12 columns">
+		<div class="panel">
+			<h2>Delete User - <%= @user.email %></h2>
+			<h6><strong style="color: red;">All Deletions are Final</strong></h6>
+			<%= button_to "Delete User", user_path, :method => 'delete', data: { :confirm => 'Are you sure you want to delete this user?'} , class: "tiny radius alert button" %>
+		</div>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
 
 
 	</div><!--/.medium-6-->
