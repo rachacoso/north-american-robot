@@ -14,14 +14,14 @@
 		<div class="conversation-action-tile active">
 			<h4><strong>PROCEED to next stage <%= next_stage %></strong></h4>
 			<% if next_stage == "PROPOSE" %>
-				<h4>You can proceed to the next stage of the conversation, <strong>PROPOSE</strong>, to start discussing the details of your potential partnership.</h4>
+				<p>You can proceed to the next stage of the conversation, <strong>PROPOSE</strong>, to start discussing the details of your potential partnership.</p>
 			<% elsif next_stage == "PREPARE" %>
-				<h4>If you've both agreed on the terms of your partnership, you can proceed to the next stage of the conversation, <strong>PREPARE</strong>, to make sure you're properly prepared to start international distribution.</h4>
+				<p>If you've both agreed on the terms of your partnership, you can proceed to the next stage of the conversation, <strong>PREPARE</strong>, to make sure you're properly prepared to start international distribution.</p>
 			<% elsif next_stage == "ORDER" %>
-				<h4>If you've both properly prepared for international distribution, you can proceed to the next stage of the conversation, <strong>ORDER</strong>, to finalize your first order.</h4>
+				<p>If you've both properly prepared for international distribution, you can proceed to the next stage of the conversation, <strong>ORDER</strong>, to finalize your first order.</p>
 			<% end %>
 			<br>
-			<h4>Send a request to <%=match.send(@current_user.type_inverse?).company_name%> to proceed to the next stage <strong><%= get_next_stage(match) %></strong></h4>
+			<p>Send a request to <%=match.send(@current_user.type_inverse?).company_name%> to proceed to the next stage <strong><%= get_next_stage(match) %></strong></p>
 			<%= button_to "PROCEED TO #{get_next_stage(match)}" , match_stage_update_path(match), :class => "button tiny alert expand", data: {confirm: 'Yes, I want to send a request to proceed'}, remote: true %>
 		</div>
 	<% end %>
@@ -31,14 +31,14 @@
 		<div class="conversation-action-tile">
 			<h4><strong>To PROCEED to next stage <%= next_stage %> ...</strong></h4>
 			<% if next_stage == "PROPOSE" %>
-				<h4>After getting acquainted, you can proceed to the next stage of the conversation, <strong>PROPOSE</strong>, to start discussing the details of your potential partnership. But before you can proceed, both you and <%=match.send(@current_user.type_inverse?).company_name%> need to exchange messages.</h4>
+				<p>After getting acquainted, you can proceed to the next stage of the conversation, <strong>PROPOSE</strong>, to start discussing the details of your potential partnership. But before you can proceed, both you and <%=match.send(@current_user.type_inverse?).company_name%> need to exchange messages.</p>
 			<% elsif next_stage == "PREPARE" %>
-				<h4>After you and <%=match.send(@current_user.type_inverse?).company_name%> have agreed on the terms of your partnership, you can proceed to the next stage of the conversation, <strong>PREPARE</strong>, to make sure you and <%=match.send(@current_user.type_inverse?).company_name%> are properly prepared to start international distribution.</h4>
+				<p>After you and <%=match.send(@current_user.type_inverse?).company_name%> have agreed on the terms of your partnership, you can proceed to the next stage of the conversation, <strong>PREPARE</strong>, to make sure you and <%=match.send(@current_user.type_inverse?).company_name%> are properly prepared to start international distribution.</p>
 			<% elsif next_stage == "ORDER" %>
-				<h4>After you and <%=match.send(@current_user.type_inverse?).company_name%> have properly prepared for international distribution, you can proceed to the next stage of the conversation, <strong>ORDER</strong>, to finalize your first order.</h4>
+				<p>After you and <%=match.send(@current_user.type_inverse?).company_name%> have properly prepared for international distribution, you can proceed to the next stage of the conversation, <strong>ORDER</strong>, to finalize your first order.</p>
 			<% end %>
 			<% if match.stage != "contact" %>
-				<h4>Before you can proceed, both you and <%=match.send(@current_user.type_inverse?).company_name%> need to share all relevant term sheet items - listed above in the <strong>SHARE INFORMATION</strong> section.  If you have shared all your required information but cannot yet proceed, this means that <%=match.send(@current_user.type_inverse?).company_name%> still needs to complete sharing of all of their required information. </strong></h4>
+				<p>Before you can proceed, both you and <%=match.send(@current_user.type_inverse?).company_name%> need to share all relevant term sheet items - listed above in the <strong>SHARE INFORMATION</strong> section.  If you have shared all your required information but cannot yet proceed, this means that <%=match.send(@current_user.type_inverse?).company_name%> still needs to complete sharing of all of their required information. </strong></p>
 			<% end %>
 		</div>
 

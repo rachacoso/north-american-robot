@@ -232,6 +232,16 @@ top: 10px;
   overflow-y: scroll;
 }
 
+.action-information {
+  color: $landing-orange;
+  h4 {
+    color: $landing-orange;
+  }
+  padding: rem-calc(8) 0 rem-calc(10) 0;
+  border-top: 1px solid $landing-orange;
+  border-bottom: 1px solid $landing-orange;
+  margin: rem-calc(15) 0 rem-calc(5) 0;
+}
 
 .conversation-action-tile,
 .conversation-action-center-tile {

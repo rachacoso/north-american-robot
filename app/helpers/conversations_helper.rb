@@ -84,6 +84,22 @@ module ConversationsHelper
 		end
 	end
 
+	def match_has_not_shared_yet(match)
+		if @current_user.distributor
+			if match.send("distributor_shared_#{match.stage}") && !match.send("brand_shared_#{match.stage}")
+				return true
+			else
+				return false
+			end
+		else
+			if !match.send("distributor_shared_#{match.stage}") && match.send("brand_shared_#{match.stage}")
+				return true
+			else
+				return false
+			end
+		end
+	end
+
 	def get_next_stage(match)
 		case match.stage
 		when 'contact'

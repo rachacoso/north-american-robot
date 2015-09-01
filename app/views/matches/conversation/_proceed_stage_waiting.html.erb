@@ -1,0 +1,9 @@
+<% if match_has_not_shared_yet(match) %>
+
+				<div class="conversation-action-tile text-left">
+					<h4><span data-tooltip aria-haspopup="true" class="has-tip radius" title="WAITING FOR <%= profile.company_name %> TO SHARE INFORMATION">
+					<%= image_tag "match_profile_icons_waiting.svg" %></span><br>Thanks for sharing your information.</strong><br>
+	<%= profile.company_name %> needs to share all of their information before you can proceed to the next stage of the conversation.</h4>
+				</div>
+
+<% end %>

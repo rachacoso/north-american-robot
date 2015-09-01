@@ -3,9 +3,12 @@
 
 		<% if match && !match.messages.blank? && match.stage == "prepare" %>
 
+			<%= render partial: "matches/conversation/proceed_stage_waiting", locals: {match: match, profile: profile} %>
+
 			<% if @current_user.brand %>
-	
+
 				<% if has_all_docs('prepare') %>
+
 					<div class="conversation-action-tile active" id="action-one">
 						<h4><strong>SHARE INFORMATION with <%= profile.company_name %></strong></h4>
 						<p>You can share information to help prepare for international distribution</p>
@@ -155,8 +158,6 @@
 
 
 			<% elsif @current_user.distributor %>
-
-
 
 				<div class="conversation-action-tile active" id="action-one">
 					<h4><strong>SHARE INFORMATION with <%= profile.company_name %></strong></h4>
