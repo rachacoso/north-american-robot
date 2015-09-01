@@ -63,6 +63,8 @@ gem 'remotipart', '~> 1.2'
 
 gem 'browser'
 
+gem 'mailgun-ruby', '~>1.0.3', require: 'mailgun'
+
 group :production do
   gem 'pg'
 end
