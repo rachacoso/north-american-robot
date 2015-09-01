@@ -65,6 +65,8 @@ gem 'browser'
 
 gem 'mailgun-ruby', '~>1.0.3', require: 'mailgun'
 
+gem "figaro"
+
 group :production do
   gem 'pg'
 end
