@@ -1,0 +1,7 @@
+# Add configuration values here, as shown below.
+#
+
+# FOR MAILGUN CONFIG
+domain: just.An.Example.Domain
+username: justAnExampleUsername
+password: justAnExamplePassword
