@@ -2,6 +2,8 @@
 #
 
 # FOR MAILGUN CONFIG
-domain: just.An.Example.Domain
-username: justAnExampleUsername
-password: justAnExamplePassword
+MAILGUN_DOMAIN: JustAnExample
+MAILGUN_SMTP_LOGIN: JustAnExample
+MAILGUN_SMTP_PASSWORD: JustAnExample
+MAILGUN_SMTP_PORT: JustAnExample
+MAILGUN_SMTP_SERVER: JustAnExample
