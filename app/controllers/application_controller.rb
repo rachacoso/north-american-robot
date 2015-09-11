@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
       else
        cookies.delete :auth_token
        @current_user = nil
-       flash[:notice] = "YOU MUST BE LOGGED IN TO ACCESS11"
+       flash[:notice] = "YOU MUST BE LOGGED IN TO ACCESS (err: 11)"
        redirect_to login_url # halts request cycle       
       end
     end
@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
  
   def require_login
     unless @current_user
-      flash[:notice] = "YOU MUST BE LOGGED IN TO ACCESS22"
+      flash[:notice] = "YOU MUST BE LOGGED IN TO ACCESS (err: 22)"
       redirect_to login_url # halts request cycle
     end
   end
