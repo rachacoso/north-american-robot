@@ -258,21 +258,28 @@ class MatchesController < ApplicationController
   def view_match
 
     if @current_user.distributor 
-      @match = Brand.find(params[:match_id])
-      @stage = @current_user.distributor.matches.where(brand_id: params[:match_id]).first.stage rescue nil
-      @messages = @current_user.distributor.matches.where(brand_id: @match.id).first.messages.order_by(:c_at.desc) rescue nil
-      # @gallery = Array.new
-      @product_list = @match.products.pluck(:id)
-      @product_photos = ProductPhoto.where(:photographable_id.in => @product_list)
-      @brand_photos = @match.brand_photos
-      @gallery = @product_photos.concat @brand_photos
-
+      if Brand.find(params[:match_id])
+        @match = Brand.find(params[:match_id])
+        @stage = @current_user.distributor.matches.where(brand_id: params[:match_id]).first.stage rescue nil
+        @messages = @current_user.distributor.matches.where(brand_id: @match.id).first.messages.order_by(:c_at.desc) rescue nil
+        # @gallery = Array.new
+        @product_list = @match.products.pluck(:id)
+        @product_photos = ProductPhoto.where(:photographable_id.in => @product_list)
+        @brand_photos = @match.brand_photos
+        @gallery = @product_photos.concat @brand_photos
+      else
+        redirect_to root_url
+      end
     else # is a brand
-      @match = Distributor.find(params[:match_id])
-      @stage = @current_user.brand.matches.where(distributor_id: params[:match_id]).first.stage rescue nil
-      @messages = @current_user.brand.matches.where(distributor_id: @match.id).first.messages.order_by(:c_at.desc) rescue nil
-      @brands_list = @match.distributor_brands.pluck(:id)
-      @gallery = ProductPhoto.where(:photographable_id.in => @brands_list)
+      if Distributor.find(params[:match_id])
+        @match = Distributor.find(params[:match_id])
+        @stage = @current_user.brand.matches.where(distributor_id: params[:match_id]).first.stage rescue nil
+        @messages = @current_user.brand.matches.where(distributor_id: @match.id).first.messages.order_by(:c_at.desc) rescue nil
+        @brands_list = @match.distributor_brands.pluck(:id)
+        @gallery = ProductPhoto.where(:photographable_id.in => @brands_list)
+      else 
+        redirect_to root_url
+      end
     end
 
     
