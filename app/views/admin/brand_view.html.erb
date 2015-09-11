@@ -77,28 +77,31 @@
 					<div class="admin-user-list">
 						<%= render partial: "/users/user_list", locals: {b_or_d: @brand} %>
 					</div>
-
-					<h5>Add User</h5>
-
 					<span class="error-message"><%= flash[:alert] %></span>
-
 					<%= form_for User.new, url: admin_add_user_path(@brand) do |f| %>
-					<div class="row">
-						<div class="medium-4 columns">
-						<%= f.text_field :email, label: false, placeholder: "Email (used as username)"  %>
-						</div><!--/.medium-4-->
-						<%= fields_for :contact do |ff| %>
-						<div class="medium-3 columns">
-							<%= ff.text_field :firstname, label: false, placeholder: "First Name" %>
-						</div><!--/.medium-4-->
-						<div class="medium-3 columns">
-							<%= ff.text_field :lastname, label: false, placeholder: "Last Name"  %>
-						</div><!--/.medium-4-->
-						<div class="medium-2 columns end">
-							<%= f.submit "Add", class: "button tiny alert" %>
-						</div>
-						<% end %>
-					</div><!--/.row-->
+					<table class="contacts-table" style="border: 1px solid #efefef;">
+						<tr>
+							<td>
+								<h5>Add User</h5>
+								<div class="row collapse">
+									<div class="medium-4 columns">
+									<%= f.text_field :email, label: false, placeholder: "Email (used as username)"  %>
+									</div><!--/.medium-4-->
+									<%= fields_for :contact do |ff| %>
+									<div class="medium-3 columns">
+										<%= ff.text_field :firstname, label: false, placeholder: "First Name" %>
+									</div><!--/.medium-4-->
+									<div class="medium-3 columns">
+										<%= ff.text_field :lastname, label: false, placeholder: "Last Name"  %>
+									</div><!--/.medium-4-->
+									<div class="medium-2 columns end">
+										<%= f.submit "Add", class: "button tiny alert postfix" %>
+									</div>
+									<% end %>
+								</div><!--/.row-->
+							</td>
+						</tr>
+					</table>
 
 					<hr>
 					<h2>Company Contacts</h2>
