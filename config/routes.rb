@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   post  '/login' => 'session#create'
   get   '/logout' => 'session#destroy', as: 'logout'
 
+  get   '/ns/:id/' => 'home#share', as: 'new_share'
+
   get   '/dashboard' => 'home#dashboard', as: 'dashboard'
 
   get   '/admin' => 'admin#index', as: 'admin'
