@@ -1,0 +1,87 @@
+
+<div class="ps-panel">
+	<div class="row">
+		<div class="small-12 columns">
+			<h3>Are you new to Landing International?</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-12 columns">
+			<h2>Enter your email address to get started</h2>
+		</div>
+	</div>
+
+	<%= form_tag prospect_share_login_url, method: 'post', remote: true  do %>
+	<%= hidden_field_tag :share_id, @share_id %>
+	<div class="row collapse">
+		<div class="small-10 columns">
+			<%= email_field_tag :email, @prospect_email, placeholder: 'EMAIL'%>
+		</div>
+		<div class="small-2 columns">
+			<%= submit_tag "NEXT", class: "alert button postfix", style: "padding:0;" %>
+		</div><!--/.small-1-->
+	</div>
+	<% end %>
+
+</div>
+
+<div class="row">
+	<div class="small-5 columns">
+		<hr>
+	</div><!--/.small-5-->
+	<div class="small-2 columns text-center">
+		<h2><strong>OR</strong></h2>
+	</div><!--/.small-2-->
+	<div class="small-5 columns">
+		<hr>
+	</div><!--/.small-5-->
+</div><!--/.row-->
+
+
+
+
+
+<div class="ps-panel">
+	<div class="row">
+		<div class="small-12 columns">
+			<h3>Are you returning to Landing International?</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-12 columns">
+			<h2>Login</h2>
+			<div class="errornotice <%= flash[:notice] ? "error-on" : "" %>">
+				<%= flash[:notice] ? flash[:notice].html_safe : "&nbsp;".html_safe %>
+			</div>
+			<%= form_tag '/login', method: 'post', id: "loginform" do %>
+			<%= hidden_field_tag :share_id, @share_id %>
+		  <div class="row">
+				<div class="small-12 columns">
+					<%= email_field_tag :email, '', placeholder: 'EMAIL'%>
+				</div>
+			</div>
+			<div class="row">
+				<div class="small-12 columns">
+					<%= password_field_tag :password, '', placeholder: 'PASSWORD' %>
+				</div>
+			</div>
+			<div class="row">
+				<div class="medium-8 columns">
+					<div class="row">
+						<div class="small-1 columns">
+							<%= check_box_tag :keep_me_logged_in %>
+						</div>
+						<div class="small-11 columns">
+							<%= label_tag :keep_me_logged_in, 'KEEP ME LOGGED IN', style: "color:white;" %>
+						</div>
+					</div>
+				</div>
+				<div class="medium-4 columns text-right">
+					<%= submit_tag "LOGIN", class: "alert button", id: "submit-login", style: "padding:0;" %>
+					<%#= link_to 'LOGIN', "#", :onclick => "$('#loginform').submit()".html_safe, class: "alert button expand" %>
+				</div>
+			</div>
+			<% end %>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+</div>

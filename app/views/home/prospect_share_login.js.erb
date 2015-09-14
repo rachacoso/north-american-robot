@@ -1,0 +1,9 @@
+<% if @return %>
+
+	$('#p-share-lg').hide().html("<%= j (render(partial: 'home/prospect_share/ps_login')) %>").slideToggle(500);
+
+<% else %>
+
+	$('#p-share-lg').hide().html("<%= j (render(partial: 'home/prospect_share/ps2')) %>").slideToggle(500);
+
+<% end %>

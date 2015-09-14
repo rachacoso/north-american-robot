@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   
-  skip_before_action :require_login, only: [:front]
+  skip_before_action :require_login, only: [:front, :prospect_share, :prospect_share_login]
 
 	def front
 		if @current_user
@@ -54,5 +54,44 @@ class HomeController < ApplicationController
 
 	end
 
+	def prospect_share
+		if @share_id = params[:id]
+			if @current_user
+				if @current_user.brand
+					# currently can only share brands, so only visible by distributors
+					redirect_to dashboard_url
+				elsif @current_user.distributor
+					redirect_to view_match_url(@share_id, 'na')
+				elsif @current_user.administrator
+					redirect_to admin_brand_view_url(@share_id)
+				end
+			elsif params[:prospect_email]
+				@prospect_email = params[:prospect_email]
+			end
+		else
+			redirect_to root
+		end
+		render layout: "front"
+	end
+
+	def prospect_share_login
+		if params[:return] == "true"
+			@return = true
+		elsif @share_id = params[:share_id] && @email = params[:email]
+			if User.where(email: @email).exists?
+				@has_a_login = true
+			else
+
+			end
+		else
+			redirect_to root
+		end
+
+		respond_to do |format|
+			format.html
+			format.js
+		end 
+
+	end
 
 end
