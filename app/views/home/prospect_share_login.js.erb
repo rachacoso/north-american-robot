@@ -1,9 +1,13 @@
-<% if @return %>
+<% unless params[:email].empty? %>
 
-	$('#p-share-lg').hide().html("<%= j (render(partial: 'home/prospect_share/ps_login')) %>").slideToggle(500);
+	<% if @has_a_login %>
 
-<% else %>
+		$('#p-share-lg').hide().html("<%= j (render(partial: 'home/prospect_share/ps2')) %>").slideToggle(500);
 
-	$('#p-share-lg').hide().html("<%= j (render(partial: 'home/prospect_share/ps2')) %>").slideToggle(500);
+	<% else %>
 
+		$('#p-share-lg').hide().html("<%= j (render(partial: 'home/prospect_share/ps3')) %>").slideToggle(500);
+
+	<% end %>
+	
 <% end %>
