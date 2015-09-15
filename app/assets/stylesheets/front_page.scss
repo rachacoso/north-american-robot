@@ -75,6 +75,25 @@
 
 }
 
+.scroll-down-indicator {
+	display: block;
+  position: absolute;
+  background: url(/images/scroll_down.png) center center no-repeat;
+  width: 70px;
+  height: 63px;
+  left: 50%;
+  margin-left: -35px;
+  bottom: 15px;
+  cursor: pointer;
+  // display: none;
+  animation-name: floating;
+  -webkit-animation-name: floating;
+  animation-duration: 1.5s;
+  -webkit-animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+}
+
 #front-logo {
 	position: absolute;
 	bottom: rem-calc(10);	
