@@ -1,3 +1,4 @@
+<div class="ps-panel">
 <div class="row">
 	<div class="small-12 columns">
 		<h2><strong><%= @email %></strong> <br>already has an account</h2>
@@ -7,6 +8,7 @@
 	</div>
 </div>
 
+<h2>Enter the account password to login</h2>
 <%= form_tag '/login', method: 'post', id: "loginform" do %>
 <%= hidden_field_tag :share_id, @share_id %>
 <%= hidden_field_tag :email, @email %>
@@ -27,7 +29,16 @@
 </div>
 <div class="row">
 	<div class="small-12 columns">
-		<h2>Set or Reset a password for <%= @email %></h2>
+		<h2>If you do not know,<br> or cannot remember the password</h2>
+		<div id="p-share-reset">
+			<%= form_tag password_resets_path, :method => :post, remote: true do %>
+				<%= hidden_field_tag :email, @email %>
+				<%= hidden_field_tag :pshare, "true" %>
+				<%= submit_tag "RESET PASSWORD", class: "button alert tiny expand"%>
+			<% end %>
+		</div>
 	</div>
 </div>
-<%= link_to 'back', prospect_share_url(@share_id) %>
+<br><br>
+<%= link_to 'start over', prospect_share_url(@share_id) %>
+</div>
