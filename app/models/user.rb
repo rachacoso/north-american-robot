@@ -77,11 +77,11 @@ class User
 		return self.send(self.type?)
 	end
   
-	def send_password_reset
+	def send_password_reset(share_id)
 	  generate_token(:password_reset_token)
 	  self.password_reset_sent_at = Time.zone.now
 	  save!
-	  UserMailer.password_reset(self).deliver
+	  UserMailer.password_reset(self, share_id).deliver
 	end
   
 end
