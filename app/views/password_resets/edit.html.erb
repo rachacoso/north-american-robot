@@ -23,7 +23,7 @@
 
         <div class="row">
         <div class="small-8 columns small-centered">
-        <p>Enter a new password</p>
+        <p>Enter a new password for <%= @user.email %></p>
           <% if @user %>
             <%= form_for @user, :url => password_reset_path(params[:id]) do |f| %>
               <% if @user.errors.any? %>
@@ -43,6 +43,7 @@
               <div class="field">
                 <%= f.label :password_confirmation %>
                 <%= f.password_field :password_confirmation, label: false %>
+                <br>
               </div>
               <div class="actions"><%= f.submit "Update Password", class: "button alert tiny" %></div>
             <% end %>
