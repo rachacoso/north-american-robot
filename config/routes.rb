@@ -10,8 +10,6 @@ Rails.application.routes.draw do
 
   get   '/ps/:id/' => 'home#prospect_share', as: 'prospect_share'
   post   '/ps/l' => 'home#prospect_share_login', as: 'prospect_share_login'
-  get   '/ps/l/:return' => 'home#prospect_share_login', as: 'prospect_share_login_return'
-
 
   get   '/dashboard' => 'home#dashboard', as: 'dashboard'
 
