@@ -8,7 +8,15 @@ class PasswordResetsController < ApplicationController
 	def create
 	  user = User.where(email: params[:email]).first
 	  user.send_password_reset if user
-	  redirect_to login_url, :notice => "AN EMAIL HAS BEEN SENT WITH PASSWORD RESET INSTRUCTIONS"
+	  unless params[:pshare]
+		  redirect_to login_url, :notice => "AN EMAIL HAS BEEN SENT WITH PASSWORD RESET INSTRUCTIONS" and return
+		end
+
+		respond_to do |format|
+			format.html
+			format.js
+		end 
+				
 	end  
 
 	def edit
