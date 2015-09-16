@@ -60,19 +60,24 @@
 
 #p-share-lg {
 	// background-color: $landing-light-gray;
-	padding: rem-calc(15);
+	padding: 0 rem-calc(15);
+
+}
+#p-share-login-error {
+	color: red;
+}
+.ps-panel {
+	border: 1px solid $landing-light-gray;
+	padding: rem-calc(10);
 	h2, h3 {
 		color: white;
 	}
 	hr {
 		border-color: white;
 	}
-}
-
-.ps-panel {
-	border: 1px solid $landing-light-gray;
-	padding: rem-calc(10);
-
+	&.noborder{
+		border: none;
+	}
 }
 
 .scroll-down-indicator {

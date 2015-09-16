@@ -2,12 +2,15 @@
 
 	<% if @has_a_login %>
 
-		$('#p-share-lg').hide().html("<%= j (render(partial: 'home/prospect_share/ps2')) %>").slideToggle(500);
+		$('#p-share-lg').hide().html("<%= j (render(partial: 'home/prospect_share/ps2')) %>").fadeIn(500);
 
 	<% else %>
 
-		$('#p-share-lg').hide().html("<%= j (render(partial: 'home/prospect_share/ps3')) %>").slideToggle(500);
+		$('#p-share-lg').hide().html("<%= j (render(partial: 'home/prospect_share/ps3')) %>").fadeIn(500);
 
 	<% end %>
 	
 <% end %>
+
+$(document).foundation();
+$(document).foundation('equalizer', 'reflow');

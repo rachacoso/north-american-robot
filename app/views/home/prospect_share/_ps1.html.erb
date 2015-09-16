@@ -2,7 +2,7 @@
 <div class="ps-panel">
 	<div class="row">
 		<div class="small-12 columns">
-			<h3>New to Landing International?</h3>
+			<h3><strong>New to Landing International?</strong></h3>
 		</div>
 	</div>
 	<div class="row">
@@ -26,31 +26,30 @@
 </div>
 
 <div class="row">
-	<div class="small-5 columns">
-		<hr>
-	</div><!--/.small-5-->
-	<div class="small-2 columns text-center">
-		<h2><strong>OR</strong></h2>
+	<div class="small-2 columns">
+		<hr style="border-color: white;">
 	</div><!--/.small-2-->
-	<div class="small-5 columns">
-		<hr>
-	</div><!--/.small-5-->
+	<div class="small-2 columns text-center">
+		<h2 style="color:white;"><strong>OR</strong></h2>
+	</div><!--/.small-2-->
+	<div class="small-8 columns">
+		<hr style="border-color: white;">
+	</div><!--/.small-8-->
 </div><!--/.row-->
-
-
 
 
 
 <div class="ps-panel">
 	<div class="row">
 		<div class="small-12 columns">
-			<h3>Already a member of Landing International?</h3>
+			<h3><strong>Already a member of Landing International?</strong></h3>
 		</div>
 	</div>
 	<div class="row">
 		<div class="small-12 columns">
 			<h2>Login to your existing account</h2>
-			<div class="errornotice <%= flash[:notice] ? "error-on" : "" %>">
+			<div class="errornotice <%= flash[:notice] || flash[:alert] ? "error-on" : "" %>">
+				<%= flash[:alert] ? flash[:alert].html_safe : "&nbsp;".html_safe %>
 				<%= flash[:notice] ? flash[:notice].html_safe : "&nbsp;".html_safe %>
 			</div>
 			<%= form_tag '/login', method: 'post', id: "loginform" do %>

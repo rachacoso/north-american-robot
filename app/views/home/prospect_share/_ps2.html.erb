@@ -1,44 +1,64 @@
-<div class="ps-panel">
-<div class="row">
-	<div class="small-12 columns">
-		<h2><strong><%= @email %></strong> <br>already has an account</h2>
-		<div class="errornotice <%= flash[:notice] ? "error-on" : "" %>">
-			<%= flash[:notice] ? flash[:notice].html_safe : "&nbsp;".html_safe %>
-		</div>
-	</div>
-</div>
-
-<h2>Enter the account password to login</h2>
-<%= form_tag '/login', method: 'post', id: "loginform" do %>
-<%= hidden_field_tag :share_id, @share_id %>
-<%= hidden_field_tag :email, @email %>
-<div class="row collapse">
-	<div class="small-10 columns">
-		<%= password_field_tag :password, '', placeholder: 'PASSWORD' %>
-	</div>
-	<div class="small-2 columns">
-		<%= submit_tag "LOGIN", class: "alert button postfix", style: "padding:0;" %>
-	</div>
-</div>
-<% end %>
-
-<div class="row">
-	<div class="small-12 columns">
-		<h2><strong>OR</strong></h2>
-	</div>
-</div>
-<div class="row">
-	<div class="small-12 columns">
-		<h2>If you do not know,<br> or cannot remember the password</h2>
-		<div id="p-share-reset">
-			<%= form_tag password_resets_path, :method => :post, remote: true do %>
-				<%= hidden_field_tag :email, @email %>
-				<%= hidden_field_tag :pshare, @share_id %>
-				<%= submit_tag "RESET PASSWORD", class: "button alert tiny expand"%>
+<div class="ps-panel noborder">
+	<div class="row">
+		<div class="small-12 columns">
+			<h2><strong><%= @email %></strong> <br>has an existing account</h2>
+			<% if flash[:notice] %>
+				<div class="errornotice error-on" %>">
+					<%= flash[:notice] ? flash[:notice].html_safe : "&nbsp;".html_safe %>
+				</div>
 			<% end %>
 		</div>
 	</div>
 </div>
-<br><br>
-<%= link_to 'start over', prospect_share_url(@share_id) %>
+
+<br>
+
+<div class="ps-panel">
+	<div class="row">
+		<div class="small-12 columns">
+			<h2>Enter the account password to login</h2>
+		</div>
+	</div>
+	<%= form_tag '/login', method: 'post', id: "loginform", remote: true do %>
+	<%= hidden_field_tag :share_id, @share_id %>
+	<%= hidden_field_tag :email, @email %>
+	<div class="row collapse">
+		<div class="small-10 columns">
+			<%= password_field_tag :password, '', placeholder: 'PASSWORD' %>
+			<div id="p-share-login-error"></div>
+		</div>
+		<div class="small-2 columns">
+			<%= submit_tag "LOGIN", class: "alert button postfix", style: "padding:0;" %>
+		</div>
+	</div>
+	<% end %>
+</div>
+
+
+<div class="row">
+	<div class="small-2 columns">
+		<hr style="border-color: white;">
+	</div><!--/.small-2-->
+	<div class="small-2 columns text-center">
+		<h2 style="color:white;"><strong>OR</strong></h2>
+	</div><!--/.small-2-->
+	<div class="small-8 columns">
+		<hr style="border-color: white;">
+	</div><!--/.small-8-->
+</div><!--/.row-->
+
+
+<div class="ps-panel">
+	<div class="row">
+		<div class="small-12 columns">
+			<h2>Set up a new password<br> (or reset the existing password)</h2>
+			<div id="p-share-reset">
+				<%= form_tag password_resets_path, :method => :post, remote: true do %>
+					<%= hidden_field_tag :email, @email %>
+					<%= hidden_field_tag :pshare, @share_id %>
+					<%= submit_tag "SET UP or RESET PASSWORD", class: "button alert tiny expand"%>
+				<% end %>
+			</div>
+		</div>
+	</div>
 </div>
