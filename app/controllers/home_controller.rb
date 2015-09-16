@@ -79,7 +79,8 @@ class HomeController < ApplicationController
 				if User.where(email: @email).exists?
 					@has_a_login = true
 				else
-
+			    @newuser = User.new
+			    @newuser.build_contact 
 				end
 			else
 				redirect_to root

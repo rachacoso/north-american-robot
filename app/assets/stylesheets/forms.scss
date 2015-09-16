@@ -78,7 +78,7 @@ select.hover {
 
 
 // placeholder styling
-$placeholder-color: scale-color($input-background-color, $lightness: -30%);
+$placeholder-color: scale-color($input-background-color, $lightness: -50%);
 
 ::-webkit-input-placeholder {
    color: $placeholder-color;
