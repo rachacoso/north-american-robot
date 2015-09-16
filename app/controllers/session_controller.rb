@@ -38,10 +38,6 @@ class SessionController < ApplicationController
 				flash[:notice] = "INVALID EMAIL OR PASSWORD"
 			end
 
-			respond_to do |format|
-				format.js
-			end
-
 		else #is regular login
 
 			if @user && @user.authenticate(params[:password])
@@ -51,16 +47,21 @@ class SessionController < ApplicationController
 					cookies[:auth_token] = @user.auth_token  
 				end
 				if @user.administrator
-					redirect_to admin_brands_index_url and return
+					@redirect_url = admin_brands_index_url
 				else
-					redirect_to dashboard_url and return
+					@redirect_url = dashboard_url
 				end
 			else
 				flash[:notice] = "INVALID EMAIL OR PASSWORD"
-				redirect_to login_url and return
+				@redirect_url = login_url
 			end
 
 		end
+
+    respond_to do |format|
+      format.html { redirect_to @redirect_url }
+      format.js
+    end
 
 	end
 
