@@ -3,13 +3,6 @@
 
 
 <% content_for :javascript_head do %>
-	<% if @display %>
-		<%= javascript_tag do %>
-			<% if @display.background_photo_file_name %>
-			var bgImage = <%= "\"#{@display.background_photo.url(:large)}\"".html_safe %>
-			<% end %>
-			var bgColor = <%= "\"\##{@display.background_color}\"".html_safe %>
-		<% end %>
 
 			<style>
 		
@@ -121,7 +114,6 @@
 			}			
 			</style>
 
-	<% end %>
 <% end %>
 
 
