@@ -35,7 +35,7 @@ class SessionController < ApplicationController
 					end
 				end
 			else
-				flash[:notice] = "INVALID EMAIL OR PASSWORD"
+				flash.now[:notice] = "INVALID EMAIL OR PASSWORD"
 			end
 
 		else #is regular login
