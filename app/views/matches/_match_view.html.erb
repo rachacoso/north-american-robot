@@ -6,8 +6,12 @@
 			<% if @current_user.subscriber? %>
 				<%= render partial: "/shared/profile/brand_full_profile", locals: {profile: @match} %>
 			<% else %>
-				<%# LEGACY?  SEE IF CAN REMOVE %>
-				<%#= render partial: "/shared/profile/brand_public_profile_tiles", locals: {profile: @match} %>
+				<%= render partial: "/shared/profile/brand_public_profile", locals: {profile: @match} %>
+				<div class="row">
+					<div class="small-12 text-center columns">
+						<h2>Landing International Premium Account holders have access to this Brand's full profile</h2>
+					</div><!--/.small-12-->
+				</div><!--/.row-->
 			<% end %>
 
 		<% elsif @current_user.brand %>
@@ -15,8 +19,12 @@
 			<% if @current_user.subscriber? %>
 				<%= render partial: "/shared/profile/distributor_full_profile", locals: {profile: @match} %>
 			<% else %>
-				<%# LEGACY?  SEE IF CAN REMOVE %>
-				<%#= render partial: "/shared/profile/distributor_public_profile_tiles", locals: {profile: @match} %>
+				<%= render partial: "/shared/profile/distributor_public_profile", locals: {profile: @match} %>
+				<div class="row">
+					<div class="small-12 text-center columns">
+						<h2>Landing International Premium Account holders have access to this Brand's full profile</h2>
+					</div><!--/.small-12-->
+				</div><!--/.row-->
 			<% end %>
 
 		<% end %>
