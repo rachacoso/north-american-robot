@@ -9,6 +9,6 @@ class UserMailer < ActionMailer::Base
   def password_reset(user, share_id)
     @user = user
     @share_id = share_id
-    mail :to => user.email, :subject => "Password Reset"
+    mail :to => user.email, :subject => "Landing International: Password Set/Reset"
   end
 end
