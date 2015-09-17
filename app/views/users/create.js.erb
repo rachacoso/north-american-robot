@@ -1,0 +1,5 @@
+<% if flash[:error] %>
+	$('#p-share-user-error').fadeOut(500).html("<%= flash[:error] %>").fadeIn(500);
+<% else %>
+	window.location.replace("<%= @redirect_url %>");
+<% end %>

@@ -17,39 +17,39 @@ class UsersController < ApplicationController
 
   def create
 
+    @share_id = params[:pshare]
+
     if User.where(email: params[:user][:email]).exists?
 
-      flash[:error] = "That email address is already in use"
+      flash.now[:error] = "That email address is already in use"
       @newuser = User.new
       @newuser.build_contact
       redirection
 
     elsif params[:user][:email].blank?
 
-      flash[:error] = "Email field cannot be blank"
-      persist_params
+      flash.now[:error] = "Email field cannot be blank"
       @newuser = User.new
       @newuser.build_contact
       redirection
 
-
     elsif params[:user][:contact_attributes][:firstname].blank? || params[:user][:contact_attributes][:lastname].blank?
 
-      flash[:error] = "Please enter a first and last name"
+      flash.now[:error] = "Please enter a first and last name"
       @newuser = User.new
       @newuser.build_contact
       redirection
 
     elsif params[:user][:password].blank? || params[:user][:password_confirmation].blank?
 
-      flash[:error] = "Password fields cannot be blank"
+      flash.now[:error] = "Password fields cannot be blank"
       @newuser = User.new
       @newuser.build_contact
       redirection
 
     elsif params[:user][:password] != params[:user][:password_confirmation]
 
-      flash[:error] = "Passwords did not match"
+      flash.now[:error] = "Passwords did not match"
       @newuser = User.new
       @newuser.build_contact
       redirection
@@ -67,7 +67,7 @@ class UsersController < ApplicationController
         user.contact.lastname = params[:user][:contact_attributes][:lastname]
         user.administrator = true
         user.save!
-        redirect_to users_url
+        @response_action = "redirect_to users_url"
 
       else 
 
@@ -79,7 +79,6 @@ class UsersController < ApplicationController
         user.password_confirmation = params[:user][:password_confirmation]
         user.contact.firstname = params[:user][:contact_attributes][:firstname]
         user.contact.lastname = params[:user][:contact_attributes][:lastname]
-        # user.save!
         
         #create profile for the selected user type
         if params[:user_type] == 'distributor' || params[:user_type] == 'brand' # restrict to only allowed values
@@ -100,16 +99,25 @@ class UsersController < ApplicationController
         cookies[:auth_token] = user.auth_token
 
         if params[:user_type] == 'distributor'
-          redirect_to distributor_url
+          @response_action = "redirect_to distributor_url" # for regular logins
+          @share_id ? (@redirect_url = view_match_url(@share_id, 'na')) : "" # for prospect share logins
         elsif params[:user_type] == 'brand'
-          redirect_to brand_url
+          @response_action = "redirect_to brand_url" # for regular logins
+          @share_id ? (@redirect_url = view_match_url(@share_id, 'na')) : "" # for prospect share logins
         else
-          redirect_to dashboard_url
+          @share_id ? (@redirect_url = dashboard_url) : "" # for prospect share logins
+          @response_action = "redirect_to dashboard_url" # for regular logins
         end
 
       end
 
-    end    
+    end
+
+    respond_to do |format|
+      format.html { eval(@response_action) }
+      format.js
+    end
+
   end
 
 # ADMIN ONLY
@@ -264,11 +272,9 @@ class UsersController < ApplicationController
 
   def redirection 
     if params[:administrator]
-      redirect_to users_url
+      @response_action = "redirect_to users_url"
     else
-      # redirect_to root_url
-      # render 'home/front'
-      render 'users/new'
+      @response_action = "render :new"
     end
   end
 
