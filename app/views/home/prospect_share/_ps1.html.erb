@@ -47,11 +47,8 @@
 	<div class="row">
 		<div class="small-12 columns">
 			<h2>Login to your existing account</h2>
-			<div class="errornotice <%= flash[:notice] || flash[:alert] ? "error-on" : "" %>">
-				<%= flash[:alert] ? flash[:alert].html_safe : "&nbsp;".html_safe %>
-				<%= flash[:notice] ? flash[:notice].html_safe : "&nbsp;".html_safe %>
-			</div>
-			<%= form_tag '/login', method: 'post', id: "loginform" do %>
+			<div id="p-share-login-error"></div>
+			<%= form_tag '/login', method: 'post', id: "loginform", remote: true do %>
 			<%= hidden_field_tag :share_id, @share_id %>
 		  <div class="row">
 				<div class="small-12 columns">
