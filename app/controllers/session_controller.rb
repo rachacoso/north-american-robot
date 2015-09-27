@@ -35,7 +35,7 @@ class SessionController < ApplicationController
 					end
 				end
 			else
-				flash.now[:notice] = "INVALID EMAIL OR PASSWORD"
+				flash.now[:notice] = "INVALID PASSWORD"
 				@redirect_url = prospect_share_url(@share_id)
 			end
 
