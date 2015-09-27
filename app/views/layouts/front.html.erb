@@ -30,6 +30,8 @@
 <%= javascript_include_tag "application" %>
 <%= content_for?(:javascript_foot) ? yield(:javascript_foot) : "" %>
 
+<div class="overlay"></div>
+<div class="modal ajax-wait"><%= image_tag 'landing_loading.gif' %></div>
 
 </body>
 </html>
