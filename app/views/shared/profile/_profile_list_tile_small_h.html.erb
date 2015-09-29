@@ -51,10 +51,13 @@
 						<%= render partial: "shared/profile/distributor_rating", locals: {d: profile_item} %>
 					<% end %>
 		</div><!--/.medium-2-->
-		<div class="medium-5 columns text-right">
-					<% if @current_user.subscriber? && action_name != "public_profile"  %>
-						<%= render partial:"shared/profile/components/indicators_h", locals:{match: profile_item} %>
-					<% end %>
+		<div class="medium-4 columns text-right">
+			<% if @current_user.subscriber? && action_name != "public_profile"  %>
+				<%= render partial:"shared/profile/components/indicators_h", locals:{match: profile_item} %>
+			<% end %>
 		</div><!--/.medium-3-->
+		<div class="medium-1 columns text-right">
+			<%= render partial: "shared/profile/components/savebutton", locals: {profile: profile_item} %>
+		</div>
 	</div>
 </div>
