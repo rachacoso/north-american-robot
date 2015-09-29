@@ -25,17 +25,20 @@
 		<div class="medium-4 columns">
 
 					<% if @current_user.brand %>
-						<% profile_item.export_countries.each do |ec| %>
-							<small><%= ec.country %></small><br>
+						<% profile_item.export_countries.each_with_index do |ec, index| %>
+							<small><%= ec.country %></small><%= index == (profile_item.export_countries.length - 1) ? '' : '<small>,</small>'.html_safe %>
 						<% end %>
 					<% elsif @current_user.distributor %>
-						<% profile_item.sectors.sort_by{|s| s.name}.each do |s| %>
-							<small><%= s.name %></small><br>
+						<% profile_item.sectors.sort_by{|s| s.name}.each_with_index do |s, index| %>
+							<small><%= s.name %></small><%= index == (profile_item.sectors.length - 1) ? '' : '<small>,</small>'.html_safe %>
 						<% end %>
 					<% end %>
-
+						<br>
 					<% if @current_user.subscriber? && action_name != "public_profile" %>
 						<span style="font-weight: 200;font-size:1.3em;"><%= link_to profile_item.company_name, view_match_url(profile_item.id, action_name) %></span>
+						<% if @current_user.distributor && !profile_item.brand_positioning.blank? %>
+							<h5><%= truncate(profile_item.brand_positioning, :length => 100, :separator => ' ') %><small><%= link_to "more", view_match_url(profile_item.id, action_name) %> </small></h5>
+						<% end %>
 					<% else %>
 						<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= profile_item.class.to_s %> name hidden. Subscribe to view full profile">
 						<%= ("&blk12;" * profile_item.company_name.length).html_safe %>
