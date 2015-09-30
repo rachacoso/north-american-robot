@@ -70,63 +70,6 @@
   }
 }
 
-.profile-list-tile-small-sq {
-  width: rem-calc(275);  
-   // border: 1px solid $landing-middle-gray;
-   // width: rem-calc(225);
-   // min-height: rem-calc(300);
-   margin: 0.5em;   
-}
-
-.profile-list-tile-small-sq-top {
-  position: relative;
-  // width: rem-calc(300);
-  height: rem-calc(180);
-  // border-right: 1px solid $landing-middle-gray;
-  @include transparent(#000, 0.4);
-  background-image: url("/images/crate.jpg");
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  -webkit-background-size: cover;
-  background-size: cover;
-  background-position: center;
-
-  .profile-list-tile-small-sq-top-countries-sectors {
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-    @include transparent(#000, 0.4);
-    padding: rem-calc(5);
-    color: $landing-light-gray;
-    font-weight: 100;
-    // border-bottom: 1px solid $landing-light-gray;
-    // border-right: 1px solid white;
-  }
-
-}
-
-.profile-list-tile-small-sq-top-companyname {
-  // width: rem-calc(225);  
-  // @include transparent(#000, 0.6);
-  // border-top: 1px solid white;
-  // border-left: 1px solid white;
-  // background: white;
-  height: rem-calc(60);
-  @include transparent(#000, 0.6);
-  padding: rem-calc(10);
-  a {color: white; display: block;}
-  h3 {margin: 0;color: white;}
-}
-
-
-
-
-.profile-list-tile-small-sq-middle {
-   height: rem-calc(125);
-   // width: rem-calc(225);   
-   background: white;
-   padding: rem-calc(5);
-}
 
 .profile-logo-area {
   height: rem-calc(80);
