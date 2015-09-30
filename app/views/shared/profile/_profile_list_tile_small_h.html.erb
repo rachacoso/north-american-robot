@@ -1,5 +1,4 @@
-
-<div class="profile-list-tile-small">
+<div class="profile-list-item">
 	<div class="row">
 		<div class="medium-1 columns">
 			<% if @current_user.subscriber? && action_name != "public_profile"  %>
@@ -44,6 +43,7 @@
 						<%= ("&blk12;" * profile_item.company_name.length).html_safe %>
 						</span>
 					<% end %>
+
 		</div><!--/.medium-4-->
 		<div class="medium-2 columns">
 					<br>
@@ -60,4 +60,13 @@
 			<%= render partial: "shared/profile/components/savebutton", locals: {profile: profile_item} %>
 		</div>
 	</div>
+</div>
+<div class="tags-list text-left">
+<% if @current_user.subscriber? && action_name != "public_profile" %>
+	<% profile_item.tags.each do |tag| %>
+		<%= link_to matches_path(tag: tag.name, sector: @sector, country: @country, list_style: 'hz') do %>
+			<span class="label"><%= tag.name %></span>
+		<% end %>
+	<% end %>
+<% end %>
 </div>

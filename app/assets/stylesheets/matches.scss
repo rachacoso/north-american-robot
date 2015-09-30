@@ -55,13 +55,13 @@
 }
 
 
-.profile-list-tile-small {
+.profile-list-item {
   position: relative;
-  border-bottom: 1px solid $landing-middle-gray;
+  // border-bottom: 1px solid $landing-middle-gray;
   // border-radius: 1em;
   background: white;
   padding: rem-calc(10);
-  margin-bottom: rem-calc(5);
+  margin-top: rem-calc(2);
   .country {
     position: absolute;
     top: 0px;
@@ -273,7 +273,9 @@ a.profile-sq-left {
 
 .tags-list{
   // border: 1px solid black;
-  padding: rem-calc(5);
+  padding-top: rem-calc(2);
+  padding-bottom: rem-calc(10);
+  margin-bottom: rem-calc(10);
 }
 
 #quick-view {
