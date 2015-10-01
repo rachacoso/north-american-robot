@@ -2,16 +2,30 @@
 
 	<% case action_name 
 		when "index" %>
-		
 		<% if @country %>
-			<%= link_to "grid", matches_path(:list_style => "sq", :country => @country), :class => "button tiny" %>
-			<%= link_to "list", matches_path(:list_style => "hz", :country => @country), :class => "button tiny" %>
+			<% if @tag %>
+				<%= link_to "grid", matches_path(:list_style => "sq", :country => @country, :tag => @tag), :class => "button tiny" %>
+				<%= link_to "list", matches_path(:list_style => "hz", :country => @country, :tag => @tag), :class => "button tiny" %>
+			<% else %>
+				<%= link_to "grid", matches_path(:list_style => "sq", :country => @country), :class => "button tiny" %>
+				<%= link_to "list", matches_path(:list_style => "hz", :country => @country), :class => "button tiny" %>
+			<% end %>
 		<% elsif @sector %>
-			<%= link_to "grid", matches_path(:list_style => "sq", :sector => @sector), :class => "button tiny #{@list_style == "sq" ? "active" : ""}" %>
-			<%= link_to "list", matches_path(:list_style => "hz", :sector => @sector), :class => "button tiny" %>	
+			<% if @tag %>
+				<%= link_to "grid", matches_path(:list_style => "sq", :sector => @sector, :tag => @tag), :class => "button tiny #{@list_style == "sq" ? "active" : ""}" %>
+				<%= link_to "list", matches_path(:list_style => "hz", :sector => @sector, :tag => @tag), :class => "button tiny" %>	
+			<% else %>
+				<%= link_to "grid", matches_path(:list_style => "sq", :sector => @sector), :class => "button tiny #{@list_style == "sq" ? "active" : ""}" %>
+				<%= link_to "list", matches_path(:list_style => "hz", :sector => @sector), :class => "button tiny" %>	
+			<% end %>
 		<% else %>
-			<%= link_to "grid", matches_path(:list_style => "sq"), :class => "button tiny" %>
-			<%= link_to "list", matches_path(:list_style => "hz"), :class => "button tiny" %>
+			<% if @tag %>
+				<%= link_to "grid", matches_path(:list_style => "sq", :tag => @tag), :class => "button tiny" %>
+				<%= link_to "list", matches_path(:list_style => "hz", :tag => @tag), :class => "button tiny" %>
+			<% else %>
+				<%= link_to "grid", matches_path(:list_style => "sq"), :class => "button tiny" %>
+				<%= link_to "list", matches_path(:list_style => "hz"), :class => "button tiny" %>
+			<% end %>
 		<% end %>
 
 	<% when "index_conversations" %>
