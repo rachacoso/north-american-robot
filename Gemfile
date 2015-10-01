@@ -37,8 +37,10 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'debugger', group: [:development, :test]
 
 
-gem "mongoid", "~> 4.0.0"
+# gem "mongoid", "~> 4.0.0"
+gem 'mongoid', "~> 5.0.0"
 gem 'bson_ext'
+# gem 'bson'
 
 # Use paperclip/s3 for file upload
 gem "mongoid-paperclip", :require => "mongoid_paperclip"
