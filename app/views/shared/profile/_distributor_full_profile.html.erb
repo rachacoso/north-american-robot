@@ -176,10 +176,10 @@
 									<div class="preview-data">
 										<span class="preview-data-tile-title">Sales &amp; Education</span><br>
 										<% unless profile.inside_sales_size.blank? %>
-										<h6><strong>Inside Sales Force: <%= profile.inside_sales_size %></strong></h6>
+										<h6>Inside Sales Force: <strong><%= profile.inside_sales_size %></strong></h6>
 										<% end %>
 										<% unless profile.outside_sales_size.blank? %>
-										<h6><strong>Outside Sales Force: <%= profile.outside_sales_size %></strong></h6>								
+										<h6>Outside Sales Force: <strong><%= profile.outside_sales_size %></strong></h6>
 										<% end %>
 									</div>
 									<% end %>
