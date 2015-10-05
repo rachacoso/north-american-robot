@@ -201,7 +201,7 @@ class MatchesController < ApplicationController
   def gallery
 
     if @current_user.type? == "distributor"
-      @gallery = ProductPhoto.where(photographable_type: "Product")
+      @gallery = ProductPhoto.where(photographable_type: "Product").shuffle
     else
       redirect_to all_matches_url
     end
