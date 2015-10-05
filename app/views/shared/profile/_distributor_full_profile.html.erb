@@ -145,6 +145,24 @@
 						<br>
 					<% end %>
 
+					<% if profile.trade_shows.length > 0 %>
+					<div class="profile-container">
+						<div class="profile-header">
+							<h1>TRADE SHOWS</h1>
+						</div><!--.profile-header-->
+						<div class="profile-content">
+
+							<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
+							<% profile.trade_shows.order_by(:date.desc).each do |p| %>
+								<li><%= render partial: "shared/collections_view/trade_shows", locals: {
+									collitem: p
+								} %></li>
+							<% end %>
+							</ul>
+						</div><!--.profile-content-->
+					</div><!--.profile-container-->
+					<br>
+					<% end %>
 
 					<div class="profile-container">
 						<div class="profile-header">

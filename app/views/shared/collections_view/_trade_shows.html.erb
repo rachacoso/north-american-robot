@@ -5,13 +5,13 @@
 				<i class="fi-laptop"></i>
 			<% end %>
 		<% end %>
-
 </h2>
 <div class="row">
 	<div class="medium-12 columns">
-		<h4><strong><%= collitem.country %></strong> <small>/</small> <%= collitem.date ? collitem.date.strftime("%b %Y") : ""  %>
-<small>/</small>
-Participant for <%= collitem.years_participated %> years
+		<h4>
+			<%#= !collitem.country.blank? ? "<strong>#{collitem.country}</strong>".html_safe : "" %>
+			<%= collitem.date ? "<br>#{collitem.date.strftime('%b %Y')}".html_safe : ""  %>
+			<%= !collitem.years_participated.blank? ? "<br>Participant for #{collitem.years_participated} years".html_safe : "" %>
 		</h4>
 	</div>
 </div>
