@@ -190,38 +190,25 @@
 									<div class="preview-data">
 									<span class="preview-data-tile-title">Marketing &amp; PR</span><br>
 									<% unless profile.internal_marketing_size.blank? %>
-									<h6>Internal Marketing/ PR Team Size: <strong><%= profile.internal_marketing_size %></strong></h6>
+									<h6>Internal Marketing / PR Team Size: <strong><%= profile.internal_marketing_size %></strong></h6>
 									<% end %>
 									
-									<h6><strong><%= profile.employ_pr_agency ? "Has" : "No" %> External Marketing/PR</strong></h6>
+									<h6>External Marketing / PR?: <strong><%= profile.employ_pr_agency ? "Yes" : "No" %></strong></h6>
 									
 									<% unless profile.customer_database_size.blank? %>
 									<h6>Customer Database Size: <strong><%= profile.customer_database_size %></strong></h6>
 									<% end %>
 
-									<h6><strong>Product Marketing:</strong></h6>
-									<div class="row">
-										<div class="small-6 columns">
-											<div class="preview-data">
-											<strong>
-											<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Print" ,p: profile.marketing_via_print}%>
-											<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Online" ,p: profile.marketing_via_online}%>
-											<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Email" ,p: profile.marketing_via_email}%>
-											<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Outdoor" ,p: profile.marketing_via_outdoor}%>
-											</strong>
-											</div>					
-										</div><!--/.small-6-->
-										<div class="small-6 columns">
-											<div class="preview-data">
-											<strong>
-											<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Events" ,p: profile.marketing_via_events}%>
-											<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Direct Mail" ,p: profile.marketing_via_direct_mail}%>
-											<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Classes" ,p: profile.marketing_via_classes}%>		
-											</strong>
-											</div>			
-										</div><!--/.small-6-->
-									</div><!--/.row-->
-									</div>
+									<h6>Product Marketing:
+										<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Print" ,p: profile.marketing_via_print}%>,
+										<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Online" ,p: profile.marketing_via_online}%>,
+										<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Email" ,p: profile.marketing_via_email}%>,
+										<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Outdoor" ,p: profile.marketing_via_outdoor}%>,
+										<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Events" ,p: profile.marketing_via_events}%>,
+										<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Direct Mail" ,p: profile.marketing_via_direct_mail}%>,
+										<%= render partial: "/shared/profile/components/distributor_marketing_type", locals: {name: "Classes" ,p: profile.marketing_via_classes}%>
+										</h6>
+									</div><!--/.preview-data-->
 								</div><!--/.small-12-->
 							</div><!--/.row-->
 

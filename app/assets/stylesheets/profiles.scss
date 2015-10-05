@@ -103,17 +103,14 @@
 }
 
 .productmarketingtype {
-  // border: 1px solid scale-color($input-background-color, $lightness: -80%);
-  // background-color: scale-color($input-background-color, $lightness: 30%);
-  &::before {
-    content: "\2611";
-  }
+  font-weight: bold;
   &.off {
     color: #adadad;
-    // border: 1px dotted scale-color($input-background-color, $lightness: -80%);
     background-color: transparent;
-    &::before {
-    content: "\2610";
-    }
+    font-weight: normal;
+    text-decoration: line-through;
+    // &::before {
+    // content: "\2610";
+    // }
   }
 }
