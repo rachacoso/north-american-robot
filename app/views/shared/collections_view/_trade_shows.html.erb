@@ -11,7 +11,7 @@
 	</div><!--/.small-12-->
 	<div class="small-12 columns">
 		<h4>
-			<%#= !collitem.country.blank? ? "<strong>#{collitem.country}</strong>".html_safe : "" %>
+			<%= !collitem.country.blank? ? "<strong>#{collitem.country}</strong>".html_safe : "" %>
 			<%= collitem.date ? "<br>#{collitem.date.strftime('%b %Y')}".html_safe : ""  %>
 			<%= !collitem.years_participated.blank? ? "<br>Participant for #{collitem.years_participated} years".html_safe : "" %>
 		</h4>
