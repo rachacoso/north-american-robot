@@ -48,8 +48,15 @@
 				<div class="preview-data">
 					<% unless profile.sectors.blank? %>
 					<span class="preview-data-tile-title">Sectors</span><br>
-					<% profile.sectors.each do |s| %>
+					<% profile.sectors.order_by(:name => "asc").each do |s| %>
 						<strong><%= s.name %></strong><br>
+						<% unless profile.subsectors.blank? %>
+							<% profile.subsectors.order_by(:name => "asc").each do |ss| %>
+								<% if ss.sector == s %>
+								&nbsp;&nbsp;&nbsp;<%= ss.name %><br>
+								<% end %>
+							<% end %>
+						<% end %>
 					<% end %>
 					<% end %>
 				</div>
