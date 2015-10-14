@@ -15,6 +15,7 @@ class AdminController < ApplicationController
     @company_size = CompanySize.all
 
   	@new_sector = Sector.new
+    @new_subsector = Subsector.new
   	@new_channel = Channel.new
   	# @new_country = Country.new
     @new_company_size = CompanySize.new
