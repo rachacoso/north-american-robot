@@ -26,10 +26,8 @@ class SectorsController < ApplicationController
 	def update
 		c = Sector.find(params[:id])
 		c.update(sector_parameters)
-		# c.name = params[:sector][:name]
 		c.save
 		redirect_to admin_url
-
 	end
 
   private
@@ -42,10 +40,7 @@ class SectorsController < ApplicationController
 
   def sector_parameters
     params.require(:sector).permit(
-			:name,
-      subsector_attributes: [
-        :name
-      ]
+			:name
 		)
 	end
   
