@@ -57,6 +57,7 @@ class Distributor
 	embeds_many :export_countries, as: :exportable
 
   has_and_belongs_to_many :sectors, inverse_of: nil 
+  has_and_belongs_to_many :subsectors, inverse_of: nil 
 	has_and_belongs_to_many :channels, inverse_of: nil 
   
 

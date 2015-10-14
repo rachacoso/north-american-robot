@@ -52,7 +52,8 @@ class Brand
 	field :social_give_back, type: String
 
 
-  has_and_belongs_to_many :sectors, inverse_of: nil 
+  has_and_belongs_to_many :sectors, inverse_of: nil
+  has_and_belongs_to_many :subsectors, inverse_of: nil 
 	has_and_belongs_to_many :channels, inverse_of: nil 
   
   has_many :brand_photos, dependent: :destroy
