@@ -166,15 +166,20 @@
 						<%= f.check_box :verified_social_media, label: ' Social Media'  %>		
 					</div><!--/.small-4-->
 					<div class="small-8 columns">
-						<% if @distributor.facebook.blank? && @distributor.linkedin.blank? %>
+						<% if @distributor.facebook.blank? && @distributor.linkedin.blank? && @distributor.twitter.blank? && @distributor.instagram.blank? %>
 						<h3> NO SOCIAL MEDIA </h3>
 						<% end %>
 						<% unless @distributor.facebook.blank? %>
 						<h3><%= link_to "Facebook", @distributor.facebook.sub(/^https?\:\/\//, '').sub(/^www./,'') %></h3>
-						<h3><%= @distributor.facebook.sub(/^https?\:\/\//, '').sub(/^www./,'') %></h3>
 						<% end %>
 						<% unless @distributor.linkedin.blank? %>
 						<h3><%= link_to "LinkedIn", @distributor.linkedin.sub(/^https?\:\/\//, '').sub(/^www./,'') %></h3>
+						<% end %>
+						<% unless @distributor.linkedin.blank? %>
+						<h3><%= link_to "Instagram", @distributor.instagram.sub(/^https?\:\/\//, '').sub(/^www./,'') %></h3>
+						<% end %>
+						<% unless @distributor.linkedin.blank? %>
+						<h3><%= link_to "Twitter", @distributor.twitter.sub(/^https?\:\/\//, '').sub(/^www./,'') %></h3>
 						<% end %>
 
 					</div><!--/.small-8-->
