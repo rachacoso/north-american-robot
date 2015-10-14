@@ -20,6 +20,7 @@
 				</div><!--/.small-1-->
 				<div class="small-11 columns">
 					<% sc.subsectors.order_by(:name => "asc").each do |ssc| %>
+						<%= hidden_field_tag "subsectors[#{ssc.id}]", 0, id: '' %>
 						<%= check_box_tag "subsectors[#{ssc.id}]", ssc.id, (@distributor.subsectors.find(ssc) rescue false) ? true : false %>
 						<%= label_tag("subsectors[#{ssc.id}]", ssc.name) %>
 					<% end %>					
