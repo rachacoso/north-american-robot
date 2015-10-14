@@ -84,6 +84,24 @@ class BrandsController < ApplicationController
 			end
 		end
 
+		if params[:subsectors]
+			# set subsectors
+			assigned_subsectors = Subsector.find(params[:subsectors].values) rescue []
+			subsector_parents = assigned_subsectors.map { |s| s.sector }
+
+			brand.subsectors = [] # clear current ones before update
+			assigned_subsectors.each do |s|
+				brand.subsectors << s
+			end
+
+			subsector_parents.each do |p|
+				unless brand.sectors.find(p)
+					brand.sectors << p
+				end
+			end
+
+		end
+
 		if params[:channels]
 			# set channels
 			assigned_channels = Channel.find(params[:channels].values) rescue []

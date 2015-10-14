@@ -14,7 +14,7 @@
 			<%= check_box_tag "sectors[#{sc.id}]", sc.id, (@distributor.sectors.find(sc) rescue false) ? true : false %>
 			<%= label_tag("sectors[#{sc.id}]", sc.name) %>
 			<% if sc.subsectors %>
-			<div class="row">
+			<div class="row collapse">
 				<div class="small-1 columns">
 					&nbsp;
 				</div><!--/.small-1-->

@@ -63,6 +63,22 @@ class DistributorsController < ApplicationController
       end
     end
 
+    if params[:subsectors]
+      # set subsectors
+      assigned_subsectors = Subsector.find(params[:subsectors].values) rescue []
+      subsector_parents = assigned_subsectors.map { |s| s.sector }
+
+      distributor.subsectors = [] # clear current ones before update
+      assigned_subsectors.each do |s|
+        distributor.subsectors << s
+      end
+
+      subsector_parents.each do |p|
+        distributor.sectors << p
+      end
+
+    end
+
     if params[:channels]
       # set channels
       assigned_channels = Channel.find(params[:channels].values) rescue []
