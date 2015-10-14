@@ -10,9 +10,22 @@
 
 <div class="row editform">	
 	<div class="medium-10 push-2 columns">		
-		<% Sector.each do |sc| %>
+		<% Sector.order_by(:name => "asc").each do |sc| %>
 			<%= check_box_tag "sectors[#{sc.id}]", sc.id, (@distributor.sectors.find(sc) rescue false) ? true : false %>
 			<%= label_tag("sectors[#{sc.id}]", sc.name) %>
+			<% if sc.subsectors %>
+			<div class="row">
+				<div class="small-1 columns">
+					&nbsp;
+				</div><!--/.small-1-->
+				<div class="small-11 columns">
+					<% sc.subsectors.order_by(:name => "asc").each do |ssc| %>
+						<%= check_box_tag "subsectors[#{ssc.id}]", ssc.id, (@distributor.subsectors.find(ssc) rescue false) ? true : false %>
+						<%= label_tag("subsectors[#{ssc.id}]", ssc.name) %>
+					<% end %>					
+				</div><!--/.small-11-->
+			</div><!--/.row-->
+			<% end %>
 	  <% end %>
 	</div>
 </div>
