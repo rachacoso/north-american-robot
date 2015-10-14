@@ -4,7 +4,8 @@ class SectorsController < ApplicationController
 
 	def create
 		c = Sector.new
-		c.name = params[:sector][:name]
+		c.update(sector_parameters)
+		# c.name = params[:sector][:name]
 
 		if c.valid?
 			c.save!
@@ -24,7 +25,8 @@ class SectorsController < ApplicationController
 
 	def update
 		c = Sector.find(params[:id])
-		c.name = params[:sector][:name]
+		c.update(sector_parameters)
+		# c.name = params[:sector][:name]
 		c.save
 		redirect_to admin_url
 
@@ -37,5 +39,14 @@ class SectorsController < ApplicationController
       redirect_to dashboard_url
     end
   end
+
+  def sector_parameters
+    params.require(:sector).permit(
+			:name,
+      subsector_attributes: [
+        :name
+      ]
+		)
+	end
   
 end
