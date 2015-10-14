@@ -7,6 +7,7 @@
 
 		<% profile_section.order_by(:name => 'asc').each do |s| %>
 
+			<h2><%= profile_section.model_name.human %></h2>
 			<%= form_for s do |f| %>
 				<div class="row">
 					<div class="small-8 columns">
@@ -24,21 +25,40 @@
 			<% end %>
 
 			<% if profile_section.model_name.human == "Sector" %>
+				<div class="row">
+					<div class="small-1 columns">&nbsp;</div><!--/.small-1-->
+					<div class="small-7 columns"><h3>SUBSECTORS</h3>
 
-				<% s.subsectors.each do |s| %>
-					<%= s.name %>
-				<% end %>
+						<% s.subsectors.each do |s| %>
+							<%= form_for s do |f| %>
+								<div class="row">
+									<div class="small-8 columns">
+										<%= f.text_field :name, label: false %>
+									</div><!--/.small-8-->
+									<div class="small-4 columns">
+										<%= link_to 'update', "#", :onclick => "$('#edit_#{dom_id(s)}').submit()".html_safe, class: "itemformlink" %>
+										<%= link_to 'delete', s, :method => :delete, data: { :confirm => "Are you sure you want to delete #{s.name}?"}, class: "itemformlink" %>
+									</div><!--/.small-4-->
+								</div><!--/.row-->
+							<% end %>
+							<br>
+						<% end %>
 
-		<%= form_for s do |f| %>
+						<%= form_for @new_subsector do |f| %>
+							<%= f.hidden_field :sid, value: s.id %>
+							<div class="row collapse">
+								<div class="small-10 columns">
+									<%= f.text_field :name, :placeholder => "[NEW SUBSECTOR NAME]", label: false %>			
+								</div><!--/.small-10-->
+								<div class="small-2 columns">
+									<%= f.submit "ADD", class: "button alert postfix" %>		
+								</div><!--/.small-2-->
+							</div><!--/.row-->
+						<% end %>
 
-				<%= f.fields_for :subsector do |ff| %>
-				<%= ff.text_field :name, :placeholder => "Name", label: "Add Subsector" %>
-				<% end %>
-
-				<%= f.submit "ADD", class: "text-submit" %>
-
-		<% end %>
-
+					</div><!--/.small-7-->
+					<div class="small-4 columns">&nbsp;</div><!--/.small-4-->
+				</div><!--/.row-->
 			<% end %>
 			<hr>
 		<% end %>

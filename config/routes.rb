@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   root 'home#front'
 
 
@@ -25,6 +24,7 @@ Rails.application.routes.draw do
 
 
   resources :sectors, only: [:create, :update, :destroy]
+  resources :subsectors, only: [:create, :update, :destroy]
   resources :channels, only: [:create, :update, :destroy]
   resources :company_sizes, only: [:create, :update, :destroy]
   resources :countries, only: [:create, :update, :destroy]
