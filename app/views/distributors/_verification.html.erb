@@ -5,22 +5,53 @@
 	</div>
 </div>
 <div class="row">
-	<div class="small-6 columns">
-		<h3><strong>Website:</strong> <br><%= @current_user.distributor.verified_website ? "Verified" : "Not Verified" %></h3>
-	</div><!--/.small-6 -->
-	<div class="small-6 columns">
-		<h3><strong>Facebook / LinkedIn:</strong> <br><%= @current_user.distributor.verified_social_media ? "Verified" : "Not Verified" %></h3>
-	</div><!--/.small-6 -->
-	<div class="small-6 columns">
-		<h3><strong>Client Brand:</strong> <br><%= @current_user.distributor.verified_client_brand ? "Verified" : "Not Verified" %></h3>
-	</div><!--/.small-6 -->
-	<div class="small-6 columns">
-		<h3><strong>Business Registration:</strong> <br><%= @current_user.distributor.verified_business_registration ? "Verified" : "Not Verified" %></h3>
-	</div><!--/.small-6 -->
+	<div class="small-4 columns">
+		<h3><strong>Website:</strong> <br>
+			<%= render partial: "verification_indicator", locals: {item: @current_user.distributor.verified_website } %></h3>
+	</div><!--/.small-4 -->
+	<div class="small-4 columns">
+		<h3><strong>Social Media:</strong> <br>
+			<%= render partial: "verification_indicator", locals: {item: @current_user.distributor.verified_social_media } %></h3>
+	</div><!--/.small-4 -->
+	<div class="small-4 columns">
+		<h3><strong>Client Brand:</strong> <br>
+			<%= render partial: "verification_indicator", locals: {item: @current_user.distributor.verified_client_brand } %></h3>
+	</div><!--/.small-4 -->
 </div><!--/.row-->
+
+<div class="row">
+	<div class="small-12 columns">
+		<hr>
+		<h3><strong>Business Registration:</strong> <br>
+			<%= render partial: "verification_indicator", locals: {item: @current_user.distributor.verified_business_registration } %></h3>
+		<%= form_for @distributor, url: distributor_url do |f| %>
+		<div class="row">
+			<div class="small-7 columns small-centered">
+				<div class="row collapse">
+					<div class="small-12 columns">
+						<%= f.label :business_id, "Your BUSINESS ID number" %>
+					</div><!--/.small-12-->
+					<div class="medium-7 columns">
+						<%= f.text_field :business_id, placeholder: "Enter BUSINESS ID number", label: false %>
+					</div><!--/.small-8-->
+					<div class="medium-5 columns">
+						<%= f.submit (@distributor.business_id.blank? ? "ADD Business ID" : "UPDATE Business ID"), class: "button alert tiny postfix" %>
+					</div><!--/.small-4-->
+					<div class="small-12 columns">
+						<h3 style="line-height: 1em;"><small>For example, in the US, this would be your <strong>Tax ID number</strong>,<br> in Korea, your <strong>Business ID number</strong></small></h3>
+					</div><!--/.small-12-->
+				</div><!--/.row-->
+			</div><!--/.small-8-->
+		</div><!--/.row-->
+		<% end %>
+		<hr>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
 <div class="row">					
 	<div class="medium-4 columns">
-		<h3><strong>Business Certificate:</strong> <br><%= @current_user.distributor.verified_business_certificate ? "Verified" : "Not Verified" %></h3>
+		<h3><strong>Business Certificate:</strong> <br>
+			<%= render partial: "verification_indicator", locals: {item: @current_user.distributor.verified_business_certificate } %></h3>
 		<%= form_for @distributor, :html => {id: 'business-registration-form'}, url: distributor_url do |f| %>
 			<%= hidden_field_tag "redirect_anchor", "a-verification" %>
 			<%= f.label :verification_business_certificate do %>
@@ -45,7 +76,9 @@
 	</div><!--/.medium-4-->
 	<div class="medium-4 columns">
 
-		<h3><strong>Location:</strong> <br><%= @current_user.distributor.verified_location ? "Verified" : "Not Verified" %></h3>
+		<h3><strong>Location:</strong> <br>
+			<%= render partial: "verification_indicator", locals: {item: @current_user.distributor.verified_location } %>
+			</h3>
 		<%= form_for @distributor, :html => {id: 'location-form'}, url: distributor_url do |f| %>
 			<%= hidden_field_tag "redirect_anchor", "a-verification" %>
 			<%= f.label :verification_location_photo do %>
@@ -68,7 +101,9 @@
 	</div><!--/.medium-4-->
 	<div class="medium-4 columns">
 
-		<h3><strong>Brand Display:</strong> <br><%= @current_user.distributor.verified_brand_display ? "Verified" : "Not Verified" %></h3>
+		<h3><strong>Brand Display:</strong> <br>
+			<%= render partial: "verification_indicator", locals: {item: @current_user.distributor.verified_brand_display } %>
+		</h3>
 		<%= form_for @distributor, :html => {id: 'brand-display-form'}, url: distributor_url do |f| %>
 			<%= hidden_field_tag "redirect_anchor", "a-verification" %>
 			<%= f.label :verification_brand_display_photo do %>

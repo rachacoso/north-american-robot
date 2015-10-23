@@ -254,6 +254,7 @@ class DistributorsController < ApplicationController
       :marketing_via_email,
       :marketing_via_classes,
       :customer_database_size,
+      :business_id,
       :verification_location_photo,
       :verification_brand_display_photo,
       :verification_business_certificate,

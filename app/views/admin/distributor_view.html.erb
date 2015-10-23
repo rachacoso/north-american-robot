@@ -149,23 +149,23 @@
 <hr>				
 
 				<div class="row">
-					<div class="small-4 columns">
+					<div class="medium-4 columns">
 						<%= f.check_box :verified_website, label: ' Website'  %>		
-					</div><!--/.small-4-->
-					<div class="small-8 columns">
+					</div><!--/.medium-4-->
+					<div class="medium-8 columns">
 						<% if @distributor.website.blank?  %>
 							<h3> NO WEBSITE </h3>
 						<% else %>						
 							<h3><%= link_to @distributor.website.sub(/^https?\:\/\//, '').sub(/^www./,''), "//#{@distributor.website.sub(/^https?\:\/\//, '').sub(/^www./,'')}", target: 'blank' %></h3>
 						<% end %>
-					</div><!--/.small-8-->
+					</div><!--/.medium-8-->
 				</div><!--/.row-->
 <hr>				
 				<div class="row">
-					<div class="small-4 columns">
+					<div class="medium-4 columns">
 						<%= f.check_box :verified_social_media, label: ' Social Media'  %>		
-					</div><!--/.small-4-->
-					<div class="small-8 columns">
+					</div><!--/.medium-4-->
+					<div class="medium-8 columns">
 						<% if @distributor.facebook.blank? && @distributor.linkedin.blank? && @distributor.twitter.blank? && @distributor.instagram.blank? %>
 						<h3> NO SOCIAL MEDIA </h3>
 						<% end %>
@@ -182,94 +182,140 @@
 						<h3><%= link_to "Twitter", @distributor.twitter.sub(/^https?\:\/\//, '').sub(/^www./,'') %></h3>
 						<% end %>
 
-					</div><!--/.small-8-->
+					</div><!--/.medium-8-->
 				</div><!--/.row-->					
 <hr>			
 				<div class="row">
-					<div class="small-4 columns">
+					<div class="medium-4 columns">
 						<%= f.check_box :verified_business_registration, label: ' Business Registration'  %>		
-					</div><!--/.small-4-->
-					<div class="small-8 columns">
+					</div><!--/.medium-4-->
+					<div class="medium-8 columns">
 
 							<div class="row">
-								<div class="small-12 columns">
-										Company Name: 
-										<h3><%= @distributor.company_name %></h3>
-										 Contact Information:
-										 <% @distributor.contacts.each do |contact| %>
-										 <h3>
-										  <%= contact.firstname %> <%= contact.lastname %>,<br> <%= contact.title %><br>
-										  <% unless !contact.address %>
-											  <%= contact.address.address1 %><br>
-											  <%= contact.address.address2 %><br>
-											  <% unless contact.address.city.blank? && contact.address.state.blank? && contact.address.postcode.blank? %>
-											  <%= contact.address.city %> <%= contact.address.state %> <%= contact.address.postcode %><br>
-											  <% end %>
-											  <%= contact.address.country %><br>
-										  <% end %>
-										  <%= contact.phone %><br>
-										  <a href="mailto:<%= contact.email %>"><%= contact.email %></a>
+								<div class="small-5 columns text-right">
+									<h4><strong>Company Name</strong></h4>
+								</div><!--/.small-5-->
+								<div class="small-7 columns">
+									<h4><%= @distributor.company_name %></h4>
+								</div><!--/.small-7-->
+								<div class="small-5 columns text-right">
+									<h4><strong>Contact Information</strong></h4>
+								</div><!--/.small-5-->
+								<div class="small-7 columns">
+
+									<% @distributor.contacts.each do |contact| %>
+										<h3>
+											<%= contact.firstname %> <%= contact.lastname %> <%= contact.title %><br>
+											<% unless !contact.address %>
+												<%= contact.address.address1 %><br>
+												<%= contact.address.address2 %><br>
+											<% unless contact.address.city.blank? && contact.address.state.blank? && contact.address.postcode.blank? %>
+												<%= contact.address.city %> <%= contact.address.state %> <%= contact.address.postcode %><br>
+											<% end %>
+												<%= contact.address.country %><br>
+											<% end %>
+											<% unless contact.phone.blank? %>
+												<%= contact.phone %>
+											<% end %>
+											<% unless contact.email.blank? %>
+												<%= contact.email %>
+											<% end %>
 										</h3>
-										<% end %>
-								</div>
+									<% end %>
+
+								</div><!--/.small-7-->
+								<div class="small-5 columns text-right">
+									<h4><strong>Business ID</strong></h4>
+								</div><!--/.small-5-->
+								<div class="small-7 columns">
+									<h3><%= !@distributor.business_id.blank? ? @distributor.business_id : 'NO BUSINESS ID' %>
+										(<%= !@distributor.country_of_origin.blank? ? @distributor.country_of_origin : 'ADD COUNTRY OF ORIGIN' %>)</h3>
+								</div><!--/.small-7-->
+
 							</div>
 
-					</div><!--/.small-8-->
+					</div><!--/.medium-8-->
 				</div><!--/.row-->			
 <hr>		
 				<div class="row">
-					<div class="small-4 columns">
-						<%= f.check_box :verified_client_brand, label: ' Client Brand'  %>		
-					</div><!--/.small-4-->
-					<div class="small-8 columns">
-						<h3>Current Brands</h3>
-						<% @distributor.distributor_brands.where(current: true).each do |b| %>
-							<%= b.brand %><br>
-							<small><%= b.website %></small>
-						<% end %>
-						<br>
-						<h3>Past Brands</h3>
-						<% @distributor.distributor_brands.where(current: false).each do |b| %>
-							<%= b.brand %> ( <small><%= link_to b.website, "//#{b.website}", target: 'blank' %></small> )
-						<% end %>						
-					</div><!--/.small-8-->
+					<div class="medium-4 columns">
+						<%= f.check_box :verified_client_brand, label: ' Client Brands'  %>		
+					</div><!--/.medium-4-->
+					<div class="medium-8 columns">
+						<div class="row">
+							<div class="small-5 columns text-right">
+								<h4><strong>Current Brands</strong></h4>
+							</div><!--/.small-5-->
+							<div class="small-7 columns">
+								<% @distributor.distributor_brands.where(current: true).each do |b| %>
+									<h4><%= b.brand %>
+										<% unless b.website.blank? %>
+											<%= link_to "//#{b.website}", target: 'blank' do %>
+												<i class="fi-link"></i>
+											<% end %>
+										<% end %>
+									</h4>
+								<% end %>
+							</div><!--/.small-7-->
+						</div><!--/.row-->
+						<div class="row">
+							<div class="small-5 columns text-right">
+								<h4><strong>Past Brands</strong></h4>
+							</div><!--/.small-5-->
+							<div class="small-7 columns">
+								<% @distributor.distributor_brands.where(current: false).each do |b| %>
+									<h4><%= b.brand %>
+										<% unless b.website.blank? %>
+											<%= link_to "//#{b.website}", target: 'blank' do %>
+												<i class="fi-link"></i>
+											<% end %>
+										<% end %>
+									</h4>
+								<% end %>		
+							</div><!--/.small-7-->
+						</div><!--/.row-->
+				
+					</div><!--/.medium-8-->
 				</div><!--/.row-->							
 <hr>
 				<div class="row">
-					<div class="small-4 columns">
+					<div class="medium-4 columns">
 						<%= f.check_box :verified_business_certificate, label: ' Business Certificate'  %>		
-					</div><!--/.small-4-->
-					<div class="small-8 columns">
+					</div><!--/.medium-4-->
+					<div class="medium-8 columns">
+						<h4>Business Certificate</h4>
 						<% if @distributor.verification_business_certificate.exists? %>
 							<%= image_tag 'document.png', style: 'height:100px;' %><br>
 							<small><%= @distributor.verification_business_certificate_file_name %></small><br>
 							<%= link_to "View", @distributor.verification_business_certificate.url, :target => "_blank" %>
-						<% end %>					
-					</div><!--/.small-8-->
+						<% else %>
+							<h3>[NO BUSINESS CERTIFICATE UPLOADED]</h3>
+						<% end %>
+					</div><!--/.medium-8-->
 				</div><!--/.row-->		
 
 <hr>
 				<div class="row">
-					<div class="small-4 columns">
+					<div class="medium-4 columns">
 						<%= f.check_box :verified_location, label: ' Location'  %>		
-					</div><!--/.small-4-->
-					<div class="small-8 columns">
-								Location Photo <br>
+					</div><!--/.medium-4-->
+					<div class="medium-8 columns">
+								<h4>Location Photo</h4>
 								<%= image_tag @distributor.verification_location_photo.url(:medium), alt: "Location Photo"%>
-								<%= @distributor.verification_location_photo.exists? ? (link_to "View Larger", @distributor.verification_location_photo.url(:large), :target => "_blank") : "" %>					
-					</div><!--/.small-8-->
+								<%= @distributor.verification_location_photo.exists? ? (link_to "enlarge", @distributor.verification_location_photo.url(:large), :target => "_blank", style: "font-weight:100;") : "" %>					
+					</div><!--/.medium-8-->
 				</div><!--/.row-->		
 
 				<hr>
 				<div class="row">
-					<div class="small-4 columns">
+					<div class="medium-4 columns">
 						<%= f.check_box :verified_brand_display, label: ' Brand Display' %>		
-					</div><!--/.small-4-->
-					<div class="small-8 columns">
-						Brand Display Photo <br>
+					</div><!--/.medium-4-->
+					<div class="medium-8 columns">
+						<h4>Brand Display Photo</h4>
 						<%= image_tag @distributor.verification_brand_display_photo.url(:medium), alt: "Brand Display Photo"%>
 						<%= @distributor.verification_brand_display_photo.exists? ? (link_to "View Larger", @distributor.verification_brand_display_photo.url(:large), :target => "_blank") : "" %>					
-					</div><!--/.small-8-->
+					</div><!--/.medium-8-->
 				</div><!--/.row-->		
 
 				

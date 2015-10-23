@@ -120,6 +120,8 @@ class Distributor
 
 
 	# VERIFICATION
+	# CONTROLLED/ADDED BY DISTRIBUTOR
+	field :business_id, type: String
 	# CONTROLLED BY ADMIN
 	field :verified_website, type: Boolean
 	field :verified_social_media, type: Boolean # facebook or linkedin
