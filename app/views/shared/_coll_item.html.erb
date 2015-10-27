@@ -10,7 +10,7 @@
 				    <a href="#a_<%= cb.id %>"><%= cb.send(identifier).empty? ? "( No Name )" : cb.send(identifier)  %>
 			    	<% if has_picture_list(cb) %>
 					   	<% if cb.product_photos %>
-								<% cb.product_photos.each do |photo| %>
+								<% cb.product_photos.limit(1).each do |photo| %>
 									<%= image_tag photo.photo.url(:small), :width => '25', :height => '25' %>
 								<% end %>
 							<% end %>
