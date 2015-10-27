@@ -426,7 +426,7 @@ $dashboard-agency-color: $landing-teal;
   left: 0;
   height: 100%;
   width: 100%;
-  z-index: 10;
+  z-index: 100000;
   // background-color: rgba(0,0,0,0.5);
   background-color: rgba(0,0,0,0.8);
   display: none;
@@ -444,7 +444,7 @@ $dashboard-agency-color: $landing-teal;
     background-color: $landing-orange;
     border-radius: 5px;
     text-align: center;
-    z-index: 11; /* 1px higher than the overlay layer */
+    z-index: 100001; /* 1px higher than the overlay layer */
     display: none;
     color: white;
     font-weight: 700;
