@@ -12,8 +12,12 @@ class BrandPhoto
 	    :profile_tile    => ['275x180', :jpg]
 	    
 	  },
-		:convert_options => { :profile_tile => "-background white -gravity center -extent 275x180" }
-	   
+		:convert_options => { 
+			:profile_tile => "-alpha remove -background white -gravity center -extent 275x180", 
+			:small => "-alpha remove -background white", 
+			:medium => "-alpha remove -background white", 
+			:large => "-alpha remove -background white" 
+		}
 	validates_attachment_content_type :photo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
 
 	belongs_to :brand
