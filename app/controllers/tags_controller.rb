@@ -51,9 +51,6 @@ class TagsController < ApplicationController
 
 		type = params[:type]
 		tid = params[:tid]
-		# name = params[:tag][:name].split.map{ |x| (x==x.upcase ? x : x.capitalize) }.join(' ')
-
-		name = params[:tag][:name].split.map{ |x| x.upcase }.join(' ')
 
 		case type
 		when 'b'
@@ -76,8 +73,14 @@ class TagsController < ApplicationController
 			end					
 		end
 		
+
 		unless params[:tag][:name].empty?
-			to_be_tagged.tags.find_or_create_by(name: name)
+			taglist = params[:tag][:name].split(",")
+			taglist.each do |name|
+				next if name.blank?
+				name = name.split.map{ |x| x.upcase }.join(' ')
+				to_be_tagged.tags.find_or_create_by(name: name)
+			end
 		end
 		
 		@tags = to_be_tagged.tags
