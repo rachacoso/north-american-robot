@@ -5,14 +5,12 @@
 			<div class="ftg-items">
 				<% gallery.shuffle.each do |item| %>
 		    <div class="tile">
-					<a class="tile-inner" href="<%= item.photo.url(:medium) %>">
-						<img class="item" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="<%= item.photo.url(:medium) %>" />
-						<% if profile.class.to_s.downcase == 'brand' %>
-						<span class='title'><%= item.class.to_s == "BrandPhoto" ? item.brand.company_name : item.photographable.name %></span>
-						<% else %>
-						<span class='title'><%= item.photographable.brand %></span>
-						<% end %>
-					</a>
+					<img class="item" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="<%= item.photo.url(:medium) %>" />
+					<% if profile.class.to_s.downcase == 'brand' %>
+					<span class='title'><%= item.class.to_s == "BrandPhoto" ? item.brand.company_name : item.photographable.name %></span>
+					<% else %>
+					<span class='title'><%= item.photographable.brand %></span>
+					<% end %>
 		    </div>
 				<% end %>
 			</div>
