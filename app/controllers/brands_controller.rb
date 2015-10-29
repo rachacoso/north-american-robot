@@ -53,8 +53,8 @@ class BrandsController < ApplicationController
 
 		# GALLERY
     @product_list = @profile.products.pluck(:id)
-    @product_photos = ProductPhoto.where(:photographable_id.in => @product_list)
-    @brand_photos = @profile.brand_photos
+    @product_photos = ProductPhoto.where(:photographable_id.in => @product_list).shuffle[0..8]
+    @brand_photos = @profile.brand_photos.shuffle[0..8]
     @gallery = @product_photos.concat @brand_photos
 
 	end

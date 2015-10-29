@@ -264,8 +264,8 @@ class MatchesController < ApplicationController
         @messages = @current_user.distributor.matches.where(brand_id: @match.id).first.messages.order_by(:c_at.desc) rescue nil
         # @gallery = Array.new
         @product_list = @match.products.pluck(:id)
-        @product_photos = ProductPhoto.where(:photographable_id.in => @product_list)
-        @brand_photos = @match.brand_photos
+        @product_photos = ProductPhoto.where(:photographable_id.in => @product_list).shuffle[0..8]
+        @brand_photos = @match.brand_photos.shuffle[0..8]
         @gallery = @product_photos.concat @brand_photos
       else
         redirect_to root_url
