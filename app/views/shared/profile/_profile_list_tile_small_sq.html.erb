@@ -13,13 +13,8 @@
 									"/images/SECTORS_<%= sector.name.gsub(/\s+/, "").gsub(/\//, "").downcase %>.svg",
 								<% end %>
 							<% else %>
-								<% profile_item.brand_photos.each do |photo| %>
+								<% get_photos(profile_item).each do |photo| %>
 							    "<%= photo.photo.url(:profile_tile) %>",
-							  <% end %>
-							  <% profile_item.products.each do |product| %>
-								  <% product.product_photos.each do |photo| %>
-										"<%= photo.photo.url(:profile_tile) %>",
-								  <% end %>
 							  <% end %>
 						  <% end %>
 						   ], {duration: 3000, fade: 750});

@@ -24,6 +24,26 @@ module MatchesHelper
 		end
 	end
 
+
+	def get_photos(profile)
+		b_photos = Array.new
+		profile.brand_photos.each do |item|
+			b_photos << item
+		end
+
+		p_photos = Array.new
+		profile.products.each do |product|
+			product.product_photos.each do |photo|
+				p_photos << photo
+			end
+		end
+
+		photos = Array.new
+		photos = b_photos.shuffle[0..7] + p_photos.shuffle[0..7]
+		return photos.shuffle
+	end
+
+
 	def get_last_login(match)
 
 		login_list = Array.new
