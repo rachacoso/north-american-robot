@@ -39,6 +39,8 @@ class HomeController < ApplicationController
 		when "distributor"
 			@sector = @profile.sector_ids.to_s
 	  	@gallery = ProductPhoto.where(photographable_type: "Product").shuffle[0..4]
+			@gallery_products = ProductPhoto.where(photographable_type: "Product").shuffle[0..11]
+
 		when "brand"
 
 			@all_matches = Distributor.in(sector_ids: @profile.sector_ids).excludes(country_of_origin: "", export_countries: nil)

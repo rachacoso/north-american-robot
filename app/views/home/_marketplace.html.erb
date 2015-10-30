@@ -50,6 +50,7 @@
 
 
 <% if @current_user.distributor %>
+
 	<% if @gallery %>
 	<%= link_to gallery_url do %>
 	<div id="dashboard-marketplace-header">
@@ -62,26 +63,37 @@
 	<div class="row collapse">
 		<div class="small-11 small-centered columns">
 			<div class="profile-content gallery-window">
-				<div id="profile_gallery" class="final-tiles-gallery effect-dezoom effect-fade-out caption-top">
-					<div class="ftg-items">
-						
-						<% @gallery.each do |item| %>
-				    <div class="tile">
-			        <a class="tile-inner" href="<%= view_match_path(item.photographable.brand.id, 'na') %>">
-		            <img class="item" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="<%= item.photo.url(:medium) %>" />
-			        </a>
-				    </div>
-						<% end %>
 
-					</div>
-				</div>
+				<ul class="medium-block-grid-3 small-block-grid-1">
+					<% @gallery_products.each_with_index do |item, index| %>
+						<li>
+							<div class="gallery-item">
+							<div class="row">
+								<div class="small-12 columns">
+									<%= link_to view_match_path(item.photographable.brand.id, "na") do %>
+									<%= image_tag item.photo.url(:profile_tile) %>
+									<% end %>
+								</div><!--/.medium-5-->
+							</div><!--/.row-->
+							<div class="row collapse">
+								<div class="small-12 columns text-center">
+									<%= link_to view_match_path(item.photographable.brand.id, "na") do %>
+									<h3><%= item.photographable.brand.company_name %><br><small><%= item.photographable.name %></small></h3>
+									<% end %>
+								</div>
+							</div><!--/.row-->
+							</div>
+						</li>
+					<% end %>
+				</ul>
+
 			</div>
 		</div><!--/.small-12-->
 	</div><!--/.row-->
 
 	<div class="row">
 		<div class="small-12 columns text-center">
-	<%= link_to "MORE", gallery_url, class: "button tiny" %>		
+	<%= link_to "MORE", gallery_url, class: "button tiny" %>
 		</div><!--/.small-12-->
 	</div><!--/.row-->
 
