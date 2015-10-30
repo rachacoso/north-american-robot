@@ -57,7 +57,7 @@ class MatchesController < ApplicationController
         @matches = all_matches.in(sector_ids: @sector)
         if params[:tag]
           tag = Tag.where(name: params[:tag], taggable_type: 'Brand').pluck(:taggable_id)
-          @matches = all_matches.in(:id => tag)
+          @matches = @matches.in(:id => tag)
           @tag = params[:tag]
         end
       elsif params[:tag]
