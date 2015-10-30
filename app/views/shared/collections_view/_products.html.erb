@@ -45,10 +45,18 @@
 	</div><!--/.small-12-->	
 	<div class="small-12 columns">
 		<% unless collitem.description.blank? %>
-			<%= simple_format(collitem.description) %>
+			<div class="products-description">
+				<%= simple_format(collitem.description) %>
+			</div>
+		<% end %>
+		<% unless collitem.description.blank? || collitem.key_benefits.blank? %>
+			<br>
 		<% end %>
 		<% unless collitem.key_benefits.blank? %>
-			<%= simple_format(collitem.key_benefits) %>
+			<div class="products-key-benefits">
+				<h3>Key Benefits</h3>
+				<%= simple_format(collitem.key_benefits) %>
+			</div>
 		<% end %>		
 	</div><!--/.small-12-->
 </div><!--/.row-->
