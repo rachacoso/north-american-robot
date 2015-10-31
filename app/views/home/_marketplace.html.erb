@@ -5,19 +5,19 @@
 <div id="dashboard-marketplace-content">
 <% if @current_user.distributor %>
 
-	<div class="row">
+	<div class="row collapse">
+		<div class="small-12 columns text-left">
+			<h2 class="dashboard-section-title">FIND NEW BRANDS</h2>
+		</div><!--/.small-12-->
 		<div class="small-12 columns">
-
-			<h2 class="dashboard-section-title">Find New Brands</h2>
 			<div id="match-sectors-container">
 				<div class="row">
 					<div class="small-11 small-centered columns">
 						<%= render partial: "matches/distributor_search_start" %>		
 					</div><!--/.small-11 small-centered-->
 				</div><!--/.row-->
-			</div><!--/.match-map-container -->		
-
-		</div>
+			</div><!--/.match-map-container -->					
+		</div><!--/.small-12-->
 	</div>
 
 
@@ -54,7 +54,7 @@
 	<% if @gallery %>
 	<%= link_to gallery_url do %>
 	<div id="dashboard-marketplace-header">
-		<h3>Gallery</h3>
+		<h3>Brand Gallery</h3>
 	</div>
 	<% end %>
 	<div id="dashboard-marketplace-content">

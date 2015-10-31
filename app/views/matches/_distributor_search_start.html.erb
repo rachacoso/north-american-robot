@@ -4,13 +4,19 @@
 	<%# sectors = Sector.find(@current_user.distributor.sector_ids) %>
 	<% sectors = Sector.all %>
 
-	<div class="row">
-		<% sectors.order_by(:name.asc).each do |s| %>
-		<%= link_to all_matches_url(:sector => s.id) do %>
-		<div class="medium-3 columns hide-for-small-only text-center" id="match-<%=s.name.downcase.tr("/"," ").squish.tr(" ","-") %>">
-		</div>
-		<% end %>
-		<% end %>		
+	<div class="row collapse">
+		<div class="small-12 columns">
+			<% sectors.order_by(:name.asc).each do |s| %>
+				<%= link_to all_matches_url(:sector => s.id) do %>
+					<div class="small-3 columns">
+						<div class="row collapse">
+							<div class="small-12 columns hide-for-small-only text-center" id="match-<%=s.name.downcase.tr("/"," ").squish.tr(" ","-") %>">
+							</div><!--/.small-12-->
+						</div><!--/.row-->
+					</div><!--/.small-3-->
+				<% end %>
+			<% end %>
+		</div><!--/.small-12-->
 	</div><!--/.row-->
 
 	<div class="row show-for-small-only">
