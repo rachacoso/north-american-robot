@@ -201,7 +201,31 @@ class MatchesController < ApplicationController
   def gallery
 
     if @current_user.type? == "distributor"
-      @gallery = ProductPhoto.where(photographable_type: "Product").shuffle
+
+      get_gallery()
+      
+      @gallery = @gallery.page(1).per(30)
+
+    else
+      redirect_to all_matches_url
+    end
+
+  end
+
+  def gallery_next
+
+    if @current_user.type? == "distributor"
+
+      get_gallery()
+
+      if params[:page]
+        @gallery = @gallery.page(params[:page]).per(30)
+      else
+        @gallery = []
+      end
+
+      render :layout => false
+
     else
       redirect_to all_matches_url
     end
@@ -601,6 +625,10 @@ class MatchesController < ApplicationController
   end
 
   private
+
+  def get_gallery
+    @gallery = ProductPhoto.where(photographable_type: "Product").order_by(:photo_updated_at.desc)
+  end
 
   def match_share_parameters
     params.require(:match).permit(

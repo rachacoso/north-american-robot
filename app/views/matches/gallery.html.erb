@@ -9,29 +9,25 @@
 <div class="row">
 	<div class="small-12 columns marketplace-subpage-header">
 	<h1>GALLERY</h1>
-	<h3>Browse all products currently in the Landing Marketplace.</h3>
+	<h3>View the most recent products in the Landing Marketplace.</h3>
 	</div>
 </div>
 
 
 <% if @gallery %>
+
 <div class="row collapse">
 	<div class="small-11 small-centered columns">
-		<div class="profile-content gallery-window">
-			<div id="profile_gallery" class="final-tiles-gallery effect-dezoom effect-fade-out caption-top">
-				<div class="ftg-items">
-					
-					<% @gallery.each do |item| %>
-			    <div class="tile">
-			        <a class="tile-inner" href="<%= view_match_path(item.photographable.brand.id, 'na') %>">
-			            <img class="item" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="<%= item.photo.url(:medium) %>" />
-			            <span class='title'><%= item.photographable.brand.company_name %></span>
-			        </a>
-			    </div>
-					<% end %>
+		<div class="profile-content gallery-window" style="background: white;">
 
-				</div>
-			</div>
+				<ul class="medium-block-grid-6 small-block-grid-1" id="gallery-list">
+					<%= render "gallery_results"%>
+				</ul>
+				<%#= paginate @gallery %>
+				<br><br>
+
+				
+
 		</div>
 	</div><!--/.small-12-->
 </div><!--/.row-->

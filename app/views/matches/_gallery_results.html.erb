@@ -1,0 +1,21 @@
+<% @gallery.each do |gallerybrand| %>
+	<% product = gallerybrand %>
+	<li>
+		<div class="gallery-item">
+		<div class="row">
+			<div class="small-12 columns text-center">
+				<%= link_to view_match_path(product.photographable.brand.id, "na") do %>
+				<%= image_tag product.photo.url(:profile_tile) %>
+				<% end %>
+			</div><!--/.medium-5-->
+		</div><!--/.row-->
+		<div class="row collapse">
+			<div class="small-12 columns text-center">
+				<%= link_to view_match_path(gallerybrand.id, "na") do %>
+				<h3><%= product.photographable.brand.company_name %><br><small><%= product.photographable.name %></small></h3>
+				<% end %>
+			</div>
+		</div><!--/.row-->
+		</div>
+	</li>
+<% end %>

@@ -112,6 +112,7 @@ Rails.application.routes.draw do
   get '/matches/contract/:match_id' => 'matches#view_contract', as: 'view_contract'
   post '/matches/accept/:id' => 'matches#accept_match', as: 'accept_match'
   get '/gallery' => 'matches#gallery', as: 'gallery'
+  get '/gallerynext' => 'matches#gallery_next', as: 'gallery_next'
   # post '/matches/share/:match_id' => 'matches#match_share', as: 'match_share'
   patch '/matches/share/:match_id' => 'matches#match_share', as: 'match_share'
 
