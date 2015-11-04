@@ -18,7 +18,7 @@
 					<% end %>					
 				<% end %>
 			<% else %>
-			<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= profile_item.class.to_s %> logo hidden. Subscribe to view full profile"><%= image_tag profile_item.logo.url(:public), width: "40", height: "40", alt: "Logo" %></span>
+			<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= profile_item.class.to_s %> logo hidden. Subscribe to view full profile"><%= image_tag profile_item.logo.url(:medium), width: "40", height: "40", alt: "Logo" %></span>
 			<% end %>
 		</div><!--/.medium-1-->
 		<div class="medium-4 columns">
@@ -39,8 +39,8 @@
 							<h5><%= truncate(profile_item.brand_positioning, :length => 100, :separator => ' ') %><small><%= link_to "more", view_match_url(profile_item.id, action_name) %> </small></h5>
 						<% end %>
 					<% else %>
-						<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= profile_item.class.to_s %> name hidden. Subscribe to view full profile">
-						<%= ("&blk12;" * profile_item.company_name.length).html_safe %>
+						<span data-tooltip aria-haspopup="true" class="has-tip" title="Subscribe to view full profile">
+						<%= profile_item.company_name %>
 						</span>
 					<% end %>
 

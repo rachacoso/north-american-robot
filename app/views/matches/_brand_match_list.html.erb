@@ -43,26 +43,16 @@
 			</div>
 		<% else %>
 
-			<div class="row">
+
+			<div class="row" style="padding: 0px;">
 				<div class="small-12 columns">
-
-					<table width="100%">
-					  	<tbody>
-							<% matches.each do |match| %>
-							<tr id="pot_<%= match.id %>">
-								<td>
-									
-								<%= render partial: "shared/profile/profile_list_tile_small_h", locals: {profile_item: match, set: set} %>
-
-								</td>
-
-							</tr>
-							<% end %>
-							</tbody>
-					</table>
-
+					<% matches.each do |match| %>
+						<%= render partial: "shared/profile/profile_list_tile_small_h", locals: {profile_item: match, set: set} %>
+					<% end %>
 				</div>
 			</div>
+
+
 		<% end %>
 
 	<% else %>
