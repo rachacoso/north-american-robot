@@ -421,39 +421,6 @@ $dashboard-agency-color: $landing-teal;
 }
 
 
-// AJAX OVERLAY AND WAIT MODAL
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 100000;
-  // background-color: rgba(0,0,0,0.5);
-  background-color: rgba(0,0,0,0.8);
-  display: none;
-}
-
-.ajax-wait {
-    width: 100px;
-    height: 100px;
-    line-height: 100px;
-    position: fixed;
-    top: 50%; 
-    left: 50%;
-    margin-top: -50px;
-    margin-left: -100px;
-    background-color: $landing-orange;
-    border-radius: 5px;
-    text-align: center;
-    z-index: 100001; /* 1px higher than the overlay layer */
-    display: none;
-    color: white;
-    font-weight: 700;
-}
-
-
 // NEW SEARCH START PAGE
 
 // .matchback {
