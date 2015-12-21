@@ -19,3 +19,6 @@
 /public/system
 # Ignore application configuration
 /config/application.yml
+
+# Ignore pow symlink
+/landing
