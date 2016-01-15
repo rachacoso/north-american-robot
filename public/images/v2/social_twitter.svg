@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="38px" height="32px" viewBox="0 0 38 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>Twitter</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Landing-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="FRONT-PAGE-1024-v2.2-Copy" sketch:type="MSArtboardGroup" transform="translate(-875.000000, -2627.000000)" fill="#8E99A8">
+            <g id="Group" sketch:type="MSLayerGroup" transform="translate(1.000000, 100.000000)">
+                <g id="FOOTER" transform="translate(36.000000, 2448.000000)" sketch:type="MSShapeGroup">
+                    <g id="Group" transform="translate(642.000000, 77.000000)">
+                        <path d="M232.42,2.577 C230.934,3.479 229.292,4.135 227.537,4.486 C226.139,2.956 224.141,2 221.929,2 C217.689,2 214.248,5.528 214.248,9.879 C214.248,10.497 214.314,11.096 214.446,11.673 C208.06,11.344 202.399,8.211 198.607,3.438 C197.945,4.606 197.567,5.961 197.567,7.404 C197.567,10.136 198.923,12.548 200.986,13.961 C199.728,13.923 198.541,13.565 197.503,12.979 L197.503,13.075 C197.503,16.894 200.152,20.08 203.67,20.801 C203.026,20.986 202.346,21.079 201.645,21.079 C201.15,21.079 200.667,21.031 200.199,20.939 C201.177,24.068 204.013,26.347 207.376,26.408 C204.747,28.522 201.432,29.782 197.833,29.782 C197.213,29.782 196.6,29.746 196,29.674 C199.4,31.906 203.441,33.211 207.779,33.211 C221.914,33.211 229.641,21.207 229.641,10.794 C229.641,10.451 229.635,10.109 229.622,9.773 C231.123,8.662 232.427,7.275 233.453,5.695 C232.077,6.321 230.595,6.745 229.041,6.935 C230.628,5.961 231.846,4.417 232.42,2.577" id="Twitter"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

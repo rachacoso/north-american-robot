@@ -1,5 +1,5 @@
 var hasBG = typeof bgImage != 'undefined';
-var bgDefaultColor = "#E5E5E5";
+var bgDefaultColor = "#FFFFFF";
 
 
 function doBackstretch (location, photos, durationTime, fadeTime) {

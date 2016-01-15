@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title><%= content_for?(:title) ? yield(:title) : "Landing" %></title>
   <link rel="shortcut icon" href="/favicon.ico?v=2" />
   <%= stylesheet_link_tag    "application" %>
@@ -13,12 +13,11 @@
 <script>try{Typekit.load();}catch(e){}</script>
 
   <%= content_for?(:javascript_head) ? yield(:javascript_head) : "" %>
-  <%= content_for?(:css_head) ? yield(:css_head) : "" %>
 
 
 
 </head>
-<body>
+<body data-vide-bg="mp4: /video/Landing.mp4" data-vide-options="loop: false, muted: true, position: 0% 0%">
 
 <%= content_for?(:user_head) ? yield(:user_head) : "" %>
 
@@ -28,21 +27,11 @@
 <%= yield %>
 
 
-<div class="overlay"></div>
-<div class="modal ajax-wait"><%= image_tag 'landing_loading.gif' %></div>
-
-<div id="quick-view">
-	<a id="close-quick-view" aria-label="Close"><i class="fi-x"></i></a>
-	<div id="quick-view-data"></div>
-</div>
-<div class="overlay" id="quick-view-overlay"></div>
-
 <%= javascript_include_tag "application" %>
 <%= content_for?(:javascript_foot) ? yield(:javascript_foot) : "" %>
 
+<div class="overlay"></div>
+<div class="modal ajax-wait"><%= image_tag 'landing_loading.gif' %></div>
 
 </body>
 </html>
-
-
-

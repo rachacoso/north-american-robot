@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="37px" height="37px" viewBox="0 0 37 37" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>Instagram</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Landing-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="FRONT-PAGE-1024-v2.2-Copy" sketch:type="MSArtboardGroup" transform="translate(-947.000000, -2625.000000)" fill="#8E99A8">
+            <g id="Group" sketch:type="MSLayerGroup" transform="translate(1.000000, 100.000000)">
+                <g id="FOOTER" transform="translate(36.000000, 2448.000000)" sketch:type="MSShapeGroup">
+                    <g id="Group" transform="translate(642.000000, 77.000000)">
+                        <path d="M300.305,0 L272.358,0 C269.951,0 268,1.946 268,4.348 L268,32.315 C268,34.716 269.951,36.663 272.358,36.663 L300.305,36.663 C302.712,36.663 304.663,34.716 304.663,32.315 L304.663,4.348 C304.663,1.946 302.712,0 300.305,0 L300.305,0 Z M294.352,5.728 C294.352,5.096 294.865,4.583 295.497,4.583 L298.934,4.583 C299.567,4.583 300.08,5.096 300.08,5.728 L300.08,9.166 C300.08,9.798 299.567,10.311 298.934,10.311 L295.497,10.311 C294.865,10.311 294.352,9.798 294.352,9.166 L294.352,5.728 L294.352,5.728 Z M286.374,11.34 C290.268,11.34 293.425,14.49 293.425,18.374 C293.425,22.259 290.268,25.408 286.374,25.408 C282.481,25.408 279.324,22.259 279.324,18.374 C279.324,14.49 282.481,11.34 286.374,11.34 L286.374,11.34 Z M301.226,32.08 C301.226,32.712 300.713,33.226 300.08,33.226 L272.583,33.226 C271.95,33.226 271.437,32.712 271.437,32.08 L271.437,14.894 L276.02,14.894 C275.423,15.753 275.221,17.356 275.221,18.374 C275.221,24.509 280.225,29.501 286.374,29.501 C292.524,29.501 297.528,24.509 297.528,18.374 C297.528,17.356 297.383,15.778 296.643,14.894 L301.226,14.894 L301.226,32.08 L301.226,32.08 Z" id="Instagram"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
