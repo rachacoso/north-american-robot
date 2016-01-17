@@ -62,15 +62,18 @@ Rails.application.routes.draw do
   
   resources :users, only: [:new, :create, :edit, :update, :destroy, :index]
   
-  get    '/distributors' => 'distributors#edit', as: 'distributor'
-  get    '/distributors/public_profile' => 'distributors#public_profile', as: 'distributor_public_profile'
-  get    '/distributors/full_profile' => 'distributors#full_profile', as: 'distributor_full_profile'
-  patch  '/distributors' => 'distributors#update'
+  get    '/distributor/edit' => 'distributors#edit', as: 'distributor'
+  get    '/distributor/public_profile' => 'distributors#public_profile', as: 'distributor_public_profile'
+  get    '/distributor/full_profile' => 'distributors#full_profile', as: 'distributor_full_profile'
+  patch  '/distributor/edit' => 'distributors#update'
   patch  '/distributor_brands' => 'distributor_brands#update'
-  patch  '/distributors/adminupdate/:id' => 'distributors#adminupdate', as: 'distributor_admin_update'
-  delete '/distributors/validation/delitem' => 'distributors#validation_delete', as: 'distributor_validation_delete'
+  patch  '/distributor/adminupdate/:id' => 'distributors#adminupdate', as: 'distributor_admin_update'
+  delete '/distributor/validation/delitem' => 'distributors#validation_delete', as: 'distributor_validation_delete'
 
-  
+  # v2 public view
+  # get    '/viewbrands'
+
+  # for brand editing
   get    '/brands' => 'brands#edit', as: 'brand'
   get    '/brands/public_profile' => 'brands#public_profile', as: 'brand_public_profile'
   get    '/brands/full_profile' => 'brands#full_profile', as: 'brand_full_profile'
