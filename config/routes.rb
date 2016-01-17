@@ -74,11 +74,11 @@ Rails.application.routes.draw do
   # get    '/viewbrands'
 
   # for brand editing
-  get    '/brands' => 'brands#edit', as: 'brand'
-  get    '/brands/public_profile' => 'brands#public_profile', as: 'brand_public_profile'
-  get    '/brands/full_profile' => 'brands#full_profile', as: 'brand_full_profile'
-  patch  '/brands' => 'brands#update'
-  patch  '/brands/adminupdate/:id' => 'brands#adminupdate', as: 'brand_admin_update'
+  get    '/brand/edit' => 'brands#edit', as: 'brand'
+  get    '/brand/public_profile' => 'brands#public_profile', as: 'brand_public_profile'
+  get    '/brand/full_profile' => 'brands#full_profile', as: 'brand_full_profile'
+  patch  '/brand/edit' => 'brands#update'
+  patch  '/brand/adminupdate/:id' => 'brands#adminupdate', as: 'brand_admin_update'
 
   get '/onboard/distributor/one' => 'onboard_distributor#one', as: 'onboard_distributor_one'
   get '/onboard/distributor/two' => 'onboard_distributor#two', as: 'onboard_distributor_two'
