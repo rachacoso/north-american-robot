@@ -1,4 +1,5 @@
 <div class="index-item">
+<%= link_to view_brand_url(brand) do %>
 <div class="image">
 	<% type, photo = index_item_photo(brand) %>
 	<% if type == "logo" %>
@@ -7,7 +8,8 @@
 		<img class="lazyOwl" data-src="<%= photo %>">
 	<% end %>
 </div>
-<div class="name"><%= brand.company_name %></div>
+<% end %>
+<div class="name"><%= link_to view_brand_url(brand) do %><%= brand.company_name %><% end %></div>
 
 			
 </div><!--/.index-item-->

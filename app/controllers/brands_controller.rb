@@ -1,7 +1,7 @@
 class BrandsController < ApplicationController
 
 	before_action :check_usertype, only: [:edit, :public_profile, :full_profile, :update]
-	skip_before_action :require_login, only: [:index]
+	skip_before_action :require_login, only: [:index, :view]
 
 	def index
 
@@ -12,10 +12,17 @@ class BrandsController < ApplicationController
 		# drop if no active brands use tag
 		@brand_tags.reject! { |bt| Brand.activated.find(bt.taggable_id).blank? }
 
-		@product_tags = Tag.where(taggable_type: "Product").uniq { |p| p.name }
 
 	end
 
+	def view
+		@profile = Brand.find(params[:id])
+		# GALLERY
+    @product_list = @profile.products.pluck(:id)
+    @product_photos = ProductPhoto.where(:photographable_id.in => @product_list).shuffle[0..8]
+    @brand_photos = @profile.brand_photos.shuffle[0..8]
+    @gallery = @product_photos.concat @brand_photos
+	end
 
 	def edit
 

@@ -1,0 +1,16 @@
+<%= render partial: 'shared/v2/header/main' %>
+
+<div class="row">
+	<div class="small-12 columns">
+		<nav class="breadcrumbs">
+		  <a href="#">Beauty</a>
+		  <%= link_to "Find", brands_url %>
+		  <a class="current" href="#"><%= @profile.company_name %></a>
+		</nav>
+	</div>
+</div>
+
+<%= render partial: "/shared/profile/brand_full_profile", locals: {profile: @profile} %>
+
+
+<%= render partial: 'shared/v2/footer/main' %>
