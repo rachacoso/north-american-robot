@@ -2,7 +2,13 @@
 @import "foundation/components/labels";
 @import "global_variables";
 @import "mixins";
-
+.owlStatus {
+	font-weight: 100;
+	margin-left: rem-calc(10);
+}
+.owl-carousel {
+	margin: rem-calc(30) 0;
+}
 #owl-demo .item{
   display: block;
   padding: 30px 0px;
