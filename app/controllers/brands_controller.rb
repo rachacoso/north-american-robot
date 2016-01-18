@@ -8,6 +8,12 @@ class BrandsController < ApplicationController
 		@sectors = Sector.all
 		@brands = Brand.activated
 
+		@brand_tags = Tag.where(taggable_type: "Brand").uniq { |p| p.name }.sort_by { |p| p.name }
+		# drop if no active brands use tag
+		@brand_tags.reject! { |bt| Brand.activated.find(bt.taggable_id).blank? }
+
+		@product_tags = Tag.where(taggable_type: "Product").uniq { |p| p.name }
+
 	end
 
 

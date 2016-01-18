@@ -16,7 +16,65 @@
 </div><!--/.row-->
 <br><br>
 
+<% @brand_tags.each do |bt| %>
+	
+	<div class="row">
+		<div class="small-11 small-centered columns">
+			<h2><%= bt.name %></h2>
+			<span id="owlStatus-<%= bt.id %>" class="owlStatus">
+				<span class="owlItems"><span class="result"></span></span> brands
+			</span>
+			<div id="owl-example-<%= bt.id %>" class="owl-carousel owl-theme">
+			<% brand_tags(bt.name).each do |t| %>
+			  <% next unless brand_tag_brands(t) %>
+				<div><%= render partial: "index_item", locals: {brand: brand_tag_brands(t)} %></div>
+			<% end %>
+			</div>
+		</div><!--/.small-11 small-centered-->
+	</div><!--/.row-->
 
+	<% content_for :javascript_foot do %>
+	  <%= javascript_tag do %>
+			$(document).ready(function() {
+
+			  $("#owl-example-<%= bt.id %>").owlCarousel({
+					lazyLoad : true,
+					lazyFollow : true,
+					lazyEffect : "fade",
+					navigation : true,
+					navigationText : [
+						"<img src='images/v2/left-arrow.svg'>",
+						"<img src='images/v2/right-arrow.svg'>",
+					],
+					items : 6,
+					pagination : true,
+					scrollPerPage : true,
+					afterAction : afterAction
+				});
+
+				function updateResult(pos,value){
+					$("#owlStatus-<%= bt.id %>").find(pos).find(".result").text(value);
+				}
+
+				function afterAction(){
+					updateResult(".owlItems", this.owl.owlItems.length);
+				}
+
+
+			});
+	  <% end %>
+	<% end %>
+
+	<br>
+<% end %>
+
+
+<br><br>
+<% @product_tags.each do |pt| %>
+  <%= pt.name %><br>
+<% end %>
+
+<br><br>
 <% @sectors.each do |s| %>
 	<% next if @brands.where(:sector_ids => s.id).blank? %>
 	
@@ -24,7 +82,7 @@
 		<div class="small-11 small-centered columns">
 			<h2><%= s.name %></h2>
 			<span id="owlStatus-<%= s.id %>" class="owlStatus">
-				<span class="visibleItems"><span class="result"></span></span> of <span class="owlItems"><span class="result"></span></span> brands
+				<span class="owlItems"><span class="result"></span></span> brands
 			</span>
 			<div id="owl-example-<%= s.id %>" class="owl-carousel owl-theme">
 			<% @brands.where(:sector_ids => s.id).each do |b| %>
@@ -35,44 +93,37 @@
 	</div><!--/.row-->
 
 
-<% content_for :javascript_foot do %>
-  <%= javascript_tag do %>
-		$(document).ready(function() {
+	<% content_for :javascript_foot do %>
+	  <%= javascript_tag do %>
+			$(document).ready(function() {
 
-		  $("#owl-example-<%= s.id %>").owlCarousel({
-				lazyLoad : true,
-				lazyFollow : true,
-				lazyEffect : "fade",
-				navigation: true,
-				navigationText: [
-					"<img src='images/v2/left-arrow.svg'>",
-					"<img src='images/v2/right-arrow.svg'>",
-				],
-				items : 6,
-				pagination: false,
-				afterAction : afterAction
-			});
+			  $("#owl-example-<%= s.id %>").owlCarousel({
+					lazyLoad : true,
+					lazyFollow : true,
+					lazyEffect : "fade",
+					navigation : true,
+					navigationText : [
+						"<img src='images/v2/left-arrow.svg'>",
+						"<img src='images/v2/right-arrow.svg'>",
+					],
+					items : 6,
+					pagination : true,
+					scrollPerPage : true,
+					afterAction : afterAction
+				});
 
-			function updateResult(pos,value){
-				$("#owlStatus-<%= s.id %>").find(pos).find(".result").text(value);
-			}
-
-			function afterAction(){
-				var items = this.owl.visibleItems;
-				if (items.length == 1) {
-					itemsDisplay = items[0] + 1;
-				} else {
-					itemsDisplay = (items[0] + 1) + " - " + (items[items.length - 1] + 1);
+				function updateResult(pos,value){
+					$("#owlStatus-<%= s.id %>").find(pos).find(".result").text(value);
 				}
-				
-				updateResult(".owlItems", this.owl.owlItems.length);
-				updateResult(".visibleItems", itemsDisplay);
-			}
+
+				function afterAction(){
+					updateResult(".owlItems", this.owl.owlItems.length);
+				}
 
 
-		});
-  <% end %>
-<% end %>
+			});
+	  <% end %>
+	<% end %>
 
 <% end %>
 
