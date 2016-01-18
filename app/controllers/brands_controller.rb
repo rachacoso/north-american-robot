@@ -1,6 +1,13 @@
 class BrandsController < ApplicationController
 
 	before_action :check_usertype, only: [:edit, :public_profile, :full_profile, :update]
+	skip_before_action :require_login, only: [:index]
+
+	def index
+
+		@brands = Brand.activated
+
+	end
 
 
 	def edit

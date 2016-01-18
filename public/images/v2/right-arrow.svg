@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="34px" height="34px" viewBox="0 0 34 34" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>Oval 39 + Triangle 1 Copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Landing-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="FIND-BRANDS---TREND-1024-V2" sketch:type="MSArtboardGroup" transform="translate(-955.000000, -1026.000000)">
+            <g id="Group" sketch:type="MSLayerGroup" transform="translate(40.000000, 154.000000)">
+                <g id="Group-+-Landing-/-Slider-Arrows-Copy-2" transform="translate(5.000000, 782.000000)" sketch:type="MSShapeGroup">
+                    <g id="Landing-/-Slider-Arrows-Copy-2" transform="translate(0.000000, 92.000000)">
+                        <g id="Oval-39-+-Triangle-1-Copy" transform="translate(927.000000, 15.000000) rotate(-180.000000) translate(-927.000000, -15.000000) translate(912.000000, 0.000000)">
+                            <ellipse id="Oval-39" stroke="#979797" stroke-width="3" cx="15" cy="15" rx="15" ry="15"></ellipse>
+                            <path d="M20,8 L20,22 L6,15 L20,8 Z" id="Triangle-1" fill="#868394"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

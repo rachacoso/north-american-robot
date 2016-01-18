@@ -113,6 +113,16 @@ class Brand
 # MODEL METHODS
 ################
 
+	def all_product_photos
+		# First, finding ids of products
+		ids = Product.where(brand_id: self.id).only(:_id).map(&:id)
+		# Then, find photos of those products
+		photos = ProductPhoto.any_in(:photographable_id => ids)
+
+		return photos
+
+	end
+
 	def completeness_percentage
 
 		# items to test for present-ness (i.e. field exists AND has content)

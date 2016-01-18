@@ -1,0 +1,16 @@
+@import "foundation/functions";
+@import "foundation/components/labels";
+@import "global_variables";
+@import "mixins";
+
+.index-item {
+	.image {
+		text-align: center;
+		height: 100px;
+	}
+	.name {
+		text-align: center;
+		font-weight: 100;
+		font-size: rem-calc(12)
+	}	
+}

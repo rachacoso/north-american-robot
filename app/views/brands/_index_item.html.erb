@@ -1,0 +1,13 @@
+<div class="index-item">
+<div class="image">
+	<% type, photo = index_item_photo(brand) %>
+	<% if type == "logo" %>
+		<img class="lazyOwl" data-src="<%= photo %>" width="100px">
+	<% else %>
+		<img class="lazyOwl" data-src="<%= photo %>">
+	<% end %>
+</div>
+<div class="name"><%= brand.company_name %></div>
+
+			
+</div><!--/.index-item-->

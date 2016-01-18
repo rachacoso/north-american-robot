@@ -71,7 +71,7 @@ Rails.application.routes.draw do
   delete '/distributor/validation/delitem' => 'distributors#validation_delete', as: 'distributor_validation_delete'
 
   # v2 public view
-  # get    '/viewbrands'
+  get    '/brands' => 'brands#index', as: 'brands'
 
   # for brand editing
   get    '/brand/edit' => 'brands#edit', as: 'brand'

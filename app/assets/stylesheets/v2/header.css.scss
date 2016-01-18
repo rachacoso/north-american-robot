@@ -65,3 +65,15 @@
 	}
 
 }
+
+.breadcrumbs {
+	margin-top: rem-calc(20);
+	font-weight: 100;
+	.current {
+		font-weight: 200;
+	}
+
+}
+.breadcrumbs > *:before {
+	top: -2px;
+}

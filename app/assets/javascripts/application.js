@@ -41,6 +41,7 @@
 //= require dropzone
 //= require jquery.finaltilesgallery
 //= require jquery.vide.min
+//= require owl.carousel
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
