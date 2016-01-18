@@ -3,6 +3,21 @@
 @import "global_variables";
 @import "mixins";
 
+.brandindex-top{
+	min-height: 100vh;
+	h1 > strong {
+		color: $landing-middle-gray;
+	}
+	h1 > strong.active {
+		color: $landing-dark-gray;
+	}
+	h2 {
+		display: inline-block;
+		font-weight: 700;
+		color: #9B9B9B;
+		margin-left: rem-calc(-30);
+	}
+}
 .index-item {
 	.image {
 		text-align: center;
@@ -14,3 +29,8 @@
 		font-size: rem-calc(12)
 	}	
 }
+.owlStatus {
+	font-weight: 100;
+	margin-left: rem-calc(10);
+}
+

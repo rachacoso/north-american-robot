@@ -5,6 +5,7 @@ class BrandsController < ApplicationController
 
 	def index
 
+		@sectors = Sector.all
 		@brands = Brand.activated
 
 	end

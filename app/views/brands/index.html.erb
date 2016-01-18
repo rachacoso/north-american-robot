@@ -1,5 +1,6 @@
 <%= render partial: 'shared/v2/header/main' %>
 <%#= render partial: 'shared/v2/header/sub_beauty' %>
+<div class="brandindex-top">
 
 <div class="row">
 	<div class="small-12 columns">
@@ -9,31 +10,36 @@
 		  <a class="current" href="#">Find</a>
 		</nav>
 
-		<h1>BEAUTY BRANDS by TREND / RETAILER / CATEGORY / ALL</h1>
+		<h1>BEAUTY BRANDS by <strong>TREND</strong> / <strong>RETAILER</strong> / <strong>CATEGORY</strong> / <strong class="active">ALL</strong></h1>
 
 	</div><!--/.small-12-->
 </div><!--/.row-->
+<br><br>
 
 
-<div class="row">
-	<div class="small-11 small-centered columns">
+<% @sectors.each do |s| %>
+	<% next if @brands.where(:sector_ids => s.id).blank? %>
+	
+	<div class="row">
+		<div class="small-11 small-centered columns">
+			<h2><%= s.name %></h2>
+			<span id="owlStatus-<%= s.id %>" class="owlStatus">
+				<span class="visibleItems"><span class="result"></span></span> of <span class="owlItems"><span class="result"></span></span> brands
+			</span>
+			<div id="owl-example-<%= s.id %>" class="owl-carousel owl-theme">
+			<% @brands.where(:sector_ids => s.id).each do |b| %>
+				<div><%= render partial: "index_item", locals: {brand: b} %></div>
+			<% end %>
+			</div>
+		</div><!--/.small-11 small-centered-->
+	</div><!--/.row-->
 
-		<%= @brands.count %>
-		<div id="owl-example" class="owl-carousel owl-theme">
-		<% @brands.each do |b| %>
-			<div><%= render partial: "index_item", locals: {brand: b} %></div>
-		<% end %>
-		</div>
-
-		
-	</div><!--/.small-11 small-centered-->
-</div><!--/.row-->
 
 <% content_for :javascript_foot do %>
   <%= javascript_tag do %>
 		$(document).ready(function() {
-		  $("#owl-example").owlCarousel({
-				//Lazy load
+
+		  $("#owl-example-<%= s.id %>").owlCarousel({
 				lazyLoad : true,
 				lazyFollow : true,
 				lazyEffect : "fade",
@@ -43,8 +49,35 @@
 					"<img src='images/v2/right-arrow.svg'>",
 				],
 				items : 6,
-				pagination: false
+				pagination: false,
+				afterAction : afterAction
 			});
+
+			function updateResult(pos,value){
+				$("#owlStatus-<%= s.id %>").find(pos).find(".result").text(value);
+			}
+
+			function afterAction(){
+				var items = this.owl.visibleItems;
+				if (items.length == 1) {
+					itemsDisplay = items[0] + 1;
+				} else {
+					itemsDisplay = (items[0] + 1) + " - " + (items[items.length - 1] + 1);
+				}
+				
+				updateResult(".owlItems", this.owl.owlItems.length);
+				updateResult(".visibleItems", itemsDisplay);
+			}
+
+
 		});
   <% end %>
 <% end %>
+
+<% end %>
+
+
+</div>
+
+<%= render partial: 'shared/v2/footer/main' %>
+
