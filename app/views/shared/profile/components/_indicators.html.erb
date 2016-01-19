@@ -3,7 +3,7 @@
 
 
 
-				<% if @current_user.subscriber? && action_name != "public_profile"  %>
+				<% if @current_user && @current_user.subscriber? && action_name != "public_profile"  %>
 
 					<% m = this_match(match) %>		
 					<% has_unread, count = unread_count_from_match(match) %>

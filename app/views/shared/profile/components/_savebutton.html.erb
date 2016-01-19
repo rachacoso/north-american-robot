@@ -1,4 +1,4 @@
-<% if @current_user.subscriber? %>
+<% if @current_user && @current_user.subscriber? %>
 
 	<% if action_name == "index" || action_name == "view_match" || action_name == "contact_match" || action_name == "index_incoming_matches" || action_name == "index_contacted_matches" || action_name == "index_saved_matches" %>
 		<% if action_name == "index" || action_name == "view_match" || action_name == "contact_match" || action_name == "index_incoming_matches" || action_name == "index_contacted_matches"%>
