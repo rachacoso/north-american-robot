@@ -56,6 +56,9 @@ class Brand
   has_and_belongs_to_many :subsectors, inverse_of: nil 
 	has_and_belongs_to_many :channels, inverse_of: nil 
   
+	has_and_belongs_to_many :key_retailers, inverse_of: nil
+	has_and_belongs_to_many :trends, inverse_of: nil
+
   has_many :brand_photos, dependent: :destroy
 
   has_many :library_documents, as: :documentable, dependent: :destroy
@@ -127,21 +130,23 @@ class Brand
 
 		# items to test for present-ness (i.e. field exists AND has content)
 		items_present = [
-		 	:company_name,
+			:company_name,
 			:country_of_origin,
 			:year_established,
 			:company_size,
 			:website,
 			:logo_file_name,			
-		 	:export_countries,
-		 	:sectors,
-		 	:channels,
-		 	:brand_photos,
-		 	:products,
-		 	:press_hits,
-		 	:patents,
-		 	:trademarks,
-		 	:compliances,
+			:export_countries,
+			:sectors,
+			:channels,
+			:key_retailers,
+			:trends,
+			:brand_photos,
+			:products,
+			:press_hits,
+			:patents,
+			:trademarks,
+			:compliances,
 			:trade_shows
 		]
 

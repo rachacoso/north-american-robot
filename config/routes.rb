@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   resources :subsectors, only: [:create, :update, :destroy]
   resources :channels, only: [:create, :update, :destroy]
   resources :company_sizes, only: [:create, :update, :destroy]
+  resources :key_retailers, only: [:create, :update, :destroy]
+  resources :trends, only: [:create, :update, :destroy]
   resources :countries, only: [:create, :update, :destroy]
   resources :channel_capacities, only: [:create, :update, :destroy]
   resources :brand_photos, only: [:create, :destroy]

@@ -5,3 +5,22 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+
+Trend.create([
+	{ name: 'Paraben-Free Sun Care' }, 
+	{ name: '5-Free Nail Care' },
+	{ name: 'Natural Color Cosmetics' },
+	{ name: 'Natural/Organic Hair Care' },
+	{ name: 'Small Batch Beauty' },
+	{ name: 'Tools & Devices' }
+	])
+
+KeyRetailer.create([
+	{ name: 'Bergdorf Goodman' },
+	{ name: 'Sephora' },
+	{ name: 'SPACE NK' },
+	{ name: 'ULTA' },
+	{ name: 'Urban Outfitters' },
+	{ name: "RICKY'S" }
+	])

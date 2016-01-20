@@ -13,12 +13,17 @@ class AdminController < ApplicationController
   	@channel = Channel.all
   	# @country = Country.all
     @company_size = CompanySize.all
+    @key_retailer = KeyRetailer.all
+    @trend = Trend.all
+
 
   	@new_sector = Sector.new
     @new_subsector = Subsector.new
   	@new_channel = Channel.new
   	# @new_country = Country.new
     @new_company_size = CompanySize.new
+    @new_trend = Trend.new
+    @new_key_retailer = KeyRetailer.new
 
 		if Display.all.first.blank?
 			@display_info = Display.new

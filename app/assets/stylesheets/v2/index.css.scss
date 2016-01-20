@@ -47,7 +47,7 @@
 ul.index-tag-list {
 	list-style-type: none; /*to remove bullets*/
 	text-align: left;
-	margin-left:0;
+	margin-left: rem-calc(-3);
 	padding: 0px;
 	zoom:1;
 	overflow: hidden;

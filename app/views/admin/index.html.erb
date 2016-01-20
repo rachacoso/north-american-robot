@@ -14,7 +14,9 @@
 
 <%= render partial: "section", locals: {profile_section: @company_size, new_profile_section: @new_company_size, profile_section_name: 'Company Size'} %>
 
-<%#= render partial: "section", locals: {profile_section: @country, new_profile_section: @new_country, profile_section_name: 'Countries'} %>
+<%= render partial: "section", locals: {profile_section: @trend, new_profile_section: @new_trend, profile_section_name: 'Trends'} %>
+
+<%= render partial: "section", locals: {profile_section: @key_retailer, new_profile_section: @new_key_retailer, profile_section_name: 'Key Retailers'} %>
 
 
 <div class="row">
