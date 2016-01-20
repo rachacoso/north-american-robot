@@ -12,7 +12,7 @@
 		  <a class="current" href="#">Find</a>
 		</nav>
 
-		<h1>BEAUTY BRANDS by <strong>TREND</strong> / <strong>RETAILER</strong> / <strong>CATEGORY</strong> / <strong class="active">ALL</strong></h1>
+		<h1>BEAUTY BRANDS by <strong>TREND</strong> / <strong>RETAILER</strong> / <strong class="active">CATEGORY</strong> </h1>
 
 	</div><!--/.small-12-->
 </div><!--/.row-->
@@ -20,11 +20,11 @@
 <div class="row">
 	<div class="small-12 columns">
 		<ul class="index-tag-list">
-			<% @brand_tags.each do |bt| %>
-				<% if @filtered && @filtered.name == bt.name %>
-					<li class="active"><%= bt.name %></li>
+			<% @brand_chunk.each do |bc| %>
+				<% if @filtered && @filtered.name == bc.name %>
+					<li class="active"><%= bc.name %></li>
 				<% else %>
-					<%= link_to brands_url(filter: "#{bt.id}") do %><li><%= bt.name %></li><% end %>
+					<%= link_to brands_url(filter: "#{bc.id}") do %><li><%= bc.name %></li><% end %>
 				<% end %>
 			<% end %>
 			<% if @filtered %>
@@ -40,29 +40,32 @@
 	<div class="row">
 		<div class="small-11 small-centered columns small-text-center medium-text-left">
 		<h2><%= @filtered.name %></h2>
-		<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-5">
-			<% @filtered_brands.each do |fb| %>
-				<li>
-				<%= render partial: "index_item_filtered", locals: {brand: fb} %>
-				</li>
-			<% end %>
-		</ul>
+		<% if @filtered_brands.blank? %>
+			<h3>No Brands</h3>
+		<% else %>
+			<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-5">
+				<% @filtered_brands.each do |fb| %>
+					<li>
+					<%= render partial: "index_item_filtered", locals: {brand: fb} %>
+					</li>
+				<% end %>
+			</ul>
+		<% end %>
 		</div>
 	</div>
 <% else %>
 
-	<% @brand_tags.each do |bt| %>
+	<% @brand_chunk.each do |bc| %>
 		
 		<div class="row">
 			<div class="small-11 small-centered columns">
-				<h2><%= bt.name %></h2>
-				<span id="owlStatus-<%= bt.id %>" class="owlStatus">
-					<span class="owlItems"><span class="result"></span></span> brands
+				<h2><%= bc.name %></h2>
+				<span id="owlStatus-<%= bc.id %>" class="owlStatus">
+					<span class="owlItems"><span class="result"><%= get_brands(bc.id).blank? ? '0' : '' %></span></span> brands
 				</span>
-				<div id="owl-example-<%= bt.id %>" class="owl-carousel owl-theme">
-				<% brand_tags(bt.name).each do |t| %>
-				  <% next unless brand_tag_brands(t) %>
-					<div><%= render partial: "index_item", locals: {brand: brand_tag_brands(t)} %></div>
+				<div id="owl-example-<%= bc.id %>" class="owl-carousel owl-theme">
+				<% get_brands(bc.id).each do |b| %>
+					<div><%= render partial: "index_item", locals: {brand: b} %></div>
 				<% end %>
 				</div>
 			</div><!--/.small-11 small-centered-->
@@ -72,7 +75,7 @@
 		  <%= javascript_tag do %>
 				$(document).ready(function() {
 
-				  $("#owl-example-<%= bt.id %>").owlCarousel({
+				  $("#owl-example-<%= bc.id %>").owlCarousel({
 						lazyLoad : true,
 						lazyFollow : true,
 						lazyEffect : "fade",
@@ -88,7 +91,7 @@
 					});
 
 					function updateResult(pos,value){
-						$("#owlStatus-<%= bt.id %>").find(pos).find(".result").text(value);
+						$("#owlStatus-<%= bc.id %>").find(pos).find(".result").text(value);
 					}
 
 					function afterAction(){

@@ -5,22 +5,15 @@ class BrandsController < ApplicationController
 
 	def index
 
+		# get only beauty sector brands
+		beauty_sector = Sector.where(name: 'Beauty / Personal Care').first
+
 		if params[:filter]
-			@filtered = Tag.find(params[:filter])
-			@brand_tags = Tag.where(taggable_type: "Brand").uniq { |p| p.name }.sort_by { |p| p.name }
-			@brand_tags.reject! { |bt| Brand.activated.find(bt.taggable_id).blank? } # drop if no active brands use tag
-
-			filtered_brand_ids = Tag.only(:taggable_id).where(taggable_type: "Brand", name: @filtered.name).map(&:taggable_id)
-			@filtered_brands = Brand.activated.find(filtered_brand_ids)
-
-			@sectors = Sector.all
-			@brands = Brand.activated
+			@filtered = Subsector.find(params[:filter])
+			@filtered_brands = Brand.activated.where(subsector_ids: @filtered)
+			@brand_chunk = Subsector.where(sector_id: beauty_sector.id).uniq { |p| p.name }.sort_by { |p| p.name }
 		else
-			@brand_tags = Tag.where(taggable_type: "Brand").uniq { |p| p.name }.sort_by { |p| p.name }
-			@brand_tags.reject! { |bt| Brand.activated.find(bt.taggable_id).blank? } # drop if no active brands use tag
-
-			@sectors = Sector.all
-			@brands = Brand.activated
+			@brand_chunk = Subsector.where(sector_id: beauty_sector.id).uniq { |p| p.name }.sort_by { |p| p.name }
 		end
 
 	end
