@@ -1,0 +1,28 @@
+<%= form_for @brand, url: brand_url do |f| %>
+	<%= f.hidden_field :company_name %>
+	<%= hidden_field_tag "redirect_anchor", "a-key-retailer" %>
+
+	<div class="row">
+		<div class="small-12 columns">
+			<a class="anchor" id="a-key-retailer"></a>
+			<h1>Key Retailers</h1>
+		</div>
+	</div>
+
+	<div class="row editform">
+		<div class="medium-10 push-2 columns">
+			<% KeyRetailer.each do |kr| %>
+				<%= check_box_tag "key_retailers[#{kr.id}]", kr.id, (@brand.key_retailers.find(kr) rescue false) ? true : false  %>
+				<%= label_tag "key_retailers[#{kr.id}]" do %>
+					<%= kr.name %>
+				<% end %>								
+		  <% end %>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="medium-10 push-2 columns">
+			<%= f.submit 'Update Key Retailers', class: "tiny radius alert button right" %>
+		</div>
+	</div>
+<% end %>

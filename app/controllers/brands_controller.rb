@@ -97,6 +97,28 @@ class BrandsController < ApplicationController
 			brand.update(year_established: Date.new(params[:year_established].to_i))
 		end
 
+		if params[:key_retailers]
+			# set key_retailers
+			assigned_key_retailers = KeyRetailer.find(params[:key_retailers].values) rescue []
+			unless assigned_key_retailers.blank?
+				brand.key_retailers = [] # clear current ones before update
+			end
+			assigned_key_retailers.each do |kr|
+				brand.key_retailers << kr
+			end
+		end
+
+		if params[:trends]
+			# set trends
+			assigned_trends = Trend.find(params[:trends].values) rescue []
+			unless assigned_trends.blank?
+				brand.trends = [] # clear current ones before update
+			end
+			assigned_trends.each do |t|
+				brand.trends << t
+			end
+		end
+
 		if params[:sectors]
 			# set sectors
 			assigned_sectors = Sector.find(params[:sectors].values) rescue []
