@@ -3,6 +3,10 @@ class HomeController < ApplicationController
   skip_before_action :require_login, only: [:front, :prospect_share, :prospect_share_login]
 
 	def front
+		
+		# for submenu
+		@brand_chunk = Subsector.where(sector_id: Sector.where(name: 'Beauty / Personal Care').first.id).uniq { |p| p.name }.sort_by { |p| p.name }
+
 		if @current_user
 			if @current_user.administrator
 				redirect_to admin_url

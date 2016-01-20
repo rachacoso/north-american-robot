@@ -18,6 +18,9 @@
 		color: #9B9B9B;
 		margin-left: rem-calc(-30);
 	}
+	h3 {
+		color: #9B9B9B;
+	}
 }
 .index-item {
 	.image {
@@ -64,3 +67,6 @@ ul.index-tag-list {
 	}
 }
 
+.filtered-results {
+	margin-top: rem-calc(20);
+}

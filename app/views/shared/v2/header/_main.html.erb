@@ -1,7 +1,7 @@
 <div id="v2header">
 	<div class="row">
 		<div class="small-6 columns">
-			<%= image_tag 'v2/logo.svg', width: "100" %>
+			<%= link_to root_url do %><%= image_tag 'v2/logo.svg', width: "100" %><% end %>
 		</div><!--/.small-6-->
 		<div class="small-6 columns text-right">
 			<div class="row">
@@ -11,10 +11,10 @@
 							<%= link_to 'BEAUTY', '#' %>
 						</div><!--/.small-4-->
 						<div class="small-4 columns inactive">
-							FASHION
+							<span data-tooltip aria-haspopup="true" class="has-tip" title="Coming Soon" style="font-weight: 100;color: #B3B3B3">FASHION</span>
 						</div><!--/.small-4-->
 						<div class="small-4 columns inactive">
-							BABY/KIDS
+							<span data-tooltip aria-haspopup="true" class="has-tip" title="Coming Soon" style="font-weight: 100;color: #B3B3B3">BABY/KIDS</span>
 						</div><!--/.small-4-->
 					</div><!--/.row-->
 				</div><!--/.small-10-->
