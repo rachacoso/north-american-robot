@@ -1,11 +1,11 @@
-<div class="index-item">
+<div class="index-item filtered">
 <%= link_to view_brand_url(brand) do %>
 <div class="image">
 	<% type, photo = index_item_photo(brand) %>
 	<% if type == "logo" %>
-		<img class="lazyOwl" data-src="<%= photo %>">
+		<%= image_tag photo %>
 	<% else %>
-		<img class="lazyOwl" data-src="<%= photo %>">
+		<%= image_tag photo %>
 	<% end %>
 </div>
 <% end %>

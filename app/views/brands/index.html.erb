@@ -1,5 +1,7 @@
 <%= render partial: 'shared/v2/header/main' %>
 <%#= render partial: 'shared/v2/header/sub_beauty' %>
+
+
 <div class="brandindex-top">
 
 <div class="row">
@@ -14,114 +16,93 @@
 
 	</div><!--/.small-12-->
 </div><!--/.row-->
-<br><br>
 
-<% @brand_tags.each do |bt| %>
-	
-	<div class="row">
-		<div class="small-11 small-centered columns">
-			<h2><%= bt.name %></h2>
-			<span id="owlStatus-<%= bt.id %>" class="owlStatus">
-				<span class="owlItems"><span class="result"></span></span> brands
-			</span>
-			<div id="owl-example-<%= bt.id %>" class="owl-carousel owl-theme">
-			<% brand_tags(bt.name).each do |t| %>
-			  <% next unless brand_tag_brands(t) %>
-				<div><%= render partial: "index_item", locals: {brand: brand_tag_brands(t)} %></div>
+<div class="row">
+	<div class="small-12 columns">
+		<ul class="index-tag-list">
+			<% @brand_tags.each do |bt| %>
+				<% if @filtered && @filtered.name == bt.name %>
+					<li class="active"><%= bt.name %></li>
+				<% else %>
+					<%= link_to brands_url(filter: "#{bt.id}") do %><li><%= bt.name %></li><% end %>
+				<% end %>
 			<% end %>
-			</div>
-		</div><!--/.small-11 small-centered-->
-	</div><!--/.row-->
+			<% if @filtered %>
+				<%= link_to brands_url do %><li>ALL</li><% end %>
+			<% else %>
+				<li class="active">ALL</li>
+			<% end %>
+		</ul>
+	</div><!--/.small-12-->
+</div><!--/.row-->
 
-	<% content_for :javascript_foot do %>
-	  <%= javascript_tag do %>
-			$(document).ready(function() {
+<% if @filtered %>
+	<div class="row">
+		<div class="small-11 small-centered columns small-text-center medium-text-left">
+		<h2><%= @filtered.name %></h2>
+		<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-5">
+			<% @filtered_brands.each do |fb| %>
+				<li>
+				<%= render partial: "index_item_filtered", locals: {brand: fb} %>
+				</li>
+			<% end %>
+		</ul>
+		</div>
+	</div>
+<% else %>
 
-			  $("#owl-example-<%= bt.id %>").owlCarousel({
-					lazyLoad : true,
-					lazyFollow : true,
-					lazyEffect : "fade",
-					navigation : true,
-					navigationText : [
-						"<img src='images/v2/left-arrow.svg'>",
-						"<img src='images/v2/right-arrow.svg'>",
-					],
-					items : 6,
-					pagination : true,
-					scrollPerPage : true,
-					afterAction : afterAction
+	<% @brand_tags.each do |bt| %>
+		
+		<div class="row">
+			<div class="small-11 small-centered columns">
+				<h2><%= bt.name %></h2>
+				<span id="owlStatus-<%= bt.id %>" class="owlStatus">
+					<span class="owlItems"><span class="result"></span></span> brands
+				</span>
+				<div id="owl-example-<%= bt.id %>" class="owl-carousel owl-theme">
+				<% brand_tags(bt.name).each do |t| %>
+				  <% next unless brand_tag_brands(t) %>
+					<div><%= render partial: "index_item", locals: {brand: brand_tag_brands(t)} %></div>
+				<% end %>
+				</div>
+			</div><!--/.small-11 small-centered-->
+		</div><!--/.row-->
+
+		<% content_for :javascript_foot do %>
+		  <%= javascript_tag do %>
+				$(document).ready(function() {
+
+				  $("#owl-example-<%= bt.id %>").owlCarousel({
+						lazyLoad : true,
+						lazyFollow : true,
+						lazyEffect : "fade",
+						navigation : true,
+						navigationText : [
+							"<img src='images/v2/left-arrow.svg'>",
+							"<img src='images/v2/right-arrow.svg'>",
+						],
+						items : 6,
+						pagination : true,
+						scrollPerPage : true,
+						afterAction : afterAction
+					});
+
+					function updateResult(pos,value){
+						$("#owlStatus-<%= bt.id %>").find(pos).find(".result").text(value);
+					}
+
+					function afterAction(){
+						updateResult(".owlItems", this.owl.owlItems.length);
+					}
+
 				});
+		  <% end %>
+		<% end %>
 
-				function updateResult(pos,value){
-					$("#owlStatus-<%= bt.id %>").find(pos).find(".result").text(value);
-				}
-
-				function afterAction(){
-					updateResult(".owlItems", this.owl.owlItems.length);
-				}
-
-
-			});
-	  <% end %>
 	<% end %>
 
-<% end %>
-
-
-
-<br><br>
-<% @sectors.each do |s| %>
-	<% next if @brands.where(:sector_ids => s.id).blank? %>
-	
-	<div class="row">
-		<div class="small-11 small-centered columns">
-			<h2><%= s.name %></h2>
-			<span id="owlStatus-<%= s.id %>" class="owlStatus">
-				<span class="owlItems"><span class="result"></span></span> brands
-			</span>
-			<div id="owl-example-<%= s.id %>" class="owl-carousel owl-theme">
-			<% @brands.where(:sector_ids => s.id).each do |b| %>
-				<div><%= render partial: "index_item", locals: {brand: b} %></div>
-			<% end %>
-			</div>
-		</div><!--/.small-11 small-centered-->
-	</div><!--/.row-->
-
-
-	<% content_for :javascript_foot do %>
-	  <%= javascript_tag do %>
-			$(document).ready(function() {
-
-			  $("#owl-example-<%= s.id %>").owlCarousel({
-					lazyLoad : true,
-					lazyFollow : true,
-					lazyEffect : "fade",
-					navigation : true,
-					navigationText : [
-						"<img src='images/v2/left-arrow.svg'>",
-						"<img src='images/v2/right-arrow.svg'>",
-					],
-					items : 6,
-					pagination : true,
-					scrollPerPage : true,
-					afterAction : afterAction
-				});
-
-				function updateResult(pos,value){
-					$("#owlStatus-<%= s.id %>").find(pos).find(".result").text(value);
-				}
-
-				function afterAction(){
-					updateResult(".owlItems", this.owl.owlItems.length);
-				}
-
-
-			});
-	  <% end %>
-	<% end %>
 
 <% end %>
-
 
 </div>
 

@@ -6,8 +6,8 @@ class HomeController < ApplicationController
 		if @current_user
 			if @current_user.administrator
 				redirect_to admin_url
-			else
-				redirect_to dashboard_url
+			# else
+			# 	redirect_to dashboard_url
 			end
 		else
 			@newuser = User.new
