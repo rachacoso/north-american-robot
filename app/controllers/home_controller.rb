@@ -7,6 +7,10 @@ class HomeController < ApplicationController
 		# for submenu
 		@brand_chunk = Subsector.where(sector_id: Sector.where(name: 'Beauty / Personal Care').first.id).uniq { |p| p.name }.sort_by { |p| p.name }
 
+		# for find links
+		@trends = Trend.all.sort_by { |p| p.name }
+		@key_retailers = KeyRetailer.all.sort_by { |p| p.name }
+
 		if @current_user
 			if @current_user.administrator
 				redirect_to admin_url

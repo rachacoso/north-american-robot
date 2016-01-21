@@ -38,4 +38,35 @@
 			font-weight:700;
 		}
 	}
+
+	.browseblock {
+		margin: rem-calc(150) 0 0 0;
+		h1 {
+			z-index: 10;
+			font-weight: 100;
+			line-height: 1em;
+			strong {
+				font-weight: 700;
+			}
+		}
+		hr {
+			z-index: -10;
+			// margin-top: rem-calc(-20);
+		}
+		ul {
+			list-style-type: none; /*to remove bullets*/
+			text-align: center;
+			margin-left:0;
+			margin-top: rem-calc(30);
+			padding: 0px;
+			zoom:1;
+			overflow: hidden;
+			li {
+				font-weight:100;
+				font-size: rem-calc(18);
+				line-height: rem-calc(30);
+			}
+		}
+	}
+
 }
