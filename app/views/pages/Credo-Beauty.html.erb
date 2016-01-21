@@ -2,6 +2,144 @@
 <%= render partial: 'shared/v2/header/sub_beauty' %>
 
 
+<div class="article">
+	<div class="row">
+		<div class="small-12 columns text-center">
+		<div id="article-carousel" class="owl-carousel owl-theme"> 
+		  <div class="item"><%= image_tag 'v2/credo_exterior.png' %></div>
+			<div class="item"><%= image_tag 'v2/credo_interior1.png' %></div>
+			<div class="item"><%= image_tag 'v2/credo_interior2.png' %></div>
+		</div>
+
+			<% content_for :javascript_foot do %>
+			  <%= javascript_tag do %>
+					$(document).ready(function() {
+
+				  $("#article-carousel").owlCarousel({
+				 
+				      navigation : true, // Show next and prev buttons
+				      slideSpeed : 300,
+				      paginationSpeed : 400,
+				      singleItem:true,
+				      navigation : true,
+				      navigationText : [
+				      	"<img src='/images/v2/left-arrow.svg'>",
+				      	"<img src='/images/v2/right-arrow.svg'>",
+				      ],
+				 
+				      // "singleItem:true" is a shortcut for:
+				      // items : 1, 
+				      // itemsDesktop : false,
+				      // itemsDesktopSmall : false,
+				      // itemsTablet: false,
+				      // itemsMobile : false
+				 
+				  });
+
+					});
+			  <% end %>
+			<% end %>
+			
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+	<div class="row articlepreviewtext">
+		<div class="medium-8 columns">
+			<div class="row">
+				<div class="medium-10 medium-push-2 columns">
+					<h1>Credo Beauty: A new retail concept</h1>
+					<h2>REPORT / ANALYSIS on TRENDS</h2>
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+			<div class="row">
+				<div class="medium-10 medium-push-2 columns">
+					<div class="byline">12.03.15 by Sarah Chung</div>
+					<div class="social">Share: 
+						<a href="https://twitter.com/share" class="twitter-share-button"{count}>Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<a href="https://www.pinterest.com/pin/create/button/">
+    <img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png" />
+</a>
+
+
+					</div>
+
+					<h2>WHAT</h2>
+					<p>Dubbed the Sephora for natural beauty, Credo Beauty is a new retail concept carrying exclusively natural beauty brands.</p>
+
+
+					<h2>WHERE</h2>
+					<p>E-commerce site (www.credobeauty.com) February 2015. First brick and mortar store on 2136 Fillmore Street, San Francisco in June 2016. Coming soon to Los Angeles and New York City.</p>
+
+
+					<h2>WHO</h2>
+					<p>President and Founder, Shashi Batra, has an impressive beauty resume including: President, of Victorias Secret Beauty, President, of NVPerriconeMD, President of Estee Lauder and was a founding member of the Sephora USA team.</p>
+
+
+					<h2>WHY YOU SHOULD CARE</h2>
+					<p>They currently stock about 75 natural beauty brands and are taking risks on smaller brands that you won’t see at a Sephora or department store format.</p>
+
+
+<p>Credo Beauty vets thier brands and only carry ones that do not have the following:</p>
+<p>Animal fats, oils &amp; musks<br>
+Benzalkonium chloride<br>
+Benzophenone &amp; derivatives<br>
+Bisphenol A (BPA)<br>
+Butoxyethanol<br>
+BHA &amp; BHT<br>
+Coal tar ingredients<br>
+1,4-dioxane<br>
+Ethylenediaminetetraacetic acid (EDTA)<br>
+Ethanolamines (MEA/DEA/TEA)<br>
+Formaldehyde<br>
+Hydroquinone<br>
+Methylisothiazolinone, methylchloroisothiazolinone and benzisothiazolinone<br>
+Mineral Oil<br>
+Oxybenzone<br>
+Parabens<br>
+Phthalates (DBP, DEHP, DEP and others)<br>
+Polyethylene glycol (PEG compounds)<br>
+Resorcinol<br>
+Sodium Lauryl Sulfate &amp; Sodium Laureth Sulfate (SLS &amp; SLES)<br>
+Toluene<br>
+Triclosan &amp; Triclocarban</p>
+
+
+
+				</div><!--/.medium-10 medium-push-2-->
+			</div><!--/.row-->
+		</div><!--/.medium-8-->
+
+		
+		<div class="medium-4 columns">
+			<div class="show-for-small-only"><br></div>
+			<h3>FEATURING</h3>
+			<ul class="featuringlist">
+				<li> 
+					<div class="row">
+						<div class="small-4 columns">
+							<%= image_tag "/images/v2/pur_feature_1.png" %>
+						</div><!--/.small-6-->
+						<div class="small-6 columns text-left end">
+							[ITEM 1]
+						</div><!--/.small-6-->
+					</div><!--/.row-->
+				</li>
+				<li> 
+					<div class="row">
+						<div class="small-4 columns">
+							<%= image_tag "/images/v2/pur_feature_2.png" %>
+						</div><!--/.small-6-->
+						<div class="small-6 columns text-left end">
+							[ITEM 2]
+						</div><!--/.small-6-->
+					</div><!--/.row-->
+				</li>
+			</ul>
+		</div><!--/.medium-4-->
+
+
+	</div><!--/.row-->
+</div>
 
 
 <%= render partial: 'shared/v2/footer/main' %>
