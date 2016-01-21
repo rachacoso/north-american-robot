@@ -4,7 +4,7 @@
 			<div class="navbar">
 			    <ul>
 			<% @brand_chunk.each do |bc| %>
-				<li><%= link_to brands_url(filter: "#{bc.id}") do %><%= bc.name %><% end %></li>
+				<li><%= link_to brands_url(filter: "#{bc.id}", type: "c") do %><%= bc.name %><% end %></li>
 			<% end %>
 			    </ul>
 			</div>

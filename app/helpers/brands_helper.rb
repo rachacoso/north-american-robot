@@ -10,18 +10,15 @@ module BrandsHelper
 		end
 	end
 
-	def get_brands(chunk)
-		brands = Brand.where(subsector_ids: Subsector.find(chunk).id)
+	def get_brands(chunk,type)
+		if type == "c"
+			brands = Brand.activated.where(subsector_ids: chunk.id )
+		elsif type == "t"
+			brands = Brand.activated.where(trend_ids: chunk.id )
+		elsif type == "kr"
+			brands = Brand.activated.where(key_retailer_ids: chunk.id )
+		end
 		return brands
 	end
-	# def brand_tags(tag)
-	# 	tags = Tag.only(:taggable_id).where(name: tag, taggable_type: "Brand")
-	# 	return tags
-	# end
-
-	# def brand_tag_brands(tag)
-	# 	brands = Brand.activated.find(tag.taggable_id)
-	# 	return brands
-	# end
 
 end

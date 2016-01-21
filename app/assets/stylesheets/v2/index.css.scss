@@ -21,6 +21,12 @@
 	h3 {
 		color: #9B9B9B;
 	}
+	a {
+		color: #9B9B9B;
+		&:hover { 
+			color: $landing-dark-gray;
+		}
+	}
 }
 .index-item {
 	.image {
@@ -61,12 +67,13 @@ ul.index-tag-list {
 		padding: rem-calc(4) rem-calc(10) rem-calc(6) rem-calc(10);
 	}
 	li.active {
-		background-color: $landing-middle-gray;
+		background-color: $landing-dark-gray;
+		border: 1px solid $landing-dark-gray;
 		color: #ffffff;
 		font-weight: 500;
 	}
 }
 
-.filtered-results {
+.filtered-results, .all-results {
 	margin-top: rem-calc(20);
 }
