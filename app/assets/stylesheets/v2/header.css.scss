@@ -48,14 +48,18 @@
 	    margin-left: auto ;
 	    margin-right: auto ;
 	    // background-color: #ABCDEF;
+	    hr {
+	    	margin-top: 0;
+	    }
 	}
 	.navbar ul {
 		list-style-type: none; /*to remove bullets*/
 		text-align: center;
 		padding: 0px;
 		zoom:1;
-		// border:1px solid red;
 		overflow: hidden;
+		// :first-child {text-align: left;}
+		// :last-child {text-align: right;}
 	}
 	.navbar li{
 	    padding: 2px;
