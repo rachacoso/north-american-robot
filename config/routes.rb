@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   post   '/admin/adduser/:id' => 'admin#add_user', as: 'admin_add_user'
   delete   '/admin/deleteuser/:id' => 'admin#delete_user', as: 'admin_delete_user'
 
+  # "static" pages
+  get  '/pages/:page' => 'pages#show'
 
   resources :sectors, only: [:create, :update, :destroy]
   resources :subsectors, only: [:create, :update, :destroy]

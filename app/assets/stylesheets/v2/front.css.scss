@@ -8,6 +8,9 @@
 	.articlepreviewtext {
 		margin-top: rem-calc(39);
 	}
+	a {
+		color: $landing-dark-gray;
+	}
 	h1 {
 		font-size: rem-calc(24);
 		font-weight: 800;
