@@ -3,42 +3,45 @@
 
 <div class="v2front">
 
-	<%= link_to "/pages/5-free-nail" do %>
+	
 	<article class="preview_featured">
 		<div class="row">
 			<div class="small-12 columns text-center">
-				<%= image_tag 'v2/5free.png' %>
+				<%= link_to "/pages/5-free-nail" do %><%= image_tag 'v2/5free.png' %><% end %>
 			</div><!--/.small-12-->
 		</div><!--/.row-->
 
 		<div class="row articlepreviewtext">
 			<div class="medium-8 columns">
 				<div class="row">
+					<%= link_to "/pages/5-free-nail" do %>
 					<div class="small-12 columns text-left medium-text-right">
 						<h1>5-Free Nail Polish Revolution</h1>
 						<h2>REPORT / ANALYSIS on TRENDS</h2>
 					</div><!--/.small-12-->
+					<% end %>
 				</div><!--/.row-->
 				<div class="row">
+					<%= link_to "/pages/5-free-nail" do %>
 					<div class="medium-10 medium-push-2 columns">
 						<p>12.03.15 by Sarah Chung // The nail polish industry has seen a boom in recent years. In 2012, sales of nail polish reached $768 million in the U.S. and an unprecedented $6 billion globally. The sweeping trend toward toxic-free, 5-Free and 7-Free nail polish should perk the interest of retailers, beauty distributors and salon/spa owners.</p>
 					</div><!--/.medium-10 medium-push-2-->
+					<% end %>
 				</div><!--/.row-->
 			</div><!--/.medium-8-->
 			<div class="medium-4 columns">
 				<div class="show-for-small-only"><br></div>
 				<h3>FEATURING</h3>
 				<ul class="featuringlist">
-					<li>RGB</li>
-					<li>LVX</li>
+					<li><%= link_to "RGB", "//landing-international.herokuapp.com/brand/view/55775ef93366380003200000" %></li>
+					<li><%= link_to "LVX", "//landing-international.herokuapp.com/brand/view/567ea32d1f2a0f0003000004" %></li>
 					<li>Scotch Naturals</li>
 					<li>Smith &amp; Cult</li>
-					<li>Priti NYC</li>
+					<li><%= link_to "Priti NYC", "//landing-international.herokuapp.com/brand/view/567ed0b0e3ef350003000002" %></li>
 				</ul>
 			</div><!--/.medium-4-->
 		</div><!--/.row-->
 	</article>
-	<% end %>
 
 	<div class="row">
 		<div class="small-10 small-centered columns">
