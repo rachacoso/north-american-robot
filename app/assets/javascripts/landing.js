@@ -432,6 +432,11 @@ function initialize () {
       // select the form and submit
       $('#brand-photo-upload').submit(); 
   });
+  // FOR ARTICLE PHOTO UPLOAD
+  $('#article_photo_photo').change(function() { 
+      // select the form and submit
+      $('#article-photo-upload').submit(); 
+  });
   // FOR PRODUCT PHOTO UPLOAD
   $('.product-photo-photo').change(function() { 
       // select the form and submit

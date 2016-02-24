@@ -25,6 +25,12 @@ Rails.application.routes.draw do
   # "static" pages
   get  '/pages/:page' => 'pages#show'
 
+  resources :articles, only: [:index, :show, :update, :destroy]
+  post  '/article/new/:type' => 'articles#create', as: 'create_article'
+
+  resources :article_photos, only: [:create]
+  delete '/article_photos/:id/:article_id' => 'article_photos#destroy', as: 'delete_article_photo'
+
   resources :sectors, only: [:create, :update, :destroy]
   resources :subsectors, only: [:create, :update, :destroy]
   resources :channels, only: [:create, :update, :destroy]

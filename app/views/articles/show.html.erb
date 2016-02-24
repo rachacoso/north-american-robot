@@ -1,0 +1,33 @@
+<%= render partial: "shared/topbar_admin" %>
+<div class="row">
+	<div class="small-12 columns">
+		<h1>ARTICLE: <%= @article.headline %></h1>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
+
+<div class="row">
+	<div class="small-12 columns">
+		<%= link_to "<< Back to All Articles", articles_url, style: "font-size: 10px; color: black; font-weight: 100;border:1px solid gray; padding: 5px;" %>	
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
+
+<div class="row">
+	<div class="small-9 small-centered columns">
+		<span class="notice"><%= notice %></span>
+		<%= render "form" %>
+	</div><!--/.small-9-->
+</div><!--/.row-->
+
+
+<div class="row">
+	<div class="small-12 columns">
+		<hr>
+		ARTICLE PREVIEW
+		<hr>		
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
+
+<%= render "full_article" %>

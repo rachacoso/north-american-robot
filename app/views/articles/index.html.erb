@@ -1,0 +1,49 @@
+<%= render partial: "shared/topbar_admin" %>
+<div class="row">
+	<div class="small-12 columns">
+		<h1>Articles</h1>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
+
+
+<div class="row">
+	<div class="small-12 columns">
+		<span class="notice"><%= notice %></span>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
+<div class="row">
+	<div class="medium-6 columns">
+		<h2>Articles on Brands</h2>
+		<h3>PUBLISHED</h3>
+		<% @articles.active.on_brands.each do |a| %>
+		<p>
+			<strong><%= a.headline %></strong> by <%= a.author %> // <%= a.date %> <%= link_to 'edit', a %> <%= link_to 'delete', a, method: :delete, data: { confirm: 'Are you sure?' } %>
+		</p>
+		<% end %>
+		<h3>WAITING</h3>
+		<% @articles.inactive.on_brands.each do |a| %>
+		<p>
+			<strong><%= a.headline %></strong> by <%= a.author %> // <%= a.date %> <%= link_to 'edit', a %> <%= link_to 'delete', a, method: :delete, data: { confirm: 'Are you sure?' } %>
+		</p>
+		<% end %>
+		<%= link_to "Create New Article on Brands", create_article_url(1), method: :post %>
+	</div><!--/.small-6-->
+	<div class="medium-6 columns">
+		<h2>Articles on Trends</h2>
+		<h3>PUBLISHED</h3>
+		<% @articles.on_trends.active.each do |a| %>
+		<p>
+			<strong><%= a.headline %></strong> by <%= a.author %> // <%= a.date %> <%= link_to 'edit', a %> <%= link_to 'delete', a, method: :delete, data: { confirm: 'Are you sure?' } %>
+		</p>
+		<% end %>
+		<h3>WAITING</h3>
+		<% @articles.on_trends.inactive.each do |a| %>
+		<p>
+			<strong><%= a.headline %></strong> by <%= a.author %> // <%= a.date %> <%= link_to 'edit', a %> <%= link_to 'delete', a, method: :delete, data: { confirm: 'Are you sure?' } %>
+		</p>
+		<% end %>
+		<%= link_to "Create New Article on Trends", create_article_url(2), method: :post %>
+	</div><!--/.small-6-->
+</div><!--/.row-->

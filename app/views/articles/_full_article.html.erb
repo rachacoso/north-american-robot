@@ -1,0 +1,156 @@
+
+
+<div class="row">
+	<div class="small-12 columns">
+		<nav class="breadcrumbs">
+			<%= link_to "Beauty", root_url %>
+			<%= link_to "Read", root_url %>
+		  <a class="current" href="#"><%= @article.headline %></a>
+		</nav>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
+<div class="article">
+	<div class="row">
+		<div class="small-12 columns text-center">
+			
+		<% unless @article.article_photos.blank? %>
+
+			<div id="article-carousel" class="owl-carousel owl-theme">
+				<% @article.article_photos.each do |photo| %>
+			  <div class="item"><%= image_tag photo.photo.url(:large) %></div>
+				<% end %>
+			</div>
+
+			<% content_for :javascript_foot do %>
+			  <%= javascript_tag do %>
+					$(document).ready(function() {
+
+				  $("#article-carousel").owlCarousel({
+				 
+				      navigation : true, // Show next and prev buttons
+				      slideSpeed : 300,
+				      paginationSpeed : 400,
+				      singleItem:true,
+				      navigation : true,
+				      navigationText : [
+				      	"<img src='/images/v2/left-arrow.svg'>",
+				      	"<img src='/images/v2/right-arrow.svg'>",
+				      ],
+				 
+				      // "singleItem:true" is a shortcut for:
+				      // items : 1, 
+				      // itemsDesktop : false,
+				      // itemsDesktopSmall : false,
+				      // itemsTablet: false,
+				      // itemsMobile : false
+				 
+				  });
+
+					});
+			  <% end %>
+			<% end %>
+
+		<% end %>
+
+
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+	<div class="row articlepreviewtext">
+		<div class="medium-8 columns">
+			<div class="row">
+				<div class="medium-10 medium-push-2 columns">
+					<h1><%= @article.headline %></h1>
+					<h2>REPORT / ANALYSIS on <%= get_article_type(@article.article_type) %></h2>
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+			<div class="row">
+				<div class="medium-10 medium-push-2 columns">
+					<div class="byline"><%= @article.date.strftime("%m.%d.%Y") %> by <%= @article.author %></div>
+					<div class="social">Share: 
+						<a href="https://twitter.com/share" class="twitter-share-button"{count}>Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<a href="https://www.pinterest.com/pin/create/button/">
+    <img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png" />
+</a>
+
+
+					</div>
+
+<% if @article.body.match(/<[a-z][\s\S]*>/) %>
+	<%= @article.body.html_safe %>
+<% else %>
+	<%= simple_format(@article.body) %>
+<% end %>
+
+
+				</div><!--/.medium-10 medium-push-2-->
+			</div><!--/.row-->
+		</div><!--/.medium-8-->
+		<div class="medium-4 columns">
+			<div class="show-for-small-only"><br></div>
+			<h3>FEATURING</h3>
+			<ul class="featuringlist">
+				<li>
+					<%= link_to "//landing-international.herokuapp.com/brand/view/55775ef93366380003200000" do %>
+						<div class="row">
+							<div class="small-4 columns">
+								<%= image_tag "/images/v2/RGB.png" %>
+							</div><!--/.small-6-->
+							<div class="small-6 columns text-left end">
+								RGB
+							</div><!--/.small-6-->
+						</div><!--/.row-->
+					<% end %>
+				</li>
+				<li> 
+					<%= link_to "//landing-international.herokuapp.com/brand/view/567ea32d1f2a0f0003000004" do %>
+					<div class="row">
+						<div class="small-4 columns">
+							<%= image_tag "/images/v2/lvx.png" %>
+						</div><!--/.small-6-->
+						<div class="small-6 columns text-left end">
+							LVX
+						</div><!--/.small-6-->
+					</div><!--/.row-->
+					<% end %>
+				</li>
+				<li> 
+					<%= link_to "//landing-international.herokuapp.com/brand/view/567edaebe3ef350003000036" do %>
+					<div class="row">
+						<div class="small-4 columns">
+							<%= image_tag "/images/v2/scotch.png" %>
+						</div><!--/.small-6-->
+						<div class="small-6 columns text-left end">
+							Scotch Naturals
+						</div><!--/.small-6-->
+					</div><!--/.row-->
+					<% end %>
+				</li>
+				<li> 
+					<div class="row">
+						<div class="small-4 columns">
+							<%= image_tag "/images/v2/smithcult.png" %>
+						</div><!--/.small-6-->
+						<div class="small-6 columns text-left end">
+							Smith &amp; Cult
+						</div><!--/.small-6-->
+					</div><!--/.row-->
+				</li>
+				<li> 
+					<%= link_to "//landing-international.herokuapp.com/brand/view/567ed0b0e3ef350003000002" do %>
+					<div class="row">
+						<div class="small-4 columns">
+							<%= image_tag "/images/v2/priti.png" %>
+						</div><!--/.small-6-->
+						<div class="small-6 columns text-left end">
+							Priti NYC
+						</div><!--/.small-6-->
+					</div><!--/.row-->
+					<% end %>
+				</li>
+			</ul>
+		</div><!--/.medium-4-->
+	</div><!--/.row-->
+</div>
+
