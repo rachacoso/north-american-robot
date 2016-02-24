@@ -16,150 +16,143 @@
 	</div>
 </div>
 
+<div class="row profile-logo">
+	<div class="small-12 columns">
+		<% if profile.logo_file_name %>
+			<%= image_tag profile.logo.url(:medium), alt: "Logo" %>
+		<% else %>
+			<% if !profile.facebook.blank? && fb_picture(profile.facebook) %>
+				<%= image_tag fb_picture(profile.facebook) %>
+			<% else %>
+				<%= image_tag profile.logo.url(:medium), width: "100", height: "100", alt: "Logo" %>
+			<% end %>					
+		<% end %>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
+
+<div class="row">
+	<div class="small-12 columns">
+		<%= render partial: "shared/profile/components/gallery", locals: {gallery: @gallery, profile: profile} %>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
+
+<div class="row">
+	<div class="small-12 columns">
+		<div class="brand-positioning">
+			<%= simple_format(profile.brand_positioning) %>
+		</div>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
+
+<div class="row">
+	<div class="small-12 columns">
+		<% profile.tags.each do |tag| %>
+			<span class="label"><%= tag.name %></span>
+		<% end %>
+
+		<%= render partial: "shared/profile/components/indicators", locals: {match: profile} %>
+		
+		<% unless profile.website.blank? %>
+			<%= link_to "//#{clean_url(profile.website)}", target: "blank" do %> 
+			<i class="fi-laptop" style="font-size: 3em;"></i> 
+			<% end %>
+		<% end %>
+		<% unless profile.facebook.blank? %>
+			<%#= !profile.website.blank? ? "/" : "" %>
+			<%= link_to "//#{clean_url(profile.facebook)}", target: "blank" do %>
+			<i class="fi-social-facebook" style="font-size: 3em;"></i> 
+			<% end %>
+		<% end %>
+		<% unless profile.linkedin.blank? %>
+			<%#= !profile.website.blank? || !profile.facebook.blank? ? "/" : "" %>
+			<%= link_to "//#{clean_url(profile.linkedin)}", target: "blank" do %>
+				<i class="fi-social-linkedin" style="font-size: 3em;"></i> 
+			<% end %>
+		<% end %>
+		<% unless profile.twitter.blank? %>
+			<%#= !profile.website.blank? || !profile.facebook.blank? || !profile.linkedin.blank? ? "/" : "" %>
+			<%= link_to "//#{clean_url(profile.twitter)}", target: "blank" do %>
+				<i class="fi-social-twitter" style="font-size: 3em;"></i> 
+			<% end %>
+		<% end %>
+		<% unless profile.instagram.blank? %>
+			<%#= !profile.website.blank? || !profile.facebook.blank? || !profile.linkedin.blank? || !profile.twitter.blank? ? "/" : "" %>
+			<%= link_to "//#{clean_url(profile.instagram)}", target: "blank" do %>
+				<i class="fi-social-instagram" style="font-size: 3em;"></i> 
+			<% end %>
+		<% end %>
+	</div><!--/.small-12 -->
+</div><!--/.row -->
+
+
+
+<div class="row">
+	<div class="small-12 columns">
+		<div class="brand-snapshot">
+			<%= render partial: "shared/profile/components/general_info", locals: {profile: profile} %>
+		</div>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
+<div class="row profile-skus">
+	
+		<% if profile.products.where(current: true).length > 0 %>
+
+			<div class="small-12 columns">
+				<div class="profile-section-head"><%= profile.products.where(current: true).length %> CURRENT SKUs</div>
+			</div><!--/.small-12-->
+			
+			<div class="medium-11 medium-centered columns">
+			<% profile.products.where(current: true).order_by(:description.desc, :key_benefits.desc).each do |p| %>
+				<%= render partial: "shared/collections_view/products", locals: {
+					collitem: p
+				} %>
+			<% end %>
+			</div><!--/.medium-11-->
+
+		<% end %>
+		<% if profile.products.where(current: false).length > 0 %>
+
+			<div class="small-12 columns">
+				<div class="profile-section-head"><%= profile.products.where(current: false).length %> FUTURE SKUs</div>
+			</div><!--/.small-12-->
+
+			<div class="medium-11 medium-centered columns">
+			<% profile.products.where(current: false).order_by(:description.desc, :key_benefits.desc).each do |p| %>												<%= render partial: "shared/collections_view/products", locals: {
+					collitem: p
+				} %>
+			<% end %>
+			</div><!--/.medium-11-->
+
+		<% end %>
+	
+</div><!--/.row-->
+
 <div id="profile-profile-wrapper">
-	<div class="row collapse" style="background-color: white;">
-		<div class="medium-8 columns">
-			<%= render partial: "shared/profile/components/gallery", locals: {gallery: @gallery, profile: profile} %>
-		</div><!--/.medium-8-->
-		<div class="medium-4 text-left columns">
 
-			<div class="tags-window previewtile">
-				<div class="profile-container">
-					<div class="profile-content">
-						<div class="row">
-							<div class="small-12 columns">
-
-								<div class="row collapse">
-									<div class="small-6 columns">
-										<h1><%= profile.company_name %></h1>
-									</div><!--/.small-6-->
-									<div class="small-6 columns text-right">
-										<%= render partial: "shared/profile/components/savebutton", locals: {profile: profile} %>
-									</div><!--/.small-6-->
-								</div><!--/.row-->
-								
-
-									<% if profile.logo_file_name %>
-										<%= image_tag profile.logo.url(:medium), alt: "Logo" %>
-									<% else %>
-										<% if !profile.facebook.blank? && fb_picture(profile.facebook) %>
-											<%= image_tag fb_picture(profile.facebook) %>
-										<% else %>
-											<%= image_tag profile.logo.url(:medium), width: "100", height: "100", alt: "Logo" %>
-										<% end %>					
-									<% end %>
-												<br>
-								<% profile.tags.each do |tag| %>
-									<span class="label"><%= tag.name %></span>
-								<% end %>
-
-
-								
-								<%= render partial: "shared/profile/components/indicators", locals: {match: profile} %>
-								
-
-								<p>
-								<%= simple_format(profile.brand_positioning) %>
-								</p>
-								
-								<% unless profile.website.blank? %>
-									<%= link_to "//#{clean_url(profile.website)}", target: "blank" do %> 
-									<i class="fi-laptop" style="font-size: 3em;"></i> 
-									<% end %>
-								<% end %>
-								<% unless profile.facebook.blank? %>
-									<%#= !profile.website.blank? ? "/" : "" %>
-									<%= link_to "//#{clean_url(profile.facebook)}", target: "blank" do %>
-									<i class="fi-social-facebook" style="font-size: 3em;"></i> 
-									<% end %>
-								<% end %>
-								<% unless profile.linkedin.blank? %>
-									<%#= !profile.website.blank? || !profile.facebook.blank? ? "/" : "" %>
-									<%= link_to "//#{clean_url(profile.linkedin)}", target: "blank" do %>
-										<i class="fi-social-linkedin" style="font-size: 3em;"></i> 
-									<% end %>
-								<% end %>
-								<% unless profile.twitter.blank? %>
-									<%#= !profile.website.blank? || !profile.facebook.blank? || !profile.linkedin.blank? ? "/" : "" %>
-									<%= link_to "//#{clean_url(profile.twitter)}", target: "blank" do %>
-										<i class="fi-social-twitter" style="font-size: 3em;"></i> 
-									<% end %>
-								<% end %>
-								<% unless profile.instagram.blank? %>
-									<%#= !profile.website.blank? || !profile.facebook.blank? || !profile.linkedin.blank? || !profile.twitter.blank? ? "/" : "" %>
-									<%= link_to "//#{clean_url(profile.instagram)}", target: "blank" do %>
-										<i class="fi-social-instagram" style="font-size: 3em;"></i> 
-									<% end %>
-								<% end %>
-							</div><!--/.small-12 -->
-						</div><!--/.row -->
-					</div><!--/.profile-container -->
-				</div><!--/.profile-content -->
-
-				<%= render partial: "shared/profile/components/general_info", locals: {profile: profile} %>
-
-							
-			</div><!-- /.tags-window previewtile-->
-		</div><!--/.medium-3-->
-	</div><!--/.row-->
-
-	<br>
 
 	<%= render partial: "matches/conversation_start", locals: {profile: profile} %>
 
+
+
 	<div class="row collapse">
 		<div class="small-12 columns">
-
-					<% if profile.products.where(current: true).length > 0 %>
-					<div class="profile-container">
-						<div class="profile-header">
-							<h1>CURRENT PRODUCTS</h1>
-						</div><!--.profile-header-->
-						<div class="profile-content">
-
-						<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
-
-						<% profile.products.where(current: true).order_by(:description.desc, :key_benefits.desc).each do |p| %>
-							<li><%= render partial: "shared/collections_view/products", locals: {
-								collitem: p
-							} %></li>
-						<% end %>
-						</ul>
-
-						</div><!--.profile-content-->
-					</div><!--.profile-container-->
-					<br>
-					<% end %>
-
-
-					<% if profile.products.where(current: false).length > 0 %>				
-					<div class="profile-container">
-						<div class="profile-header">
-							<h1>UPCOMING PRODUCTS</h1>
-						</div><!--.profile-header-->
-						<div class="profile-content">
-
-						<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
-						<% profile.products.where(current: false).order_by(:description.desc, :key_benefits.desc).each do |p| %>																
-							<li><%= render partial: "shared/collections_view/products", locals: {
-								collitem: p
-							} %></li>
-						<% end %>
-						</ul>
-
-						</div><!--.profile-content-->
-					</div><!--.profile-container-->
-					<br>
-					<% end %>
+	
 
 
 					<% unless profile.brand_photos.blank? %>
 
-
 					<div class="profile-container">
-						<div class="profile-header">
-							<h1>BRAND GALLERY</h1>
-						</div><!--.profile-header-->
+						<div class="row">
+							<div class="small-12 columns">
+								<div class="profile-section-head">
+									BRAND GALLERY
+								</div><!--.profile-section-head-->								
+							</div><!--/.small-12-->
+						</div><!--/.row-->
 						<div class="profile-content">
 					
 							<div class="galleria-brand-photos">
@@ -175,21 +168,21 @@
 								<% end %>					    
 							</div>
 
-
-
 						</div><!--.profile-content-->
 					</div><!--.profile-container-->
 					<br>
-
-
 
 					<% end %>
 
 					<% if profile.press_hits.length > 0 %>
 					<div class="profile-container">
-						<div class="profile-header">
-							<h1>PRESS CLIPS</h1>
-						</div><!--.profile-header-->
+						<div class="row">
+							<div class="small-12 columns">
+								<div class="profile-section-head">
+									PRESS CLIPS
+								</div><!--.profile-section-head-->								
+							</div><!--/.small-12-->
+						</div><!--/.row-->
 						<div class="profile-content">
 
 						<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
@@ -208,9 +201,13 @@
 
 					<% if profile.trade_shows.length > 0 %>
 					<div class="profile-container">
-						<div class="profile-header">
-							<h1>TRADE SHOWS</h1>
-						</div><!--.profile-header-->
+						<div class="row">
+							<div class="small-12 columns">
+								<div class="profile-section-head">
+									TRADE SHOWS
+								</div><!--.profile-section-head-->								
+							</div><!--/.small-12-->
+						</div><!--/.row-->
 						<div class="profile-content">
 
 							<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
@@ -229,9 +226,13 @@
 
 					<% if profile.patents.length > 0 %>
 					<div class="profile-container">
-						<div class="profile-header">
-							<h1>PATENTS</h1>
-						</div><!--.profile-header-->
+						<div class="row">
+							<div class="small-12 columns">
+								<div class="profile-section-head">
+									PATENTS
+								</div><!--.profile-section-head-->								
+							</div><!--/.small-12-->
+						</div><!--/.row-->
 						<div class="profile-content">
 						
 						<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
@@ -250,9 +251,13 @@
 
 					<% if profile.trademarks.length > 0 %>
 					<div class="profile-container">
-						<div class="profile-header">
-							<h1>TRADEMARKS</h1>
-						</div><!--.profile-header-->
+						<div class="row">
+							<div class="small-12 columns">
+								<div class="profile-section-head">
+									TRADEMARKS
+								</div><!--.profile-section-head-->								
+							</div><!--/.small-12-->
+						</div><!--/.row-->
 						<div class="profile-content">
 						
 						<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
@@ -271,9 +276,13 @@
 
 					<% if profile.compliances.length > 0 %>
 					<div class="profile-container">
-						<div class="profile-header">
-							<h1>BUSINESS CERTIFICATIONS</h1>
-						</div><!--.profile-header-->
+						<div class="row">
+							<div class="small-12 columns">
+								<div class="profile-section-head">
+									BUSINESS CERTIFICATIONS
+								</div><!--.profile-section-head-->								
+							</div><!--/.small-12-->
+						</div><!--/.row-->
 						<div class="profile-content">
 
 						<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>

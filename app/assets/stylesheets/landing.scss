@@ -338,12 +338,10 @@ $dashboard-agency-color: $landing-teal;
 .gallery-window {
   padding-top: rem-calc(20);
   padding-bottom: rem-calc(20);
-  // min-height: 100%;
-  // min-height: 100vh;
-  // overflow-y: scroll;
-  // background-color: $landing-middle-gray;
-  // border-right: 1px solid $landing-middle-gray;
-  // border-bottom: 1px solid $landing-middle-gray;
+  max-height: rem-calc(200);
+  overflow-y: hidden;
+
+  // THESE ARE FOR BLANK GALLERIES
   &.gallery-distributor, &.gallery-brand {
     height: 75%;
     height: 75vh;  
@@ -382,6 +380,67 @@ $dashboard-agency-color: $landing-teal;
 
 }
 
+.brand-positioning {
+  margin-top: rem-calc(40);
+  margin-bottom: rem-calc(40);
+}
+.profile-logo {
+  margin: rem-calc(20) 0;
+}
+.profile-section-head {
+  color: $landing-middle-gray;
+  font-size: rem-calc(17);
+  font-weight: 500;
+  margin: rem-calc(40) 0 ;
+}
+.profile-skus {
+
+  .profile-sku-item {
+    margin: rem-calc(20) 0 ;
+    border-bottom: 1px solid $landing-middle-gray;
+  }
+
+}
+.profile-general-info {
+  color: $landing-middle-gray;
+  width: 100%;
+  margin-left: auto ;
+  margin-right: auto ;
+
+  & ul {
+    list-style-type: none; /*to remove bullets*/
+    text-align: left;
+    padding: 0px;
+    zoom:1;
+    overflow: hidden;
+    // :first-child {text-align: left;}
+    // :last-child {text-align: right;}
+  }
+  & li {
+      padding: 2px;
+      text-align: left;
+      vertical-align: top;
+      width: 19%;
+      display:inline-block;
+  }
+  .title {
+    font-size: rem-calc(17);
+    font-weight: 500;
+  }
+  .data {
+    font-size: rem-calc(15);
+    font-weight: 100;
+  }
+}
+
+
+
+
+.brand-snapshot {
+  border: 1px solid $landing-middle-gray;
+  padding: rem-calc(5);
+  margin-top: rem-calc(50);
+}
 
 .profile-section-title {
   font-weight: 300;

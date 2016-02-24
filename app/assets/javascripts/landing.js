@@ -328,8 +328,8 @@ function initialize () {
 
   $('#profile_gallery').finalTilesGallery({
     margin:  2,
-    imageSizeFactor: [[4000, .5],[1024, .5],[800, .5],[600, .5],[480, .5]],
-    gridSize: 50,
+    imageSizeFactor: [[4000, .4],[1024, .4],[800, .3],[600, .3],[480, .3]],
+    gridSize: 100,
     allowEnlargement: true
   });
 

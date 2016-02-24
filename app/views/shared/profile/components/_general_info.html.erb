@@ -1,112 +1,151 @@
 <div class="profile-container">
-	<div class="profile-content">
+	<div class="profile-content profile-general-info">
 
-		<div class="row collapse">
-			<div class="small-6 columns">
-				<div class="preview-data">
-					<% unless profile.country_of_origin.blank? %>
-					<span class="preview-data-tile-title">Headquarters</span><br>
-					<strong><%= profile.country_of_origin %></strong>
-					<% end %>
-				</div>							
-			</div><!--/.small-6-->
-			<div class="small-6 columns">
-				<div class="preview-data">
-					<% unless profile.company_size.blank? %>
-					<span class="preview-data-tile-title">Company Size</span><br>
-					<strong><%= CompanySize.find(profile.company_size).name rescue nil %></strong>
+	<div class="hide-for-small-only">
+	<ul>
+		<li>
+			<div class="title">Trends</div>
+			<% if profile.trends.blank? %>
+				n/a
+			<% else %>
+				<div class="data">
+					<% profile.trends.each do |t| %>
+						<%= t.name %>
 					<% end %>
 				</div>
-			</div><!--/.small-6-->
-		</div><!--/.row-->
-
-
-		<div class="row collapse">
-			<div class="small-6 columns">
-				<div class="preview-data">
-					<% unless profile.year_established.blank? %>
-					<span class="preview-data-tile-title">Year Established</span><br>
-					<strong><%= profile.year_established.strftime("%Y") rescue nil %></strong>
-					<% end %>
-				</div>						
-			</div><!--/.small-6-->
-			<div class="small-6 columns">
-				<div class="preview-data">
-					<% unless profile.export_countries.blank? %>
-					<span class="preview-data-tile-title">Countries of Distribution</span><br>
-						<% profile.export_countries.sort_by{ |m| m.country.downcase }.each do |ec| %>
-							<strong><%= ec.country %></strong><br>
-						<% end %>
+			<% end %>
+		</li>
+		<li>
+			<div class="title">Key Retailers</div>
+			<% if profile.key_retailers.blank? %>
+				n/a
+			<% else %>
+				<div class="data">
+					<% profile.key_retailers.each do |kr| %>
+						<%= kr.name %>
 					<% end %>
 				</div>
-			</div><!--/.small-6-->
-		</div><!--/.row-->
-
-
-		<div class="row collapse">
-			<div class="small-12 columns">
-				<div class="preview-data">
-					<% unless profile.sectors.blank? %>
-					<span class="preview-data-tile-title">Sectors</span><br>
-					<% profile.sectors.order_by(:name => "asc").each do |s| %>
-						<strong><%= s.name %></strong><br>
-						<% unless profile.subsectors.blank? %>
-							<% profile.subsectors.order_by(:name => "asc").each do |ss| %>
-								<% if ss.sector == s %>
-								&nbsp;&nbsp;&nbsp;<%= ss.name %><br>
-								<% end %>
+			<% end %>
+		</li>
+		<li>
+			<div class="title">Country</div>
+			<% if profile.country_of_origin.blank? %>
+				n/a
+			<% else %>
+			<div class="data"><%= profile.country_of_origin %></div>
+			<% end %>
+		</li>
+		<li>
+			<% if profile.company_size.blank? %>
+				n/a
+			<% else %>
+			<div class="title">Company Size</div>
+			<div class="data"><%= CompanySize.find(profile.company_size).name rescue nil %></div>
+			<% end %>
+		</li>
+		<li>
+			<div class="title">Sector</div>
+			<% if profile.sectors.blank? %>
+				n/a
+			<% else %>
+				<div class="data">
+				<% profile.sectors.order_by(:name => "asc").each do |s| %>
+					<%= s.name %><br>
+					<% unless profile.subsectors.blank? %>
+						<% profile.subsectors.order_by(:name => "asc").each do |ss| %>
+							<% if ss.sector == s %>
+							&nbsp;&nbsp;&ndash; <%= ss.name %><br>
 							<% end %>
 						<% end %>
 					<% end %>
-					<% end %>
+				<% end %>
 				</div>
-			</div><!--/.small-12-->
-		</div>
-		<div class="row collapse">
+			<% end %>
+		</li>
+	</ul>
+	</div>
+
+	<div class="show-for-small-only">
+
+		<div class="row">
 			<div class="small-12 columns">
-				<div class="preview-data">
-					<% unless profile.channels.blank? %>
-					<span class="preview-data-tile-title">Channels</span><br>
-					<% profile.channels.each do |ch| %>
-						<strong><%= ch.name %></strong><br>
-					<% end %>
-					<% if profile.channel_capacities.where(channel_id: 0).length > 0 %>
-						<% profile.channel_capacities.where(channel_id: 0).each do |cch| %>
-							<strong><%= cch.custom_channel_name %> *</strong><br>
+				<div class="title">Trends</div>
+				<% if profile.trends.blank? %>
+					n/a
+				<% else %>
+					<div class="data">
+						<% profile.trends.each do |t| %>
+							<%= t.name %>
 						<% end %>
-						<small>(* Custom Channels)</small>
-					<% end %>
-					<% end %>
-				</div>
+					</div>
+				<% end %>
 			</div><!--/.small-12-->
 		</div><!--/.row-->
 
-		<div class="row collapse">
+		<div class="row">
 			<div class="small-12 columns">
-				<div class="preview-data">
-					<span class="preview-data-tile-title">General Contact Information</span><br>
-					<% profile.contacts.each do |contact| %>
-						<% unless contact.firstname.blank? && contact.lastname.blank? && contact.title.blank? %>
-					  <strong>
-						<%= contact.firstname.blank? ? "" : "#{contact.firstname}".html_safe %>
-						<%= contact.lastname.blank? ? "" : "#{contact.lastname}".html_safe %>
-						<%= contact.title.blank? ? "" : "| #{contact.title}".html_safe %>
-					  </strong><br>
-					  <% end %>
-					  <% if contact.address %>
-						  <%= contact.address.address1.blank? ? "" : "#{contact.address.address1}<br>".html_safe %>
-						  <%= contact.address.address2.blank? ? "" : "#{contact.address.address2}<br>".html_safe %>
-						  <%= contact.address.city.blank? ? "" : "#{contact.address.city}" %>
-						  <%= contact.address.state.blank? ? "" : "#{contact.address.state}" %>
-						  <%= contact.address.postcode.blank? ? "" : "#{contact.address.postcode}<br>".html_safe %>
-						  <%= contact.address.country.blank? ? "" : "#{contact.address.country}<br>".html_safe %>
-					  <% end %>
-					  <%= contact.phone.blank? ? "" : "#{contact.phone}<br>".html_safe %>
-					  
-				  <% end %>
-				</div>		
+					<div class="title">Key Retailers</div>
+					<% if profile.key_retailers.blank? %>
+						n/a
+					<% else %>
+						<div class="data">
+							<% profile.key_retailers.each do |kr| %>
+								<%= kr.name %>
+							<% end %>
+						</div>
+					<% end %>
 			</div><!--/.small-12-->
 		</div><!--/.row-->
+
+
+		<div class="row">
+			<div class="small-12 columns">
+					<div class="title">Country</div>
+					<% if profile.country_of_origin.blank? %>
+						n/a
+					<% else %>
+					<div class="data"><%= profile.country_of_origin %></div>
+					<% end %>
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+
+
+		<div class="row">
+			<div class="small-12 columns">
+					<% if profile.company_size.blank? %>
+						n/a
+					<% else %>
+					<div class="title">Company Size</div>
+					<div class="data"><%= CompanySize.find(profile.company_size).name rescue nil %></div>
+					<% end %>
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+
+
+		<div class="row">
+			<div class="small-12 columns">
+					<div class="title">Sector</div>
+					<% if profile.sectors.blank? %>
+						n/a
+					<% else %>
+						<div class="data">
+						<% profile.sectors.order_by(:name => "asc").each do |s| %>
+							<%= s.name %><br>
+							<% unless profile.subsectors.blank? %>
+								<% profile.subsectors.order_by(:name => "asc").each do |ss| %>
+									<% if ss.sector == s %>
+									&nbsp;&nbsp;&ndash; <%= ss.name %><br>
+									<% end %>
+								<% end %>
+							<% end %>
+						<% end %>
+						</div>
+					<% end %>
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+
+	</div>
+
 
 	</div>
 	

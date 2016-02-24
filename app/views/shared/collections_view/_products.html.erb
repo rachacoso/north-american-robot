@@ -1,5 +1,6 @@
-<div class="row">
-	<div class="small-12 columns">
+
+<div class="row profile-sku-item">
+	<div class="medium-4 columns">
 		<div class="collections-view-product-top">
 			<div class="galleria-product-photos" id="galleria-product-photos-<%=collitem.id%>">
 			<% if !collitem.product_photos.blank? %>
@@ -20,30 +21,25 @@
 			<% end %>
 			</div>
 		</div>
-	</div>
-</div>
+	</div><!--/.medium-4-->
+	<div class="medium-4 columns">
 
-
-<div class="row">
-	<div class="small-12 columns">
 		<h2><strong style="color: #5f5f5f;"><%= collitem.name.empty? ? "( No Name )" : collitem.name  %></strong><br>
 		<% unless collitem.country_of_manufacture.blank? %>
 			<small>Manufactured in <%= collitem.country_of_manufacture %></small>
 		<% end %>
 		</h2>
-	</div>
-	<div class="small-12 columns">
 		<% unless collitem.msrp.blank? %>
 			<h4>$<%= collitem.msrp %> MSRP</h4>
 		<% end %>
-	</div>	
-	<div class="small-12 columns">
+
 		<% collitem.tags.each do |tag| %>
 			<span class="label"><%= tag.name %></span>
 		<% end %>
-		<br><br>
-	</div><!--/.small-12-->	
-	<div class="small-12 columns">
+
+	</div><!--/.medium-4-->
+	<div class="medium-4 columns">
+
 		<% unless collitem.description.blank? %>
 			<div class="products-description">
 				<%= simple_format(collitem.description) %>
@@ -58,7 +54,8 @@
 				<%= simple_format(collitem.key_benefits) %>
 			</div>
 		<% end %>		
-	</div><!--/.small-12-->
+
+	</div><!--/.medium-4-->
 </div><!--/.row-->
 
 
