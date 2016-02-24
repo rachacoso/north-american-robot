@@ -1,0 +1,12 @@
+@import "foundation/functions";
+@import "foundation/components/labels";
+@import "global_variables";
+@import "mixins";
+
+.article-cm-action-link {
+	font-size: rem-calc(12); 
+	color: black; 
+	font-weight: 100;
+	border: 1px solid $landing-middle-gray;
+	padding: rem-calc(5);
+}

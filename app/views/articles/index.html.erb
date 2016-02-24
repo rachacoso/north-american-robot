@@ -28,7 +28,8 @@
 			<strong><%= a.headline %></strong> by <%= a.author %> // <%= a.date %> <%= link_to 'edit', a %> <%= link_to 'delete', a, method: :delete, data: { confirm: 'Are you sure?' } %>
 		</p>
 		<% end %>
-		<%= link_to "Create New Article on Brands", create_article_url(1), method: :post %>
+		<br>
+		<%= link_to "Create New Article on Brands", create_article_url(1), method: :post, class: "article-cm-action-link " %>
 	</div><!--/.small-6-->
 	<div class="medium-6 columns">
 		<h2>Articles on Trends</h2>
@@ -44,6 +45,7 @@
 			<strong><%= a.headline %></strong> by <%= a.author %> // <%= a.date %> <%= link_to 'edit', a %> <%= link_to 'delete', a, method: :delete, data: { confirm: 'Are you sure?' } %>
 		</p>
 		<% end %>
-		<%= link_to "Create New Article on Trends", create_article_url(2), method: :post %>
+		<br>
+		<%= link_to "Create New Article on Trends", create_article_url(2), method: :post, class: "article-cm-action-link "  %>
 	</div><!--/.small-6-->
 </div><!--/.row-->
