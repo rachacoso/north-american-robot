@@ -40,6 +40,31 @@ class BrandsController < ApplicationController
 
 	end
 
+	def list
+		beauty_sector = Sector.where(name: 'Beauty / Personal Care').first
+
+		# :messages.last.from_user => {'$ne' => current_user}
+		brands = Brand.activated.order_by(:company_name => 'asc')
+		# brands = Brand.activated
+		@list = Hash.new
+		@list['suggestions'] = Array.new
+
+		if !params[:query].blank?
+			q = params[:query]
+			brands = brands.any_of({"company_name": /#{q}/i})
+		end
+
+		brands.each do |b|
+			unless b.company_name.blank?
+				@list['suggestions'] << { "value": b.company_name, "data": b.id.to_s }
+			end
+		end
+
+
+		render json: @list
+
+	end
+
 	def view
 		@profile = Brand.find(params[:id])
 		# GALLERY

@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
 
 	before_action :administrators_only
-	before_action :get_article, only: [:show, :edit, :update, :destroy]
+	before_action :get_article, only: [:show, :edit, :update, :destroy, :featured_brand, :delete_featured_brand]
 
 	def index
 		@articles = Article.all
@@ -36,6 +36,30 @@ class ArticlesController < ApplicationController
       render :edit
     end
 
+	end
+
+	def featured_brand
+
+		unless params[:fb_id].blank?
+			brand = Brand.find(params[:fb_id])
+			@article.brands << brand
+		end
+
+	  respond_to do |format|
+	    format.js
+	  end 
+
+	end
+
+	def delete_featured_brand
+		unless params[:fb_id].blank?
+			brand = Brand.find(params[:fb_id])
+			@article.brands.delete(brand)
+		end
+
+	  respond_to do |format|
+	    format.js
+	  end 
 	end
 
 	def destroy

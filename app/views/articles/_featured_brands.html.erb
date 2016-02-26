@@ -1,0 +1,6 @@
+<ul class="featuringlist">
+<% @article.brands.each do |b| %>
+	<%= render partial: "featured_brand", locals: { brand: b } %>
+	<%#= b.company_name %>
+<% end %>
+</ul>

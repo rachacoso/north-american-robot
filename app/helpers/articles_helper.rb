@@ -8,5 +8,10 @@ module ArticlesHelper
 			return "TRENDS"
 		end
 	end
+
+	def get_brand_photo(brand)
+    product_list = brand.products.pluck(:id)
+    return ProductPhoto.where(:photographable_id.in => product_list).shuffle[0]
+	end
 	
 end

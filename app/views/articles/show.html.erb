@@ -1,16 +1,19 @@
 <%= render partial: "shared/topbar_admin" %>
-<div class="row">
-	<div class="small-12 columns">
-		<h1>ARTICLE: <%= @article.headline %></h1>
-	</div><!--/.small-12-->
-</div><!--/.row-->
 
-
+<br>
 <div class="row">
 	<div class="small-12 columns">
 		<%= link_to "<< Back to All Articles", articles_url, class: "article-cm-action-link" %>	
 	</div><!--/.small-12-->
 </div><!--/.row-->
+<br>
+<div class="row">
+	<div class="small-12 columns">
+		<h1>ARTICLE: <strong><%= @article.headline %></strong></h1>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
+
 
 
 <div class="row">
@@ -24,7 +27,8 @@
 <div class="row">
 	<div class="small-12 columns">
 		<hr>
-		ARTICLE PREVIEW
+		<a name="article-preview"></a>
+		<h2>ARTICLE PREVIEW <br><small>(reload page to see changes to Article Featured Brands)</small></h2>
 		<hr>		
 	</div><!--/.small-12-->
 </div><!--/.row-->

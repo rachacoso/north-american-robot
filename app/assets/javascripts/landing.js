@@ -402,6 +402,20 @@ function initialize () {
     tabDisabled: true
   });
 
+  $('#article-featured-brands-input').devbridgeAutocomplete({
+    serviceUrl: '/brands/list',
+    minChars: 0,
+    delimiter: ', ',
+    showNoSuggestionNotice: true,
+    noSuggestionNotice: 'Sorry, no matching results',
+    triggerSelectOnValidInput: true,
+    tabDisabled: true,
+    onSelect: function (suggestion) {
+      $('#fb-id').val(suggestion.data);
+    }
+  });
+
+
   // FILE UPLOAD
 
   // FOR VERIFICATION IMAGES UPLOAD

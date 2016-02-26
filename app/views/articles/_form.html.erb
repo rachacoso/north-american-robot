@@ -44,12 +44,44 @@
 </div><!--/.row-->
 
 <div class="row">
-	<div class="small-12 columns">
-		<%= f.submit "UPDATE ARTICLE", class: "tiny button" %>
+	<div class="small-12 columns text-right">
+		<%= f.submit "UPDATE ARTICLE", class: "tiny button alert" %>
 	</div><!--/.small-9-->
 </div><!--/.row-->
 
 <% end %>
+
+<div class="row">
+	<div class="small-12 columns">
+		<hr>
+		<h2>Article Featured Brands</h2>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="small-12 columns">
+		<div id="featured_brands">
+			<%= render partial: "featured_brands_edit_list" %>
+		</div>
+		<%= form_tag article_featured_brand_path, remote: true do %>
+		<div class="row">
+			<div class="small-12 columns">
+				<div class="row collapse">
+					<div class="small-10 columns">
+						<input type="hidden" id="fb-id" name="fb_id" value="" />
+						<%= text_field_tag 'article-featured-brands-input' %>
+					</div><!--/.small-11-->
+					<div class="small-2 columns">
+						<%= submit_tag 'Add Brand', class: 'postfix button tiny alert' %>
+					</div><!--/.small-2-->		
+				</div><!--/.row-->
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+		<% end %>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
 
 <div class="row">
 	<div class="small-12 columns">

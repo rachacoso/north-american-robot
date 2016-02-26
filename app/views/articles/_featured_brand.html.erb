@@ -1,0 +1,14 @@
+<li>
+	<%= link_to "#" do %>
+		<div class="row">
+			<div class="small-4 columns text-center">
+				<% if photo = get_brand_photo(brand) %>
+					<%= image_tag photo.photo.url(:small) %>
+				<% end %>
+			</div><!--/.small-6-->
+			<div class="small-6 columns text-left end">
+				<%= brand.company_name %>
+			</div><!--/.small-6-->
+		</div><!--/.row-->
+	<% end %>
+</li>
