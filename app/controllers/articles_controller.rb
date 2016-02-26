@@ -1,7 +1,19 @@
 class ArticlesController < ApplicationController
 
-	before_action :administrators_only
-	before_action :get_article, only: [:show, :edit, :update, :destroy, :featured_brand, :delete_featured_brand]
+	skip_before_action :require_login, only: [:public_view]
+	before_action :administrators_only, except: [:public_view]
+	before_action :get_article, only: [:show, :edit, :update, :destroy, :featured_brand, :delete_featured_brand, :public_view]
+
+	def public_view
+
+		# for submenu
+		@brand_chunk = Subsector.where(sector_id: Sector.where(name: 'Beauty / Personal Care').first.id).uniq { |p| p.name }.sort_by { |p| p.name }
+
+		# for find links
+		@trends = Trend.all.sort_by { |p| p.name }
+		@key_retailers = KeyRetailer.all.sort_by { |p| p.name }
+
+	end
 
 	def index
 		@articles = Article.all

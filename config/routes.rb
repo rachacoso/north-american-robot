@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get  '/pages/:page' => 'pages#show'
 
   resources :articles, only: [:index, :show, :update, :destroy]
+  get  '/article/view/:id' => 'articles#public_view', as: 'public_view_article'
   post  '/article/new/:type' => 'articles#create', as: 'create_article'
   post  '/article/fb/:id' => 'articles#featured_brand', as: 'article_featured_brand'
   delete  '/article/fb/:id/:fb_id' => 'articles#delete_featured_brand', as: 'delete_article_featured_brand'

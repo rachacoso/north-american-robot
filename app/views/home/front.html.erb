@@ -3,7 +3,10 @@
 
 <div class="v2front">
 
-	
+<% Article.active.each do |a| %>
+<%= link_to a.headline, public_view_article_url(a) %><br>
+<% end %>
+
 	<article class="preview_featured">
 		<div class="row">
 			<div class="small-12 columns text-center">
