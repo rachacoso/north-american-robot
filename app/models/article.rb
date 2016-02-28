@@ -2,6 +2,7 @@ class Article
   include Mongoid::Document
 
   field :headline, type: String, default: ""
+  field :preview_text, type: String, default: ""
   field :body, type: String, default: ""
 	field :author, type: String, default: ""
   field :date, type: Date, default: -> { DateTime.now }

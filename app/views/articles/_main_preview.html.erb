@@ -1,0 +1,40 @@
+	<article class="preview_featured">
+		<div class="row">
+			<div class="small-12 columns text-center">
+				<% unless a.article_photos.blank? %>
+					<%= link_to public_view_article_url(a) do %>
+					  <div class="item"><%= image_tag a.article_photos.first.photo.url(:large) %></div>
+					<% end %>
+				<% end %>
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+
+		<div class="row articlepreviewtext">
+			<div class="medium-8 columns">
+				<div class="row">
+					<%= link_to public_view_article_url(a) do %>
+					<div class="small-12 columns text-left medium-text-right">
+						<h1><%= a.headline %></h1>
+						<h2>REPORT / ANALYSIS on <%= get_article_type(a.article_type) %></h2>
+					</div><!--/.small-12-->
+					<% end %>
+				</div><!--/.row-->
+				<div class="row">
+					<%= link_to public_view_article_url(a) do %>
+					<div class="medium-10 medium-push-2 columns">
+						<p><%= a.date.strftime("%m.%d.%Y") %> by <%= a.author %> // <%= a.preview_text %></p>
+					</div><!--/.medium-10 medium-push-2-->
+					<% end %>
+				</div><!--/.row-->
+			</div><!--/.medium-8-->
+			<div class="medium-4 columns">
+				<div class="show-for-small-only"><br></div>
+				<h3>FEATURING</h3>
+				<ul class="featuringlist">
+					<% a.brands.each do |b| %>
+						<%= render partial: "articles/featured_brand_preview", locals: { brand: b } %>
+					<% end %>
+				</ul>
+			</div><!--/.medium-4-->
+		</div><!--/.row-->
+	</article>

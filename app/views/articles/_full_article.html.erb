@@ -91,10 +91,10 @@
 			<div class="show-for-small-only"><br></div>
 			<h3>FEATURING</h3>
 			<ul class="featuringlist">
-<% @article.brands.each do |b| %>
-	<%= render partial: "featured_brand", locals: { brand: b } %>
-	<%#= b.company_name %>
-<% end %>
+				<% @article.brands.each do |b| %>
+					<%= render partial: "featured_brand", locals: { brand: b } %>
+					<%#= b.company_name %>
+				<% end %>
 			</ul>
 		</div><!--/.medium-4-->
 	</div><!--/.row-->

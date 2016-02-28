@@ -33,6 +33,13 @@
 
 <div class="row">
 	<div class="small-12 columns">
+		<%= f.label :preview_text, "Preview Text [text that appears on main page article previews]" %>
+		<%= f.text_area :preview_text, columns: 3, rows: 5, label: false %>
+	</div><!--/.small-9-->
+</div><!--/.row-->
+
+<div class="row">
+	<div class="small-12 columns">
 		<%= f.text_area :body, columns: 3, rows: 15 %>
 	</div><!--/.small-9-->
 </div><!--/.row-->

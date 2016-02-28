@@ -3,161 +3,27 @@
 
 <div class="v2front">
 
-<% Article.active.each do |a| %>
-<%= link_to a.headline, public_view_article_url(a) %><br>
-<% end %>
 
-	<article class="preview_featured">
-		<div class="row">
-			<div class="small-12 columns text-center">
-				<%= link_to "/pages/5-free-nail" do %><%= image_tag 'v2/5free.png' %><% end %>
-			</div><!--/.small-12-->
-		</div><!--/.row-->
-
-		<div class="row articlepreviewtext">
-			<div class="medium-8 columns">
-				<div class="row">
-					<%= link_to "/pages/5-free-nail" do %>
-					<div class="small-12 columns text-left medium-text-right">
-						<h1>5-Free Nail Polish Revolution</h1>
-						<h2>REPORT / ANALYSIS on TRENDS</h2>
-					</div><!--/.small-12-->
-					<% end %>
-				</div><!--/.row-->
-				<div class="row">
-					<%= link_to "/pages/5-free-nail" do %>
-					<div class="medium-10 medium-push-2 columns">
-						<p>12.03.15 by Sarah Chung // The nail polish industry has seen a boom in recent years. In 2012, sales of nail polish reached $768 million in the U.S. and an unprecedented $6 billion globally. The sweeping trend toward toxic-free, 5-Free and 7-Free nail polish should perk the interest of retailers, beauty distributors and salon/spa owners.</p>
-					</div><!--/.medium-10 medium-push-2-->
-					<% end %>
-				</div><!--/.row-->
-			</div><!--/.medium-8-->
-			<div class="medium-4 columns">
-				<div class="show-for-small-only"><br></div>
-				<h3>FEATURING</h3>
-				<ul class="featuringlist">
-					<li><%= link_to "RGB", "//landing-international.herokuapp.com/brand/view/55775ef93366380003200000" %></li>
-					<li><%= link_to "LVX", "//landing-international.herokuapp.com/brand/view/567ea32d1f2a0f0003000004" %></li>
-					<li><%= link_to "Scotch Naturals", "//landing-international.herokuapp.com/brand/view/567edaebe3ef350003000036" %></li>
-					<li>Smith &amp; Cult</li>
-					<li><%= link_to "Priti NYC", "//landing-international.herokuapp.com/brand/view/567ed0b0e3ef350003000002" %></li>
-				</ul>
-			</div><!--/.medium-4-->
-		</div><!--/.row-->
-	</article>
-
+<% if get_main_article() %>
+	<%= render partial: "/articles/main_preview", locals: { a: get_main_article() } %>
 	<div class="row">
 		<div class="small-10 small-centered columns">
 			<hr>		
 		</div><!--/.small-10-small-centered -->
 	</div><!--/.row-->
-
-<%= link_to "/pages/PUR-Cosmetics" do %>
-	<article class="preview_standard">
-		<div class="row">
-			<div class="medium-8 columns">
-				<div class="row">
-					<div class="medium-6 columns text-left medium-text-right">
-						<%= image_tag 'v2/PurImage.png' %>
-					</div><!--/.medium-12-->
-					<div class="medium-6 columns">
-						<div class="row">
-							<div class="small-12 columns text-left medium-text-right">
-								<h1>PUR Cosmetics</h1>
-								<h2>REPORT / ANALYSIS on BRANDS</h2>
-								<p>12.03.15 by Sarah Chung // With the tagline, “The Complexion Authority,” Pur Cosmetics manufactures a line of for mineral-based makeup and skincare products designing at improving the complexion.</p>
-							</div><!--/.small-12-->
-						</div><!--/.row-->
-					</div><!--/.medium-6-->
-				</div><!--/.row-->
-			</div><!--/.medium-8-->
-			<div class="medium-4 columns">
-				<div class="show-for-small-only"><br></div>
-				<h3>FEATURING</h3>
-				<ul class="featuringlist">
-					<li>4-IN-1 PRESSED MINERAL MAKEUP</li>
-					<li>CC CREAM BROAD SPECTRUM SPF 40</li>
-					<li>CORRECTING PRIMER</li>
-				</ul>
-			</div><!--/.medium-12-->
-		</div><!--/.row-->
-	</article>
-<% end %>	
-
-	<div class="row">
-		<div class="small-10 small-centered columns">
-			<hr>		
-		</div><!--/.small-10-small-centered -->
-	</div><!--/.row-->
-
-<%= link_to "/pages/Consumers-Will-Pay-More" do %>
-	<article class="preview_standard">
-		<div class="row">
-			<div class="medium-8 columns">
-				<div class="row">
-					<div class="medium-6 columns text-left medium-text-right">
-						<%= image_tag 'v2/consumers.png' %>
-					</div><!--/.medium-12-->
-					<div class="medium-6 columns">
-						<div class="row">
-							<div class="small-12 columns text-left medium-text-right">
-								<h1>Consumers Will Pay More for Cruelty-Free, All-Natural Beauty</h1>
-								<h2>REPORT / ANALYSIS on BRANDS</h2>
-								<p>12.03.15 by Sarah Chung // Here at Landing, we are focused on connecting distributors and retailers with “Good for People, Good for Planet” brands</p>
-							</div><!--/.small-12-->
-						</div><!--/.row-->
-					</div><!--/.medium-6-->
-				</div><!--/.row-->
-			</div><!--/.medium-8-->
-			<div class="medium-4 columns">
-				<div class="show-for-small-only"><br></div>
-				<h3>FEATURING</h3>
-				<ul class="featuringlist">
-					<li>[ITEM 1]</li>
-					<li>[ITEM 2]</li>
-				</ul>
-			</div><!--/.medium-12-->
-		</div><!--/.row-->
-	</article>
 <% end %>
 
-	<div class="row">
-		<div class="small-10 small-centered columns">
-			<hr>		
-		</div><!--/.small-10-small-centered -->
-	</div><!--/.row-->
-
-<%= link_to "/pages/Credo-Beauty" do %>
-	<article class="preview_standard">
+<% alist = get_sub_articles() %>
+<% alist.each_with_index do |a, i| %>
+	<%= render partial: "/articles/sub_preview", locals: { a: a } %>
+	<% unless i == alist.count - 2 %>
 		<div class="row">
-			<div class="medium-8 columns">
-				<div class="row">
-					<div class="medium-6 columns text-left medium-text-right">
-						<%= image_tag 'v2/Exterior.png' %>
-					</div><!--/.medium-12-->
-					<div class="medium-6 columns">
-						<div class="row">
-							<div class="small-12 columns text-left medium-text-right">
-								<h1>Credo Beauty: A new retail concept</h1>
-								<h2>REPORT / ANALYSIS on TRENDS</h2>
-								<p>12.03.15 by Sarah Chung // Dubbed the Sephora for natural beauty, Credo Beauty is a new retail concept carrying exclusively natural beauty brands.</p>
-							</div><!--/.small-12-->
-						</div><!--/.row-->
-					</div><!--/.medium-6-->
-				</div><!--/.row-->
-			</div><!--/.medium-8-->
-			<div class="medium-4 columns">
-				<div class="show-for-small-only"><br></div>
-				<h3>FEATURING</h3>
-				<ul class="featuringlist">
-					<li>[ITEM 1]</li>
-					<li>[ITEM 2]</li>
-				</ul>
-			</div><!--/.medium-12-->
+			<div class="small-10 small-centered columns">
+				<hr>
+			</div><!--/.small-10-small-centered -->
 		</div><!--/.row-->
-	</article>
+	<% end %>
 <% end %>
-
 
 <div class="browseblock">
 	<div class="row">

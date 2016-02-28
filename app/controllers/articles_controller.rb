@@ -97,6 +97,7 @@ class ArticlesController < ApplicationController
     params.require(:article).permit(
 			:headline,
 			:author,
+			:preview_text,
 			:body,
 			:date,
 			:article_type,

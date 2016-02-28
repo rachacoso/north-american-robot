@@ -7,7 +7,8 @@ class ArticlePhoto
   	# :path => ':attachment/:id/:style.:extension',
 	  # :url => ":s3_domain_url",
 	  :styles => {
-	    :small    => ['100x100'],
+			:small    => ['100x100'],
+	    :preview  => ['268x178'],
 	    :medium		=> ['400x400'],
 	    :large    => ['800>'],
 	  },
