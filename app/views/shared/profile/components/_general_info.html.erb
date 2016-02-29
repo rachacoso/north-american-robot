@@ -15,18 +15,18 @@
 				</div>
 			<% end %>
 		</li>
-		<li>
-			<div class="title">Key Retailers</div>
-			<% if profile.key_retailers.blank? %>
-				n/a
-			<% else %>
-				<div class="data">
-					<% profile.key_retailers.each do |kr| %>
-						<%= kr.name %>
-					<% end %>
-				</div>
-			<% end %>
-		</li>
+<%#		<li>  %>
+<%#			<div class="title">Key Retailers</div>  %>
+<%#			<% if profile.key_retailers.blank? %>
+<%#				n/a  %>
+<%#			<% else %>  
+<%#				<div class="data">  %>
+<%#					<% profile.key_retailers.each do |kr| %>
+<%#						<%= kr.name %>
+<%#					<% end %>
+<%#				</div>  %>
+<%#			<% end %>
+<%#		</li>  %>
 		<li>
 			<div class="title">Country</div>
 			<% if profile.country_of_origin.blank? %>
