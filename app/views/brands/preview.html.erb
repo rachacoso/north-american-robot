@@ -3,7 +3,11 @@
 		
 
 		<div class="row profile-logo">
-			<div class="medium-4 columns">
+
+			<div class="medium-8 columns">
+				<h2><%= @profile.company_name %></h2>
+			</div><!--/.medium-8 -->
+			<div class="medium-4 columns text-right">
 				<% if @profile.logo_file_name %>
 					<%= image_tag @profile.logo.url(:medium), alt: "Logo" %>
 				<% else %>
@@ -14,9 +18,7 @@
 					<% end %>					
 				<% end %>
 			</div><!--/.medium-4-->
-			<div class="medium-8 columns">
-				<h2><%= @profile.company_name %></h2>
-			</div><!--/.medium-8 -->
+
 		</div><!--/.row-->
 
 		<div class="row">
