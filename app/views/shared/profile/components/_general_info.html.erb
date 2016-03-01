@@ -5,15 +5,15 @@
 	<ul>
 		<li>
 			<div class="title">Trends</div>
-			<% if profile.trends.blank? %>
-				n/a
-			<% else %>
-				<div class="data">
+			<div class="data">
+				<% if profile.trends.blank? %>
+					n/a
+				<% else %>
 					<% profile.trends.each do |t| %>
 						<%= t.name %>
 					<% end %>
-				</div>
-			<% end %>
+				<% end %>
+			</div>
 		</li>
 <%#		<li>  %>
 <%#			<div class="title">Key Retailers</div>  %>
@@ -36,12 +36,14 @@
 			<% end %>
 		</li>
 		<li>
+			<div class="title">Company Size</div>
+			<div class="data">
 			<% if profile.company_size.blank? %>
 				n/a
 			<% else %>
-			<div class="title">Company Size</div>
-			<div class="data"><%= CompanySize.find(profile.company_size).name rescue nil %></div>
+				<%= CompanySize.find(profile.company_size).name rescue nil %>
 			<% end %>
+			</div>
 		</li>
 		<li>
 			<div class="title">Sector</div>

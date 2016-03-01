@@ -86,6 +86,7 @@ Rails.application.routes.draw do
   # v2 public view
   get    '/brands' => 'brands#index', as: 'brands'
   get    '/brand/view/:id' => 'brands#view', as: 'view_brand'
+  get    '/brand/preview/:id' => 'brands#preview', as: 'preview_brand'
 
   # for brand editing
   get    '/brand/edit' => 'brands#edit', as: 'brand'

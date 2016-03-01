@@ -1,0 +1,328 @@
+@import "foundation/functions";
+@import "foundation/components/labels";
+@import "global_variables";
+@import "mixins";
+
+
+// PROFILE DISPLAY
+
+.profile-tabs {
+  padding-top: rem-calc(5);
+  h2 {
+    display: inline;
+    cursor: pointer;
+    padding: 0 rem-calc(5) rem-calc(2) rem-calc(5);
+    border-top: 1px dotted $landing-middle-gray;
+    border-left: 1px dotted $landing-middle-gray;
+    border-right: 1px dotted $landing-middle-gray;
+    background: scale-color($landing-middle-gray, $lightness: 40%);
+    color: white;
+    &:hover {
+      background: $landing-light-gray;
+      color: black;
+    }
+    &.active {
+      background: white;
+      color: black;
+    }
+    &.active:hover {
+      cursor: text;
+    }
+  }
+}
+
+#profile-profile, #profile-conversation {
+  // display: none;
+}
+
+.profile-list-item {
+  position: relative;
+  // border-bottom: 1px solid $landing-middle-gray;
+  // border-radius: 1em;
+  background: white;
+  padding: rem-calc(10);
+  margin-top: rem-calc(2);
+  .country {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background: $landing-light-gray;
+  }
+}
+
+
+.profile-logo-area {
+  height: rem-calc(80);
+  // margin-top: rem-calc(15);
+  img.uploaded-logo  {
+    width: auto !important;
+    max-height: 80px;
+  }
+}
+
+.profile-indicators {
+  // padding: rem-calc(5);
+}
+
+
+// PROFILE STYLING (UPDATED)
+
+.profile-container {
+  padding: 0;
+  background-color: white;
+}
+.profile-content {
+  padding: rem-calc(10);
+  hr {
+     // border: 1px solid $landing-middle-gray;
+     border-color: $landing-middle-gray;
+     margin-top: 0px;
+  }
+
+}
+
+
+// NEW PROFILE TILES
+
+.profile-wrapper {
+  // display: none;
+}
+.profile-sq-wrapper {
+  background: white;
+}
+a.profile-sq-left {
+  display: block;
+}
+.profile-sq-left, .profile-sq-right {
+  min-height: rem-calc(280);
+  position: relative;
+  .profile-sq-sectors-country {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    @include transparent(#000, 0.4);
+    padding: rem-calc(5);
+    color: $landing-light-gray;
+    font-weight: 100;
+  }
+}
+
+.profile-sq-left {
+  // background-image: url("/images/crate.jpg");
+  // background-image: url("/images/SECTORS_personalcare.svg");
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: center;
+}
+
+.profile-sq-right {
+  padding: rem-calc(5) !important;
+  background-color: white;
+  h2 a {
+    color: black;
+  }
+}
+
+.profile-sq-indicators {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
+
+.gallery-item {
+  margin: rem-calc(25) 0;
+}
+
+
+.gallery-window {
+  padding-top: rem-calc(20);
+  padding-bottom: rem-calc(20);
+  max-height: rem-calc(200);
+  overflow-y: hidden;
+
+  // THESE ARE FOR BLANK GALLERIES
+  &.gallery-distributor, &.gallery-brand {
+    height: 75%;
+    height: 75vh;  
+  }
+  &.gallery-distributor#uk {
+    height: 75%;
+    height: 75vh;
+    background: transparent url("/images/SECTORS_babykids.svg") center;
+    background-size: cover;
+  }
+  &.gallery-brand#fashionaccessories {
+    background: transparent url("/images/SECTORS_fashionaccessories.svg") center;
+    background-size: cover;
+  }
+}
+.tags-window {
+  padding: rem-calc(10);
+  // border-left: 1px solid $landing-middle-gray;
+}
+.profile-header {
+  padding: rem-calc(9) rem-calc(10) rem-calc(5) rem-calc(10);
+  background-color: $landing-light-gray;
+  h4 {
+    color: $landing-dark-gray;
+    font-weight: 100;
+  }
+  &#profile-main-top {
+    border-top: 1px solid $landing-middle-gray;
+    border-bottom: 1px solid $landing-middle-gray;
+  }
+  &#profile-main-bottom {
+    // border-top: 1px solid $landing-middle-gray;
+    // border-bottom: 1px solid $landing-middle-gray;
+    background-color: white;
+  }  
+
+}
+
+.brand-positioning {
+  margin-top: rem-calc(40);
+  margin-bottom: rem-calc(40);
+}
+.profile-logo {
+  margin: rem-calc(20) 0;
+}
+.profile-section-head {
+  color: $landing-middle-gray;
+  font-size: rem-calc(17);
+  font-weight: 500;
+  margin: rem-calc(40) 0 ;
+}
+.profile-skus {
+
+  .profile-sku-item {
+    margin: rem-calc(20) 0 ;
+    border-bottom: 1px solid $landing-middle-gray;
+  }
+
+}
+.profile-general-info {
+  color: $landing-middle-gray;
+  width: 100%;
+  margin-left: auto ;
+  margin-right: auto ;
+
+  & ul {
+    list-style-type: none; /*to remove bullets*/
+    text-align: left;
+    padding: 0px;
+    zoom:1;
+    overflow: hidden;
+    // :first-child {text-align: left;}
+    // :last-child {text-align: right;}
+  }
+  & li {
+      padding: 2px;
+      text-align: left;
+      vertical-align: top;
+      width: 24%;
+      display:inline-block;
+  }
+  .title {
+    font-size: rem-calc(17);
+    font-weight: 500;
+  }
+  .data {
+    font-size: rem-calc(15);
+    font-weight: 100;
+  }
+}
+
+
+.brand-snapshot {
+  border: 1px solid $landing-middle-gray;
+  padding: rem-calc(5);
+  margin-top: rem-calc(50);
+}
+
+.profile-section-title {
+  font-weight: 300;
+  padding-left: rem-calc(3);
+}
+
+
+
+////////////
+// PROFILE PREVIEW
+////////////
+
+
+#profile-preview {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  margin: 0 0 0 -37.5%;
+  width:75%;
+  max-height: 85%;  
+  background: white;
+  z-index: 100021;
+  padding: rem-calc(20) rem-calc(10);
+  display: none;
+
+  & .brand-positioning {
+    margin-top: rem-calc(10);
+    margin-bottom: rem-calc(10);
+    p {
+      font-size: rem-calc(11);  
+    }
+    
+  }
+
+  & .brand-snapshot {
+    margin-top: rem-calc(5);
+    padding: rem-calc(5) rem-calc(5);
+  }
+
+  & .profile-content {
+    padding: 0;
+  }
+
+  & a#full-profile-link {
+    margin-bottom: rem-calc(10);
+    font-weight: 100;
+    color: $landing-middle-gray;
+    border: 1px solid $landing-middle-gray;
+    padding: rem-calc(5) rem-calc(10);
+  }
+  & a#full-profile-link:hover {
+    color: $landing-dark-gray;
+  }
+
+  & .owl-carousel {
+    margin: rem-calc(10) 0 0 0;
+  }
+}
+#profile-preview-data {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: rem-calc(5);
+}
+#close-profile-preview {
+  position: absolute;
+  top: rem-calc(-40);
+  right: rem-calc(10);
+  font-size: rem-calc(60);
+  font-weight: 900;
+  color: $landing-middle-gray;
+  z-index: 100022;
+}
+
+// resized font for BRAND PREVIEW
+.brand-snapshot#preview .profile-general-info {
+  .title {
+    font-size: rem-calc(13);
+    font-weight: 500;
+  }
+  .data {
+    font-size: rem-calc(11);
+    font-weight: 100;
+  }
+}
+
