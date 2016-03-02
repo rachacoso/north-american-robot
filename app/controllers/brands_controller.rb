@@ -65,7 +65,7 @@ class BrandsController < ApplicationController
 
     respond_to do |format|
       format.html { render "preview", :layout => false  } 
-      # format.js
+      format.js
     end
 
   end

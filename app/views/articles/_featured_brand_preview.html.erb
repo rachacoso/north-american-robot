@@ -1,1 +1,3 @@
-<li><%= link_to brand.company_name, view_brand_url(brand) %></li>
+<li>
+	<%= link_to brand.company_name, preview_brand_url(brand), remote: true %>
+</li>

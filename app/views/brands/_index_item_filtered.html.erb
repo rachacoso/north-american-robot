@@ -1,5 +1,5 @@
 <div class="index-item filtered">
-<%= link_to preview_brand_url(brand), class: "view-profile-preview", data: {ajaxurl: "#{preview_brand_url(brand)}"} do %>
+<%= link_to preview_brand_url(brand), remote: true do %>
 <div class="image">
 	<% type, photo = index_item_photo(brand) %>
 	<% if type == "logo" %>

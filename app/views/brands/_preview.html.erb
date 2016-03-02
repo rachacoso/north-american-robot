@@ -1,0 +1,53 @@
+<div class="row">
+	<div class="medium-11 medium-centered columns">
+		
+		<div class="row profile-logo">
+
+			<div class="medium-8 columns">
+				<h2><%= @profile.company_name %></h2>
+			</div><!--/.medium-8 -->
+			<div class="medium-4 columns text-right">
+				<% if @profile.logo_file_name %>
+					<%= image_tag @profile.logo.url(:medium), alt: "Logo" %>
+				<% else %>
+					<% if !@profile.facebook.blank? && fb_picture(@profile.facebook) %>
+						<%= image_tag fb_picture(@profile.facebook) %>
+					<% else %>
+						<%= image_tag @profile.logo.url(:medium), width: "100", height: "100", alt: "Logo" %>
+					<% end %>					
+				<% end %>
+			</div><!--/.medium-4-->
+
+		</div><!--/.row-->
+
+		<div class="row">
+			<div class="small-12 columns">
+				<div class="brand-positioning">
+					<%= simple_format(truncate(@profile.brand_positioning, length: 600, separator: ' ', omission: '... ') { link_to "(more)", view_brand_url(@profile), id: 'full-profile-link' }) %>
+					<%#= simple_format(@profile.brand_positioning[0..600].gsub(/\s\w+\s*$/, "... (#{ link_to 'more', view_brand_url(@profile), id: 'full-profile-link' })")) %>
+				</div>
+			</div><!--/.small-12-->
+			<div class="small-12 columns">
+				<div class="brand-snapshot" id="preview">
+					<%= render partial: "shared/profile/components/general_info", locals: {profile: @profile} %>
+				</div>
+			</div><!--/.small-12-->
+
+			<div class="small-12 columns text-center">
+				<% if !@gallery.empty? %>
+				<div id="owl-example-preview" class="owl-carousel owl-theme">
+				<% @gallery.each do |b| %>
+					<div><img class="lazyOwl" data-src="<%= b.photo.url(:small) %>"></div>
+				<% end %>
+				</div>
+				<% else %>
+					<br>
+				<% end %>
+			</div><!--/.small-12-->
+			<div class="small-12 columns text-center">
+				<%= link_to 'Full Profile', view_brand_url(@profile), id: "full-profile-link" %>
+			</div>
+		</div><!--/.row-->
+
+	</div><!--/.medium-11-->
+</div><!--/.row-->

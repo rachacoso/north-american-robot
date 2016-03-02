@@ -1,0 +1,18 @@
+
+$('#profile-preview-data').html("<%= j (render partial: 'preview') %>");
+$('.overlay#profile-preview-overlay').fadeIn();
+$('#profile-preview').fadeIn();
+
+$("#owl-example-preview").owlCarousel({
+	lazyLoad : true,
+	lazyFollow : true,
+	lazyEffect : "fade",
+	navigation : true,
+	navigationText : [
+		"<img src='/images/v2/left-arrow.svg'>",
+		"<img src='/images/v2/right-arrow.svg'>",
+	],
+	items : 4,
+	pagination : false,
+	scrollPerPage : false,
+});

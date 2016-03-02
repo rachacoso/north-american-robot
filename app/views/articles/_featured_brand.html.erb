@@ -1,5 +1,5 @@
 <li>
-	<%= link_to view_brand_url(brand) do %>
+	<%= link_to preview_brand_url(brand), remote: true do %>
 		<div class="row">
 			<div class="small-4 columns text-center">
 				<% if photo = get_brand_photo(brand) %>
