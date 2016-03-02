@@ -50,7 +50,7 @@ class SessionController < ApplicationController
 				if @user.administrator
 					@redirect_url = admin_brands_index_url
 				else
-					@redirect_url = dashboard_url
+					@redirect_url = root_url
 				end
 			else
 				flash[:notice] = "INVALID EMAIL OR PASSWORD"

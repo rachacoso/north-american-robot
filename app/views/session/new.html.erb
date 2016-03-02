@@ -1,23 +1,19 @@
-
-
-<div id="front-logo">
-	<%= link_to root_url do %><h4 style="color:white;"><%= image_tag '/images/landing_page_LOGO.svg', class: "shadow", width: 50  %> go back</h4><% end %>
-</div>
-
 <div class="front-top-panel">
 	<div class="row">
+		<div class="small-12 columns text-center">
+			<br><br>
+			<%= link_to root_url do %><%= image_tag 'v2/logo.svg', width: "100" %><% end %>
+		</div><!--/.small-12-->
 		<div class="small-12 columns">
-			<br><br><br>
-			<div class="text-center"><h1 class="shadow" style="color:white;">WELCOME 欢迎 환영 <br>BEM-VINDO स्वागत ДОБРО ПОЖАЛОВАТЬ</h1></div>
+			<div class="text-center"><h1>환영<br>WELCOME</h1></div>
 		</div><!--/.small-8 small-centered-->
 	</div><!--/.row-->
-	<div class="row" data-equalizer>
+	<div class="row">
 		<div class="small-10 medium-5 small-centered columns">
 			<div class="ldpanel">
-
 			  <div class="row">
 					<div class="small-12 columns">
-						<h2><img src="/images/li_blue_round.png" width="50" height="50" alt="Landing International" /> Log In </h2>
+						<h2>Log In </h2>
 					</div>
 				</div>
 
@@ -68,7 +64,7 @@
 			<div class="row">
 			<div class="small-12 columns">
 				<div class="text-center">
-				<%= link_to new_user_url do %><h2 style="color:white;" class="shadow-text">not yet a member? <br><strong> JOIN US </strong></h2><% end %>
+				<%= link_to new_user_url do %><h2>not yet a member? <br><strong> JOIN US </strong></h2><% end %>
 				</div>
 			</div><!--/.small-12-->	
 			</div><!--/.row-->

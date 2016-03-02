@@ -105,7 +105,7 @@ label {
 
 .ldpanel {
   border-radius: 3px; 
-	border: 1px dotted scale-color($link-color, $lightness: 50%);
+	border: 1px solid $landing-middle-gray;
   padding: 0.5em 1em;
   margin: 0.5em 0em 1.5em 0em;
   @include transparent(#fff, 0.8);
