@@ -48,6 +48,7 @@ class ApplicationController < ActionController::Base
   def require_login
     unless @current_user
       flash[:notice] = "YOU MUST BE LOGGED IN TO ACCESS (err: 22)"
+      session[:persisted_redirect] = nil # reset any persisted redirect
       redirect_to login_url # halts request cycle
     end
   end

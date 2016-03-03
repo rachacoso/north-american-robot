@@ -10,10 +10,23 @@
 	</div>
 </div>
 
-<% if @allow_redirect %>
+<% if @current_user %>
 	<%= render partial: "/shared/profile/brand_full_profile", locals: {profile: @profile} %>
 <% else %>
-	<%= render "restricted_view" %>
+	<br><br>
+	<div class="row">
+		<div class="small-12 columns">
+			<br>
+		</div><!--/.small-12-->
+		<div class="medium-10 columns medium-centered">
+			<div id="restricted-view-container">
+			<%= render "restricted_view" %>
+			</div>
+		</div>
+		<div class="small-12 columns">
+			<br><br><br>
+		</div><!--/.small-12-->
+	</div>
 <% end %>
 
 

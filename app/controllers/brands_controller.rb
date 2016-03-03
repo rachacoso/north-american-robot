@@ -53,9 +53,14 @@ class BrandsController < ApplicationController
     @brand_photos = @profile.brand_photos.shuffle[0..8]
     @gallery = @product_photos.concat @brand_photos
 
-	  if @current_user
-	    @allow_redirect = view_brand_url(@profile)
+	  unless @current_user
+			session[:persisted_redirect] = view_brand_url(@profile)
 	  end
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
 
 	end
 
@@ -69,8 +74,12 @@ class BrandsController < ApplicationController
     @brand_photos = @profile.brand_photos.shuffle[0..8]
     @gallery = @product_photos.concat @brand_photos
 
+	  unless @current_user
+			session[:persisted_redirect] = view_brand_url(@profile)
+	  end
+
     respond_to do |format|
-      format.html { render "preview", :layout => false  } 
+      format.html { redirect_to view_brand_url(@profile) } 
       format.js
     end
 

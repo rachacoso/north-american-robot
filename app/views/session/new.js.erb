@@ -1,0 +1,7 @@
+// $('#login-form').fadeOut(500).html("<%= j (render partial: 'login_form', locals: {remote: true}) %>").fadeIn(500);
+
+
+$('#login-form').fadeOut(100, function(){
+	$('#login-form').html("<%= j (render partial: 'login_form', locals: {remote: true} ) %>");
+});
+$('#login-form').fadeIn();
