@@ -1,0 +1,10 @@
+<% if @allow_redirect %>
+	window.location.href = "<%= @allow_redirect %>";
+<% else %>
+	$('#profile-preview').fadeOut(function(){
+		$('#profile-preview-data').html("<%= j (render partial: 'restricted_view') %>");
+	});
+	
+	
+	$('#profile-preview').fadeIn();
+<% end %>

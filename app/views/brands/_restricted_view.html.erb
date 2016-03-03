@@ -1,0 +1,24 @@
+<div class="front-top-panel" id="profile-restricted-view">
+	<div class="row">
+		<div class="small-12 columns text-center">
+			<%= link_to root_url do %><%= image_tag 'v2/logo.svg', width: "100" %><% end %>
+		</div><!--/.small-12-->
+		<div class="small-12 columns text-center">
+			<h2>You need to have a FREE account in order to see this Brand's full profile</h2>
+		</div><!--/.small-12-->
+		<div class="small-12 columns">
+			<br>
+		</div><!--/.small-12-->
+		<div class="small-5 columns text-right">
+			<%= link_to "SIGN IN", login_url, class: "action-link" %>
+			<h3>I already have an account</h3>
+		</div><!--/.small-5-->
+		<div class="small-2 columns text-center">
+			<h3>OR</h3>
+		</div><!--/.small-2-->
+		<div class="small-5 columns text-left">
+			<%= link_to "SIGN UP", new_user_url, class: "action-link" %>
+			<h3>I need to sign up for an account</h3>
+		</div><!--/.small-5-->
+	</div><!--/.row-->
+</div><!--/.front-top-panel-->

@@ -10,7 +10,11 @@
 	</div>
 </div>
 
-<%= render partial: "/shared/profile/brand_full_profile", locals: {profile: @profile} %>
+<% if @allow_redirect %>
+	<%= render partial: "/shared/profile/brand_full_profile", locals: {profile: @profile} %>
+<% else %>
+	<%= render "restricted_view" %>
+<% end %>
 
 
 <%= render partial: 'shared/v2/footer/main' %>

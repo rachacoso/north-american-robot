@@ -252,6 +252,18 @@ a.profile-sq-left {
 // PROFILE PREVIEW
 ////////////
 
+#profile-restricted-view {
+  a.action-link {
+    font-weight: 300;
+    color: $landing-dark-gray;
+    padding: rem-calc(5) rem-calc(10);
+    border: 1px solid $landing-middle-gray;
+    &:hover {
+      background: $landing-middle-gray;
+      color: white;
+    }
+  }
+}
 
 #profile-preview {
   position: fixed;
@@ -271,6 +283,9 @@ a.profile-sq-left {
     p {
       font-size: rem-calc(11);  
     }
+    a {
+      color: $landing-dark-gray;
+    }
     
   }
 
@@ -285,8 +300,8 @@ a.profile-sq-left {
 
   & a#full-profile-link {
     margin-bottom: rem-calc(10);
-    font-weight: 100;
-    color: $landing-middle-gray;
+    font-weight: 200;
+    color: $landing-dark-gray;
     border: 1px solid $landing-middle-gray;
     padding: rem-calc(5) rem-calc(10);
   }

@@ -1,7 +1,7 @@
 class BrandsController < ApplicationController
 
 	before_action :check_usertype, only: [:edit, :public_profile, :full_profile, :update]
-	skip_before_action :require_login, only: [:index, :preview]
+	skip_before_action :require_login, only: [:index, :view, :preview]
 
 	# V2 ACTIONS
 
@@ -45,12 +45,18 @@ class BrandsController < ApplicationController
 
 
 	def view
+
 		@profile = Brand.find(params[:id])
 		# GALLERY
     @product_list = @profile.products.pluck(:id)
     @product_photos = ProductPhoto.where(:photographable_id.in => @product_list).shuffle[0..8]
     @brand_photos = @profile.brand_photos.shuffle[0..8]
     @gallery = @product_photos.concat @brand_photos
+
+	  if @current_user
+	    @allow_redirect = view_brand_url(@profile)
+	  end
+
 	end
 
 
