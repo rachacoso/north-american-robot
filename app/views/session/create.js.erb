@@ -1,5 +1,5 @@
 <% if flash[:notice] %>
-	$('#p-share-login-error').fadeOut(500).html("<%= flash[:notice] %>").fadeIn(500);
+	$('#login-error').fadeOut(500).html("<%= flash[:notice] %>").fadeIn(500);
 <% else %>
 	window.location.replace("<%= @redirect_url %>");
 <% end %>
