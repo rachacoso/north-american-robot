@@ -11,7 +11,7 @@ class ArticlesController < ApplicationController
 
 		# for find links
 		@trends = Trend.all.sort_by { |p| p.name }
-		@key_retailers = KeyRetailer.all.sort_by { |p| p.name }
+		# @key_retailers = KeyRetailer.all.sort_by { |p| p.name }
 
 	end
 

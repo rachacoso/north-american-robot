@@ -20,12 +20,6 @@
 				<strong><%= link_to 'TREND', brands_url(type: "t") %></strong> 
 			<% end %>
 			/ 
-			<% if @type == "kr" %>
-				<strong class="active">RETAILER</strong>
-			<% else %>
-				<strong><%= link_to 'RETAILER', brands_url(type: "kr") %></strong> 
-			<% end %>
-			/ 
 			<% if @type == "c" || @type.blank? %>
 				<strong class="active">CATEGORY</strong>
 			<% else %>

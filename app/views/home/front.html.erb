@@ -52,33 +52,6 @@
 </div>
 
 
-<div class="browseblock">
-	<div class="row">
-		<div class="medium-4 columns">
-			<hr>
-		</div><!--/.medium-4-->
-		<div class="medium-4 columns text-center">
-			<h1>
-				BROWSE<br>
-				BEAUTY BRANDS by <strong>RETAILER</strong>
-			</h1>
-		</div><!--/.medium-4-->
-		<div class="medium-4 columns">
-			<hr>
-		</div><!--/.medium-4-->
-	</div><!--/.row-->
-	<div class="row">
-		<div class="small-12 columns">
-			<ul>
-				<% @key_retailers.each do |kr| %>
-					<%= link_to brands_url(filter: "#{kr.id}", type: "kr") do %><li><%= kr.name %></li><% end %>
-				<% end %>
-			</ul>
-		</div><!--/.small-12-->
-	</div><!--/.row-->
-</div>
-
-
 
 </div><!--/. v2front -->
 

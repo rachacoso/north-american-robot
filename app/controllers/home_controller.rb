@@ -9,7 +9,7 @@ class HomeController < ApplicationController
 
 		# for find links
 		@trends = Trend.all.sort_by { |p| p.name }
-		@key_retailers = KeyRetailer.all.sort_by { |p| p.name }
+		# @key_retailers = KeyRetailer.all.sort_by { |p| p.name }
 
 		if @current_user
 			if @current_user.administrator
