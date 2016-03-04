@@ -1,26 +1,20 @@
-<div id="front-logo">
-	<%= link_to root_url do %><h4 style="color:white;"><%= image_tag '/images/landing_page_LOGO.svg', class: "shadow", width: 50  %> go back</h4><% end %>
-</div>
+<%= render partial: 'shared/v2/header/main' %>
+<br><br>
 
 <div class="front-top-panel">
+
 	<div class="row">
-		<div class="small-12 columns">
-			<br><br><br>
-			<div class="text-center"><h1 class="shadow" style="color:white;">WELCOME 欢迎 환영 <br>BEM-VINDO स्वागत ДОБРО ПОЖАЛОВАТЬ</h1></div>
-		</div><!--/.small-8 small-centered-->
-	</div><!--/.row-->
-	<div class="row" data-equalizer>
 		<div class="small-10 medium-5 small-centered columns">
 			<div class="ldpanel">
 
 			  <div class="row">
 					<div class="small-12 columns">
-						<h2><img src="/images/li_blue_round.png" width="50" height="50" alt="Landing International" /> Reset Password </h2>
+						<h2>Reset Password </h2>
 					</div>
 				</div>
 
 				<div class="row">
-				<div class="small-6 columns small-centered">
+				<div class="small-10 columns small-centered">
 				<p>Enter the email you use to login</p>
 				<%= form_tag password_resets_path, :method => :post do %>
 				  <div class="field">
