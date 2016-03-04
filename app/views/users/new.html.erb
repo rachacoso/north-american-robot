@@ -1,15 +1,22 @@
+<%= render partial: 'shared/v2/header/main' %>
+
 <div class="front-top-panel">
 	<div class="row">
-		<div class="small-12 columns text-center">
-			<br><br>
-			<%= link_to root_url do %><%= image_tag 'v2/logo.svg', width: "100" %><% end %>
-		</div><!--/.small-12-->
-		<div class="small-12 columns">
-			<div class="text-center"><h1>환영<br>WELCOME</h1></div>
-		</div><!--/.small-8 small-centered-->
-	</div><!--/.row-->
-	<div class="row">
-		<div class="small-10 medium-5 small-centered columns">
+		<div class="medium-4 columns">
+
+			<div class="row">
+				<div class="small-12 columns text-center">
+					<br>
+					<h1>환영<br>WELCOME</h1>
+					<h3>Create a FREE account</h3>
+				</div><!--/.small-8 small-centered-->
+			</div><!--/.row-->
+
+		</div><!--/.medium-4-->
+		<div class="medium-8 columns">
+			
+			<div class="row">
+				<div class="small-10 small-centered columns">
 					<div class="ldpanel" id="sign-up">
 						<h2>Join Us</h2>
 						<div class="row">
@@ -73,15 +80,13 @@
 							</div>
 						</div>
 					</div>
-			
-			
+				</div><!--/.medium-5 columns -->
+			</div><!-- /.row -->
 
 
-		</div><!--/.medium-5 columns -->
-
-	</div><!-- /.row -->
-
-</div>
+		</div><!--/.medium-8-->
+	</div><!--/.row-->
+</div> <!--/.front-top-panel -->
 
 <% content_for :javascript_foot do %>
 	<%= javascript_tag do %>
