@@ -12,6 +12,8 @@ function doBackstretch (location, photos, durationTime, fadeTime) {
 
 $( document ).ready(function() {
 
+// DROPDOWN MENU
+$('.dropmenu').dropit();
 
 // ADJUST HEIGHT OF PROFILE GALLERY AND INFO
 

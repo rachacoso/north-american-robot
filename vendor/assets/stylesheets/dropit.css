@@ -1,0 +1,66 @@
+@import "foundation/functions";
+@import "foundation/components/labels";
+@import "global_variables";
+@import "mixins";
+
+/*
+ * Dropit v1.1.0
+ * http://dev7studios.com/dropit
+ *
+ * Copyright 2012, Dev7studios
+ * Free to use and abuse under the MIT license.
+ * http://www.opensource.org/licenses/mit-license.php
+ */
+
+
+/* These styles assume you are using ul and li */
+.dropit {
+    list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.dropit .dropit-trigger {
+ position: relative; 
+}
+.dropit .dropit-submenu {
+    position: absolute;
+    top: 100%;
+    right: 0; /* dropdown left or right */
+    z-index: 1000;
+    display: none;
+    min-width: 250px;
+    list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.dropit .dropit-open .dropit-submenu {
+ display: block; 
+}
+
+.dropmenu ul{
+    display:none;
+    }
+.dropmenu ul.dropit-submenu{
+    background-color:#fff;
+    border:1px solid #B3B3B3;
+    padding:6px 0;
+    margin:3px 0 0 1px;
+/*    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+    -webkit-box-shadow:0px 1px 3px rgba(0,0,0,0.15);
+    -moz-box-shadow:0px 1px 3px rgba(0,0,0,0.15);
+    box-shadow:0px 1px 3px rgba(0,0,0,0.15);*/
+    }
+.dropmenu ul.dropit-submenu a{
+    display:block;
+    font-size:14px;
+    line-height:25px;
+    color:#7a868e;
+    padding:0 18px;
+    }
+.dropmenu ul.dropit-submenu a:hover{
+    background: #F2F2F2;
+    color:#fff;
+    text-decoration:none;
+}

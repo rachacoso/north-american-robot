@@ -30,6 +30,7 @@
  *= require owl.carousel
  *= require owl.theme
  *= require owl.transitions
+ *= require dropit
  *= require_tree .
  
  */
