@@ -27,7 +27,8 @@
     left: 50%;
     margin-top: -50px;
     margin-left: -100px;
-    background-color: $landing-orange;
+    background-color: $landing-light-gray;
+    border: 1px solid $landing-middle-gray;
     border-radius: 5px;
     text-align: center;
     z-index: 100001; /* 1px higher than the overlay layer */
