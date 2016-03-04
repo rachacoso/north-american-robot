@@ -1,0 +1,95 @@
+<% hide_top_bar ||= false %>
+<% content_for :user_head do %>
+
+	<div class="contain-to-grid <%= hide_top_bar ? "" : "fixed"%>" id="topbar-general">
+
+		<nav class="top-bar" data-topbar role="navigation">
+
+		  <ul class="title-area">
+		    <li class="name">
+
+					<h1>
+					<%= link_to root_url do %>
+					<%= image_tag 'v2/logo.svg', width: "100" %>
+					<% end %>
+					</h1>      
+		    </li>
+		     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+		    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+
+		  </ul>
+			
+
+
+			<section class="top-bar-section">
+
+			  <ul class="right">
+		    <% if @current_user && show_top_menu %>
+			  <li><%= link_to 'BEAUTY', root_url %></li>
+			  <li><%= link_to 'FASHION', "#" %></li>
+			  <li><%= link_to 'BABY / KIDS', "#" %></li>
+				<li class="divider"></li>
+
+				<% if @messages_unread > 0 || @new_contact_messages > 0 %>
+				<!-- MESSAGES Nav Section -->
+				<li id="unread-message-badge">
+					<%= link_to messages_path do %>
+						<span> <i class="fi-mail" style="margin: 0; padding: 0; color: red;"></i> </span> 
+					<% end %>
+				</li>
+				<li class="divider" id="unread-message-badge-divider"></li>
+				<% end %>
+
+				<!-- OLD MARKETS Nav LINKS -->
+				<%#= link_to "FIND #{@current_user.type_inverse?.upcase}S", all_matches_path, class: 'text-right' %>
+				<%#= link_to "BROWSE GALLERY", gallery_path, class: 'text-right' %>
+				<%#= link_to "SAVED #{@current_user.type_inverse?.upcase}S", saved_matches_path, class: 'text-right' %>
+				<%#= link_to "CONTACTED #{@current_user.type_inverse?.upcase}S", conversations_path, class: 'text-right' %>
+
+				<li class="divider"></li>
+
+			  <!-- User Nav Section -->
+		    <li class="has-dropdown">
+		    	
+		      <a href="#">
+	      		<%= image_tag 'v2/user_icon.svg' %>
+		      </a>
+
+		      <ul class="dropdown">
+		      	<li>
+				      <%= link_to 'DASHBOARD', dashboard_url, id: "menu-dashboard", class: 'text-right' %>
+			      </li>
+						<li class="divider"></li>
+		        <li>
+		        	<%= link_to 'PREVIEW YOUR PROFILE', eval("#{@current_user.type?}_full_profile_path"), class: 'text-right' %>
+		        </li>
+		        <li>
+		        	<%= link_to 'EDIT YOUR PROFILE', eval("#{@current_user.type?}_path"), class: 'text-right' %>
+		        </li>
+		        <li>
+		        	<%= link_to 'GLOBAL TERMS & DOCUMENTS', library_documents_path, class: 'text-right' %>
+		        </li>
+		        <li class="divider"></li>
+		        <li><%= link_to 'LOGOUT', logout_url, class: 'text-right' %></li>
+		        <li><%= link_to "Logged in as #{@current_user.email}", class: 'text-right' %></li>
+		      </ul>
+		    </li>
+		    <% end %>
+
+
+				<%# if !@current_user && controller_name != 'session' %>
+				<%#= render partial: "shared/login_widget" %>
+				<%# end %>
+
+			  </ul>
+
+
+
+
+			</section>
+
+		</nav>
+
+	</div>
+	<HR>
+<% end %>

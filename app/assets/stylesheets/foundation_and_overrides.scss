@@ -1226,7 +1226,7 @@ $tooltip-max-width: 500px;
 // $topbar-bg-color: #333;
 // $topbar-bg: $topbar-bg-color;
 
-$topbar-bg-color: $landing-dark-gray;
+$topbar-bg-color: #FFFFFF;
 $topbar-bg: $topbar-bg-color;
 
 // Height and margin
@@ -1240,18 +1240,16 @@ $topbar-title-font-size: rem-calc(25);
 // Style the top bar dropdown elements
 // $topbar-dropdown-bg: #333;
 // $topbar-dropdown-link-color: #fff;
-$topbar-dropdown-link-color: $link-color;
-// $topbar-dropdown-link-bg: #333;
+$topbar-dropdown-link-color: #000;
+$topbar-dropdown-link-bg: $landing-middle-gray;
 // $topbar-dropdown-link-weight: $font-weight-normal;
 // $topbar-dropdown-toggle-size: 5px;
-$topbar-dropdown-toggle-color: $link-color;
 // $topbar-dropdown-toggle-alpha: 0.4;
 
 // Set the link colors and styles for top-level nav
-$topbar-link-color: $link-color;
+$topbar-link-color: #000;
 // $topbar-link-color-hover: #fff;
-$topbar-link-color-hover: $landing-yellow;
-$topbar-link-color-active: #000;
+$topbar-link-color-hover: #fff;
 // $topbar-link-color-active-hover: #fff;
 // $topbar-link-weight: $font-weight-normal;
 // $topbar-link-weight: 300;
@@ -1259,8 +1257,8 @@ $topbar-link-color-active: #000;
 // $topbar-link-hover-lightness: -10%; // Darken by 10%
 // $topbar-link-bg: $topbar-bg;
 // $topbar-link-bg-color-hover: #555555;
+$topbar-link-bg-color-hover: $landing-light-gray;
 // $topbar-link-bg-hover: #272727;
-$topbar-link-bg-active: $landing-orange;
 // $topbar-link-bg-active-hover: scale-color($primary-color, $lightness: -14%);
 // $topbar-link-font-family: $body-font-family;
 // $topbar-link-text-transform: none;
@@ -1279,8 +1277,8 @@ $topbar-link-bg-active: $landing-orange;
 // $topbar-menu-link-transform: uppercase;
 // $topbar-menu-link-font-size: rem-calc(13);
 // $topbar-menu-link-weight: $font-weight-bold;
-$topbar-menu-link-color: $link-color;
-$topbar-menu-icon-color: $link-color;
+// $topbar-menu-link-color: $link-color;
+// $topbar-menu-icon-color: $link-color;
 // $topbar-menu-link-color-toggled: #888;
 // $topbar-menu-icon-color-toggled: #888;
 
