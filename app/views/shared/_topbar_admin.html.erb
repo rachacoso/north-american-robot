@@ -1,66 +1,64 @@
 <% content_for :user_head do %>
 
-<div class="contain-to-grid fixed">
-
-	<nav class="top-bar" data-topbar role="navigation">
-
-
-	  <ul class="title-area">
-	    <li class="name">
-
-				<h1>
-				<%= link_to admin_url do %>
-				<%= render "shared/imageswap/landing_logo" %>
+<div id="v2header">
+	<div class="row">
+		<div class="small-6 columns">
+			<%= link_to root_url do %><%= image_tag 'v2/logo.svg', width: "100" %><% end %>
+		</div><!--/.small-6-->
+		<div class="small-6 columns text-right">
+			<div class="row">
+				<div class="small-10 columns">
+					<div class="row">
+						<div class="small-12 columns text-right">
+							(Administration)
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+				</div><!--/.small-10-->
+				<div class="small-2 columns">
+					
+				<% if @current_user && show_top_menu %>
+					<ul class="dropmenu">
+					    <li>
+					        <%= link_to dashboard_url do %><%= image_tag 'v2/user_icon.svg' %><% end %>
+					        <ul>
+										<li>
+											<%= link_to 'Admin', admin_url %>
+										</li>
+										<li>
+											<%= link_to 'Users', users_url %>
+										</li>
+										<li>
+											<%= link_to 'Brands', admin_brands_index_url %>
+										</li>
+										<li>
+											<%= link_to 'Distributors', admin_distributors_index_url %>
+										</li>
+										<li>
+											<%= link_to 'Articles', articles_url %>
+										</li>
+										<li>
+											<%= link_to 'Upload', new_bulk_upload_url %>
+										</li>	          
+										<li>
+											<%= link_to "Logout - #{@current_user.email}", logout_url %>
+										</li>
+					        </ul>
+					    </li>
+					</ul>
+				<% else %>
+					<%= link_to dashboard_url do %><%= image_tag 'v2/user_icon.svg' %><% end %>
 				<% end %>
-				</h1>      
-	    </li>
-	     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-	    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-	  </ul>
-		
-		
 
-<section class="top-bar-section">
-  <!-- Right Nav Section -->
-  <ul class="right">
-    <% if @current_user && show_top_menu %>
-    <li class="has-dropdown">
-      <a href="#">
-				(Administrator)    	      	
-				<%= @current_user.contact.firstname.blank? ? "Welcome" : @current_user.contact.firstname %>
-      </a>
-      <ul class="dropdown">       	
-        <li>
-					<%= link_to 'Admin', admin_url %>
-        </li>
-				<li>
-					<%= link_to 'Users', users_url %>
-				</li>
-				<li>
-					<%= link_to 'Brands', admin_brands_index_url %>
-				</li>
-				<li>
-					<%= link_to 'Distributors', admin_distributors_index_url %>
-				</li>
-        <li>
-					<%= link_to 'Articles', articles_url %>
-        </li>
-				<li>
-					<%= link_to 'Upload', new_bulk_upload_url %>
-				</li>	          
-
-        <li><%= link_to 'Logout', logout_url %></li>
-      </ul>
-    </li>
-    <% end %>
-		<% if !@current_user %>
-		<%= render partial: "shared/login_widget" %>
-		<% end %>	      
-  </ul>
-</section>
-
-	</nav>
+				</div><!--/.small-2-->
+			</div><!--/.row-->
+		</div><!--/.small-6-->
+	</div><!--/.row-->
+	<div class="row">
+		<div class="small-12 columns">
+			<hr>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
 
 </div>
-	
+
 <% end %>
