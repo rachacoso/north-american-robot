@@ -280,6 +280,7 @@ a.profile-sq-left {
   background: white;
   z-index: 100021;
   padding: rem-calc(20) rem-calc(10);
+  overflow-x: scroll;
   display: none;
 
   & .brand-positioning {
@@ -304,6 +305,8 @@ a.profile-sq-left {
   }
 
   & a#full-profile-link {
+    display: inline-block;
+    margin-top: rem-calc(40);
     margin-bottom: rem-calc(10);
     font-weight: 200;
     color: $landing-dark-gray;
