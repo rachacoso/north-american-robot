@@ -83,6 +83,14 @@ Rails.application.routes.draw do
   patch  '/distributor/adminupdate/:id' => 'distributors#adminupdate', as: 'distributor_admin_update'
   delete '/distributor/validation/delitem' => 'distributors#validation_delete', as: 'distributor_validation_delete'
 
+  get    '/retailer/edit' => 'retailers#edit', as: 'retailer'
+  get    '/retailer/public_profile' => 'retailers#public_profile', as: 'retailer_public_profile'
+  get    '/retailer/full_profile' => 'retailers#full_profile', as: 'retailer_full_profile'
+  patch  '/retailer/edit' => 'retailers#update'
+  patch  '/retailer/adminupdate/:id' => 'retailers#adminupdate', as: 'retailer_admin_update'
+  delete '/retailer/validation/delitem' => 'retailers#validation_delete', as: 'retailer_validation_delete'
+
+
   # v2 public view
   get    '/brands' => 'brands#index', as: 'brands'
   get    '/brand/view/:id' => 'brands#view', as: 'view_brand'
