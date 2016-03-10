@@ -24,9 +24,11 @@ class User
 	# child of a DISTRIBUTOR or BRAND
 	belongs_to :distributor
 	belongs_to :brand
+	belongs_to :retailer
 
 	accepts_nested_attributes_for :brand
 	accepts_nested_attributes_for :distributor
+	accepts_nested_attributes_for :retailer
 
 	# to identify who created messages
 	has_many :messages
@@ -49,6 +51,8 @@ class User
 			return "brand"
 		elsif self.distributor
 			return "distributor"
+		elsif self.retailer
+			return "retailer"
 		elsif self.administrator
 			return "administrator"
 		end
@@ -58,6 +62,8 @@ class User
 		if self.brand
 			return "distributor"
 		elsif self.distributor
+			return "brand"
+		elsif self.retailer
 			return "brand"
 		elsif self.administrator
 			return nil
