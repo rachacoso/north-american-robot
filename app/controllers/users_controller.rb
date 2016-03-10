@@ -81,14 +81,14 @@ class UsersController < ApplicationController
         user.contact.lastname = params[:user][:contact_attributes][:lastname]
         
         #create profile for the selected user type
-        if params[:user_type] == 'distributor' || params[:user_type] == 'brand' # restrict to only allowed values
+        if params[:user_type] == 'distributor' || params[:user_type] == 'brand' || params[:user_type] == 'retailer' # restrict to only allowed values
           createusertype = "create_" + params[:user_type]
           user.send(createusertype) # create relation
    
           # prepopulate contact info with user info (user can change later)
-          brand_or_distributor = user.send(params[:user_type])
-          brand_or_distributor.create_address
-          brand_or_distributor.contacts << Contact.new(
+          newuser = user.send(params[:user_type])
+          newuser.create_address
+          newuser.contacts << Contact.new(
             firstname: params[:user][:contact_attributes][:firstname], 
             lastname: params[:user][:contact_attributes][:lastname], 
             email: params[:user][:email])          
@@ -104,6 +104,8 @@ class UsersController < ApplicationController
         elsif params[:user_type] == 'brand'
           @response_action = "redirect_to brand_url" # for regular logins
           @share_id ? (@redirect_url = view_match_url(@share_id, 'na')) : "" # for prospect share logins
+        elsif params[:user_type] == 'retailer'
+          @response_action = "redirect_to retailer_url" # for regular logins
         else
           @share_id ? (@redirect_url = dashboard_url) : "" # for prospect share logins
           @response_action = "redirect_to dashboard_url" # for regular logins
