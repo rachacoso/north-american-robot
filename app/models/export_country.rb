@@ -1,7 +1,7 @@
 class ExportCountry
   include Mongoid::Document
 
-  # used for both brands (countries of export) and distributors (countries of distribution)
+  # used for both brands (countries of export), distributors (countries of distribution) and Retailers (countries of operation)
 
   embedded_in :exportable, polymorphic: true
 
