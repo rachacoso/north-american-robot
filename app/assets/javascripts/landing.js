@@ -435,7 +435,7 @@ function initialize () {
       // select the form and submit
       $('#brand-display-form').submit(); 
   });
-  $('#distributor_logo, #brand_logo').change(function() { 
+  $('#distributor_logo, #brand_logo, #retailer_logo').change(function() { 
       // select the form and submit
       $('#company-info-form').submit(); 
   });     
