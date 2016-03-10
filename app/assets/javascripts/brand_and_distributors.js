@@ -1,6 +1,6 @@
 $(document).ready(function() {
     var text_max = 500;
-    $('#brand_brand_positioning, #distributor_company_introduction').on('keyup', function() {
+    $('#brand_brand_positioning, #distributor_company_introduction, #retailer_company_introduction').on('keyup', function() {
         var text_length = $( this ).val().length;
         var text_remaining = text_max - text_length;
         if (text_remaining < 0) {

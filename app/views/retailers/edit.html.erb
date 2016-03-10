@@ -1,0 +1,157 @@
+<%= render partial: "shared/topbar" %>
+
+
+<div class="row collapse">
+	<div class="small-12 columns marketplace-header">
+		<%= image_tag "logo_header_marketplace.svg" %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="small-12 columns marketplace-subpage-header">
+		<div class="medium-6 columns" id="your-profile-header">
+			<h1>YOUR PROFILE</h1>
+			<h3>Preview &amp; Edit your marketplace profile.</h3>			
+		</div><!--/.medium-6-->		
+		<div class="medium-6 columns">
+			<div class="row">
+				<div class="small-6 columns">
+					<h2>Edit Profile</h2>
+					<small><span data-tooltip aria-haspopup="true" class="has-tip radius" title="Edit your profile. [Helpful profile tips here]">What is this?</span></small>							
+				</div>
+				<div class="small-6 columns">
+				</div>		
+			</div>
+		</div><!--/.medium-6-->
+	</div>
+</div>
+
+<div class="row collapse">
+	<div class="small-12 columns marketplace-content">
+
+		<div class="row collapse">
+			<div class="medium-6 push-6 columns">
+				<ul class="button-group even-3">
+			  <li><%= link_to 'PUBLIC Profile', retailer_public_profile_url, class: "tiny button secondary" %></li>
+			  <li><%= link_to 'FULL Profile', retailer_full_profile_url, class: "tiny button secondary" %></li>
+			  <li><%= link_to 'EDIT Profile', "#", class: "tiny button info"%></li>
+			  </ul>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="medium-8 medium-push-4 columns">
+				<div class="profile-edit-form">
+					<%= render "company_info" %>
+				</div>
+			</div>
+		</div><!-- /.row -->
+
+		<div class="row">
+			<div class="medium-8 medium-push-4 columns">
+				<div class="profile-edit-form">
+					<%= render "company_contacts" %>
+				</div>
+			</div>
+		</div><!-- /.row -->
+
+		<div class="row">
+			<div class="medium-8 medium-push-4 columns">
+				<div class="profile-edit-form">
+					<%= render "company_introduction" %>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="medium-8 medium-push-4 columns">
+				<div class="profile-edit-form">
+					<%#= render "social_tags" %>
+				</div>
+			</div>
+		</div><!-- /.row -->
+
+		<div class="row">
+			<div class="medium-8 medium-push-4 columns">
+				<div class="profile-edit-form">
+					<%#= render "sectors" %>
+				</div>
+			</div>
+		</div><!-- /.row -->
+
+		<div class="row">
+			<div class="medium-8 medium-push-4 columns">
+				<div class="profile-edit-form">
+					<%#= render "channels" %>
+				</div>
+			</div>
+		</div><!-- /.row -->
+
+		<div class="row">
+			<div class="medium-8 medium-push-4 columns">
+				<div class="profile-edit-form">
+					<%#= render "channel_capacities" %>
+				</div>
+			</div>
+		</div><!-- /.row -->
+
+		<div class="row">
+			<div class="medium-8 medium-push-4 columns">
+				<div class="profile-edit-form">
+					<%#= render "countries_of_distribution" %>
+				</div>
+			</div>
+		</div><!-- /.row -->
+
+		<div class="row">
+			<div class="medium-8 medium-push-4 columns">
+				<div class="profile-edit-form">
+					<%#= render "brand_portfolio" %>
+				</div>
+			</div>
+		</div><!-- /.row -->
+
+
+		<div class="row">
+			<div class="medium-8 medium-push-4 columns">
+				<div class="profile-edit-form">
+					<%#= render "sales_education" %>
+				</div>
+			</div>
+		</div><!-- /.row -->
+
+		<div class="row">
+			<div class="medium-8 medium-push-4 columns">
+				<div class="profile-edit-form">
+					<%#= render "marketing_pr" %>
+				</div>
+			</div>
+		</div><!-- /.row -->
+
+		<div class="row">
+			<div class="medium-8 medium-push-4 columns">
+				<div class="profile-edit-form">
+					<%#= render "tradeshows" %>
+				</div>
+			</div>
+		</div><!-- /.row -->
+
+		<div class="row">
+			<div class="medium-8 medium-push-4 columns">
+				<div class="profile-edit-form">
+					<%#= render "social_fields" %>
+				</div>
+			</div>
+		</div><!-- /.row -->
+
+		<div class="row">
+			<div class="medium-8 medium-push-4 columns">
+				<div class="profile-edit-form">
+					<%#= render "verification" %>
+				</div>
+			</div>
+		</div><!-- /.row -->
+
+
+	</div>
+</div>
