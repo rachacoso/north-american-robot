@@ -25,17 +25,14 @@
 								<%= form_for @newuser, url: users_path do |f| %>
 								<div class="row" style="margin-bottom: 1em;">
 									<div class="medium-12 columns" id="type-selector">
-										<% if @user_type == 'brand' || !@user_type %>
-											<%= radio_button_tag(:user_type, "brand", selected: true) %>
+
+											<%= radio_button_tag(:user_type, "brand", @user_type == 'brand' || !@user_type ) %>
 											<%= label_tag(:user_type_brand, "as a Brand") %>
-											<%= radio_button_tag(:user_type, "distributor") %>
+											<%= radio_button_tag(:user_type, "distributor", @user_type == 'distributor' ) %>
 											<%= label_tag(:user_type_distributor, "as a Distributor") %>
-										<% elsif @user_type == 'distributor' %>
-											<%= radio_button_tag(:user_type, "brand") %>
-											<%= label_tag(:user_type_brand, "as a Brand") %>
-											<%= radio_button_tag(:user_type, "distributor", selected: true) %>
-											<%= label_tag(:user_type_distributor, "as a Distributor") %>
-										<% end %>
+											<%= radio_button_tag(:user_type, "retailer", @user_type == 'retailer' ) %>
+											<%= label_tag(:user_type_retailer, "as a Retailer") %>
+
 									</div>
 								</div>
 								<div class="errornotice <%= flash[:error] ? "error-on" : "" %>"><%= flash[:error] ? flash[:error].upcase.html_safe : "&nbsp;".html_safe %></div>
