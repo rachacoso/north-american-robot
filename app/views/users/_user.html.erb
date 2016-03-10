@@ -1,4 +1,4 @@
-<% profile = user.distributor || user.brand %>
+<% profile = user.distributor || user.brand || user.retailer %>
 <div class="row">
 	<div class="small-8 columns">
 		<div class="row">
@@ -17,7 +17,7 @@
 				<%= link_to user.email, edit_user_url(user) %>
 
 				<% unless user.administrator %>
-				<h3>for <strong><%= profile.company_name %></strong> <small>[<%= user.brand ? "BRAND" : "DISTRIBUTOR" %>]</small></h3>
+				<h3>for <strong><%= profile.company_name %></strong> <small>[<%= user.type?.upcase %>]</small></h3>
 				<% end %>
 			</div><!--/.small-11-->
 
