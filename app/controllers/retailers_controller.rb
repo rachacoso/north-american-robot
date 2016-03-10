@@ -31,6 +31,14 @@ class RetailersController < ApplicationController
     end
 
 
+    if params[:sectors]
+			retailer.set_sectors(params[:sectors])
+    end
+
+    if params[:subsectors]
+			retailer.set_subsectors(params[:subsectors])
+    end
+
     if retailer.save
       # successful
       

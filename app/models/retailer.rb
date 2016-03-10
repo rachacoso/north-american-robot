@@ -136,6 +136,34 @@ class Retailer
 ################
 # MODEL METHODS
 ################
+	
+def set_sectors(sec)
+
+  assigned_sectors = Sector.find(sec.values) rescue []
+  unless assigned_sectors.blank?
+    self.sectors = [] # clear current ones before update
+  end
+  assigned_sectors.each do |s|
+    self.sectors << s
+  end
+
+end
+
+def set_subsectors(ssec)
+
+	assigned_subsectors = Subsector.find(ssec.values) rescue []
+	subsector_parents = assigned_subsectors.map { |s| s.sector }
+
+	self.subsectors = [] # clear current ones before update
+	assigned_subsectors.each do |s|
+	  self.subsectors << s
+	end
+
+	subsector_parents.each do |p|
+	  self.sectors << p
+	end
+
+end
 
 	# def all_product_photos
 	# 	# First, finding ids of products
