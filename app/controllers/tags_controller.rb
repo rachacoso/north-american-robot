@@ -57,6 +57,8 @@ class TagsController < ApplicationController
 			to_be_tagged = @current_user.brand
 		when 'd'
 			to_be_tagged = @current_user.distributor
+		when 'r'
+			to_be_tagged = @current_user.retailer
 		when 'p'
 			id = params[:product_id]
 			to_be_tagged = @current_user.brand.products.find(id)
