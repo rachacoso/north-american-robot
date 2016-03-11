@@ -196,7 +196,7 @@
 									<h4><strong>Company Name</strong></h4>
 								</div><!--/.small-5-->
 								<div class="small-7 columns">
-									<h4><%= @distributor.company_name %></h4>
+									<h4><%= @distributor.company_name || "<br>".html_safe %></h4>
 								</div><!--/.small-7-->
 								<div class="small-5 columns text-right">
 									<h4><strong>Contact Information</strong></h4>
@@ -228,7 +228,7 @@
 									<h4><strong>Business ID</strong></h4>
 								</div><!--/.small-5-->
 								<div class="small-7 columns">
-									<h3><%= !@distributor.business_id.blank? ? @distributor.business_id : 'NO BUSINESS ID' %>
+									<h3><%= !@distributor.business_id.blank? ? @distributor.business_id : 'NO BUSINESS ID' %><br>
 										(<%= !@distributor.country_of_origin.blank? ? @distributor.country_of_origin : 'ADD COUNTRY OF ORIGIN' %>)</h3>
 								</div><!--/.small-7-->
 
