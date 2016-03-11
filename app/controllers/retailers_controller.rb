@@ -45,7 +45,11 @@ class RetailersController < ApplicationController
       # update completeness
       # retailer.update_completeness
 
-			redirect_to retailer_url
+			if params[:redirect_anchor]
+        redirect_to retailer_url + "#" + params[:redirect_anchor]
+      else
+				redirect_to retailer_url
+			end
 
 
     else
