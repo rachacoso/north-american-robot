@@ -34,15 +34,15 @@
 	</div>
 	<div class="row editform">
 		<div class="medium-4 columns">
-			<%= render partial: "shared/checkbox", locals: {field: "marketing_via_print", label: 'Print' } %>
-			<%= render partial: "shared/checkbox", locals: {field: "marketing_via_online", label: 'Online' } %>
-			<%= render partial: "shared/checkbox", locals: {field: "marketing_via_email", label: 'Email' } %>
-			<%= render partial: "shared/checkbox", locals: {field: "marketing_via_outdoor", label: 'Outdoor' } %>
+			<%= render partial: "shared/marketing_checkbox", locals: {type: 'distributor', field: "marketing_via_print", label: 'Print' } %>
+			<%= render partial: "shared/marketing_checkbox", locals: {type: 'distributor', field: "marketing_via_online", label: 'Online' } %>
+			<%= render partial: "shared/marketing_checkbox", locals: {type: 'distributor', field: "marketing_via_email", label: 'Email' } %>
+			<%= render partial: "shared/marketing_checkbox", locals: {type: 'distributor', field: "marketing_via_outdoor", label: 'Outdoor' } %>
 		</div>
 		<div class="medium-4 columns end">
-			<%= render partial: "shared/checkbox", locals: {field: "marketing_via_events", label: 'Events' } %>
-			<%= render partial: "shared/checkbox", locals: {field: "marketing_via_direct_mail", label: 'Direct Mail' } %>
-			<%= render partial: "shared/checkbox", locals: {field: "marketing_via_classes", label: 'Classes' } %>
+			<%= render partial: "shared/marketing_checkbox", locals: {type: 'distributor', field: "marketing_via_events", label: 'Events' } %>
+			<%= render partial: "shared/marketing_checkbox", locals: {type: 'distributor', field: "marketing_via_direct_mail", label: 'Direct Mail' } %>
+			<%= render partial: "shared/marketing_checkbox", locals: {type: 'distributor', field: "marketing_via_classes", label: 'Classes' } %>
 		</div>
 	</div>	
 	<hr>

@@ -56,8 +56,14 @@ class Retailer
 
 	# MARKETING/PR CAPABILITIES
 	field :internal_marketing_size, type: Integer
-	field :has_external_marketing, type: Boolean
-	field :where_product_advertised, type: String
+	field :employ_pr_agency, type: Boolean
+	field :marketing_via_print, type: Boolean
+	field :marketing_via_online, type: Boolean
+	field :marketing_via_email, type: Boolean
+	field :marketing_via_outdoor, type: Boolean
+	field :marketing_via_events, type: Boolean
+	field :marketing_via_direct_mail, type: Boolean
+	field :marketing_via_classes, type: Boolean
 	field :customer_database_size, type: Integer
 	has_many :trade_shows, dependent: :destroy
 

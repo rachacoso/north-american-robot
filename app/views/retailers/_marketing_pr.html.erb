@@ -1,0 +1,61 @@
+<div class="row">
+	<div class="small-12 columns">
+		<a class="anchor" id="a-marketing"></a>
+		<h1>Marketing / PR Capabilities</h1>
+	</div>
+</div>
+<br>
+<%= form_for @retailer, url: retailer_url do |f| %>
+	<%= hidden_field_tag "redirect_anchor", "a-marketing" %>
+	<div class="row">
+		<div class="small-12 columns">
+			<%= render partial: "shared/numeric_field", locals: {f: f, field: :internal_marketing_size, fieldlabel: 'Internal Marketing/Design Team Size' } %>
+		</div>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="small-12 columns">
+			<h3>External Marketing/PR</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-12 columns">
+			<%= radio_button_tag("retailer[employ_pr_agency]", false,  (@retailer.employ_pr_agency rescue false) ? false : true ) %>
+			<%= label_tag("retailer[employ_pr_agency]_false", "No, we do not employ an outside PR Agency") %>
+			<%= radio_button_tag("retailer[employ_pr_agency]", true, (@retailer.employ_pr_agency rescue false) ? true : false ) %>
+			<%= label_tag("retailer[employ_pr_agency]_true", "Yes, we employ an outside PR Agency") %>
+		</div>
+	</div>				
+	<hr>
+	<div class="row">
+		<div class="small-12 columns">
+			<h3>Where have you marketed/advertised your products?</h3>
+		</div>
+	</div>
+	<div class="row editform">
+		<div class="medium-4 columns">
+			<%= render partial: "shared/marketing_checkbox", locals: {type: 'retailer', field: "marketing_via_print", label: 'Print' } %>
+			<%= render partial: "shared/marketing_checkbox", locals: {type: 'retailer', field: "marketing_via_online", label: 'Online' } %>
+			<%= render partial: "shared/marketing_checkbox", locals: {type: 'retailer', field: "marketing_via_email", label: 'Email' } %>
+			<%= render partial: "shared/marketing_checkbox", locals: {type: 'retailer', field: "marketing_via_outdoor", label: 'Outdoor' } %>
+		</div>
+		<div class="medium-4 columns end">
+			<%= render partial: "shared/marketing_checkbox", locals: {type: 'retailer', field: "marketing_via_events", label: 'Events' } %>
+			<%= render partial: "shared/marketing_checkbox", locals: {type: 'retailer', field: "marketing_via_direct_mail", label: 'Direct Mail' } %>
+			<%= render partial: "shared/marketing_checkbox", locals: {type: 'retailer', field: "marketing_via_classes", label: 'Classes' } %>
+		</div>
+	</div>	
+	<hr>
+	<div class="row">
+		<div class="small-12 columns">
+			<%= render partial: "shared/numeric_field", locals: {f: f, field: :customer_database_size, fieldlabel: 'Customer Database Size' } %>	
+		</div>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="small-12 columns">
+			<%= f.submit 'Update Marketing / PR Capabilities', class: "tiny radius alert button right"  %>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+	
+<% end %>
