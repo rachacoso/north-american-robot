@@ -2,6 +2,7 @@ class TradeShow
   include Mongoid::Document
   belongs_to :distributor
   belongs_to :brand
+  belongs_to :retailer
 
   field :name, type: String, default: ""
   field :date, type: Date, default: -> { DateTime.now }

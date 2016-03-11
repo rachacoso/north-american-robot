@@ -1,16 +1,18 @@
 class TradeShowsController < ApplicationController
 
+	before_action :get_user
+
 	def create
-		u = @current_user.distributor || @current_user.brand
-		new_item = u.trade_shows.create!(trade_show_parameters)
+
+		new_item = @u.trade_shows.create!(trade_show_parameters)
 		save_date(params[:trade_show]['date(1i)'], params[:trade_show]['date(2i)'], new_item)
 		@identifier = 'name'
 		@new_item_id = new_item.id
-		@collection = u.trade_shows
+		@collection = @u.trade_shows
 
 		# update COMPLETENESS
 		if @current_user.distributor
-			u.update_completeness
+			@u.update_completeness
 		end
 
 		respond_to do |format|
@@ -21,18 +23,18 @@ class TradeShowsController < ApplicationController
 	end
 
 	def update
-		u = @current_user.distributor || @current_user.brand
-		collitem = u.trade_shows.find(params[:id])
+
+		collitem = @u.trade_shows.find(params[:id])
 		collitem.update!(trade_show_parameters)
 		save_date(params[:trade_show]['date(1i)'], params[:trade_show]['date(2i)'], collitem)
 
 		@identifier = 'name'
 		@new_item_id = collitem.id
-		@collection = u.trade_shows
+		@collection = @u.trade_shows
 
 		# update COMPLETENESS
 		if @current_user.distributor
-			u.update_completeness
+			@u.update_completeness
 		end
 
 		respond_to do |format|
@@ -44,19 +46,17 @@ class TradeShowsController < ApplicationController
 
 	def destroy
 
-		u = @current_user.distributor || @current_user.brand
-
 		@collitemid = params[:id]
 		d = TradeShow.find(@collitemid)
 		@collection_name = d.class.to_s.downcase
 		d.destroy
 		@identifier = 'name'
-		@collection = u.trade_shows
+		@collection = @u.trade_shows
 		@no_item_message = 'No Trade Shows'
 
 		# update COMPLETENESS
 		if @current_user.distributor
-			u.update_completeness
+			@u.update_completeness
 		end
 
 		respond_to do |format|
@@ -68,6 +68,11 @@ class TradeShowsController < ApplicationController
 
 
   private
+
+  def get_user
+		@u = @current_user.distributor || @current_user.brand || @current_user.retailer
+  end
+
   def trade_show_parameters
     params.require(:trade_show).permit(
 			:name,
