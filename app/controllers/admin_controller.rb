@@ -164,7 +164,7 @@ class AdminController < ApplicationController
   
   def administrators_only
     unless @current_user.administrator
-      redirect_to dashboard_url
+      redirect_to root_url
     end
   end
 
