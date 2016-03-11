@@ -1,0 +1,17 @@
+<div class="row">
+	<div class="small-12 columns">
+		<a class="anchor" id="a-social-fields"></a>
+		<h1>Social Ethos &amp; Impact</h1>
+	</div>
+</div>
+<div class="row clearfix">
+	<%= form_for @retailer, url: retailer_url do |f| %>
+	<%= hidden_field_tag "redirect_anchor", "a-social-fields" %>
+		<div class="small-12 columns">
+			<%= f.text_area :social_causes, rows: 10, label: "Causes You Are Passionate About", placeholder: 'Causes' %>
+			<%= f.text_area :social_organizations, rows: 10, label: "Organizations You Support", placeholder: 'Organizations' %>
+			<%= f.text_area :social_give_back, rows: 10, label: "How You Give Back", placeholder: 'Give Back' %>
+			<%= f.submit 'Update Social Ethos and Impact', class: "tiny radius alert button right" %>
+		</div>
+	<% end %>
+</div>
