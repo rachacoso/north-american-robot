@@ -1,0 +1,25 @@
+<div class="row">
+	<div class="small-12 columns">
+		<a class="anchor" id="a-locations-brands"></a>
+		<h1>Locations &amp; Brands</h1>
+	</div>
+</div>
+
+<div class="row">
+	<%= form_for @retailer, url: retailer_url do |f| %>
+	<%= hidden_field_tag "redirect_anchor", "a-locations-brands" %>
+		<div class="small-12 columns">
+			<div class="row">
+				<div class="small-6 columns">
+					<%= f.label :number_of_locations, "Number of Locations" %>		
+					<%= f.number_field :number_of_locations, min: 0, label: false %>		
+				</div><!--/.small-6-->
+				<div class="small-6 columns">
+					<%= f.label :number_of_brands_sold, "Number of Brands Sold" %>
+					<%= f.number_field :number_of_brands_sold, min: 0, label: false %>					
+				</div><!--/.small-6-->
+			</div><!--/.row-->
+			<%= f.submit 'Update Locations & Brands', class: "tiny radius alert button right" %>
+		</div>
+	<% end %>
+</div>
