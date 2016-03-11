@@ -5,7 +5,7 @@
 	</div>
 </div>
 <div class="row clearfix">
-	<%= form_for @distributor, url: brand_url do |f| %>
+	<%= form_for @distributor, url: distributor_url do |f| %>
 	<%= hidden_field_tag "redirect_anchor", "a-social-fields" %>
 		<div class="small-12 columns">
 			<%= f.text_area :social_causes, rows: 10, label: "Causes You Are Passionate About", placeholder: 'Causes' %>
