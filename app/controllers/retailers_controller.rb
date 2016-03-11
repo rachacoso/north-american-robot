@@ -83,7 +83,18 @@ class RetailersController < ApplicationController
     redirect_to retailer_url + "#a-verification" 
   end
 
+  def public_profile
+    @profile = @current_user.retailer
+  end
+
+  def full_profile
+    @profile = @current_user.retailer
+  end
+
   private
+
+
+
   def retailer_parameters
     params.require(:retailer).permit(
 			:company_name,

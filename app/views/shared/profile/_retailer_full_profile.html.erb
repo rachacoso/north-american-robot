@@ -30,7 +30,7 @@
 							<div class="small-12 columns">
 								<div class="row collapse">
 									<div class="small-6 columns">
-										<%= render partial: "shared/profile/distributor_rating", locals: {d: profile} %><br>
+										<%#= render partial: "shared/profile/distributor_rating", locals: {d: profile} %><br>
 									</div><!--/.small-6-->
 									<div class="small-6 columns text-right">
 										<%= render partial: "shared/profile/components/savebutton", locals: {profile: profile} %>
@@ -107,44 +107,6 @@
 		<div class="small-12 columns">
 			
 
-
-					<% if profile.distributor_brands.where(current: true).length > 0 %>
-						<div class="profile-container">
-							<div class="profile-header">
-								<h1>CURRENT BRAND PORTFOLIO</h1>
-							</div>
-							<div class="profile-content">
-							<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
-							<% profile.distributor_brands.where(current: true).each do |p| %>
-								<li><%= render partial: "shared/collections_view/distributor_brands", locals: {
-									collitem: p
-								} %></li>
-							<% end %>
-							</ul>
-							</div>
-						</div>
-						<br>
-					<% end %>
-					
-
-					<% if profile.distributor_brands.where(current: false).length > 0 %>
-						<div class="profile-container">
-							<div class="profile-header">
-								<h1>PAST BRAND PORTFOLIO</h1>
-							</div>
-							<div class="profile-content">
-							<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
-							<% profile.distributor_brands.where(current: false).each do |p| %>
-								<li><%= render partial: "shared/collections_view/distributor_brands", locals: {
-									collitem: p
-								} %></li>
-							<% end %>
-							</ul>
-							</div>
-						</div>
-						<br>
-					<% end %>
-
 					<% if profile.trade_shows.length > 0 %>
 					<div class="profile-container">
 						<div class="profile-header">
@@ -170,38 +132,6 @@
 						</div>
 						<div class="profile-content">
 							<div class="previewtile">
-							<div class="row">
-								<div class="small-6 columns">
-									<% unless profile.inside_sales_size.blank? && profile.outside_sales_size.blank? %>
-									<div class="preview-data">
-										<span class="preview-data-tile-title">Sales &amp; Education</span><br>
-										<% unless profile.inside_sales_size.blank? %>
-										<h6>Inside Sales Force: <strong><%= profile.inside_sales_size %></strong></h6>
-										<% end %>
-										<% unless profile.outside_sales_size.blank? %>
-										<h6>Outside Sales Force: <strong><%= profile.outside_sales_size %></strong></h6>
-										<% end %>
-									</div>
-									<% end %>
-								</div><!--/.small-6-->
-								<div class="small-6 columns">
-									<% unless profile.channels.blank? %>
-									<div class="preview-data">
-										<span class="preview-data-tile-title">Channels (Capacity)</span>
-											
-											<% profile.channels.each do |ch| %>
-												<h6><strong><%= ch.name  %> <%= profile.channel_capacities.where(channel_id: ch.id).first.capacity.blank? ? "" : "(#{profile.channel_capacities.where(channel_id: ch.id).first.capacity})" %></strong></h6>
-											<% end %>
-
-											<% if profile.channel_capacities.where(channel_id: 0).length > 0 %>
-												<% profile.channel_capacities.where(channel_id: 0).each do |cch| %>
-													<h6><strong><%= cch.custom_channel_name %> <small>(Custom Channel)</small> (<%= cch.capacity %>)</strong></h6>
-												<% end %>
-											<% end %>								
-										</div>
-										<% end %>
-								</div><!--/.small-6-->
-							</div><!--/.row-->
 
 							<div class="row">
 								<div class="small-12 columns">
@@ -240,7 +170,7 @@
 
 
 
-<%# set default distributor brand photo %>
+<%# set default retailer brand photo %>
 <% content_for :javascript_head do %>
 	<%= javascript_tag do %>
 		var profileType = "<%=profile.class.to_s.downcase%>";

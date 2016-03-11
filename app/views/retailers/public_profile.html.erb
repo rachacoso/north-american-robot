@@ -1,0 +1,51 @@
+
+<%= render partial: "shared/topbar" %>
+
+<div class="row collapse">
+	<div class="small-12 columns marketplace-header">
+		<%= image_tag "logo_header_marketplace.svg" %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="small-12 columns marketplace-subpage-header">
+		<div class="row">
+			<div class="medium-6 columns" id="your-profile-header">
+				<h1>YOUR PROFILE</h1>
+				<h3>Preview &amp; Edit your marketplace profile.</h3>
+			</div><!--/.medium-6-->
+			<div class="medium-6 columns">
+				<div class="row">
+					<div class="small-4 columns">
+						<h2>Public Profile</h2>
+						<small><span data-tooltip aria-haspopup="true" class="has-tip radius" title="Your public profile is viewable by all registered brands. It displays limited publicly available information including countries of distribution, year established, product sector and retail channels.">What is this?</span></small>
+					</div>
+					<div class="small-8 columns" id="profile-completeness">
+						<%# TBD %>
+					</div>
+				</div>
+
+			</div><!--/.medium-6-->
+		</div><!--/.row-->
+	</div>
+</div>
+
+<div class="row collapse">
+	<div class="small-12 columns marketplace-content">
+
+
+		<div class="row collapse">
+			<div class="medium-6 push-6 columns">
+				<ul class="button-group even-3">
+			  <li><%= link_to 'PUBLIC Profile', "#", class: "tiny button info"%></li>
+			  <li><%= link_to 'FULL Profile', retailer_full_profile_url, class: "tiny button secondary" %></li>
+			  <li><%= link_to 'EDIT Profile', retailer_url, class: "tiny button secondary" %></li>
+			  </ul>
+			</div>
+		</div>
+
+
+		<%= render partial: "/shared/profile/retailer_public_profile", locals: {profile: @profile} %>
+		<br>
+	</div>
+</div><!-- /.row -->

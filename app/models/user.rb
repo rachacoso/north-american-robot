@@ -71,7 +71,7 @@ class User
 	end
 
 	def subscriber?
-		u = self.distributor || self.brand
+		u = self.distributor || self.brand || self.retailer
 		if u.subscriber
 			return true
 		else

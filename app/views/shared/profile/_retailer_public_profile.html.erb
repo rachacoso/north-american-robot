@@ -1,0 +1,106 @@
+<div class="previewtile">
+
+<div class="row">
+	<div class="small-12 columns">		
+		<div class="row" data-equalizer>
+
+			<div class="medium-4 columns">
+				
+				<div class="profile-container" data-equalizer-watch>
+					<div class="profile-header" id="profile-main-top">
+						<h2><%= profile.company_name %></h2>
+
+					</div>
+					<div class="profile-content">
+						<%#= render partial: "shared/profile/distributor_rating", locals: {d: profile} %>
+						<br>
+						<%= image_tag profile.logo.url, width: "100", height: "100", alt: "Logo" %>
+						<% unless profile.website.blank? %>
+						<h3><strong><%= link_to profile.website, "//#{profile.website}" %></strong></h3>	
+						<% end %>
+						
+					</div>
+					<div class="profile-indicators text-right">
+						<%= render partial: "shared/profile/components/indicators", locals: {match: profile} %>
+					</div>
+				</div>				
+
+			</div><!--/.medium-4-->
+
+			<div class="medium-8 columns">
+				
+				<div class="profile-container" data-equalizer-watch>
+					<div class="profile-header">
+						<h4>GENERAL INFO</h4>
+					</div>
+					<div class="profile-content">
+
+						<div class="row collapse">
+							<div class="small-6 columns">
+								<div class="preview-data">
+									<span class="preview-data-tile-title">Countries of Operation</span><br>
+										<% profile.export_countries.sort_by{ |m| m.country.downcase }.each do |ec| %>
+											<strong><%= ec.country %> <%= ec.country == profile.country_of_origin ? "<small>(Headquarters)</small>".html_safe : "" %></strong><br>
+										<% end %>
+								</div>							
+							</div><!--/.small-6-->
+							<div class="small-6 columns">
+								<div class="preview-data">
+									<span class="preview-data-tile-title">Company Size</span><br>
+									<strong><%= CompanySize.find(profile.company_size).name rescue nil %></strong>
+								</div>
+							</div><!--/.small-6-->
+						</div><!--/.row-->
+
+
+						<div class="row collapse">
+							<div class="small-6 columns">
+								<div class="preview-data">
+									<span class="preview-data-tile-title">Year Established</span><br>
+									<strong><%= profile.year_established.strftime("%Y") rescue nil %></strong>
+								</div>						
+							</div><!--/.small-6-->
+							<div class="small-6 columns">
+								&nbsp;
+							</div><!--/.small-6-->
+						</div><!--/.row-->
+
+
+						<div class="row collapse">
+							<div class="small-6 columns">
+								<div class="preview-data">
+									<span class="preview-data-tile-title">Sectors</span><br>
+									<% profile.sectors.order_by(:name => "asc").each do |s| %>
+										<strong><%= s.name %></strong><br>
+										<% unless profile.subsectors.blank? %>
+											<% profile.subsectors.order_by(:name => "asc").each do |ss| %>
+												<% if ss.sector == s %>
+												&nbsp;&nbsp;&nbsp;<%= ss.name %><br>
+												<% end %>
+											<% end %>
+										<% end %>
+									<% end %>
+								</div>					
+							</div><!--/.small-6-->
+
+							<div class="small-6 columns">
+								<div class="preview-data">
+
+
+								</div>
+							</div><!--/.small-6-->
+						</div><!--/.row-->
+
+					</div>
+				</div>				
+
+			</div><!--/.medium-8-->
+
+
+		</div>
+	</div>
+</div>
+
+
+</div><!--/.previewtile-->
+
