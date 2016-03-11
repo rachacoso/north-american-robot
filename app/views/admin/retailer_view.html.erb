@@ -1,0 +1,323 @@
+<%= render partial: "shared/topbar_admin" %>
+
+
+<% if flash[:notice] %>
+<div class="row">
+	<div class="small-12 columns panel">
+		
+				<div data-alert class="alert-box alert round">
+			  	<%= flash[:notice] %>
+				  <a href="#" class="close">&times;</a>
+				</div>
+		
+	</div>
+</div>
+<% end %>
+
+
+<div class="row">
+	<div class="small-12 columns">
+		<div class="panel">
+			<h2>[RETAILER] <%= @retailer.company_name %></h2>
+		</div>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="medium-5 columns">
+		
+		<div class="row">
+			
+			<div class="small-12 columns">
+				<div class="panel">
+				<h2>Upload Logo</h2>
+
+					<%= form_for @retailer, :html => {id: 'b-or-d-admin-update-logo-upload'}, url: retailer_admin_update_path(@retailer) do |f| %>
+						<%= f.label :logo do %>
+						Company logo <br>
+						<%= image_tag @retailer.logo.url(:medium), alt: "Logo", id: "logo-preview"%>
+						<% end %>
+						<br>
+						<%= f.file_field :logo, class: 'hide-upload', label: false, accept: 'image/png,image/gif,image/jpeg' %>
+
+					<% end %>
+
+					<h2>Logo Finding Links</h2>
+
+					<% if !@retailer.facebook.blank? %>
+
+						<h3><%= link_to "Facebook", "//#{clean_url(@retailer.facebook)}", target: "blank" %></h3>
+						<% if facebook_id = fb_picture(@retailer.facebook) %>
+							<%= image_tag facebook_id %>
+							<h4><%= facebook_id %></h4>
+						<% end %>
+
+					<% else %>
+
+						<h3> NO Facebook </h3>
+
+					<% end %>
+
+
+					<h3><%= !@retailer.linkedin.blank? ? (link_to "LinkedIn", "//#{clean_url(@retailer.linkedin)}", target: "blank") : "NO LinkedIn" %></h3>
+
+					<h3><%= !@retailer.website.blank? ? (link_to "Website", "//#{clean_url(@retailer.website)}", target: 'blank') : "NO Website" %></h3>
+
+				</div>
+			</div>
+
+		</div>
+
+	</div><!--/.medium-5-->
+
+	<div class="medium-7 columns">
+
+
+		<div class="row">
+			<div class="small-12 columns">
+				<div class="panel">
+					<h2>Users</h2>
+					<small><span data-tooltip aria-haspopup="true" class="has-tip" title="Usernames associated with this account.">What is this?</span></small><br>
+					
+					<div class="admin-user-list">
+						<%= render partial: "/users/user_list", locals: {b_or_d: @retailer} %>
+					</div>
+
+					<h5>Add User</h5>
+
+					<span class="error-message"><%= flash[:alert] %></span>
+
+					<%= form_for User.new, url: admin_add_user_path(@retailer) do |f| %>
+					<div class="row">
+						<div class="medium-4 columns">
+						<%= f.text_field :email, label: false, placeholder: "Email (used as username)"  %>
+						</div><!--/.medium-4-->
+						<%= fields_for :contact do |ff| %>
+						<div class="medium-3 columns">
+							<%= ff.text_field :firstname, label: false, placeholder: "First Name" %>
+						</div><!--/.medium-4-->
+						<div class="medium-3 columns">
+							<%= ff.text_field :lastname, label: false, placeholder: "Last Name"  %>
+						</div><!--/.medium-4-->
+						<div class="medium-2 columns end">
+							<%= f.submit "Add", class: "button tiny alert" %>
+						</div>
+						<% end %>
+					</div><!--/.row-->
+
+					<hr>
+					<h2>Company Contacts</h2>
+					<% @retailer.contacts.each do |contact| %>
+						<div class="row">
+							<div class="small-4 columns">
+							<h3><%= contact.email %></h3>
+							</div><!--/.small-6-->
+							<div class="small-6 columns end">
+								<h4><%= contact.firstname %> <%= contact.lastname %></h4>
+							</div><!--/.small-6-->
+						</div><!--/.row-->
+					<% end %>
+
+					<% end %>
+				</div>
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+		
+<%= form_for @retailer, url: retailer_admin_update_path(@retailer) do |f| %>
+
+		<div class="row">
+			<div class="small-12 columns">
+			<div class="panel">
+				<h2>Subscriber Status</h2>
+				<small><span data-tooltip aria-haspopup="true" class="has-tip" title="This controls whether this profile has access to the subscriber functionality.">What is this?</span></small><br>
+				<%= f.check_box :subscriber %>
+			</div>
+			<div class="panel">
+				<h2>Active/Visibility Status</h2>
+				<small><span data-tooltip aria-haspopup="true" class="has-tip" title="This controls whether this profile is visible/available for matching.">What is this?</span></small><br>
+				
+				<%= f.check_box :active, label: false %><%= f.label :active, "Active/Visible for matching" %>
+			</div>
+			<div class="panel">
+				<h2>Validation</h2>
+				<div class="row">
+					<div class="small-12 columns">
+						<%= f.text_area :verification_notes, label: ' Notes (only visible to administrators)'  %>		
+					</div><!--/.small-12-->
+				</div><!--/.row-->
+<hr>				
+
+				<div class="row">
+					<div class="medium-4 columns">
+						<%= f.check_box :verified_website, label: ' Website'  %>		
+					</div><!--/.medium-4-->
+					<div class="medium-8 columns">
+						<% if @retailer.website.blank?  %>
+							<h3> NO WEBSITE </h3>
+						<% else %>						
+							<h3><%= link_to @retailer.website.sub(/^https?\:\/\//, '').sub(/^www./,''), "//#{@retailer.website.sub(/^https?\:\/\//, '').sub(/^www./,'')}", target: 'blank' %></h3>
+						<% end %>
+					</div><!--/.medium-8-->
+				</div><!--/.row-->
+<hr>				
+				<div class="row">
+					<div class="medium-4 columns">
+						<%= f.check_box :verified_social_media, label: ' Social Media'  %>		
+					</div><!--/.medium-4-->
+					<div class="medium-8 columns">
+						<% if @retailer.facebook.blank? && @retailer.linkedin.blank? && @retailer.twitter.blank? && @retailer.instagram.blank? %>
+						<h3> NO SOCIAL MEDIA </h3>
+						<% end %>
+						<% unless @retailer.facebook.blank? %>
+						<h3><%= link_to "Facebook", @retailer.facebook.sub(/^https?\:\/\//, '').sub(/^www./,'') %></h3>
+						<% end %>
+						<% unless @retailer.linkedin.blank? %>
+						<h3><%= link_to "LinkedIn", @retailer.linkedin.sub(/^https?\:\/\//, '').sub(/^www./,'') %></h3>
+						<% end %>
+						<% unless @retailer.linkedin.blank? %>
+						<h3><%= link_to "Instagram", @retailer.instagram.sub(/^https?\:\/\//, '').sub(/^www./,'') %></h3>
+						<% end %>
+						<% unless @retailer.linkedin.blank? %>
+						<h3><%= link_to "Twitter", @retailer.twitter.sub(/^https?\:\/\//, '').sub(/^www./,'') %></h3>
+						<% end %>
+
+					</div><!--/.medium-8-->
+				</div><!--/.row-->					
+<hr>			
+				<div class="row">
+					<div class="medium-4 columns">
+						<%= f.check_box :verified_business_registration, label: ' Business Registration'  %>		
+					</div><!--/.medium-4-->
+					<div class="medium-8 columns">
+
+							<div class="row">
+								<div class="small-5 columns text-right">
+									<h4><strong>Company Name</strong></h4>
+								</div><!--/.small-5-->
+								<div class="small-7 columns">
+									<h4><%= @retailer.company_name || "<br>".html_safe %></h4>
+								</div><!--/.small-7-->
+								<div class="small-5 columns text-right">
+									<h4><strong>Contact Information</strong></h4>
+								</div><!--/.small-5-->
+								<div class="small-7 columns">
+
+									<% @retailer.contacts.each do |contact| %>
+										<h3>
+											<%= contact.firstname %> <%= contact.lastname %> <%= contact.title %><br>
+											<% unless !contact.address %>
+												<%= contact.address.address1 %><br>
+												<%= contact.address.address2 %><br>
+											<% unless contact.address.city.blank? && contact.address.state.blank? && contact.address.postcode.blank? %>
+												<%= contact.address.city %> <%= contact.address.state %> <%= contact.address.postcode %><br>
+											<% end %>
+												<%= contact.address.country %><br>
+											<% end %>
+											<% unless contact.phone.blank? %>
+												<%= contact.phone %>
+											<% end %>
+											<% unless contact.email.blank? %>
+												<%= contact.email %>
+											<% end %>
+										</h3>
+									<% end %>
+
+								</div><!--/.small-7-->
+								<div class="small-5 columns text-right">
+									<h4><strong>Business ID</strong></h4>
+								</div><!--/.small-5-->
+								<div class="small-7 columns">
+									<h3><%= !@retailer.business_id.blank? ? @retailer.business_id : 'NO BUSINESS ID' %><br>
+										(<%= !@retailer.country_of_origin.blank? ? @retailer.country_of_origin : 'ADD COUNTRY OF ORIGIN' %>)</h3>
+								</div><!--/.small-7-->
+
+							</div>
+
+					</div><!--/.medium-8-->
+				</div><!--/.row-->			
+<hr>		
+				<div class="row">
+					<div class="medium-4 columns">
+						<%= f.check_box :verified_client_brand, label: ' Client Brands'  %>		
+					</div><!--/.medium-4-->
+					<div class="medium-8 columns">
+						<div class="row">
+							<div class="small-5 columns text-right">
+								<h4><strong>Current Brands</strong></h4>
+							</div><!--/.small-5-->
+							<div class="small-7 columns">
+
+							</div><!--/.small-7-->
+						</div><!--/.row-->
+						<div class="row">
+							<div class="small-5 columns text-right">
+								<h4><strong>Past Brands</strong></h4>
+							</div><!--/.small-5-->
+							<div class="small-7 columns">
+
+							</div><!--/.small-7-->
+						</div><!--/.row-->
+				
+					</div><!--/.medium-8-->
+				</div><!--/.row-->							
+<hr>
+				<div class="row">
+					<div class="medium-4 columns">
+						<%= f.check_box :verified_business_certificate, label: ' Business Certificate'  %>		
+					</div><!--/.medium-4-->
+					<div class="medium-8 columns">
+						<h4>Business Certificate</h4>
+						<% if @retailer.verification_business_certificate.exists? %>
+							<%= image_tag 'document.png', style: 'height:100px;' %><br>
+							<small><%= @retailer.verification_business_certificate_file_name %></small><br>
+							<%= link_to "View", @retailer.verification_business_certificate.url, :target => "_blank" %>
+						<% else %>
+							<h3>[NO BUSINESS CERTIFICATE UPLOADED]</h3>
+						<% end %>
+					</div><!--/.medium-8-->
+				</div><!--/.row-->		
+
+<hr>
+				<div class="row">
+					<div class="medium-4 columns">
+						<%= f.check_box :verified_location, label: ' Location'  %>		
+					</div><!--/.medium-4-->
+					<div class="medium-8 columns">
+								<h4>Location Photo</h4>
+								<%= image_tag @retailer.verification_location_photo.url(:medium), alt: "Location Photo"%>
+								<%= @retailer.verification_location_photo.exists? ? (link_to "enlarge", @retailer.verification_location_photo.url(:large), :target => "_blank", style: "font-weight:100;") : "" %>					
+					</div><!--/.medium-8-->
+				</div><!--/.row-->		
+
+				<hr>
+				<div class="row">
+					<div class="medium-4 columns">
+						<%= f.check_box :verified_brand_display, label: ' Brand Display' %>		
+					</div><!--/.medium-4-->
+					<div class="medium-8 columns">
+						<h4>Brand Display Photo</h4>
+						<%= image_tag @retailer.verification_brand_display_photo.url(:medium), alt: "Brand Display Photo"%>
+						<%= @retailer.verification_brand_display_photo.exists? ? (link_to "View Larger", @retailer.verification_brand_display_photo.url(:large), :target => "_blank") : "" %>					
+					</div><!--/.medium-8-->
+				</div><!--/.row-->		
+
+				
+
+
+				</div>
+			</div>
+
+		</div>
+	</div><!--/.medium-7-->	
+	<div class="small-12 columns text-right">
+		<div class="panel">
+		<%= f.submit 'Update Retailer', class: 'button tiny alert' %>
+		</div>
+	</div><!--/.small-12-->
+<% end %>
+
+</div><!--/.row-->
+
+<br>
+<br>

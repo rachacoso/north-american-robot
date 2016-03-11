@@ -61,6 +61,20 @@ class AdminController < ApplicationController
     @distributor = Distributor.find(params[:id])
   end
 
+  def retailers_index
+    retailers = Retailer.all
+    if params[:q] && !params[:q].blank?
+      @query = params[:q]
+      retailers = retailers.where(company_name: /#{@query}/i )
+    end
+    retailers = retailers.sort_by{ |d| d.company_name.to_s }
+    @retailers = do_kaminari_array(retailers, params[:page])
+  end
+
+  def retailer_view
+    @retailer = Retailer.find(params[:id])
+  end
+
   def new_bulk_upload
 
   end

@@ -1,6 +1,7 @@
 class RetailersController < ApplicationController
 
 	before_action :check_usertype, only: [:edit, :public_profile, :full_profile, :update]
+  before_action :administrators_only, only: [:adminupdate]
 
 	def edit
 
@@ -91,10 +92,13 @@ class RetailersController < ApplicationController
     @profile = @current_user.retailer
   end
 
+  def adminupdate
+    retailer = Retailer.find(params[:id])
+    retailer.update!(admin_retailer_parameters)
+    redirect_to admin_retailer_view_url(retailer)
+  end
+
   private
-
-
-
   def retailer_parameters
     params.require(:retailer).permit(
 			:company_name,
@@ -139,33 +143,19 @@ class RetailersController < ApplicationController
       ]
 		)
 	end
-  def admin_brand_parameters
+  def admin_retailer_parameters
     params.require(:retailer).permit(
-			:company_name,
-			:country_of_origin,
-			:year_established,
-			:company_size,
-			:website,
-			:facebook,
-			:linkedin,
-			:twitter,
-			:instagram,
 			:logo,
-			:countries_where_exported,
-			:brand_positioning,
-			:social_causes,
-			:social_organizations,
-			:social_give_back,
+      :verification_notes,
+      :verified_website,
+      :verified_social_media,
+      :verified_business_registration,
+      :verified_client_brand,
+      :verified_business_certificate,
+      :verified_location,
+      :verified_brand_display,
 			:subscriber,
-			:active,
-      address_attributes: [ 
-        :address1,
-        :address2,
-        :city,
-        :state,
-        :postcode,
-        :country
-      ]
+			:active
 		)
 	end	
 	def check_usertype

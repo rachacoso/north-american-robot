@@ -5,6 +5,8 @@
 	<div class="small-11 columns">
 		<% if b_or_d.class.to_s == "Distributor" %>
 			<%= link_to "#{b_or_d.company_name.blank? ? '(no name)' : b_or_d.company_name}", admin_distributor_view_url(b_or_d) %>
+		<% elsif b_or_d.class.to_s == "Retailer" %> 
+			<%= link_to "#{b_or_d.company_name.blank? ? '(no name)' : b_or_d.company_name}", admin_retailer_view_url(b_or_d) %>
 		<% elsif b_or_d.class.to_s == "Brand" %> 
 			<%= link_to "#{b_or_d.company_name.blank? ? '(no name)' : b_or_d.company_name}", admin_brand_view_url(b_or_d) %>
 		<% end %>

@@ -17,8 +17,10 @@ Rails.application.routes.draw do
   post   '/admin/new_bulk_upload' => 'admin#do_bulk_upload'
   get   '/admin/distributors' => 'admin#distributors_index', as: 'admin_distributors_index'
   get   '/admin/brands' => 'admin#brands_index', as: 'admin_brands_index'
-  get   '/admin/distributors/:id' => 'admin#distributor_view', as: 'admin_distributor_view'
-  get   '/admin/brands/:id' => 'admin#brand_view', as: 'admin_brand_view'
+  get   '/admin/retailers' => 'admin#retailers_index', as: 'admin_retailers_index'
+  get   '/admin/distributor/:id' => 'admin#distributor_view', as: 'admin_distributor_view'
+  get   '/admin/brand/:id' => 'admin#brand_view', as: 'admin_brand_view'
+  get   '/admin/retailer/:id' => 'admin#retailer_view', as: 'admin_retailer_view'
   post   '/admin/adduser/:id' => 'admin#add_user', as: 'admin_add_user'
   delete   '/admin/deleteuser/:id' => 'admin#delete_user', as: 'admin_delete_user'
 
