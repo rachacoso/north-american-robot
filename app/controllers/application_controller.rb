@@ -21,6 +21,13 @@ class ApplicationController < ActionController::Base
 
 
 	private
+
+  def administrators_only
+    unless @current_user.administrator
+      redirect_to root_url
+    end
+  end
+    
   def get_current_user
   	if cookies[:auth_token]
       if a = User.where(:auth_token => cookies[:auth_token]).first

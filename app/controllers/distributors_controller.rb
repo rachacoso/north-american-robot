@@ -1,6 +1,7 @@
 class DistributorsController < ApplicationController
 
   before_action :check_usertype, only: [:edit, :public_profile, :full_profile, :update]
+  before_action :administrators_only, only: [:adminupdate]
 
   def edit
 

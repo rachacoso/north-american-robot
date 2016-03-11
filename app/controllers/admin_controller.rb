@@ -161,12 +161,6 @@ class AdminController < ApplicationController
   end
 
   private
-  
-  def administrators_only
-    unless @current_user.administrator
-      redirect_to root_url
-    end
-  end
 
   def do_kaminari_array(collection, page = 1)
     return Kaminari.paginate_array(collection).page(page).per(20)
