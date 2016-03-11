@@ -1,0 +1,128 @@
+<div class="row">
+	<div class="small-12 columns">
+		<a class="anchor" id="a-verification"></a>
+		<h1>Verification</h1>
+	</div>
+</div>
+<div class="row">
+	<div class="small-4 columns">
+		<h3><strong>Website:</strong> <br>
+			<%= render partial: "verification_indicator", locals: {item: @current_user.retailer.verified_website } %></h3>
+	</div><!--/.small-4 -->
+	<div class="small-4 columns">
+		<h3><strong>Social Media:</strong> <br>
+			<%= render partial: "verification_indicator", locals: {item: @current_user.retailer.verified_social_media } %></h3>
+	</div><!--/.small-4 -->
+	<div class="small-4 columns">
+		<h3><strong>Client Brand:</strong> <br>
+			<%= render partial: "verification_indicator", locals: {item: @current_user.retailer.verified_client_brand } %></h3>
+	</div><!--/.small-4 -->
+</div><!--/.row-->
+
+<div class="row">
+	<div class="small-12 columns">
+		<hr>
+		<h3><strong>Business Registration:</strong> <br>
+			<%= render partial: "verification_indicator", locals: {item: @current_user.retailer.verified_business_registration } %></h3>
+		<%= form_for @retailer, url: retailer_url do |f| %>
+		<%= hidden_field_tag "redirect_anchor", "a-verification" %>
+		<div class="row">
+			<div class="small-7 columns small-centered">
+				<div class="row collapse">
+					<div class="small-12 columns">
+						<%= f.label :business_id, "Your BUSINESS ID number" %>
+					</div><!--/.small-12-->
+					<div class="medium-7 columns">
+						<%= f.text_field :business_id, placeholder: "Enter BUSINESS ID number", label: false %>
+					</div><!--/.small-8-->
+					<div class="medium-5 columns">
+						<%= f.submit (@retailer.business_id.blank? ? "ADD Business ID" : "UPDATE Business ID"), class: "button alert tiny postfix" %>
+					</div><!--/.small-4-->
+					<div class="small-12 columns">
+						<h3 style="line-height: 1em;"><small>For example, in the US, this would be your <strong>Tax ID number</strong>,<br> in Korea, your <strong>Business ID number</strong></small></h3>
+					</div><!--/.small-12-->
+				</div><!--/.row-->
+			</div><!--/.small-8-->
+		</div><!--/.row-->
+		<% end %>
+		<hr>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
+<div class="row">					
+	<div class="medium-4 columns">
+		<h3><strong>Business Certificate:</strong> <br>
+			<%= render partial: "verification_indicator", locals: {item: @current_user.retailer.verified_business_certificate } %></h3>
+		<%= form_for @retailer, :html => {id: 'business-registration-form'}, url: retailer_url do |f| %>
+			<%= hidden_field_tag "redirect_anchor", "a-verification" %>
+			<%= f.label :verification_business_certificate do %>
+				<div class="text-center">
+				<div style="height: 200px; width: 200px;">
+					<% if @retailer.verification_business_certificate.exists? %>
+						<br>
+						<%= image_tag 'document.png', style: 'height:100px;' %><br>
+						<small><%= @retailer.verification_business_certificate_file_name %></small><br>
+						<%= link_to "View", @retailer.verification_business_certificate.url, :target => "_blank", class: "itemformlink" %>
+						<%= link_to 'Delete', retailer_validation_delete_path(type: "bc"), :method => :delete, data: { :confirm => "Are you sure you want to delete this item?"}, class: "itemformlink" %>
+					<% else %>
+						<br>
+						<%= image_tag '/images/image_add.svg' %><br>
+						<small>Upload Business Certificate</small>
+					<% end %>
+				</div>
+			<% end %>
+			<%= f.file_field :verification_business_certificate, class: 'hide-upload', label: false, accept: 'application/pdf,application/vnd.ms-powerpoint,application/msword,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/jpeg,image/pngimage/gif' %>
+			</div>
+		<% end %>
+	</div><!--/.medium-4-->
+	<div class="medium-4 columns">
+
+		<h3><strong>Location:</strong> <br>
+			<%= render partial: "verification_indicator", locals: {item: @current_user.retailer.verified_location } %>
+			</h3>
+		<%= form_for @retailer, :html => {id: 'location-form'}, url: retailer_url do |f| %>
+			<%= hidden_field_tag "redirect_anchor", "a-verification" %>
+			<%= f.label :verification_location_photo do %>
+				<div class="text-center">
+					<% if @retailer.verification_location_photo.exists? %>
+						<br>
+						<%= image_tag @retailer.verification_location_photo.url(:medium), alt: "Location Photo"%><br>
+						<%= link_to "View", @retailer.verification_location_photo.url, :target => "_blank", class: "itemformlink" %>
+						<%= link_to 'Delete', retailer_validation_delete_path(type: "lp"), :method => :delete, data: { :confirm => "Are you sure you want to delete this item?"}, class: "itemformlink" %>
+					<% else %>
+						<br>
+						<%= image_tag '/images/image_add.svg' %><br>
+						<small>Upload Location Photo</small>
+					<% end %>
+				</div>
+			<% end %>
+			<br>
+			<%= f.file_field :verification_location_photo, class: 'hide-upload', label: false, accept: 'image/png,image/gif,image/jpeg' %>
+		<% end %>	
+	</div><!--/.medium-4-->
+	<div class="medium-4 columns">
+
+		<h3><strong>Brand Display:</strong> <br>
+			<%= render partial: "verification_indicator", locals: {item: @current_user.retailer.verified_brand_display } %>
+		</h3>
+		<%= form_for @retailer, :html => {id: 'brand-display-form'}, url: retailer_url do |f| %>
+			<%= hidden_field_tag "redirect_anchor", "a-verification" %>
+			<%= f.label :verification_brand_display_photo do %>
+				<div class="text-center">
+					<% if @retailer.verification_brand_display_photo.exists? %>
+						<br>
+						<%= image_tag @retailer.verification_brand_display_photo.url(:medium), alt: "Brand Display Photo"%><br>
+						<%= link_to "View", @retailer.verification_brand_display_photo.url, :target => "_blank", class: "itemformlink" %>
+						<%= link_to 'Delete', retailer_validation_delete_path(type: "bd"), :method => :delete, data: { :confirm => "Are you sure you want to delete this item?"}, class: "itemformlink" %>
+					<% else %>
+						<br>
+						<%= image_tag '/images/image_add.svg' %><br>
+						<small>Upload Brand Display Photo</small>
+					<% end %>
+				</div>
+			<% end %>
+			<br>
+			<%= f.file_field :verification_brand_display_photo, class: 'hide-upload', label: false, accept: 'image/png,image/gif,image/jpeg' %>
+		<% end %>	
+	</div><!--/.medium-4-->
+</div><!--/.row-->

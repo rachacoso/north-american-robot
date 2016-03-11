@@ -67,6 +67,21 @@ class RetailersController < ApplicationController
 
   end
 
+  def validation_delete
+    unless params[:type].blank?
+      retailer = @current_user.retailer
+      case params[:type]
+      when 'bc' #business certificate
+        retailer.verification_business_certificate.destroy
+      when 'lp' #location photo
+        retailer.verification_location_photo.destroy
+      when 'bd' #brand display
+        retailer.verification_brand_display_photo.destroy
+      end
+      retailer.save
+    end
+    redirect_to retailer_url + "#a-verification" 
+  end
 
   private
   def retailer_parameters
@@ -99,7 +114,10 @@ class RetailersController < ApplicationController
 			:social_causes,
 			:social_organizations,
 			:social_give_back,
-			:active,
+			:business_id,
+      :verification_location_photo,
+      :verification_brand_display_photo,
+      :verification_business_certificate,
       address_attributes: [ 
         :address1,
         :address2,
