@@ -9,8 +9,9 @@ class RetailersController < ApplicationController
     @trade_shows = @retailer.trade_shows rescue nil
     @new_trade_show = TradeShow.new
 
-    @countries_of_operation = @retailer.countries_of_operation rescue nil
-    @new_country_of_operation = ExportCountry.new   
+		# for COUNTRIES OF OPERATION -- ODDLY NAMED SO CAN RE-USE EXISTING FORMS
+    @countries_of_export = @retailer.countries_of_operation rescue nil
+    @new_export_country = ExportCountry.new
 
     @tags = @retailer.tags rescue nil
 
