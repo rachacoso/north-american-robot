@@ -3,8 +3,8 @@
 
 	<div class="hide-for-small-only">
 	<ul>
-		<% if @current_user.type? == 'brand' %>
 		<li>
+			<% if profile.class.to_s == "Brand" %>
 			<div class="title">Trends</div>
 			<div class="data">
 				<% if profile.trends.blank? %>
@@ -15,8 +15,8 @@
 					<% end %>
 				<% end %>
 			</div>
+			<% end %>
 		</li>
-		<% end %>
 		<li>
 			<div class="title">Country</div>
 			<% if profile.country_of_origin.blank? %>
