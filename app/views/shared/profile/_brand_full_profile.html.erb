@@ -50,7 +50,7 @@
 <div class="row">
 	<div class="small-12 columns">
 		<% profile.tags.each do |tag| %>
-			<span class="label"><%= tag.name %></span>
+			<span class="tag"><%= tag.name %></span>
 		<% end %>
 
 		<%= render partial: "shared/profile/components/indicators", locals: {match: profile} %>

@@ -4,7 +4,7 @@
 			<% list.each do |tag| %>
 				<% unless !tag.id %>
 					<%= link_to tag_url(tag, tid: tid), :method => 'delete', data: { :confirm => 'Delete Tag?'}, remote: true do %>
-						<span class="label"><%= tag.name %> <small style="color: gray;margin: auto;">x</small></span>
+						<span class="tag"><%= tag.name %> <small style="color: gray;margin: auto;">x</small></span>
 					<% end %>
 				<% end %>
 				<%#= link_to 'X', library_document_delete_url(doc), :method => 'delete', data: { :confirm => 'Delete Tag?'}  %>

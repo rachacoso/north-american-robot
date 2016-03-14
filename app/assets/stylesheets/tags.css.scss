@@ -1,0 +1,22 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+@import "global_variables";
+
+.tag {
+	display: inline-block;
+	font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+	font-weight: 200;
+	line-height: 0.5;
+	line-height: 1;
+	margin-bottom: auto;
+	position: relative;
+	text-align: center;
+	text-decoration: none;
+	white-space: nowrap;
+	padding: 0.25rem 0.5rem 0.25rem;
+	font-size: 0.6875rem;
+	border: 1px solid $landing-middle-gray;
+	color: $landing-dark-gray;
+}

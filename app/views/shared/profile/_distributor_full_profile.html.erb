@@ -48,7 +48,7 @@
 									<% end %>
 								<br><br>
 								<% profile.tags.each do |tag| %>
-									<span class="label"><%= tag.name %></span>
+									<span class="tag"><%= tag.name %></span>
 								<% end %>
 								<br><br>
 								<%= render partial: "shared/profile/components/indicators", locals: {match: profile} %>
