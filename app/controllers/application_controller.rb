@@ -68,7 +68,7 @@ class ApplicationController < ActionController::Base
 
   def get_unread_message_count
     if @current_user
-      u = @current_user.distributor || @current_user.brand
+      u = @current_user.distributor || @current_user.brand || @current_user.retailer
       m = u.matches rescue nil
       if m
         match_ids = m.pluck(:id)
