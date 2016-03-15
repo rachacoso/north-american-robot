@@ -32,7 +32,7 @@ class HomeController < ApplicationController
 
 		if @current_user
 
-			@profile = @current_user.brand || @current_user.distributor
+			@profile = @current_user.brand || @current_user.distributor || @current_user.retailer
 
 			matches = @profile.matches
 			@unread_list = Array.new
@@ -41,7 +41,6 @@ class HomeController < ApplicationController
 					@unread_list << m
 				end
 			end
-
 			@incoming_requests_list = matches.where(accepted: false, initial_contact_by: @current_user.type_inverse?)
 			@outgoing_requests_list = matches.where(accepted: false, initial_contact_by: @current_user.type?)
 
