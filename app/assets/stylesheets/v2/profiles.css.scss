@@ -64,6 +64,11 @@
   // padding: rem-calc(5);
 }
 
+.profile-social-link {
+  font-weight: 200;
+  color: $landing-dark-gray;
+  font-size: rem-calc(12);
+}
 
 // PROFILE STYLING (UPDATED)
 
@@ -287,7 +292,7 @@ a.profile-sq-left {
     margin-top: rem-calc(10);
     margin-bottom: rem-calc(10);
     p {
-      font-size: rem-calc(11);  
+      font-size: rem-calc(11);
     }
     a {
       color: $landing-dark-gray;
