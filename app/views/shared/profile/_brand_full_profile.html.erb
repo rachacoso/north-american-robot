@@ -17,7 +17,7 @@
 </div>
 
 <div class="row profile-logo">
-	<div class="medium-6 columns medium-push-6 medium-text-right">
+	<div class="medium-4 columns medium-push-8 medium-text-right">
 		<% if profile.logo_file_name %>
 			<%= image_tag profile.logo.url(:medium), alt: "Logo" %>
 		<% else %>
@@ -27,18 +27,66 @@
 				<%= image_tag profile.logo.url(:medium), width: "100", height: "100", alt: "Logo" %>
 			<% end %>					
 		<% end %>
-	</div><!--/.medium-6-->
-	<div class="medium-6 columns medium-pull-6 medium-text-left">
+	</div><!--/.medium-4-->
+	<div class="medium-8 columns medium-pull-4 medium-text-left">
 		<h1><%= profile.company_name %></h1>
 
-		<% profile.tags.each do |tag| %>
-			<span class="tag"><%= tag.name %></span>
+		<div>
+			<% profile.tags.each do |tag| %>
+				<span data-tooltip aria-haspopup="true" class="has-tip radius tip-right" title="GLOBAL GOOD TAGS"><span class="tag"><%= tag.name %></span></span>
+			<% end %>
+		</div>
+		
+		<% if profile.class.to_s == "Brand" && !profile.trends.blank? %>
+		<div>
+			<% profile.trends.pluck(:name).each do |trend| %>
+				<span data-tooltip aria-haspopup="true" class="has-tip radius tip-right" title="TRENDS"><span class="tag trend"><%= trend %></span></span>
+			<% end %>
+		</div>				
 		<% end %>
+		
+		<br>
 
-		<br><br>
-		<%= render partial: "shared/profile/components/links", locals: {profile: profile} %>
+		<div class="profile-general-info">
+			<div class="data">
+				Based in 
+				<strong>
+				<% if profile.country_of_origin.blank? %>
+				 Unknown Country
+				<% else %>
+				<%= profile.country_of_origin %>
+				<% end %>
+				</strong>
+				with
+				<strong>
+				<% if profile.company_size.blank? %>
+					unknown number of employees
+				<% else %>
+					<%= CompanySize.find(profile.company_size).name rescue nil %>
+				<% end %>
+				</strong>
+			</div>
+			<div class="data">
+			<span class="item">Sector</span>
+			<span class="item">
+			<strong>
+			<% if profile.sectors.blank? %>
+				n/a
+			<% else %>
+				<% profile.sectors.order_by(:name => "asc").each do |s| %>
+					<%= s.name %>
+					(<%= profile.subsectors.where(:sector => s).pluck(:name).to_a.join(", ") %>)<br>
+				<% end %>
+			<% end %>
+			</strong>
+			</span>
+			</div>
 
-	</div><!--/.medium-6-->
+		</div>
+		
+			<%= render partial: "shared/profile/components/links", locals: {profile: profile} %>
+
+	</div><!--/.medium-8-->
 </div><!--/.row-->
 
 
@@ -63,16 +111,6 @@
 		<%= render partial: "shared/profile/components/indicators", locals: {match: profile} %>
 	</div><!--/.small-12 -->
 </div><!--/.row -->
-
-
-
-<div class="row">
-	<div class="small-12 columns">
-		<div class="brand-snapshot">
-			<%= render partial: "shared/profile/components/general_info", locals: {profile: profile} %>
-		</div>
-	</div><!--/.small-12-->
-</div><!--/.row-->
 
 <div class="row profile-skus">
 	

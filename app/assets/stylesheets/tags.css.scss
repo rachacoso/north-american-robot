@@ -19,4 +19,7 @@
 	font-size: 0.6875rem;
 	border: 1px solid $landing-middle-gray;
 	color: $landing-dark-gray;
+	&.trend {
+		background-color: $landing-light-gray;
+	}
 }
