@@ -134,6 +134,30 @@ class Retailer
 										]
 	validates_attachment_size :verification_business_certificate, :in => 0.megabytes..2.megabytes
 
+	has_many :matches do 
+		def contacted_by_me
+			where(initial_contact_by: "retailer")
+		end
+		def contacting_me
+			where(initial_contact_by: "brand")
+		end
+		def contacted_by_me_waiting
+			where(initial_contact_by: "retailer", accepted: false)
+		end
+		def contacting_me_waiting
+			where(initial_contact_by: "brand", accepted: false)
+		end				
+		def contacted_by_me_accepted
+			where(initial_contact_by: "retailer", accepted: true)
+		end
+		def contacting_me_accepted
+			where(initial_contact_by: "brand", accepted: true)
+		end		
+		def accepted
+			where(accepted: true)
+		end	
+	end
+
 
 	scope :subscribed, ->{where(subscriber: true)}
 	scope :activated, ->{where(active: true)}
