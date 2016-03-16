@@ -26,20 +26,17 @@
 
 <div class="row">
 	<div class="small-12 columns">
-		<h2><strong style="color: #5f5f5f;"><%= collitem.brand.empty? ? "( No Name )" : collitem.brand  %></strong>
-		<% unless collitem.website.blank? %>
-			<%= link_to "//#{clean_url(collitem.website)}" do %>
-				<i class="fi-link"></i>
-			<% end %>
-		<% end %>
-		<br>
-		<% unless collitem.category.blank? %>
-			<%= Sector.find(collitem.category).name %><br>
+		<h2><strong style="color: #5f5f5f;"><%= collitem.brand.empty? ? "( No Name )" : collitem.brand  %></strong></h2>
+		<p><% unless collitem.category.blank? %>
+			<%= Sector.find(collitem.category).name %>
 		<% end %>
 		<% unless collitem.country_of_manufacture.blank? %>
-			<small>Manufactured in <%= collitem.country_of_manufacture %></small>
+			<br>Manufactured in <%= collitem.country_of_manufacture %>
 		<% end %>
-		</h2>
+		<% unless collitem.website.blank? %>
+			<br><%= link_to 'website', "//#{clean_url(collitem.website)}" %>
+		<% end %></p>
+		
 	</div>
 	<div class="small-12 columns">
 		<% collitem.tags.each do |tag| %>
