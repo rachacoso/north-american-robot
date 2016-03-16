@@ -16,7 +16,7 @@
 	</div>
 </div>
 
-<div class="row profile-logo">
+<div class="row">
 	<div class="medium-4 columns medium-push-8 medium-text-right">
 		<% if profile.logo_file_name %>
 			<%= image_tag profile.logo.url(:medium), alt: "Logo" %>
@@ -67,19 +67,21 @@
 				</strong>
 			</div>
 			<div class="data">
-			<span class="item">Sector</span>
-			<span class="item">
-			<strong>
+
 			<% if profile.sectors.blank? %>
 				n/a
 			<% else %>
 				<% profile.sectors.order_by(:name => "asc").each do |s| %>
-					<%= s.name %>
-					(<%= profile.subsectors.where(:sector => s).pluck(:name).to_a.join(", ") %>)<br>
+					<strong><%= s.name %></strong>
+					<% unless profile.subsectors.where(:sector => s).blank? %>
+					( <%= profile.subsectors.where(:sector => s).pluck(:name).to_a.join(", ") %> )
+					<% end %>
+					sector
+					<br>
 				<% end %>
 			<% end %>
-			</strong>
-			</span>
+
+			
 			</div>
 
 		</div>

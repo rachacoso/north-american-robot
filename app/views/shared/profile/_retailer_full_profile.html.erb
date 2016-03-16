@@ -16,60 +16,87 @@
 	</div>
 </div>
 
-<div id="profile-profile-wrapper">
-	<div class="row collapse" style="background-color: white;">
-		<div class="medium-8 columns">
-			<%= render partial: "shared/profile/components/gallery", locals: {gallery: @gallery, profile: profile} %>
-		</div><!--/.medium-8-->
-		<div class="medium-4 text-left columns">
+<div class="row">
+	<div class="medium-4 columns medium-push-8 medium-text-right">
+		<% if profile.logo_file_name %>
+			<%= image_tag profile.logo.url(:medium), alt: "Logo" %>
+		<% else %>
+			<% if !profile.facebook.blank? && fb_picture(profile.facebook) %>
+				<%= image_tag fb_picture(profile.facebook) %>
+			<% else %>
+				<%= image_tag profile.logo.url(:medium), width: "100", height: "100", alt: "Logo" %>
+			<% end %>
+		<% end %>
+	</div><!--/.medium-4-->
+	<div class="medium-8 columns medium-pull-4 medium-text-left">
+		<h1><%= profile.company_name %></h1>
 
-			<div class="tags-window previewtile">
-				<div class="profile-container">
-					<div class="profile-content">
-						<div class="row">
-							<div class="small-12 columns">
-								<div class="row collapse">
-									<div class="small-6 columns">
-										<%#= render partial: "shared/profile/distributor_rating", locals: {d: profile} %><br>
-									</div><!--/.small-6-->
-									<div class="small-6 columns text-right">
-										<%= render partial: "shared/profile/components/savebutton", locals: {profile: profile} %>
-									</div><!--/.small-6-->
-								</div><!--/.row-->
-								<h1><%= profile.company_name %></h1>
-									<% if profile.logo_file_name %>
-										<%= image_tag profile.logo.url(:medium), alt: "Logo" %>
-									<% else %>
-										<% if !profile.facebook.blank? && fb_picture(profile.facebook) %>
-											<%= image_tag fb_picture(profile.facebook) %>
-										<% else %>
-											<%= image_tag profile.logo.url(:medium), width: "100", height: "100", alt: "Logo" %>
-										<% end %>					
-									<% end %>
-								<br><br>
-								<% profile.tags.each do |tag| %>
-									<span class="tag"><%= tag.name %></span>
-								<% end %>
-								<br><br>
-								<%= render partial: "shared/profile/components/indicators", locals: {match: profile} %>
-
-								<p>
-								<%= simple_format(profile.company_introduction) %>
-								</p>
-
-								<%= render partial: "shared/profile/components/links", locals: {profile: profile} %>
-
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<%= render partial: "shared/profile/components/general_info", locals: {profile: profile} %>
+		<div>
+			<% profile.tags.each do |tag| %>
+				<span data-tooltip aria-haspopup="true" class="has-tip radius tip-right" title="GLOBAL GOOD TAGS"><span class="tag"><%= tag.name %></span></span>
+			<% end %>
+		</div>
 		
-			</div>
-		</div><!--/.medium-3-->
-	</div><!--/.row-->
+		<% if profile.class.to_s == "Brand" && !profile.trends.blank? %>
+		<div>
+			<% profile.trends.pluck(:name).each do |trend| %>
+				<span data-tooltip aria-haspopup="true" class="has-tip radius tip-right" title="TRENDS"><span class="tag trend"><%= trend %></span></span>
+			<% end %>
+		</div>
+		<% end %>
+		
+		<br>
 
+		<div class="profile-general-info">
+			<div class="data">
+				Based in 
+				<strong>
+				<% if profile.country_of_origin.blank? %>
+				 Unknown Country
+				<% else %>
+				<%= profile.country_of_origin %>
+				<% end %>
+				</strong>
+				with
+				<strong>
+				<% if profile.company_size.blank? %>
+					unknown number of employees
+				<% else %>
+					<%= CompanySize.find(profile.company_size).name rescue nil %>
+				<% end %>
+				</strong>
+			</div>
+			<div class="data">
+			<% if profile.sectors.blank? %>
+				n/a
+			<% else %>
+				<% profile.sectors.order_by(:name => "asc").each do |s| %>
+					<strong><%= s.name %></strong>
+					<% unless profile.subsectors.where(:sector => s).blank? %>
+					( <%= profile.subsectors.where(:sector => s).pluck(:name).to_a.join(", ") %> )
+					<% end %>
+					sector
+					<br>
+				<% end %>
+			<% end %>
+			</div>
+
+		</div>
+		
+			<%= render partial: "shared/profile/components/links", locals: {profile: profile} %>
+
+	</div><!--/.medium-8-->
+</div><!--/.row-->
+
+
+<div class="row">
+	<div class="small-12 columns">
+		<%= render partial: "shared/profile/components/gallery", locals: {gallery: @gallery, profile: profile} %>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
+
+<div id="profile-profile-wrapper">
 	<br>
 
 	<%= render partial: "matches/conversation_start", locals: {profile: profile} %>
