@@ -2,9 +2,7 @@
 		<div class="row">
 			<div class="small-12 columns text-center">
 				<% unless a.article_photos.blank? %>
-					<%= link_to public_view_article_url(a) do %>
-					  <div class="item"><%= image_tag a.article_photos.first.photo.url(:large) %></div>
-					<% end %>
+				  <div class="item"><%= link_to public_view_article_url(a) do %><%= image_tag a.article_photos.first.photo.url(:large) %><% end %></div>
 				<% end %>
 			</div><!--/.small-12-->
 		</div><!--/.row-->
