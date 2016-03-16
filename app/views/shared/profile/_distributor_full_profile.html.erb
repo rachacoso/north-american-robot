@@ -71,11 +71,10 @@
 				n/a
 			<% else %>
 				<% profile.sectors.order_by(:name => "asc").each do |s| %>
-					<strong><%= s.name %></strong>
+					<%= s.name %>
 					<% unless profile.subsectors.where(:sector => s).blank? %>
 					( <%= profile.subsectors.where(:sector => s).pluck(:name).to_a.join(", ") %> )
 					<% end %>
-					sector
 					<br>
 				<% end %>
 			<% end %>
