@@ -11,9 +11,6 @@ module TradeShowsHelper
 		unless show.years_participated.blank?
 			ts << "Participant for #{show.years_participated} years"
 		end
-		unless show.website.blank?
-			ts << "#{link_to 'website', clean_url(show.website), target: 'blank'}"
-		end
 		return ts
 	end
 end

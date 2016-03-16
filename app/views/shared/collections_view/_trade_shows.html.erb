@@ -1,10 +1,11 @@
+<div class="panel" data-equalizer-watch>
+<h2><strong style="color: #5f5f5f;"><%= collitem.name.empty? ? "( No Name )" : collitem.name  %></strong></h2>
 <div class="row">
 	<div class="small-12 columns">
-		<h2>
-			<strong style="color: #5f5f5f;"><%= collitem.name.empty? ? "( No Name )" : collitem.name  %></strong>
-			<small>
-			<%= get_tradeshow_display_info(collitem).join(' / ').html_safe %>
-			</small>
-		</h2>
-	</div><!--/.small-12-->
+		<h4><%= get_tradeshow_display_info(collitem).join(' / ').html_safe %></h4>
+			<% unless collitem.website.blank? %>
+		<h4><p><%= link_to 'website', clean_url(collitem.website), target: 'blank' %></p>
+			<% end %></h4>
+	</div>
+</div>
 </div>
