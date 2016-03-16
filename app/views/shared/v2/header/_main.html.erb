@@ -19,7 +19,23 @@
 					</div><!--/.row-->
 				</div><!--/.small-10-->
 				<div class="small-2 columns">
+
+				<% if @current_user && show_top_menu %>
+					<ul class="dropmenu">
+					    <li>
+					        <%= link_to dashboard_url do %><%= image_tag 'v2/user_icon.svg' %><% end %>
+					        <ul>
+				            <li><%= link_to 'DASHBOARD', dashboard_url, id: "menu-dashboard", class: 'text-right' %></li>
+				            <li><%= link_to 'PREVIEW YOUR PROFILE', eval("#{@current_user.type?}_full_profile_path"), class: 'text-right' %></li>
+				            <li><%= link_to 'EDIT YOUR PROFILE', eval("#{@current_user.type?}_path"), class: 'text-right' %></li>
+						        <li><%= link_to "LOGOUT #{@current_user.email}", logout_url, class: 'text-right' %></li>
+					        </ul>
+					    </li>
+					</ul>
+				<% else %>
 					<%= link_to dashboard_url do %><%= image_tag 'v2/user_icon.svg' %><% end %>
+				<% end %>
+
 				</div><!--/.small-2-->
 			</div><!--/.row-->
 		</div><!--/.small-6-->
