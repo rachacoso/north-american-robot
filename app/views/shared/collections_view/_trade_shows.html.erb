@@ -4,7 +4,7 @@
 	<div class="small-12 columns">
 		<h4><%= get_tradeshow_display_info(collitem).join(' / ').html_safe %></h4>
 			<% unless collitem.website.blank? %>
-		<h4><p><%= link_to 'website', clean_url(collitem.website), target: 'blank' %></p>
+		<h4><p><%= link_to 'website', "//#{clean_url(collitem.website)}", target: 'blank' %></p>
 			<% end %></h4>
 	</div>
 </div>
