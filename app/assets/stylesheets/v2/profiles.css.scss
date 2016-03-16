@@ -73,6 +73,12 @@
 
 // PROFILE STYLING (UPDATED)
 
+.profile-trade-shows {
+  h2 {
+    display: inline;
+  }
+}
+
 .profile-container {
   padding: 0;
   background-color: white;
@@ -199,6 +205,7 @@ a.profile-sq-left {
   font-size: rem-calc(17);
   font-weight: 500;
   margin: rem-calc(40) 0 ;
+  border-bottom: 1px solid $landing-middle-gray;
 }
 .profile-skus {
 

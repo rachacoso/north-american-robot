@@ -1,20 +1,10 @@
-<div class="panel" data-equalizer-watch>
-<div class="row collapse">
+<div class="row">
 	<div class="small-12 columns">
-		<h2><strong style="color: #5f5f5f;"><%= collitem.name.empty? ? "( No Name )" : collitem.name  %></strong>
-		<% unless collitem.website.blank? %>
-			<%= link_to "//#{clean_url(collitem.website)}", target: "blank" do %>
-				<i class="fi-link"></i>
-			<% end %>
-		<% end %>
+		<h2>
+			<strong style="color: #5f5f5f;"><%= collitem.name.empty? ? "( No Name )" : collitem.name  %></strong>
+			<small>
+			<%= get_tradeshow_display_info(collitem).join(' / ').html_safe %>
+			</small>
 		</h2>
 	</div><!--/.small-12-->
-	<div class="small-12 columns">
-		<h4>
-			<%= !collitem.country.blank? ? "<strong>#{collitem.country}</strong><br>".html_safe : "" %>
-			<%= collitem.date ? "#{collitem.date.strftime('%b %Y')}<br>".html_safe : ""  %>
-			<%= !collitem.years_participated.blank? ? "Participant for #{collitem.years_participated} years".html_safe : "" %>
-		</h4>
-	</div>
-</div>
 </div>
