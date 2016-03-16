@@ -195,32 +195,42 @@
 						</div><!--/.row-->
 						<div class="profile-content">
 							<div class="row">
-								<div class="small-12 columns">
-									<div class="preview-data">
 
-										<div class="data">
-											<h3>Social Causes</h3>
-										</div>
-										<div class="data">
-											<%= simple_format(profile.social_causes) %>
-										</div>
-										<br>
-										<div class="data">
-											<h3>Organizations You Support</h3>
-										</div>
-										<div class="data">
-											<%= simple_format(profile.social_organizations) %>
-										</div>
-										<br>
-										<div class="data">
-											<h3>How You Give Back</h3>
-										</div>
-										<div class="data">
-											<%= simple_format(profile.social_give_back) %>
-										</div>
+							<div class="small-12 columns">
+							<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
+								<% unless profile.social_causes.blank? %>
+								<li>
+									<div class="data">
+										<h3>Social Causes</h3>
+									</div>
+									<div class="data">
+										<%= simple_format(profile.social_causes) %>
+									</div>
+								</li>
+								<% end %>
+								<% unless profile.social_organizations.blank? %>
+								<li>
+									<div class="data">
+										<h3>Organizations You Support</h3>
+									</div>
+									<div class="data">
+										<%= simple_format(profile.social_organizations) %>
+									</div>
+								</li>
+								<% end %>
+								<% unless profile.social_give_back.blank? %>
+								<li>
+									<div class="data">
+										<h3>How You Give Back</h3>
+									</div>
+									<div class="data">
+										<%= simple_format(profile.social_give_back) %>
+									</div>
+								</li>
+								<% end %>
+							</ul>
+							</div><!--/.small-12-->
 
-									</div><!--/.preview-data-->
-								</div><!--/.small-12-->
 							</div><!--/.row-->
 						</div><!-- .profile-content -->
 					</div><!-- .profile-container -->
