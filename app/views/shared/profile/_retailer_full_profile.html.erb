@@ -49,7 +49,10 @@
 
 		<div class="profile-general-info">
 			<div class="data">
-				Retailer 
+				Retailer
+				<% unless profile.year_established.blank? %>
+				established in <strong><%= profile.year_established.strftime('%Y') %></strong>
+				<% end %>
 				with
 				<strong>
 				<% if profile.company_size.blank? %>
@@ -66,9 +69,6 @@
 				<%= profile.country_of_origin %>
 				<% end %>
 				</strong>
-				<% unless profile.year_established.blank? %>
-				established in <strong><%= profile.year_established.strftime('%Y') %></strong>
-				<% end %>
 				<br>
 				<strong>
 				<% if profile.number_of_locations.blank? %>
