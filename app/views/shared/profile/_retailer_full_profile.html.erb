@@ -49,15 +49,6 @@
 
 		<div class="profile-general-info">
 			<div class="data">
-				Based in 
-				<strong>
-				<% if profile.country_of_origin.blank? %>
-				 Unknown Country
-				<% else %>
-				<%= profile.country_of_origin %>
-				<% end %>
-				</strong>
-				with
 				<strong>
 				<% if profile.company_size.blank? %>
 					unknown number of employees
@@ -65,7 +56,38 @@
 					<%= CompanySize.find(profile.company_size).name rescue nil %>
 				<% end %>
 				</strong>
+				based in 
+				<strong>
+				<% if profile.country_of_origin.blank? %>
+				 Unknown Country
+				<% else %>
+				<%= profile.country_of_origin %>
+				<% end %>
+				</strong>
+				<br>
+				with
+				<strong>
+				<% if profile.number_of_locations.blank? %>
+					Unknown number of
+				<% else %>
+					<%= profile.number_of_locations %>
+				<% end %>
+				locations
+				</strong>
+				<% unless profile.export_countries.blank? %>
+					( in <strong><%= profile.export_countries.pluck(:country).join(", ") %></strong> )
+				<% end %>
+				  selling
+				<strong>
+				<% if profile.number_of_brands_sold.blank? %>
+					Unknown number of
+				<% else %>
+					<%= profile.number_of_brands_sold %>
+				<% end %>
+				brands
+				</strong>
 			</div>
+
 			<div class="data">
 			<% if profile.sectors.blank? %>
 				n/a
@@ -79,6 +101,7 @@
 				<% end %>
 			<% end %>
 			</div>
+
 			<div class="data">
 				<%= render partial: "shared/profile/components/links", locals: {profile: profile} %>
 			</div>
@@ -134,23 +157,20 @@
 							</div><!--/.small-12-->
 						</div><!--/.row-->
 						<div class="profile-content">
-							<div class="previewtile">
-
 							<div class="row">
 								<div class="small-12 columns">
 									<div class="preview-data">
-									<span class="preview-data-tile-title">Marketing &amp; PR</span><br>
 									<% unless profile.internal_marketing_size.blank? %>
 									<h6>Internal Marketing / PR Team Size: <strong><%= profile.internal_marketing_size %></strong></h6>
 									<% end %>
 									
-									<h6>External Marketing / PR?: <strong><%= profile.employ_pr_agency ? "Yes" : "No" %></strong></h6>
+									<h6>This retailer <strong><%= profile.employ_pr_agency ? "uses" : "does not use" %> external Marketing / PR resources</strong> </h6>
 									
 									<% unless profile.customer_database_size.blank? %>
 									<h6>Customer Database Size: <strong><%= profile.customer_database_size %></strong></h6>
 									<% end %>
 
-									<h6>Product Marketing:
+									<h6>This retailer advertises via:
 										<%= render partial: "/shared/profile/components/marketing_type", locals: {name: "Print" ,p: profile.marketing_via_print}%>,
 										<%= render partial: "/shared/profile/components/marketing_type", locals: {name: "Online" ,p: profile.marketing_via_online}%>,
 										<%= render partial: "/shared/profile/components/marketing_type", locals: {name: "Email" ,p: profile.marketing_via_email}%>,
@@ -162,10 +182,49 @@
 									</div><!--/.preview-data-->
 								</div><!--/.small-12-->
 							</div><!--/.row-->
-
-						</div><!-- .previewtile -->
 						</div><!-- .profile-content -->
 					</div><!-- .profile-container -->
+
+					<div class="profile-container">
+						<div class="row">
+							<div class="small-12 columns">
+								<div class="profile-section-head">
+									GIVING PLACE
+								</div><!--.profile-section-head-->								
+							</div><!--/.small-12-->
+						</div><!--/.row-->
+						<div class="profile-content">
+							<div class="row">
+								<div class="small-12 columns">
+									<div class="preview-data">
+
+										<div class="data">
+											<h3>Social Causes</h3>
+										</div>
+										<div class="data">
+											<%= simple_format(profile.social_causes) %>
+										</div>
+										<br>
+										<div class="data">
+											<h3>Organizations You Support</h3>
+										</div>
+										<div class="data">
+											<%= simple_format(profile.social_organizations) %>
+										</div>
+										<br>
+										<div class="data">
+											<h3>How You Give Back</h3>
+										</div>
+										<div class="data">
+											<%= simple_format(profile.social_give_back) %>
+										</div>
+
+									</div><!--/.preview-data-->
+								</div><!--/.small-12-->
+							</div><!--/.row-->
+						</div><!-- .profile-content -->
+					</div><!-- .profile-container -->
+
 
 		</div><!--/.small-12 -->
 	</div><!--/.row-->
