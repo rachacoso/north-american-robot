@@ -19,7 +19,7 @@
 				<% if @current_user && show_top_menu %>
 					<ul class="dropmenu">
 					    <li>
-					        <%= link_to dashboard_url do %><%= image_tag 'v2/user_icon.svg' %><% end %>
+					        <%= link_to dashboard_url do %><%= image_tag 'v2/user_icon_logged_in.svg' %><% end %>
 					        <ul>
 										<li>
 											<%= link_to 'Admin', admin_url %>

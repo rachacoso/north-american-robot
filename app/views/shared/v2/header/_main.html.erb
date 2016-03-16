@@ -23,12 +23,13 @@
 				<% if @current_user && show_top_menu %>
 					<ul class="dropmenu">
 					    <li>
-					        <%= link_to dashboard_url do %><%= image_tag 'v2/user_icon.svg' %><% end %>
+					        <%= link_to dashboard_url do %><%= image_tag 'v2/user_icon_logged_in.svg' %><% end %>
 					        <ul>
+					        	<li class="section-title">Welcome to Landing for <%= @current_user.type?.capitalize %>s <%= @current_user.email %></li>
 				            <li><%= link_to 'DASHBOARD', dashboard_url, id: "menu-dashboard", class: 'text-right' %></li>
 				            <li><%= link_to 'PREVIEW YOUR PROFILE', eval("#{@current_user.type?}_full_profile_path"), class: 'text-right' %></li>
 				            <li><%= link_to 'EDIT YOUR PROFILE', eval("#{@current_user.type?}_path"), class: 'text-right' %></li>
-						        <li><%= link_to "LOGOUT #{@current_user.email}", logout_url, class: 'text-right' %></li>
+						        <li><%= link_to "LOGOUT", logout_url, class: 'text-right' %></li>
 					        </ul>
 					    </li>
 					</ul>
