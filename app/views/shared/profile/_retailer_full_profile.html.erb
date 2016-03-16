@@ -79,24 +79,25 @@
 				<% end %>
 			<% end %>
 			</div>
-
+			<div class="data">
+				<%= render partial: "shared/profile/components/links", locals: {profile: profile} %>
+			</div>
 		</div>
-		
-			<%= render partial: "shared/profile/components/links", locals: {profile: profile} %>
-
 	</div><!--/.medium-8-->
 </div><!--/.row-->
 
 
 <div class="row">
 	<div class="small-12 columns">
-		<%= render partial: "shared/profile/components/gallery", locals: {gallery: @gallery, profile: profile} %>
+		<div class="company-introduction">
+		<%= simple_format(profile.company_introduction) %>
+		</div>
+		<%#= render partial: "shared/profile/components/gallery", locals: {gallery: @gallery, profile: profile} %>
 	</div><!--/.small-12-->
 </div><!--/.row-->
 
 
 <div id="profile-profile-wrapper">
-	<br>
 
 	<%= render partial: "matches/conversation_start", locals: {profile: profile} %>
 

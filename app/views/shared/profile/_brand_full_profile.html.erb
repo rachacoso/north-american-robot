@@ -79,11 +79,10 @@
 				<% end %>
 			<% end %>
 			</div>
-
+			<div class="data">
+				<%= render partial: "shared/profile/components/links", locals: {profile: profile} %>
+			</div>
 		</div>
-		
-			<%= render partial: "shared/profile/components/links", locals: {profile: profile} %>
-
 	</div><!--/.medium-8-->
 </div><!--/.row-->
 

@@ -193,7 +193,7 @@ a.profile-sq-left {
 
 }
 
-.brand-positioning {
+.brand-positioning, .company-introduction {
   margin-top: rem-calc(40);
   margin-bottom: rem-calc(40);
 }
@@ -255,6 +255,7 @@ a.profile-sq-left {
   .data {
     font-size: rem-calc(15);
     font-weight: 200;
+    margin: rem-calc(10) 0;
     strong {
       font-weight: 500;
       color: $landing-dark-gray;
