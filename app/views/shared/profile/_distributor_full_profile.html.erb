@@ -70,11 +70,19 @@
 				<% end %>
 				</strong>
 			</div>
-			
+
+		</div>
+
+	</div><!--/.medium-8-->
+</div><!--/.row-->
+
+
+<div class="row">
+	<div class="small-12 columns">
+			<ul class="small-block-grid-1 medium-block-grid-3">
 			<% unless profile.sectors.blank? %>
-			<div class="data">
-			<span class="item">Sectors (subsectors) </span>
-			<span class="item">
+			<li><div class="data">
+			Sectors (subsectors)<br>
 				<strong>
 				<% profile.sectors.order_by(:name => "asc").each do |s| %>
 					<%= s.name %>
@@ -84,13 +92,13 @@
 					<br>
 				<% end %>
 				</strong>
-			</span>
-			</div>
+
+			</div></li>
 			<% end %>
 
-			<div class="data">
-				<span class="item">Channels (capacity)</span>										
-				<span class="item">
+			<% unless profile.channels.blank? %>
+			<li><div class="data">
+				Channels (capacity)<br>
 					<% profile.channels.each do |ch| %>
 						<strong><%= ch.name  %> <%= profile.channel_capacities.where(channel_id: ch.id).first.capacity.blank? ? "" : "(#{profile.channel_capacities.where(channel_id: ch.id).first.capacity})" %></strong><br>
 					<% end %>
@@ -99,21 +107,26 @@
 							<strong><%= cch.custom_channel_name %> <small>(Custom Channel)</small> (<%= cch.capacity %>)</strong><br>
 						<% end %>
 					<% end %>								
-				</span>
-			</div>
-			<div class="data">
-				<span class="item">Countries of Disribution</span>
-				<span class="item"><strong><%= profile.export_countries.pluck(:country).join("<br> ").html_safe %></strong></span>
-			</div>
+			</div></li>
+			<% end %>
+
+			<% unless profile.export_countries.blank? %>
+			<li><div class="data">
+				Countries of Disribution<br>
+				<strong><%= profile.export_countries.pluck(:country).join("<br> ").html_safe %></strong>
+			</div></li>
+			<% end %>
+			</ul>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
+<div class="row">
+	<div class="small-12 columns">
 			<div class="data">
 				<%= render partial: "shared/profile/components/links", locals: {profile: profile} %>
 			</div>
-		</div>
-
-	</div><!--/.medium-8-->
+	</div><!--/.small-12-->
 </div><!--/.row-->
-
-
 <div class="row">
 	<div class="small-12 columns">
 		<div class="company-introduction">
