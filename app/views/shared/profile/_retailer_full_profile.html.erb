@@ -93,20 +93,19 @@
 			</div>
 
 			<div class="data">
-			Sectors (subsectors)<br>
-			<strong>
 			<% if profile.sectors.blank? %>
-				n/a
+				<strong>n/a</strong>
 			<% else %>
 				<% profile.sectors.order_by(:name => "asc").each do |s| %>
+					<strong>
 					<%= s.name %>
 					<% unless profile.subsectors.where(:sector => s).blank? %>
 					( <%= profile.subsectors.where(:sector => s).pluck(:name).to_a.join(", ") %> )
 					<% end %>
-					<br>
+					</strong>
+					sector<br>
 				<% end %>
 			<% end %>
-			</strong>
 			</div>
 
 			<div class="data">
