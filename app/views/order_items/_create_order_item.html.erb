@@ -1,2 +1,9 @@
-<%= @order.id %><br>
-<%= @order.status %>
+<div class="row">
+	<div class="small-12 columns text-center">
+		<% if flash[:notice] %>
+			<h2><%= flash[:notice] %></h2>
+		<% else %>
+			<h2><%= @order_item.quantity %> Units of <%= @order_product.name %> has been added to your order</h2>
+		<% end %>
+	</div><!--/.small-12-->
+</div><!--/.row-->

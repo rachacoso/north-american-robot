@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   post   '/order/new' => 'orders#create', as: 'new_order'
 
   resources :order_items, only: [:create, :edit, :update, :destroy, :index]
-  get   '/order/newitem/:id' => 'order_items#new', as: 'new_order_item'
+  get   '/order/newitem/:product_id' => 'order_items#new', as: 'new_order_item'
 
 
   # "static" pages

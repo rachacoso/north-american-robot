@@ -2,8 +2,8 @@ class OrderItem # for V2 ordering
   include Mongoid::Document
 	include Mongoid::Timestamps::Created::Short
   
-  belongs_to :order
+  embedded_in :order
 
   field :quantity, type: Integer
-  embeds_one :product
+  field :product_id, type: BSON::ObjectId
 end

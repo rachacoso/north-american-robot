@@ -10,7 +10,7 @@ class Order # for V2 ordering
   # log who sent it
   belongs_to :user
 
-  has_many :order_items
+  embeds_many :order_items
   field :status, type: String, default: "open" # Values: OPEN, CLOSED
 
   scope :open, ->{where(status: "open")}

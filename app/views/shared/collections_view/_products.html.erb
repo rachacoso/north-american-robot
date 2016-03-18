@@ -40,7 +40,7 @@
 		<% if @current_user.can_order %>
 		<div class="row">
 			<div class="small-12 columns">
-				<%= link_to "Add Item to Order", new_order_item_url(collitem.id), remote: true %>
+				<%= link_to "Order this SKU", new_order_item_url(collitem.id), remote: true %>
 			</div><!--/.small-12-->
 		</div><!--/.row-->
 		<% end %>

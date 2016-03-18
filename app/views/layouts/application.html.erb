@@ -48,6 +48,11 @@
 </div>
 <div class="overlay" id="profile-preview-overlay"></div>
 
+<div id="order-item">
+  <a id="close-order-item" aria-label="Close"><i class="fi-x"></i></a>
+  <div id="order-item-data"></div>
+</div>
+<div class="overlay" id="order-item-overlay"></div>
 
 <%= javascript_include_tag "application" %>
 <%= content_for?(:javascript_foot) ? yield(:javascript_foot) : "" %>

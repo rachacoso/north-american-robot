@@ -1,25 +1,38 @@
+<%= form_for @order_item, remote: true do |f| %>
+<%= hidden_field_tag "product_id", @order_product.id %>
 <div class="row">
-	<div class="medium-9 small-centered columns">
-		<%= @order_item.brand.company_name %>
-		<h1><strong><%= @order_item.name %></strong></h1>
-		<h4>$ <%= @order_item.msrp %> MSRP</h4>
-		<%= form_for OrderItem.new do |f| %>
-			<%= hidden_field_tag "id", @order_item.id %>
+	<div class="medium-6 columns">
+		<h3><%= @order_product.brand.company_name %></h3>
+		<h2><strong><%= @order_product.name %></strong></h2>
+	</div><!--/.medium-6-->
+	<div class="medium-6 columns">
+		<br>
 			<div class="row">
-				<div class="small-4 columns">
-					<%= f.number_field :quantity, min: 0, label: false %>
-				</div><!--/.small-4-->
-				<div class="small-4 columns">
-					<h3>UNITS</h3>
-				</div><!--/.small-4-->
-				<div class="small-4 columns">
-					<%= f.submit "Add to order", class: "tiny button" %>
-				</div><!--/.small-4-->
-			</div><!--/.row-->			
-		<% end %>
-	</div><!--/.small-9 small-centered-->
+				<div class="small-10 medium-8 small-centered columns">
+					<div class="row">
+						<div class="small-12 columns text-center">
+							<p>$ <%= @order_product.msrp %> MSRP</p>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+					<div class="row collapse">
+						<div class="small-6 columns">
+							<%= f.number_field :quantity, min: 0, label: false %>		
+						</div><!--/.small-6-->
+						<div class="small-6 columns">
+							<span class="postfix">UNITS</span>
+						</div><!--/.small-6-->
+					</div><!--/.row-->
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+			<div class="row">
+				<div class="small-12 columns text-center">
+					<%= f.submit "Order SKU", class: "tiny button" %>
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+		<span style="color: red;font-weight: 100;font-size: 0.75em;"><%= flash[:error] ? flash[:error] : "" %></span>
+	</div><!--/.medium-6-->
 </div><!--/.row-->
-
+<% end %>
 
 
 

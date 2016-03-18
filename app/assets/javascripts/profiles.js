@@ -7,5 +7,10 @@ $( document ).ready(function() {
 		$('.overlay').fadeOut();
 	});	
 
+	$('.overlay#order-item-overlay, a#close-order-item').on('click', function(e){
+		e.preventDefault();
+		$('#order-item').fadeOut();
+		$('.overlay').fadeOut();
+	});	
 
 });
