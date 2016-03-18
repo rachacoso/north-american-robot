@@ -6,15 +6,32 @@
 				<%= f.text_field :name, label: "Product Name", placeholder: 'Product Name' %>
 			</div>
 			<div class="medium-3 columns">
-				<%= f.label :msrp, "MSRP" %>
+<%#				<%= f.label :msrp, "MSRP (Display Only)" %>
+<%#				<div class="row collapse">   %>
+<%#					<div class="small-2 columns">   %>
+<%#						<span class="prefix">$</span>   %>
+<%#					</div><!--/.small-2-->   %>
+<%#					<div class="small-10 columns">   %>
+<%#						<%= f.text_field :msrp, label: false, placeholder: 'MSRP'  %>
+<%#					</div><!--/.small-10-->   %>
+<%#				</div><!--/.row-->   %>
+				<%= f.label :price, "MSRP" %>
+				<% if defined?(cb) && cb.msrp.present? && !cb.price.present? %>
+				<small>[Previous MSRP <%= cb.msrp %>]</small>
+				<% end %>
 				<div class="row collapse">
 					<div class="small-2 columns">
 						<span class="prefix">$</span>
 					</div><!--/.small-2-->
 					<div class="small-10 columns">
-						<%= f.text_field :msrp, label: false, placeholder: 'MSRP'  %>		
+						<% if defined?(cb) && cb.price.present? %>
+							<%= f.number_field :price, label: false, step: "any", placeholder: 'MSRP', value: cb.display_price  %>
+						<% else %>
+							<%= f.number_field :price, label: false, step: "any", placeholder: 'MSRP'  %>
+						<% end %>
 					</div><!--/.small-10-->
 				</div><!--/.row-->
+
 			</div>
 			<div class="medium-4 columns">
 				<%= f.text_field :country_of_manufacture, class: "country-autocomplete", label: "Manufactured in", placeholder: 'Country of Manufacture'  %>

@@ -14,4 +14,15 @@ class Product
 
  	belongs_to :brand
   
+	def save_price(p)
+		unless p.blank?
+			pc = (p.to_f * 100).round
+			self.price = pc
+			self.save!
+		end
+	end
+
+	def display_price
+		return '%.2f' % (self.price.to_f / 100)
+	end
 end

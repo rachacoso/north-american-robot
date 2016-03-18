@@ -29,7 +29,9 @@
 			<small>Manufactured in <%= collitem.country_of_manufacture %></small>
 		<% end %>
 		</h2>
-		<% unless collitem.msrp.blank? %>
+		<% if collitem.price.present? %>
+			<h4>$<%= collitem.display_price %> MSRP</h4>
+		<% elsif collitem.msrp.present? %>
 			<h4>$<%= collitem.msrp %> MSRP</h4>
 		<% end %>
 
@@ -37,7 +39,7 @@
 			<span class="tag"><%= tag.name %></span>
 		<% end %>
 
-		<% if @current_user.can_order %>
+		<% if @current_user.can_order && !collitem.price.blank? %>
 		<div class="row">
 			<div class="small-12 columns">
 				<%= link_to "Order this SKU", new_order_item_url(collitem.id), remote: true %>

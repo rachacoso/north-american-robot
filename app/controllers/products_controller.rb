@@ -3,6 +3,7 @@ class ProductsController < ApplicationController
 	def create
 		brand = @current_user.brand
 		new_item = brand.products.create!(product_parameters)
+		new_item.save_price(params[:product][:price])
 		@identifier = 'name'
 		@iscurrent = params[:product][:current]
 
@@ -44,6 +45,7 @@ class ProductsController < ApplicationController
 
 		collitem = brand.products.find(params[:id])
 		collitem.update!(product_parameters)
+		collitem.save_price(params[:product][:price])
 		@identifier = 'name'
 		@iscurrent = collitem.current
 		@new_item_id = collitem.id
