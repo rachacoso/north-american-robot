@@ -30,6 +30,10 @@ class User
 	accepts_nested_attributes_for :distributor
 	accepts_nested_attributes_for :retailer
 
+
+	# V2 ORDERING to identify who created order
+	has_many :orders
+
 	# to identify who created messages
 	has_many :messages
 
@@ -77,6 +81,10 @@ class User
 		else
 			return false
 		end
+	end
+
+	def can_order
+		return true if self.distributor || self.retailer
 	end
 
 	def get_parent

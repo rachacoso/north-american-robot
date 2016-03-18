@@ -74,6 +74,8 @@ class Retailer
 	field :social_organizations, type: String # Organizations you support
 	field :social_give_back, type: String # How you give back
 
+	# V2 ORDERING
+	has_many :orders
 
 	# OTHER
 

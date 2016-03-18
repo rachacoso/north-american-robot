@@ -37,6 +37,14 @@
 			<span class="tag"><%= tag.name %></span>
 		<% end %>
 
+		<% if @current_user.can_order %>
+		<div class="row">
+			<div class="small-12 columns">
+				<%= link_to "Add Item to Order", new_order_item_url(collitem.id), remote: true %>
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+		<% end %>
+
 	</div><!--/.medium-4-->
 	<div class="medium-4 columns">
 

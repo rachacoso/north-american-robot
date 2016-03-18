@@ -81,6 +81,10 @@ class Brand
 	# field :countries_where_exported, type: String
 	embeds_many :export_countries, as: :exportable, cascade_callbacks: true
 
+
+	# V2 ORDERING
+	has_many :orders
+
 	# array of saved distributor matches
 	has_and_belongs_to_many :saved_matches, class_name: "Distributor", inverse_of: nil
 

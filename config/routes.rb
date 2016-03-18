@@ -24,6 +24,14 @@ Rails.application.routes.draw do
   post   '/admin/adduser/:id' => 'admin#add_user', as: 'admin_add_user'
   delete   '/admin/deleteuser/:id' => 'admin#delete_user', as: 'admin_delete_user'
 
+
+  # ORDERS
+  post   '/order/new' => 'orders#create', as: 'new_order'
+
+  resources :order_items, only: [:create, :edit, :update, :destroy, :index]
+  get   '/order/newitem/:id' => 'order_items#new', as: 'new_order_item'
+
+
   # "static" pages
   get  '/pages/:page' => 'pages#show'
 
