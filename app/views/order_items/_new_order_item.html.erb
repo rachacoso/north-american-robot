@@ -4,16 +4,25 @@
 	<div class="medium-6 columns">
 		<h3><%= @order_product.brand.company_name %></h3>
 		<h2><strong><%= @order_product.name %></strong></h2>
+		<% if @order_product.item_id.present? %>
+			<h4>Product ID Number: <%= @order_product.item_id %></h4>
+		<% end %>
+		<% if @order_product.item_size.present? %>
+			<h4>Size: <%= @order_product.item_size %></h4>
+		<% end %>
 	</div><!--/.medium-6-->
 	<div class="medium-6 columns">
 		<br>
 			<div class="row">
+				<div class="small-10 small-centered columns text-center">
+					<p>
+						<del>$ <%= @order_product.display_price %> MSRP</del><br>
+						$ <%= order_item_display_price(@order_product.price * 0.5) %> Wholesale (50%)
+					</p>
+				</div><!--/.small-10 small-centered-->
+			</div><!--/.row-->
+			<div class="row">
 				<div class="small-10 medium-8 small-centered columns">
-					<div class="row">
-						<div class="small-12 columns text-center">
-							<p>$ <%= @order_product.display_price %> MSRP</p>
-						</div><!--/.small-12-->
-					</div><!--/.row-->
 					<div class="row collapse">
 						<div class="small-6 columns">
 							<%= f.number_field :quantity, min: 0, label: false %>		
@@ -26,7 +35,7 @@
 			</div><!--/.row-->
 			<div class="row">
 				<div class="small-12 columns text-center">
-					<%= f.submit "Order SKU", class: "tiny button" %>
+					<%= f.submit "Add SKU to Order", class: "tiny button" %>
 				</div><!--/.small-12-->
 			</div><!--/.row-->
 		<span style="color: red;font-weight: 100;font-size: 0.75em;"><%= flash[:error] ? flash[:error] : "" %></span>

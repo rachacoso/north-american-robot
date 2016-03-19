@@ -35,6 +35,14 @@
 			<h4>$<%= collitem.msrp %> MSRP</h4>
 		<% end %>
 
+		<% if collitem.item_id.present? %>
+			<h4>Product ID Number: <%= collitem.item_id %></h4>
+		<% end %>
+
+		<% if collitem.item_size.present? %>
+			<h4>Size: <%= collitem.item_size %></h4>
+		<% end %>
+
 		<% collitem.tags.each do |tag| %>
 			<span class="tag"><%= tag.name %></span>
 		<% end %>

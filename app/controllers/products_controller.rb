@@ -122,7 +122,9 @@ class ProductsController < ApplicationController
     params.require(:product).permit(
 			:name,
 			:description,
-			:msrp,
+			# :msrp,
+			:item_id,
+			:item_size,
 			:key_benefits,
 			:country_of_manufacture,
 			:current
