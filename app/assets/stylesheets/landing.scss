@@ -68,6 +68,20 @@ label {
 }
 
 
+a.landing-button, input[type=submit].landing-button {
+  display: inline-block;
+  background-color: $landing-blue;
+  border: 1px solid $landing-blue;
+  color: white;
+  font-weight: 300;
+  padding: rem-calc(5) rem-calc(5);
+  margin: rem-calc(10) 0;
+  line-height: rem-calc(12);
+}
+a.landing-button:hover, input[type=submit].landing-button:hover {
+  border: 1px solid $landing-middle-gray;
+}
+
 // Top Bar
 .topbar {
   border-radius: 0px;

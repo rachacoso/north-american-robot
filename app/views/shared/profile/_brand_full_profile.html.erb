@@ -91,8 +91,8 @@
 
 	</div><!--/.medium-8-->
 	<div class="medium-4 columns medium-text-right">
-		[contact button]<br>
-		<%= current_order(profile) ? (link_to "open order", order_url(current_order(profile)), remote: true) : "" %>
+		<%= link_to "Contact", "#", remote:true, class: "landing-button" %>
+		<%= current_order(profile) ? (link_to "View Open Order", order_url(current_order(profile)), remote: true, class: "landing-button") : "" %>
 	</div><!--/.medium-4-->
 </div><!--/.row-->
 
