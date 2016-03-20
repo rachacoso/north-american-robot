@@ -2,7 +2,7 @@
 <%= hidden_field_tag "product_id", @order_product.id %>
 <div class="row">
 	<div class="medium-6 columns">
-		<h3><%= @order_product.brand.company_name %></h3>
+		<h3 style="margin-bottom: 0;"><%= @order_product.brand.company_name %></h3>
 	</div>
 </div>
 <div class="row">
@@ -16,7 +16,7 @@
 		<% end %>
 		<p>
 			<%= number_to_currency(@order_product.price_in_dollars) %> MSRP<br>
-			<%= number_to_currency(@order_product.tiered_price_in_dollars) %> Unit Price<br>
+			<strong><%= number_to_currency(@order_product.tiered_price_in_dollars) %> Unit Price</strong>
 		</p>
 	</div><!--/.medium-6-->
 	<div class="medium-6 columns">
