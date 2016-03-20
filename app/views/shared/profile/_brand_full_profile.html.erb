@@ -145,7 +145,7 @@
 
 			<div class="medium-11 medium-centered columns">
 			<% profile.products.where(current: false).order_by(:description.desc, :key_benefits.desc).each do |p| %>												<%= render partial: "shared/collections_view/products", locals: {
-					collitem: p
+					collitem: p, profile: profile
 				} %>
 			<% end %>
 			</div><!--/.medium-11-->
