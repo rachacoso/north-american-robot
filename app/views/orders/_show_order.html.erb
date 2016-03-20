@@ -10,7 +10,7 @@
 <div class="row">
 	<div class="small-12 columns text-center">
 		<%= link_to "Submit Order", submit_order_url(@order,0), class: "landing-button", remote: true %>
-		<%= link_to "Continue Ordering", "#", class: "landing-button secondary", id: "continue-ordering" %>
+		<%= link_to "Continue Ordering", view_brand_url(@order.brand), class: "landing-button secondary", id: "continue-ordering" %>
 	</div><!--/.small-12-->
 </div><!--/.row-->
 <% end %>

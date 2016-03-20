@@ -1,1 +1,19 @@
-<%= render "create_order_item" %>
+<%= render partial: 'shared/v2/header/main' %>
+
+<div class="row">
+	<div class="small-12 columns">
+		<nav class="breadcrumbs">
+			<%= link_to "Beauty", root_url %>
+		  <%= link_to "Find", brands_url %>
+		  <a class="current" href="#"><%= @order.brand.company_name %></a>
+		</nav>
+	</div>
+</div>
+
+<%= render "orders/show_order" %>
+
+<div class="row">
+	<div class="small-12 columns text-center">
+		<%= link_to "Continue Ordering", view_brand_url(@order.brand), class: "landing-button secondary" %>		
+	</div><!--/.small-12-->
+</div><!--/.row-->
