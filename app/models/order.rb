@@ -11,9 +11,10 @@ class Order # for V2 ordering
   belongs_to :user
 
   embeds_many :order_items, cascade_callbacks: true
-  field :status, type: String, default: "open" # Values: OPEN, CLOSED
+  field :status, type: String, default: "open" # Values: OPEN, PENDING, CLOSED
 
   scope :open, ->{where(status: "open")}
+  scope :pending, ->{where(status: "pending")}
   scope :closed, ->{where(status: "closed")}
 
   def total_price # in dollars
