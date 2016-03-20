@@ -204,13 +204,14 @@ a.profile-sq-left {
   color: $landing-middle-gray;
   font-size: rem-calc(17);
   font-weight: 500;
-  margin: rem-calc(40) 0 0 rem-calc(10) ;
+  margin: rem-calc(40) 0 rem-calc(20) rem-calc(10) ;
   border-bottom: 1px solid $landing-middle-gray;
 }
 .profile-skus {
 
   .profile-sku-item {
     margin: rem-calc(20) 0 ;
+    padding-bottom: rem-calc(20);
     border-bottom: 1px solid $landing-middle-gray;
   }
 
