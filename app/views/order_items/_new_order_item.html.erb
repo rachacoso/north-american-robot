@@ -15,8 +15,8 @@
 			<h4>Size: <%= @order_product.item_size %></h4>
 		<% end %>
 		<p>
-			<del><%= number_to_currency(@order_product.price_in_dollars) %> MSRP</del><br>
-			<%= number_to_currency(@order_product.tiered_price_in_dollars) %> Wholesale (50%)<br>
+			<%= number_to_currency(@order_product.price_in_dollars) %> MSRP<br>
+			<%= number_to_currency(@order_product.tiered_price_in_dollars) %> Unit Price<br>
 		</p>
 	</div><!--/.medium-6-->
 	<div class="medium-6 columns">
