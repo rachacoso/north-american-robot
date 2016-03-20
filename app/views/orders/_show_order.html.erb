@@ -9,7 +9,7 @@
 <% else %>
 <div class="row">
 	<div class="small-12 columns text-center">
-		<%= link_to "Finalize Order", finalize_order_url(@order,0), class: "landing-button", remote: true %>
+		<%= link_to "Submit Order", submit_order_url(@order,0), class: "landing-button", remote: true %>
 		<%= link_to "Continue Ordering", "#", class: "landing-button secondary", id: "continue-ordering" %>
 	</div><!--/.small-12-->
 </div><!--/.row-->

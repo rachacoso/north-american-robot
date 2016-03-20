@@ -1,0 +1,25 @@
+<% if @order.status == "pending" %>
+	<div class="row">
+		<div class="small-12 columns text-center">
+			<h2>Your order has been submitted to <br><strong><%= @order.brand.company_name %></strong></h2>
+			<h3>You will receive a final order invoice via email from Landing International. Orders may take up to 24 hours to process.</h3>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+	<div class="row">
+		<div class="small-12 columns text-center">
+			<%= link_to "OK", view_brand_url(@order.brand), class: "landing-button", id: "submit-close" %>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+<% else %>
+	<div class="row">
+		<div class="small-12 columns text-center">
+			<h2>Would you like to submit this order to <br><strong><%= @order.brand.company_name %></strong></h2>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+	<div class="row">
+		<div class="small-12 columns text-center">
+			<%= link_to "Yes", submit_order_url(@order,1), class: "landing-button", remote: true %>
+			<%= link_to "Not Yet", view_brand_url(@order.brand), class: "landing-button secondary", id: "submit-close" %>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+<% end %>

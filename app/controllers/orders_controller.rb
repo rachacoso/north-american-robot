@@ -1,12 +1,12 @@
 class OrdersController < ApplicationController
 
-	before_action :set_order, only: [:show, :edit, :update, :destroy, :finalize]
+	before_action :set_order, only: [:show, :edit, :update, :destroy, :submit]
 
 	def show
 
 	end
 
-	def finalize
+	def submit
 		if params[:confirm].to_i == 1
 			@order.status = "pending"
 			@order.save!

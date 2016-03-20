@@ -1,8 +1,9 @@
+<% unless @order.status == "pending" %>
 // close any open order-items
 $('#order').fadeOut();
 $('.overlay').fadeOut();
-
-$('#order-item-data').html("<%= j (render partial: 'finalize_order') %>");
+<% end %>
+$('#order-item-data').html("<%= j (render partial: 'submit_order') %>");
 $('.overlay#order-item-overlay').fadeIn();
 $('#order-item').fadeIn();
 

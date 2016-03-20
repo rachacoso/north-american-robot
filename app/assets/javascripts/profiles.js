@@ -12,7 +12,7 @@ function setModalActions () {
 		$('.overlay').fadeOut();
 	});	
 
-	$('.overlay#order-item-overlay, a#close-order-item, a#finalize-close, a#finalized-close').on('click', function(e){
+	$('.overlay#order-item-overlay, a#close-order-item, a#submit-close').on('click', function(e){
 		e.preventDefault();
 		$('#order-item').fadeOut();
 		$('.overlay').fadeOut();

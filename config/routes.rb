@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   # ORDERS
   resources :orders, only: [:show, :edit, :update, :destroy, :index]
   post   '/order/new' => 'orders#create', as: 'new_order'
-  get   '/order/f/:id/:confirm' => 'orders#finalize', as: 'finalize_order'
+  get   '/order/s/:id/:confirm' => 'orders#submit', as: 'submit_order'
 
   resources :order_items, only: [:create, :edit, :update, :destroy, :index]
   get   '/order/newitem/:product_id' => 'order_items#new', as: 'new_order_item'
