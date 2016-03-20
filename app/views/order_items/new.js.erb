@@ -1,3 +1,7 @@
+// close any open order modals
+$('#order').fadeOut();
+$('.overlay').fadeOut();
+
 $('#order-item-data').html("<%= j (render partial: 'new_order_item') %>");
 $('.overlay#order-item-overlay').fadeIn();
 $('#order-item').fadeIn();

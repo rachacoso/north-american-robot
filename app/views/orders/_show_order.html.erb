@@ -3,11 +3,29 @@
 		<%= image_tag 'v2/logo.svg', width: "100" %>
 		<h2>
 			Order
-			<% if @order.c_at.present? %>
-				<br><small><%= @order.c_at.strftime("started on: %d %b %Y") %></small>
-			<% end %>			
 		</h2>
 	</div><!--/.small-12-->
+</div><!--/.row-->
+<div class="row">
+	<div class="medium-11 medium-centered columns">
+			<% if @order.u_at.present? %>
+				<h4><%= @order.u_at.strftime("Date: %d %b %Y") %></h4>
+			<% elsif @order.c_at.present? %>
+				<h4><%= @order.c_at.strftime("Date: %d %b %Y") %></h4>
+			<% end %>
+		</div><!--/.medium-10-->
+</div><!--/.row-->
+<div class="row">
+	<div class="medium-11 medium-centered columns">
+		<div class="row">
+			<div class="medium-6 columns">
+				<h4><%= @order.brand.company_name %></h4>
+			</div><!--/.medium-6-->
+			<div class="medium-6 columns">
+				<h4><%= @current_user.get_parent.company_name %></h4>
+			</div><!--/.medium-6-->
+		</div><!--/.row-->
+	</div><!--/.medium-10-->
 </div><!--/.row-->
 <div class="row">
 	<div class="small-12 columns">
@@ -22,9 +40,9 @@
 			<tbody>
 				<% @order.order_items.each do |item| %>
 				<tr>
-					<td><%= item.product.name %></td>
+					<td><%= link_to item.product.name, new_order_item_url(item.product.id), remote: true %> <%= item.product.item_id.present? ? "(SKU: #{item.product.item_id})" : "" %></td>
 					<td><%= number_to_currency(item.product.price_in_dollars) %></td>
-					<td class="text-right"><%= item.quantity %></td>
+					<td class="text-right"><%= link_to item.quantity, new_order_item_url(item.product.id), remote: true %></td>
 					<td><%= number_to_currency(item.product.tiered_price_in_dollars) %></td>
 					<td><%= number_to_currency(item.total_price) %></td>
 				</tr>
