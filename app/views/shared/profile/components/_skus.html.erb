@@ -1,0 +1,29 @@
+<% if profile.products.where(current: true).length > 0 %>
+
+	<div class="small-12 columns">
+		<div class="profile-section-head"><%= profile.products.where(current: true).length %> CURRENT SKUs</div>
+	</div><!--/.small-12-->
+	
+	<div class="medium-11 medium-centered columns">
+	<% profile.products.where(current: true).order_by(:description.desc, :key_benefits.desc).each do |p| %>
+		<%= render partial: "shared/collections_view/products", locals: {
+			collitem: p, profile: profile
+		} %>
+	<% end %>
+	</div><!--/.medium-11-->
+
+<% end %>
+<% if profile.products.where(current: false).length > 0 %>
+
+	<div class="small-12 columns">
+		<div class="profile-section-head"><%= profile.products.where(current: false).length %> FUTURE SKUs</div>
+	</div><!--/.small-12-->
+
+	<div class="medium-11 medium-centered columns">
+	<% profile.products.where(current: false).order_by(:description.desc, :key_benefits.desc).each do |p| %>												<%= render partial: "shared/collections_view/products", locals: {
+			collitem: p, profile: profile
+		} %>
+	<% end %>
+	</div><!--/.medium-11-->
+
+<% end %>

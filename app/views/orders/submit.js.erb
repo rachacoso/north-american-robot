@@ -3,6 +3,13 @@
 $('#order').fadeOut();
 $('.overlay').fadeOut();
 <% end %>
+
+<% if @order.status == "pending" %>
+$('#view-orders-buttons').html("<%= j (render partial: 'shared/profile/components/view_orders_buttons', locals: {profile: @order.brand}) %>");
+$('#skus-list').html("<%= j (render partial: 'shared/profile/components/skus', locals: {profile: @order.brand}) %>");
+initializeGallery(".galleria-product-photos",300);
+<% end %>
+
 $('#order-item-data').html("<%= j (render partial: 'submit_order') %>");
 $('.overlay#order-item-overlay').fadeIn();
 $('#order-item').fadeIn();

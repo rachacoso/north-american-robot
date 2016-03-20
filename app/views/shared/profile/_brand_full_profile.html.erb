@@ -92,8 +92,7 @@
 	</div><!--/.medium-8-->
 	<div class="medium-4 columns medium-text-right">
 		<%= link_to "Contact", "#", remote:true, class: "landing-button" %>
-		<%= current_order(profile) ? (link_to "View Current Order", order_url(current_order(profile)), remote: true, class: "landing-button") : "" %>
-		<%= pending_order(profile) ? (link_to "View Pending Order", order_url(pending_order(profile)), remote: true, class: "landing-button") : "" %>
+		<span id="view-orders-buttons"><%= render partial: "shared/profile/components/view_orders_buttons", locals: {profile: profile} %></span>
 	</div><!--/.medium-4-->
 </div><!--/.row-->
 
@@ -120,37 +119,9 @@
 	</div><!--/.small-12 -->
 </div><!--/.row -->
 
-<div class="row profile-skus">
+<div class="row profile-skus" id="skus-list">
 	
-		<% if profile.products.where(current: true).length > 0 %>
-
-			<div class="small-12 columns">
-				<div class="profile-section-head"><%= profile.products.where(current: true).length %> CURRENT SKUs</div>
-			</div><!--/.small-12-->
-			
-			<div class="medium-11 medium-centered columns">
-			<% profile.products.where(current: true).order_by(:description.desc, :key_benefits.desc).each do |p| %>
-				<%= render partial: "shared/collections_view/products", locals: {
-					collitem: p, profile: profile
-				} %>
-			<% end %>
-			</div><!--/.medium-11-->
-
-		<% end %>
-		<% if profile.products.where(current: false).length > 0 %>
-
-			<div class="small-12 columns">
-				<div class="profile-section-head"><%= profile.products.where(current: false).length %> FUTURE SKUs</div>
-			</div><!--/.small-12-->
-
-			<div class="medium-11 medium-centered columns">
-			<% profile.products.where(current: false).order_by(:description.desc, :key_benefits.desc).each do |p| %>												<%= render partial: "shared/collections_view/products", locals: {
-					collitem: p, profile: profile
-				} %>
-			<% end %>
-			</div><!--/.medium-11-->
-
-		<% end %>
+	<%= render partial: "shared/profile/components/skus", locals: {profile: profile} %>
 	
 </div><!--/.row-->
 
