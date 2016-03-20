@@ -1,3 +1,7 @@
-$('#order-item-data').html("<%= j (render partial: 'create_order_item') %>");
-$('.overlay#order-item-overlay').fadeIn();
-$('#order-item').fadeIn();
+// close any open order-items
+$('#order-item').fadeOut();
+$('.overlay').fadeOut();
+
+$('#order-data').html("<%= j (render partial: 'orders/show_order') %>");
+$('.overlay#order-overlay').fadeIn();
+$('#order').fadeIn();

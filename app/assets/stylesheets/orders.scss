@@ -10,4 +10,8 @@ table.order {
 		background: white;
 		border: 1px dotted $landing-middle-gray;
 	}
+	tr#total {
+		background: $landing-light-gray;
+		font-weight: 800;
+	}
 }

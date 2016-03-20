@@ -15,8 +15,8 @@
 			<thead>
 				<th>Product</th>
 				<th>MSRP</th>
-				<th>Quantity</th>
-				<th>Wholesale Price</th>
+				<th class="text-right">Quantity</th>
+				<th>Wholesale Price (50%)</th>
 				<th>Item Total</th>
 			</thead>
 			<tbody>
@@ -24,15 +24,14 @@
 				<tr>
 					<td><%= item.product.name %></td>
 					<td><%= number_to_currency(item.product.price_in_dollars) %></td>
-					<td><%= item.quantity %></td>
+					<td class="text-right"><%= item.quantity %></td>
 					<td><%= number_to_currency(item.product.tiered_price_in_dollars) %></td>
 					<td><%= number_to_currency(item.total_price) %></td>
 				</tr>
 				<% end %>
-				<tr>
-					<td colspan="4"></td>
+				<tr id="total">
+					<td colspan="4" class="text-right">Order Total</td>
 					<td><%= number_to_currency(@order.total_price) %></td>
-					
 				</tr>
 			</tbody>
 		</table>
