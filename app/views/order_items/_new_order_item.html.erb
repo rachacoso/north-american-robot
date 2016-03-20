@@ -16,8 +16,8 @@
 			<div class="row">
 				<div class="small-10 small-centered columns text-center">
 					<p>
-						<del>$ <%= @order_product.display_price %> MSRP</del><br>
-						$ <%= order_item_display_price(@order_product.price * 0.5) %> Wholesale (50%)
+						<del><%= number_to_currency(@order_product.price_in_dollars) %> MSRP</del><br>
+						<%= number_to_currency(@order_product.tiered_price_in_dollars) %> Wholesale (50%)<br>
 					</p>
 				</div><!--/.small-10 small-centered-->
 			</div><!--/.row-->

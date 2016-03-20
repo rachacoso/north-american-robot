@@ -3,7 +3,27 @@
 		<% if flash[:notice] %>
 			<h2><%= flash[:notice] %></h2>
 		<% else %>
-			<h2><%= @order_item.quantity %> Units of <%= @order_product.name %> has been added to your order</h2>
+			<h3><%= @order_item.quantity %> Units of <%= @order_product.name %> has been added to your <%= link_to "order", order_url(@order), remote: true %></h3>
+			<table class="order">
+				<thead>
+					<tr>
+					<th>Product</th>
+					<th>MSRP</th>
+					<th>Quantity</th>
+					<th>Wholesale Price</th>
+					<th>Item Total</th>
+					</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td><%= @order_item.product.name %></td>
+					<td><%= number_to_currency(@order_item.product.price_in_dollars) %></td>
+					<td><%= @order_item.quantity %></td>
+					<td><%= number_to_currency(@order_item.product.tiered_price_in_dollars) %></td>
+					<td><%= number_to_currency(@order_item.total_price) %></td>
+				</tr>
+				</tbody>
+			</table>
 		<% end %>
 	</div><!--/.small-12-->
 </div><!--/.row-->

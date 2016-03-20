@@ -13,4 +13,10 @@ $( document ).ready(function() {
 		$('.overlay').fadeOut();
 	});	
 
+	$('.overlay#order-overlay, a#close-order').on('click', function(e){
+		e.preventDefault();
+		$('#order').fadeOut();
+		$('.overlay').fadeOut();
+	});	
+
 });

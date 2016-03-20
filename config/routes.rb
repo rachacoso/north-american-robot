@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
 
   # ORDERS
+  resources :orders, only: [:show, :edit, :update, :destroy, :index]
   post   '/order/new' => 'orders#create', as: 'new_order'
 
   resources :order_items, only: [:create, :edit, :update, :destroy, :index]

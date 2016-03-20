@@ -302,6 +302,38 @@ a.profile-sq-left {
   }
 }
 
+// ORDER MODAL
+#order {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  @media only screen { 
+    width:90%; 
+    margin: 0 0 0 -45%;
+  }
+  max-height: 85%;  
+  background: white;
+  z-index: 100021;
+  padding: rem-calc(20) rem-calc(10);
+  overflow-x: scroll;
+  display: none;
+}
+#order-data {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: rem-calc(5);
+}
+#close-order {
+  position: absolute;
+  top: rem-calc(-40);
+  right: rem-calc(10);
+  font-size: rem-calc(60);
+  font-weight: 900;
+  color: $landing-middle-gray;
+  z-index: 100022;
+}
+
 // ORDER ITEM MODAL
 #order-item {
   position: fixed;

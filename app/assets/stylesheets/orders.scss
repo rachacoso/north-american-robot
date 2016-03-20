@@ -1,0 +1,13 @@
+@import "foundation/functions";
+@import "foundation/components/labels";
+@import "global_variables";
+@import "mixins";
+
+table.order {
+	width: 90%;
+	th {
+		color: $landing-dark-gray;
+		background: white;
+		border: 1px dotted $landing-middle-gray;
+	}
+}

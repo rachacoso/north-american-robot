@@ -32,7 +32,7 @@
 					</div><!--/.small-2-->
 					<div class="small-10 columns">
 						<% if defined?(cb) && cb.price.present? %>
-							<%= f.number_field :price, label: false, step: "any", placeholder: 'MSRP', value: cb.display_price  %>
+							<%= f.number_field :price, label: false, step: "any", placeholder: 'MSRP', value: display_price(cb.price)  %>
 						<% else %>
 							<%= f.number_field :price, label: false, step: "any", placeholder: 'MSRP'  %>
 						<% end %>

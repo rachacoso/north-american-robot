@@ -24,7 +24,7 @@ class OrderItemsController < ApplicationController
 
 		unless @order # create new order if doesnt exist
 			order = Order.new
-			@current_user.send(@current_user.type?).orders << order
+			@current_user.get_parent.orders << order
 			@current_user.orders << order
 			@order_product.brand.orders << order
 			@order = order

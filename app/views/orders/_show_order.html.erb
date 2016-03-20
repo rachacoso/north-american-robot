@@ -1,0 +1,40 @@
+<div class="row">
+	<div class="small-12 columns text-center">
+		<%= image_tag 'v2/logo.svg', width: "100" %>
+		<h2>
+			Order
+			<% if @order.c_at.present? %>
+				<br><small><%= @order.c_at.strftime("started on: %d %b %Y") %></small>
+			<% end %>			
+		</h2>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<div class="row">
+	<div class="small-12 columns">
+		<table class="order" style="margin: auto;">
+			<thead>
+				<th>Product</th>
+				<th>MSRP</th>
+				<th>Quantity</th>
+				<th>Wholesale Price</th>
+				<th>Item Total</th>
+			</thead>
+			<tbody>
+				<% @order.order_items.each do |item| %>
+				<tr>
+					<td><%= item.product.name %></td>
+					<td><%= number_to_currency(item.product.price_in_dollars) %></td>
+					<td><%= item.quantity %></td>
+					<td><%= number_to_currency(item.product.tiered_price_in_dollars) %></td>
+					<td><%= number_to_currency(item.total_price) %></td>
+				</tr>
+				<% end %>
+				<tr>
+					<td colspan="4"></td>
+					<td><%= number_to_currency(@order.total_price) %></td>
+					
+				</tr>
+			</tbody>
+		</table>
+	</div><!--/.small-12-->
+</div><!--/.row-->

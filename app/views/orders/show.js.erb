@@ -1,0 +1,7 @@
+// close any open order-items
+$('#order-item').fadeOut();
+$('.overlay').fadeOut();
+
+$('#order-data').html("<%= j (render partial: 'show_order') %>");
+$('.overlay#order-overlay').fadeIn();
+$('#order').fadeIn();
