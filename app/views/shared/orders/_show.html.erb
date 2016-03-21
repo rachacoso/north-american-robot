@@ -6,6 +6,13 @@
 		</h2>
 	</div><!--/.small-12-->
 </div><!--/.row-->
+<% if @order.status == "pending" %>
+<div class="row">
+	<div class="medium-9 small-11 small-centered columns panel order-alert text-center">
+		<h3>Thank you for your order. <br>You should receive a final invoice shortly with the estimated shipping time and costs.</h3>
+	</div><!--/.medium-9 small-11 small-centered-->
+</div><!--/.row-->
+<% end %>
 <div class="row">
 	<div class="medium-11 medium-centered columns">
 			<% if @order.u_at.present? %>
