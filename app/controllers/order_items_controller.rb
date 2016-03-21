@@ -55,7 +55,7 @@ class OrderItemsController < ApplicationController
 	end
 
 	def get_open_order
-		@order = @order_product.brand.orders.where(status: "open", orderer_id: @current_user.get_parent.id ).first
+		@order = @order_product.brand.orders.current.where(orderer_id: @current_user.get_parent.id ).first
 	end
 
 end

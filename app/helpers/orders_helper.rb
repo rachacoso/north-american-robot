@@ -1,15 +1,19 @@
 module OrdersHelper
 
 	def current_order(brand)
-		return @current_user.get_parent.orders.where(status: "open", brand_id: brand.id).first
+		return brand.orders.current.where(orderer_id: @current_user.get_parent.id).first
 	end
 
 	def submitted_order(brand)
-		return @current_user.get_parent.orders.where(status: "submitted", brand_id: brand.id).first
+		return brand.orders.submitted.where(orderer_id: @current_user.get_parent.id).first
 	end
 
 	def pending_order(brand)
-		return @current_user.get_parent.orders.where(status: "pending", brand_id: brand.id).first
+		return brand.orders.pending.where(orderer_id: @current_user.get_parent.id).first
+	end
+
+	def active_orders(brand)
+		return brand.orders.active.where(orderer_id: @current_user.get_parent.id)
 	end
 
 end
