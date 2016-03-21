@@ -55,11 +55,7 @@ class OrderItemsController < ApplicationController
 	end
 
 	def get_open_order
-		if @current_user.type? == "retailer"
-			@order = @order_product.brand.orders.where(status: "open", retailer_id: @current_user.retailer.id ).first
-		elsif @current_user.type? == "distributor"
-			@order = @order_product.brand.orders.where(status: "open", distributor_id: @current_user.distributor.id ).first
-		end
+		@order = @order_product.brand.orders.where(status: "open", orderer_id: @current_user.get_parent.id ).first
 	end
 
 end
