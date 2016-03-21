@@ -75,7 +75,7 @@ class Retailer
 	field :social_give_back, type: String # How you give back
 
 	# V2 ORDERING
-	has_many :orders
+	has_many :orders, as: :orderer
 
 	# OTHER
 

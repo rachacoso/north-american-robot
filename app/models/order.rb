@@ -5,8 +5,9 @@ class Order # for V2 ordering
   # Ordering FROM
   belongs_to :brand
   # Ordered BY
-  belongs_to :distributor
-  belongs_to :retailer
+  belongs_to :orderer, polymorphic: true
+  # belongs_to :distributor
+  # belongs_to :retailer
   # log who sent it
   belongs_to :user
 

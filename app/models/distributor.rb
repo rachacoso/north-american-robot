@@ -89,7 +89,7 @@ class Distributor
 	has_many :trade_shows, dependent: :destroy
 	
 	# V2 ORDERING
-	has_many :orders
+	has_many :orders, as: :orderer
 
 	# array of saved brand matches
 	has_and_belongs_to_many :saved_matches, class_name: "Brand", inverse_of: nil
