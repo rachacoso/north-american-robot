@@ -23,11 +23,12 @@ class OrderItemsController < ApplicationController
 	def create
 
 		unless @order # create new order if doesnt exist
-			order = Order.new
-			@current_user.get_parent.orders << order
-			@current_user.orders << order
-			@order_product.brand.orders << order
-			@order = order
+			new_order = Order.new
+	    new_order.orderer = @current_user.get_parent
+	    new_order.user = @current_user
+	    new_order.brand = @order_product.brand
+	    new_order.save!
+			@order = new_order
 		end
 		if params[:order_item][:quantity].to_i > 0
 			@order_item = OrderItem.new(product_id: @order_product.id, quantity: params[:order_item][:quantity].to_i)
