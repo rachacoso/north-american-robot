@@ -1,10 +1,10 @@
-<% unless @order.status == "pending" %>
+<% unless @order.status == "submitted" %>
 // close any open order-items
 $('#order').fadeOut();
 $('.overlay').fadeOut();
 <% end %>
 
-<% if @order.status == "pending" %>
+<% if @order.status == "submitted" %>
 $('#view-orders-buttons').html("<%= j (render partial: 'shared/profile/components/view_orders_buttons', locals: {profile: @order.brand}) %>");
 $('.order-sku-button').fadeOut();
 <% end %>

@@ -4,6 +4,10 @@ module OrdersHelper
 		return @current_user.get_parent.orders.where(status: "open", brand_id: brand.id).first
 	end
 
+	def submitted_order(brand)
+		return @current_user.get_parent.orders.where(status: "submitted", brand_id: brand.id).first
+	end
+
 	def pending_order(brand)
 		return @current_user.get_parent.orders.where(status: "pending", brand_id: brand.id).first
 	end

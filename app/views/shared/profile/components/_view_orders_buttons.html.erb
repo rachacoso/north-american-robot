@@ -1,2 +1,2 @@
 <%= current_order(profile) ? (link_to "View Current Order", order_url(current_order(profile)), remote: true, class: "landing-button") : "" %>
-<%= pending_order(profile) ? (link_to "View Pending Order", order_url(pending_order(profile)), remote: true, class: "landing-button") : "" %>
+<%= submitted_order(profile) ? (link_to "View Submitted Order", order_url(submitted_order(profile)), remote: true, class: "landing-button") : "" %>

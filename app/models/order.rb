@@ -15,6 +15,7 @@ class Order # for V2 ordering
   field :status, type: String, default: "open" # Values: OPEN, PENDING, CLOSED
 
   scope :open, ->{where(status: "open")}
+  scope :submitted, ->{where(status: "submitted")}
   scope :pending, ->{where(status: "pending")}
   scope :closed, ->{where(status: "closed")}
 

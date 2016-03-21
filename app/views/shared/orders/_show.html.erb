@@ -6,7 +6,7 @@
 		</h2>
 	</div><!--/.small-12-->
 </div><!--/.row-->
-<% if @order.status == "pending" %>
+<% if @order.status == "submitted" %>
 <div class="row">
 	<div class="medium-9 small-11 small-centered columns panel order-alert text-center">
 		<h3>Thank you for your order. <br>You should receive a final invoice shortly with the estimated shipping time and costs.</h3>
@@ -20,6 +20,7 @@
 			<% elsif @order.c_at.present? %>
 				<h4><%= @order.c_at.strftime("Date: %d %b %Y") %></h4>
 			<% end %>
+			<h4>Status: <%= @order.status.capitalize %> </h4>
 		</div><!--/.medium-10-->
 </div><!--/.row-->
 <div class="row">
@@ -49,8 +50,8 @@
 				<% @order.order_items.each do |item| %>
 				<tr>
 					<td><%= item.product.item_id.present? ? "#{item.product.item_id}" : "&nbsp;".html_safe %></td>
-					<td><%= @order.status == "pending" ? item.product.name : (link_to item.product.name, new_order_item_url(item.product.id), remote: true) %> </td>
-					<td><%= @order.status == "pending" ? item.quantity : (link_to item.quantity, new_order_item_url(item.product.id), remote: true) %></td>
+					<td><%= @order.status == "submitted" ? item.product.name : (link_to item.product.name, new_order_item_url(item.product.id), remote: true) %> </td>
+					<td><%= @order.status == "submitted" ? item.quantity : (link_to item.quantity, new_order_item_url(item.product.id), remote: true) %></td>
 					<td><%= number_to_currency(item.product.price_in_dollars) %></td>
 					<td><%= number_to_currency(item.product.tiered_price_in_dollars) %></td>
 					<td><%= number_to_currency(item.total_price) %></td>

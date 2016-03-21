@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
 
 	def submit
 		if params[:confirm].to_i == 1
-			@order.status = "pending"
+			@order.status = "submitted"
 			@order.save!
 		end
 	end

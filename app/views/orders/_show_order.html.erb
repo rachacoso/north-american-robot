@@ -1,6 +1,6 @@
 <%= render "shared/orders/show" %>
 <br>
-<% if @order.status == "pending" %>
+<% if @order.status == "submitted" %>
 <div class="row">
 	<div class="small-12 columns text-center">
 		<%= link_to "OK", "#", class: "landing-button", id: "continue-ordering" %>
