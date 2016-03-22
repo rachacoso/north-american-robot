@@ -25,8 +25,8 @@
 <% else %>
 <div class="row">
 	<div class="small-12 columns text-center">
-		<%= link_to "Submit Order", submit_order_url(@order,0), class: "landing-button", remote: true %>
-		<%= link_to "Continue Ordering", view_brand_url(@order.brand), class: "landing-button secondary" %>
+		<%= link_to "Submit Order to #{@order.brand.company_name}", submit_order_url(@order,0), class: "landing-button", remote: true %>
+		<%= link_to "Add More Items to Order", view_brand_url(@order.brand), class: "landing-button secondary" %>
 	</div><!--/.small-12-->
 </div><!--/.row-->
 <% end %>
