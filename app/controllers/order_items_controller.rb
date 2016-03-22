@@ -1,6 +1,6 @@
 class OrderItemsController < ApplicationController
 
-	before_action :set_product, :get_open_order
+	before_action :set_product, :get_current_order
 
 	def new
 		if @order && item = @order.order_items.where(product_id: @order_product.id).first
@@ -55,7 +55,7 @@ class OrderItemsController < ApplicationController
 		@order_product = Product.find(params[:product_id])
 	end
 
-	def get_open_order
+	def get_current_order
 		@order = @order_product.brand.orders.current.where(orderer_id: @current_user.get_parent.id ).first
 	end
 
