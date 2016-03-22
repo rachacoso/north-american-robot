@@ -13,6 +13,7 @@
 <% else %>
 	<div class="row">
 		<div class="small-12 columns text-center">
+			<h2>Your order total is <strong><%= number_to_currency(@order.total_price) %></strong></h2>
 			<h2>Would you like to submit this order to <br><strong><%= @order.brand.company_name %></strong></h2>
 		</div><!--/.small-12-->
 	</div><!--/.row-->

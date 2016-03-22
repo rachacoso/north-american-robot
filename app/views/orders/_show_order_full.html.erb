@@ -1,10 +1,21 @@
 
 <% if @order.status == "submitted" && !@current_user.administrator %>
 	<div class="row">
-		<div class="medium-9 small-11 small-centered columns panel order-alert text-center">
-			<h3>Thank you for your order. <br>You should receive a final invoice shortly with the estimated shipping time and costs.</h3>
+		<div class="medium-11 medium-centered columns text-center">
+			<div class="panel order-alert">
+			<h3>Thank you for your order. <br>Your order has been submitted and is being processed. <br>You should receive a final invoice shortly with the estimated shipping time and costs.</h3>
+			</div>
 		</div><!--/.medium-9 small-11 small-centered-->
 	</div><!--/.row-->
+<% end %>
+
+<% unless @order.status == "submitted" %>
+<div class="row">
+	<div class="medium-11 medium-centered columns">
+		<h1>1) Confirm Order Details</h1>
+		<h3>Click on any order item to edit</h3>
+	</div><!--/.small-12-->
+</div><!--/.row-->
 <% end %>
 
 <div class="row">
@@ -24,9 +35,27 @@
 </div><!--/.row-->
 <% else %>
 <div class="row">
-	<div class="small-12 columns text-center">
-		<%= link_to "Submit Order to #{@order.brand.company_name}", submit_order_url(@order,0), class: "landing-button", remote: true %>
-		<%= link_to "Add More Items to Order", view_brand_url(@order.brand), class: "landing-button secondary" %>
+	<div class="medium-11 medium-centered columns">
+		
+		<h1>2) Submit Order to <%= @order.brand.company_name %></h1>
+		<h3>When you are ready to submit the order to <%= @order.brand.company_name %></h3>
+		
 	</div><!--/.small-12-->
 </div><!--/.row-->
+<div class="row">
+	<div class="medium-11 medium-centered columns text-center">
+		<div class="panel">
+		<%= link_to "Submit Order to #{@order.brand.company_name}", submit_order_url(@order,0), class: "landing-button", remote: true %> or
+		<%= link_to "Add More Items to Order", view_brand_url(@order.brand), class: "landing-button secondary" %>
+		</div>
+	</div><!--/.medium-11-->
+</div><!--/.row-->
 <% end %>
+
+<div class="footer">
+<div class="row">
+	<div class="medium-11 medium-centered columns">
+		<p>[Text here about orders and shipping/taxes and how landing works?]</p>
+	</div><!--/.medium-11-->
+</div><!--/.row-->
+</div>
