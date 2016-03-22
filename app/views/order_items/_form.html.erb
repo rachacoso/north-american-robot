@@ -1,0 +1,43 @@
+<%= hidden_field_tag "product_id", @order_product.id %>
+<div class="row">
+	<div class="medium-6 columns">
+		<h3 style="margin-bottom: 0;"><%= @order_product.brand.company_name %></h3>
+	</div>
+</div>
+<div class="row">
+	<div class="medium-6 columns">
+		<h2 style="margin-top: 0;"><strong><%= @order_product.name %></strong></h2>
+		<% if @order_product.item_id.present? %>
+			<h4>Product ID Number: <%= @order_product.item_id %></h4>
+		<% end %>
+		<% if @order_product.item_size.present? %>
+			<h4>Size: <%= @order_product.item_size %></h4>
+		<% end %>
+		<p>
+			<%= number_to_currency(@order_product.price_in_dollars) %> MSRP<br>
+			<strong><%= number_to_currency(@order_product.tiered_price_in_dollars) %> Unit Price</strong>
+		</p>
+	</div><!--/.medium-6-->
+	<div class="medium-6 columns">
+		
+			<div class="row">
+				<div class="small-10 medium-8 small-centered columns">
+					<div class="row collapse">
+						<div class="small-6 columns">
+							<%= f.number_field :quantity, min: 0, label: false %>		
+						</div><!--/.small-6-->
+						<div class="small-6 columns">
+							<span class="postfix">UNITS</span>
+						</div><!--/.small-6-->
+					</div><!--/.row-->
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+			<div class="row">
+				<div class="small-12 columns text-center">
+					<%= f.submit "Add SKU to Order", class: "landing-button" %>
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+			<span style="color: red;font-weight: 100;font-size: 0.75em;"><%= flash[:error] ? flash[:error] : "" %></span>
+
+	</div><!--/.medium-6-->
+</div><!--/.row-->

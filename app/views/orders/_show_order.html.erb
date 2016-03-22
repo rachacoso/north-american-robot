@@ -1,4 +1,38 @@
-<%= render "shared/orders/show" %>
+
+<div class="row">
+	<div class="medium-6 columns medium-text-right  medium-push-6">
+		<h2 style="line-height: 1.5em;">
+			[Estimated] Invoice<br>
+			<small>by</small>
+			<%= image_tag 'v2/logo.svg', width: "100", alt: "Landing International" %>
+		</h2>
+	</div><!--/.medium-6-->
+	<div class="medium-6 columns text-left medium-pull-6">
+		<% if @order.brand.logo_file_name %>
+			<%= image_tag @order.brand.logo.url(:medium), alt: "Logo" %>
+		<% else %>
+			<% if !@order.brand.facebook.blank? && fb_picture(@order.brand.facebook) %>
+				<%= image_tag fb_picture(@order.brand.facebook) %>
+			<% else %>
+				<%= image_tag @order.brand.logo.url(:medium), width: "100", height: "100", alt: "Logo" %>
+			<% end %>
+		<% end %>
+		<h1><%= @order.brand.company_name %></h1>
+	</div><!--/.medium-6-->
+</div><!--/.row-->
+
+<% if @order.status == "submitted" && !@current_user.administrator %>
+	<div class="row">
+		<div class="medium-9 small-11 small-centered columns panel order-alert text-center">
+			<h3>Thank you for your order. <br>You should receive a final invoice shortly with the estimated shipping time and costs.</h3>
+		</div><!--/.medium-9 small-11 small-centered-->
+	</div><!--/.row-->
+<% end %>
+
+<hr>
+
+<%= render "shared/orders/order_table" %>
+
 <br>
 <% if @order.status == "submitted" %>
 <div class="row">

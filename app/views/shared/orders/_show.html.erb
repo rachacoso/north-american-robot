@@ -1,20 +1,27 @@
 <div class="row">
-	<div class="small-12 columns text-center">
-		<%= image_tag 'v2/logo.svg', width: "100" %>
-		<h2>
-			Order
+	<div class="medium-6 columns medium-text-right  medium-push-6">
+		<h2 style="line-height: 1.5em;">
+			[Estimated] Invoice<br>
+			<small>by</small>
+			<%= image_tag 'v2/logo.svg', width: "100", alt: "Landing International" %>
 		</h2>
-	</div><!--/.small-12-->
+	</div><!--/.medium-6-->
+	<div class="medium-6 columns text-left medium-pull-6">
+		<% if @order.brand.logo_file_name %>
+			<%= image_tag @order.brand.logo.url(:medium), alt: "Logo" %>
+		<% else %>
+			<% if !@order.brand.facebook.blank? && fb_picture(@order.brand.facebook) %>
+				<%= image_tag fb_picture(@order.brand.facebook) %>
+			<% else %>
+				<%= image_tag @order.brand.logo.url(:medium), width: "100", height: "100", alt: "Logo" %>
+			<% end %>
+		<% end %>
+		<h1><%= @order.brand.company_name %></h1>
+	</div><!--/.medium-6-->
 </div><!--/.row-->
-<% if @order.status == "submitted" && !@current_user.administrator %>
+
 <div class="row">
-	<div class="medium-9 small-11 small-centered columns panel order-alert text-center">
-		<h3>Thank you for your order. <br>You should receive a final invoice shortly with the estimated shipping time and costs.</h3>
-	</div><!--/.medium-9 small-11 small-centered-->
-</div><!--/.row-->
-<% end %>
-<div class="row">
-	<div class="medium-11 medium-centered columns">
+	<div class="small-12 columns">
 			<% if @order.u_at.present? %>
 				<h4><%= @order.u_at.strftime("Date: %d %b %Y") %></h4>
 			<% elsif @order.c_at.present? %>
@@ -24,7 +31,7 @@
 		</div><!--/.medium-10-->
 </div><!--/.row-->
 <div class="row">
-	<div class="medium-11 medium-centered columns">
+	<div class="small-12 columns">
 		<div class="row">
 			<div class="medium-6 columns">
 				<h4><%= @order.brand.company_name %></h4>
@@ -35,33 +42,4 @@
 		</div><!--/.row-->
 	</div><!--/.medium-10-->
 </div><!--/.row-->
-<div class="row">
-	<div class="small-12 columns">
-		<table class="order" style="margin: auto;">
-			<thead>
-				<th>Item</th>
-				<th>Description</th>
-				<th>Quantity</th>
-				<th>MSRP</th>
-				<th>Unit Price</th>
-				<th>Amount</th>
-			</thead>
-			<tbody>
-				<% @order.order_items.each do |item| %>
-				<tr>
-					<td><%= item.product.item_id.present? ? "#{item.product.item_id}" : "&nbsp;".html_safe %></td>
-					<td><%= @order.status == "submitted" ? item.product.name : (link_to item.product.name, new_order_item_url(item.product.id), remote: true) %> </td>
-					<td><%= @order.status == "submitted" ? item.quantity : (link_to item.quantity, new_order_item_url(item.product.id), remote: true) %></td>
-					<td><%= number_to_currency(item.product.price_in_dollars) %></td>
-					<td><%= number_to_currency(item.product.tiered_price_in_dollars) %></td>
-					<td><%= number_to_currency(item.total_price) %></td>
-				</tr>
-				<% end %>
-				<tr id="total">
-					<td colspan="5" class="text-right">Subtotal <small>(before taxes/fees/shipping)</small></td>
-					<td><%= number_to_currency(@order.total_price) %></td>
-				</tr>
-			</tbody>
-		</table>
-	</div><!--/.small-12-->
-</div><!--/.row-->
+<%= render "shared/orders/order_table" %>

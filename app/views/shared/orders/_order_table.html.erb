@@ -1,0 +1,30 @@
+<div class="row">
+	<div class="small-12 columns">
+		<table class="order" style="margin: auto;">
+			<thead>
+				<th>Item</th>
+				<th>Description</th>
+				<th>Quantity</th>
+				<th>MSRP</th>
+				<th>Unit Price</th>
+				<th>Amount</th>
+			</thead>
+			<tbody>
+				<% @order.order_items.each do |item| %>
+				<tr>
+					<td><%= item.product.item_id.present? ? "#{item.product.item_id}" : "&nbsp;".html_safe %></td>
+					<td><%= @order.status == "submitted" ? item.product.name : (link_to item.product.name, new_order_item_url(item.product.id), remote: true) %> </td>
+					<td><%= @order.status == "submitted" ? item.quantity : (link_to item.quantity, new_order_item_url(item.product.id), remote: true) %></td>
+					<td><%= number_to_currency(item.product.price_in_dollars) %></td>
+					<td><%= number_to_currency(item.product.tiered_price_in_dollars) %></td>
+					<td><%= number_to_currency(item.total_price) %></td>
+				</tr>
+				<% end %>
+				<tr id="total">
+					<td colspan="5" class="text-right">Subtotal <small>(before taxes/fees/shipping)</small></td>
+					<td><%= number_to_currency(@order.total_price) %></td>
+				</tr>
+			</tbody>
+		</table>
+	</div><!--/.small-12-->
+</div><!--/.row-->

@@ -1,0 +1,32 @@
+
+<% if @order.status == "submitted" && !@current_user.administrator %>
+	<div class="row">
+		<div class="medium-9 small-11 small-centered columns panel order-alert text-center">
+			<h3>Thank you for your order. <br>You should receive a final invoice shortly with the estimated shipping time and costs.</h3>
+		</div><!--/.medium-9 small-11 small-centered-->
+	</div><!--/.row-->
+<% end %>
+
+<div class="row">
+	<div class="medium-11 medium-centered columns">
+		<div class="panel">
+			<%= render "shared/orders/show" %>
+		</div>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
+<br>
+<% if @order.status == "submitted" %>
+<div class="row">
+	<div class="small-12 columns text-center">
+		<%= link_to "Back to Brand Profile", view_brand_url(@order.brand), class: "landing-button" %>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<% else %>
+<div class="row">
+	<div class="small-12 columns text-center">
+		<%= link_to "Submit Order", submit_order_url(@order,0), class: "landing-button" %>
+		<%= link_to "Continue Ordering", view_brand_url(@order.brand), class: "landing-button secondary" %>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<% end %>

@@ -19,6 +19,10 @@ class OrderItemsController < ApplicationController
 			else
 				@order_item.update!(order_item_parameters)
 			end
+			respond_to do |format|
+				format.html  { redirect_to order_url(@order) }
+				format.js
+			end
 		else
 			redirect_to view_brand_url(@order_product.brand)
 		end
