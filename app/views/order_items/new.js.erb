@@ -2,11 +2,8 @@
 $('#order').fadeOut();
 $('.overlay').fadeOut();
 
-<% if URI(request.referer).path.match(/orders/) %>
-	$('#order-item-data').html("<%= j (render partial: 'new_order_item_notremote') %>");
-<% else %>
-	$('#order-item-data').html("<%= j (render partial: 'new_order_item') %>");
-<% end %>
+
+$('#order-item-data').html("<%= j (render partial: 'new_order_item') %>");
 $('.overlay#order-item-overlay').fadeIn();
 $('#order-item').fadeIn();
 
