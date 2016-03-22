@@ -16,6 +16,11 @@ class OrderItemsController < ApplicationController
 			if params[:order_item][:quantity].to_i == 0
 				@order_item.destroy
 				flash.now[:notice] = "#{@order_product.name} has been removed from the order"
+				if @order.order_items.empty?
+					brand = @order.brand
+					@order.destroy
+					redirect_to view_brand_url(brand) and return
+				end
 			else
 				@order_item.update!(order_item_parameters)
 			end
