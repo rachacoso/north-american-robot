@@ -31,6 +31,21 @@
   }
 }
 
+.profile-action-panel {
+  #open, #submitted, #pending {
+    font-weight: 400;
+  }
+  #open {
+    color: blue;
+  }
+  #submitted {
+    color: orange;
+  }
+  #pending {
+    color: green;
+  }
+}
+
 #profile-profile, #profile-conversation {
   // display: none;
 }

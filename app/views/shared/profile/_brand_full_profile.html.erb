@@ -91,8 +91,10 @@
 
 	</div><!--/.medium-8-->
 	<div class="medium-4 columns medium-text-right">
-		<%= link_to "Contact", "#", remote:true, class: "landing-button" %>
-		<span id="view-orders-buttons"><%= render partial: "shared/profile/components/view_orders_buttons", locals: {profile: profile} %></span>
+
+			<%= link_to "Contact", "#", remote:true, class: "landing-button" %>
+			<div id="view-orders-buttons"><%= render partial: "shared/profile/components/view_orders_buttons", locals: {profile: profile} %></div>
+
 	</div><!--/.medium-4-->
 </div><!--/.row-->
 

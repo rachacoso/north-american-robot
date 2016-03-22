@@ -12,8 +12,8 @@ module OrdersHelper
 		return brand.orders.pending.where(orderer_id: @current_user.get_parent.id).first
 	end
 
-	def active_orders(brand)
-		return brand.orders.active.where(orderer_id: @current_user.get_parent.id)
+	def active_order(brand)
+		return brand.orders.active.where(orderer_id: @current_user.get_parent.id).first
 	end
 
 end

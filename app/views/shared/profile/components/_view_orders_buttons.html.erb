@@ -1,2 +1,12 @@
-<%= current_order(profile) ? (link_to "View Current Order", order_url(current_order(profile)), remote: true, class: "landing-button") : "" %>
-<%= submitted_order(profile) ? (link_to "View Submitted Order", order_url(submitted_order(profile)), remote: true, class: "landing-button") : "" %>
+<% if order = active_order(profile) %>
+<div class="row">
+	<div class="small-12 columns profile-action-panel">
+
+
+			<h3 style="margin-bottom: 0;">You Have an Active Order</h3>
+			<h3 style="margin-bottom: 0;">Status: <span id="<%= order.status.downcase %>"><%= order.status.upcase %></span></h3>
+			<%= link_to "View Order", order_url(active_order(profile)), remote: true, class: "landing-button" %>
+
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<% end %>
