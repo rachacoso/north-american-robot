@@ -1,6 +1,6 @@
 class OrderItemsController < ApplicationController
 
-	before_action :set_product, :get_current_order
+	before_action :set_product, :get_order
 
 	def new
 		if @order && item = @order.order_items.where(product_id: @order_product.id).first
@@ -11,18 +11,22 @@ class OrderItemsController < ApplicationController
 	end
 
 	def update
-		@order_item = @order.order_items.find(params[:id])
-		if params[:order_item][:quantity].to_i == 0
-			@order_item.destroy
-			flash.now[:notice] = "#{@order_product.name} has been removed from the order"
+		if @order # only update if there is active order
+			@order_item = @order.order_items.find(params[:id])
+			if params[:order_item][:quantity].to_i == 0
+				@order_item.destroy
+				flash.now[:notice] = "#{@order_product.name} has been removed from the order"
+			else
+				@order_item.update!(order_item_parameters)
+			end
 		else
-			@order_item.update!(order_item_parameters)
+			redirect_to view_brand_url(@order_product.brand)
 		end
 	end
 
 	def create
 
-		unless @order # create new order if doesnt exist
+		if !@order && !@submitted_order && !@pending_order # create new order if doesnt exist (as open, submitted, or pending)
 			new_order = Order.new
 	    new_order.orderer = @current_user.get_parent
 	    new_order.user = @current_user
@@ -30,17 +34,22 @@ class OrderItemsController < ApplicationController
 	    new_order.save!
 			@order = new_order
 		end
-		if params[:order_item][:quantity].to_i > 0
-			@order_item = OrderItem.new(product_id: @order_product.id, quantity: params[:order_item][:quantity].to_i)
-			@order.order_items << @order_item
-		else
-			flash.now[:error] = "Sorry, please enter a vaild quantity"
-			@order_item = OrderItem.new
-			respond_to do |format|
-				format.html  { render :new }
-				format.js { render :new }
+		if @order # only create/update if there is active order
+			if params[:order_item][:quantity].to_i > 0
+				@order_item = @order.order_items.find_or_create_by(product_id: @order_product.id) # dont product duplicate order items if somehow was already created
+				@order_item.update(quantity: params[:order_item][:quantity].to_i)
+			else
+				flash.now[:error] = "Sorry, please enter a vaild quantity"
+				@order_item = OrderItem.new
+				respond_to do |format|
+					format.html  { render :new }
+					format.js { render :new }
+				end
 			end
+		else
+			redirect_to view_brand_url(@order_product.brand)
 		end
+
 	end
 
 	private
@@ -55,8 +64,10 @@ class OrderItemsController < ApplicationController
 		@order_product = Product.find(params[:product_id])
 	end
 
-	def get_current_order
+	def get_order
 		@order = @order_product.brand.orders.current.where(orderer_id: @current_user.get_parent.id ).first
+		@submitted_order = @order_product.brand.orders.submitted.where(orderer_id: @current_user.get_parent.id ).first
+		@pending_order = @order_product.brand.orders.pending.where(orderer_id: @current_user.get_parent.id ).first
 	end
 
 end
