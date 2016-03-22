@@ -75,6 +75,16 @@ class AdminController < ApplicationController
     @retailer = Retailer.find(params[:id])
   end
 
+  def orders_index
+    @orders = Order.submitted
+    orderers = @orders.map(&:orderer).uniq.sort_by { |x| x.company_name }
+    @orderers = do_kaminari_array(orderers, params[:page])
+  end
+
+  def order_view
+    @order = Order.find(params[:id])
+  end
+
   def new_bulk_upload
 
   end

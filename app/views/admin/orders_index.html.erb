@@ -1,0 +1,17 @@
+<%= render layout: "index_layout" do %>
+
+	<% if !@orderers.empty? %>
+		<%= paginate @orderers %><br>
+		<% @orderers.each do |o| %>
+			<%= o.company_name %><br>
+			<% @orders.where(orderer: o).each do |order| %>
+				<%= render partial: 'order', locals: { order: order }  %>
+			<% end %>
+		<% end %>
+		
+	<% else %>
+		<hr>
+		<h3><em>No Orders</em></h3>
+	<% end %>
+
+<% end %>
