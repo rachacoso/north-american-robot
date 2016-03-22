@@ -5,12 +5,18 @@ $('.overlay').fadeOut();
 <% end %>
 
 <% if @order.status == "submitted" %>
-$('#view-orders-buttons').html("<%= j (render partial: 'shared/profile/components/view_orders_buttons', locals: {profile: @order.brand}) %>");
-$('.order-sku-button').fadeOut();
+	<% if URI(request.referer).path.match(/orders/) %>
+		window.location.replace("<%= order_url(@order) %>");
+	<% else %>
+		$('#view-orders-buttons').html("<%= j (render partial: 'shared/profile/components/view_orders_buttons', locals: {profile: @order.brand}) %>");
+		$('.order-sku-button').fadeOut();
+	<% end %>
 <% end %>
 
+<% unless @order.status == "submitted" && URI(request.referer).path.match(/orders/) %>
 $('#order-item-data').html("<%= j (render partial: 'submit_order') %>");
 $('.overlay#order-item-overlay').fadeIn();
 $('#order-item').fadeIn();
+<% end %>
 
 setModalActions();
