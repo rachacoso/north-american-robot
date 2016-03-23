@@ -112,6 +112,8 @@ class Brand
 		end
 	end
 
+	default_scope ->{ where(:country_of_origin.ne => "United States") }
+
 	scope :subscribed, ->{where(subscriber: true)}
 	scope :activated, ->{where(active: true)}
 
