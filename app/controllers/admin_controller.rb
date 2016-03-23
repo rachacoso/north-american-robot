@@ -77,8 +77,20 @@ class AdminController < ApplicationController
 
   def orders_index
     @orders = Order.submitted
-    orderers = @orders.map(&:orderer).uniq.sort_by { |x| x.company_name }
-    @orderers = do_kaminari_array(orderers, params[:page])
+    case params[:group]
+    when "d"
+      distributors = @orders.where(orderer_type: "Distributor").map(&:orderer).uniq.sort_by { |x| x.company_name }
+      @group = do_kaminari_array(distributors, params[:page])
+      @group_type = "d"
+    when "r"
+      retailers = @orders.where(orderer_type: "Retailer").map(&:orderer).uniq.sort_by { |x| x.company_name }
+      @group = do_kaminari_array(retailers, params[:page])
+      @group_type = "r"
+    when "b"
+      brands = @orders.map(&:brand).uniq.sort_by { |x| x.company_name }
+      @group = do_kaminari_array(brands, params[:page])
+      @group_type = "b"
+    end
   end
 
   def order_view

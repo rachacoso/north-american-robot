@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get   '/admin/distributors' => 'admin#distributors_index', as: 'admin_distributors_index'
   get   '/admin/brands' => 'admin#brands_index', as: 'admin_brands_index'
   get   '/admin/retailers' => 'admin#retailers_index', as: 'admin_retailers_index'
-  get   '/admin/orders' => 'admin#orders_index', as: 'admin_orders_index'
+  get   '/admin/orders/:group' => 'admin#orders_index', as: 'admin_orders_index'
   get   '/admin/distributor/:id' => 'admin#distributor_view', as: 'admin_distributor_view'
   get   '/admin/brand/:id' => 'admin#brand_view', as: 'admin_brand_view'
   get   '/admin/retailer/:id' => 'admin#retailer_view', as: 'admin_retailer_view'
