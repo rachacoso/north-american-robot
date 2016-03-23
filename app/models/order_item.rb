@@ -25,7 +25,7 @@ class OrderItem # for V2 ordering
     return (self.price * (1-discount))
   end
   def total_price # in dollars
-  	return (self.quantity * self.product.tiered_price) / 100
+  	return (self.quantity * self.tiered_price) / 100
   end
 
 end

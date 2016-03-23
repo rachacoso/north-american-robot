@@ -1,21 +1,29 @@
 class OrderItemsController < ApplicationController
 
-	before_action :set_product, :get_order
+	before_action :set_product, :get_order, only: [:new, :create]
 
 	def new
 		if @order && item = @order.order_items.where(product_id: @order_product.id).first
 			@order_item = item
+			render :edit
 		else
 			@order_item = OrderItem.new
 		end
 	end
 
+	def edit
+		@order = @current_user.get_parent.orders.find(params[:o])
+		@order_item = @order.order_items.find(params[:id])
+		@order_product = @order_item.product
+	end
+
 	def update
-		if @order # only update if there is active order
+		@order = @current_user.get_parent.orders.current.find(params[:o])
+		if @order # only update if there is a current order
 			@order_item = @order.order_items.find(params[:id])
 			if params[:order_item][:quantity].to_i == 0
 				@order_item.destroy
-				flash.now[:notice] = "#{@order_product.name} has been removed from the order"
+				flash.now[:notice] = "#{@order_item.name} has been removed from the order"
 				if @order.order_items.empty?
 					brand = @order.brand
 					@order.destroy
@@ -29,7 +37,7 @@ class OrderItemsController < ApplicationController
 				format.js
 			end
 		else
-			redirect_to view_brand_url(@order_product.brand)
+			redirect_to root_url
 		end
 	end
 

@@ -1,0 +1,83 @@
+<%# if product is deleted before submission of order%>
+<% if !@order_item.product %>
+
+<div class="row">
+	<div class="medium-6 columns">
+		<h3 style="margin-bottom: 0;"><%= @order.brand.company_name %></h3>
+	</div>
+</div>
+<div class="row">
+	<div class="medium-6 columns">
+		<h2 style="margin-top: 0;"><strong><del><%= @order_item.name %></del></strong></h2>
+		<% if @order_item.item_id.present? %>
+			<h4><del>Product ID Number: <%= @order_item.item_id %></del></h4>
+		<% end %>
+		<% if @order_item.item_size.present? %>
+			<h4><del>Size: <%= @order_item.item_size %></del></h4>
+		<% end %>
+		<p>
+			<del><%= number_to_currency(@order_item.price_in_dollars) %> MSRP</del><br>
+			<strong><del><%= number_to_currency(@order_item.tiered_price_in_dollars) %> Unit Price</del></strong>
+		</p>
+	</div><!--/.medium-6-->
+
+	<div class="medium-6 columns">
+		<h3>Uh Oh!<br>It looks like <%= @order.brand.company_name %> has removed this product from the system.</h3>
+			<div class="row">
+				<div class="small-12 columns text-center">
+					<%= hidden_field_tag "order_item[quantity]", 0 %>
+					<%= hidden_field_tag "o", @order.id %>
+					<%= f.submit "Delete SKU", class: "landing-button" %>
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+	</div>
+</div>
+
+<% else %>
+
+<%= hidden_field_tag "product_id", @order_item.product_id %>
+<%= hidden_field_tag "o", @order.id %>
+<div class="row">
+	<div class="medium-6 columns">
+		<h3 style="margin-bottom: 0;"><%= @order.brand.company_name %></h3>
+	</div>
+</div>
+<div class="row">
+	<div class="medium-6 columns">
+		<h2 style="margin-top: 0;"><strong><%= @order_item.name %></strong></h2>
+		<% if @order_item.item_id.present? %>
+			<h4>Product ID Number: <%= @order_item.item_id %></h4>
+		<% end %>
+		<% if @order_item.item_size.present? %>
+			<h4>Size: <%= @order_item.item_size %></h4>
+		<% end %>
+		<p>
+			<%= number_to_currency(@order_item.price_in_dollars) %> MSRP<br>
+			<strong><%= number_to_currency(@order_item.tiered_price_in_dollars) %> Unit Price</strong>
+		</p>
+	</div><!--/.medium-6-->
+	<div class="medium-6 columns">
+		
+			<div class="row">
+				<div class="small-10 medium-8 small-centered columns">
+					<div class="row collapse">
+						<div class="small-6 columns">
+							<%= f.number_field :quantity, min: 0, label: false %>		
+						</div><!--/.small-6-->
+						<div class="small-6 columns">
+							<span class="postfix">UNITS</span>
+						</div><!--/.small-6-->
+					</div><!--/.row-->
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+			<div class="row">
+				<div class="small-12 columns text-center">
+					<%= f.submit "Update SKU Quantity", class: "landing-button" %>
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+			<span style="color: red;font-weight: 100;font-size: 0.75em;"><%= flash[:error] ? flash[:error] : "" %></span>
+
+	</div><!--/.medium-6-->
+</div><!--/.row-->
+
+<% end %>

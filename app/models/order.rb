@@ -23,7 +23,7 @@ class Order # for V2 ordering
   def total_price # in dollars
     price = 0
     self.order_items.each do |item|
-      price += item.quantity * item.product.tiered_price
+      price += item.quantity * item.tiered_price
     end
     return price / 100
   end

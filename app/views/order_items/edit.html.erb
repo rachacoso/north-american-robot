@@ -1,0 +1,24 @@
+<%= render partial: 'shared/v2/header/main' %>
+
+<div class="row">
+	<div class="small-12 columns">
+		<nav class="breadcrumbs">
+			<%= link_to "Beauty", root_url %>
+		  <%= link_to "Find", brands_url %>
+		  <%= link_to @order.brand.company_name, view_brand_url(@order.brand) %>
+		  <a class="current" href="#">Order SKU</a>
+		</nav>
+	</div>
+</div>
+
+<div class="row">
+	<div class="small-8 small-centered columns text-center">
+		<%= render "edit_order_item_notremote" %>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<br>
+<div class="row">
+	<div class="small-12 columns text-center">
+		<%= link_to "Back to Brand Profile", view_brand_url(@order.brand), class: "landing-button secondary" %>		
+	</div><!--/.small-12-->
+</div><!--/.row-->
