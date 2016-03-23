@@ -32,7 +32,9 @@ class HomeController < ApplicationController
 
 		if @current_user
 
-			@profile = @current_user.brand || @current_user.distributor || @current_user.retailer
+			@profile = @current_user.get_parent
+
+			@orders = @profile.orders
 
 			matches = @profile.matches
 			@unread_list = Array.new

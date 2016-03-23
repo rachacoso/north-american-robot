@@ -9,31 +9,12 @@
 	<div class="small-11 small-centered columns">
 		
 		<% if @current_user %>
-		<div class="row">
 
-			<div class="medium-8 columns">
-
-				<div id="dashboard-marketplace-container">
-						<%= render "marketplace" %>
-				</div>
-
-				<br>
-				
-				<div id="dashboard-agency-container">	
-					<%#= render "agency" %>
-				</div>
-
-			</div>
-
-			<div class="medium-4 columns">
-
-				<div id="dashboard-insights-container">
-					<%= render "insights" %>
-				</div>
-
-			</div>
-
-		</div>
+			<div class="row">
+				<div class="small-12 columns">
+					<%= render "marketplace_v2" %>
+				</div><!--/.small-12-->
+			</div><!--/.row-->
 
 		<% else %>
 			<%= render "restricted_view" %>

@@ -1,5 +1,5 @@
-
-<% if @order.status == "submitted" && !@current_user.administrator %>
+<br><br>
+<% if @order.status == "submitted" && !@current_user.brand %>
 	<div class="row">
 		<div class="medium-11 medium-centered columns text-center">
 			<div class="panel order-alert">
@@ -28,11 +28,19 @@
 
 <br>
 <% if @order.status == "submitted" %>
-<div class="row">
-	<div class="small-12 columns text-center">
-		<%= link_to "Back to Brand Profile", view_brand_url(@order.brand), class: "landing-button" %>
-	</div><!--/.small-12-->
-</div><!--/.row-->
+	<% if @current_user.brand %>
+	<div class="row">
+		<div class="small-12 columns text-center">
+			<%= link_to "Back to #{@order.orderer_type} Profile", "#", class: "landing-button" %>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+	<% else %>
+	<div class="row">
+		<div class="small-12 columns text-center">
+			<%= link_to "Back to Brand Profile", view_brand_url(@order.brand), class: "landing-button" %>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+	<% end %>
 <% else %>
 <div class="row">
 	<div class="medium-11 medium-centered columns">
