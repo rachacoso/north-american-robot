@@ -59,7 +59,7 @@
 
 	<div class="show-for-small-only">
 
-		<% if @current_user.type? == 'brand' %>
+		<% if profile.class.to_s == "Brand" %>
 		<div class="row">
 			<div class="small-12 columns">
 				<div class="title">Trends</div>
