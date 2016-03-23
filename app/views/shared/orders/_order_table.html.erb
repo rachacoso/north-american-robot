@@ -10,14 +10,14 @@
 				<th>Amount</th>
 			</thead>
 			<tbody>
-				<% get_sorted_order_items(@order).each do |lineitem, product| %>
+				<% get_sorted_order_items(@order).each do |lineitem| %>
 				<tr>
-					<td><%= product.item_id.present? ? "#{product.item_id}" : "&nbsp;".html_safe %></td>
-					<td><%= @order.status == "submitted" ? product.name : (link_to product.name, new_order_item_url(product.id), remote: true) %> </td>
-					<td><%= @order.status == "submitted" ? lineitem.quantity : (link_to lineitem.quantity, new_order_item_url(product.id), remote: true) %></td>
-					<td><%= number_to_currency(product.price_in_dollars) %></td>
-					<td><%= number_to_currency(product.tiered_price_in_dollars) %></td>
-					<td><%= number_to_currency(lineitem.total_price) %></td>
+				<td><%= lineitem.item_id.present? ? "#{lineitem.item_id}" : "&nbsp;".html_safe %></td>
+				<td><%= @order.status == "open" && lineitem.product ? (link_to lineitem.name, new_order_item_url(lineitem.product_id), remote: true) : lineitem.name %> </td>
+				<td><%= @order.status == "open" && lineitem.product ? (link_to lineitem.quantity, new_order_item_url(lineitem.product_id), remote: true) : lineitem.quantity %></td>
+				<td><%= number_to_currency(lineitem.price_in_dollars) %></td>
+				<td><%= number_to_currency(lineitem.tiered_price_in_dollars) %></td>
+				<td><%= number_to_currency(lineitem.total_price) %></td>
 				</tr>
 				<% end %>
 				<tr id="total">

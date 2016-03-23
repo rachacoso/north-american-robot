@@ -46,7 +46,13 @@ class OrderItemsController < ApplicationController
 		if @order # only create/update if there is active order
 			if params[:order_item][:quantity].to_i > 0
 				@order_item = @order.order_items.find_or_create_by(product_id: @order_product.id) # dont product duplicate order items if somehow was already created
-				@order_item.update(quantity: params[:order_item][:quantity].to_i)
+				@order_item.update(
+					quantity: params[:order_item][:quantity].to_i,
+					price: @order_product.price,
+					name: @order_product.name,
+					item_id: @order_product.item_id,
+					item_size: @order_product.item_size
+					 )
 			else
 				flash.now[:error] = "Sorry, please enter a vaild quantity"
 				@order_item = OrderItem.new
