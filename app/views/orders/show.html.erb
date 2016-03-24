@@ -7,11 +7,11 @@
 			<% if @order.orderer_type == "Retailer" %>
 			<%= link_to "Retailers", "#" %>
 			<%= link_to "Find", "#" %>
-		  <%= link_to @order.orderer.company_name, "#" %>
+		  <%= link_to @order.orderer.company_name, view_retailer_url(@order.orderer) %>
 		  <% elsif @order.orderer_type == "Distributor" %>
 			<%= link_to "Distributors", "#" %>
 			<%= link_to "Find", "#" %>
-		  <%= link_to @order.orderer.company_name, "#" %>
+		  <%= link_to @order.orderer.company_name, view_distributor_url(@order.orderer) %>
 		  <% end %>
 		  <a class="current" href="#">Order</a>
 		</nav>

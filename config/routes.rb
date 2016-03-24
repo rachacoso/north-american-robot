@@ -110,6 +110,9 @@ Rails.application.routes.draw do
   get    '/brand/view/:id' => 'brands#view', as: 'view_brand'
   get    '/brand/preview/:id' => 'brands#preview', as: 'preview_brand'
 
+  get    '/retailer/view/:id' => 'retailers#view', as: 'view_retailer'
+  get    '/distributor/view/:id' => 'distributors#view', as: 'view_distributor'
+
   # for brand editing
   get    '/brand/edit' => 'brands#edit', as: 'brand'
   get    '/brand/public_profile' => 'brands#public_profile', as: 'brand_public_profile'

@@ -2,6 +2,25 @@ class DistributorsController < ApplicationController
 
   before_action :check_usertype, only: [:edit, :public_profile, :full_profile, :update]
   before_action :administrators_only, only: [:adminupdate]
+  skip_before_action :require_login, only: [:view]
+
+  # V2 ACTIONS
+  def view
+
+    @profile = Distributor.find(params[:id])
+
+    unless @current_user
+      session[:persisted_redirect] = view_distributor_url(@profile)
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
+  end
+
+  # ORIGINAL ACTIONS
 
   def edit
 

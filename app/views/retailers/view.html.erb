@@ -3,15 +3,15 @@
 <div class="row">
 	<div class="small-12 columns">
 		<nav class="breadcrumbs">
-			<%= link_to "Beauty", root_url %>
-		  <%= link_to "Find", brands_url %>
+			<%= link_to "Retailers", "#" %>
+		  <%= link_to "Find", "#" %>
 		  <a class="current" href="#"><%= @profile.company_name %></a>
 		</nav>
 	</div>
 </div>
 
 <% if @current_user %>
-	<%= render partial: "/shared/profile/brand_full_profile", locals: {profile: @profile} %>
+	<%= render partial: "/shared/profile/retailer_full_profile", locals: {profile: @profile} %>
 <% else %>
 	<br><br>
 	<div class="row">

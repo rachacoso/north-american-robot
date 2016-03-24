@@ -1,5 +1,5 @@
 <% if @current_user %>
-	window.location.href = "<%= view_brand_url(@profile) %>";
+	window.location.href = "<%= view_distributor_url(@profile) %>";
 <% else %>
 	$('#profile-preview').fadeOut(function(){
 		$('#profile-preview-data').html("<%= j (render partial: 'shared/profile/restricted_view') %>");

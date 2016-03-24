@@ -31,7 +31,11 @@
 	<% if @current_user.brand %>
 	<div class="row">
 		<div class="small-12 columns text-center">
-			<%= link_to "View #{@order.orderer_type} Profile", "#", class: "landing-button" %>
+			<% if @order.orderer_type == "Retailer" %>
+				<%= link_to "View Retailer Profile", view_retailer_url(@order.orderer), class: "landing-button" %>
+			<% elsif @order.orderer_type == "Distributor" %>
+				<%= link_to "View Distributor Profile", view_distributor_url(@order.orderer), class: "landing-button" %>
+			<% end %>
 		</div><!--/.small-12-->
 	</div><!--/.row-->
 	<% else %>
