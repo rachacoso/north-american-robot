@@ -20,6 +20,9 @@ table.order {
 	}
 }
 
-.panel.order-alert {
-	background: $landing-light-gray;
+.full-order-container {
+	margin-top: rem-calc(20);
+	.panel.outer, .panel.order-alert {
+		background: $landing-light-gray;
+	}
 }

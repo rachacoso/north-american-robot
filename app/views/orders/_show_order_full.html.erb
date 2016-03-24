@@ -1,67 +1,85 @@
-<br><br>
-<% if @order.status == "submitted" && !@current_user.brand %>
-	<div class="row">
-		<div class="medium-11 medium-centered columns text-center">
-			<div class="panel order-alert">
-			<h3>Thank you for your order. <br>Your order has been submitted and is being processed. <br>You will receive a final invoice shortly with the estimated shipping time and costs.</h3>
-			</div>
-		</div><!--/.medium-9 small-11 small-centered-->
-	</div><!--/.row-->
-<% end %>
+<div class="full-order-container">
 
-<% unless @order.status == "submitted" %>
-<div class="row">
-	<div class="medium-11 medium-centered columns">
-		<h1>1) Confirm Order Details</h1>
-		<h3>Click on any item to edit</h3>
-	</div><!--/.small-12-->
-</div><!--/.row-->
-<% end %>
+	<% if @order.status == "submitted" %>
+		<div class="row">
+			<div class="medium-11 medium-centered columns">
+				<div class="panel order-alert">
 
-<div class="row">
-	<div class="medium-11 medium-centered columns">
-		<div class="panel">
-			<%= render "shared/orders/show" %>
-		</div>
-	</div><!--/.small-12-->
-</div><!--/.row-->
+					<div class="row">
+						<div class="small-8 columns text-left">
+							<% if @current_user.brand %>
+							<h3>
+								An order has been submitted by <%= @order.orderer.company_name %> and is being processed by Landing International.<br>
+								Final negotiations 
+								
+							</h3>
+							<% else %>
+							<h3>
+								Thank you for your order. <br>
+								Your order has been submitted and is being processed. <br>You will receive a final invoice shortly with the estimated shipping time and costs.
+							</h3>
+							<% end %>
+						</div><!--/.small-8-->
+						<div class="small-4 columns text-right">
 
-<br>
-<% if @order.status == "submitted" %>
-	<% if @current_user.brand %>
-	<div class="row">
-		<div class="small-12 columns text-center">
-			<% if @order.orderer_type == "Retailer" %>
-				<%= link_to "View Retailer Profile", view_retailer_url(@order.orderer), class: "landing-button" %>
-			<% elsif @order.orderer_type == "Distributor" %>
-				<%= link_to "View Distributor Profile", view_distributor_url(@order.orderer), class: "landing-button" %>
-			<% end %>
-		</div><!--/.small-12-->
-	</div><!--/.row-->
-	<% else %>
-	<div class="row">
-		<div class="small-12 columns text-center">
-			<%= link_to "View Brand Profile", view_brand_url(@order.brand), class: "landing-button" %>
-		</div><!--/.small-12-->
-	</div><!--/.row-->
+							<% if @current_user.brand %>
+								<% if @order.orderer_type == "Retailer" %>
+									<%= link_to "View Retailer Profile", view_retailer_url(@order.orderer), class: "landing-button" %>
+								<% elsif @order.orderer_type == "Distributor" %>
+									<%= link_to "View Distributor Profile", view_distributor_url(@order.orderer), class: "landing-button" %>
+								<% end %>
+							<% else %>
+									<%= link_to "View Brand Profile", view_brand_url(@order.brand), class: "landing-button" %>
+							<% end %>
+
+						</div><!--/.small-4-->
+					</div><!--/.row-->
+
+				</div>
+			</div><!--/.medium-9 small-11 small-centered-->
+		</div><!--/.row-->
 	<% end %>
-<% else %>
-<div class="row">
-	<div class="medium-11 medium-centered columns">
-		
-		<h1>2) Submit Order to <%= @order.brand.company_name %></h1>
-		
-	</div><!--/.small-12-->
-</div><!--/.row-->
-<div class="row">
-	<div class="medium-11 medium-centered columns text-center">
-		<div class="panel">
-		<%= link_to "Submit Order to #{@order.brand.company_name}", submit_order_url(@order,0), class: "landing-button", remote: true %> or
-		<%= link_to "Add More Items to Order", view_brand_url(@order.brand), class: "landing-button secondary" %>
-		</div>
-	</div><!--/.medium-11-->
-</div><!--/.row-->
-<% end %>
+
+	<div class="row">
+		<div class="medium-11 medium-centered columns">
+
+			<div class="panel outer">
+				<% unless @order.status == "submitted" %>
+					<h1>1) Confirm Order Details</h1>
+				<% end %>
+
+				<div class="row">
+					<div class="medium-11 medium-centered columns">
+						<% unless @order.status == "submitted" %>
+							<h3>Click on any item to edit</h3>
+						<% end %>
+						<div class="panel">
+						<%= render "shared/orders/show" %>		
+						</div>
+					</div><!--/.small-12-->
+				</div><!--/.row-->
+			</div>
+
+				<% if @order.status == "submitted" %>
+
+				<% else %>
+					<div class="panel outer">
+						<h1>2) Submit Order to <%= @order.brand.company_name %></h1>
+						<div class="row">
+							<div class="medium-11 medium-centered columns text-center">
+								<div class="panel">
+								<%= link_to "Submit Order to #{@order.brand.company_name}", submit_order_url(@order,0), class: "landing-button", remote: true %> <span style="font-weight: 100;">or</span>
+								<%= link_to "Add More Items to Order", view_brand_url(@order.brand), class: "landing-button secondary" %>
+								</div>
+							</div><!--/.medium-11-->
+						</div><!--/.row-->
+					</div>
+				<% end %>
+
+		</div><!--/.medium-11-->
+	</div><!--/.row-->
+
+</div>
 
 <div class="footer">
 <div class="row">
