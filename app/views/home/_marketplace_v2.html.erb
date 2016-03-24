@@ -11,42 +11,4 @@
 	</div><!--/.small-12-->
 </div><!--/.row-->
 
-<div class="row">
-	<div class="small-12 columns">
-		<div class="panel">
-		<h2>Your Orders</h2>
-
-
-		<% if @orders.present? %>
-		<table width="100%" id="dashboard-orders-table">
-			<thead>
-				<tr>
-					<th>
-						<%= @current_user.brand ? "Retailer/Distributor" : "Brand" %>
-					</th>
-					<th>
-						Status
-					</th>
-					<th>
-						Subtotal
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				<% get_order_companies(@orders).each do |company| %>
-					<% order = get_order(company) %>
-
-					<tr>
-						<td><%= link_to order_url(order) do %><%= company.company_name %><% end %> <%= @current_user.brand ? "(#{company.class})" : "" %></td>
-						<td><%= order.status %></td>
-						<td><%= number_to_currency(order.total_price) %></td>
-					</tr>
-
-				<% end %>
-			</tbody>
-		</table>
-		<% end %>
-
-		</div>
-	</div><!--/.small-12-->
-</div><!--/.row-->
+<%= render "orders" %>

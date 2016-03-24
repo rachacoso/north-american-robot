@@ -3,6 +3,10 @@
 @import "global_variables";
 @import "mixins";
 
-.dashboard-orders-table {
-	
+.dashboard-order-tile {
+	border-radius: rem-calc(5);
+}
+
+#dashboard-order-section {
+	background: $landing-light-gray;
 }

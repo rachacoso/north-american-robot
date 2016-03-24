@@ -8,8 +8,8 @@ class OrdersController < ApplicationController
 
 	def submit
 		if params[:confirm].to_i == 1
-			@order.status = "submitted"
-			@order.save!
+			@order.submission
+			# @order.save!
 		end
 		respond_to do |format|
 			format.html  { redirect_to order_url(@order) }

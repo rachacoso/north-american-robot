@@ -1,0 +1,40 @@
+<div class="row">
+	<div class="small-12 columns">
+		<div class="panel" id="dashboard-order-section">
+		<h2>Your Orders</h2>
+
+
+		<% if @orders.present? %>
+
+				<% @orders.each do |order| %>
+					<div class="row">
+						<div class="small-12 columns">
+							<div class="panel dashboard-order-tile">
+								<div class="row">
+									<div class="medium-8 columns">
+										<%= link_to order_url(order) do %>
+											<h2>
+												<%= @current_user.brand ? order.orderer_company_name : order.brand_company_name %>
+												<%= @current_user.brand ? "(#{order.orderer_type})" : "" %>
+											</h2>
+										<% end %> 
+									</div><!--/.medium-8-->
+									<div class="medium-4 columns">
+										<h3>
+											<% status, date = order_status(order) %>
+											Status: <span id="<%= status.downcase %>"><%= status %></span> on <%= date.strftime('%b %d, %Y') %>
+										</h3>
+										<h3>Subtotal: <strong><%= number_to_currency(order.total_price) %></strong></h3>
+									</div><!--/.medium-4-->
+								</div><!--/.row-->
+							</div>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+
+				<% end %>
+
+		<% end %>
+
+		</div>
+	</div><!--/.small-12-->
+</div><!--/.row-->
