@@ -19,10 +19,12 @@
 		</li>
 		<li>
 			<div class="title">Country</div>
+			<div class="data">
 			<% if profile.country_of_origin.blank? %>
 				n/a
 			<% else %>
-			<div class="data"><%= profile.country_of_origin %></div>
+			<%= profile.country_of_origin %>
+			</div>
 			<% end %>
 		</li>
 		<li>
@@ -37,10 +39,11 @@
 		</li>
 		<li>
 			<div class="title">Sector</div>
+			<div class="data">
 			<% if profile.sectors.blank? %>
 				n/a
 			<% else %>
-				<div class="data">
+				
 				<% profile.sectors.order_by(:name => "asc").each do |s| %>
 					<%= s.name %><br>
 					<% unless profile.subsectors.blank? %>
@@ -51,8 +54,8 @@
 						<% end %>
 					<% end %>
 				<% end %>
-				</div>
 			<% end %>
+			</div>
 		</li>
 	</ul>
 	</div>
@@ -63,15 +66,15 @@
 		<div class="row">
 			<div class="small-12 columns">
 				<div class="title">Trends</div>
+				<div class="data">
 				<% if profile.trends.blank? %>
 					n/a
 				<% else %>
-					<div class="data">
-						<% profile.trends.each do |t| %>
-							<%= t.name %>
-						<% end %>
-					</div>
+					<% profile.trends.each do |t| %>
+						<%= t.name %>
+					<% end %>
 				<% end %>
+				</div>
 			</div><!--/.small-12-->
 		</div><!--/.row-->
 		<% end %>
@@ -79,23 +82,27 @@
 		<div class="row">
 			<div class="small-12 columns">
 					<div class="title">Country</div>
+					<div class="data">
 					<% if profile.country_of_origin.blank? %>
 						n/a
 					<% else %>
-					<div class="data"><%= profile.country_of_origin %></div>
+					<%= profile.country_of_origin %>
 					<% end %>
+					</div>
 			</div><!--/.small-12-->
 		</div><!--/.row-->
 
 
 		<div class="row">
 			<div class="small-12 columns">
+					<div class="title">Company Size</div>
+					<div class="data">
 					<% if profile.company_size.blank? %>
 						n/a
 					<% else %>
-					<div class="title">Company Size</div>
-					<div class="data"><%= CompanySize.find(profile.company_size).name rescue nil %></div>
+					<%= CompanySize.find(profile.company_size).name rescue nil %>
 					<% end %>
+					</div>
 			</div><!--/.small-12-->
 		</div><!--/.row-->
 
@@ -103,10 +110,10 @@
 		<div class="row">
 			<div class="small-12 columns">
 					<div class="title">Sector</div>
+					<div class="data">
 					<% if profile.sectors.blank? %>
 						n/a
 					<% else %>
-						<div class="data">
 						<% profile.sectors.order_by(:name => "asc").each do |s| %>
 							<%= s.name %><br>
 							<% unless profile.subsectors.blank? %>
@@ -117,8 +124,8 @@
 								<% end %>
 							<% end %>
 						<% end %>
-						</div>
 					<% end %>
+					</div>
 			</div><!--/.small-12-->
 		</div><!--/.row-->
 
