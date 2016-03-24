@@ -45,10 +45,7 @@ class OrderItemsController < ApplicationController
 
 		if !@order && !@submitted_order && !@pending_order # create new order if doesnt exist (as open, submitted, or pending)
 			new_order = Order.new
-	    new_order.orderer = @current_user.get_parent
-	    new_order.user = @current_user
-	    new_order.brand = @order_product.brand
-	    new_order.save!
+			new_order.setup(@current_user.get_parent, @current_user, @order_product.brand)
 			@order = new_order
 		end
 		if @order # only create/update if there is active order
