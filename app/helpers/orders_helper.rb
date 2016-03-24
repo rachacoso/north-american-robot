@@ -15,7 +15,7 @@ module OrdersHelper
 	def active_order(profile)
 		if profile.class.to_s == "Brand"
 			return profile.orders.active.where(orderer_id: @current_user.get_parent.id).first
-		elsif profile.class.to_s == "Distributor" || profile.class == "Retailer"
+		elsif profile.class.to_s == "Distributor" || profile.class.to_s == "Retailer"
 			return profile.orders.active.where(brand: @current_user.get_parent.id).first
 		end
 	end
