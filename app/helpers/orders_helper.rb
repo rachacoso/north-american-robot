@@ -12,8 +12,12 @@ module OrdersHelper
 		return brand.orders.pending.where(orderer_id: @current_user.get_parent.id).first
 	end
 
-	def active_order(brand)
-		return brand.orders.active.where(orderer_id: @current_user.get_parent.id).first
+	def active_order(profile)
+		if profile.class.to_s == "Brand"
+			return profile.orders.active.where(orderer_id: @current_user.get_parent.id).first
+		elsif profile.class.to_s == "Distributor" || profile.class == "Retailer"
+			return profile.orders.active.where(brand: @current_user.get_parent.id).first
+		end
 	end
 
 end

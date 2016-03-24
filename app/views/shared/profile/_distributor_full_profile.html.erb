@@ -78,7 +78,8 @@
 		</div>
 	</div><!--/.medium-8-->
 	<div class="medium-4 columns medium-text-right">
-		[contact button]
+		<%= link_to "Contact", "#", remote:true, class: "landing-button" %>
+		<div id="view-orders-buttons"><%= render partial: "shared/profile/components/view_orders_buttons", locals: {profile: profile} %></div>
 	</div><!--/.medium-4-->
 </div><!--/.row-->
 
