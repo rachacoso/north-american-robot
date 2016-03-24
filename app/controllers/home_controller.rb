@@ -34,7 +34,9 @@ class HomeController < ApplicationController
 
 			@profile = @current_user.get_parent
 
-			@orders = @profile.orders
+			@submitted_orders = @profile.orders.submitted
+			@pending_orders = @profile.orders.pending
+			@current_orders = @profile.orders.current
 
 			matches = @profile.matches
 			@unread_list = Array.new

@@ -1,0 +1,25 @@
+<div class="row">
+	<div class="small-12 columns">
+		<div class="panel dashboard-order-tile">
+			<div class="row">
+				<div class="medium-3 columns">
+					<h2>
+						<%= @current_user.brand ? order.orderer_company_name : order.brand_company_name %>
+						<%= @current_user.brand ? "(#{order.orderer_type})" : "" %>
+					</h2>
+					<h4>
+						<%= order_status(order).html_safe %>
+					</h4>
+					<% if order.status == "open" %>
+					<%= link_to "Continue Order", order_url(order), class: "landing-button"  %>
+					<% else %>
+					<%= link_to "View Order", order_url(order), class: "landing-button"  %>
+					<% end %>
+				</div><!--/.medium-3-->
+				<div class="medium-9 columns text-right">
+					<%= render partial: "shared/orders/order_table", locals: {order: order} %>
+				</div><!--/.medium-9 -->
+			</div><!--/.row-->
+		</div>
+	</div><!--/.small-12-->
+</div><!--/.row-->

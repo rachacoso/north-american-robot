@@ -23,9 +23,12 @@ module HomeHelper
 	def order_status(order)
 		status = order.status
 		case status
+		when "open"
+			return "<span id='#{status.downcase}'>STARTED</span> on #{order.c_at.strftime('%b %d, %Y')}"
 		when "submitted"
-			return "SUBMITTED", order.submission_date
+			return "<span id='#{status.downcase}'>SUBMITTED</span> on #{order.submission_date.strftime('%b %d, %Y')}"
 		when "pending"
+			return "<span id='#{status.downcase}'>PENDING</span> on #{order.pending_date.strftime('%b %d, %Y')}"
 		end
 	end
 
