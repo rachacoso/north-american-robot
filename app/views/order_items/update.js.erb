@@ -5,7 +5,7 @@ $('.overlay').fadeOut();
 
 <% if URI(request.referer).path.match(/orders/) %>
 
-$('#order-table-data').html("<%= j (render partial: 'shared/orders/order_table') %>");
+$('#order-table-data').html("<%= j (render partial: 'shared/orders/order_table', locals: {order: @order}) %>");
 
 <% else %>
 

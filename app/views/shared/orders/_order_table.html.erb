@@ -10,11 +10,11 @@
 				<th>Amount</th>
 			</thead>
 			<tbody>
-				<% get_sorted_order_items(@order).each do |lineitem| %>
+				<% get_sorted_order_items(order).each do |lineitem| %>
 				<tr>
 				<td><%= lineitem.item_id.present? ? "#{lineitem.item_id}" : "&nbsp;".html_safe %></td>
-				<td><%= @order.status == "open" ? (link_to lineitem.name, edit_order_item_url(lineitem,o:@order.id), remote: true) : lineitem.name %> <%= lineitem.product ? "" : "(err: 33!)" %></td>
-				<td><%= @order.status == "open" ? (link_to lineitem.quantity, edit_order_item_url(lineitem,o:@order.id), remote: true) : lineitem.quantity %></td>
+				<td><%= order.status == "open" ? (link_to lineitem.name, edit_order_item_url(lineitem,o:order.id), remote: true) : lineitem.name %> <%= lineitem.product ? "" : "(err: 33!)" %></td>
+				<td><%= order.status == "open" ? (link_to lineitem.quantity, edit_order_item_url(lineitem,o:order.id), remote: true) : lineitem.quantity %></td>
 				<td><%= number_to_currency(lineitem.price_in_dollars) %></td>
 				<td><%= number_to_currency(lineitem.tiered_price_in_dollars) %></td>
 				<td><%= number_to_currency(lineitem.total_price) %></td>
@@ -22,7 +22,7 @@
 				<% end %>
 				<tr id="total">
 					<td colspan="5" class="text-right">Subtotal <small>(before taxes/fees/shipping)</small></td>
-					<td><%= number_to_currency(@order.total_price) %></td>
+					<td><%= number_to_currency(order.total_price) %></td>
 				</tr>
 			</tbody>
 		</table>

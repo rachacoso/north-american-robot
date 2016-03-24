@@ -31,7 +31,7 @@
 
 <hr>
 
-<%= render "shared/orders/order_table" %>
+<%= render partial: "shared/orders/order_table", locals: {order: @order} %>
 
 <br>
 <% if @order.status == "submitted" %>

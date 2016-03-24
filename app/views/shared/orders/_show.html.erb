@@ -43,5 +43,5 @@
 	</div><!--/.medium-10-->
 </div><!--/.row-->
 <div id="order-table-data">
-<%= render "shared/orders/order_table" %>
+<%= render partial: "shared/orders/order_table", locals: { order: @order } %>
 </div>
