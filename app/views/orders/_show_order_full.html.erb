@@ -9,14 +9,13 @@
 						<div class="small-8 columns text-left">
 							<% if @current_user.brand %>
 							<h3>
-								An order has been submitted by <%= @order.orderer.company_name %> and is being processed by Landing International.<br>
-								Final negotiations 
-								
+								An order has been submitted by <strong><%= @order.orderer.company_name %></strong> and is being processed by Landing International.<br>
 							</h3>
 							<% else %>
 							<h3>
-								Thank you for your order. <br>
-								Your order has been submitted and is being processed. <br>You will receive a final invoice shortly with the estimated shipping time and costs.
+								Thank you for your order.<br>
+								Your order has been submitted and is being processed.<br>
+								You will receive a final invoice shortly with the estimated shipping time and costs.
 							</h3>
 							<% end %>
 						</div><!--/.small-8-->
