@@ -11,19 +11,19 @@
 	padding: rem-calc(5);
 }
 
-.article {
-	font-weight: 100;
-	ul, ol, a {
-		font-weight: 100;
-	}
-	a {
-		border-bottom: rem-calc(1) solid $landing-middle-gray;
-	}
-	ul {
-		list-style: none;
-	}
-	ul li:before{ 
-		content:"• "; 
-		font-size: rem-calc(10);
-	}
-}
+// .article {
+// 	font-weight: 100;
+// 	ul, ol, a {
+// 		font-weight: 100;
+// 	}
+// 	a {
+// 		border-bottom: rem-calc(1) solid $landing-middle-gray;
+// 	}
+// 	// ul {
+// 	// 	list-style: none;
+// 	// }
+// 	// ul li:before{ 
+// 	// 	content:"• "; 
+// 	// 	font-size: rem-calc(10);
+// 	// }
+// }
