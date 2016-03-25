@@ -14,4 +14,8 @@ module ArticlesHelper
     return ProductPhoto.where(:photographable_id.in => product_list).shuffle[0]
 	end
 	
+	def get_brand_photo_backup(brand)
+    return brand.brand_photos.shuffle[0]
+	end
+
 end
