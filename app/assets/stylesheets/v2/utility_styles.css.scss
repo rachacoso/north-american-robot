@@ -1,0 +1,27 @@
+@import "foundation/functions";
+@import "foundation/components/labels";
+@import "global_variables";
+@import "mixins";
+
+
+ul.filterlist {
+	list-style-type: none; /*to remove bullets*/
+	text-align: left;
+	margin-left:0;
+	padding: 0px;
+	zoom:1;
+	overflow: hidden;
+	li {
+		font-weight:700;
+		display: inline-block;
+		&::before {
+			content: "/ ";
+		}
+		&:first-child::before {
+			content: " ";
+		}
+		&.active {
+			a{color: $landing-dark-gray;}
+		}
+	}
+}
