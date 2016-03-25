@@ -5,15 +5,17 @@
 	<% if !@orders.empty? %>
 	<div class="row">
 		<div class="small-12 columns">
-		<h2>Orders by <%= order_groupname(@group_type) %></h2>
-		<%= link_to "by Brand", admin_orders_index_url("b"), class: "landing-button" %>
-		<%= link_to "by Retailer", admin_orders_index_url("r"), class: "landing-button" %>
-		<%= link_to "by Distributor", admin_orders_index_url("d"), class: "landing-button" %>
+		<h2 style="margin-bottom: 0;">Orders</h2>
+		<ul class="filterlist">
+			<li <%= @group_type == "b" ? "class=active" : "" %>><%= link_to "by Brand", admin_orders_index_url("b") %></li>
+			<li <%= @group_type == "r" ? "class=active" : "" %>><%= link_to "by Retailer", admin_orders_index_url("r") %></li>
+			<li <%= @group_type == "d" ? "class=active" : "" %>><%= link_to "by Distributor", admin_orders_index_url("d") %></li>
+		</ul>
 		<%= paginate @group %><br>
 		<% @group.each do |o| %>
-			<h3><%= o.company_name %></h3>
+			<h2><%= o.company_name %></h2>
 			<% order_groupquery(@orders, @group_type, o).each do |order| %>
-				<%= render partial: 'order', locals: { order: order }  %>
+				<%= render partial: 'order', locals: { order: order, group_type: @group_type }  %>
 			<% end %>
 		<% end %>
 		</div><!--/.medium-6-->

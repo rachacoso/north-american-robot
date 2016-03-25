@@ -1,5 +1,18 @@
 <%= render partial: "shared/topbar_admin" %>
 
+<div class="row">
+	<div class="small-12 columns">
+		<nav class="breadcrumbs">
+			<%= link_to "Orders", admin_orders_index_url("b") %>
+		  <a class="current" href="#">
+			<strong><%= @order.brand.company_name %></strong> (order from <strong><%= @order.orderer.company_name %></strong>)
+		  </a>
+		</nav>
+	</div>
+</div>
+
+<br>
+
 <% if flash[:notice] %>
 <div class="row">
 	<div class="small-12 columns panel">
@@ -13,24 +26,20 @@
 </div>
 <% end %>
 
-
 <div class="row">
-	<div class="small-12 columns">
+	<div class="medium-11 medium-centered columns">
 		<div class="panel">
-			<h2><strong><%= @order.orderer.company_name %></strong> ordering from <strong><%= @order.brand.company_name %></strong></h2>
+		<h2>
+			<strong><%= @order.brand.company_name %></strong> order from <strong><%= @order.orderer.company_name %></strong>
+		</h2>
 		</div>
 	</div>
 </div>
 
 <div class="row">
-	<div class="small-12 columns">
-		<%= render partial: "shared/orders/show" %>
+	<div class="medium-11 medium-centered columns">
+		<div class="panel">
+		<%= render "shared/orders/show" %>
+		</div>
 	</div><!--/.small-12-->
 </div><!--/.row-->
-
-<div class="row">
-	<div class="small-12 columns text-center">
-		[link back]
-	</div><!--/.small-12-->
-</div><!--/.row-->
-

@@ -1,3 +1,9 @@
-<p>Order from <%= order.orderer.company_name %> to <%= order.brand.company_name %>
-<%= link_to "view", admin_order_view_url(order) %>
+<p>
+	<%= link_to admin_order_view_url(order) do %>
+		<% if group_type == "r" || group_type == "d" %>
+			<%= order.brand.company_name %>
+		<% else %>
+			<%= order.orderer.company_name %>
+		<% end %>
+	<% end %>
 </p>
