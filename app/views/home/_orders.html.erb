@@ -35,21 +35,6 @@
 		</div>
 		<% end %>
 
-		<h3>Pending Orders</h3>
-		<% if @pending_orders.present?  %>
-				<% @pending_orders.each do |order| %>
-					<%= render partial: "order_item", locals: { order: order } %>
- 				<% end %>
-		<% else %>
-		<div class="row">
-			<div class="small-12 columns">
-				<div class="panel dashboard-order-tile">
-					<h3>(No Orders)</h3>
-				</div>
-			</div>
-		</div>
-		<% end %>
-
 		</div>
 	</div><!--/.small-12-->
 </div><!--/.row-->
