@@ -41,7 +41,7 @@
 				<% end %>
 			<% end %>
 			<% if @filtered %>
-				<%= link_to brands_url do %><li>ALL</li><% end %>
+				<%= link_to brands_url(type: @type) do %><li>ALL</li><% end %>
 			<% else %>
 				<li class="active">ALL</li>
 			<% end %>
