@@ -316,6 +316,12 @@ a.profile-sq-left {
       color: white;
     }
   }
+  h2, h3 {
+    line-height: 1em;
+  }
+  #copy {
+    margin: rem-calc(30) 0;
+  }
 }
 
 // ORDER MODAL

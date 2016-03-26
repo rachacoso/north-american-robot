@@ -9,21 +9,31 @@
 	<div class="small-11 small-centered columns">
 		
 		<% if @current_user %>
-
 			<div class="row">
 				<div class="small-12 columns">
 					<%= render "marketplace_v2" %>
 				</div><!--/.small-12-->
 			</div><!--/.row-->
-
 		<% else %>
-			<%= render "restricted_view" %>
+			<br><br>
+			<div class="row">
+				<div class="small-12 columns">
+					<br>
+				</div><!--/.small-12-->
+				<div class="medium-10 columns medium-centered">
+					<div id="restricted-view-container">
+					<%= render "shared/profile/restricted_view" %>
+					</div>
+				</div>
+				<div class="small-12 columns">
+					<br><br><br>
+				</div><!--/.small-12-->
+			</div>
 		<% end %>
 
 
 	</div><!--/.small-11 small-centered-->
 </div><!--/.row-->
 
-<br>
-<br>	
+<%= render partial: 'shared/v2/footer/main' %>
 

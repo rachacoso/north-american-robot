@@ -3,17 +3,29 @@
 		<div class="small-12 columns text-center">
 			<%= link_to root_url do %><%= image_tag 'v2/logo.svg', width: "100" %><% end %>
 		</div><!--/.small-12-->
-		<div class="small-12 columns text-center">
-			<h2>To view <%= @profile.company_name %>'s full profile, <br>
-				you need to have a FREE account</h2>
-		</div><!--/.small-12-->
+	</div><!--/.row-->
+	<div class="row">
+		<div class="medium-10 medium-centered columns text-center">
+			<div id="copy">
+			<h2>
+				Please log-in to access premium brand profiles with product information and ordering options.
+			</h2>
+
+			<h3><strong>
+				Discover new beauty brands from all across the world. <br>Free to join for verified brands, retailers and distributors.</strong>
+			</h3>
+			</div>
+		</div><!--/.medium-9 -->
+	</div><!--/.row-->
+	<div class="row">
 		<div class="small-12 columns">
 			<br>
 		</div><!--/.small-12-->
+	</div><!--/.row-->
+	<div class="row">
 		<div class="small-5 columns text-right">
 			<%= link_to "SIGN IN", login_url, remote: true, class: "action-link" %>
 			<h3>I already have an account</h3>
-			<div id="login-form"></div>
 		</div><!--/.small-5-->
 		<div class="small-2 columns text-center">
 			<h3>OR</h3>
@@ -23,4 +35,9 @@
 			<h3>I need to get an account</h3>
 		</div><!--/.small-5-->
 	</div><!--/.row-->
-</div><!--/.front-top-panel-->
+	<div class="row">
+		<div class="medium-7 medium-centered columns">
+			<div id="login-form"></div>
+		</div><!--/.medium-7 -->
+	</div><!--/.row-->
+</div><!--/.profile-restricted-view-->
