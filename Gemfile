@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 ruby '2.2.2'
 
+
+gem 'puma'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.9'
 # Use SCSS for stylesheets
