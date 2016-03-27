@@ -17,7 +17,7 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
 
   # Mailer default URL
-  config.action_mailer.default_url_options = { :host => "localhost:3000" }
+  config.action_mailer.default_url_options = { :host => "landing.dev" }
   
   # config.action_mailer.smtp_settings = {
   #   :port           => ENV['MAILGUN_SMTP_PORT'],
