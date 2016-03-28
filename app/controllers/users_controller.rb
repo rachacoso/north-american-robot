@@ -21,17 +21,13 @@ class UsersController < ApplicationController
 
     @newuser = User.new
 
-    if params[:administrator] #create ADMIN user
-      @newuser.administrator = true
-      @response_action = "redirect_to users_url"
-    else 
-      @newuser.build_contact
-      @newuser.email = params[:user][:email]
-      @newuser.password = params[:user][:password]
-      @newuser.password_confirmation = params[:user][:password_confirmation]
-      @newuser.contact.firstname = params[:user][:contact_attributes][:firstname]
-      @newuser.contact.lastname = params[:user][:contact_attributes][:lastname]
-    end
+    @newuser.administrator = true if params[:administrator] #set as admin if admin create
+    @newuser.email = params[:user][:email]
+    @newuser.password = params[:user][:password]
+    @newuser.password_confirmation = params[:user][:password_confirmation]
+    @newuser.build_contact
+    @newuser.contact.firstname = params[:user][:contact_attributes][:firstname]
+    @newuser.contact.lastname = params[:user][:contact_attributes][:lastname]
 
     if verify_recaptcha(model: @newuser) && @newuser.save # if validates
       #create profile for the selected user type
@@ -40,7 +36,9 @@ class UsersController < ApplicationController
 
       cookies[:auth_token] = @newuser.auth_token
 
-      if params[:user_type] == 'distributor'
+      if params[:administrator]
+        response_action = "redirect_to users_url"
+      elsif params[:user_type] == 'distributor'
         response_action = "redirect_to distributor_url" # for regular logins
         @share_id ? (@redirect_url = view_match_url(@share_id, 'na')) : "" # for prospect share logins
       elsif params[:user_type] == 'brand'

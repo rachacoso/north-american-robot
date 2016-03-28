@@ -17,4 +17,10 @@ class UserMailerPreview < ActionMailer::Preview
 		UserMailer.password_reset(User.first,Brand.first.id)
   end
 
+	# Preview this email at http://localhost:3000/rails/mailers/user_mailer/new_user_notification
+  def new_user_notification
+		UserMailer.new_user_notification('test@test.com',User.where(:administrator => nil).first)
+  end
+
+
 end

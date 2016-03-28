@@ -111,6 +111,7 @@ class User
 				email: self.email
 			)
 			self.save!
+			UserMailer.send_new_user_notification(self) unless self.administrator
 		end
 	end
 

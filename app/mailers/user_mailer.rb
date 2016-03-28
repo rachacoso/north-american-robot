@@ -11,4 +11,23 @@ class UserMailer < ActionMailer::Base
     @share_id = share_id
     mail :to => user.email, :subject => "Landing International: Password Set/Reset"
   end
+
+  # def create_notification(user)
+  #   @user = user
+  #   mail :to => 'roberto@landingintl.com, sarah@landingintl.com', :subject => "Landing International: New User Created"
+  # end
+
+  def self.send_new_user_notification(user)
+    emails = ['roberto@landingintl.com', 'sarah@landingintl.com']
+    emails.each do |email|
+      new_user_notification(email,user).deliver
+    end
+  end
+
+  def new_user_notification(email, user)
+    @user = user
+    mail :to => email, :subject => "Landing International: New User Created"
+
+  end
+
 end

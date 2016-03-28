@@ -44,7 +44,8 @@
 		<div class="row">
 			<div class="small-7 small-centered columns panel">
 				<h3>Add Administrator</h3>
-				<div class="errornotice <%= flash[:error] ? "error-on" : "" %>"><%= flash[:error] ? flash[:error].upcase.html_safe : "&nbsp;".html_safe %></div>				
+				<div class="errornotice <%= flash[:error] ? "error-on" : "" %>"><%= flash[:error] ? flash[:error].upcase.html_safe : "&nbsp;".html_safe %></div>
+				<%= parse_errors(@newuser.errors) %>
 				<%= form_for @newuser do |f| %>
 					<%= hidden_field_tag :administrator, 'true' %>
 					<%= f.fields_for :contact do |ff| %>
@@ -68,6 +69,10 @@
 					<%= f.password_field :password_confirmation, :placeholder => 'Password (repeat)', :label => false %>
 					</div>
 					<div class="medium-12 columns text-right">
+					<br>
+					<p>Hack Note: Error handling incomplete... if you don't fill out correctly, will return page error... need to fix</p>
+					<%= recaptcha_tags %>
+					<br>
 					<%= f.submit 'Add Administrator', class: "tiny button alert" %>
 					</div>				
 					</div>
