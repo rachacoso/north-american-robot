@@ -1,0 +1,18 @@
+<div class="row">
+	<div class="medium-10 medium-centered columns">
+		<h2 style="margin-bottom: 0;">Send a message to <%= @recipient.company_name %> </h2>
+		<h4 style="margin-top: 0;">A copy of this email will be emailed to you at <%= @current_user.email %></h4>
+	</div><!--/.medium-10-->
+</div><!--/.row-->
+
+<div class="row">
+	<div class="medium-10 medium-centered columns">
+		<%= form_for @message, url: new_simple_message_url(@recipient), remote: true do |f| %>
+			<%= f.hidden_field :sender, value: @current_user.get_parent.company_name %>
+			<%= f.hidden_field :sender_email, value: @current_user.email %>
+			<%= f.hidden_field :recipient, value: @recipient.company_name %>
+			<%= f.text_area :text, rows: 10, label:false, placeholder: "Message Text Here" %>
+			<%= f.submit 'Send Message', class: "landing-button" %>
+		<% end %>
+	</div><!--/.medium-10-->
+</div><!--/.row-->

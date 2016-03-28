@@ -165,6 +165,8 @@ Rails.application.routes.draw do
   # post '/conversations/share' => 'conversations#share', as: 'conversation_share'
 
   resources :messages, only: [:create, :index]
+  get '/smsg/:recipient_id' => 'messages#new_simple_message', as: 'new_simple_message'
+  post '/smsg/:recipient_id' => 'messages#send_simple_message'
   resources :password_resets
   # get 'messages/all/:match_id' => 'messages#all_messages', as: 'all_messages'
 

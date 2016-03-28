@@ -1,0 +1,18 @@
+LANDING INTERNATIONAL
+
+<% if @cc %>
+Thanks for you message to <%= @message.recipient %>
+
+Copy of message:
+<%= @message.text %>
+<% else %>
+<%= @message.sender %> has sent <%= @message.recipient %> the following message:
+<%= @message.text %>
+
+
+You can respond to them at <%= @message.sender_email %>
+<% end %>
+
+
+Landing International
+Los Angeles, CA

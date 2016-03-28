@@ -37,6 +37,20 @@ class MessagesController < ApplicationController
 
 	end
 
+	def new_simple_message # for sending without saving
+		@message = Message.new
+		@recipient = Brand.find(params[:recipient_id]) || Distributor.find(params[:recipient_id]) || Retailer.find(params[:recipient_id])
+	end
+	def send_simple_message # for sending without saving
+		@message = Message.new(
+			sender: params[:message][:sender],
+			sender_email: params[:message][:sender_email],
+			recipient: params[:message][:recipient],
+			text: params[:message][:text]
+			)
+		@message.simple_messages
+	end
+
 	def index
 		u = @current_user.brand || @current_user.distributor
 		@matches = u.matches

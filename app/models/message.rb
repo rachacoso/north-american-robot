@@ -5,7 +5,9 @@ class Message
   belongs_to :match
   
   # id of distributor/brand match
-  field :recipient, type: String
+  field :sender, type: String
+  field :sender_email, type: String # for simple_message
+  field :recipient, type: String # for simple_message
   field :subject, type: String
   field :text, type: String
   field :read, type: Mongoid::Boolean
@@ -15,4 +17,7 @@ class Message
   # log who sent it
   belongs_to :user
 
+  def simple_messages
+    MessageMailer.send_simple_messages(self)
+  end
 end
