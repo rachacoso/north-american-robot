@@ -160,7 +160,7 @@ class AdminController < ApplicationController
   def add_user
     if params[:id]
       id = params[:id]
-      b_or_d = Brand.find(id) || Distributor.find(id)
+      b_or_d = Brand.find(id) || Distributor.find(id) || Retailer.find(id)
       if !params[:user][:email].blank?
 
         if User.where(email: params[:user][:email]).exists?
