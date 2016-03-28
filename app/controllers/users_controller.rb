@@ -19,104 +19,46 @@ class UsersController < ApplicationController
 
     @share_id = params[:pshare]
 
-    if User.where(email: params[:user][:email]).exists?
+    @newuser = User.new
 
-      flash.now[:error] = "That email address is already in use"
-      @newuser = User.new
+    if params[:administrator] #create ADMIN user
+      @newuser.administrator = true
+      @response_action = "redirect_to users_url"
+    else 
       @newuser.build_contact
-      redirection
+      @newuser.email = params[:user][:email]
+      @newuser.password = params[:user][:password]
+      @newuser.password_confirmation = params[:user][:password_confirmation]
+      @newuser.contact.firstname = params[:user][:contact_attributes][:firstname]
+      @newuser.contact.lastname = params[:user][:contact_attributes][:lastname]
+    end
 
-    elsif params[:user][:email].blank?
+    if verify_recaptcha(model: @newuser) && @newuser.save # if validates
+      #create profile for the selected user type
+      
+      @newuser.initial_setup(params[:user_type])
 
-      flash.now[:error] = "Email field cannot be blank"
-      @newuser = User.new
-      @newuser.build_contact
-      redirection
+      cookies[:auth_token] = @newuser.auth_token
 
-    elsif params[:user][:contact_attributes][:firstname].blank? || params[:user][:contact_attributes][:lastname].blank?
-
-      flash.now[:error] = "Please enter a first and last name"
-      @newuser = User.new
-      @newuser.build_contact
-      redirection
-
-    elsif params[:user][:password].blank? || params[:user][:password_confirmation].blank?
-
-      flash.now[:error] = "Password fields cannot be blank"
-      @newuser = User.new
-      @newuser.build_contact
-      redirection
-
-    elsif params[:user][:password] != params[:user][:password_confirmation]
-
-      flash.now[:error] = "Passwords did not match"
-      @newuser = User.new
-      @newuser.build_contact
-      redirection
-
-    else
-
-      if params[:administrator] #create ADMIN user
-        user = User.new
-
-        user.build_contact
-        user.email = params[:user][:email]
-        user.password = params[:user][:password]
-        user.password_confirmation = params[:user][:password_confirmation]
-        user.contact.firstname = params[:user][:contact_attributes][:firstname]
-        user.contact.lastname = params[:user][:contact_attributes][:lastname]
-        user.administrator = true
-        user.save!
-        @response_action = "redirect_to users_url"
-
-      else 
-
-        user = User.new
-        
-        user.build_contact
-        user.email = params[:user][:email]
-        user.password = params[:user][:password]
-        user.password_confirmation = params[:user][:password_confirmation]
-        user.contact.firstname = params[:user][:contact_attributes][:firstname]
-        user.contact.lastname = params[:user][:contact_attributes][:lastname]
-        
-        #create profile for the selected user type
-        if params[:user_type] == 'distributor' || params[:user_type] == 'brand' || params[:user_type] == 'retailer' # restrict to only allowed values
-          createusertype = "create_" + params[:user_type]
-          user.send(createusertype) # create relation
-   
-          # prepopulate contact info with user info (user can change later)
-          newuser = user.send(params[:user_type])
-          newuser.create_address
-          newuser.contacts << Contact.new(
-            firstname: params[:user][:contact_attributes][:firstname], 
-            lastname: params[:user][:contact_attributes][:lastname], 
-            email: params[:user][:email])          
-          user.save!
-
-        end
-
-        cookies[:auth_token] = user.auth_token
-
-        if params[:user_type] == 'distributor'
-          @response_action = "redirect_to distributor_url" # for regular logins
-          @share_id ? (@redirect_url = view_match_url(@share_id, 'na')) : "" # for prospect share logins
-        elsif params[:user_type] == 'brand'
-          @response_action = "redirect_to brand_url" # for regular logins
-          @share_id ? (@redirect_url = view_match_url(@share_id, 'na')) : "" # for prospect share logins
-        elsif params[:user_type] == 'retailer'
-          @response_action = "redirect_to retailer_url" # for regular logins
-        else
-          @share_id ? (@redirect_url = dashboard_url) : "" # for prospect share logins
-          @response_action = "redirect_to dashboard_url" # for regular logins
-        end
-
+      if params[:user_type] == 'distributor'
+        response_action = "redirect_to distributor_url" # for regular logins
+        @share_id ? (@redirect_url = view_match_url(@share_id, 'na')) : "" # for prospect share logins
+      elsif params[:user_type] == 'brand'
+        response_action = "redirect_to brand_url" # for regular logins
+        @share_id ? (@redirect_url = view_match_url(@share_id, 'na')) : "" # for prospect share logins
+      elsif params[:user_type] == 'retailer'
+        response_action = "redirect_to retailer_url" # for regular logins
+      else
+        @share_id ? (@redirect_url = dashboard_url) : "" # for prospect share logins
+        response_action = "redirect_to dashboard_url" # for regular logins
       end
 
+    else
+      render :new and return
     end
 
     respond_to do |format|
-      format.html { eval(@response_action) }
+      format.html { eval(response_action) }
       format.js
     end
 
@@ -271,14 +213,6 @@ class UsersController < ApplicationController
 
     )
   end 
-
-  def redirection 
-    if params[:administrator]
-      @response_action = "redirect_to users_url"
-    else
-      @response_action = "render :new"
-    end
-  end
 
   def persist_params
     if params[:user][:email]

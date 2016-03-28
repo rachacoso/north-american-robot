@@ -98,4 +98,20 @@ class User
 	  UserMailer.password_reset(self, share_id).deliver
 	end
   
+	def initial_setup(type)
+		if ['distributor','brand','retailer'].include? type # restrict to only allowed values
+			createusertype = "create_" + type
+			self.send(createusertype) # create relation
+			# prepopulate contact info with user info (user can change later)
+			new_company = self.send(type)
+			new_company.create_address
+			new_company.contacts << Contact.new(
+				firstname: self.contact.firstname,
+				lastname: self.contact.lastname,
+				email: self.email
+			)
+			self.save!
+		end
+	end
+
 end
