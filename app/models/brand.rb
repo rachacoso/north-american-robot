@@ -4,7 +4,7 @@ class Brand
 	include Mongoid::Paperclip
 
 	field :subscriber, type: Mongoid::Boolean
-	field :active, type: Mongoid::Boolean, default: true
+	field :active, type: Mongoid::Boolean, default: false
 	
 	# LOGINS/USERS WHO CAN ACT ON BEHALF OF BRAND
 	has_many :users
