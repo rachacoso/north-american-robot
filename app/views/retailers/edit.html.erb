@@ -1,5 +1,7 @@
 <%= render partial: "shared/topbar" %>
 
+<%= render "newuser" if flash[:notice] %>
+
 <div class="row">
 	<div class="small-12 columns marketplace-subpage-header">
 		<div class="medium-6 columns" id="your-profile-header">

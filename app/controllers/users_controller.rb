@@ -35,6 +35,8 @@ class UsersController < ApplicationController
       @newuser.initial_setup(params[:user_type])
 
       cookies[:auth_token] = @newuser.auth_token
+      
+      flash[:notice] = true
 
       if params[:administrator]
         response_action = "redirect_to users_url"
