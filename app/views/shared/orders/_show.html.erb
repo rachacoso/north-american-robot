@@ -31,7 +31,7 @@
 				<% end %>
 
 				<h3 style="margin-top: 2em;">
-					<%= @order.brand.company_name %>
+					<%= @order.brand_company_name %>
 					<%= "<br>#{@order.brand.address.address1}".html_safe unless !@order.brand.address.address1 || @order.brand.address.address1.empty? %>
 					<%= "<br>#{@order.brand.address.address2}".html_safe unless !@order.brand.address.address2 || @order.brand.address.address2.empty? %>
 					<%= "<br>#{@order.brand.address.city}".html_safe unless !@order.brand.address.city || @order.brand.address.city.empty? %>
@@ -41,7 +41,7 @@
 				</h3>
 
 				<h3 style="margin-top:1.5em; margin-bottom: 2em;">Bill to:<br>
-					<%= @order.orderer.company_name %>
+					<%= @order.orderer_company_name %>
 					<%= "<br>#{@order.orderer.address.address1}".html_safe unless !@order.orderer.address.address1 || @order.orderer.address.address1.empty? %>
 					<%= "<br>#{@order.orderer.address.address2}".html_safe unless !@order.orderer.address.address2 || @order.orderer.address.address2.empty? %>
 					<%= "<br>#{@order.orderer.address.city}".html_safe unless !@order.orderer.address.city || @order.orderer.address.city.empty? %>
