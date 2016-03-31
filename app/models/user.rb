@@ -84,7 +84,10 @@ class User
 	end
 
 	def can_order
-		return true if self.distributor || self.retailer
+		d_or_r = self.distributor || self.retailer
+		if d_or_r && d_or_r.company_name.present?
+			return true
+		end
 	end
 
 	def get_parent
