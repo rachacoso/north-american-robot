@@ -22,6 +22,7 @@ table.order {
 
 .full-order-container {
 	margin-top: rem-calc(20);
+	margin-bottom: rem-calc(100);
 	.panel.outer, .panel.order-alert {
 		background: $landing-light-gray;
 	}

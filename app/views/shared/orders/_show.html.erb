@@ -29,28 +29,25 @@
 						<%= image_tag @order.brand.logo.url(:medium), width: "100", height: "100", alt: "Logo" %>
 					<% end %>
 				<% end %>
-				<h1 style="margin-bottom:0;">
-					<%= @order.brand.company_name %>
-				</h1>
 
-				<h3>
-					<%#= @order.brand.company_name %>
-					<%= "#{@order.brand.address.address1}".html_safe unless @order.brand.address.address1.empty? %>
-					<%= "<br>#{@order.brand.address.address2}".html_safe unless @order.brand.address.address2.empty? %>
-					<%= "<br>#{@order.brand.address.city}".html_safe unless @order.brand.address.city.empty? %>
-					<%= "#{@order.brand.address.state}".html_safe unless @order.brand.address.state.empty? %>
-					<%= "#{@order.brand.address.postcode}".html_safe unless @order.brand.address.postcode.empty? %>
-					<%= "<br>#{@order.brand.address.country}".html_safe unless @order.brand.address.country.empty? %>
+				<h3 style="margin-top: 2em;">
+					<%= @order.brand.company_name %>
+					<%= "<br>#{@order.brand.address.address1}".html_safe unless !@order.brand.address.address1 || @order.brand.address.address1.empty? %>
+					<%= "<br>#{@order.brand.address.address2}".html_safe unless !@order.brand.address.address2 || @order.brand.address.address2.empty? %>
+					<%= "<br>#{@order.brand.address.city}".html_safe unless !@order.brand.address.city || @order.brand.address.city.empty? %>
+					<%= "#{@order.brand.address.state}".html_safe unless !@order.brand.address.state || @order.brand.address.state.empty? %>
+					<%= "#{@order.brand.address.postcode}".html_safe unless !@order.brand.address.postcode || @order.brand.address.postcode.empty? %>
+					<%= "<br>#{@order.brand.address.country}".html_safe unless !@order.brand.address.country || @order.brand.address.country.empty? %>
 				</h3>
 
-				<h3 style="margin-top:1.5em;">Bill to:<br>
+				<h3 style="margin-top:1.5em; margin-bottom: 2em;">Bill to:<br>
 					<%= @order.orderer.company_name %>
-					<%= "<br>#{@order.orderer.address.address1}".html_safe unless @order.orderer.address.address1.empty? %>
-					<%= "<br>#{@order.orderer.address.address2}".html_safe unless @order.orderer.address.address2.empty? %>
-					<%= "<br>#{@order.orderer.address.city}".html_safe unless @order.orderer.address.city.empty? %>
-					<%= "#{@order.orderer.address.state}".html_safe unless @order.orderer.address.state.empty? %>
-					<%= "#{@order.orderer.address.postcode}".html_safe unless @order.orderer.address.postcode.empty? %>
-					<%= "<br>#{@order.orderer.address.country}".html_safe unless @order.orderer.address.country.empty? %>
+					<%= "<br>#{@order.orderer.address.address1}".html_safe unless !@order.orderer.address.address1 || @order.orderer.address.address1.empty? %>
+					<%= "<br>#{@order.orderer.address.address2}".html_safe unless !@order.orderer.address.address2 || @order.orderer.address.address2.empty? %>
+					<%= "<br>#{@order.orderer.address.city}".html_safe unless !@order.orderer.address.city || @order.orderer.address.city.empty? %>
+					<%= "#{@order.orderer.address.state}".html_safe unless !@order.orderer.address.state || @order.orderer.address.state.empty? %>
+					<%= "#{@order.orderer.address.postcode}".html_safe unless !@order.orderer.address.postcode || @order.orderer.address.postcode.empty? %>
+					<%= "<br>#{@order.orderer.address.country}".html_safe unless !@order.orderer.address.country || @order.orderer.address.country.empty? %>
 				</h3>
 
 			</div><!--/.medium-6-->
