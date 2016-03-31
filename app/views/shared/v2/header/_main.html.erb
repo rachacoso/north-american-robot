@@ -1,7 +1,7 @@
 <div id="v2header">
 	<div class="row">
 		<div class="small-6 columns">
-			<%= link_to root_url do %><%= image_tag 'v2/logo.svg', width: "100" %><% end %>
+			<%= link_to root_url do %><%= image_tag 'https://s3.amazonaws.com/landingintl-us/general/landing-logo.png', width: "100", alt: "Landing International" %><% end %>
 		</div><!--/.small-6-->
 		<div class="small-6 columns text-right">
 			<div class="row">
@@ -23,7 +23,7 @@
 				<% if @current_user && show_top_menu %>
 					<ul class="dropmenu">
 					    <li>
-					        <%= link_to dashboard_url do %><%= image_tag 'v2/user_icon_logged_in.svg' %><% end %>
+					        <%= link_to dashboard_url do %><%= image_tag 'https://s3.amazonaws.com/landingintl-us/general/landing_icon_b.png', width: 32, height: 32, alt: "Landing Users" %><% end %>
 					        <ul>
 					        	<li class="section-title">Welcome to Landing International<br> <%= @current_user.email %></li>
 				            <li><%= link_to 'DASHBOARD', dashboard_url, id: "menu-dashboard", class: 'text-right' %></li>
@@ -35,7 +35,7 @@
 					    </li>
 					</ul>
 				<% else %>
-					<%= link_to dashboard_url do %><%= image_tag 'v2/user_icon.svg' %><% end %>
+					<%= link_to dashboard_url do %><%= image_tag 'https://s3.amazonaws.com/landingintl-us/general/landing_icon_a.png', width: 32, height: 32, alt: "Landing Users" %><% end %>
 				<% end %>
 
 				</div><!--/.small-2-->
