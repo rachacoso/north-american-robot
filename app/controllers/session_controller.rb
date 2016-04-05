@@ -4,7 +4,7 @@ class SessionController < ApplicationController
 
 	def new
 		if @current_user
-			redirect_to root_url
+			redirect_to root_url and return
 		else
 			@newuser = User.new
 			@newuser.build_contact
