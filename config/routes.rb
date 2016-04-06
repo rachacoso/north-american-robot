@@ -88,7 +88,8 @@ Rails.application.routes.draw do
   # resources :marketing_spends, only: [:create, :update, :destroy]
   
   resources :users, only: [:new, :create, :edit, :update, :destroy, :index]
-  
+  get    '/user/confirm/:token' => 'users#confirm_email', as: 'user_email_confirmation'
+
   get    '/distributor/edit' => 'distributors#edit', as: 'distributor'
   get    '/distributor/public_profile' => 'distributors#public_profile', as: 'distributor_public_profile'
   get    '/distributor/full_profile' => 'distributors#full_profile', as: 'distributor_full_profile'

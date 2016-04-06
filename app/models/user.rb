@@ -4,6 +4,7 @@ class User
 																				# 'has_secure_password' below
 																				# enables all the pwd hashing  
   before_create { generate_token(:auth_token) }
+  before_create { generate_token(:email_confirmation_token) }
 
   field :email, type: String
   field :auth_token, type: String
@@ -13,6 +14,9 @@ class User
   # for password reset
 	field :password_reset_token, type: String 
 	field :password_reset_sent_at, type: DateTime
+	# for email confirmation
+	field :email_confirmed, type: Mongoid::Boolean, default: false
+	field :email_confirmation_token, type: String
 
 	validates :email, presence: true, uniqueness: true
 
@@ -114,8 +118,15 @@ class User
 				email: self.email
 			)
 			self.save!
+			UserMailer.registration_confirmation(self).deliver unless self.administrator
 			UserMailer.send_new_user_notification(self) unless self.administrator
 		end
+	end
+
+	def confirm_email
+    self.email_confirmed = true
+    self.email_confirmation_token = nil
+    save!(:validate => false)
 	end
 
 end

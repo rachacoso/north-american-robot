@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  skip_before_action :require_login, only: [:new, :create]
+  skip_before_action :require_login, only: [:new, :create, :confirm_email]
 
   #restrict to administrators only
   before_action :administrators_only, only: [:index, :edit, :update, :destroy]
@@ -34,23 +34,18 @@ class UsersController < ApplicationController
       
       @newuser.initial_setup(params[:user_type])
 
-      cookies[:auth_token] = @newuser.auth_token
-      
-      flash[:notice] = true
+      # no longer log in automatically, need to confirm email (except if administrator)
+      if params[:administrator]
+        cookies[:auth_token] = @newuser.auth_token
+      end
 
+      # for new user modal firing
+      # flash[:notice] = true 
+      flash[:success] = "<h2>Thank you for registering with the Landing Marketplace!</h2><h3>One last step! A confirmation email has been sent to <strong>#{@newuser.email}</strong></h3><h3>Please check your email and follow the instructions to activate your account.</h3>"
       if params[:administrator]
         response_action = "redirect_to users_url"
-      elsif params[:user_type] == 'distributor'
-        response_action = "redirect_to distributor_url" # for regular logins
-        @share_id ? (@redirect_url = view_match_url(@share_id, 'na')) : "" # for prospect share logins
-      elsif params[:user_type] == 'brand'
-        response_action = "redirect_to brand_url" # for regular logins
-        @share_id ? (@redirect_url = view_match_url(@share_id, 'na')) : "" # for prospect share logins
-      elsif params[:user_type] == 'retailer'
-        response_action = "redirect_to retailer_url" # for regular logins
       else
-        @share_id ? (@redirect_url = dashboard_url) : "" # for prospect share logins
-        response_action = "redirect_to dashboard_url" # for regular logins
+        response_action = "redirect_to root_url"
       end
 
     else
@@ -62,6 +57,18 @@ class UsersController < ApplicationController
       format.js
     end
 
+  end
+
+  def confirm_email
+    user = User.find_by(email_confirmation_token: params[:token])
+    if user
+      user.confirm_email
+      flash[:success] = "<h2>Welcome to the Landing Marketplace!</h2><h3>Your email has been confirmed. Please log in to continue.</h3>"
+      redirect_to login_url
+    else
+      flash[:notice] = "Sorry! Email Confirmation Failed <br>[User does not exist or Link has expired]"
+      redirect_to login_url
+    end
   end
 
 # ADMIN ONLY

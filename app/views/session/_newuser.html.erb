@@ -1,0 +1,11 @@
+<% content_for :javascript_foot do %>
+  <%= javascript_tag do %>
+		$(document).ready(function() {
+
+			$('#profile-preview-data').html("<%= j (render partial: 'newuser_content') %>");
+			$('.overlay#profile-preview-overlay').fadeIn();
+			$('#profile-preview').fadeIn();
+
+		});
+  <% end %>
+<% end %>

@@ -12,6 +12,12 @@ class UserMailer < ActionMailer::Base
     mail :to => user.email, :subject => "Landing International: Password Set/Reset"
   end
 
+
+  def registration_confirmation(user)
+    @user = user
+    mail :to => user.email, :subject => "Landing International: Email Confirmation"
+  end
+
   # def create_notification(user)
   #   @user = user
   #   mail :to => 'roberto@landingintl.com, sarah@landingintl.com', :subject => "Landing International: New User Created"
