@@ -123,6 +123,14 @@ class User
 		end
 	end
 
+	def resend_confirmation
+		if !self.email_confirmation_token
+			generate_token(:email_confirmation_token)
+			save!(:validate => false)
+		end
+		UserMailer.registration_confirmation(self).deliver
+	end
+
 	def confirm_email
     self.email_confirmed = true
     self.email_confirmation_token = nil

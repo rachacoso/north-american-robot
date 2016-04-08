@@ -2,7 +2,7 @@
   <%= javascript_tag do %>
 		$(document).ready(function() {
 
-			$('#profile-preview-data').html("<%= j (render partial: 'newuser_content') %>");
+			$('#profile-preview-data').html("<%= j (render partial: content) %>");
 			$('.overlay#profile-preview-overlay').fadeIn();
 			$('#profile-preview').fadeIn();
 

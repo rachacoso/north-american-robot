@@ -41,11 +41,12 @@ class UsersController < ApplicationController
 
       # for new user modal firing
       # flash[:notice] = true 
-      flash[:success] = "<h2>Thank you for registering with the Landing Marketplace!</h2><h3>One last step! A confirmation email has been sent to <strong>#{@newuser.email}</strong></h3><h3>Please check your email and follow the instructions to activate your account.</h3>"
+      flash[:success] = "<h2>You're almost done!</h2><h3>We need to confirm your email address before we can log you in.<br> We've sent an email to you at <strong>#{@newuser.email}</strong></h3><h3>Please check your email and follow the instructions to activate your account.</h3>"
+      flash[:notice] = "CONFIRM YOUR EMAIL ADDRESS <BR>(CHECK YOUR EMAIL FOR INSTRUCTIONS)"
       if params[:administrator]
         response_action = "redirect_to users_url"
       else
-        response_action = "redirect_to root_url"
+        response_action = "redirect_to login_url"
       end
 
     else
@@ -63,7 +64,7 @@ class UsersController < ApplicationController
     user = User.find_by(email_confirmation_token: params[:token])
     if user
       user.confirm_email
-      flash[:success] = "<h2>Welcome to the Landing Marketplace!</h2><h3>Your email has been confirmed. Please log in to continue.</h3>"
+      flash[:success] = "<h2>Welcome to the Landing Marketplace!</h2><h3>Your email <strong>#{user.email}</strong> has been confirmed. Please log in to continue.</h3>"
       redirect_to login_url
     else
       flash[:notice] = "Sorry! Email Confirmation Failed <br>[User does not exist or Link has expired]"

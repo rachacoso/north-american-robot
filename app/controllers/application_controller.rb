@@ -30,24 +30,33 @@ class ApplicationController < ActionController::Base
     
   def get_current_user
   	if cookies[:auth_token]
-      if a = User.where(:auth_token => cookies[:auth_token]).first
-    		@current_user = a
-         # update last login (if hasn't been updated in the last hour)
-        unless (1.hours.ago..DateTime.now).cover?(a.last_login)
-          now = DateTime.now
-          a.last_login = now
-          a.save!
-          unless a.administrator
-            b_or_d = a.send(a.type?)
-            b_or_d.last_login = now
-            b_or_d.save!
+      if a = User.find_by(auth_token: cookies[:auth_token])
+        if a.email_confirmed # check to see if email has been confirmed
+      		@current_user = a
+           # update last login (if hasn't been updated in the last hour)
+          unless (1.hours.ago..DateTime.now).cover?(a.last_login)
+            now = DateTime.now
+            a.last_login = now
+            a.save!
+            unless a.administrator
+              b_or_d = a.send(a.type?)
+              b_or_d.last_login = now
+              b_or_d.save!
+            end
           end
+        else # re/send email confirmation if email not yet confirmed and logout
+          a.resend_confirmation
+          cookies.delete :auth_token
+          flash[:success] = "<h2>Hello!<br> We need to confirm your email address before we can log you in.</h2><h3>We've sent an email to you at <strong>#{a.email}</strong></h3><h3>Please check your email and follow the instructions to activate your account.</h3>"
+          flash[:notice] = "CONFIRM YOUR EMAIL ADDRESS <BR>(CHECK YOUR EMAIL FOR INSTRUCTIONS)"
+          @current_user = nil
+          redirect_to login_url and return # halts request cycle     
         end
       else
-       cookies.delete :auth_token
-       @current_user = nil
-       flash[:notice] = "YOU MUST BE LOGGED IN TO ACCESS (err: 11)"
-       redirect_to login_url # halts request cycle       
+        cookies.delete :auth_token
+        @current_user = nil
+        flash[:notice] = "YOU MUST BE LOGGED IN TO ACCESS (err: 11)"
+        redirect_to login_url # halts request cycle       
       end
     end
   end
