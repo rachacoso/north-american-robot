@@ -119,7 +119,6 @@ class User
 			)
 			self.save!
 			UserMailer.registration_confirmation(self).deliver unless self.administrator
-			UserMailer.send_new_user_notification(self) unless self.administrator
 		end
 	end
 
@@ -135,6 +134,7 @@ class User
     self.email_confirmed = true
     self.email_confirmation_token = nil
     save!(:validate => false)
+		UserMailer.send_new_user_notification(self) unless self.administrator
 	end
 
 end
