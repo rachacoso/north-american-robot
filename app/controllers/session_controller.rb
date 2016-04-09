@@ -37,19 +37,19 @@ class SessionController < ApplicationController
 					elsif @user.distributor
 						redirect_url = view_match_url(@share_id, 'na')
 					end
-				elsif session[:persisted_redirect] # if a persisted redirect exists
+				elsif session[:persisted_redirect] && @user.type? != 'brand' # if a persisted redirect exists and user isn't a brand
 					redirect_url = session[:persisted_redirect]
 					session[:persisted_redirect] = nil # reset the redirect
-					flash[:notice] = true if @user.last_login.blank? # is a new user (i.e. has never logged in)
+					flash[:newuser] = true if @user.last_login.blank? # is a new user (i.e. has never logged in)
 				elsif @user.last_login.blank? # is a new user (i.e. has never logged in)
 					redirect_url = eval("#{@user.type?}_url")
-					flash[:notice] = true
+					flash[:newuser] = true
 				else
 					redirect_url = root_url
 				end
 			end
 		else
-			flash[:notice] = "INVALID PASSWORD"
+			flash[:notice] = "INVALID EMAIL or PASSWORD"
 			if @share_id #is login from a share link
 				redirect_url = prospect_share_url(@share_id)
 			else

@@ -1,5 +1,6 @@
+<% flash[:newuser] = true %>
 <%= render partial: 'shared/v2/header/main' %>
-<%= render partial: "newuser", locals: { content: "shared/newusers/neworderer_content" } if flash[:notice] %>
+<%= render partial: "newuser", locals: { content: "shared/newusers/neworderer_content" } if flash[:newuser] %>
 
 <div class="row">
 	<div class="small-12 columns">
