@@ -16,6 +16,9 @@ class Order # for V2 ordering
   field :submission_date, type: DateTime
   field :completion_date, type: DateTime
 
+  field :discount, type: Integer, default: 50 # discount in % - defaults to 50% discount
+  validates :discount, numericality: { less_than_or_equal_to: 100, greater_than_or_equal_to: 0 }
+
   scope :current, ->{where(status: "open")}
   scope :submitted, ->{where(status: "submitted")}
   scope :pending, ->{where(status: "pending")}
