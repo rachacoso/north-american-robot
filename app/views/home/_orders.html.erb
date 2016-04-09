@@ -3,7 +3,7 @@
 		<div class="panel" id="dashboard-order-section">
 		<h2>Your Orders</h2>
 
-		<% unless @current_user.type? == "brand" %>
+		<%# unless @current_user.type? == "brand" %>
 		<h3>Current Open Orders</h3>
 		<% if @current_orders.present?  %>
 				<% @current_orders.each do |order| %>
@@ -18,7 +18,7 @@
 			</div>
 		</div>
 		<% end %>
-		<% end %>
+		<%# end %>
 
 		<h3>Submitted Orders</h3>
 		<% if @submitted_orders.present?  %>

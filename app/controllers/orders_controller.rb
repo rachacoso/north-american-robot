@@ -17,10 +17,23 @@ class OrdersController < ApplicationController
 		end
 	end
 
+	def update
+		@order.update(order_params)
+		if !@order.save
+			flash[:error] = "Sorry, Discount must be a number between 0 and 100"
+		end
+		redirect_to order_url(@order)
+	end
+
 	private
 
 	def set_order
 		@order = Order.find(params[:id])
 	end
 
+	def order_params
+		params.require(:order).permit(
+			:discount
+		)
+	end
 end

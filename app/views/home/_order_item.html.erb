@@ -11,7 +11,7 @@
 					<h4>
 						<%= order_status(order).html_safe %>
 					</h4>
-					<% if order.status == "open" %>
+					<% if order.status == "open" && !@current_user.brand %>
 					<%= link_to "Continue Order", order_url(order), class: "landing-button"  %>
 					<% else %>
 					<%= link_to "View Order", order_url(order), class: "landing-button"  %>
