@@ -45,16 +45,21 @@
 			<div class="panel outer">
 				<% unless @order.status == "submitted" %>
 					<% if @current_user.brand? %>
-						<h1>Open Order</h1>
-						<p>This order is still open and can be updated by <strong><%= @order.orderer.company_name %></strong></p>
 						<div class="row">
 							<div class="medium-11 medium-centered columns">
 								<div class="row">
-									<div class="medium-7 medium-push-5 columns">
+									<div class="medium-6 columns">
+										<h1>Open Order</h1>
+										<h3>This order is still open and can be updated by <strong><%= @order.orderer.company_name %></strong></h3>
+									</div><!--/.medium-6-->
+									<div class="medium-6 columns text-right">
+										<%= link_to "View Company Profile - #{@order.orderer.company_name}", eval("view_#{@order.orderer_type.downcase}_url(@order.orderer)"), class: "landing-button" %>
+									</div><!--/.medium-6-->
+								</div><!--/.row-->
+								<div class="row">
+									<div class="medium-6 medium-push-6 columns">
 										<div class="panel">
-											<%= link_to "View #{@order.orderer_type} profile", eval("view_#{@order.orderer_type.downcase}_url(@order.orderer)"), class: "landing-button" %>
-										</div><!--.panel-->
-										<div class="panel">
+												
 												<%= form_for @order do |f| %>
 												<div class="row">
 													<div class="small-12 columns">
