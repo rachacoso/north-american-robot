@@ -7,7 +7,7 @@ class Retailer
 	field :active, type: Mongoid::Boolean, default: true
 	
 	# LOGINS/USERS WHO CAN ACT ON BEHALF OF BRAND
-	has_many :users
+	has_many :users, dependent: :destroy
 
   #####################
 	### Profile

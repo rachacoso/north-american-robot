@@ -7,7 +7,7 @@ class Brand
 	field :active, type: Mongoid::Boolean, default: false
 	
 	# LOGINS/USERS WHO CAN ACT ON BEHALF OF BRAND
-	has_many :users
+	has_many :users, dependent: :destroy
 
   #####################
 	### Profile
