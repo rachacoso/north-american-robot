@@ -15,7 +15,11 @@
 		<% end %>
 		<p>
 			<%= number_to_currency(@order_product.price_in_dollars) %> MSRP<br>
-			<strong><%= number_to_currency(@order_product.tiered_price_in_dollars) %> Unit Price</strong>
+			<% if @order %>
+				<strong><%= number_to_currency(@order_product.tiered_price_in_dollars(@order.discount)) %> Unit Price <small>(<%= @order.discount %>%)</small></strong>
+			<% else %>
+				<strong><%= number_to_currency(@order_product.tiered_price_in_dollars) %> Unit Price <small>(50%)</small></strong>
+			<% end %>
 		</p>
 	</div><!--/.medium-6-->
 	<div class="medium-6 columns">
