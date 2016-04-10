@@ -7,7 +7,7 @@
 		<h3>Current Open Orders</h3>
 		<% if @current_orders.present?  %>
 				<% @current_orders.each do |order| %>
-					<%= render partial: "order_item", locals: { order: order } %>
+					<%= render partial: "order", locals: { order: order } %>
  				<% end %>
 		<% else %>
 		<div class="row">
@@ -23,7 +23,7 @@
 		<h3>Submitted Orders</h3>
 		<% if @submitted_orders.present?  %>
 				<% @submitted_orders.each do |order| %>
-					<%= render partial: "order_item", locals: { order: order } %>
+					<%= render partial: "order", locals: { order: order } %>
  				<% end %>
 		<% else %>
 		<div class="row">
