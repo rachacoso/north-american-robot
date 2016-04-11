@@ -10,9 +10,6 @@ gem "recaptcha", require: "recaptcha/rails"
 # ARMOR PAYMENTS
 gem 'armor_payments'
 
-# PHONE NUMBER VALIDATION/DISPLAY
-gem 'phony_rails'
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.9'
 # Use SCSS for stylesheets
@@ -53,6 +50,9 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'mongoid', "~> 5.0.0"
 gem 'bson_ext'
 # gem 'bson'
+
+# PHONE NUMBER VALIDATION/DISPLAY
+gem 'phony_rails'
 
 # Use paperclip/s3 for file upload
 gem "mongoid-paperclip", :require => "mongoid_paperclip"
