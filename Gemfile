@@ -7,6 +7,9 @@ gem 'puma'
 # reCAPTCHA helper gem
 gem "recaptcha", require: "recaptcha/rails"
 
+# ARMOR PAYMENTS
+gem 'armor_payments'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.9'
 # Use SCSS for stylesheets
