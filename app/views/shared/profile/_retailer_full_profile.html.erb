@@ -1,8 +1,16 @@
-<div id="profile-status">
-<% if order = active_order(profile) %>
-	<%= render partial: "shared/profile/components/profile_status", locals: {order: order} %>
-<% end %>
-</div><!--/.profile-status-->
+<div class="row">
+	<div class="small-12 columns">
+		<div class="panel text-right" id="profile-actions">
+			<span id="profile-status">
+				<% if order = active_order(profile) %>
+				<%= render partial: "shared/profile/components/profile_status", locals: { order: order } %>
+				<% end %>
+			</span>
+			<span id="view-orders-buttons"><%= render partial: "shared/profile/components/view_orders_buttons", locals: {profile: profile} %></span>
+			<%= link_to "Contact", new_simple_message_url(profile), remote:true, class: "landing-button" %>
+		</div>
+	</div><!--/.small-12-->
+</div><!--/.row-->
 
 <% if @messages && @current_user.subscriber? %>
 <div class="row">
@@ -103,7 +111,7 @@
 
 			<div class="data">
 			<% if profile.sectors.blank? %>
-				<strong>n/a</strong>
+				<strong>Unknown Sectors</strong>
 			<% else %>
 				<% profile.sectors.order_by(:name => "asc").each do |s| %>
 					<strong>
@@ -123,8 +131,7 @@
 		</div>
 	</div><!--/.medium-8-->
 	<div class="medium-4 columns medium-text-right">
-		<span id="view-orders-buttons"><%= render partial: "shared/profile/components/view_orders_buttons", locals: {profile: profile} %></span>
-		<%= link_to "Contact", new_simple_message_url(profile), remote:true, class: "landing-button" %>
+
 	</div><!--/.medium-4-->
 </div><!--/.row-->
 
