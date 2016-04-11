@@ -4,7 +4,7 @@
 		<h2>Your Orders</h2>
 
 		<%# unless @current_user.type? == "brand" %>
-		<h3>Current Open Orders</h3>
+		<h4><strong>Open Orders</strong></h4>
 		<% if @current_orders.present?  %>
 				<% @current_orders.each do |order| %>
 					<%= render partial: "order", locals: { order: order } %>
@@ -20,7 +20,7 @@
 		<% end %>
 		<%# end %>
 
-		<h3>Submitted Orders</h3>
+		<h4><strong>Submitted Orders</strong></h4>
 		<% if @submitted_orders.present?  %>
 				<% @submitted_orders.each do |order| %>
 					<%= render partial: "order", locals: { order: order } %>
