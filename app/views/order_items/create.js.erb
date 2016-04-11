@@ -3,7 +3,7 @@ $('#order-item').fadeOut();
 $('.overlay').fadeOut();
 
 $('#view-orders-buttons').html("<%= j (render partial: 'shared/profile/components/view_orders_buttons', locals: {profile: @order.brand}) %>");
-
+$('#profile-status').html("<%= j (render partial: 'shared/profile/components/profile_status', locals: {order: @order}) %>");
 $('#order-data').html("<%= j (render partial: 'orders/show_order') %>");
 $('.overlay#order-overlay').fadeIn();
 $('#order').fadeIn();

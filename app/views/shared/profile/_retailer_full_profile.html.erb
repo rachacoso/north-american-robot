@@ -1,3 +1,9 @@
+<div id="profile-status">
+<% if order = active_order(profile) %>
+	<%= render partial: "shared/profile/components/profile_status", locals: {order: order} %>
+<% end %>
+</div><!--/.profile-status-->
+
 <% if @messages && @current_user.subscriber? %>
 <div class="row">
 	<div class="small-6 columns">
