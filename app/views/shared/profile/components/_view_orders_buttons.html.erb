@@ -1,12 +1,3 @@
 <% if order = active_order(profile) %>
-<div class="row">
-	<div class="small-12 columns profile-action-panel">
-
-
-			<h3 style="margin-bottom: 0;">You Have an Active Order</h3>
-			<h3 style="margin-bottom: 0;">Status: <span id="<%= order.status.downcase %>"><%= order.status.upcase %></span></h3>
-			<%= link_to "View Order", order_url(active_order(profile)), class: "landing-button" %>
-
-	</div><!--/.small-12-->
-</div><!--/.row-->
+	<%= link_to "View #{order.status.upcase} Order", order_url(active_order(profile)), class: "landing-button" %>
 <% end %>

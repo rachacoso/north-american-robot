@@ -1,20 +1,45 @@
 <div class="row">
 	<div class="medium-8 columns">
-		<h1>Submitted Order / <%= order.orderer.company_name %></h1>
-		<h3>This order has been submitted and may no longer be updated by <%= order.orderer.company_name %></h3>
+		<h1><%= order.orderer.company_name %></h1>
 	</div><!--/.medium-8-->
 	<div class="medium-4 columns text-right">
-		<%= link_to "View #{order.orderer_type} Profile - #{order.orderer.company_name}", eval("view_#{order.orderer_type.downcase}_url(order.orderer)"), class: "landing-button" %>		
+		<% if order.orderer.logo_file_name %>
+			<%= image_tag order.orderer.logo.url(:medium), alt: "Logo" %><br>
+		<% else %>
+			<% if !order.orderer.facebook.blank? && fb_picture(order.orderer.facebook) %>
+				<%= image_tag fb_picture(order.orderer.facebook) %><br>
+			<% else %>
+				<%= image_tag order.orderer.logo.url(:medium), width: "100", height: "100", alt: "Logo" %><br>
+			<% end %>					
+		<% end %>
+		<%= link_to "View #{order.orderer_type} Profile", eval("view_#{order.orderer_type.downcase}_url(order.orderer)"), class: "landing-button" %>
+		<%= link_to "Contact", new_simple_message_url(order.orderer), remote:true, class: "landing-button" %>
 	</div><!--/.medium-4-->
 </div><!--/.row-->
-<br>
+<div class="full-order-container">
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="panel outer">
 
-<div class="row">
-	<div class="medium-11 medium-centered columns">
-		
-		<div class="panel">
-			<%= render "shared/orders/show" %>		
-		</div>
+				<div class="row">
+					<div class="small-12 columns">
+						<h1>Submitted Order</h1>
+						<h3>This order has been submitted and may no longer be updated by <%= order.orderer.company_name %></h3>
+					</div><!--/.small-12-->
+				</div><!--/.row-->
+				<hr>
 
-	</div><!--/.medium-11 medium-centered-->
-</div><!--/.row-->
+				<div class="row">
+					<div class="medium-11 medium-centered columns">
+						
+						<div class="panel">
+							<%= render "shared/orders/show" %>		
+						</div>
+
+					</div><!--/.medium-11 medium-centered-->
+				</div><!--/.row-->
+
+			</div><!--/.panel outer-->
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+</div><!--/.full-order-container-->

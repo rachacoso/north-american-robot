@@ -1,19 +1,13 @@
-<div class="full-order-container">
-	<div class="row">
-		<div class="medium-11 medium-centered columns">
-			<div class="panel outer">
 
-			<% if @current_user.brand && order.status == "open" %>
-				<%= render partial: "orders/showfull/open_brand", locals: {order: order} %>
-			<% elsif @current_user.brand && order.status == "submitted" %>
-				<%= render partial: "orders/showfull/submitted_brand", locals: {order: order} %>
-			<% elsif !@current_user.brand && order.status == "open" %>
-				<%= render partial: "orders/showfull/open_orderer", locals: {order: order} %>
-			<% elsif !@current_user.brand && order.status == "submitted" %>
-				<%= render partial: "orders/showfull/submitted_orderer", locals: {order: order} %>
-			<% end %>			
 
-			</div><!--/.panel outer-->
-		</div><!--/.medium-11-->
-	</div><!--/.row-->
-</div><!--/.full-order-container-->
+<% if @current_user.brand && order.status == "open" %>
+	<%= render partial: "orders/showfull/open_brand", locals: {order: order} %>
+<% elsif @current_user.brand && order.status == "submitted" %>
+	<%= render partial: "orders/showfull/submitted_brand", locals: {order: order} %>
+<% elsif !@current_user.brand && order.status == "open" %>
+	<%= render partial: "orders/showfull/open_orderer", locals: {order: order} %>
+<% elsif !@current_user.brand && order.status == "submitted" %>
+	<%= render partial: "orders/showfull/submitted_orderer", locals: {order: order} %>
+<% end %>			
+
+

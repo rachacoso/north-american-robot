@@ -1,56 +1,81 @@
 <div class="row">
 	<div class="medium-8 columns">
-		<h1>Open Order / <%= order.orderer.company_name %></h1>
-		<h3>This order is open and may be updated by <%= order.orderer.company_name %></h3>
+		<h1><%= order.orderer.company_name %></h1>
 	</div><!--/.medium-8-->
 	<div class="medium-4 columns text-right">
-		<%= link_to "View #{order.orderer_type} Profile - #{order.orderer.company_name}", eval("view_#{order.orderer_type.downcase}_url(order.orderer)"), class: "landing-button" %>
+		<% if order.orderer.logo_file_name %>
+			<%= image_tag order.orderer.logo.url(:medium), alt: "Logo" %><br>
+		<% else %>
+			<% if !order.orderer.facebook.blank? && fb_picture(order.orderer.facebook) %>
+				<%= image_tag fb_picture(order.orderer.facebook) %><br>
+			<% else %>
+				<%= image_tag order.orderer.logo.url(:medium), width: "100", height: "100", alt: "Logo" %><br>
+			<% end %>					
+		<% end %>
+		<%= link_to "View #{order.orderer_type} Profile", eval("view_#{order.orderer_type.downcase}_url(order.orderer)"), class: "landing-button" %>
+		<%= link_to "Contact", new_simple_message_url(order.orderer), remote:true, class: "landing-button" %>
 	</div><!--/.medium-4-->
 </div><!--/.row-->
-<br>
+<div class="full-order-container">
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="panel outer">
 
-<div class="row">
-	<div class="medium-11 medium-centered columns">
-		<hr>
-		<h1>Set Order Discount Rate</h1>
-		<div class="row">
-			<div class="small-12 columns">
-				<div class="panel text-right">
-					<%= form_for order do |f| %>
+				<div class="row">
+					<div class="small-12 columns">
+						<h1>Open Order</h1>
+						<h3>This order is open and may be updated by <%= order.orderer.company_name %></h3>
+					</div><!--/.small-12-->
+				</div><!--/.row-->
+				<hr>
+
+				<div class="row">
+					<div class="medium-11 medium-centered columns">
+						<br>
+						<h1>Set Order Discount Rate</h1>
 						<div class="row">
 							<div class="small-12 columns">
-								<%= f.label :discount, "Order Discount" %>
-								<span style="font-size: 0.7em;font-weight: 200; color: red;"><%= flash[:error] ? flash[:error] : "" %></span>
+								<div class="panel text-right">
+									<%= form_for order do |f| %>
+										<div class="row">
+											<div class="small-12 columns">
+												<%= f.label :discount, "Order Discount" %>
+												<span style="font-size: 0.7em;font-weight: 200; color: red;"><%= flash[:error] ? flash[:error] : "" %></span>
+											</div><!--/.small-12-->
+										</div><!--/.row-->
+										<div class="row collapse">
+											<div class="small-4 small-push-6 medium-1 medium-push-10 columns">
+												<%= f.number_field :discount, label: false %>
+											</div><!--/.small-4-->
+											<div class="small-2 small-push-6 medium-1 medium-push-10 columns end">
+												<span class="postfix">%</span>
+											</div><!--/.small-2-->
+										</div><!--/.row-->
+										<div class="row">
+											<div class="small-12 columns">
+												<%= f.submit "Set Discount", class: "landing-button" %>
+											</div><!--/.small-12-->
+										</div><!--/.row-->
+									<% end %>
+									<h4>Updates the discount rate for this order, overriding the default 50% unit discount rate.</h4>
+								</div> <!--.panel-->
 							</div><!--/.small-12-->
 						</div><!--/.row-->
-						<div class="row collapse">
-							<div class="small-4 small-push-6 medium-1 medium-push-10 columns">
-								<%= f.number_field :discount, label: false %>
-							</div><!--/.small-4-->
-							<div class="small-2 small-push-6 medium-1 medium-push-10 columns end">
-								<span class="postfix">%</span>
-							</div><!--/.small-2-->
-						</div><!--/.row-->
-						<div class="row">
-							<div class="small-12 columns">
-								<%= f.submit "Set Discount", class: "landing-button" %>
-							</div><!--/.small-12-->
-						</div><!--/.row-->
-					<% end %>
-					<h4>Updates the discount rate for this order, overriding the default 50% unit discount rate.</h4>
-				</div> <!--.panel-->
-			</div><!--/.small-12-->
-		</div><!--/.row-->
-	</div><!--/.medium-11 medium-centered-->
-</div><!--/.row-->
+					</div><!--/.medium-11 medium-centered-->
+				</div><!--/.row-->
 
-<div class="row">
-	<div class="medium-11 medium-centered columns">
-		<hr>
-		<h1>Review Current Order</h1>
-		<div class="panel">
-			<%= render "shared/orders/show" %>		
-		</div>
+				<div class="row">
+					<div class="medium-11 medium-centered columns">
+						<br>
+						<h1>Review Current Order</h1>
+						<div class="panel">
+							<%= render "shared/orders/show" %>		
+						</div>
 
-	</div><!--/.medium-11 medium-centered-->
-</div><!--/.row-->
+					</div><!--/.medium-11 medium-centered-->
+				</div><!--/.row-->
+
+			</div><!--/.panel outer-->
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+</div><!--/.full-order-container-->
