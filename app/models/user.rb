@@ -137,4 +137,13 @@ class User
 		UserMailer.send_new_user_notification(self) unless self.administrator
 	end
 
+	def allow_armor_signup
+		if self.email_confirmed &&
+			self.contact.firstname.present? &&
+			self.contact.lastname.present? &&
+			self.contact.phone.present? &&
+			self.get_parent.company_name.present?
+			return true
+		end
+	end
 end
