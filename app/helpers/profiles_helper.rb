@@ -30,4 +30,21 @@ module ProfilesHelper
 		return links
 	end
 
+	def profile_status(order)
+		case order.status
+		when "open"
+			if !@current_user.brand
+				return "You have an OPEN order"
+			else
+				return "#{order.orderer.company_name} has an open order"
+			end
+		when "submitted"
+			if !@current_user.brand
+				return "You have submitted an order"
+			else
+				return "#{order.orderer.company_name} has submitted and order"
+			end
+		end
+	end
+
 end
