@@ -1,11 +1,11 @@
 <div class="row">
 	<div class="small-12 columns">
+		<span id="profile-status">
+			<% if order = active_order(profile) %>
+			<%= render partial: "shared/profile/components/profile_status", locals: { order: order } %>
+			<% end %>
+		</span>
 		<div class="panel text-right" id="profile-actions">
-			<span id="profile-status">
-				<% if order = active_order(profile) %>
-				<%= render partial: "shared/profile/components/profile_status", locals: { order: order } %>
-				<% end %>
-			</span>
 			<span id="view-orders-buttons"><%= render partial: "shared/profile/components/view_orders_buttons", locals: {profile: profile} %></span>
 			<%= link_to "Contact", new_simple_message_url(profile), remote:true, class: "landing-button" %>
 		</div>
@@ -43,7 +43,10 @@
 		<% end %>
 	</div><!--/.medium-4-->
 	<div class="medium-8 columns medium-pull-4 medium-text-left">
+		<span id="profile-company-name">
 		<h1><%= profile.company_name %></h1>
+		<h4>Retailer Profile</h4>
+		</span>
 
 		<div>
 			<% profile.tags.each do |tag| %>

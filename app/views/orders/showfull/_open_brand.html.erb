@@ -9,7 +9,10 @@
 
 <div class="row">
 	<div class="medium-8 columns">
+		<span id="profile-company-name">
 		<h1><%= order.orderer.company_name %></h1>
+		<h4>Orders</h4>
+		</span>
 	</div><!--/.medium-8-->
 	<div class="medium-4 columns text-right">
 		<% if order.orderer.logo_file_name %>
@@ -23,19 +26,22 @@
 		<% end %>
 	</div><!--/.medium-4-->
 </div><!--/.row-->
+
+
+				
 <div class="full-order-container">
 	<div class="row">
 		<div class="small-12 columns">
+
+			<div class="row">
+				<div class="small-12 columns">
+					<div id="order-panel-top">
+					<h2>Open Order<br><small>This order is open and may be updated by <%= order.orderer.company_name %></small></h2>
+					</div>
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+
 			<div class="panel outer">
-
-				<div class="row">
-					<div class="small-12 columns">
-						<h1>Open Order</h1>
-						<h3>This order is open and may be updated by <%= order.orderer.company_name %></h3>
-					</div><!--/.small-12-->
-				</div><!--/.row-->
-				<hr>
-
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
 						<br>
