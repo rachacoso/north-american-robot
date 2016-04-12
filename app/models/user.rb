@@ -37,6 +37,9 @@ class User
 	belongs_to :brand
 	belongs_to :retailer
 
+	# v2 brand/retailer/distributor relation
+	belongs_to :company, polymorphic: true
+
 	# V2 ORDERING to identify who created order
 	has_many :orders
 
@@ -120,6 +123,8 @@ class User
 				lastname: self.contact.lastname,
 				email: self.email
 			)
+			# v2 brand/retailer/distributor relation
+			self.company = new_company
 			self.save!
 			UserMailer.registration_confirmation(self).deliver unless self.administrator
 		end

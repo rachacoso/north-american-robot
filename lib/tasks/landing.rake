@@ -43,3 +43,18 @@ task :set_all_tags_upcase => :environment do
 	end
 end
 
+task :set_user_company => :environment do
+	users = User.where(company: nil, administrator: nil)
+	users.each do |u|
+		puts u.email
+		brd = u.brand || u.retailer || u.distributor
+		if brd
+			u.company = brd
+			puts "#{brd.company_name} set!"
+			u.save!
+			puts "#{brd.company_name} saved!"
+		else
+			u.destroy # destroy if orphaned and not an admin
+		end
+	end
+end

@@ -9,6 +9,9 @@ class Retailer
 	# LOGINS/USERS WHO CAN ACT ON BEHALF OF BRAND
 	has_many :users, dependent: :destroy
 
+	# v2 brand/retailer/distributor relation
+	has_many :users, as: :company, dependent: :destroy
+
   #####################
 	### Profile
 	#####################
