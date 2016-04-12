@@ -109,8 +109,9 @@ class User
   
 	def initial_setup(type)
 		if ['distributor','brand','retailer'].include? type # restrict to only allowed values
-			createusertype = "create_" + type
-			self.send(createusertype) # create relation
+			# createusertype = "create_" + type
+			# self.send(createusertype) # create relation
+			eval("self.#{type} = #{type.capitalize}.new")
 			# prepopulate contact info with user info (user can change later)
 			new_company = self.send(type)
 			new_company.create_address
