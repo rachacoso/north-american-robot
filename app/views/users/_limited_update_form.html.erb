@@ -20,10 +20,10 @@
 		<div class="medium-6 columns">
 			<%= ff.label :phone, "Phone (country code + number)" %>
 			<% if @errors && @errors[:phone] %>
-				<%= ff.text_field :phone, value: user.contact.phone.phony_formatted(format: :international, spaces: '-'), class: "error", label: false %>
+				<%= ff.text_field :phone, value: user.contact.phone.present? ? user.contact.phone.phony_formatted(format: :international , spaces: '-') : "", class: "error", label: false %>
 				<small class="error error" style="margin-bottom: 0.2em;">Phone number was invalid</small>
 			<% else %>
-				<%= ff.text_field :phone, value: user.contact.phone.phony_formatted(format: :international, spaces: '-'), label: false, style: "margin-bottom: 0.2em;" %>
+				<%= ff.text_field :phone, value: user.contact.phone.present? ? user.contact.phone.phony_formatted(format: :international , spaces: '-') : "", label: false, style: "margin-bottom: 0.2em;" %>
 			<% end %>
 			<div class="row">
 				<div class="small-1 columns">
