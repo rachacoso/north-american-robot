@@ -131,7 +131,7 @@ class UsersController < ApplicationController
     @brands = User.all.reject{ |r| r.brand.nil? }.reject{ |r| r.brand.company_name.nil? }.sort_by{|i| i.brand.company_name}
 
     @admins = User.where(administrator: true)
-    @users = User.where(:administrator.exists => false)
+    @users = User.where(:administrator.exists => false).order_by(:email.asc)
 
     @newuser = User.new
     @newuser.build_contact
