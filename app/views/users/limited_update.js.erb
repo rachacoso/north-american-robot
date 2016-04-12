@@ -1,0 +1,8 @@
+
+$('#user-limited-update-form').fadeIn().html("<%= j( render partial: 'users/limited_update_form', locals: {user: @current_user} ) %>");
+$('#user-limited-update-notice').fadeIn().html('<%= @notice %> &nbsp;&nbsp;');
+$('#contacts_list').html("<%= j (render partial: '/users/user_list', locals: {b_or_d: @current_user.get_parent}) %>");
+
+setTimeout(function(){
+	$('#user-limited-update-notice').fadeOut();
+}, 5000);

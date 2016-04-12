@@ -89,6 +89,7 @@ Rails.application.routes.draw do
   
   resources :users, only: [:new, :create, :edit, :update, :destroy, :index]
   get    '/user/confirm/:token' => 'users#confirm_email', as: 'user_email_confirmation'
+  patch    '/user/lu/:id' => 'users#limited_update', as: 'user_limited_update'
 
   get    '/distributor/edit' => 'distributors#edit', as: 'distributor'
   get    '/distributor/public_profile' => 'distributors#public_profile', as: 'distributor_public_profile'

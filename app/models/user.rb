@@ -25,6 +25,13 @@ class User
 	has_one :contact, as: :contactable, dependent: :destroy
 	accepts_nested_attributes_for :contact
 
+	# add errors from contact validation (NOTE: currently the only contact validation is for phone number)
+	validate do |user|
+		user.contact.errors.full_messages.each do |msg|
+			errors[:phone] = "#{msg}"
+		end
+	end
+
 	# child of a DISTRIBUTOR or BRAND
 	belongs_to :distributor
 	belongs_to :brand

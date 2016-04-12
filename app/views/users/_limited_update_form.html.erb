@@ -1,0 +1,46 @@
+<%= form_for user, url: user_limited_update_url(user), remote: true do |f| %>
+	<%= f.fields_for :contact do |ff| %>
+	<div class="row">
+		<div class="small-12 columns">
+			<h3>Username:<br> <%= @current_user.email %></h3>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+	<div class="row">
+		<div class="medium-6 columns">
+			<%= ff.text_field :firstname, label: "First Name" %>
+		</div><!--/.medium-6-->
+		<div class="medium-6 columns">
+			<%= ff.text_field :lastname, label: "Last Name" %>	
+		</div><!--/.medium-6-->
+	</div><!--/.row-->
+	<div class="row">
+		<div class="medium-6 columns">
+			<%= ff.text_field :title %>
+		</div><!--/.medium-6-->
+		<div class="medium-6 columns">
+			<%= ff.label :phone, "Phone (country code + number)" %>
+			<% if @errors && @errors[:phone] %>
+				<%= ff.text_field :phone, value: user.contact.phone.phony_formatted(format: :international, spaces: '-'), class: "error", label: false %>
+				<small class="error error" style="margin-bottom: 0.2em;">Phone number was invalid</small>
+			<% else %>
+				<%= ff.text_field :phone, value: user.contact.phone.phony_formatted(format: :international, spaces: '-'), label: false, style: "margin-bottom: 0.2em;" %>
+			<% end %>
+			<div class="row">
+				<div class="small-1 columns">
+					<h4 style="margin-top: 0;">e.g.</h4>
+				</div><!--/.small-1-->
+				<div class="small-11 columns">
+					<h4 style="margin-top: 0;">USA: +1 310-555-1212,<br>Korea: +82-2-2222-2222</h4>
+				</div><!--/.small-11-->
+			</div><!--/.row-->
+
+		</div><!--/.medium-6-->
+	</div><!--/.row-->			
+	<% end %>
+	<div class="row">
+		<div class="small-12 columns text-right">
+			<span id="user-limited-update-notice" class="update-notice" ></span>  <%= f.submit "Update", class: "landing-button" %>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+	
+<% end %>

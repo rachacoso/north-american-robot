@@ -1,0 +1,26 @@
+<div class="row">
+	<div class="small-12 columns">
+		<h1>Account Logins</h1>
+	</div>
+</div>
+
+<div class="row">
+	<div class="small-12 columns">
+		<h3><strong>Logins for this Account</strong></h3>
+		<div id="contacts_list">
+			<%= render partial: "/users/user_list", locals: {b_or_d: @brand} %>
+		</div>
+		<br>
+	</div>
+</div>
+
+<hr>
+
+<div class="row">
+	<div class="small-12 columns">
+		<h3><strong>Update Your Login Info</strong></h3>
+		<div id="user-limited-update-form">
+			<%= render partial: 'users/limited_update_form', locals: {user: @current_user} %>
+		</div>
+	</div>
+</div>

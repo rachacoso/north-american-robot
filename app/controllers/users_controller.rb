@@ -81,6 +81,18 @@ class UsersController < ApplicationController
 
   end
 
+  def limited_update #allow user to update phone (fun hack needed for Armor Payments signup)
+    if user = User.find(params[:id])
+      user.update(user_limited_update_parameters)
+      if user.save
+        @notice = DateTime.now.strftime("UPDATED at %I:%M%p")
+      else
+        @notice = "Sorry, There were errors"
+        @errors = user.errors
+      end
+    end
+  end
+
   def confirm_email
     user = User.find_by(email_confirmation_token: params[:token])
     if user
@@ -233,6 +245,17 @@ class UsersController < ApplicationController
 
 
   private
+
+  def user_limited_update_parameters
+    params.require(:user).permit(
+      contact_attributes: [
+        :firstname,
+        :lastname,
+        :title,
+        :phone
+      ]
+    )
+  end 
 
   def user_parameters
     params.require(:user).permit(

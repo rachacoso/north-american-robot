@@ -31,7 +31,7 @@
 						<%= user.contact.title.blank? ? "(no title)" : "#{user.contact.title}".html_safe %>
 					</td>
 					<td>
-						<%= user.contact.phone.blank? ? "(no phone)" : "#{user.contact.phone}<br>".html_safe %>
+						<%= user.contact.phone.blank? ? "(no phone)" : "#{user.contact.phone.phony_formatted(format: :international, spaces: '-')}<br>".html_safe %>
 					</td>
 				</tr>
 				<% end %>
