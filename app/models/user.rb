@@ -37,11 +37,6 @@ class User
 	belongs_to :brand
 	belongs_to :retailer
 
-	accepts_nested_attributes_for :brand
-	accepts_nested_attributes_for :distributor
-	accepts_nested_attributes_for :retailer
-
-
 	# V2 ORDERING to identify who created order
 	has_many :orders
 
