@@ -1,0 +1,91 @@
+<div class="row">
+	<div class="small-12 columns">
+		<h3>You need to complete these profile items before you can sign up for an Armor Payments account. These fields can be updated via the form below or via the Company Info or Your Login Info sections on this page.</h3>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
+<div class="row">
+	<div class="small-12 columns">
+		<div class="panel" style="background-color: #f2f2f2;">
+			<h3>Please enter the following:</h3>
+			<ul style="font-weight: 100;">
+			<% e.each do |err| %>
+				<% if err == "Phone" %>
+					<li><%= err %><%= flash[:error] ? " <span style='color: red;'>(#{flash[:error]})</span>".html_safe : "" %></li>
+				<% else %>
+					<li><%= err %></li>
+				<% end %>
+			<% end %>
+			</ul>
+		</div>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
+<%= form_tag ap_complete_required_url, method: "post", id: "armor-combined" do %>
+<div class="row">
+	<div class="small-12 columns">
+		<hr>
+		<h2><small>from</small> Company Info</h2>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<div class="row">
+	<div class="small-12 columns">
+	<%= label_tag :company_name, "Company Name", class: ( e.include?("Company Name") ? "error" : nil) %>
+	<%= text_field_tag :company_name, c.company_name, placeholder: "Company Name", class: ( e.include?("Company Name") ? "error" : nil) %>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<div class="row">
+	<div class="small-12 columns">
+	<%= label_tag :address1, "Address 1", class: ( e.include?("Address") ? "error" : nil) %>
+	<%= text_field_tag :address1, c.address.address1, placeholder: "Address 1", class: ( e.include?("Address") ? "error" : nil) %>
+	<%= label_tag :address2, "Address 2 (optional)" %>
+	<%= text_field_tag :address2, c.address.address2, placeholder: "Address 2" %>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<div class="row">
+	<div class="medium-6 columns">
+	<%= label_tag :city, "City/Town/Department", class: ( e.include?("City/Town/Department") ? "error" : nil) %>
+	<%= text_field_tag :city, c.address.city, placeholder: "City/Town/Department", class: ( e.include?("City/Town/Department") ? "error" : nil) %>		
+	</div><!--/.medium-6-->
+	<div class="medium-6 columns">
+	<%= label_tag :state, "State/Province/Region/County", class: ( e.include?("State/Provice/Region/County") ? "error" : nil) %>
+	<%= text_field_tag :state, c.address.state, placeholder: "State/Province/Region/County", class: ( e.include?("State/Provice/Region/County") ? "error" : nil) %>
+	</div><!--/.medium-6-->
+</div><!--/.row-->
+<div class="row">
+	<div class="medium-4 columns">
+	<%= label_tag :postcode, "Zip/Postcode", class: ( e.include?("Zip/Postcode") ? "error" : nil)  %>
+	<%= text_field_tag :postcode, c.address.postcode, placeholder: "Zip/Postcode", class: ( e.include?("Zip/Postcode") ? "error" : nil)  %>
+	</div><!--/.medium-4-->
+	<div class="medium-8 columns">
+	<%= label_tag :country, "Country", class: ( e.include?("Country") ? "error" : nil)  %>
+	<%= text_field_tag :country, c.address.country, placeholder: "Country", class: ( e.include?("Country") ? "error country-autocomplete" : "country-autocomplete")  %>		
+	</div><!--/.medium-8-->
+</div><!--/.row-->
+<div class="row">
+	<div class="small-12 columns">
+		<hr>
+		<h2><small>from</small> Your Login Info</h2>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<div class="row">
+	<div class="medium-4 columns">
+	<%= label_tag :user_firstname, "First Name", class: ( e.include?("First Name") ? "error" : nil) %>
+	<%= text_field_tag :user_firstname, u.contact.firstname, placeholder: "First Name", class: ( e.include?("First Name") ? "error" : nil) %>
+	</div><!--/.medium-4-->
+	<div class="medium-4 columns">
+	<%= label_tag :user_lastname, "Last Name", class: ( e.include?("Last Name") ? "error" : nil) %>
+	<%= text_field_tag :user_lastname, u.contact.lastname, placeholder: "Last Name", class: ( e.include?("Last Name") ? "error" : nil) %>
+	</div><!--/.medium-4-->
+	<div class="medium-4 columns">
+	<%= label_tag :user_phone, "Phone", class: ( e.include?("Phone") || flash[:error] ? "error" : nil) %>
+	<%= text_field_tag :user_phone, u.contact.phone.present? ? u.contact.phone.phony_formatted(format: :international , spaces: '-') : "", placeholder: "Phone", class: ( e.include?("Phone") || flash[:error] ? "error" : nil) %>
+	</div><!--/.medium-4-->
+</div><!--/.row-->
+<div class="row">
+	<div class="small-12 columns text-right">
+		<hr>
+		<%= submit_tag :Update, class: "landing-button" %>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<% end %>

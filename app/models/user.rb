@@ -18,6 +18,9 @@ class User
 	field :email_confirmed, type: Mongoid::Boolean, default: false
 	field :email_confirmation_token, type: String
 
+	# PAYONEER/ARMOR
+	field :armor_account_id, type: String
+
 	validates :email, presence: true, uniqueness: true
 
 	has_secure_password
@@ -145,13 +148,51 @@ class User
 		UserMailer.send_new_user_notification(self) unless self.administrator
 	end
 
-	def allow_armor_signup
-		if self.email_confirmed &&
-			self.contact.firstname.present? &&
-			self.contact.lastname.present? &&
-			self.contact.phone.present? &&
-			self.get_parent.company_name.present?
-			return true
+	def allows_armor_signup
+		if self.email_confirmed
+			allow = true
+			armor_errors = []
+			if self.contact.firstname.blank?
+				allow = false
+				armor_errors << "First Name"
+			end
+			if self.contact.lastname.blank?
+				allow = false
+				armor_errors << "Last Name"
+			end
+			if self.contact.phone.blank?
+				allow = false
+				armor_errors << "Phone"
+			end
+			if self.company.company_name.blank?
+				allow = false
+				armor_errors << "Company Name"
+			end
+			if self.company.address.address1.blank?
+				allow = false
+				armor_errors << "Address"
+			end
+			if self.company.address.city.blank?
+				allow = false
+				armor_errors << "City/Town/Department"
+			end
+			if self.company.address.state.blank?
+				allow = false
+				armor_errors << "State/Provice/Region/County"
+			end
+			if self.company.address.postcode.blank?
+				allow = false
+				armor_errors << "Zip/Postcode"
+			end
+			if self.company.address.country.blank?
+				allow = false
+				armor_errors << "Country"
+			end
+			if allow
+				return true, nil
+			else
+				return false, armor_errors
+			end
 		end
 	end
 end

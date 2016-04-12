@@ -1,0 +1,22 @@
+<a class="anchor" id="a-armor"></a>
+<div class="row">
+	<div class="small-12 columns">
+		<h1>Ordering &amp; Payments</h1>
+		<h3>Text here about Armor Payments</h3>
+	</div>
+</div>
+
+<div class="row">
+	<div class="small-12 columns">
+		<hr>		
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
+<% allow, errors = @current_user.allows_armor_signup %>
+<% if @current_user.company.armor_account_id.blank? && allow %>
+	<h2>Sign up for Armor Payments</h2>
+<% elsif @current_user.company.armor_account_id != @current_user.armor_account_id %>
+	<h2>This <%= @current_user.company_type %> has an Armor Account under a different Login.</h2>
+<% else %>
+	<%= render partial: 'shared/profileform/armor/armor_combined_form', locals: { c: @current_user.company, u: @current_user, e: errors } %>
+<% end %>		

@@ -472,10 +472,20 @@ a.profile-sq-left {
   }
 }
 
+// PROFILE FORM
+
 // PROFILE EDIT UPDATE NOTICES
 
 .update-notice {
   font-size: rem-calc(12);
   font-weight: 500;
   color: red;
+}
+
+// ARMOR COMBINED FORM
+
+form#armor-combined {
+  input.error {
+    background-color: $landing-orange;
+  }
 }

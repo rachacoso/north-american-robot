@@ -27,6 +27,9 @@ class Brand
 	field :instagram, type: String
 	field :brand_positioning, type: String # now referenced as "company introduction" in ui
 
+	# PAYONEER/ARMOR
+	field :armor_account_id, type: String
+
 	field :completeness, type: Integer, default: 0 # 0-3 depending on completeness of profile fields
 	field :last_login, type: DateTime
 	embeds_one :address, as: :addressable

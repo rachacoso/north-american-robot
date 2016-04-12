@@ -35,6 +35,8 @@ Rails.application.routes.draw do
   resources :order_items, only: [:create, :edit, :update, :destroy, :index]
   get   '/order/newitem/:product_id' => 'order_items#new', as: 'new_order_item'
 
+  # ARMOR PAYMENTS
+  post  '/ap/c' => 'armor_payments#complete_required', as: 'ap_complete_required'
 
   # "static" pages
   get  '/pages/:page' => 'pages#show'
