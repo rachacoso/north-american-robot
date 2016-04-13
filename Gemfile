@@ -54,6 +54,9 @@ gem 'bson_ext'
 # PHONE NUMBER VALIDATION/DISPLAY
 gem 'phony_rails'
 
+# STATE/COUNTRY ABBREVs 
+gem 'carmen', '~> 1.0', '>= 1.0.2'
+
 # Use paperclip/s3 for file upload
 gem "mongoid-paperclip", :require => "mongoid_paperclip"
 gem 'aws-sdk', '~> 1.3.4'

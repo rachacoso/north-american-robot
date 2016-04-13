@@ -80,7 +80,7 @@
     "SK": "Slovakia",
     "SI": "Slovenia",
     "ZA": "South Africa",
-    "KR": "South Korea",
+    "KR": "Korea, Republic of",
     "ES": "Spain",
     "LK": "Sri Lanka",
     "SD": "Sudan",

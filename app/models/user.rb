@@ -151,47 +151,56 @@ class User
 	def allows_armor_signup
 		if self.email_confirmed
 			allow = true
-			armor_errors = []
+			armor_missing = []
+			armor_errors = Hash.new
 			if self.contact.firstname.blank?
 				allow = false
-				armor_errors << "First Name"
+				armor_missing << "First Name"
 			end
 			if self.contact.lastname.blank?
 				allow = false
-				armor_errors << "Last Name"
+				armor_missing << "Last Name"
 			end
 			if self.contact.phone.blank?
 				allow = false
-				armor_errors << "Phone"
+				armor_missing << "Phone"
 			end
 			if self.company.company_name.blank?
 				allow = false
-				armor_errors << "Company Name"
+				armor_missing << "Company Name"
 			end
 			if self.company.address.address1.blank?
 				allow = false
-				armor_errors << "Address"
+				armor_missing << "Address"
 			end
 			if self.company.address.city.blank?
 				allow = false
-				armor_errors << "City/Town/Department"
+				armor_missing << "City/Town/Department"
 			end
 			if self.company.address.state.blank?
 				allow = false
-				armor_errors << "State/Provice/Region/County"
+				armor_missing << "State/Provice/Region/County"
+			end
+			if self.company.address.in_us && self.company.address.state.present? && !self.company.address.state_2
+				allow = false
+				armor_errors[:state] = "#{self.company.address.state} not a US state"
 			end
 			if self.company.address.postcode.blank?
 				allow = false
-				armor_errors << "Zip/Postcode"
+				armor_missing << "Zip/Postcode"
 			end
 			if self.company.address.country.blank?
 				allow = false
-				armor_errors << "Country"
+				armor_missing << "Country"
+			end
+			if self.company.address.country.present? && !self.company.address.country_2
+				allow = false
+				armor_errors[:country] = "#{self.company.address.country} is not a valid Country"
 			end
 			if allow
 				return true, nil
 			else
-				return false, armor_errors
+				return false, armor_missing, armor_errors
 			end
 		end
 	end
