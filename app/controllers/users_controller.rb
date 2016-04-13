@@ -91,6 +91,10 @@ class UsersController < ApplicationController
         @errors = user.errors
       end
     end
+    respond_to do |format|
+      format.html { redirect_to eval("#{user.company_type.downcase}_url") + "#a-logins" }
+      format.js
+    end
   end
 
   def confirm_email
