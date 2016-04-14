@@ -42,9 +42,6 @@ class Retailer
 	field :instagram, type: String
 	embeds_one :address, as: :addressable
 
-	# PAYONEER/ARMOR
-	field :armor_account_id, type: String
-
 	# COMPANY CONTACTS
 	has_many :contacts, as: :contactable, dependent: :destroy
 	accepts_nested_attributes_for :contacts, :address

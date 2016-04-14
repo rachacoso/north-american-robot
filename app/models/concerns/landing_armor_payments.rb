@@ -1,8 +1,11 @@
 module LandingArmorPayments
-  extend ActiveSupport::Concern
   
-
   module Company
+    extend ActiveSupport::Concern
+
+    included do
+      field :armor_account_id, type: String
+    end
 
     def api_get_bank_details_form(user)
       require 'armor_payments'
@@ -32,6 +35,11 @@ module LandingArmorPayments
   end
 
   module User
+    extend ActiveSupport::Concern
+
+    included do
+      field :armor_user_id, type: String
+    end
 
     def allows_armor_signup
       if self.email_confirmed

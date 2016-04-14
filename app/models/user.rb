@@ -20,8 +20,6 @@ class User
 	field :email_confirmed, type: Mongoid::Boolean, default: false
 	field :email_confirmation_token, type: String
 
-	# PAYONEER/ARMOR
-	field :armor_user_id, type: String
 
 	validates :email, presence: true, uniqueness: true
 
