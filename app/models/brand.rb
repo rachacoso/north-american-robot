@@ -2,6 +2,7 @@ class Brand
   include Mongoid::Document
   include Mongoid::Timestamps::Short
 	include Mongoid::Paperclip
+	include LandingArmorPayments::Company
 
 	field :subscriber, type: Mongoid::Boolean
 	field :active, type: Mongoid::Boolean, default: false
