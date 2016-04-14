@@ -489,3 +489,14 @@ form#armor-combined {
     background-color: $landing-orange;
   }
 }
+
+// ARMOR 
+
+table#armor-account-summary {
+  margin: auto;
+  font-weight: 200;
+  font-size: rem-calc(12);
+  .fieldname {
+    background-color: $landing-light-gray;
+  }
+}

@@ -36,7 +36,8 @@ Rails.application.routes.draw do
   get   '/order/newitem/:product_id' => 'order_items#new', as: 'new_order_item'
 
   # ARMOR PAYMENTS
-  post  '/ap/c' => 'armor_payments#complete_required', as: 'ap_complete_required'
+  post  '/ap/complete' => 'armor_payments#complete_required', as: 'ap_complete_required'
+  post  '/ap/create' => 'armor_payments#create_account', as: 'ap_create_account'
 
   # "static" pages
   get  '/pages/:page' => 'pages#show'

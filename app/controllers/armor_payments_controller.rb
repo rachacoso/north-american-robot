@@ -21,9 +21,30 @@ class ArmorPaymentsController < ApplicationController
 		unless u.save # currently only user.contact.phone validated
 			flash[:error] = "last phone number entered was invalid"
 		end
+		@company = c
+		redirect_to eval("#{u.company_type.downcase}_url") + "#a-armor"
+
+	end
+
+
+	def create_account
+		u = @current_user
+		if params[:armor_payments_terms]
+			success, errors = u.api_create_armor_payments_account
+			if !success
+				flash[:error] = "Sorry, there was an error:"
+				logger.debug "zzzzzzzzz #{errors}"
+				flash[:errorlist] = errors
+			end
+		else
+			flash[:error] = "Sorry, you must agree to Armor Payments Terms and Conditions"
+		end
 
 		redirect_to eval("#{u.company_type.downcase}_url") + "#a-armor"
 
 	end
+
+
+
 
 end

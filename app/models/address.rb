@@ -20,13 +20,25 @@ class Address
 			end
 		end
 	end
-	def state_2
+	def state_2_test
 		if self.state.present?
 			if self.in_us
-			us = Country.named(self.country)
+				us = Country.named(self.country)
 				if state = us.subregions.coded(self.state) || state = us.subregions.named(self.state)
 					return state.code
 				end
+			end
+		end
+	end
+	def state_2
+		if self.state.present?
+			if self.in_us
+				us = Country.named(self.country)
+				if state = us.subregions.coded(self.state) || state = us.subregions.named(self.state)
+					return state.code
+				end
+			else
+				return self.state
 			end
 		end
 	end

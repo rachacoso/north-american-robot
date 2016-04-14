@@ -1,0 +1,45 @@
+<div class="row">
+	<div class="small-12 columns">
+		<h2>You're all set to create an Armor Payments Account</h2>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<% if flash[:error] %>
+	<div class="row">
+		<div class="small-12 columns">
+			<span class="error"><%= flash[:error] %><br>
+					<% flash[:errorlist].each do |k,v| %>
+						<%= v[0] %><br>
+					<% end %>
+			</span>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+	<br>
+<% end %>
+<div class="row">
+	<div class="small-12 columns">
+		<table id="armor-account-summary">
+			<tr><td class="fieldname">Company Name</td><td><%= c.company_name %></td></tr>
+			<tr><td class="fieldname">User Name</td><td><%= u.contact.firstname %> <%=u.contact.lastname %></td></tr>
+			<tr><td class="fieldname">Email</td> <td><%= u.email %></td></tr>
+			<tr><td class="fieldname">Phone</td><td><%= u.contact.phone.phony_formatted(format: :international , spaces: '-') %></td></tr>
+			<tr><td class="fieldname">Address</td> <td><%= c.address.address1 %><%= ", #{c.address.address2}" %></td></tr>
+			<tr><td class="fieldname">City/Town/Department</td> <td><%= c.address.city %></td></tr>
+			<tr><td class="fieldname">State/Province/Region/County</td> <td><%= c.address.state_2 %></td></tr>
+			<tr><td class="fieldname">Zip/Postal Code</td> <td><%= c.address.postcode %></td></tr>
+			<tr><td class="fieldname">Country</td> <td><%= c.address.country_2 %></td></tr>
+		</table>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<br>
+<div class="row">
+	<div class="small-12 columns text-right">
+	<%= form_tag ap_create_account_url + "#a-armor", method: "post", id: "armor-signup" do %>
+	<input type="checkbox" id="armor_payments_terms" name="armor_payments_terms" class="error"/>
+	<!-- Replace 1052419 with your own Partner ID in this URL --> 
+	<span style="font-weight: 200;">I agree to the <a href="https://app.armorpayments.com/terms/160405182787" target="_BLANK">Terms and Conditions</a> of Armor Payments.</span>
+	</div>
+	<div class="small-12 columns text-right">
+	<%= submit_tag "Create Armor Payments Account", class: "landing-button" %>		
+	<% end %>
+	</div><!--/.small-12-->
+</div><!--/.row-->
