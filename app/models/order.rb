@@ -33,15 +33,6 @@ class Order # for V2 ordering
     return price / 100
   end
 
-  def setup(orderer, user, brand)
-    self.orderer = orderer
-    self.orderer_company_name = orderer.company_name
-    self.user = user
-    self.brand = brand
-    self.brand_company_name = brand.company_name
-    self.save!
-  end
-
   def submission
     self.status = "submitted"
     self.submission_date = DateTime.now
