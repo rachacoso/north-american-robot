@@ -487,6 +487,21 @@ a.profile-sq-left {
 form#armor-combined {
   input.error {
     background-color: $landing-orange;
+    color: $landing-light-gray;
+    &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+        color: $landing-light-gray;
+    }
+    &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+       color:    $landing-light-gray;
+       opacity:  1;
+    }
+    &::-moz-placeholder { /* Mozilla Firefox 19+ */
+       color:    $landing-light-gray;
+       opacity:  1;
+    }
+    &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+       color:    $landing-light-gray;
+    }
   }
 }
 
