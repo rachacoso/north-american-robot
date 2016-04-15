@@ -13,10 +13,10 @@
 </div><!--/.row-->
 
 <% allow, missing, errors = @current_user.allows_armor_signup %>
-<% if @current_user.company.armor_account_id.blank? && allow %>
+<% if @current_user.company.armor_account_id %>
+	<%= render partial: 'shared/profileform/armor/armor_account_details', locals: { c: @current_user.company, u: @current_user } %>
+<% elsif @current_user.company.armor_account_id.blank? && allow %>
 	<%= render partial: 'shared/profileform/armor/armor_signup', locals: { c: @current_user.company, u: @current_user } %>
-<% elsif @current_user.company.armor_account_id %>
-	<%= render partial: 'shared/profileform/armor/armor_bank_details', locals: { c: @current_user.company, u: @current_user } %>
 <% else %>
 	<%= render partial: 'shared/profileform/armor/armor_combined_form', locals: { c: @current_user.company, u: @current_user, m: missing, e: errors } %>
 <% end %>		
