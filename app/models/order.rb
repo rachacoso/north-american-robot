@@ -41,7 +41,7 @@ class Order # for V2 ordering
     self.order_additional_charges.each do |item|
       amount += item.amount
     end
-    return amount / 100
+    return amount.to_f / 100
   end
 
   def total_price
