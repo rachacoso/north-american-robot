@@ -1,15 +1,17 @@
 <div class="row">
 	<div class="small-12 columns">
 		<table class="order" style="margin: auto;">
-			<thead>
-				<th>Item</th>
-				<th>Description</th>
-				<th>Quantity</th>
-				<th>MSRP</th>
-				<th>Unit Price <small>(<%= order.discount %>%)</small></th>
-				<th>Amount</th>
-			</thead>
+
 			<tbody>
+				<tr><th colspan="6"> Products </th></tr>
+				<tr>
+					<th>Item</th>
+					<th>Description</th>
+					<th>Quantity</th>
+					<th>MSRP</th>
+					<th>Unit Price <small>(<%= order.discount %>%)</small></th>
+					<th>Amount</th>
+				</tr>
 				<% get_sorted_order_items(order).each do |lineitem| %>
 				<tr>
 				<td><%= lineitem.item_id.present? ? "#{lineitem.item_id}" : "&nbsp;".html_safe %></td>
@@ -17,13 +19,47 @@
 				<td><%= order.status == "open" && controller_name != "home" && !@current_user.brand ? (link_to lineitem.quantity, edit_order_item_url(lineitem,o:order.id), remote: true) : lineitem.quantity %></td>
 				<td><%= number_to_currency(lineitem.price_in_dollars) %></td>
 				<td><%= number_to_currency(lineitem.tiered_price_in_dollars) %></td>
-				<td><%= number_to_currency(lineitem.total_price) %></td>
+				<td class="text-right"><%= number_to_currency(lineitem.total_price) %></td>
 				</tr>
 				<% end %>
-				<tr id="total">
+				<tr class="subtotal">
 					<td colspan="5" class="text-right">Subtotal <small>(before taxes/fees/shipping)</small></td>
-					<td><%= number_to_currency(order.total_price) %></td>
+					<td class="text-right"><%= number_to_currency(order.subtotal_price) %></td>
 				</tr>
+
+				<tr><th colspan="6"> Additional Charges (e.g. shipping) </th></tr>
+				<tr>
+					<th colspan="2">&nbsp;</th>
+					<th>Charge</th>
+					<th colspan="2">Description</th>
+					<th>Amount</th>
+				</tr>
+				<% if order.order_additional_charges.present? %>
+					<% order.order_additional_charges.each do |lineitem| %>
+					<tr>
+						<td colspan="2">&nbsp;</td>
+						<td><%= lineitem.name %></td>
+						<td colspan="2"><%= lineitem.description %></td>
+						<td class="text-right"><%= number_to_currency(lineitem.amount_in_dollars) %></td>
+					</tr>
+					<% end %>
+					<tr class="subtotal">
+						<td colspan="5" class="text-right">Additional Charges Subtotal <small></small></td>
+						<td class="text-right"><%= number_to_currency(order.charges_subtotal_price) %></td>
+					</tr>
+				<% else %>
+					<tr><td colspan="6" class="text-center">[TBD]</th></td>
+					<tr class="subtotal">
+						<td colspan="5" class="text-right">Additional Charges Subtotal <small></small></td>
+						<td class="text-right"><%= number_to_currency(0) %></td>
+					</tr>
+				<% end %>
+
+					<tr class="total">
+						<td colspan="5" class="text-right">Order Total <small></small></td>
+						<td class="text-right"><%= number_to_currency(order.total_price) %></td>
+					</tr>
+
 			</tbody>
 		</table>
 	</div><!--/.small-12-->

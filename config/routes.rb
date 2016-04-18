@@ -35,6 +35,10 @@ Rails.application.routes.draw do
   resources :order_items, only: [:create, :edit, :update, :destroy, :index]
   get   '/order/newitem/:product_id' => 'order_items#new', as: 'new_order_item'
 
+  post   'order/charges/a/:order_id' => 'order_additional_charges#create', as: 'create_order_additional_charge'
+  patch   'order/:order_id/charges/u/:id' => 'order_additional_charges#update', as: 'update_order_additional_charge'
+  delete   'order/:order_id/charges/d/:id' => 'order_additional_charges#destroy', as: 'delete_order_additional_charge'
+
   # ARMOR PAYMENTS
   post  '/ap/complete' => 'armor_payments#complete_required', as: 'ap_complete_required'
   post  '/ap/create' => 'armor_payments#create_account', as: 'ap_create_account'

@@ -78,6 +78,8 @@ a.landing-button, input[type=submit].landing-button {
   padding: rem-calc(10) rem-calc(7);
   margin: rem-calc(10) 0;
   line-height: rem-calc(12);
+  font-size: rem-calc(12);
+  letter-spacing: 1.5px;
   &:hover {
     background-color: scale-color($landing-blue, $lightness: -25%);;
   }

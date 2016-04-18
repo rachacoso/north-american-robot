@@ -10,7 +10,11 @@ table.order {
 		background: white;
 		border: 1px dotted $landing-middle-gray;
 	}
-	tr#total {
+	tr.subtotal {
+		background: scale-color($landing-light-gray, $lightness: 50%);;
+		font-weight: 800;
+	}
+	tr.total {
 		background: $landing-light-gray;
 		font-weight: 800;
 	}
