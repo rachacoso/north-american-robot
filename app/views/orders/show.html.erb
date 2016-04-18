@@ -7,13 +7,12 @@
 			<% if @order.orderer_type == "Retailer" %>
 			<%= link_to "Retailers", "#" %>
 			<%= link_to "Find", "#" %>
-		  <%= link_to @order.orderer.company_name, view_retailer_url(@order.orderer) %>
+		  <a class="current" href="#"><%=@order.orderer.company_name%></a>
 		  <% elsif @order.orderer_type == "Distributor" %>
 			<%= link_to "Distributors", "#" %>
 			<%= link_to "Find", "#" %>
-		  <%= link_to @order.orderer.company_name, view_distributor_url(@order.orderer) %>
+		  <a class="current" href="#"><%=@order.orderer.company_name%></a>
 		  <% end %>
-		  <a class="current" href="#">Orders</a>
 		</nav>
 	</div>
 </div>
@@ -23,8 +22,7 @@
 		<nav class="breadcrumbs">
 			<%= link_to "Beauty", root_url %>
 		  <%= link_to "Find", brands_url %>
-		  <%= link_to @order.brand.company_name, view_brand_url(@order.brand) %>
-		  <a class="current" href="#">Orders</a>
+		  <a class="current" href="#"><%=@order.brand.company_name%></a>
 		</nav>
 	</div>
 </div>

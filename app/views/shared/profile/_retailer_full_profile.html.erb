@@ -1,13 +1,21 @@
 <div class="row">
 	<div class="small-12 columns">
-		<span id="profile-status">
-			<% if order = active_order(profile) %>
-			<%= render partial: "shared/profile/components/profile_status", locals: { order: order } %>
-			<% end %>
-		</span>
-		<div class="panel text-right" id="profile-actions">
+		<div class="text-center" id="profile-tabs">
 			<span id="view-orders-buttons"><%= render partial: "shared/profile/components/view_orders_buttons", locals: {profile: profile} %></span>
-			<%= link_to "Contact", new_simple_message_url(profile), remote:true, class: "landing-button" %>
+		</div>
+		<div id="profile-status-and-contact">
+			<div class="row">
+				<div class="medium-6 columns text-left">
+					<span id="profile-status">
+					<% if order = active_order(profile) %>
+					<%= render partial: "shared/profile/components/profile_status", locals: { order: order } %>
+					<% end %>
+					</span>
+				</div><!--/.medium-6-->
+				<div class="medium-6 columns text-right">
+					<h3>Have questions? <%= link_to "Contact #{profile.company_name}", new_simple_message_url(profile), remote:true %></h3>
+				</div><!--/.medium-6-->
+			</div><!--/.row-->
 		</div>
 	</div><!--/.small-12-->
 </div><!--/.row-->
@@ -45,7 +53,6 @@
 	<div class="medium-8 columns medium-pull-4 medium-text-left">
 		<span id="profile-company-name">
 		<h1><%= profile.company_name %></h1>
-		<h4>Retailer Profile</h4>
 		</span>
 
 		<div>

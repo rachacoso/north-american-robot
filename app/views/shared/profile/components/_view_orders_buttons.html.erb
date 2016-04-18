@@ -1,3 +1,6 @@
-<% if order = active_order(profile) %>
-	<%= link_to "View #{order.status.upcase} Order", order_url(active_order(profile)), class: "landing-button" %>
-<% end %>
+<ul class="tablist">
+	<li class="active"><%= link_to "#{profile.class.to_s.upcase} PROFILE", eval("view_#{profile.class.to_s.downcase}_url(profile)") %></li>
+	<% if order = active_order(profile) %>
+	<li><%= link_to "ORDERS", order_url(active_order(profile)) %></li>
+	<% end %>
+</ul>

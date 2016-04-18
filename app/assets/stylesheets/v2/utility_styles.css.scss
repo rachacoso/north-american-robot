@@ -26,6 +26,7 @@ ul.filterlist {
 	}
 }
 
+
 input[type="text"].searchbox {
 	&::-webkit-input-placeholder {
 	   color: $landing-middle-gray;
@@ -73,3 +74,28 @@ input[type="text"].searchbox {
 		}
 	}
 }
+
+
+ul.tablist {
+	list-style-type: none; /*to remove bullets*/
+	// margin-left:0;
+	margin-bottom: 0;
+	padding: 0px;
+	zoom:1;
+	overflow: hidden;
+	li {
+		a{color: $landing-middle-gray;}
+		font-weight:200;
+		font-size: rem-calc(18);
+		display: inline-block;
+		margin: 0 rem-calc(5);
+		padding: rem-calc(10) rem-calc(0) rem-calc(5) rem-calc(0);
+		&.active {
+			a{color: $landing-dark-gray;}
+			font-weight:300;
+			border-bottom: rem-calc(3) solid $landing-dark-gray;
+		}
+	}
+}
+
+

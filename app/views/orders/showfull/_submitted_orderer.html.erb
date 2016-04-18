@@ -1,8 +1,20 @@
 <div class="row">
 	<div class="small-12 columns">
-		<div class="panel text-right" id="profile-actions">
-			<%= link_to "View Brand Profile", view_brand_url(order.brand), class: "landing-button" %>
-			<%= link_to "Contact", new_simple_message_url(order.brand), remote:true, class: "landing-button" %>
+		<div class="text-center" id="profile-tabs">
+			<ul class="tablist">
+				<li><%= link_to "BRAND PROFILE", eval("view_brand_url(order.brand)") %></li>
+				<li class="active"><%= link_to "ORDERS", order_url(order) %></li>
+			</ul>
+		</div>
+		<div id="profile-status-and-contact">
+			<div class="row">
+				<div class="medium-6 columns text-left">
+					<%= render partial: "shared/profile/components/profile_status", locals: { order: order } %>
+				</div><!--/.medium-6-->
+				<div class="medium-6 columns text-right">
+					<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
+				</div><!--/.medium-6-->
+			</div><!--/.row-->
 		</div>
 	</div><!--/.small-12-->
 </div><!--/.row-->
@@ -11,7 +23,6 @@
 	<div class="medium-8 columns">
 		<span id="profile-company-name">
 		<h1><%= order.brand.company_name %></h1>
-		<h4>Orders</h4>
 		</span>
 	</div><!--/.medium-8-->
 	<div class="medium-4 columns text-right">
@@ -54,9 +65,9 @@
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
 						<br>
-						<h1>2) Wait for Brand to calculate final fees and costs</h1>
+						<h1>2) Wait for <%= order.brand.company_name %> to calculate final fees and costs</h1>
 						<div class="panel">
-							<h2>The brand will add all final fees and shipping costs.  You will recieve an email when the final order is available for review and payment.</h2>
+							<h2><%= order.brand.company_name %> will add all final fees and shipping costs.  You will recieve an email when the final order is available for review and payment.</h2>
 						</div>
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->
