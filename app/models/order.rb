@@ -54,7 +54,7 @@ class Order # for V2 ordering
     self.status = "submitted"
     self.submission_date = DateTime.now
     self.save!
-    OrderMailer.send_order(self).deliver
+    OrderMailer.send_submitted_order(self).deliver
   end
 
   def pending

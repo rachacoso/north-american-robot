@@ -7,7 +7,7 @@ class OrderMailer < ActionMailer::Base
   #
   #   en.user_mailer.password_reset.subject
   #
-  def send_order(order)
+  def send_submitted_order(order)
     @order = order
     mail :to => 'orders@landingintl.com', :subject => "Landing International: Order Submitted"
   end
