@@ -3,7 +3,9 @@ class OrdersController < ApplicationController
 	before_action :set_order, only: [:show, :edit, :update, :destroy, :submit, :pending]
 
 	def show
-
+		unless @order.viewable_by? @current_user
+			redirect_to root_url
+		end
 	end
 
 	def submit

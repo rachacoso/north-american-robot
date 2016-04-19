@@ -65,4 +65,8 @@ class Order # for V2 ordering
     # OrderMailer.send_order(self).deliver
   end
 
+  def viewable_by?(user)
+    return true if self.orderer == user.company || self.brand == user.company
+  end
+
 end
