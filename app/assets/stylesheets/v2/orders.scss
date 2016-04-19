@@ -18,6 +18,11 @@ table.order {
 		background: $landing-light-gray;
 		font-weight: 800;
 	}
+	tr.inactive {
+		th, td {
+			color: $landing-middle-gray;
+		}
+	}
 	a {
 		color: $landing-blue;
 		text-decoration: underline;

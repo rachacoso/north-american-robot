@@ -27,8 +27,8 @@
 					<td class="text-right"><%= number_to_currency(order.subtotal_price) %></td>
 				</tr>
 
-				<tr><th colspan="6"> Additional Charges (e.g. shipping) </th></tr>
-				<tr>
+				<tr class="<%= order.status == 'open' ? 'inactive' : '' %>"><th colspan="6"> Additional Charges (e.g. shipping) </th></tr>
+				<tr class="<%= order.status == 'open' ? 'inactive' : '' %>">
 					<th colspan="2">&nbsp;</th>
 					<th>Charge</th>
 					<th colspan="2">Description</th>
@@ -48,8 +48,8 @@
 						<td class="text-right"><%= number_to_currency(order.charges_subtotal_price) %></td>
 					</tr>
 				<% else %>
-					<tr><td colspan="6" class="text-center">[TBD]</th></td>
-					<tr class="subtotal">
+					<tr><td colspan="6" class="text-center"><h3>[ Any additional charges will be calculated and added by <%= order.brand.company_name %> ]</h3></th></td>
+					<tr class="subtotal inactive">
 						<td colspan="5" class="text-right">Additional Charges Subtotal <small></small></td>
 						<td class="text-right"><%= number_to_currency(0) %></td>
 					</tr>
