@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
 
-	before_action :set_order, only: [:show, :edit, :update, :destroy, :submit]
+	before_action :set_order, only: [:show, :edit, :update, :destroy, :submit, :pending]
 
 	def show
 
@@ -9,7 +9,16 @@ class OrdersController < ApplicationController
 	def submit
 		if params[:confirm].to_i == 1
 			@order.submission
-			# @order.save!
+		end
+		respond_to do |format|
+			format.html  { redirect_to order_url(@order) }
+			format.js
+		end
+	end
+
+	def pending
+		if params[:confirm].to_i == 1
+			@order.pending
 		end
 		respond_to do |format|
 			format.html  { redirect_to order_url(@order) }

@@ -4,10 +4,14 @@
 	<%= render partial: "orders/showfull/open_brand", locals: {order: order} %>
 <% elsif @current_user.brand && order.status == "submitted" %>
 	<%= render partial: "orders/showfull/submitted_brand", locals: {order: order} %>
+<% elsif @current_user.brand && order.status == "pending" %>
+	<%= render partial: "orders/showfull/pending_brand", locals: {order: order} %>
 <% elsif !@current_user.brand && order.status == "open" %>
 	<%= render partial: "orders/showfull/open_orderer", locals: {order: order} %>
 <% elsif !@current_user.brand && order.status == "submitted" %>
 	<%= render partial: "orders/showfull/submitted_orderer", locals: {order: order} %>
+<% elsif !@current_user.brand && order.status == "pending" %>
+	<%= render partial: "orders/showfull/pending_orderer", locals: {order: order} %>
 <% end %>			
 
 

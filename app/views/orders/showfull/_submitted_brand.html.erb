@@ -159,7 +159,7 @@
 						<h1>3) Send <%= order.orderer.company_name %> the Updated Order</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 						<div class="panel">
-							[Controls go here]
+							<%= link_to "Submit Updated Order to #{order.orderer.company_name}", pending_order_url(order,0), class: "landing-button", remote: true %>
 						</div>
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->

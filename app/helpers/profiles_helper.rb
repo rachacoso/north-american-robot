@@ -42,7 +42,13 @@ module ProfilesHelper
 			if !@current_user.brand
 				return "You have submitted an order"
 			else
-				return "#{order.orderer.company_name} has submitted and order"
+				return "#{order.orderer.company_name} has submitted an order"
+			end
+		when "pending"
+			if !@current_user.brand
+				return "Order awaiting Payment and Shipping information"
+			else
+				return "Order awaing Payment and Shipping information from #{order.orderer.company_name}"
 			end
 		end
 	end

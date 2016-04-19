@@ -17,6 +17,7 @@ class Order # for V2 ordering
   field :orderer_company_name, type: String
   field :brand_company_name, type: String
   field :submission_date, type: DateTime
+  field :pending_date, type: DateTime
   field :completion_date, type: DateTime
 
   field :discount, type: Integer, default: 50 # discount in % - defaults to 50% discount
@@ -25,6 +26,7 @@ class Order # for V2 ordering
   scope :current, ->{where(status: "open")}
   scope :submitted, ->{where(status: "submitted")}
   scope :pending, ->{where(status: "pending")}
+  scope :shipped, ->{where(status: "shipped")}
   scope :complete, ->{where(status: "complete")}
   scope :active, ->{any_of(:status.in => ["open","submitted","pending"])}
 
@@ -53,6 +55,14 @@ class Order # for V2 ordering
     self.submission_date = DateTime.now
     self.save!
     OrderMailer.send_order(self).deliver
+  end
+
+  def pending
+    self.status = "pending"
+    self.pending_date = DateTime.now
+    self.save!
+    # set up mailer with for pending notification
+    # OrderMailer.send_order(self).deliver
   end
 
 end
