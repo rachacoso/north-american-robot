@@ -42,5 +42,9 @@ table.order {
 		}
 		border: 1px dotted $landing-middle-gray;
 		padding: rem-calc(10);
+		hr {
+			border-top: 1px solid $landing-middle-gray;
+			margin: 0;
+		}
 	}
 }
