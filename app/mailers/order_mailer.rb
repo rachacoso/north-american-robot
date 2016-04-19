@@ -11,4 +11,11 @@ class OrderMailer < ActionMailer::Base
     @order = order
     mail :to => 'orders@landingintl.com', :subject => "Landing International: Order Submitted"
   end
+
+  def send_pending_order(order)
+    @order = order
+    # send to orderer email (using the order creator's email in this case)
+    mail :to => order.user.email, :subject => "Landing International: Order Updated"
+  end
+
 end

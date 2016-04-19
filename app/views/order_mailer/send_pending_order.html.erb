@@ -1,0 +1,90 @@
+<body bgcolor="#ffffff">
+<div style="background-color:#ffffff;">
+<div style="font-family:tahoma,geneva,gotham,sans-serif;">
+<div style="text-align:center;">
+<table width="80%" bgcolor="#ffffff" style="margin-left: auto; margin-right:auto;padding-top:30px; border: 1px solid black;">
+	<tr style="text-align:center;">
+		<td>
+			<table style="margin:auto;">
+				<tr>
+					<td>
+						<img src="https://s3.amazonaws.com/landingintl-us/general/landing_logo_v2.png" width="200" alt="Landing Logo">
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<table style="margin:auto;">
+				<tr>
+					<td>
+
+						<table>
+						<tr style="text-align:center;">
+							<td style="padding: 20px;">
+								<span style="font-size:25px;font-weight:light;">
+									Hello, <%= @order.orderer.company_name %>
+								</span>
+								<p>
+								<span style="font-size:25px;font-weight:light;">
+									<%= @order.brand.company_name %>
+								</span>
+								<br>has updated your order
+							</p>
+							</td>
+						</tr>
+						<tr style="text-align:center;">
+							<td style="padding: 20px;">
+								<%= link_to order_url(@order), style: "text-decoration:none;" do %>
+								<div style="width:400px;background-color: #33CCFF;border: none;color: white;font-weight: 300;padding: 0.625rem 0.4375rem;margin: 0.625rem 0;line-height: 0.75rem;text-align:center;margin:auto;">
+									<h4 style=" margin:0;">VIEW ORDER</h4>
+								</div>
+								<% end %>
+							</td>
+						</tr>
+						<tr style="text-align:center;">
+							<td style="padding: 20px;">
+								<span style="font-size:10px;">
+									<p>If you cannot click through above, copy/paste the link below into your browser:</p>
+									<%= link_to order_url(@order), order_url(@order) %>
+								</span>
+							</td>
+						</tr>
+						<tr style="text-align:center;">
+							<td>
+								<img src="https://s3.amazonaws.com/landingintl-us/general/landing-world-map.gif" width="500" alt="Landing International Marketplace">
+							</td>
+						</tr>
+						</table>
+
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<table width="100%" style="background-color:gray;padding:20px;">
+				<tr>
+					<td>
+						<span style="font-weight: light; font-size:10px; color:white;">
+							<span style="font-weight:bold;">Landing International</span><br>
+							Los Angeles, CA
+						</span>
+					</td>
+					<td>
+						&nbsp;
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+
+
+
+</div>
+</div>
+</div>
+</body>

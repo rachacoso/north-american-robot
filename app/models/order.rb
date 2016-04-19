@@ -62,7 +62,7 @@ class Order # for V2 ordering
     self.pending_date = DateTime.now
     self.save!
     # set up mailer with for pending notification
-    # OrderMailer.send_order(self).deliver
+    OrderMailer.send_pending_order(self).deliver
   end
 
   def viewable_by?(user)
