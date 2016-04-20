@@ -116,7 +116,7 @@ ul.order-flow-header {
 		// margin: 0 rem-calc(5);
 		// padding: rem-calc(10) rem-calc(0) rem-calc(0) rem-calc(0);
 		&::before {
-			content: " / ";
+			content: "\00a0\002F\00a0";
 		}
 		&:first-child {
 			margin-left: 0;
