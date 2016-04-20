@@ -20,7 +20,10 @@ class OrdersController < ApplicationController
 
 	def pending
 		if params[:confirm].to_i == 1
-			@order.pending
+			success, error = @order.pending
+			unless success
+				flash.now[:notice] = error
+			end
 		end
 		respond_to do |format|
 			format.html  { redirect_to order_url(@order) }

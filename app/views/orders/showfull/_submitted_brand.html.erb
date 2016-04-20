@@ -53,6 +53,7 @@
 						</ul>
 						<hr>
 						<h3>This order has been submitted by <%= order.orderer.company_name %></h3>
+						<%= flash[:notice] ? "<span class='error'>#{flash[:notice]}</span>".html_safe : "" %>
 					</div>
 				</div><!--/.small-12-->
 			</div><!--/.row-->
@@ -158,7 +159,7 @@
 						<br>
 						<h1>3) Send <%= order.orderer.company_name %> the Updated Order</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
-						<div class="panel">
+						<div class="panel text-center">
 							<%= link_to "Submit Updated Order to #{order.orderer.company_name}", pending_order_url(order,0), class: "landing-button", remote: true %>
 						</div>
 					</div><!--/.medium-11 medium-centered-->

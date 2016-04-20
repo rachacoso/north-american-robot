@@ -1,5 +1,42 @@
 module LandingArmorPayments
   
+
+  module Order
+    extend ActiveSupport::Concern
+
+    included do
+      field :armor_seller_user_id, type: String
+      field :armor_seller_account_id, type: String
+      field :armor_buyer_user_id, type: String
+      field :armor_order_id, type: String
+    end
+
+    def api_create_order
+      should_use_sandbox = true
+      client = ArmorPayments::API.new ENV["ARMOR_KEY"], ENV["ARMOR_SECRET"], should_use_sandbox
+      account_id = self.armor_seller_account_id # The account_id of the seller
+      order_data = {
+        "seller_id" => self.armor_seller_user_id, # The user_id of the seller
+        "buyer_id" => self.armor_buyer_user_id, # The user_id of the buyer
+        "amount" => self.total_price,
+        "summary" => "Goods order. Buyer: #{self.orderer_company_name} Seller: #{self.brand_company_name}"
+        # "description" => "An escrow for goods order for use as an example.",
+        # "invoice_num" => "12345",
+        # "purchase_order_num" => "67890",
+        # "message" => "Hello, Example Buyer! Thank you for your example goods order."
+      }
+      response = client.orders(account_id).create(order_data) # Store result.order_id in the local DB
+      case response.status
+      when 200 #OK
+        order_id = response.data[:body]["order_id"]
+        return true, order_id
+      else # all other statuses
+        # errors = response.data[:body]["errors"]
+        return false, response
+      end
+    end
+  end
+
   module Company
     extend ActiveSupport::Concern
 

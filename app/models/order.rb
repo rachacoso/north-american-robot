@@ -1,7 +1,8 @@
 class Order # for V2 ordering
   include Mongoid::Document
 	include Mongoid::Timestamps::Short
-  
+  include LandingArmorPayments::Order
+
   # Ordering FROM
   belongs_to :brand
   # Ordered BY
@@ -58,11 +59,18 @@ class Order # for V2 ordering
   end
 
   def pending
-    self.status = "pending"
-    self.pending_date = DateTime.now
-    self.save!
-    # set up mailer with for pending notification
-    OrderMailer.send_pending_order(self).deliver
+    success, response = self.api_create_order
+    if success
+      self.armor_order_id = response
+      self.status = "pending"
+      self.pending_date = DateTime.now
+      self.save!
+      # set up mailer with for pending notification
+      OrderMailer.send_pending_order(self).deliver
+      return true, nil
+    else
+      return false, "Status:#{response.status} - #{response.data[:body]["errors"]}"
+    end
   end
 
   def viewable_by?(user)
