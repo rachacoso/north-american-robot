@@ -29,9 +29,11 @@ module LandingArmorPayments
         errors = response.data[:body]["errors"]
         return false, errors
       end
-
     end
 
+    def can_sell?
+      return true if self.armor_account_id
+    end
   end
 
   module User
@@ -39,6 +41,11 @@ module LandingArmorPayments
 
     included do
       field :armor_user_id, type: String
+      scope :with_armor_user_id, ->{where(:armor_user_id.ne => nil)}
+    end
+
+    def can_order?
+      return true if self.armor_user_id
     end
 
     def allows_armor_signup
