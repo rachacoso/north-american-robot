@@ -26,10 +26,6 @@ class DistributorsController < ApplicationController
 
     @distributor = @current_user.distributor
 
-    if @distributor.armor_account_id.present?
-      @armor_bank_success, @armor_bank_url = @distributor.api_get_bank_details_form(@current_user)
-    end
-
     @current_brands = @distributor.distributor_brands.where(current: true) rescue nil
     @past_brands = @distributor.distributor_brands.where(current: false) rescue nil
     @new_brand = DistributorBrand.new

@@ -126,11 +126,6 @@ class BrandsController < ApplicationController
 	def edit
 
 		@brand = @current_user.brand
-		
-		if @brand.armor_account_id.present?
-			@armor_bank_success, @armor_bank_url = @brand.api_get_bank_details_form(@current_user)
-		end
-
 
 		@current_products = @brand.products.where(current: true) rescue nil
 		@past_products = @brand.products.where(current: false) rescue nil

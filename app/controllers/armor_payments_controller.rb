@@ -30,11 +30,10 @@ class ArmorPaymentsController < ApplicationController
 	def create_account
 		u = @current_user
 		if params[:armor_payments_terms]
-			success, errors = u.api_create_armor_payments_account
-			if !success
-				flash[:error] = "Sorry, there was an error:"
-				logger.debug "zzzzzzzzz #{errors}"
-				flash[:errorlist] = errors
+			u.api_create_armor_payments_account
+			if u.errors.any?
+				flash[:error] = "Sorry, there was an error, please try again:"
+				flash[:errorlist] = u.errors.full_messages
 			end
 		else
 			flash[:error] = "Sorry, you must agree to Armor Payments Terms and Conditions"

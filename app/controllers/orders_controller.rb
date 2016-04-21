@@ -6,6 +6,12 @@ class OrdersController < ApplicationController
 		unless @order.viewable_by? @current_user
 			redirect_to root_url
 		end
+		if @order.status == "pending"
+			url = @order.api_get_payment_url(@current_user)
+			unless @order.errors.any?
+				@armor_payment_instructions_url = url
+			end
+		end
 	end
 
 	def submit
@@ -20,9 +26,9 @@ class OrdersController < ApplicationController
 
 	def pending
 		if params[:confirm].to_i == 1
-			success, error = @order.pending
-			unless success
-				flash.now[:notice] = error
+			@order.pending
+			if @order.errors.any?
+				flash.now[:notice] = @order.errors.full_messages
 			end
 		end
 		respond_to do |format|

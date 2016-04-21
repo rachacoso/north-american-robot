@@ -59,17 +59,12 @@ class Order # for V2 ordering
   end
 
   def pending
-    success, response = self.api_create_order
-    if success
-      self.armor_order_id = response
+    self.api_create_order
+    unless self.errors.any?
       self.status = "pending"
       self.pending_date = DateTime.now
       self.save!
-      # set up mailer with for pending notification
       OrderMailer.send_pending_order(self).deliver
-      return true, nil
-    else
-      return false, "Status:#{response.status} - #{response.data[:body]["errors"]}"
     end
   end
 

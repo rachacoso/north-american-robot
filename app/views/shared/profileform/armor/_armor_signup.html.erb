@@ -1,6 +1,7 @@
 <div class="row">
 	<div class="small-12 columns">
 		<h2>You're all set to create an Armor Payments Account</h2>
+		<h3>NOTE: Companies domiciled in Arizona or Idaho are currently unable to use Armor Payments due to escrow licensing issues. Your registration will be rejected if it has a mailing address in either of those states.</h3>
 	</div><!--/.small-12-->
 </div><!--/.row-->
 <% if flash[:error] %>
@@ -8,8 +9,8 @@
 		<div class="small-12 columns">
 			<span class="error"><%= flash[:error] %><br>
 				<% if flash[:errorlist] %>
-					<% flash[:errorlist].each do |k,v| %>
-						<%= v[0] %><br>
+					<% flash[:errorlist].each do |error| %>
+						<%= error %><br>
 					<% end %>
 				<% end %>
 			</span>

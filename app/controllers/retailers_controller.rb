@@ -26,10 +26,6 @@ class RetailersController < ApplicationController
 
     @retailer = @current_user.retailer
 
-    if @retailer.armor_account_id.present?
-      @armor_bank_success, @armor_bank_url = @retailer.api_get_bank_details_form(@current_user)
-    end
-
     @trade_shows = @retailer.trade_shows rescue nil
     @new_trade_show = TradeShow.new
 
