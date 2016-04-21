@@ -24,7 +24,7 @@
 					<% if @user.administrator %>
 						<h3>User is an <strong>administrator</strong></h3>
 					<% else %>
-						<h3>User associated with <strong><%= link_to @user.send(@user.type?).company_name, eval("admin_#{@user.type?}_view_path(@user.send(@user.type?))") %></strong> [<%= @user.type?.upcase %>]</h3>
+						<h3>User associated with <strong><%= link_to @user.company.company_name, eval("admin_#{@user.company_type.downcase}_view_path(@user.company)") %></strong> [<%= @user.company_type.upcase %>]</h3>
 					<% end %>
 				</div>
 			</div><!--/.small-12-->
