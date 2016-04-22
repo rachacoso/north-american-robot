@@ -44,13 +44,7 @@
 			<div class="row">
 				<div class="small-12 columns">
 					<div id="order-panel-top">
-						<ul class="order-flow-header">
-							<li>Open</li>
-							<li class="active">Order Submitted</li>
-							<li>Pending</li>
-							<li>Shipped</li>
-							<li>Complete</li>
-						</ul>
+						<%= render partial: "orders/showfull/order_flow_header", locals: { status: order.status } %>
 						<hr>
 						<h3>This order has been submitted by <%= order.orderer.company_name %></h3>
 						<%= flash[:notice] ? "<span class='error'>#{flash[:notice]}</span>".html_safe : "" %>

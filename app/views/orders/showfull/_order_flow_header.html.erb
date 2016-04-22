@@ -1,0 +1,8 @@
+<ul class="order-flow-header">
+	<li <%= status == "open" ? "class=active" : "" %>>Open <%= status == "open" ? " Order" : "" %></li>
+	<li <%= status == "submitted" ? "class=active" : "" %>><%= status == "submitted" ? "Order " : "" %>Submitted</li>
+	<li <%= status == "pending" ? "class=active" : "" %>><%= status == "pending" ? "Order " : "" %>Pending<%= status == "pending" ? " Approval" : "" %></li>
+	<li <%= status == "approved" ? "class=active" : "" %>><%= status == "approved" ? "Order " : "" %>Approved</li>
+	<li <%= status == "shipped" ? "class=active" : "" %>><%= status == "shipped" ? "Order " : "" %>Shipped</li>
+	<li <%= status == "complete" ? "class=active" : "" %>><%= status == "complete" ? "Order " : "" %>Complete</li>
+</ul>
