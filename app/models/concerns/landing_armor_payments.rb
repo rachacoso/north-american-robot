@@ -164,7 +164,7 @@ module LandingArmorPayments
       armororder.create(account_id, order_data)
 
       if armororder.errors.any?
-        self.errors[:base] << armororder.errors
+        self.errors[:base] << armororder.errors.full_messages
       else
         self.armor_order_id = armororder.order_id
         self.save!
