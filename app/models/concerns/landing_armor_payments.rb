@@ -72,7 +72,7 @@ module LandingArmorPayments
 
     def api_create_armor_payments_account
       
-      client = LandingArmorClient.new
+      armoraccount = LandingArmorAccount.new
 
       account_data = {
         "company" => "#{self.company.company_name}",
@@ -88,29 +88,32 @@ module LandingArmorPayments
         "agreed_terms" => true
       }
 
-      if client.create_account(account_data)
-        if client.account_id.present?
-          self.company.armor_account_id = client.account_id # set company armor_account_id
-          if client.get_user_info(self.company.armor_account_id) #set user armor_user_id and armor_email
-            self.armor_user_id = client.user_id
-            self.armor_email = client.user_email
+      # create armor account
+      armoraccount.create(account_data)
+      if armoraccount.errors.any?
+        self.errors[:base] << armoraccount.errors.full_messages
+      else
+        if armoraccount.account_id.present?
+          self.company.armor_account_id = armoraccount.account_id # set company armor_account_id
+          #get user armor_user_id and armor_email
+          armoraccount.get_user_info(self.company.armor_account_id)
+          if armoraccount.errors.any? # if errors in getting user info
+            self.errors[:base] << armoraccount.errors.full_messages
+          else
+            #set user armor_user_id and armor_email
+            self.armor_user_id = armoraccount.user_id
+            self.armor_email = armoraccount.email
             self.save!
             self.company.save!
-          else
-            self.errors[:base] << client.errors
           end
         else
           self.errors[:base] << "Unable to save Armor Account ID (err: 1)"  
         end
-      else
-        self.errors[:base] << client.errors
       end
 
     end
 
   end
-
-
 
   module Company
     extend ActiveSupport::Concern
@@ -136,7 +139,7 @@ module LandingArmorPayments
 
     def api_create_order
 
-      client = LandingArmorClient.new
+      armororder = LandingArmorOrder.new
 
       account_id = self.armor_seller_account_id # The account_id of the seller
       order_data = {
@@ -157,17 +160,21 @@ module LandingArmorPayments
         # "purchase_order_num" => "67890",
         # "message" => "Hello, Example Buyer! Thank you for your example goods order."
       }
-      if client.create_order(account_id, order_data)
-        self.armor_order_id = client.order_id
-        self.save!
+
+      armororder.create(account_id, order_data)
+
+      if armororder.errors.any?
+        self.errors[:base] << armororder.errors
       else
-        self.errors[:base] << client.errors
+        self.armor_order_id = armororder.order_id
+        self.save!
       end
+
     end
 
     def api_get_payment_url(user)
 
-      client = LandingArmorClient.new
+      armororder = LandingArmorOrder.new
 
       account_id = user.company.armor_account_id # The account_id of the user viewing payment instructions (the buyer for the order)
       user_id = user.armor_user_id # The user_id of the user viewing the payment instructions
@@ -176,10 +183,12 @@ module LandingArmorPayments
         'action' => 'view'
       }
       
-      if client.get_payment_url(account_id, user_id, auth_data)
-        return client.url
+      armororder.get_payment_info(account_id, user_id, auth_data)
+
+      if armororder.errors.any?
+        self.errors[:base] << armororder.errors.full_messages
       else
-        self.errors[:base] << client.errors
+        return armororder.url
       end
 
     end
@@ -188,57 +197,17 @@ module LandingArmorPayments
 
 
   class LandingArmorClient
+    extend ActiveModel::Naming
     require 'armor_payments'
+    attr_reader   :errors
 
     def initialize
+      @errors = ActiveModel::Errors.new(self)
       should_use_sandbox = true
-      @client = ArmorPayments::API.new ENV["ARMOR_KEY"], ENV["ARMOR_SECRET"], should_use_sandbox
+      @client =  ArmorPayments::API.new ENV["ARMOR_KEY"], ENV["ARMOR_SECRET"], should_use_sandbox
     end
 
-    def create_account(account_data)
-      response = @client.accounts.create(account_data)
-      return parse_response(response, "account_id")
-    end
-    def account_id
-      return @account_id
-    end
-
-    def get_user_info(account_id)
-      response = @client.accounts.users(account_id).all
-      if parse_response_user(response, "user_id") && parse_response_user(response, "email")
-        return true
-      else
-        return false
-      end
-    end
-    def user_id
-      return @user_id
-    end
-    def user_email
-      return @email
-    end
-
-    def create_order(account_id, order_data)
-      response = @client.orders(account_id).create(order_data) # Store result.order_id in the local DB
-      return parse_response(response, "order_id")
-    end
-    def order_id
-      return @order_id
-    end
-
-    def get_payment_url(account_id, user_id, auth_data)
-      response = @client.accounts.users(account_id).authentications(user_id).create(auth_data)
-      return parse_response(response, "url")
-    end
-    def url
-      return @url
-    end
-
-    def errors
-      return @errors
-    end
-
-    private
+    protected
 
     def parse_response(response, item)
       case response.status.to_i
@@ -246,10 +215,8 @@ module LandingArmorPayments
         varname = "@#{item}"
         value = response.data[:body][item]
         self.instance_variable_set varname, value
-        return true
       else # all other statuses
-        @errors = "Response Status: #{response.status} - #{response.data[:body]['errors']}"
-        return false
+        self.errors[:base] << "Response Status: #{response.status} - #{response.data[:body]['errors']}"
       end
     end
 
@@ -259,11 +226,39 @@ module LandingArmorPayments
         varname = "@#{item}"
         value = response.data[:body][0][item]
         self.instance_variable_set varname, value
-        return true
       else # all other statuses
-        @errors = "Response Status: #{response.status} - #{response.data[:body]['errors']}"
-        return false
+        self.errors[:base] << "Response Status: #{response.status} - #{response.data[:body]['errors']}"
       end
+    end
+  end
+
+  class LandingArmorAccount < LandingArmorClient
+    attr_reader :account_id, :user_id, :email
+
+    def create(account_data)
+      response = @client.accounts.create(account_data)
+      parse_response(response, "account_id")
+    end
+
+    def get_user_info(account_id)
+      response = @client.accounts.users(account_id).all
+      parse_response_user(response, "user_id")
+      parse_response_user(response, "email")
+    end
+
+  end
+
+  class LandingArmorOrder < LandingArmorClient
+    attr_reader :url, :order_id
+
+    def create(account_id, order_data)
+      response = @client.orders(account_id).create(order_data) # Store result.order_id in the local DB
+      parse_response(response, "order_id")
+    end
+
+    def get_payment_info(account_id, user_id, auth_data)
+      response = @client.accounts.users(account_id).authentications(user_id).create(auth_data)
+      parse_response(response, "url")
     end
 
   end

@@ -1,9 +1,3 @@
-<% if @order.errors.any? %>
-
-<h4>Sorry, there was an error. Please reload the page</h4>	
-
-<% else %>
-
 <a id="paymentInstructionsFrame-lightbox-preview" data-url="<%= url %>" class="landing-button">View Payment Information</a>
 <h4>Payment via Armor Payments</h4>
 <% content_for :javascript_foot do %>
@@ -25,4 +19,3 @@
 	</script>
 <% end %>
 
-<% end %>

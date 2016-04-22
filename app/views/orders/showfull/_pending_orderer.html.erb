@@ -77,10 +77,15 @@
 						<h1>2) Enter Payment and Shipping Information</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 						<div class="panel">
-							<% if @armor_payment_instructions_url.present? %>
-								<%= render partial: "orders/showfull/pending_orderer_payment_instructions", locals: {url: @armor_payment_instructions_url} %>
-							<% elsif @armor_payment_instructions_error.present? %>
-								<%= @armor_payment_instructions_error %>
+							<% if order.errors.any? %>
+								<h4>Sorry, there was an error. Please reload the page</h4>
+								<% order.errors.full_messages.each do |m| %>
+									<%= m %><br>
+								<% end %>
+							<% else %>
+								<% if @armor_payment_instructions_url.present? %>
+									<%= render partial: "orders/showfull/pending_orderer_payment_instructions", locals: {url: @armor_payment_instructions_url} %>
+								<% end %>
 							<% end %>
 						</div>
 					</div><!--/.medium-11 medium-centered-->
