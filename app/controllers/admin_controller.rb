@@ -166,7 +166,7 @@ class AdminController < ApplicationController
         if User.where(email: params[:user][:email]).exists?
           flash[:error] = "That email address is already in use"
           redirect_to eval("admin_#{b_or_d.class.to_s.downcase}_view_path"), :alert => "That email/username is taken."
-        else        
+        else
           pwd = SecureRandom.urlsafe_base64
           user = User.new
           user.build_contact
@@ -175,8 +175,10 @@ class AdminController < ApplicationController
           user.password_confirmation = pwd
           user.contact.firstname = params[:contact][:firstname]
           user.contact.lastname = params[:contact][:lastname]
+          user.company = b_or_d
+          user.send("#{user.company_type.downcase}=", b_or_d)
           user.save!
-          b_or_d.users << user
+          # b_or_d.users << user
           redirect_to eval("admin_#{b_or_d.class.to_s.downcase}_view_path")
         end
 
