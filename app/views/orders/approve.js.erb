@@ -1,0 +1,13 @@
+<% if @order.status == "approved" %>
+	window.location.replace("<%= order_url(@order) %>");
+<% elsif flash[:notice] %>
+	$('#order-item-data').html("<div class='text-center'><h3>Sorry, there was an error, please try again.</h3><hr><p><%= flash[:notice] %></p></div>");
+	$('.overlay#order-item-overlay').fadeIn();
+	$('#order-item').fadeIn();
+<% else %>
+	$('#order-item-data').html("<%= j (render partial: 'approve_order') %>");
+	$('.overlay#order-item-overlay').fadeIn();
+	$('#order-item').fadeIn();
+<% end %>
+
+setModalActions();

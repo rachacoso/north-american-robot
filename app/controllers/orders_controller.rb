@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
 
-	before_action :set_order, only: [:show, :edit, :update, :destroy, :submit, :pending]
+	before_action :set_order, only: [:show, :edit, :update, :destroy, :submit, :pending, :approve]
 
 	def show
 		unless @order.viewable_by? @current_user
@@ -27,6 +27,19 @@ class OrdersController < ApplicationController
 	def pending
 		if params[:confirm].to_i == 1
 			@order.pending
+			if @order.errors.any?
+				flash.now[:notice] = @order.errors.full_messages
+			end
+		end
+		respond_to do |format|
+			format.html  { redirect_to order_url(@order) }
+			format.js
+		end
+	end
+
+	def approve
+		if params[:confirm].to_i == 1
+			@order.approval
 			if @order.errors.any?
 				flash.now[:notice] = @order.errors.full_messages
 			end
