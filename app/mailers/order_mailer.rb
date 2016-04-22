@@ -1,7 +1,7 @@
 class OrderMailer < ActionMailer::Base
-  add_template_helper(OrderItemsHelper)
   default from: "Landing International <info@landingintl.com>"
-
+  add_template_helper(OrderItemsHelper)
+  add_template_helper(ApplicationHelper)
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
