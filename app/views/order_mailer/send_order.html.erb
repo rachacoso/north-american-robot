@@ -19,24 +19,22 @@
 			<table style="margin:auto;">
 				<tr>
 					<td>
-
 						<table>
 						<tr style="text-align:center;">
 							<td style="padding: 20px;">
-								<span style="font-size:25px;font-weight:light;">
-									Hello, <%= @order.orderer.company_name %>
-								</span>
-								<p>
-								<span style="font-size:25px;font-weight:light;">
-									<%= @order.brand.company_name %>
-								</span>
-								<br>has updated your order
-							</p>
+
+								<%= render partial: "#{@status}_order", locals: { order: @order } %>
+
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<%= render partial: "order_table", locals: { order: @order } %>
 							</td>
 						</tr>
 						<tr style="text-align:center;">
 							<td style="padding: 20px;">
-								<%= link_to order_url(@order), style: "text-decoration:none;" do %>
+								<%= link_to @link, style: "text-decoration:none;" do %>
 								<div style="width:400px;background-color: #33CCFF;border: none;color: white;font-weight: 300;padding: 0.625rem 0.4375rem;margin: 0.625rem 0;line-height: 0.75rem;text-align:center;margin:auto;">
 									<h4 style=" margin:0;">VIEW ORDER</h4>
 								</div>
@@ -47,7 +45,7 @@
 							<td style="padding: 20px;">
 								<span style="font-size:10px;">
 									<p>If you cannot click through above, copy/paste the link below into your browser:</p>
-									<%= link_to order_url(@order), order_url(@order) %>
+									<%= link_to @link, @link %>
 								</span>
 							</td>
 						</tr>
@@ -57,7 +55,6 @@
 							</td>
 						</tr>
 						</table>
-
 					</td>
 				</tr>
 			</table>

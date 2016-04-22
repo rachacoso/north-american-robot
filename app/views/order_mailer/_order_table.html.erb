@@ -1,0 +1,69 @@
+<table>
+	<tr>
+		<td>
+			<table style="margin: auto; padding: 5px; border: 1px solid #cdcdcd;" cellpadding="5" cellspacing="5" border="0">
+				<tbody>
+					<tr>
+						<td colspan="3" style="vertical-align: bottom;">
+							<p>
+								<% if order.brand.logo_file_name %>
+									<%= image_tag order.brand.logo.url(:medium), alt: "Logo" %>
+								<% else %>
+									<% if !order.brand.facebook.blank? && fb_picture(order.brand.facebook) %>
+										<%= image_tag fb_picture(order.brand.facebook) %>
+									<% else %>
+										<%= image_tag order.brand.logo.url(:medium), width: "100", height: "100", alt: "Logo" %>
+									<% end %>
+								<% end %>
+								<br>
+								<%= order.brand.company_name %><br>
+								<%= "#{order.brand.address.address1}".html_safe unless order.brand.address.address1.blank? %>
+								<%= "<br>#{order.brand.address.address2}".html_safe unless order.brand.address.address2.blank? %>
+								<%= "<br>#{order.brand.address.city}".html_safe unless order.brand.address.city.blank? %>
+								<%= "#{order.brand.address.state}".html_safe unless order.brand.address.state.blank? %>
+								<%= "#{order.brand.address.postcode}".html_safe unless order.brand.address.postcode.blank? %>
+								<%= "<br>#{order.brand.address.country}".html_safe unless order.brand.address.country.blank? %>
+							</p>
+						</td>
+						<td colspan="3" style="vertical-align: bottom;">
+							<p>
+								<span style="font-weight: 900;">Bill to:</span>
+								<br>
+								<%= order.orderer.company_name %>
+								<%= "<br>#{order.orderer.address.address1}".html_safe unless order.orderer.address.address1.blank? %>
+								<%= "<br>#{order.orderer.address.address2}".html_safe unless order.orderer.address.address2.blank? %>
+								<%= "<br>#{order.orderer.address.city}".html_safe unless order.orderer.address.city.blank? %>
+								<%= "#{order.orderer.address.state}".html_safe unless order.orderer.address.state.blank? %>
+								<%= "#{order.orderer.address.postcode}".html_safe unless order.orderer.address.postcode.blank? %>
+								<%= "<br>#{order.orderer.address.country}".html_safe unless order.orderer.address.country.blank? %>
+							</p>
+						</td>
+					</tr>
+					<tr style="background-color: #efefef; font-weight: 900;">
+						<td>Item</td>
+						<td>Description</td>
+						<td>Quantity</td>
+						<td>MSRP</td>
+						<td>Unit Price</td>
+						<td>Amount</td>
+					</tr>
+					<% get_sorted_order_items(order).each do |lineitem| %>
+					<tr>
+					<td><%= lineitem.item_id.present? ? "#{lineitem.item_id}" : "&nbsp;".html_safe %></td>
+					<td><%= order.status == "open" && controller_name != "home" ? (link_to lineitem.name, edit_order_item_url(lineitem,o:order.id), remote: true) : lineitem.name %> <%= lineitem.product ? "" : "(err: 33!)" %></td>
+					<td><%= order.status == "open" && controller_name != "home" ? (link_to lineitem.quantity, edit_order_item_url(lineitem,o:order.id), remote: true) : lineitem.quantity %></td>
+					<td><%= number_to_currency(lineitem.price_in_dollars) %></td>
+					<td><%= number_to_currency(lineitem.tiered_price_in_dollars) %></td>
+					<td><%= number_to_currency(lineitem.total_price) %></td>
+					</tr>
+					<% end %>
+					<tr style="background-color: #efefef; font-weight: 900;">
+						<td colspan="5" style="text-align: right;">Subtotal <small>(before taxes/fees/shipping)</small></td>
+						<td><%= number_to_currency(order.subtotal_price) %></td>
+					</tr>
+				</tbody>
+			</table>
+
+		</td>
+	</tr>
+</table>

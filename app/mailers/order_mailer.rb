@@ -7,15 +7,21 @@ class OrderMailer < ActionMailer::Base
   #
   #   en.user_mailer.password_reset.subject
   #
+
   def send_submitted_order(order)
     @order = order
     mail :to => 'orders@landingintl.com', :subject => "Landing International: Order Submitted"
   end
 
-  def send_pending_order(order)
+  def send_order(order:,status:,email: 'orders@landingintl.com',subject:)
     @order = order
-    # send to orderer email (using the order creator's email in this case)
-    mail :to => order.user.email, :subject => "Landing International: Order Updated"
+    @status = status
+    if ['submitted','approved'].include? status
+      @link = admin_order_view_url(order)
+    elsif ['pending'].include? status
+      @link = order_url(order)
+    end
+    mail :to => email, :subject => subject
   end
 
 end

@@ -14,7 +14,7 @@ class Order # for V2 ordering
   embeds_many :order_additional_charges, cascade_callbacks: true
   accepts_nested_attributes_for :order_items, :order_additional_charges
 
-  field :status, type: String, default: "open" # Values: OPEN, SUBMITTED, PENDING, COMPLETE
+  field :status, type: String, default: "open" # Values: OPEN, SUBMITTED, PENDING, APPROVED, SHIPPED, COMPLETE
   field :orderer_company_name, type: String
   field :brand_company_name, type: String
   field :submission_date, type: DateTime
@@ -27,9 +27,11 @@ class Order # for V2 ordering
   scope :current, ->{where(status: "open")}
   scope :submitted, ->{where(status: "submitted")}
   scope :pending, ->{where(status: "pending")}
+  scope :approved, ->{where(status: "approved")}
   scope :shipped, ->{where(status: "shipped")}
+  scope :delivered, ->{where(status: "delivered")}
   scope :complete, ->{where(status: "complete")}
-  scope :active, ->{any_of(:status.in => ["open","submitted","pending"])}
+  scope :active, ->{any_of(:status.in => ["open","submitted","pending","approved","shipped","delivered"])}
 
   def subtotal_price # price before addtional fees in dollars
     price = 0
@@ -55,16 +57,38 @@ class Order # for V2 ordering
     self.status = "submitted"
     self.submission_date = DateTime.now
     self.save!
-    OrderMailer.send_submitted_order(self).deliver
+    OrderMailer.send_order(
+      order: self, 
+      status: "submitted", 
+      email: "order@landingintl.com", # send to brand/landing (currently just sending to Landing)
+      subject: "Landing International: Order Submitted"
+      ).deliver
   end
 
   def pending
+    self.status = "pending"
+    self.pending_date = DateTime.now
+    self.save!
+    OrderMailer.send_order(
+      order: self, 
+      status: "pending", 
+      email: self.user.email, # send to orderer email (using the order creator's email in this case)
+      subject: "Landing International: Order Updated"
+      ).deliver
+  end
+
+  def approval
     self.api_create_order
     unless self.errors.any?
-      self.status = "pending"
-      self.pending_date = DateTime.now
+      self.status = "approved"
+      self.approved_date = DateTime.now
       self.save!
-      OrderMailer.send_pending_order(self).deliver
+      OrderMailer.send_order(
+        order: self, 
+        status: "approved", 
+        email: "order@landingintl.com", # send to brand/landing (currently just sending to Landing)
+        subject: "Landing International: Order Approved"
+        ).deliver
     end
   end
 

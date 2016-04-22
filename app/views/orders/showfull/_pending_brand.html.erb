@@ -48,6 +48,7 @@
 							<li>Open</li>
 							<li>Submitted</li>
 							<li class="active">Pending Order</li>
+							<li>Approved</li>
 							<li>Shipped</li>
 							<li>Complete</li>
 						</ul>
@@ -74,7 +75,7 @@
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
 						<br>
-						<h1>2) Wait for payment and shipping information from <%= order.orderer.company_name %>.</h1>
+						<h1>2) Wait for approval and final payment from <%= order.orderer.company_name %></h1>
 						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 						<div class="panel">
 							[Stuff here about that]
