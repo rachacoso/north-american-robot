@@ -45,7 +45,7 @@ class BrandsController < ApplicationController
 
 
 	def search
-		if params[:q]
+		if params[:q].present?
 			@query = params[:q]
 			@searchresults = Brand.activated.international.where(company_name: /#{@query}/i)
 		else
