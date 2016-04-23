@@ -1,0 +1,54 @@
+<%= render partial: 'shared/v2/header/main' %>
+
+<div class="brandindex-top">
+
+<div class="row">
+	<div class="small-12 columns">
+
+		<nav class="breadcrumbs">
+			<%= link_to "Beauty", brands_url %>
+		  <a class="current" href="#">Search</a>
+		</nav>
+
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<br>
+<div class="row">
+	<div class="medium-5 small-11 columns">
+		<%= form_tag(search_brands_url, method: "get") do %>
+		<div class="row collapse">
+			<div class="small-1 columns text-left">
+				<%= label_tag(:q) do %><%= image_tag "https://s3.amazonaws.com/landingintl-us/general/search.png", width: 32, height: 32%><% end %>
+			</div><!--/.small-1-->
+			<div class="small-11 columns">
+				<%= text_field_tag(:q, @query, placeholder: "SEARCH BRANDS") %>
+				<h3>You searched for <strong><%= @query %></strong></h3>
+			</div><!--/.small-10-->
+		</div><!--/.row-->
+		<% end %>
+	</div><!--/.medium-5-->
+</div><!--/.row-->
+
+	<div class="filtered-results">
+
+	<div class="row">
+		<div class="small-11 small-centered columns small-text-center medium-text-left">		
+		<% if @searchresults.blank? %>
+			<h3>No Brands</h3>
+		<% else %>
+			
+			<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-5">
+				<% @searchresults.each do |b| %>
+					<li>
+					<%= render partial: "index_item_filtered", locals: {brand: b} %>
+					</li>
+				<% end %>
+			</ul>
+		<% end %>
+		</div>
+	</div>
+	</div>
+
+	</div>
+
+<%= render partial: 'shared/v2/footer/main' %>

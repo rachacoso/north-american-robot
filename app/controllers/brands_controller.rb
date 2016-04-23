@@ -2,7 +2,7 @@ class BrandsController < ApplicationController
 
 	before_action :check_usertype, only: [:edit, :public_profile, :full_profile, :update]
 	before_action :administrators_only, only: [:adminupdate]
-	skip_before_action :require_login, only: [:index, :view, :preview]
+	skip_before_action :require_login, only: [:index, :view, :preview, :search]
 
 	# V2 ACTIONS
 
@@ -44,6 +44,14 @@ class BrandsController < ApplicationController
 	end
 
 
+	def search
+		if params[:q]
+			@query = params[:q]
+			@searchresults = Brand.activated.international.where(company_name: /#{@query}/i)
+		else
+			redirect_to brands_url
+		end
+	end
 
 	def view
 
