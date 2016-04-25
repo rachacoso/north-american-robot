@@ -12,6 +12,15 @@ class OrderItem # for V2 ordering
   field :item_size, type: String, default: ""
   field :product_id, type: BSON::ObjectId
 
+  def self.get_item(product:, orderer:)
+    order = Order.current.where(brand: product.brand, orderer: orderer).first
+    if order && item = order.order_items.find_by(product_id: product.id)
+      return item
+    else
+      return self.new
+    end
+  end
+
   def product
   	return Product.find(self.product_id)
   end

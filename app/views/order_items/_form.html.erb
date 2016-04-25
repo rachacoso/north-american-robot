@@ -1,4 +1,5 @@
 <%= hidden_field_tag "product_id", @order_product.id %>
+<%= @order ? (hidden_field_tag "o", @order.id) : "" %>
 <div class="row">
 	<div class="medium-6 columns">
 		<h3 style="margin-bottom: 0;"><%= @order_product.brand.company_name %></h3>

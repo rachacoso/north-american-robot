@@ -3,12 +3,9 @@ class OrderItemsController < ApplicationController
 	before_action :set_product, :get_order, only: [:new, :create]
 
 	def new
-		if @order && item = @order.order_items.where(product_id: @order_product.id).first
-			@order_item = item
-			render :edit
-		else
-			@order_item = OrderItem.new
-		end
+
+		@order_item = OrderItem.get_item(product: @order_product, orderer: @current_user.company)
+
 	end
 
 	def edit
@@ -43,7 +40,7 @@ class OrderItemsController < ApplicationController
 
 	def create
 
-		if !@order && !@submitted_order && !@pending_order # create new order if doesnt exist (as open, submitted, or pending)
+		if !@order  # create new order if doesnt exist
 			@order = Order.new(
 				orderer: @current_user.company,
 				orderer_company_name: @current_user.company.company_name,
@@ -68,7 +65,7 @@ class OrderItemsController < ApplicationController
 					 )
 			else
 				flash.now[:error] = "Sorry, please enter a vaild quantity"
-				@order_item = OrderItem.new
+				@order_item = OrderItem.get_item(product: @order_product, orderer: @current_user.company)
 				respond_to do |format|
 					format.html  { render :new }
 					format.js { render :new }
@@ -93,9 +90,7 @@ class OrderItemsController < ApplicationController
 	end
 
 	def get_order
-		@order = @order_product.brand.orders.current.where(orderer_id: @current_user.get_parent.id ).first
-		@submitted_order = @order_product.brand.orders.submitted.where(orderer_id: @current_user.get_parent.id ).first
-		@pending_order = @order_product.brand.orders.pending.where(orderer_id: @current_user.get_parent.id ).first
+		@order = Order.current.where(brand: @order_product.brand, orderer: @current_user.company).first
 	end
 
 end
