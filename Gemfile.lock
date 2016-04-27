@@ -158,6 +158,8 @@ GEM
       mongoid (~> 5.0)
       rake
       rspec (~> 3.3)
+    mongoid_cleaner (1.2.0)
+      mongoid (>= 4.0)
     multi_json (1.11.2)
     multi_xml (0.5.5)
     nenv (0.2.0)
@@ -308,6 +310,7 @@ DEPENDENCIES
   mongoid (~> 5.0.0)
   mongoid-paperclip
   mongoid-rspec (= 3.0.0)
+  mongoid_cleaner
   pg
   phony_rails
   puma
