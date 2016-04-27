@@ -7,13 +7,6 @@ FactoryGirl.define do
 		country_of_origin { FFaker::Address.country }
 		year_established { Date.new(1990) }
 		address  { FactoryGirl.build(:address) }
-		# user
-  end
-
-  trait :with_products do
-    after :create do |brand|
-      FactoryGirl.create_list :product, 3, :brand => brand
-    end
   end
 end
 

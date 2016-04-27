@@ -20,23 +20,55 @@ describe Order do
   it { is_expected.to have_field(:pending_date).of_type(DateTime) }
   it { is_expected.to have_field(:completion_date).of_type(DateTime) }
 
-  describe "get_current_order" do
-    # let (:order) { FactoryGirl.create(:order, :from_retailer, status: "open") }
-    # current_order = Order.
+end
+
+describe Order do
+
+  before(:context) do
+    brand = FactoryGirl.create(:brand)
+    @order = FactoryGirl.create(:order, brand: brand)
+    OrderItem.new(quantity: 12, price: 1200, order: @order)
+    OrderItem.new(quantity: 10, price: 1000, order: @order)
+    OrderAdditionalCharge.new(order: @order, amount: 12345)
+    OrderAdditionalCharge.new(order: @order, amount: 23888)
   end
 
-  describe "get_submitted_order" do
+  describe "#subtotal_price" do
+    context "with 2 order items: 1) amt: 12 price: 12.00 and 2) amt: 10 price: 10.00 and default discount" do
+      it "returns 244 * 0.5 discount = 122" do
+        expect(@order.subtotal_price).to eq(122)
+      end
+    end
+
+    context "with 2 order items: 1) amt: 12 price: 12.00 and 2) amt: 10 price: 10.00 and 75% custom discount" do
+      it "returns 244 * 0.25 (i.e. with 0.75 discount) = 61" do
+        @order.update(discount: 75)
+        expect(@order.subtotal_price).to eq(61)
+      end
+    end
+
   end
 
-  describe "get_pending_order" do
+  describe "#charges_subtotal_price" do
+    context "with 2 order charges: 1) amount: 123.45  and 2) amt: 238.88" do
+      it "returns sum of 123.45 and 238.88 = 362.33" do
+        expect(@order.charges_subtotal_price).to eq(362.33)
+      end
+    end
   end
 
-
+  describe "#total_price" do
+    context "with 2 order items: 1) amt: 12 price: 12.00 and 2) amt: 10 price: 10.00 and 75% discount and with 2 order charges: 1) amount: 123.45  and 2) amt: 238.88" do
+      it "returns 244 * 0.25 (i.e. with 0.75 discount) = 61 added to the sum of 123.45 and 238.88 = 362.33 (i.e. 423.33)" do
+        expect(@order.total_price).to eq(423.33)
+      end
+    end
+  end
 end
 
 describe OrderItem do
 
-  before(:each) do
+  before(:example) do
     brand = FactoryGirl.create(:brand)
     @retailer = FactoryGirl.create(:retailer)
     @product1 = FactoryGirl.create(:product, brand: brand, price: 1000)
