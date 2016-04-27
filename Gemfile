@@ -91,5 +91,9 @@ end
 group :development, :test do
     gem 'rspec-rails'
     gem 'guard-rspec'
+    gem 'shoulda-matchers', '~> 3.0'
+    gem 'mongoid-rspec', '3.0.0'
     gem 'capybara'
+    gem "factory_girl_rails", "~> 4.0", :require => false
+	  gem 'ffaker'
 end
