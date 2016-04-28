@@ -19,6 +19,7 @@ class Order # for V2 ordering
   field :brand_company_name, type: String
   field :submission_date, type: DateTime
   field :pending_date, type: DateTime
+  field :approved_date, type: DateTime
   field :completion_date, type: DateTime
 
   field :discount, type: Integer, default: 50 # discount in % - defaults to 50% discount
