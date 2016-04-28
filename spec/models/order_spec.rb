@@ -25,12 +25,14 @@ end
 describe Order do
 
   before(:context) do
+    user = FactoryGirl.create(:retailer_user)
     brand = FactoryGirl.create(:brand)
-    @order = FactoryGirl.create(:order, brand: brand)
-    OrderItem.new(quantity: 12, price: 1200, order: @order)
-    OrderItem.new(quantity: 10, price: 1000, order: @order)
-    OrderAdditionalCharge.new(order: @order, amount: 12345)
-    OrderAdditionalCharge.new(order: @order, amount: 23888)
+    orderer = user.company
+    @order = FactoryGirl.create(:order, brand: brand, orderer: orderer, user: user)
+    OrderItem.create(quantity: 12, price: 1200, order: @order)
+    OrderItem.create(quantity: 10, price: 1000, order: @order)
+    OrderAdditionalCharge.create(order: @order, amount: 12345, name: "Shipping costs split 45/55")
+    OrderAdditionalCharge.create(order: @order, amount: 23888, name: "Some other cost center")
   end
 
   describe "#subtotal_price" do
@@ -64,6 +66,27 @@ describe Order do
       end
     end
   end
+
+  describe "#submission" do
+    it "changes order status to 'submitted'" do
+      @order.submission
+      expect(@order.status).to eq('submitted')
+    end
+  end
+  describe "#pending" do
+    it "changes order status to 'pending'" do
+      @order.pending
+      expect(@order.status).to eq('pending')
+    end
+  end
+  describe "#approval" do
+    it "changes order status to 'approval'" do
+      allow(@order).to receive(:api_create_order) { true } #stub armor api
+      @order.approval
+      expect(@order.status).to eq('approved')
+    end
+  end
+
 end
 
 describe OrderItem do
