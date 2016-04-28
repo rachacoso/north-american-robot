@@ -20,7 +20,7 @@ class OrderAdditionalCharge # for V2 ordering
 	end
 
   def amount_in_dollars # convert from the stored price in cents
-    return '%.2f' % (self.amount.to_f / 100)
+    return (self.amount.to_f / 100)
   end
 
 end

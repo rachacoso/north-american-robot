@@ -156,3 +156,39 @@ describe OrderItem do
 
 end
 
+
+describe OrderAdditionalCharge do
+
+  it { is_expected.to be_embedded_in(:order) }
+  it { is_expected.to have_field(:amount).of_type(Integer) }
+  it { is_expected.to have_field(:name).of_type(String).with_default_value_of("") }
+  it { is_expected.to have_field(:description).of_type(String) }
+
+  before(:context) do
+    user = FactoryGirl.create(:retailer_user)
+    brand = FactoryGirl.create(:brand)
+    orderer = user.company
+    @order = FactoryGirl.create(:order, brand: brand, orderer: orderer, user: user)
+  end
+
+  let(:new_order_additional_charge) { OrderAdditionalCharge.new(order: @order,  name: "Another New Charge") }
+
+  describe "#set_amount" do
+    context "setting a price of $60.00" do
+      it "sets the amount field to 6000 (cents)" do
+        new_order_additional_charge.set_amount("60.00")
+        expect(new_order_additional_charge.amount).to eq(6000)
+      end
+    end
+  end
+
+  describe "#amount_in_dollars" do
+    context "with amount set to 23888 cents" do
+      it "returns the amount 238.88 dollars" do
+        order_additional_charge = OrderAdditionalCharge.new(order: @order, amount: 23888, name: "A $238.88 charge")
+        expect(order_additional_charge.amount_in_dollars).to eq(238.88)
+      end
+    end
+  end
+
+end
