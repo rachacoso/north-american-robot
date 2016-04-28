@@ -19,7 +19,6 @@ FactoryGirl.define do
 		country_of_origin { FFaker::Address.country }
 		year_established { Date.new(2011) }
 		address  { FactoryGirl.build(:address) }
-		# user
   end
 
 
