@@ -91,6 +91,14 @@ end
 
 describe OrderItem do
 
+  it { is_expected.to be_embedded_in(:order) }
+  it { is_expected.to have_field(:quantity).of_type(Integer) }
+  it { is_expected.to have_field(:name).of_type(String).with_default_value_of("") }
+  it { is_expected.to have_field(:price).of_type(Integer) }
+  it { is_expected.to have_field(:item_id).of_type(String).with_default_value_of("") }
+  it { is_expected.to have_field(:item_size).of_type(String).with_default_value_of("") }
+  it { is_expected.to have_field(:product_id).of_type(BSON::ObjectId) }
+
   before(:example) do
     brand = FactoryGirl.create(:brand)
     @retailer = FactoryGirl.create(:retailer)
