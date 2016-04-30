@@ -132,8 +132,10 @@ module LandingArmorPayments
 
     included do
       field :armor_seller_user_id, type: String
+      field :armor_seller_email, type: String
       field :armor_seller_account_id, type: String
       field :armor_buyer_user_id, type: String
+      field :armor_buyer_email, type: String
       field :armor_order_id, type: String
     end
 

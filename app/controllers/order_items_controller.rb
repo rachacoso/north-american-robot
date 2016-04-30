@@ -49,7 +49,9 @@ class OrderItemsController < ApplicationController
 				brand_company_name: @order_product.brand.company_name,
 				armor_seller_account_id: @order_product.brand.armor_account_id,
 				armor_seller_user_id: @order_product.brand.users.with_armor_user_id.first.armor_user_id,
-				armor_buyer_user_id: @current_user.armor_user_id
+				armor_seller_email: @order_product.brand.users.with_armor_user_id.first.email,
+				armor_buyer_user_id: @current_user.armor_user_id,
+				armor_buyer_email: @current_user.email
 				)
 			@order.save!
 		end
