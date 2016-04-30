@@ -4,7 +4,7 @@
 			<table style="margin: auto; padding: 5px; border: 1px solid #cdcdcd; font-weight: 200;" cellpadding="5" cellspacing="5" border="0">
 				<tbody>
 					<tr>
-						<td colspan="2" style="vertical-align: bottom;">
+						<td colspan="2" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">
 							<p>
 								<% if order.brand.logo_file_name %>
 									<%= image_tag order.brand.logo.url(:medium), alt: "Logo" %>
@@ -25,7 +25,7 @@
 								<%= "<br>#{order.brand.address.country}".html_safe unless order.brand.address.country.blank? %>
 							</p>
 						</td>
-						<td colspan="2" style="vertical-align: bottom;">
+						<td colspan="2" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;">
 							<p>
 								<span style="font-weight: 900;">Bill to:</span>
 								<br>
@@ -38,7 +38,7 @@
 								<%= "<br>#{order.orderer.address.country}".html_safe unless order.orderer.address.country.blank? %>
 							</p>
 						</td>
-						<td colspan="2" style="vertical-align: bottom;">
+						<td colspan="2" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;">
 							<p>
 								<span style="font-weight: 900;">Ship to:</span>
 								<br>
@@ -63,26 +63,26 @@
 						</td>
 					</tr>
 					<tr style="background-color: #efefef; font-weight: 900;">
-						<td>Item</td>
-						<td>Description</td>
-						<td>Quantity</td>
-						<td>MSRP</td>
-						<td>Unit Price</td>
-						<td>Amount</td>
+						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">Item</td>
+						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">Description</td>
+						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">Quantity</td>
+						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">MSRP</td>
+						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">Unit Price</td>
+						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">Amount</td>
 					</tr>
 					<% get_sorted_order_items(order).each do |lineitem| %>
 					<tr>
-					<td><%= lineitem.item_id.present? ? "#{lineitem.item_id}" : "&nbsp;".html_safe %></td>
-					<td><%= lineitem.name %></td>
-					<td><%= lineitem.quantity %></td>
-					<td><%= number_to_currency(lineitem.price_in_dollars) %></td>
-					<td><%= number_to_currency(lineitem.tiered_price_in_dollars) %></td>
-					<td><%= number_to_currency(lineitem.total_price) %></td>
+					<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;"><%= lineitem.item_id.present? ? "#{lineitem.item_id}" : "&nbsp;".html_safe %></td>
+					<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;"><%= lineitem.name %></td>
+					<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;"><%= lineitem.quantity %></td>
+					<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;"><%= number_to_currency(lineitem.price_in_dollars) %></td>
+					<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;"><%= number_to_currency(lineitem.tiered_price_in_dollars) %></td>
+					<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;"><%= number_to_currency(lineitem.total_price) %></td>
 					</tr>
 					<% end %>
-					<tr style="background-color: #efefef; font-weight: 900;">
-						<td colspan="5" style="text-align: right;">Subtotal <small>(before taxes/fees/shipping)</small></td>
-						<td><%= number_to_currency(order.subtotal_price) %></td>
+					<tr style="background-color: #efefef;">
+						<td colspan="5" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; text-align: right;">Subtotal <small>(before taxes/fees/shipping)</small></td>
+						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: bolder; line-height: 20px; text-align: right;"><%= number_to_currency(order.subtotal_price) %></td>
 					</tr>
 				</tbody>
 			</table>
