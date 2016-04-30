@@ -146,12 +146,12 @@ module LandingArmorPayments
         "seller_id" => self.armor_seller_user_id, # The user_id of the seller
         "buyer_id" => self.armor_buyer_user_id, # The user_id of the buyer
         "amount" => self.total_price,
-        "summary" => "Goods order. Buyer: #{self.orderer_company_name} Seller: #{self.brand_company_name}",
+        "summary" => "Landing International. Purchase of goods from #{self.brand_company_name} by #{self.orderer_company_name}",
         "payees" => [
           {
-            "user_id" => 160405184951,
-            "amount" => self.subtotal_price * 0.01, # 8 percent of the cost of goods
-            "message" => "Hello, Landing! Here's your cut.",
+            "user_id" => 160423016973,
+            "amount" => self.subtotal_price * 0.02, # 8 percent of the cost of goods
+            "message" => "Hello, Landing International! Here's your 8% fee share.",
             "role" => "broker"
           }
         ] 
