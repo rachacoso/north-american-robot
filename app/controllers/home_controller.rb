@@ -37,6 +37,7 @@ class HomeController < ApplicationController
 			@current_orders = @profile.orders.current
 			@submitted_orders = @profile.orders.submitted
 			@pending_orders = @profile.orders.pending
+			@approved_orders = @profile.orders.approved
 
 			matches = @profile.matches
 			@unread_list = Array.new
