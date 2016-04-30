@@ -44,6 +44,7 @@ class OrderItemsController < ApplicationController
 			@order = Order.new(
 				orderer: @current_user.company,
 				orderer_company_name: @current_user.company.company_name,
+				ship_to_name: @current_user.company.company_name,
 				user:  @current_user,
 				brand: @order_product.brand,
 				brand_company_name: @order_product.brand.company_name,
@@ -53,6 +54,14 @@ class OrderItemsController < ApplicationController
 				armor_buyer_user_id: @current_user.armor_user_id,
 				armor_buyer_email: @current_user.email
 				)
+			@order.build_shipping_address(
+				address1: @current_user.company.address.address1,
+				address2: @current_user.company.address.address2,
+				city: @current_user.company.address.city,
+				state: @current_user.company.address.state,
+				postcode: @current_user.company.address.postcode,
+				country: @current_user.company.address.country,
+			)
 			@order.save!
 		end
 		if @order # only create/update if there is active order

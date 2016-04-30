@@ -12,7 +12,10 @@ class Order # for V2 ordering
 
   embeds_many :order_items, cascade_callbacks: true
   embeds_many :order_additional_charges, cascade_callbacks: true
-  accepts_nested_attributes_for :order_items, :order_additional_charges
+  field :ship_to_name, type: String
+  embeds_one :shipping_address, class_name: "Address", inverse_of: :addressable
+  accepts_nested_attributes_for :order_items, :order_additional_charges, :shipping_address
+
 
   field :status, type: String, default: "open" # Values: OPEN, SUBMITTED, PENDING, APPROVED, SHIPPED, COMPLETE
   field :orderer_company_name, type: String

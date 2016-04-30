@@ -73,7 +73,45 @@
 						</div>
 
 						<br>
-						<h1>2) Submit Order to <%= order.brand.company_name %></h1>
+						<h1>2) Update Shipping Address</h1>
+						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
+						<div class="panel text-center">
+							<%= form_for order do |f| %>
+							<div class="row">
+								<div class="medium-6 medium-centered columns">
+									<div class="small-12 columns">
+										<%= f.text_field :ship_to_name, label: "<small>Ship to</small>".html_safe %>
+									</div>
+								<%= f.fields_for :shipping_address do |ff| %>
+								<div class="small-12 columns">
+									<%= ff.text_field :address1, label: "<small>Street Address</small>".html_safe %>
+									<%= ff.text_field :address2, label: false %>
+								</div>
+								<div class="medium-4 columns">
+									<%= ff.text_field :city, label: "<small>City/Town/Department</small>".html_safe %>
+								</div>
+								<div class="medium-5 columns">
+									<%= ff.text_field :state, label: "<small>State/Province/Region/County</small>".html_safe %>
+								</div>
+								<div class="medium-3 columns">
+									<%= ff.text_field :postcode, label: "<small>Zip/Postal Code</small>".html_safe %>
+								</div>
+								<div class="medium-6 columns">
+									<%= ff.text_field :country, class: "country-autocomplete", placeholder: 'Country', label: "<small>Country</small>".html_safe %>
+								</div>
+								<% end %>
+								</div><!--/.medium-6-->
+							</div><!--/.row-->
+							<div class="row">
+								<div class="medium-6 medium-centered columns">
+									<%= f.submit "Update Shipping Address", class: "landing-button" %>
+								</div><!--/.medium-6-->
+							</div><!--/.row-->
+							<% end %>
+						</div>
+
+						<br>
+						<h1>3) Submit Order to <%= order.brand.company_name %></h1>
 						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 						<div class="panel text-center">
 						<%= link_to "Submit Order to #{order.brand.company_name}", submit_order_url(order,0), class: "landing-button", remote: true %> <span style="font-weight: 100;">or</span>

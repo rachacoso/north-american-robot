@@ -50,6 +50,28 @@
 					<%= "<br>#{@order.orderer.address.country}".html_safe unless !@order.orderer.address.country || @order.orderer.address.country.empty? %>
 				</h3>
 
+				<% if @order.shipping_address %>
+				<h3 style="margin-top:1.5em; margin-bottom: 2em;">Ship to:<br>
+					<%= @order.ship_to_name %>
+					<%= "<br>#{@order.shipping_address.address1}".html_safe unless !@order.shipping_address.address1 || @order.shipping_address.address1.empty? %>
+					<%= "<br>#{@order.shipping_address.address2}".html_safe unless !@order.shipping_address.address2 || @order.shipping_address.address2.empty? %>
+					<%= "<br>#{@order.shipping_address.city}".html_safe unless !@order.shipping_address.city || @order.shipping_address.city.empty? %>
+					<%= "#{@order.shipping_address.state}".html_safe unless !@order.shipping_address.state || @order.shipping_address.state.empty? %>
+					<%= "#{@order.shipping_address.postcode}".html_safe unless !@order.shipping_address.postcode || @order.shipping_address.postcode.empty? %>
+					<%= "<br>#{@order.shipping_address.country}".html_safe unless !@order.shipping_address.country || @order.shipping_address.country.empty? %>
+				</h3>
+				<% else %>
+				<h3 style="margin-top:1.5em; margin-bottom: 2em;">Ship to:<br>
+					<%= @order.orderer_company_name %>
+					<%= "<br>#{@order.orderer.address.address1}".html_safe unless !@order.orderer.address.address1 || @order.orderer.address.address1.empty? %>
+					<%= "<br>#{@order.orderer.address.address2}".html_safe unless !@order.orderer.address.address2 || @order.orderer.address.address2.empty? %>
+					<%= "<br>#{@order.orderer.address.city}".html_safe unless !@order.orderer.address.city || @order.orderer.address.city.empty? %>
+					<%= "#{@order.orderer.address.state}".html_safe unless !@order.orderer.address.state || @order.orderer.address.state.empty? %>
+					<%= "#{@order.orderer.address.postcode}".html_safe unless !@order.orderer.address.postcode || @order.orderer.address.postcode.empty? %>
+					<%= "<br>#{@order.orderer.address.country}".html_safe unless !@order.orderer.address.country || @order.orderer.address.country.empty? %>
+				</h3>
+				<% end %>
+
 			</div><!--/.medium-6-->
 		</div><!--/.row-->
 

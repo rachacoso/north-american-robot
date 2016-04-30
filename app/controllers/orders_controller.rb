@@ -66,7 +66,16 @@ class OrdersController < ApplicationController
 
 	def order_params
 		params.require(:order).permit(
-			:discount
+			:discount,
+			:ship_to_name,
+			shipping_address_attributes: [
+			  :address1,
+			  :address2,
+			  :city,
+			  :state,
+			  :postcode,
+			  :country
+			]
 		)
 	end
 end
