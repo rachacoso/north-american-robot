@@ -1,17 +1,21 @@
 
 
-<% if @current_user.brand && order.status == "open" %>
+<% if @current_user.company_type == "Brand" && order.status == "open" %>
 	<%= render partial: "orders/showfull/open_brand", locals: {order: order} %>
-<% elsif @current_user.brand && order.status == "submitted" %>
+<% elsif @current_user.company_type == "Brand" && order.status == "submitted" %>
 	<%= render partial: "orders/showfull/submitted_brand", locals: {order: order} %>
-<% elsif @current_user.brand && order.status == "pending" %>
+<% elsif @current_user.company_type == "Brand" && order.status == "pending" %>
 	<%= render partial: "orders/showfull/pending_brand", locals: {order: order} %>
-<% elsif !@current_user.brand && order.status == "open" %>
+<% elsif @current_user.company_type == "Brand" && order.status == "approved" %>
+	<%= render partial: "orders/showfull/approved_brand", locals: {order: order} %>
+<% elsif @current_user.company_type != "Brand" && order.status == "open" %>
 	<%= render partial: "orders/showfull/open_orderer", locals: {order: order} %>
-<% elsif !@current_user.brand && order.status == "submitted" %>
+<% elsif @current_user.company_type != "Brand" && order.status == "submitted" %>
 	<%= render partial: "orders/showfull/submitted_orderer", locals: {order: order} %>
-<% elsif !@current_user.brand && order.status == "pending" %>
+<% elsif @current_user.company_type != "Brand" && order.status == "pending" %>
 	<%= render partial: "orders/showfull/pending_orderer", locals: {order: order} %>
-<% end %>			
+<% elsif @current_user.company_type != "Brand" && order.status == "approved" %>
+	<%= render partial: "orders/showfull/approved_orderer", locals: {order: order} %>
+<% end %>
 
 

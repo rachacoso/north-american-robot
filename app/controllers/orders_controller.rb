@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
 		unless @order.viewable_by? @current_user
 			redirect_to root_url
 		end
-		if @order.status == "pending"
+		if @order.status == "approved"
 			url = @order.api_get_payment_url(@current_user)
 			unless @order.errors.any?
 				@armor_payment_instructions_url = url

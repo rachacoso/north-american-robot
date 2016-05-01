@@ -1,5 +1,4 @@
-<a id="paymentInstructionsFrame-lightbox-preview" data-url="<%= url %>" class="landing-button">View Payment Information</a>
-<h4>Payment via Armor Payments</h4>
+<a id="paymentInstructionsFrame-lightbox-preview" data-url="<%= url %>" class="landing-button">View Bank/Wire Transfer Payment Information</a>
 <% content_for :javascript_foot do %>
 	<script type="text/javascript">
 		var ArmorInstructionsClicked = false;
@@ -8,9 +7,7 @@
 				var url = $(this).attr("data-url");
 				showArmorPaymentsLightboxUi(url, 250, true);
 				ArmorInstructionsClicked = true;
-				console.log('AAAA' + ArmorInstructionsClicked)
 			} else {
-				console.log('BBBB' + ArmorInstructionsClicked)
 				$('#order-item-data').html("<div class='text-center'><h3>Sorry, there was an error, please reload the page and try again.</h3></div>");
 				$('.overlay#order-item-overlay').fadeIn();
 				$('#order-item').fadeIn();
