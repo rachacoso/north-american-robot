@@ -16,6 +16,9 @@
   // background-color: rgba(0,0,0,0.5);
   background-color: rgba(0,0,0,0.8);
   display: none;
+  .overlay#ajax-wait-overlay {
+    z-index: 1000000;
+  }
 }
 
 .ajax-wait {
@@ -31,7 +34,7 @@
     border: 1px solid $landing-middle-gray;
     border-radius: 5px;
     text-align: center;
-    z-index: 100001; /* 1px higher than the overlay layer */
+    z-index: 1000001; /* 1px higher than the overlay layer */
     display: none;
     color: white;
     font-weight: 700;
