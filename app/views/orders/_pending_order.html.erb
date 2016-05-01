@@ -12,6 +12,9 @@
 <% else %>
 	<div class="row">
 		<div class="small-12 columns text-center">
+			<h2 style="line-height: 1em;">Order subtotal:<br><small>(goods)<br></small><strong><%= number_to_currency(@order.subtotal_price) %></strong></h2>
+			<h2 style="line-height: 1em;">Additional Charges:<br><small>(shipping and other fees)<br></small><strong><%= number_to_currency(@order.charges_subtotal_price) %></strong></h2>
+			<hr>
 			<h2>Would you like to submit this updated order to <br><strong><%= @order.orderer.company_name %></strong></h2>
 		</div><!--/.small-12-->
 	</div><!--/.row-->
