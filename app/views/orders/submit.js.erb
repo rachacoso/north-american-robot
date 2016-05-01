@@ -6,6 +6,7 @@ $('.overlay').fadeOut();
 
 <% if @order.status == "submitted" %>
 	<% if URI(request.referer).path.match(/orders/) %>
+		$('#order-item-data').html("<div class='text-center'><h2>Loading...<br>Please wait...</h2></div>");
 		window.location.replace("<%= order_url(@order) %>");
 	<% else %>
 		$('#view-orders-buttons').html("<%= j (render partial: 'shared/profile/components/view_orders_buttons', locals: {profile: @order.brand}) %>");
