@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
 
-	before_action :set_order, only: [:show, :edit, :update, :destroy, :submit, :pending, :approve]
+	before_action :set_order, only: [:show, :edit, :update, :destroy, :submit, :pending, :approve, :shipment]
 
 	def show
 		unless @order.viewable_by? @current_user
@@ -10,6 +10,11 @@ class OrdersController < ApplicationController
 			url = @order.api_get_payment_url(@current_user)
 			unless @order.errors.any?
 				@armor_payment_instructions_url = url
+			end
+		elsif @order.status == "paid"
+			list = @order.api_get_shippers
+			unless @order.errors.any?
+				@armor_shippers_list = list
 			end
 		end
 	end
@@ -47,6 +52,22 @@ class OrdersController < ApplicationController
 		respond_to do |format|
 			format.html  { redirect_to order_url(@order) }
 			format.js
+		end
+	end
+
+	def shipment
+		@order.api_add_shipment_info(
+			carrier_id: params[:shipper_id], 
+			tracking_id: params[:armor_shipment_tracking_number], 
+			description: params[:armor_shipment_description],
+			other_shipper: params[:armor_other_shipper]
+			)
+		if @order.errors.any?
+			flash[:error] = "Sorry, there was an error submitting your shipment details. <br> #{@order.errors.full_messages}"
+			@armor_shippers_list = @order.api_get_shippers
+			render :show
+		else
+			redirect_to order_url(@order)
 		end
 	end
 

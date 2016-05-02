@@ -71,7 +71,7 @@
 						<h1>2) Wait for payment from <%= order.orderer.company_name %></h1>
 						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 						<div class="panel">
-							[Stuff here about that]
+							<h2><%= order.orderer.company_name %> will place payment into escrow via Armor Payments.<br> You will receive notice via email when payment has been transferred.</h2>
 						</div>
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->

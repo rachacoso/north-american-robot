@@ -1,6 +1,6 @@
 var hasBG = typeof bgImage != 'undefined';
 var bgDefaultColor = "#FFFFFF";
-
+var shippersArray = [];
 
 function doBackstretch (location, photos, durationTime, fadeTime) {
    durationTime = typeof durationTime !== 'undefined' ? durationTime : 3000;
@@ -389,6 +389,25 @@ function initialize () {
     //     // $('#selection').html('You selected: ' + suggestion.value + ', ' + suggestion.data);
     //     $('#<%=id_name%>_selected').val(suggestion.data);
     // },
+    showNoSuggestionNotice: true,
+    noSuggestionNotice: 'Sorry, no matching results',
+    tabDisabled: true
+  });
+
+  $('.shippers-autocomplete').devbridgeAutocomplete({
+    lookup: shippersArray,
+    minChars: 0,
+    // delimiter: ', ',
+    onSelect: function (suggestion) {
+        // $('#selection').html('You selected: ' + suggestion.value + ', ' + suggestion.data);
+        $('#shipper_id').val(suggestion.data);
+        if (suggestion.data == 1 || suggestion.data == 10 || suggestion.data == 11 || suggestion.data == 12) {
+          $('.other-shippers').fadeIn();
+        } else {
+          $('.other-shippers').fadeOut();
+          $("input[type='text'].other-shippers").val('');
+        }
+    },
     showNoSuggestionNotice: true,
     noSuggestionNotice: 'Sorry, no matching results',
     tabDisabled: true

@@ -137,6 +137,10 @@ module LandingArmorPayments
       field :armor_buyer_user_id, type: String
       field :armor_buyer_email, type: String
       field :armor_order_id, type: String
+      field :armor_shipment_id, type: String
+      field :armor_other_shipper, type: String # name of other shipper if not in Armor List
+      field :armor_shipment_tracking_number, type: String
+      field :armor_shipment_description, type: String
     end
 
     def api_create_order
@@ -195,6 +199,39 @@ module LandingArmorPayments
 
     end
 
+    def api_add_shipment_info(carrier_id:,tracking_id:,description:,other_shipper:)
+      armororder = LandingArmorOrder.new
+      account_id = self.armor_seller_account_id
+      order_id = self.armor_order_id
+      action_data = {
+        "user_id" => self.armor_seller_user_id, # The user_id of the user shipping the goods (usually the seller on the order)     
+        "carrier_id" => carrier_id,
+        "tracking_id" => tracking_id,
+        "description" => description
+      }
+      armororder.add_shipment_info(account_id, order_id, action_data)
+      if armororder.errors.any?
+        self.errors[:base] << armororder.errors.full_messages
+      else
+        self.armor_shipment_id = armororder.shipment_id
+        self.armor_other_shipper = other_shipper if other_shipper.present?
+        self.armor_shipment_tracking_number = tracking_id
+        self.armor_shipment_description = description
+        self.status = "shipped"
+        self.save!
+      end
+    end
+
+    def api_get_shippers
+      armorshippers = LandingArmorShippers.new
+      armorshippers.get_list
+      if armorshippers.errors.any?
+        self.errors[:base] << armorshippers.errors.full_messages
+      else
+        return armorshippers.list
+      end
+    end
+
   end
 
 
@@ -251,7 +288,7 @@ module LandingArmorPayments
   end
 
   class LandingArmorOrder < LandingArmorClient
-    attr_reader :url, :order_id
+    attr_reader :url, :order_id, :shipment_id
 
     def create(account_id, order_data)
       response = @client.orders(account_id).create(order_data) # Store result.order_id in the local DB
@@ -263,6 +300,26 @@ module LandingArmorPayments
       parse_response(response, "url")
     end
 
+    def add_shipment_info(account_id, order_id, action_data)
+      response = @client.orders(account_id).shipments(order_id).create(action_data)
+      parse_response(response, "shipment_id")
+    end
+
   end
 
+  class LandingArmorShippers < LandingArmorClient
+    attr_reader :list
+    def get_list
+      response = @client.shipmentcarriers.all
+      case response.status.to_i
+      when 200 #OK
+        varname = "@list"
+        value = response.data[:body]
+        self.instance_variable_set varname, value
+      else # all other statuses
+        self.errors[:base] << "Response Status: #{response.status} - #{response.data[:body]['errors']}"
+      end
+    end
+
+  end
 end

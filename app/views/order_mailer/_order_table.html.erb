@@ -62,6 +62,7 @@
 							</p>
 						</td>
 					</tr>
+					<tr style="background-color: #efefef;"><th colspan="6" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;"> Products </th></tr>
 					<tr style="background-color: #efefef; font-weight: 900;">
 						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">Item</td>
 						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">Description</td>
@@ -77,12 +78,39 @@
 					<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;"><%= lineitem.quantity %></td>
 					<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;"><%= number_to_currency(lineitem.price_in_dollars) %></td>
 					<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;"><%= number_to_currency(lineitem.tiered_price_in_dollars) %></td>
-					<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;"><%= number_to_currency(lineitem.total_price) %></td>
+					<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom; text-align: right;"><%= number_to_currency(lineitem.total_price) %></td>
 					</tr>
 					<% end %>
-					<tr style="background-color: #efefef;">
+					<tr>
 						<td colspan="5" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; text-align: right;">Subtotal <small>(before taxes/fees/shipping)</small></td>
 						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: bolder; line-height: 20px; text-align: right;"><%= number_to_currency(order.subtotal_price) %></td>
+					</tr>
+
+
+
+					<tr style="background-color: #efefef;"><th colspan="6" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;"> Additional Charges (e.g. shipping) </th></tr>
+					<tr style="background-color: #efefef; font-weight: 900;">
+						<td>&nbsp;</td>
+						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;" colspan="2">Charge</td>
+						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;" colspan="2">Description</td>
+						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">Amount</td>
+					</tr>
+					<% order.order_additional_charges.each.each do |lineitem| %>
+					<tr>
+						<td>&nbsp;</td>
+						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;" colspan="2"><%= lineitem.name %></td>
+						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;" colspan="2"><%= lineitem.description %></td>
+						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; text-align: right;"><%= number_to_currency(lineitem.amount_in_dollars) %></td>
+					</tr>
+					<% end %>
+					<tr>
+						<td colspan="5" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; text-align: right;">Additional Charges Subtotal </td>
+						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: bolder; line-height: 20px; text-align: right;"><%= number_to_currency(order.charges_subtotal_price) %></td>
+					</tr>
+
+					<tr style="background-color: #efefef;">
+						<td colspan="5" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; text-align: right;">Order Total</td>
+						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: bolder; line-height: 20px; text-align: right;"><%= number_to_currency(order.total_price) %></td>
 					</tr>
 				</tbody>
 			</table>

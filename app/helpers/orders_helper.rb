@@ -20,4 +20,11 @@ module OrdersHelper
 		end
 	end
 
+	def shippers_list(list)
+		tracking_list = []
+		list.each do |s|
+			tracking_list << { value:  s["name"], data: s["carrier_id"] }
+		end
+		return tracking_list.sort_by {|s| s[:value] }
+	end
 end

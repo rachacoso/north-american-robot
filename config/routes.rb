@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   get   '/order/s/:id/:confirm' => 'orders#submit', as: 'submit_order'
   get   '/order/p/:id/:confirm' => 'orders#pending', as: 'pending_order'
   get   '/order/a/:id/:confirm' => 'orders#approve', as: 'approve_order'
+  post  '/order/shipment/:id' => 'orders#shipment', as: 'order_shipment_info'
 
   resources :order_items, only: [:create, :edit, :update, :destroy, :index]
   get   '/order/newitem/:product_id' => 'order_items#new', as: 'new_order_item'
