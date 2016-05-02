@@ -16,11 +16,12 @@ class OrderMailer < ActionMailer::Base
   def send_order(order:,status:,email: 'orders@landingintl.com',subject:)
     @order = order
     @status = status
-    if ['submitted','approved'].include? status
-      @link = admin_order_view_url(order)
-    elsif ['pending'].include? status
-      @link = order_url(order)
-    end
+    @link = order_url(order)
+    # if ['submitted','approved','paid'].include? status
+    #   @link = admin_order_view_url(order)
+    # elsif ['pending','shipped'].include? status
+      # @link = order_url(order)
+    # end
     mail :to => email, :subject => subject
   end
 

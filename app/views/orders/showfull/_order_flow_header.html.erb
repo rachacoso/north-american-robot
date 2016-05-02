@@ -3,6 +3,8 @@
 	<li <%= status == "submitted" ? "class=active" : "" %>><%= status == "submitted" ? "Order " : "" %>Submitted</li>
 	<li <%= status == "pending" ? "class=active" : "" %>><%= status == "pending" ? "Order " : "" %>Pending<%= status == "pending" ? " Approval" : "" %></li>
 	<li <%= status == "approved" ? "class=active" : "" %>><%= status == "approved" ? "Order " : "" %>Approved</li>
+	<li <%= status == "paid" ? "class=active" : "" %>><%= status == "paid" ? "Order " : "" %>Paid</li>
 	<li <%= status == "shipped" ? "class=active" : "" %>><%= status == "shipped" ? "Order " : "" %>Shipped</li>
+	<li <%= status == "delivered" ? "class=active" : "" %>><%= status == "delivered" ? "Order " : "" %>Delivered</li>
 	<li <%= status == "complete" ? "class=active" : "" %>><%= status == "complete" ? "Order " : "" %>Complete</li>
 </ul>

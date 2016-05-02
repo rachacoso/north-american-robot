@@ -8,7 +8,7 @@
 		<% if @current_orders.present?  %>
 				<% @current_orders.each do |order| %>
 					<%= render partial: "order", locals: { order: order } %>
- 				<% end %>
+				<% end %>
 		<% else %>
 		<div class="row">
 			<div class="small-12 columns">
@@ -39,7 +39,7 @@
 		<% if @pending_orders.present?  %>
 				<% @pending_orders.each do |order| %>
 					<%= render partial: "order", locals: { order: order } %>
- 				<% end %>
+				<% end %>
 		<% else %>
 		<div class="row">
 			<div class="small-12 columns">
@@ -54,7 +54,82 @@
 		<% if @approved_orders.present?  %>
 				<% @approved_orders.each do |order| %>
 					<%= render partial: "order", locals: { order: order } %>
- 				<% end %>
+				<% end %>
+		<% else %>
+		<div class="row">
+			<div class="small-12 columns">
+				<div class="panel dashboard-order-tile">
+					<h3>(No Orders)</h3>
+				</div>
+			</div>
+		</div>
+		<% end %>
+
+		<h4><strong>Paid Orders</strong></h4>
+		<% if @paid_orders.present?  %>
+				<% @paid_orders.each do |order| %>
+					<%= render partial: "order", locals: { order: order } %>
+				<% end %>
+		<% else %>
+		<div class="row">
+			<div class="small-12 columns">
+				<div class="panel dashboard-order-tile">
+					<h3>(No Orders)</h3>
+				</div>
+			</div>
+		</div>
+		<% end %>
+
+		<h4><strong>Shipped Orders</strong></h4>
+		<% if @shipped_orders.present?  %>
+				<% @shipped_orders.each do |order| %>
+					<%= render partial: "order", locals: { order: order } %>
+				<% end %>
+		<% else %>
+		<div class="row">
+			<div class="small-12 columns">
+				<div class="panel dashboard-order-tile">
+					<h3>(No Orders)</h3>
+				</div>
+			</div>
+		</div>
+		<% end %>
+
+		<h4><strong>Delivered Orders</strong></h4>
+		<% if @delivered_orders.present?  %>
+				<% @delivered_orders.each do |order| %>
+					<%= render partial: "order", locals: { order: order } %>
+				<% end %>
+		<% else %>
+		<div class="row">
+			<div class="small-12 columns">
+				<div class="panel dashboard-order-tile">
+					<h3>(No Orders)</h3>
+				</div>
+			</div>
+		</div>
+		<% end %>
+
+		<h4><strong>Completed Orders</strong></h4>
+		<% if @completed_orders.present?  %>
+				<% @completed_orders.each do |order| %>
+					<%= render partial: "order", locals: { order: order } %>
+				<% end %>
+		<% else %>
+		<div class="row">
+			<div class="small-12 columns">
+				<div class="panel dashboard-order-tile">
+					<h3>(No Orders)</h3>
+				</div>
+			</div>
+		</div>
+		<% end %>
+
+		<h4><strong>Orders with Errors / In Dispute</strong></h4>
+		<% if @error_orders.present?  %>
+				<% @error_orders.each do |order| %>
+					<%= render partial: "order", locals: { order: order } %>
+				<% end %>
 		<% else %>
 		<div class="row">
 			<div class="small-12 columns">

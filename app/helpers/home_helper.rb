@@ -30,7 +30,18 @@ module HomeHelper
 		when "pending"
 			return "<span id='#{status.downcase}'>PENDING</span> on #{order.pending_date.strftime('%b %d, %Y')}"
 		when "approved"
-			return "<span id='#{status.downcase}'>APPROVED</span> on #{order.pending_date.strftime('%b %d, %Y')}"
+			return "<span id='#{status.downcase}'>APPROVED</span> on #{order.approved_date.strftime('%b %d, %Y')}"
+		when "paid"
+			return "<span id='#{status.downcase}'>PAYMENT IN ESCROW</span> on #{order.paid_date.strftime('%b %d, %Y')}"
+		when "shipped"
+			return "<span id='#{status.downcase}'>SHIPPED</span> on #{order.shipped_date.strftime('%b %d, %Y')}"
+		when "delivered"
+			return "<span id='#{status.downcase}'>DELIVERED</span> on #{order.delivered_date.strftime('%b %d, %Y')}"
+		when "completed"
+			return "<span id='#{status.downcase}'>COMPLETED (PAYMENT RELEASED)</span> on #{order.completed_date.strftime('%b %d, %Y')}"
+		when "error"
+			return "<span id='#{status.downcase}'>IN ERROR/IN DISPUTE</span> on #{order.error_date.strftime('%b %d, %Y')}"
+
 		end
 	end
 

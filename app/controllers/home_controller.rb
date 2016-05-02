@@ -38,6 +38,11 @@ class HomeController < ApplicationController
 			@submitted_orders = @profile.orders.submitted
 			@pending_orders = @profile.orders.pending
 			@approved_orders = @profile.orders.approved
+			@paid_orders = @profile.orders.paid
+			@shipped_orders = @profile.orders.shipped
+			@delivered_orders = @profile.orders.delivered
+			@completed_orders = @profile.orders.completed
+			@error_orders = @profile.orders.error
 
 			matches = @profile.matches
 			@unread_list = Array.new
