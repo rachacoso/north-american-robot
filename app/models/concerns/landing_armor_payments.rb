@@ -136,6 +136,7 @@ module LandingArmorPayments
       field :armor_seller_account_id, type: String
       field :armor_buyer_user_id, type: String
       field :armor_buyer_email, type: String
+      field :armor_buyer_account_id, type: String
       field :armor_order_id, type: String
       field :armor_shipment_id, type: String
       field :armor_other_shipper, type: String # name of other shipper if not in Armor List
