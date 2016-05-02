@@ -63,7 +63,7 @@ class OrdersController < ApplicationController
 			other_shipper: params[:armor_other_shipper]
 			)
 		if @order.errors.any?
-			flash[:error] = "Sorry, there was an error submitting your shipment details. <br> #{@order.errors.full_messages}"
+			flash.now[:error] = "Sorry, there was an error submitting your shipment details. <br> #{@order.errors.full_messages}"
 			@armor_shippers_list = @order.api_get_shippers
 			render :show
 		else
