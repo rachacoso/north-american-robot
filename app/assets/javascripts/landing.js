@@ -485,11 +485,11 @@ function initialize () {
 $(document)
   .ajaxStart(function () {
     $('.ajax-wait').show();
-    $('.overlay#ajax-wait-overlay').show();
+    // $('.overlay#ajax-wait-overlay').show();
   })
   .ajaxStop(function () {
     $('.ajax-wait').hide();
-    $('.overlay#ajax-wait-overlay').hide();
+    // $('.overlay#ajax-wait-overlay').hide();
   });
 
 function toggleTopBar(thisOne) {
