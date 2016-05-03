@@ -70,7 +70,7 @@ gem 'foundation_rails_helper'
 gem 'foundation-icons-sass-rails'
 gem 'country_select', github: 'stefanpenner/country_select'
 
-gem 'rails_12factor', group: :production
+gem 'rails_12factor', group: [:staging, :production]
 
 gem 'rails_autolink'
 
@@ -84,7 +84,7 @@ gem 'mailgun-ruby', '~>1.0.3', require: 'mailgun'
 
 gem "figaro"
 
-group :production do
+group :production, :staging do
   gem 'pg'
 end
 
