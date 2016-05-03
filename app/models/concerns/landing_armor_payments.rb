@@ -256,7 +256,7 @@ module LandingArmorPayments
         value = response.data[:body][item]
         self.instance_variable_set varname, value
       else # all other statuses
-        self.errors[:base] << "Response Status: #{response.status} - Headers:#{response.headers} Body:#{response.body}"
+        self.errors[:base] << "Response Status: #{response.status} - Headers:#{response.headers} Errors:#{response.data[:body]['errors']}"
       end
     end
 
