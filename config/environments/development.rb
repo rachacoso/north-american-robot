@@ -53,4 +53,9 @@ Rails.application.configure do
     }
   }
 
+  config.armor_payments = {
+    :key => ENV['ARMOR_KEY'],
+    :secret => ENV['ARMOR_SECRET']
+  }
+
 end

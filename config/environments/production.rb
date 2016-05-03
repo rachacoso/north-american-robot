@@ -99,4 +99,9 @@ Rails.application.configure do
     :s3_protocol => :https
   }
 
+  config.armor_payments = {
+    :key => ENV['ARMOR_KEY'],
+    :secret => ENV['ARMOR_SECRET']
+  }
+
 end
