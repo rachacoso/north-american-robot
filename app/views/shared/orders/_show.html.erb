@@ -4,7 +4,7 @@
 		<div class="row">
 			<div class="medium-6 columns medium-text-right  medium-push-6">
 				<h2 style="line-height: 1.5em;">
-					[Estimated] Invoice<br>
+					<%= "[Estimated]" if ['open','submitted','pending'].include? @order.status %> Invoice<br>
 					<small>by</small>
 					<%= image_tag 'https://s3.amazonaws.com/landingintl-us/general/landing-logo.png', width: "100", alt: "Landing International" %>
 				</h2>
