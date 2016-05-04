@@ -14,9 +14,15 @@
 		<%= paginate @group %><br>
 		<% @group.each do |o| %>
 			<h2><%= o.company_name %></h2>
-			<% order_groupquery(@orders, @group_type, o).each do |order| %>
-				<%= render partial: 'order', locals: { order: order, group_type: @group_type }  %>
-			<% end %>
+			<% @orders_by.each do |status,orders| %>
+				<% next if order_groupquery(orders, @group_type, o).blank? %>
+				<div class="admin-order-set">
+				<h3><%= status.capitalize %> Orders</h3>
+				<% order_groupquery(orders, @group_type, o).each do |order| %>
+					<%= render partial: 'order', locals: { order: order, group_type: @group_type }  %>
+				<% end %>
+				</div>
+			<% end %>				
 		<% end %>
 		</div><!--/.medium-6-->
 	</div><!--/.row-->

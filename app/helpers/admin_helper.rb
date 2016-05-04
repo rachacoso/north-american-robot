@@ -11,12 +11,12 @@ module AdminHelper
 		end
 	end
 
-	def order_groupquery(orders, group_type, group_item)
+	def order_groupquery(orders, group_type, company)
 		case group_type
 		when "b"
-			return orders.where(brand: group_item)
+			return orders.where(brand: company)
 		when "d", "r"
-			return orders.where(orderer: group_item)
+			return orders.where(orderer: company)
 		end
 	end
 end
