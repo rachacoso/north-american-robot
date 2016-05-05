@@ -1,0 +1,83 @@
+<div class="row">
+	<div class="small-12 columns">
+		<div class="text-center" id="profile-tabs">
+			<ul class="tablist">
+				<li><%= link_to "#{order.orderer_type.upcase} PROFILE", eval("view_#{order.orderer_type.downcase}_url(order.orderer)") %></li>
+				<li class="active"><%= link_to "ORDERS", order_url(order) %></li>
+			</ul>
+		</div>
+		<div id="profile-status-and-contact">
+			<div class="row">
+				<div class="medium-6 columns text-left">
+					<%= render partial: "shared/profile/components/profile_status", locals: { order: order } %>
+				</div><!--/.medium-6-->
+				<div class="medium-6 columns text-right">
+					<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
+				</div><!--/.medium-6-->
+			</div><!--/.row-->
+		</div>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
+<div class="row">
+	<div class="medium-8 columns">
+		<span id="profile-company-name">
+		<h1><%= order.orderer.company_name %></h1>
+		</span>
+	</div><!--/.medium-8-->
+	<div class="medium-4 columns text-right">
+		<% if order.orderer.logo_file_name %>
+			<%= image_tag order.orderer.logo.url(:medium), alt: "Logo" %><br>
+		<% else %>
+			<% if !order.orderer.facebook.blank? && fb_picture(order.orderer.facebook) %>
+				<%= image_tag fb_picture(order.orderer.facebook) %><br>
+			<% else %>
+				<%= image_tag order.orderer.logo.url(:medium), width: "100", height: "100", alt: "Logo" %><br>
+			<% end %>					
+		<% end %>
+	</div><!--/.medium-4-->
+</div><!--/.row-->
+<div class="full-order-container">
+	<div class="row">
+		<div class="small-12 columns">
+
+			<div class="row">
+				<div class="small-12 columns">
+					<div id="order-panel-top">
+						<%= render partial: "orders/showfull/order_flow_header", locals: { status: order.status } %>
+						<hr>
+						<h3>This order has been shipped.</h3>
+					</div>
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+
+			<div class="panel outer">
+
+				<div class="row">
+					<div class="medium-11 medium-centered columns">
+						<br>
+						<h1>1) Review Order</h1>
+						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
+						<div class="panel">
+							<%= render "shared/orders/show" %>		
+						</div>
+					</div><!--/.medium-11 medium-centered-->
+				</div><!--/.row-->
+
+
+				<div class="row">
+					<div class="medium-11 medium-centered columns">
+						<a name="form"></a>
+						<br>
+						<h1>2) Await Delivery and Review</h1>
+						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
+						<div class="panel">
+							<h2>You will be notified by email when the shipment is delivered.  The buyer will then review the shipment and release the funds from escrow.</h2>
+						</div>
+					</div><!--/.medium-11 medium-centered-->
+				</div><!--/.row-->
+
+			</div><!--/.panel outer-->
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+</div><!--/.full-order-container-->

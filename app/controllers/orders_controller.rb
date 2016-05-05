@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
 
-	before_action :set_order, only: [:show, :edit, :update, :destroy, :submit, :pending, :approve, :shipment, :paid]
+	before_action :set_order, only: [:show, :edit, :update, :destroy, :submit, :pending, :approve, :shipment, :paid, :delivered]
 
 	#setting of paid only done for testing & by admin only
 	before_action :administrators_only, only: [:paid]
@@ -80,6 +80,23 @@ class OrdersController < ApplicationController
 			@order.api_testing_set_to_paid
 			if @order.errors.any?
 				flash.now[:notice] = @order.errors.full_messages
+			else
+				@success = true
+			end
+		end
+		respond_to do |format|
+			format.html  { redirect_to order_url(@order) }
+			format.js
+		end
+	end
+
+	def delivered
+		if params[:confirm].to_i == 1
+			@order.api_testing_set_to_delivered
+			if @order.errors.any?
+				flash.now[:notice] = @order.errors.full_messages
+			else
+				@success = true
 			end
 		end
 		respond_to do |format|

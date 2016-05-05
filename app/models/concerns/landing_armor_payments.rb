@@ -247,9 +247,20 @@ module LandingArmorPayments
       armororder.set_to_paid(account_id, order_id, action_data)
       if armororder.errors.any?
         self.errors[:base] << armororder.errors.full_messages
-      # else
-      #   self.status = "paid"
-      #   self.save!
+      end
+    end
+
+    def api_testing_set_to_delivered
+      armororder = LandingArmorOrder.new
+      account_id = self.armor_seller_account_id
+      order_id = self.armor_order_id
+      action_data = {
+        "action" => "delivered",
+        "confirm" => true
+      }
+      armororder.set_to_delivered(account_id, order_id, action_data)
+      if armororder.errors.any?
+        self.errors[:base] << armororder.errors.full_messages
       end
     end
 
@@ -334,6 +345,10 @@ module LandingArmorPayments
       parse_response(response)
     end
 
+    def set_to_delivered(account_id, order_id, action_data)
+      response = @client.orders(account_id).update(order_id, action_data)
+      parse_response(response)
+    end
 
   end
 

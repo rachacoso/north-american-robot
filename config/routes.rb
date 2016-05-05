@@ -35,7 +35,9 @@ Rails.application.routes.draw do
   get   '/order/a/:id/:confirm' => 'orders#approve', as: 'approve_order'
   post  '/order/shipment/:id' => 'orders#shipment', as: 'order_shipment_info'
 
+  # ARMOR PAYMENTS TESTING
   get   '/order/paid/:id/:confirm' => 'orders#paid', as: 'paid_order'
+  get   '/order/delivered/:id/:confirm' => 'orders#delivered', as: 'delivered_order'
 
   resources :order_items, only: [:create, :edit, :update, :destroy, :index]
   get   '/order/newitem/:product_id' => 'order_items#new', as: 'new_order_item'

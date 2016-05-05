@@ -6,7 +6,7 @@
 	$('.overlay#order-item-overlay').fadeIn();
 	$('#order-item').fadeIn();
 <% else %>
-	$('#order-item-data').html("<%= j (render partial: 'paid_order') %>");
+	$('#order-item-data').html("<%= j (render partial: 'delivered_order') %>");
 	$('.overlay#order-item-overlay').fadeIn();
 	$('#order-item').fadeIn();
 <% end %>
