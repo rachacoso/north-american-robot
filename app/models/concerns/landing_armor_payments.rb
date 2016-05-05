@@ -218,7 +218,7 @@ module LandingArmorPayments
         self.armor_other_shipper = other_shipper if other_shipper.present?
         self.armor_shipment_tracking_number = tracking_id
         self.armor_shipment_description = description
-        self.status = "shipped"
+        self.shipped
         self.save!
       end
     end
