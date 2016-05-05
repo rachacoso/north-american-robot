@@ -104,6 +104,7 @@ class Order # for V2 ordering
   end
 
   def paid
+    return if self.status == "paid" # exit if already set
     self.status = "paid"
     self.paid_date = DateTime.now
     self.save!
@@ -116,6 +117,7 @@ class Order # for V2 ordering
   end
 
   def shipped
+    return if self.status == "shipped" # exit if already set
     self.status = "shipped"
     self.shipped_date = DateTime.now
     self.save!
@@ -128,6 +130,7 @@ class Order # for V2 ordering
   end
 
   def delivered
+    return if self.status == "delivered" # exit if already set
     self.status = "delivered"
     self.delivered_date = DateTime.now
     self.save!
@@ -146,6 +149,7 @@ class Order # for V2 ordering
   end
 
   def completed
+    return if self.status == "completed" # exit if already set
     self.status = "completed"
     self.completed_date = DateTime.now
     self.save!
