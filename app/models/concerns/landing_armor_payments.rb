@@ -250,12 +250,14 @@ module LandingArmorPayments
 
     protected
 
-    def parse_response(response, item)
+    def parse_response(response, item=nil)
       case response.status.to_i
       when 200 #OK
-        varname = "@#{item}"
-        value = response.data[:body][item]
-        self.instance_variable_set varname, value
+        if item.present?
+          varname = "@#{item}"
+          value = response.data[:body][item]
+          self.instance_variable_set varname, value
+        end
       else # all other statuses
         self.errors[:base] << "Response Status: #{response.status} - Headers:#{response.headers} Errors:#{response.data[:body]['errors']}"
       end
