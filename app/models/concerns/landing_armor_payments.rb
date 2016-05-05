@@ -233,6 +233,26 @@ module LandingArmorPayments
       end
     end
 
+    #FOR TESTING ONLY
+    def api_testing_set_to_paid
+      armororder = LandingArmorOrder.new
+      account_id = self.armor_seller_account_id
+      order_id = self.armor_order_id
+      action_data = {
+        "action" => "add_payment",
+        "confirm" => true,
+        "source_account_id" => self.armor_buyer_account_id, # The account_id of the party making the payment
+        "amount" => self.total_price 
+      }
+      armororder.set_to_paid(account_id, order_id, action_data)
+      if armororder.errors.any?
+        self.errors[:base] << armororder.errors.full_messages
+      # else
+      #   self.status = "paid"
+      #   self.save!
+      end
+    end
+
   end
 
 
@@ -308,6 +328,12 @@ module LandingArmorPayments
       response = @client.orders(account_id).shipments(order_id).create(action_data)
       parse_response(response, "shipment_id")
     end
+
+    def set_to_paid(account_id, order_id, action_data)
+      response = @client.orders(account_id).update(order_id, action_data)
+      parse_response(response)
+    end
+
 
   end
 

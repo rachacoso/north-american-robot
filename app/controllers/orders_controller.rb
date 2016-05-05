@@ -1,6 +1,9 @@
 class OrdersController < ApplicationController
 
-	before_action :set_order, only: [:show, :edit, :update, :destroy, :submit, :pending, :approve, :shipment]
+	before_action :set_order, only: [:show, :edit, :update, :destroy, :submit, :pending, :approve, :shipment, :paid]
+
+	#setting of paid only done for testing & by admin only
+	before_action :administrators_only, only: [:paid]
 
 	def show
 		unless @order.viewable_by? @current_user
@@ -68,6 +71,20 @@ class OrdersController < ApplicationController
 			render :show
 		else
 			redirect_to order_url(@order)
+		end
+	end
+
+	# FOR TESTING ARMOR ONLY
+	def paid
+		if params[:confirm].to_i == 1
+			@order.api_testing_set_to_paid
+			if @order.errors.any?
+				flash.now[:notice] = @order.errors.full_messages
+			end
+		end
+		respond_to do |format|
+			format.html  { redirect_to order_url(@order) }
+			format.js
 		end
 	end
 

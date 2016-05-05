@@ -32,9 +32,20 @@
 		<h2>
 			<strong><%= @order.brand.company_name %></strong> order from <strong><%= @order.orderer.company_name %></strong>
 		</h2>
+		<h3><%= @order.status.upcase %></h3>
 		</div>
 	</div>
 </div>
+
+<% if @order.status == "approved" %>
+<div class="row">
+	<div class="medium-11 medium-centered columns">
+		<div class="panel">
+			<%= link_to "TESTING ONLY: Update to Paid", paid_order_url(@order,0), class: "landing-button", remote: true %>
+		</div>
+	</div>
+</div>
+<% end %>
 
 <div class="row">
 	<div class="medium-11 medium-centered columns">
@@ -43,3 +54,5 @@
 		</div>
 	</div><!--/.small-12-->
 </div><!--/.row-->
+
+<br><br>
