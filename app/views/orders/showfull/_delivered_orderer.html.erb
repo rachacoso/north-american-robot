@@ -60,7 +60,18 @@
 						<h1>NEXT STEP: Review Shipment and Release Payment</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 						<div class="panel">
-							<h2>The order has been delivered. </h2>
+							<h2>Release Payment from Escrow</h2>
+							<% if order.errors.any? %>
+								<h4>Sorry, there was an error. Please reload the page</h4>
+								<% order.errors.full_messages.each do |m| %>
+									<%= m %><br>
+								<% end %>
+							<% else %>
+								<% if @armor_payment_release_payment_url.present? %>
+									<%= render partial: "orders/showfull/delivered_orderer_payment_release", locals: {url: @armor_payment_release_payment_url} %>
+								<% end %>
+							<% end %>
+							<h3><em>Alternately, you can also release payment via your Armor Payments account.</em></h3>
 						</div>
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->

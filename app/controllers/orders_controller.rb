@@ -19,6 +19,11 @@ class OrdersController < ApplicationController
 			unless @order.errors.any?
 				@armor_shippers_list = list
 			end
+		elsif @order.status == "delivered"
+			url = @order.api_get_release_payment_url
+			unless @order.errors.any?
+				@armor_payment_release_payment_url = url
+			end
 		end
 	end
 

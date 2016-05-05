@@ -233,6 +233,30 @@ module LandingArmorPayments
       end
     end
 
+
+    def api_get_release_payment_url
+
+      armororder = LandingArmorOrder.new
+
+      account_id = self.armor_buyer_account_id # The account_id of the buyer for the order 
+      user_id = self.armor_buyer_user_id # The user_id of the buyer for the order 
+      auth_data = {
+        'uri' => "/accounts/#{self.armor_seller_account_id}/orders/#{self.armor_order_id}",
+        'action' => 'release' 
+      } 
+
+      armororder.release_payment_url(account_id, user_id, auth_data)
+
+      if armororder.errors.any?
+        self.errors[:base] << armororder.errors.full_messages
+      else
+        return armororder.url
+      end
+
+    end
+
+
+
     #FOR TESTING ONLY
     def api_testing_set_to_paid
       armororder = LandingArmorOrder.new
@@ -338,6 +362,11 @@ module LandingArmorPayments
     def add_shipment_info(account_id, order_id, action_data)
       response = @client.orders(account_id).shipments(order_id).create(action_data)
       parse_response(response, "shipment_id")
+    end
+
+    def release_payment_url(account_id, user_id, auth_data)
+      response = @client.accounts.users(account_id).authentications(user_id).create(auth_data)
+      parse_response(response, "url")
     end
 
     def set_to_paid(account_id, order_id, action_data)
