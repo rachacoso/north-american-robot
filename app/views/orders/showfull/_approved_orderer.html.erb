@@ -54,27 +54,17 @@
 
 			<div class="panel outer">
 
-				<div class="row">
-					<div class="medium-11 medium-centered columns">
-						<br>
-						<h1>1) Review Order</h1>
-						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
-						<div class="panel">
-							<%= render "shared/orders/show" %>		
-						</div>
-					</div><!--/.medium-11 medium-centered-->
-				</div><!--/.row-->
 
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
 						<br>
-						<h1>2) Submit Payment</h1>
+						<h1>Next Step: Submit Payment</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 						<div class="panel">
 							<h2>Landing International has partnered with Armor Payments and there are two ways to complete your payment</h2>
 
 							<h2>A) Via Armor Payments Website</h2>
-							<h3>You should have received an email at from Armor Payments with instructions on how to complete payment <%= order.armor_buyer_email ? "at #{order.armor_buyer_email}" : "" %>. <br>Please follow those instructions to complete payment via the Armor Payments website.</h3>
+							<h3>An email was sent from Armor Payments to <%= order.armor_buyer_email ? "#{order.armor_buyer_email}" : "you" %> with instructions on how to complete payment. <br>Please follow those instructions to complete payment via the Armor Payments website.</h3>
 							<h2>B) Via Direct Bank/Wire Transfer</h2>
 							<h3>Click on the button below to view instructions on how to complete payment via bank or wire transfer.</h3>
 							<% if order.errors.any? %>
@@ -90,6 +80,18 @@
 						</div>
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->
+
+				<div class="row">
+					<div class="medium-11 medium-centered columns">
+						<br>
+						<h1>Order</h1>
+						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
+						<div class="panel">
+							<%= render "shared/orders/show" %>		
+						</div>
+					</div><!--/.medium-11 medium-centered-->
+				</div><!--/.row-->
+
 
 			</div><!--/.panel outer-->
 		</div><!--/.small-12-->

@@ -55,24 +55,17 @@
 
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
-						<br>
-						<h1>1) Review Order</h1>
-						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
-						<div class="panel">
-							<%= render "shared/orders/show" %>		
-						</div>
-					</div><!--/.medium-11 medium-centered-->
-				</div><!--/.row-->
-
-
-				<div class="row">
-					<div class="medium-11 medium-centered columns">
 						<a name="form"></a>
 						<br>
-						<h1>2) Ship the Order and Enter Shipment Tracking Information</h1>
+						<h1>Next Step: Ship the Order and Enter Shipment Tracking Information</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 						<div class="panel">
 
+								<div class="row">
+									<div class="medium-8 columns medium-centered text-center">
+										<h2>Please ship the order and then enter shipment tracking info below.</h2>
+									</div>
+								</div>
 								<div class="row">
 									<div class="medium-6 columns medium-centered">
 										<%= "<span class='error'>#{flash[:error]}</span>".html_safe if flash[:error] %>
@@ -140,6 +133,17 @@
 									<% end %>
 								<% end %>
 							<% end %>
+						</div>
+					</div><!--/.medium-11 medium-centered-->
+				</div><!--/.row-->
+
+				<div class="row">
+					<div class="medium-11 medium-centered columns">
+						<br>
+						<h1>Order</h1>
+						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
+						<div class="panel">
+							<%= render "shared/orders/show" %>		
 						</div>
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->
