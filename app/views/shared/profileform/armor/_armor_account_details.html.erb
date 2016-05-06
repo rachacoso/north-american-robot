@@ -1,7 +1,35 @@
 <div class="row">
 	<div class="small-12 columns">
 
-		<h2>You have an Armor Payments Account</h2>
+		<h3>You have an Armor Payments Account and can now 
+			<% if @current_user.company_type == "Brand" %>
+				sell your products on the Landing International platform.
+			<% else %>
+				order products from our <%= link_to "Brand Partners", brands_url %>
+			<% end %>
+		</h3>
+		<h3>You should have received an email from Armor Payments at <strong><%= u.email %></strong> with instructions on how to access your Armor Payments account on the Armor Payments system.</h3>
+
+<div class="row">
+	<div class="small-12 columns">
+		<table id="armor-account-summary">
+			<tr><td colspan="2"><h3>Your Armor Payments account information:</h3></td></tr>
+			<tr><td class="fieldname">Armor Payments Account ID</td><td><%= c.armor_account_id %></td></tr>
+			<tr><td class="fieldname">Armor Payments User ID</td><td><%= u.armor_user_id %></td></tr>
+			<tr><td class="fieldname">Company Name</td><td><%= c.company_name %></td></tr>
+			<tr><td class="fieldname">User Name</td><td><%= u.contact.firstname %> <%=u.contact.lastname %></td></tr>
+			<tr><td class="fieldname">Email</td> <td><%= u.email %></td></tr>
+			<tr><td class="fieldname">Phone</td><td><%= u.contact.phone.phony_formatted(format: :international , spaces: '-') %></td></tr>
+			<tr><td class="fieldname">Address</td> <td><%= c.address.address1 %><%= ", #{c.address.address2}" %></td></tr>
+			<tr><td class="fieldname">City/Town/Department</td> <td><%= c.address.city %></td></tr>
+			<tr><td class="fieldname">State/Province/Region/County</td> <td><%= c.address.state_2 %></td></tr>
+			<tr><td class="fieldname">Zip/Postal Code</td> <td><%= c.address.postcode %></td></tr>
+			<tr><td class="fieldname">Country</td> <td><%= c.address.country_2 %></td></tr>
+		</table>
+	</div><!--/.small-12-->
+</div><!--/.row-->
 
 	</div><!--/.small-12-->
 </div><!--/.row-->
+
+<br><br>
