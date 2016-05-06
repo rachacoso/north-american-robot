@@ -4,7 +4,7 @@
 			<div class="text-center" id="profile-tabs">
 				<ul class="tablist">
 					<li><%= link_to "#{order.orderer_type.upcase} PROFILE", eval("view_#{order.orderer_type.downcase}_url(order.orderer)") %></li>
-					<li class="active"><%= link_to "ORDERS", order_url(order) %></li>
+					<li class="active"><%= link_to "#{order.status == 'completed' ? 'COMPLETED' : 'CURRENT'} ORDER", order_url(order) %></li>
 				</ul>
 			</div>
 			<div id="profile-status-and-contact">
@@ -44,7 +44,7 @@
 			<div class="text-center" id="profile-tabs">
 				<ul class="tablist">
 					<li><%= link_to "BRAND PROFILE", eval("view_brand_url(order.brand)") %></li>
-					<li class="active"><%= link_to "ORDERS", order_url(order) %></li>
+					<li class="active"><%= link_to "#{order.status == 'completed' ? 'COMPLETED' : 'CURRENT'} ORDER", order_url(order) %></li>
 				</ul>
 			</div>
 			<div id="profile-status-and-contact">
