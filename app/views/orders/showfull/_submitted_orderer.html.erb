@@ -17,10 +17,10 @@
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
 						<br>
-						<h1>1) Review Submitted Order</h1>
+						<h1>Next Step: Wait for <%= order.brand.company_name %> to calculate final fees and costs</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 						<div class="panel">
-							<%= render "shared/orders/show" %>		
+							<h2><%= order.brand.company_name %> will add all final fees and shipping costs.  You will recieve an email when the final order is available for review and payment.</h2>
 						</div>
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->
@@ -28,10 +28,10 @@
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
 						<br>
-						<h1>2) Wait for <%= order.brand.company_name %> to calculate final fees and costs</h1>
+						<h1>Order</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 						<div class="panel">
-							<h2><%= order.brand.company_name %> will add all final fees and shipping costs.  You will recieve an email when the final order is available for review and payment.</h2>
+							<%= render "shared/orders/show" %>		
 						</div>
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->
