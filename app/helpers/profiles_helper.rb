@@ -34,7 +34,7 @@ module ProfilesHelper
 		case order.status
 		when "open"
 			if !@current_user.brand
-				return "You have an OPEN order"
+				return "You have an open order"
 			else
 				return "#{order.orderer.company_name} has an open order"
 			end
@@ -46,9 +46,39 @@ module ProfilesHelper
 			end
 		when "pending"
 			if !@current_user.brand
-				return "Order awaiting Payment and Shipping information"
+				return "Order awaiting your approval"
 			else
-				return "Order awaing Payment and Shipping information from #{order.orderer.company_name}"
+				return "Order awaing approval by #{order.orderer.company_name}"
+			end
+		when "approved"
+			if !@current_user.brand
+				return "Order awaiting your transfer of payment to escrow"
+			else
+				return "Order awaing payment transfer to escrow by #{order.orderer.company_name}"
+			end
+		when "paid"
+			if !@current_user.brand
+				return "Order paid and awaiting shipment by #{order.brand.company_name}"
+			else
+				return "Order paid. Please ship the order to #{order.orderer.company_name}"
+			end
+		when "shipped"
+			if !@current_user.brand
+				return "Order has been shipped"
+			else
+				return "Order has been shipped"
+			end
+		when "delivered"
+			if !@current_user.brand
+				return "Order has been delivered and is awaiting your review & payment release"
+			else
+				return "Order has been delivered and is awaiting review & payment release"
+			end
+		when "completed"
+			if !@current_user.brand
+				return "Order has been delivered, payment released and is now complete"
+			else
+				return "Order has been delivered, payment released and is now complete"
 			end
 		end
 	end
