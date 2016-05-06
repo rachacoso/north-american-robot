@@ -88,7 +88,8 @@ class ArmorPaymentsController < ApplicationController
 		if params[:order].present?
 
 			if order = Order.find_by(armor_order_id: params[:order][:order_id])
-				case params[:order][:status]
+				# case params[:order][:status]
+				case params[:event][:type]
 				when 0 # new
 					logger.info "Armor Webhook Order Status 0 (new order): #{order.id}"
 				when 1 # sent
