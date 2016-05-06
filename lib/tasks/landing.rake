@@ -58,3 +58,34 @@ task :set_user_company => :environment do
 		end
 	end
 end
+
+
+#reset all armor ids used for testing only
+task :reset_armor_ids => :environment do
+	users = User.with_armor_user_id
+	brands = Brand.where(:armor_account_id.ne => nil)
+	retailers = Retailer.where(:armor_account_id.ne => nil)
+	distributors = Distributor.where(:armor_account_id.ne => nil)
+	users.each do |u|
+		puts u.email
+		u.armor_user_id = nil
+		u.armor_email = nil
+		u.save!
+	end
+	brands.each do |b|
+		puts b.company_name
+		b.armor_account_id = nil
+		b.save!
+	end
+	retailers.each do |r|
+		puts r.company_name
+		r.armor_account_id = nil
+		r.save!
+	end
+	distributors.each do |d|
+		puts d.company_name
+		d.armor_account_id = nil
+		d.save!
+	end
+end
+
