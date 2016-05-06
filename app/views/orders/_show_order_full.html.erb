@@ -10,7 +10,7 @@
 			<div id="profile-status-and-contact">
 				<div class="row">
 					<div class="medium-6 columns text-left">
-						<%= render partial: "shared/profile/components/profile_status", locals: { order: order } unless order.status == "completed" %>
+						<%#= render partial: "shared/profile/components/profile_status", locals: { order: order } unless order.status == "completed" %>
 					</div><!--/.medium-6-->
 					<div class="medium-6 columns text-right">
 						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
@@ -50,7 +50,7 @@
 			<div id="profile-status-and-contact">
 				<div class="row">
 					<div class="medium-6 columns text-left">
-						<%= render partial: "shared/profile/components/profile_status", locals: { order: order } unless order.status == "completed" %>
+						<%#= render partial: "shared/profile/components/profile_status", locals: { order: order } unless order.status == "completed" %>
 					</div><!--/.medium-6-->
 					<div class="medium-6 columns text-right">
 						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
