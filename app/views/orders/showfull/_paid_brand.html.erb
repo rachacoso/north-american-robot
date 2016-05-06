@@ -7,7 +7,7 @@
 					<div id="order-panel-top">
 						<%= render partial: "orders/showfull/order_flow_header", locals: { status: order.status } %>
 						<hr>
-						<h3>Payment for this order has been placed into escrow and is ready for shipment.</h3>
+						<h3>Payment for this order has been placed into escrow. Order can now be shipped to <%= order.orderer.company_name %>.</h3>
 					</div>
 				</div><!--/.small-12-->
 			</div><!--/.row-->
