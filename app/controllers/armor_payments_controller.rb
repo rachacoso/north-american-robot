@@ -89,10 +89,25 @@ class ArmorPaymentsController < ApplicationController
 
 			if order = Order.find_by(armor_order_id: params[:order][:order_id])
 				# case params[:order][:status]
+				# when 0 # new
+				# 	logger.info "Armor Webhook Order Status 0 (new order): #{order.id}"
+				# when 1 # sent
+				# 	logger.info "Armor Webhook Order Status 1 (order sent): #{order.id}"
+				# when 2 # paid
+				# 	order.paid
+				# when 3 # shipped
+				# 	order.shipped
+				# when 4 # delivered
+				# 	order.delivered
+				# when 5 # payment released
+				# 	order.completed
+				# else # all other statuses
+				# 	order.error(status: params[:order][:status],message: params[:order][:status_name])
+				# end
 				case params[:event][:type]
-				when 0 # new
+				when 0 # create
 					logger.info "Armor Webhook Order Status 0 (new order): #{order.id}"
-				when 1 # sent
+				when 2 # sent
 					logger.info "Armor Webhook Order Status 1 (order sent): #{order.id}"
 				when 2 # paid
 					order.paid
@@ -100,10 +115,10 @@ class ArmorPaymentsController < ApplicationController
 					order.shipped
 				when 4 # delivered
 					order.delivered
-				when 5 # payment released
+				when 6 # payment released
 					order.completed
 				else # all other statuses
-					order.error(status: params[:order][:status],message: params[:order][:status_name])
+					order.error(status: params[:event][:type],message: params[:event][:description])
 				end
 			else
 				logger.info "Armor Webhook Order Not Found: #{params[:order][:order_id]}"
