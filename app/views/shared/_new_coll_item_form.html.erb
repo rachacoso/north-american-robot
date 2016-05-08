@@ -11,7 +11,7 @@
 <%= iscurrent.nil? ?  "" : (f.hidden_field :current, value: iscurrent) %>
 <%= (controller.controller_name == "onboard_distributor") || (controller.controller_name == "onboard_brand") ? (hidden_field_tag :ob, "true") : "" %>				
 				<%= render partial: "shared/collections/#{collection_name}", locals: {f: f } %>
-				<%= f.submit "#{titletext}", class: "tiny radius alert button right" %>
+				<%= f.submit "#{titletext}", class: "landing-button right" %>
 <% end %>				
 			</div><!--/.small-12-->
 		</div><!--/.row-->

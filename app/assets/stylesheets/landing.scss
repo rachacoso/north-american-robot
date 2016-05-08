@@ -86,6 +86,12 @@ a.landing-button, input[type=submit].landing-button {
       background-color: scale-color($landing-middle-gray, $lightness: -25%);;
     }
   }
+  &.alert {
+    background-color: #ff3c6e;
+    &:hover {
+      background-color: scale-color(#ff3c6e, $lightness: -25%);;
+    }
+  }
 }
 
 // Top Bar

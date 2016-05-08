@@ -21,14 +21,19 @@
 							<%= form_for cb, remote: true do |f| %>
 							<%= ob ? (hidden_field_tag :ob, "true") : "" %>
 							<div class="updateform">
+								<div class="row">
+									<div class="small-12 columns">
+										<%= link_to 'Delete', eval(urlstring), :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.send(identifier)}?", :remote => true }, class: "landing-button alert right" %>
+									</div>
+								</div>
 								<%= render partial: "shared/collections/#{cb.class.name.tableize}", locals: {f: f, cb: cb} %>
-							</div>
-							<div class="row">
-								<div class="small-12 columns text-right">
-									<span id="update-collitem-<%= cb.id %>" style="color: red;"></span> &nbsp;
-									<%= f.submit 'Update', class: "button alert radius tiny" %>
-									<%#= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
-									<%= link_to 'Delete', eval(urlstring), :method => :delete, data: { :confirm => "Are you sure you want to delete #{cb.send(identifier)}?", :remote => true }, class: "button success radius tiny" %>
+
+								<div class="row">
+									<div class="small-12 columns">
+										<span id="update-collitem-<%= cb.id %>" style="color: red;"></span> &nbsp;
+										<%= f.submit 'Update', class: "landing-button right" %>
+										<%#= link_to 'Update', "#", :onclick => "$('#edit_#{dom_id(cb)}').submit()".html_safe %>
+									</div>
 								</div>
 							</div>
 							<% end %>
