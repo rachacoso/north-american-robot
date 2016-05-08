@@ -127,6 +127,7 @@ class ProductsController < ApplicationController
 			:item_size,
 			:key_benefits,
 			:country_of_manufacture,
+			:ingredients,
 			:current
 		)
 	end

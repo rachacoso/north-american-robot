@@ -8,6 +8,7 @@ class Product
  	field :item_id, type: String, default: ""
  	field :item_size, type: String, default: ""
  	field :key_benefits, type: String, default: ""
+ 	field :ingredients, type: String, default: ""
  	field :country_of_manufacture, type: String, default: ""
  	field :current, type: Mongoid::Boolean
 
