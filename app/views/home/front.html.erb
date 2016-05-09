@@ -6,6 +6,31 @@
 <div class="v2front">
 
 
+<div class="row">
+	<div class="medium-5 small-11 medium-centered text-center columns">
+		<%= form_tag(search_brands_url, method: "get") do %>
+		<div class="row collapse">
+			<div class="small-1 columns text-left">
+				<%= label_tag(:q) do %><%= image_tag "https://s3.amazonaws.com/landingintl-us/general/search.png", width: 32, height: 32%><% end %>
+			</div><!--/.small-1-->
+			<div class="small-11 columns">
+				<%= text_field_tag(:q, @query, placeholder: "FIND BRANDS", class: "searchbox center") %>
+			</div><!--/.small-10-->
+		</div><!--/.row-->
+		<% end %>
+	</div><!--/.medium-5-->
+</div><!--/.row-->
+
+
+
+<div class="row">
+	<div class="small-10 small-centered columns text-center">
+		<hr>
+	</div><!--/.small-10-small-centered -->
+</div><!--/.row-->
+<div class="row">
+	<div class="small-10 small-centered columns" style="border-left: 1px solid gray; border-right: 1px solid gray;">
+
 <% if get_main_article() %>
 	<%= render partial: "/articles/main_preview", locals: { a: get_main_article() } %>
 	<div class="row">
@@ -26,6 +51,15 @@
 		</div><!--/.row-->
 	<% end %>
 <% end %>
+
+	</div><!--/.small-10-->
+</div><!--/.row-->
+
+<div class="row">
+	<div class="small-10 small-centered columns text-center">
+		<hr>
+	</div><!--/.small-10-small-centered -->
+</div><!--/.row-->
 
 <div class="browseblock">
 	<div class="row">
