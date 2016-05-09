@@ -6,4 +6,6 @@ class Sector
 	has_many :subsectors, dependent: :destroy
 	accepts_nested_attributes_for :subsectors
 
+	default_scope -> {where(name: /beauty/i)}
+
 end
