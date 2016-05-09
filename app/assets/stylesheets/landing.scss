@@ -73,6 +73,7 @@ a.landing-button, input[type=submit].landing-button {
   background-color: $landing-blue;
   border: none;
   color: white;
+  font-size: rem-calc(12);
   font-weight: 300;
   padding: rem-calc(10) rem-calc(7);
   margin: rem-calc(10) 0;
