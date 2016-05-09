@@ -17,12 +17,12 @@
 					</div>
 				</div>
 			
-			<div class="row">
+			<div class="row collapse">
 				<div class="medium-8 columns">
 					<%= f.text_field :country, class: "country-autocomplete", id: "export-countries-input", label: false, placeholder: 'Country' %>
 				</div>
 				<div class="medium-4 columns text-left">
-					<%= f.submit "ADD", class: "tiny alert button submit radius", style: "margin-top: 0;" %>
+					<%= f.submit "ADD", class: 'postfix button tiny', style: "background-color: #33CCFF; color: white;"  %>
 					<%#= link_to 'Add', "#", :onclick => "$('#new_export_country').submit()".html_safe %>
 				</div>
 			</div>				

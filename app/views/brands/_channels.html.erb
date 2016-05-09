@@ -24,7 +24,7 @@
 
 	<div class="row">
 		<div class="medium-10 push-2 columns">
-			<%= f.submit 'Update Standard Channels', class: "tiny radius alert button right" %>
+			<%= f.submit 'Update Standard Channels', class: "landing-button right" %>
 		</div>
 	</div>
 <% end %>
@@ -37,17 +37,17 @@
 <div class="row">
 	<div class="medium-10 push-2 columns">
 		<%= form_for @new_channel_capacity, :html => { :id => "new_channel_capacity" }, remote: true do |f| %>
-			<div class="row">
+			<div class="row collapse">
 				<div class="small-12 columns">
 					<h3>Add Custom Channel</h3>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row collapse">
 				<div class="medium-9 columns">
 					<%= f.text_field :custom_channel_name, label: false, placeholder: 'Custom Channel Name' %>
 				</div>
 				<div class="medium-3 columns text-right">
-					<%= f.submit 'ADD', class: "tiny radius alert button right", style: "margin-top: 0;" %> 
+					<%= f.submit 'ADD', class: 'postfix button tiny', style: "background-color: #33CCFF; color: white;"  %> 
 					<%#= link_to 'add', "#", :onclick => "$('#new_channel_capacity').submit()".html_safe, class: "itemformlink" %>
 				</div>
 			</div>
