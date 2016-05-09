@@ -84,7 +84,7 @@ module LandingArmorPayments
         "state" => "#{self.company.address.state_2}",
         "zip" => "#{self.company.address.postcode}",
         "country" => "#{self.company.address.country_2.downcase}",
-        "email_confirmed" => false,
+        "email_confirmed" => true,
         "agreed_terms" => true
       }
 
