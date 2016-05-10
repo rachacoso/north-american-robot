@@ -1,5 +1,6 @@
 <%= render partial: "shared/topbar" %>
 <%= render partial: "newuser", locals: { content: "newbrand_content" } if flash[:newuser] %>
+<%= render partial: "newuser", locals: { content: "newaccount_content" } if flash[:newaccount] %>
 
 <div class="row">
 	<div class="small-12 columns marketplace-subpage-header">

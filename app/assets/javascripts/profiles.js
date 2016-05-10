@@ -6,7 +6,7 @@ $( document ).ready(function() {
 });
 
 function setModalActions () {
-	$('.overlay#profile-preview-overlay, a#close-profile-preview').on('click', function(e){
+	$('.overlay#profile-preview-overlay, a#close-profile-preview, a#close-new-info').on('click', function(e){
 		e.preventDefault();
 		$('#profile-preview').fadeOut();
 		$('.overlay').fadeOut();
