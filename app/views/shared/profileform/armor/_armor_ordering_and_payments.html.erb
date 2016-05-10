@@ -13,7 +13,7 @@
 	<div class="small-12 columns">
 		<a class="anchor" id="a-armor"></a>
 		<hr>
-		<h2>Your Armor Payments Account</h2>
+		
 	</div><!--/.small-12-->
 </div><!--/.row-->
 
@@ -22,6 +22,7 @@
 	
 	<div class="row">
 		<div class="small-12 columns">
+			<h2>Your Armor Payments (a Payoneer company) Account</h2>
 
 			<h3>You have an Armor Payments, a Payoneer Company, account and can now 
 				<% if @current_user.company_type == "Brand" %>
@@ -30,7 +31,7 @@
 					order products from our <%= link_to "Brand Partners", brands_url %>
 				<% end %>
 			</h3>
-
+			
 			<div class="landing-notice">In order to receive payment (for Brands) or refunds (for Retailers and Distributors), you need to ensure that Armor Payments, a Payoneer company, has your bank account information. Order payment and processing may be delayed if your banking information is incomplete. You can submit your bank account information to Armor/Payoneer below.</div>
 
 			<% if company.errors.any? %>
