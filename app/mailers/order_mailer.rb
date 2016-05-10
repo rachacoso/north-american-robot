@@ -9,6 +9,6 @@ class OrderMailer < ActionMailer::Base
   #
   def send_order(order)
     @order = order
-    mail :to => 'order@landingintl.com', :subject => "Landing International: Order Submitted"
+    mail :to => 'orders@landingintl.com', :subject => "Landing International: Order Submitted"
   end
 end
