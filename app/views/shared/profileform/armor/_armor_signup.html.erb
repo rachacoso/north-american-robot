@@ -41,7 +41,7 @@
 	<%= form_tag ap_create_account_url + "#a-armor", method: "post", id: "armor-signup" do %>
 	<input type="checkbox" id="armor_payments_terms" name="armor_payments_terms" class="error"/>
 	<!-- Replace 1052419 with your own Partner ID in this URL --> 
-	<span style="font-weight: 200;">I agree to the <a href="https://app.armorpayments.com/terms/160405182787" target="_BLANK">Terms and Conditions</a> of Armor Payments.</span>
+	<label for="armor_payments_terms"><span style="font-weight: 200;">I agree to the <a href="https://app.armorpayments.com/terms/160405182787" target="_BLANK">Terms and Conditions</a> of Armor Payments.</span></label>
 	</div>
 	<div class="small-12 columns text-right">
 	<%= submit_tag "Create Armor Payments Account", class: "landing-button" %>		
