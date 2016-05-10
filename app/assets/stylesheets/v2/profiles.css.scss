@@ -515,11 +515,16 @@ form#armor-combined {
 
 // ARMOR 
 
-table#armor-account-summary {
+table.armor-account-summary {
   margin: auto;
+  margin-top: rem-calc(30);
   font-weight: 200;
   font-size: rem-calc(12);
+  width: 90%;
   .fieldname {
     background-color: $landing-light-gray;
+    &.darker {
+      background-color: scale-color($landing-light-gray, $lightness: -10%);
+    }
   }
 }

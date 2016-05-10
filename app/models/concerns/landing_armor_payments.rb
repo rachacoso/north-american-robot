@@ -125,6 +125,23 @@ module LandingArmorPayments
     def can_sell?
       return true if self.armor_account_id
     end
+
+    def api_get_bank_account_setup_url(armor_account_id:, armor_user_id:)
+      armoraccount = LandingArmorAccount.new
+      account_id = armor_account_id # The account_id of the user adding bank details
+      user_id = armor_user_id # The user_id of the user adding bank details
+      auth_data = {
+        "uri" => "/accounts/#{account_id}/bankaccounts",
+        "action" => "create"
+      }
+      armoraccount.get_bank_account_setup_url(account_id, user_id, auth_data)
+      if armoraccount.errors.any?
+        self.errors[:base] << armoraccount.errors.full_messages
+      else
+        return armoraccount.url
+      end
+    end
+
   end
 
   module Order
@@ -314,7 +331,7 @@ module LandingArmorPayments
           self.instance_variable_set varname, value
         end
       else # all other statuses
-        self.errors[:base] << "Response Status: #{response.status} - Headers:#{response.headers} Errors:#{response.data[:body]['errors']}"
+        self.errors[:base] << "Response Status: #{response.status} - Errors:#{response.data[:body]['errors']}"
       end
     end
 
@@ -331,7 +348,7 @@ module LandingArmorPayments
   end
 
   class LandingArmorAccount < LandingArmorClient
-    attr_reader :account_id, :user_id, :email
+    attr_reader :account_id, :user_id, :email, :url
 
     def create(account_data)
       response = @client.accounts.create(account_data)
@@ -344,6 +361,10 @@ module LandingArmorPayments
       parse_response_user(response, "email")
     end
 
+    def get_bank_account_setup_url(account_id, user_id, auth_data)
+      response = @client.accounts.users(account_id).authentications(user_id).create(auth_data)
+      parse_response(response, "url")
+    end
   end
 
   class LandingArmorOrder < LandingArmorClient

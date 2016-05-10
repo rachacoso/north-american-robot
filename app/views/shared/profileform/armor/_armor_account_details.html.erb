@@ -1,20 +1,24 @@
 <div class="row">
 	<div class="small-12 columns">
-
-		<h3>You have an Armor Payments Account and can now 
-			<% if @current_user.company_type == "Brand" %>
-				sell your products on the Landing International platform.
+		<table class="armor-account-summary">
+			<tr><td colspan="2" style="text-align: center;"><h3>Your Armor Payments, a Payoneer Company, account information:</h3></td></tr>
+			<tr><td class="fieldname darker">Account ID</td><td><%= c.armor_account_id %></td></tr>
+			<tr><td class="fieldname darker">User ID</td><td><%= u.armor_user_id %></td></tr>
+			<tr><td class="fieldname darker">Bank Info <br><br><em>Note: In order to receive payment (Brands) or refunds (Retailers and Distributors), you must enter your bank account information.</em></td>
+			<% if errors %>
+				<td>
+					<span class="error">
+						Sorry, there was an error. Please reload the page.<br>
+						<% errors.each do |m| %>
+							<%= m %><br>
+						<% end %>
+					</span>
+				</td>
 			<% else %>
-				order products from our <%= link_to "Brand Partners", brands_url %>
+				<td colspan="2"><a id="bankInstructionsFrame-lightbox-preview" data-url="<%= url %>" class="landing-button">Add Bank Info</a></td>
 			<% end %>
-		</h3>
+			</tr>
 
-<div class="row">
-	<div class="small-12 columns">
-		<table id="armor-account-summary">
-			<tr><td colspan="2"><h3>Your Armor Payments account information:</h3></td></tr>
-			<tr><td class="fieldname">Armor Payments Account ID</td><td><%= c.armor_account_id %></td></tr>
-			<tr><td class="fieldname">Armor Payments User ID</td><td><%= u.armor_user_id %></td></tr>
 			<tr><td class="fieldname">Company Name</td><td><%= c.company_name %></td></tr>
 			<tr><td class="fieldname">User Name</td><td><%= u.contact.firstname %> <%=u.contact.lastname %></td></tr>
 			<tr><td class="fieldname">Email</td> <td><%= u.email %></td></tr>
@@ -27,8 +31,24 @@
 		</table>
 	</div><!--/.small-12-->
 </div><!--/.row-->
-
-	</div><!--/.small-12-->
-</div><!--/.row-->
-
 <br><br>
+
+
+
+
+	<% content_for :javascript_foot do %>
+		<script type="text/javascript">
+			var ArmorInstructionsClicked = false;
+			$("#bankInstructionsFrame-lightbox-preview").click(function(){
+				if (!ArmorInstructionsClicked) {
+					var url = $(this).attr("data-url");
+					showArmorPaymentsLightboxUi(url, 250, true);
+					ArmorInstructionsClicked = true;
+				} else {
+					$('#order-item-data').html("<div class='text-center'><h3>Sorry, there was an error, please reload the page and try again.</h3></div>");
+					$('.overlay#order-item-overlay').fadeIn();
+					$('#order-item').fadeIn();
+				}
+			});
+		</script>
+	<% end %>

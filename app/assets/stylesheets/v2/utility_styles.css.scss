@@ -134,3 +134,16 @@ ul.order-flow-header {
 		}
 	}
 }
+
+.landing-notice {
+	padding: rem-calc(25);
+	border: 1px solid $landing-middle-gray;
+	background: $landing-light-gray;
+	font-weight: 200;
+	font-size: rem-calc(15);
+	@media #{$small-only} { font-size: rem-calc(10); }
+	&:before {
+		content: 'PLEASE NOTE: ';
+	}
+}
+

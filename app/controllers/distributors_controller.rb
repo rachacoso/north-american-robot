@@ -26,6 +26,13 @@ class DistributorsController < ApplicationController
 
     @distributor = @current_user.distributor
 
+    if @distributor.armor_account_id && @current_user.armor_user_id
+      url = @distributor.api_get_bank_account_setup_url(armor_account_id: @distributor.armor_account_id, armor_user_id: @current_user.armor_user_id)
+      unless @distributor.errors.any?
+        @armor_bank_url = url
+      end
+    end
+
     @current_brands = @distributor.distributor_brands.where(current: true) rescue nil
     @past_brands = @distributor.distributor_brands.where(current: false) rescue nil
     @new_brand = DistributorBrand.new
