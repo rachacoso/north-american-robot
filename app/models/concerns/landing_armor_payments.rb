@@ -10,7 +10,8 @@ module LandingArmorPayments
     end
 
     def can_order?
-      return true if self.armor_user_id  && self.company_type != "Brand"
+      # return true if self.armor_user_id  && self.company_type != "Brand"
+      return true if self.company_type != "Brand" && self.company.company_name.present? #only can order if is not a brand and has company name entered
     end
 
     def allows_armor_signup
