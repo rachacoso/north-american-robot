@@ -42,7 +42,7 @@ input[type="text"].searchbox {
 	background-color: white;
 	border-bottom: 1px solid $landing-middle-gray;
 	&:focus {
-		background-color: $landing-blue;
+		box-shadow: none;
 	}
 	&.white {
 		&::-webkit-input-placeholder {
@@ -56,6 +56,20 @@ input[type="text"].searchbox {
 		}
 		&:-ms-input-placeholder {
 		color: white;
+		}
+	}
+	&.white:focus {
+		&::-webkit-input-placeholder {
+		color: $landing-middle-gray;
+		}
+		&:-moz-placeholder { /* Firefox 18- */
+		color: $landing-middle-gray;
+		}
+		&::-moz-placeholder {  /* Firefox 19+ */
+		color: $landing-middle-gray;
+		}
+		&:-ms-input-placeholder {
+		color: $landing-middle-gray;
 		}
 	}
 }

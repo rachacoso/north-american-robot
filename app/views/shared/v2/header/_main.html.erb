@@ -1,24 +1,28 @@
 <div id="v2header">
 	<div class="row">
 		<div class="small-6 columns">
-			<%= link_to root_url do %><%= image_tag 'https://s3.amazonaws.com/landingintl-us/general/landing-logo.png', width: "100", alt: "Landing International" %><% end %>
+			<div class="row">
+				<div class="medium-3 columns">
+					<%= link_to root_url do %><%= image_tag 'https://s3.amazonaws.com/landingintl-us/general/landing-logo.png', width: "100", alt: "Landing International" %><% end %>					
+				</div><!--/.medium-3-->
+				<div class="medium-9 columns">
+					<%= form_tag(search_brands_url, method: "get") do %>
+					<div class="row collapse">
+						<div class="small-1 columns text-left">
+							<%= label_tag(:q) do %><%= image_tag "https://s3.amazonaws.com/landingintl-us/general/search.png", width: 20, height: 20%><% end %>
+						</div><!--/.small-1-->
+						<div class="small-11 columns">
+							<%= text_field_tag(:q, @query, placeholder: "Find brands", class: "searchbox white") %>
+						</div><!--/.small-10-->
+					</div><!--/.row-->
+					<% end %>
+				</div><!--/.medium-9-->
+			</div><!--/.row-->
 		</div><!--/.small-6-->
 		<div class="small-6 columns text-right">
 			<div class="row">
-				<div class="small-10 columns">
-					<div class="row">
-						<div class="small-4 columns">
-							<%= link_to 'BEAUTY', brands_url %>
-						</div><!--/.small-4-->
-						<div class="small-4 columns inactive">
-							<span data-tooltip aria-haspopup="true" class="has-tip" title="Coming Soon" style="font-weight: 100;color: #B3B3B3">FASHION</span>
-						</div><!--/.small-4-->
-						<div class="small-4 columns inactive">
-							<span data-tooltip aria-haspopup="true" class="has-tip" title="Coming Soon" style="font-weight: 100;color: #B3B3B3">BABY/KIDS</span>
-						</div><!--/.small-4-->
-					</div><!--/.row-->
-				</div><!--/.small-10-->
-				<div class="small-2 columns">
+
+				<div class="medium-2 columns medium-push-10">
 
 				<% if @current_user && show_top_menu %>
 					<ul class="dropmenu">
@@ -38,7 +42,22 @@
 					<%= link_to dashboard_url do %><%= image_tag 'https://s3.amazonaws.com/landingintl-us/general/landing_icon_a.png', width: 32, height: 32, alt: "Landing Users" %><% end %>
 				<% end %>
 
-				</div><!--/.small-2-->
+				</div><!--/.medium-2-->
+
+				<div class="medium-10 columns medium-pull-2">
+					<div class="row">
+						<div class="medium-4 columns">
+							<%= link_to 'BEAUTY', brands_url %>
+						</div><!--/.medium-4-->
+						<div class="medium-4 columns inactive">
+							<span data-tooltip aria-haspopup="true" class="has-tip" title="Coming Soon" style="font-weight: 100;color: #B3B3B3">FASHION</span>
+						</div><!--/.medium-4-->
+						<div class="medium-4 columns inactive">
+							<span data-tooltip aria-haspopup="true" class="has-tip" title="Coming Soon" style="font-weight: 100;color: #B3B3B3">BABY/KIDS</span>
+						</div><!--/.medium-4-->
+					</div><!--/.row-->
+				</div><!--/.medium-10-->
+
 			</div><!--/.row-->
 		</div><!--/.small-6-->
 	</div><!--/.row-->

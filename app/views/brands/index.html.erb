@@ -13,20 +13,7 @@
 		  <a class="current" href="#">Find</a>
 		</nav>
 		<br>
-		<div class="row">
-			<div class="medium-5 small-11 columns">
-				<%= form_tag(search_brands_url, method: "get") do %>
-				<div class="row collapse">
-					<div class="small-1 columns text-left">
-						<%= label_tag(:q) do %><%= image_tag "https://s3.amazonaws.com/landingintl-us/general/search.png", width: 32, height: 32%><% end %>
-					</div><!--/.small-1-->
-					<div class="medium-6 small-11 columns end">
-						<%= text_field_tag(:q, @query, placeholder: "FIND BRANDS", class: "searchbox") %>
-					</div><!--/.small-10-->
-				</div><!--/.row-->
-				<% end %>
-			</div><!--/.medium-5-->
-		</div><!--/.row-->
+
 
 		<h1>BEAUTY BRANDS by 
 			<% if @type == "t" %>
