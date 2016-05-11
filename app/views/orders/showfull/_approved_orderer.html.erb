@@ -21,12 +21,9 @@
 						<h1>Next Step: Submit Payment</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 						<div class="panel">
-							<h2>Landing International has partnered with Armor Payments and there are two ways to complete your payment</h2>
+							<h3>Landing International has partnered with <%= link_to "//armorpayments.com", target: "_blank" do %>Armor Payments, a Payoneer company<% end %> to handle payment via secure escrow.</h3>
 
-							<h2>A) Via Armor Payments Website</h2>
-							<h3>An email was sent from Armor Payments to <%= order.armor_buyer_email ? "#{order.armor_buyer_email}" : "you" %> with instructions on how to complete payment. <br>Please follow those instructions to complete payment via the Armor Payments website.</h3>
-							<h2>B) Via Direct Bank/Wire Transfer</h2>
-							<h3>Click on the button below to view instructions on how to complete payment via bank or wire transfer.</h3>
+							<h3>Click on the button below to view instructions on how to complete payment.</h3>
 							<% if order.errors.any? %>
 								<h4>Sorry, there was an error. Please reload the page</h4>
 								<% order.errors.full_messages.each do |m| %>
@@ -37,6 +34,8 @@
 									<%= render partial: "orders/showfull/approved_orderer_payment_instructions", locals: {url: @armor_payment_instructions_url} %>
 								<% end %>
 							<% end %>
+							<br><br>
+							<div class="landing-notice"><h3>It may take from 1 day (via Wire Transfer) to 3 days (via Bank Transfer - ACH) for funds to post to the escrow account, and a further 24 hours for this order status to be updated. You will receive an email when the funds have posted and the order status has been updated. If you have any questions, please feel free to contact us at <a href="mailto:info@landingintl.com">info@landingintl.com</a></h3></div>
 						</div>
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->
