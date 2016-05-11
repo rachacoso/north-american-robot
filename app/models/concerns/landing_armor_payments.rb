@@ -158,6 +158,7 @@ module LandingArmorPayments
       field :armor_order_id, type: String
       field :armor_shipment_id, type: String
       field :armor_other_shipper, type: String # name of other shipper if not in Armor List
+      field :armor_shipment_carrier_name, type: String
       field :armor_shipment_tracking_number, type: String
       field :armor_shipment_description, type: String
     end
@@ -210,7 +211,7 @@ module LandingArmorPayments
 
     end
 
-    def api_add_shipment_info(carrier_id:,tracking_id:,description:,other_shipper:)
+    def api_add_shipment_info(carrier_id:,carrier_name:,tracking_id:,description:,other_shipper:)
       armororder = LandingArmorOrder.new
       account_id = self.armor_seller_account_id
       order_id = self.armor_order_id
@@ -226,6 +227,7 @@ module LandingArmorPayments
       else
         self.armor_shipment_id = armororder.shipment_id
         self.armor_other_shipper = other_shipper if other_shipper.present?
+        self.armor_shipment_carrier_name = carrier_name
         self.armor_shipment_tracking_number = tracking_id
         self.armor_shipment_description = description
         self.shipped

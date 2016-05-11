@@ -21,7 +21,22 @@
 						<h1>Next Step: Await Delivery and Review</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 						<div class="panel">
-							<h2>You will be notified by email when the shipment is delivered.  The buyer will then review the shipment and release the funds from escrow.</h2>
+							<h3>You will be notified by email when the shipment is delivered.</h3>
+							<h3>The buyer will then review the shipment and release the funds from escrow.</h3>
+
+							<table class="armor-shipment-info">
+								<tr><td colspan="2" style="background: #f3f3f3;">Shipment Info</td></tr>
+								<tr>
+									<td>Carrier:</td>
+									<td> <%= order.armor_shipment_carrier_name %></td>
+								</tr>
+								<tr>
+									<td>Tracking ID:</td>
+									<td><%= order.armor_shipment_tracking_number %></td>
+								</tr>
+								<%= "<tr><td>Description:</td><td>#{order.armor_shipment_description}</td></tr>".html_safe if order.armor_shipment_description.present? %>
+							</table>
+
 						</div>
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->

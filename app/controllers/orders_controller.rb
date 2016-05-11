@@ -65,8 +65,9 @@ class OrdersController < ApplicationController
 
 	def shipment
 		@order.api_add_shipment_info(
-			carrier_id: params[:shipper_id], 
-			tracking_id: params[:armor_shipment_tracking_number], 
+			carrier_id: params[:shipper_id],
+			carrier_name: params[:shipper_name],
+			tracking_id: params[:armor_shipment_tracking_number],
 			description: params[:armor_shipment_description],
 			other_shipper: params[:armor_other_shipper]
 			)
