@@ -5,7 +5,13 @@
 
 		<%= image_tag "https://s3.amazonaws.com/landingintl-us/general/orderpayments.png" %>
 
-		<h3>All payment transactions on Landing Interational will take place via Armor Paymets payment escrow service. <strong>In order to participate please create an Armor Payments account below.</strong></h3>
+		<h3>
+			All payment transactions on Landing Interational will take place via Armor Paymets (a Payoneer company) payment escrow service. 
+			<% unless company.armor_account_id %>
+				<strong>In order to participate please follow the instructions below to enable your account with Armor Payments (Payoneer).</strong>
+			<% end %>
+		</h3>
+
 	</div>
 </div>
 
@@ -22,9 +28,9 @@
 	
 	<div class="row">
 		<div class="small-12 columns">
-			<h2>Your Armor Payments (a Payoneer company) Account</h2>
+			<h2>Armor Payments (Payoneer) Escrow Enabled</h2>
 
-			<h3>You have an Armor Payments, a Payoneer Company, account and can now 
+			<h3>You are now able to complete transactions via Armor Payments (Payoneer) and can now 
 				<% if @current_user.company_type == "Brand" %>
 					sell your products on the Landing International platform.
 				<% else %>
@@ -32,7 +38,7 @@
 				<% end %>
 			</h3>
 			
-			<div class="landing-notice">In order to receive payment (for Brands) or refunds (for Retailers and Distributors), you need to ensure that Armor Payments, a Payoneer company, has your bank account information. Order payment and processing may be delayed if your banking information is incomplete. You can submit your bank account information to Armor/Payoneer below.</div>
+			<div class="landing-notice">In order to receive payment (for Brands) or refunds (for Retailers and Distributors), you need to ensure that Armor Payments (Payoneer) has your bank account information. Order payment and processing may be delayed if your banking information is incomplete. You can submit your bank account information to Armor/Payoneer below.</div>
 
 			<% if company.errors.any? %>
 				<%= render partial: 'shared/profileform/armor/armor_account_details', locals: { c: company, u: @current_user, url: nil, errors: company.errors.full_messages } %>

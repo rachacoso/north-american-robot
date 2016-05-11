@@ -1,28 +1,29 @@
 <div class="row">
 	<div class="small-12 columns">
-		<h2>Please Create an Armor Payments (a Payoneer company) Account</h2>
-		<h3>NOTE: Companies domiciled in Arizona or Idaho are currently unable to use Armor Payments due to escrow licensing issues. Your registration will be rejected if it has a mailing address in either of those states.</h3>
+		<h2>Enable Armor Payments (Payoneer) Escrow</h2>
+		<h3>Accept Armor Payments (Payoneer) Terms and Conditions below to enable.</h3>
+		<div class="landing-notice"><h3>Companies domiciled in Arizona or Idaho are currently unable to use Armor Payments due to escrow licensing issues. You will be unable to use Armor Payments (Payoneer) Escrow service if your company is headquartered in either of those states.</h3></div>
 	</div><!--/.small-12-->
 </div><!--/.row-->
-<% if flash[:error] %>
-	<div class="row">
-		<div class="small-12 columns">
-			<span class="error"><%= flash[:error] %><br>
-				<% if flash[:errorlist] %>
-					<% flash[:errorlist].each do |error| %>
-						<%= error %><br>
-					<% end %>
-				<% end %>
-			</span>
-		</div><!--/.small-12-->
-	</div><!--/.row-->
-	<br>
-<% end %>
+
 <div class="row">
 	<div class="small-12 columns">
-
+		<% if flash[:error] %>
+			<div class="row">
+				<div class="small-12 columns">
+					<br>
+					<span class="error"><%= flash[:error] %><br>
+						<% if flash[:errorlist] %>
+							<% flash[:errorlist].each do |error| %>
+								<%= error %><br>
+							<% end %>
+						<% end %>
+					</span>
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+		<% end %>
 		<table class="armor-account-summary">
-			<tr><td colspan="2"><h3>Your Armor Payments account will be created with the following:</h3></td></tr>
+			<tr><td colspan="2"><h3>You will be sharing the following information with Armor Payments (Payoneer):</h3></td></tr>
 			<tr><td class="fieldname">Company Name</td><td><%= c.company_name %></td></tr>
 			<tr><td class="fieldname">User Name</td><td><%= u.contact.firstname %> <%=u.contact.lastname %></td></tr>
 			<tr><td class="fieldname">Email</td> <td><%= u.email %></td></tr>
@@ -39,12 +40,8 @@
 <div class="row">
 	<div class="small-12 columns text-right">
 	<%= form_tag ap_create_account_url + "#a-armor", method: "post", id: "armor-signup" do %>
-	<input type="checkbox" id="armor_payments_terms" name="armor_payments_terms" class="error"/>
-	<!-- Replace 1052419 with your own Partner ID in this URL --> 
-	<label for="armor_payments_terms"><span style="font-weight: 200;">I agree to the <a href="https://app.armorpayments.com/terms/160405182787" target="_BLANK">Terms and Conditions</a> of Armor Payments.</span></label>
-	</div>
-	<div class="small-12 columns text-right">
-	<%= submit_tag "Create Armor Payments Account", class: "landing-button" %>		
+		<%= render 'shared/profileform/armor/armor_signup_form' %>
+		<%= submit_tag "Enable Armor Payments (Payoneer) Escrow", class: "landing-button" %>
 	<% end %>
 	</div><!--/.small-12-->
 </div><!--/.row-->

@@ -34,16 +34,19 @@ class ArmorPaymentsController < ApplicationController
 		if params[:armor_payments_terms]
 			u.api_create_armor_payments_account
 			if u.errors.any?
-				flash[:error] = "Sorry, there was an error, please try again:"
-				flash[:errorlist] = u.errors.full_messages
+				flash.now[:error] = "Sorry, there was an error, please try again:"
+				flash.now[:errorlist] = u.errors.full_messages
 			else
 				flash[:newaccount] = true
 			end
 		else
-			flash[:error] = "Sorry, you must agree to Armor Payments Terms and Conditions"
+			flash.now[:error] = "Sorry, you must agree to Armor Payments Terms and Conditions"
 		end
 
-		redirect_to eval("#{u.company_type.downcase}_url") + "#a-armor"
+    respond_to do |format|
+      format.html { redirect_to eval("#{u.company_type.downcase}_url") + "#a-armor" } 
+      format.js
+    end
 
 	end
 

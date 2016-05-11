@@ -1,0 +1,13 @@
+<% if flash[:error] %>
+	<% if flash[:errorlist] %>
+		$('#order-flow-armor-error').html("Sorry! There was an error: <br><%= flash[:errorlist] %>").fadeIn();
+	<% else %>
+		$('#order-flow-armor-error').html("Sorry! Please accept the Terms and Conditions").fadeIn();
+	<% end %>
+<% elsif flash[:newaccount] %>
+	$('#order-item-data').html("<div class='text-center'><h2>Please wait...</h2></div>");
+	setTimeout(function(){
+		$('#order-item-data').html("<%= j (render partial: 'success') %>");
+		setModalActions();
+	}, 1000);
+<% end %>
