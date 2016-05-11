@@ -29,7 +29,7 @@ class OrdersController < ApplicationController
 
 	def submit
 		if params[:confirm].to_i == 1
-			@order.submission
+			@order.submission(user: @current_user)
 		end
 		respond_to do |format|
 			format.html  { redirect_to order_url(@order) }

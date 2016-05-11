@@ -64,7 +64,9 @@ class Order # for V2 ordering
     return self.charges_subtotal_price + self.subtotal_price
   end
 
-  def submission
+  def submission(user:)
+    self.armor_buyer_user_id = user.armor_user_id if self.armor_buyer_user_id.blank?
+    self.armor_buyer_account_id = user.company.armor_account_id if self.armor_buyer_account_id.blank?
     self.status = "submitted"
     self.submission_date = DateTime.now
     self.save!
