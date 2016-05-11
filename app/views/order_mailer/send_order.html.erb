@@ -9,17 +9,20 @@ font-family: Arial, sans-serif;
 </style>
 <![endif]-->
 </head>
-<body bgcolor="#ffffff">
-<div style="background-color:#ffffff;">
+<body bgcolor="#f3f3f3">
+
 <div style="font-family:tahoma,geneva,gotham,sans-serif;">
 <div style="text-align:center;">
-<table width="80%" bgcolor="#ffffff" style="margin-left: auto; margin-right:auto;padding-top:30px; border: 1px solid black;">
+<table width="80%" bgcolor="#ffffff" style="margin-left: auto; margin-right:auto;padding-top:30px;">
 	<tr style="text-align:center;">
 		<td>
-			<table style="margin:auto;">
+			<table style="width: 95%; margin:auto;">
 				<tr>
 					<td>
 						<img src="https://s3.amazonaws.com/landingintl-us/general/landing_logo_v2.png" width="200" alt="Landing Logo">
+					</td>
+					<td style="text-align: right; vertical-align: bottom;">
+						<h1 style="font-weight: lighter;margin-bottom:10px;">Making Global Easy.</h1>
 					</td>
 				</tr>
 			</table>
@@ -31,14 +34,14 @@ font-family: Arial, sans-serif;
 				<tr>
 					<td>
 						<table>
-						<tr style="text-align:center;">
-							<td style="padding: 20px;">
-
+						<tr>
+							<td>
+								<hr style="border: none;border-top: 1px solid black;">
 								<%= render partial: "#{@status}_order", locals: { order: @order } %>
-
+								<hr style="border: none;border-top: 1px solid black;">
 							</td>
 						</tr>
-						<tr>
+						<tr style="text-align:center;">
 							<td>
 								<%= render partial: "order_table", locals: { order: @order } %>
 							</td>
@@ -75,8 +78,8 @@ font-family: Arial, sans-serif;
 		<td>
 			<table width="100%" style="background-color:gray;padding:20px;">
 				<tr>
-					<td class="body-text" style="color: #ffffff; font-family: 'Open Sans', Arial, sans-serif; font-size: 16px; font-weight: lighter; line-height: 20px;">
-					<span style="font-weight:bold;">Landing International</span><br>
+					<td class="body-text" style="color: #ffffff; font-family: 'Open Sans', Arial, sans-serif; font-size: 14px; font-weight: lighter; line-height: 20px;">
+					Landing International<br>
 					Los Angeles, CA
 					</td>
 					<td>
@@ -92,5 +95,5 @@ font-family: Arial, sans-serif;
 
 </div>
 </div>
-</div>
+
 </body>

@@ -1,120 +1,115 @@
-<table>
-	<tr>
-		<td>
-			<table style="margin: auto; padding: 5px; border: 1px solid #cdcdcd; font-weight: 200;" cellpadding="5" cellspacing="5" border="0">
-				<tbody>
-					<tr>
-						<td colspan="2" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">
-							<p>
-								<% if order.brand.logo_file_name %>
-									<%= image_tag order.brand.logo.url(:medium), alt: "Logo" %>
-								<% else %>
-									<% if !order.brand.facebook.blank? && fb_picture(order.brand.facebook) %>
-										<%= image_tag fb_picture(order.brand.facebook) %>
-									<% else %>
-										<%= image_tag order.brand.logo.url(:medium), width: "100", height: "100", alt: "Logo" %>
-									<% end %>
-								<% end %>
-								<br>
-								<%= order.brand.company_name %><br>
-								<%= "#{order.brand.address.address1}".html_safe unless order.brand.address.address1.blank? %>
-								<%= "<br>#{order.brand.address.address2}".html_safe unless order.brand.address.address2.blank? %>
-								<%= "<br>#{order.brand.address.city}".html_safe unless order.brand.address.city.blank? %>
-								<%= "#{order.brand.address.state}".html_safe unless order.brand.address.state.blank? %>
-								<%= "#{order.brand.address.postcode}".html_safe unless order.brand.address.postcode.blank? %>
-								<%= "<br>#{order.brand.address.country}".html_safe unless order.brand.address.country.blank? %>
-							</p>
-						</td>
-						<td colspan="2" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;">
-							<p>
-								<span style="font-weight: 900;">Bill to:</span>
-								<br>
-								<%= order.orderer.company_name %>
-								<%= "<br>#{order.orderer.address.address1}".html_safe unless order.orderer.address.address1.blank? %>
-								<%= "<br>#{order.orderer.address.address2}".html_safe unless order.orderer.address.address2.blank? %>
-								<%= "<br>#{order.orderer.address.city}".html_safe unless order.orderer.address.city.blank? %>
-								<%= "#{order.orderer.address.state}".html_safe unless order.orderer.address.state.blank? %>
-								<%= "#{order.orderer.address.postcode}".html_safe unless order.orderer.address.postcode.blank? %>
-								<%= "<br>#{order.orderer.address.country}".html_safe unless order.orderer.address.country.blank? %>
-							</p>
-						</td>
-						<td colspan="2" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;">
-							<p>
-								<span style="font-weight: 900;">Ship to:</span>
-								<br>
-								<% if order.shipping_address %>
-								<%= order.ship_to_name %>
-								<%= "<br>#{order.shipping_address.address1}".html_safe unless order.shipping_address.address1.blank? %>
-								<%= "<br>#{order.shipping_address.address2}".html_safe unless order.shipping_address.address2.blank? %>
-								<%= "<br>#{order.shipping_address.city}".html_safe unless order.shipping_address.city.blank? %>
-								<%= "#{order.shipping_address.state}".html_safe unless order.shipping_address.state.blank? %>
-								<%= "#{order.shipping_address.postcode}".html_safe unless order.shipping_address.postcode.blank? %>
-								<%= "<br>#{order.shipping_address.country}".html_safe unless order.shipping_address.country.blank? %>
-								<% else %>
-								<%= order.orderer.company_name %>
-								<%= "<br>#{order.orderer.address.address1}".html_safe unless order.orderer.address.address1.blank? %>
-								<%= "<br>#{order.orderer.address.address2}".html_safe unless order.orderer.address.address2.blank? %>
-								<%= "<br>#{order.orderer.address.city}".html_safe unless order.orderer.address.city.blank? %>
-								<%= "#{order.orderer.address.state}".html_safe unless order.orderer.address.state.blank? %>
-								<%= "#{order.orderer.address.postcode}".html_safe unless order.orderer.address.postcode.blank? %>
-								<%= "<br>#{order.orderer.address.country}".html_safe unless order.orderer.address.country.blank? %>
-								<% end %>
-							</p>
-						</td>
-					</tr>
-					<tr style="background-color: #efefef;"><th colspan="6" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;"> Products </th></tr>
-					<tr style="background-color: #efefef; font-weight: 900;">
-						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">Item</td>
-						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">Description</td>
-						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">Quantity</td>
-						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">MSRP</td>
-						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">Unit Price</td>
-						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">Amount</td>
-					</tr>
-					<% get_sorted_order_items(order).each do |lineitem| %>
-					<tr>
-					<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;"><%= lineitem.item_id.present? ? "#{lineitem.item_id}" : "&nbsp;".html_safe %></td>
-					<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;"><%= lineitem.name %></td>
-					<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;"><%= lineitem.quantity %></td>
-					<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;"><%= number_to_currency(lineitem.price_in_dollars) %></td>
-					<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;"><%= number_to_currency(lineitem.tiered_price_in_dollars) %></td>
-					<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom; text-align: right;"><%= number_to_currency(lineitem.total_price) %></td>
-					</tr>
+
+<table style="width: 80%;margin: auto; padding: 5px; border: 1px solid #cdcdcd; font-weight: 200;" cellpadding="5" cellspacing="5" border="0">
+	<tbody>
+		<tr>
+			<td colspan="2" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">
+				<p>
+					<% if order.brand.logo_file_name %>
+						<%= image_tag order.brand.logo.url(:medium), alt: "Logo" %>
+					<% else %>
+						<% if !order.brand.facebook.blank? && fb_picture(order.brand.facebook) %>
+							<%= image_tag fb_picture(order.brand.facebook) %>
+						<% else %>
+							<%= image_tag order.brand.logo.url(:medium), width: "100", height: "100", alt: "Logo" %>
+						<% end %>
 					<% end %>
-					<tr>
-						<td colspan="5" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; text-align: right;">Subtotal <small>(before taxes/fees/shipping)</small></td>
-						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: bolder; line-height: 20px; text-align: right;"><%= number_to_currency(order.subtotal_price) %></td>
-					</tr>
-
-
-
-					<tr style="background-color: #efefef;"><th colspan="6" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;"> Additional Charges (e.g. shipping) </th></tr>
-					<tr style="background-color: #efefef; font-weight: 900;">
-						<td>&nbsp;</td>
-						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;" colspan="2">Charge</td>
-						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;" colspan="2">Description</td>
-						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">Amount</td>
-					</tr>
-					<% order.order_additional_charges.each.each do |lineitem| %>
-					<tr>
-						<td>&nbsp;</td>
-						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;" colspan="2"><%= lineitem.name %></td>
-						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;" colspan="2"><%= lineitem.description %></td>
-						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; text-align: right;"><%= number_to_currency(lineitem.amount_in_dollars) %></td>
-					</tr>
+					<br>
+					<%= order.brand.company_name %><br>
+					<%= "#{order.brand.address.address1}".html_safe unless order.brand.address.address1.blank? %>
+					<%= "<br>#{order.brand.address.address2}".html_safe unless order.brand.address.address2.blank? %>
+					<%= "<br>#{order.brand.address.city}".html_safe unless order.brand.address.city.blank? %>
+					<%= "#{order.brand.address.state}".html_safe unless order.brand.address.state.blank? %>
+					<%= "#{order.brand.address.postcode}".html_safe unless order.brand.address.postcode.blank? %>
+					<%= "<br>#{order.brand.address.country}".html_safe unless order.brand.address.country.blank? %>
+				</p>
+			</td>
+			<td colspan="2" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;">
+				<p>
+					<span style="font-weight: 900;">Bill to:</span>
+					<br>
+					<%= order.orderer.company_name %>
+					<%= "<br>#{order.orderer.address.address1}".html_safe unless order.orderer.address.address1.blank? %>
+					<%= "<br>#{order.orderer.address.address2}".html_safe unless order.orderer.address.address2.blank? %>
+					<%= "<br>#{order.orderer.address.city}".html_safe unless order.orderer.address.city.blank? %>
+					<%= "#{order.orderer.address.state}".html_safe unless order.orderer.address.state.blank? %>
+					<%= "#{order.orderer.address.postcode}".html_safe unless order.orderer.address.postcode.blank? %>
+					<%= "<br>#{order.orderer.address.country}".html_safe unless order.orderer.address.country.blank? %>
+				</p>
+			</td>
+			<td colspan="2" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;">
+				<p>
+					<span style="font-weight: 900;">Ship to:</span>
+					<br>
+					<% if order.shipping_address %>
+					<%= order.ship_to_name %>
+					<%= "<br>#{order.shipping_address.address1}".html_safe unless order.shipping_address.address1.blank? %>
+					<%= "<br>#{order.shipping_address.address2}".html_safe unless order.shipping_address.address2.blank? %>
+					<%= "<br>#{order.shipping_address.city}".html_safe unless order.shipping_address.city.blank? %>
+					<%= "#{order.shipping_address.state}".html_safe unless order.shipping_address.state.blank? %>
+					<%= "#{order.shipping_address.postcode}".html_safe unless order.shipping_address.postcode.blank? %>
+					<%= "<br>#{order.shipping_address.country}".html_safe unless order.shipping_address.country.blank? %>
+					<% else %>
+					<%= order.orderer.company_name %>
+					<%= "<br>#{order.orderer.address.address1}".html_safe unless order.orderer.address.address1.blank? %>
+					<%= "<br>#{order.orderer.address.address2}".html_safe unless order.orderer.address.address2.blank? %>
+					<%= "<br>#{order.orderer.address.city}".html_safe unless order.orderer.address.city.blank? %>
+					<%= "#{order.orderer.address.state}".html_safe unless order.orderer.address.state.blank? %>
+					<%= "#{order.orderer.address.postcode}".html_safe unless order.orderer.address.postcode.blank? %>
+					<%= "<br>#{order.orderer.address.country}".html_safe unless order.orderer.address.country.blank? %>
 					<% end %>
-					<tr>
-						<td colspan="5" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; text-align: right;">Additional Charges Subtotal </td>
-						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: bolder; line-height: 20px; text-align: right;"><%= number_to_currency(order.charges_subtotal_price) %></td>
-					</tr>
+				</p>
+			</td>
+		</tr>
+		<tr style="background-color: #efefef;"><th colspan="6" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;"> Products </th></tr>
+		<tr style="background-color: #efefef; font-weight: 900;">
+			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">Item</td>
+			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">Description</td>
+			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">Quantity</td>
+			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">MSRP</td>
+			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">Unit Price</td>
+			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">Amount</td>
+		</tr>
+		<% get_sorted_order_items(order).each do |lineitem| %>
+		<tr>
+		<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;"><%= lineitem.item_id.present? ? "#{lineitem.item_id}" : "&nbsp;".html_safe %></td>
+		<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;"><%= lineitem.name %></td>
+		<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;"><%= lineitem.quantity %></td>
+		<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;"><%= number_to_currency(lineitem.price_in_dollars) %></td>
+		<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;"><%= number_to_currency(lineitem.tiered_price_in_dollars) %></td>
+		<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom; text-align: right;"><%= number_to_currency(lineitem.total_price) %></td>
+		</tr>
+		<% end %>
+		<tr>
+			<td colspan="5" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; text-align: right;">Subtotal <small>(before taxes/fees/shipping)</small></td>
+			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: bolder; line-height: 20px; text-align: right;"><%= number_to_currency(order.subtotal_price) %></td>
+		</tr>
 
-					<tr style="background-color: #efefef;">
-						<td colspan="5" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; text-align: right;">Order Total</td>
-						<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: bolder; line-height: 20px; text-align: right;"><%= number_to_currency(order.total_price) %></td>
-					</tr>
-				</tbody>
-			</table>
 
-		</td>
-	</tr>
+
+		<tr style="background-color: #efefef;"><th colspan="6" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;"> Additional Charges (e.g. shipping) </th></tr>
+		<tr style="background-color: #efefef; font-weight: 900;">
+			<td>&nbsp;</td>
+			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;" colspan="2">Charge</td>
+			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;" colspan="2">Description</td>
+			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">Amount</td>
+		</tr>
+		<% order.order_additional_charges.each.each do |lineitem| %>
+		<tr>
+			<td>&nbsp;</td>
+			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;" colspan="2"><%= lineitem.name %></td>
+			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;" colspan="2"><%= lineitem.description %></td>
+			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; text-align: right;"><%= number_to_currency(lineitem.amount_in_dollars) %></td>
+		</tr>
+		<% end %>
+		<tr>
+			<td colspan="5" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; text-align: right;">Additional Charges Subtotal </td>
+			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: bolder; line-height: 20px; text-align: right;"><%= number_to_currency(order.charges_subtotal_price) %></td>
+		</tr>
+
+		<tr style="background-color: #efefef;">
+			<td colspan="5" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; text-align: right;">Order Total</td>
+			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: bolder; line-height: 20px; text-align: right;"><%= number_to_currency(order.total_price) %></td>
+		</tr>
+	</tbody>
 </table>
+
