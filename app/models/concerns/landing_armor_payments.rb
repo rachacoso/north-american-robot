@@ -171,15 +171,7 @@ module LandingArmorPayments
         "seller_id" => self.armor_seller_user_id, # The user_id of the seller
         "buyer_id" => self.armor_buyer_user_id, # The user_id of the buyer
         "amount" => self.total_price,
-        "summary" => "Landing International. Purchase of goods from #{self.brand_company_name} by #{self.orderer_company_name}",
-        # "payees" => [
-        #   {
-        #     "user_id" => 160423016973,
-        #     "amount" => self.subtotal_price * 0.02, # 8 percent of the cost of goods
-        #     "message" => "Hello, Landing International! Here's your 8% fee share.",
-        #     "role" => "broker"
-        #   }
-        # ]
+        "summary" => "Landing International Marketplace: Purchase of goods from #{self.brand_company_name} by #{self.orderer_company_name}",
         # "description" => "An escrow for goods order for use as an example.",
         # "invoice_num" => "12345",
         # "purchase_order_num" => "67890",
