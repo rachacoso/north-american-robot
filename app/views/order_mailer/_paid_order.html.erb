@@ -1,8 +1,20 @@
-<span style="font-size:25px;font-weight:light;">
-Landing International Marketplace: <br>
-Purchase of goods from <%= order.brand.company_name %> by <%= order.orderer.company_name %> <br>
-</span>
-<span style="font-size:20px;font-weight:light;">
-Status Update:<br>
-Purchase funds have posted to the escrow account and the order is now ready to be shipped.
-</span>
+<table style="width: 80%; margin: auto; ">
+	<tr>
+		<td style="font-size:18px;font-weight:light;padding: 1em; ">
+			<h1>Order Funds in Escrow</h1>
+			Hello, we have an update for you for the following order:
+		</td>
+	</tr>
+	<tr>
+		<td style="font-size:20px;font-weight:light;padding: 1em; ">
+			Landing International Marketplace:<br>
+			Purchase of goods from <%= order.brand.company_name %> by <%= order.orderer.company_name %> <br>
+		</td>
+	</tr>
+	<tr>
+		<td style="font-size:20px;font-weight:light; padding:1em;">
+			<strong>Update:</strong><br>
+			Purchase funds have posted to the escrow account and the order is now ready to be shipped.
+		</td>
+	</tr>
+</table>
