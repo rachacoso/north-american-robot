@@ -1,7 +1,23 @@
-<span style="font-size:25px;font-weight:light;">
-	<%= order.orderer.company_name %>
-</span>
-<br>has approved an order for<br>
-<span style="font-size:25px;font-weight:light;">
-	<%= order.brand.company_name %>
-</span>
+<table style="width: 90%; margin: auto; ">
+	<tr>
+		<td style="font-size:12px;font-weight:light;padding: 1em; ">
+			<h2>Order Approved</h2>
+			Hello, <%= order.orderer.company_name %> has approved the order
+		</td>
+	</tr>
+	<tr>
+		<td style="font-size:12px;font-weight:light;padding: 1em; ">
+			<small>Order Description:</small><br>
+			Landing International Marketplace:<br>
+			Purchase of goods from <%= order.brand.company_name %> by <%= order.orderer.company_name %> <br>
+		</td>
+	</tr>
+	<tr>
+		<td style="font-size:12px;font-weight:light; padding:1em;">
+			<strong>Next Step:</strong><br>
+			Please wait for <%= order.orderer.company_name %> to post payment to escrow.
+			<br><br>
+			<div style="padding: 10px;border:1px solid black;background: #f3f3f3;">PLEASE NOTE:<br> Ensure that you have entered you bank information in the 'Ordering &amp; Payments' section of your Landing International profile.  Missing or incorrect bank information may delay disbursement of payment.</div>
+		</td>
+	</tr>
+</table>

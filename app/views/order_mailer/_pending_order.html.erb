@@ -1,9 +1,21 @@
-<span style="font-size:25px;font-weight:light;">
-	Hello, <%= order.orderer.company_name %>
-</span>
-<p>
-<span style="font-size:25px;font-weight:light;">
-	<%= order.brand.company_name %>
-</span>
-<br>has updated your order
-</p>
+<table style="width: 90%; margin: auto; ">
+	<tr>
+		<td style="font-size:12px;font-weight:light;padding: 1em; ">
+			<h2>Order Updated</h2>
+			Hello, your order has been updated with shipping and fees
+		</td>
+	</tr>
+	<tr>
+		<td style="font-size:12px;font-weight:light;padding: 1em; ">
+			<small>Order Description:</small><br>
+			Landing International Marketplace:<br>
+			Purchase of goods from <%= order.brand.company_name %> by <%= order.orderer.company_name %> <br>
+		</td>
+	</tr>
+	<tr>
+		<td style="font-size:12px;font-weight:light; padding:1em;">
+			<strong>Next Step:</strong><br>
+			Please review the order and approve if you accept all charges.
+		</td>
+	</tr>
+</table>

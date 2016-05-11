@@ -1,7 +1,21 @@
-<span style="font-size:25px;font-weight:light;">
-	<%= order.brand.company_name %>
-</span>
-<br><span style="font-size:20px;font-weight:light;"> has shipped an order to </span><br>
-<span style="font-size:25px;font-weight:light;">
-	<%= order.orderer.company_name %>
-</span>
+<table style="width: 90%; margin: auto; ">
+	<tr>
+		<td style="font-size:12px;font-weight:light;padding: 1em; ">
+			<h2>Order Shipped</h2>
+			Hello, your order has shipped.
+		</td>
+	</tr>
+	<tr>
+		<td style="font-size:12px;font-weight:light;padding: 1em; ">
+			<small>Order Description:</small><br>
+			Landing International Marketplace:<br>
+			Purchase of goods from <%= order.brand.company_name %> by <%= order.orderer.company_name %> <br>
+		</td>
+	</tr>
+	<tr>
+		<td style="font-size:12px;font-weight:light; padding:1em;">
+			<strong>Next Step:</strong><br>
+			Review shipment on delivery.
+		</td>
+	</tr>
+</table>

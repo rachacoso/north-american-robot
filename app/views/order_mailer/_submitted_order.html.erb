@@ -1,7 +1,22 @@
-<span style="font-size:25px;font-weight:light;">
-	<%= order.orderer.company_name %>
-</span>
-<br>has submitted an order for<br>
-<span style="font-size:25px;font-weight:light;">
-	<%= order.brand.company_name %>
-</span>
+<table style="width: 90%; margin: auto; ">
+	<tr>
+		<td style="font-size:12px;font-weight:light;padding: 1em; ">
+			<h2>Order Submitted</h2>
+			Hello, a new order has been submitted. <br>
+			<%= order.orderer.company_name %> has placed an order for goods from <%= order.brand.company_name %>
+		</td>
+	</tr>
+	<tr>
+		<td style="font-size:12px;font-weight:light;padding: 1em; ">
+			<small>Order Description:</small><br>
+			Landing International Marketplace:<br>
+			Purchase of goods from <%= order.brand.company_name %> by <%= order.orderer.company_name %> <br>
+		</td>
+	</tr>
+	<tr>
+		<td style="font-size:12px;font-weight:light; padding:1em;">
+			<strong>Next Step:</strong><br>
+			Add any shipping costs or fees.
+		</td>
+	</tr>
+</table>

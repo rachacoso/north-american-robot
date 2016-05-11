@@ -31,8 +31,7 @@
 									<%= render partial: "orders/showfull/delivered_orderer_payment_release", locals: {url: @armor_payment_release_payment_url} %>
 								<% end %>
 							<% end %>
-							<h3><em>Note that the order status on this page may take time to update after you've approved the release of funds. <br>Please reload this page after you have released funds to see the most current status.</em></h3>
-							<h3><em>Alternately, you can also release payment via your Armor Payments account.</em></h3>
+							<div class="landing-notice"><h3>The order status on this page may take time to update after you've approved the release of funds. <br>Please <%= link_to "reload this page", order_url(order) %> after you have released funds to see the most current status.</h3></div>
 						</div>
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->
