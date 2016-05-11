@@ -116,6 +116,12 @@ class Order # for V2 ordering
       email: "order@landingintl.com", # send to brand/landing (currently just sending to Landing)
       subject: "Landing International: Order Paid to Escrow"
       ).deliver
+    OrderMailer.send_order(
+      order: self,
+      status: "paid",
+      email: self.armor_buyer_email, # send to buyer
+      subject: "Landing International: Order Funds Have Posted to Escrow"
+      ).deliver
   end
 
   def shipped
