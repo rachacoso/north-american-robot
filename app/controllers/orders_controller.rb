@@ -89,6 +89,7 @@ class OrdersController < ApplicationController
 				flash.now[:notice] = @order.errors.full_messages
 			else
 				@success = true
+				sleep(5) #pause to allow update of status from webhook
 			end
 		end
 		respond_to do |format|
@@ -104,6 +105,7 @@ class OrdersController < ApplicationController
 				flash.now[:notice] = @order.errors.full_messages
 			else
 				@success = true
+				sleep(5) #pause to allow update of status from webhook
 			end
 		end
 		respond_to do |format|
