@@ -121,10 +121,20 @@ module LandingArmorPayments
 
     included do
       field :armor_account_id, type: String
+      field :armor_bank_info_complete, type: Mongoid::Boolean, default: false
     end
 
     def can_sell?
       return true if self.armor_account_id
+    end
+
+    def can_send_for_approval?
+      return true if self.armor_bank_info_set
+    end
+
+    def set_armor_bank
+      self.armor_bank_info_complete = true
+      self.save!
     end
 
     def api_get_bank_account_setup_url(armor_account_id:, armor_user_id:)
