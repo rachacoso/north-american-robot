@@ -64,9 +64,39 @@ class Order # for V2 ordering
     return self.charges_subtotal_price + self.subtotal_price
   end
 
+  def self.create_new(user:, brand:)
+    order = Order.new
+
+    order.orderer = user.company
+    order.orderer_company_name = user.company.company_name
+    order.ship_to_name = user.company.company_name
+    order.user =  user
+    order.brand = brand
+    order.brand_company_name = brand.company_name
+    order.armor_seller_account_id = brand.armor_account_id
+    order.armor_seller_user_id = brand.users.with_armor_user_id.first.armor_user_id if brand.users.with_armor_user_id.present? 
+    order.armor_seller_email = brand.users.with_armor_user_id.first.email if brand.users.with_armor_user_id.present?
+    order.armor_buyer_account_id = user.company.armor_account_id
+    order.armor_buyer_user_id = user.armor_user_id
+    order.armor_buyer_email = user.email
+
+    order.build_shipping_address(
+      address1: user.company.address.address1,
+      address2: user.company.address.address2,
+      city: user.company.address.city,
+      state: user.company.address.state,
+      postcode: user.company.address.postcode,
+      country: user.company.address.country,
+    )
+    order.save!
+    return order
+  end
+
   def submission(user:)
     self.armor_buyer_user_id = user.armor_user_id if self.armor_buyer_user_id.blank?
     self.armor_buyer_account_id = user.company.armor_account_id if self.armor_buyer_account_id.blank?
+    self.armor_seller_user_id = self.brand.users.with_armor_user_id.first.armor_user_id if self.armor_seller_user_id.blank? 
+    self.armor_seller_email = self.brand.users.with_armor_user_id.first.email if self.armor_seller_email.blank?
     self.status = "submitted"
     self.submission_date = DateTime.now
     self.save!

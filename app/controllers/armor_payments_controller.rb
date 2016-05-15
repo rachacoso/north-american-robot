@@ -34,13 +34,13 @@ class ArmorPaymentsController < ApplicationController
 		if params[:armor_payments_terms]
 			u.api_create_armor_payments_account
 			if u.errors.any?
-				flash.now[:error] = "Sorry, there was an error, please try again:"
-				flash.now[:errorlist] = u.errors.full_messages
+				flash[:error] = "Sorry, there was an error, please try again:"
+				flash[:errorlist] = u.errors.full_messages
 			else
 				flash[:newaccount] = true
 			end
 		else
-			flash.now[:error] = "Sorry, you must agree to Armor Payments Terms and Conditions"
+			flash[:error] = "Sorry, you must agree to Armor Payments Terms and Conditions"
 		end
 
     respond_to do |format|
