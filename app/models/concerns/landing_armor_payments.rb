@@ -125,11 +125,8 @@ module LandingArmorPayments
     end
 
     def can_sell?
-      return true if self.armor_account_id
-    end
-
-    def can_send_for_approval?
-      return true if self.armor_bank_info_set
+      # return true if self.armor_account_id
+      return true if self.company_name.present?
     end
 
     def set_armor_bank
@@ -171,8 +168,13 @@ module LandingArmorPayments
       field :armor_shipment_carrier_name, type: String
       field :armor_shipment_tracking_number, type: String
       field :armor_shipment_description, type: String
+      scope :without_armor_account, ->{where(:armor_seller_account_id => nil)}
+      scope :with_armor_account, ->{where(:armor_seller_account_id.ne => nil)}
     end
 
+    def armor_enabled?
+      return true if self.armor_seller_account_id.present?
+    end
     def api_create_order
 
       armororder = LandingArmorOrder.new

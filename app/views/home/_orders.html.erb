@@ -143,3 +143,46 @@
 		</div>
 	</div><!--/.small-12-->
 </div><!--/.row-->
+
+<% unless @current_non_armor_orders.blank? && @submitted_non_armor_orders.blank? %>
+<div class="row">
+	<div class="small-12 columns">
+		<div class="panel" id="dashboard-order-section">
+		<h2>Your Orders (without Payment Enabled)</h2>
+		<h3>These orders are not currently enabled for payment through Landing International via Armor Payments (a Payoneer company)</h3>
+
+		<h4><strong>Open Orders</strong></h4>
+		<% if @current_non_armor_orders.present?  %>
+				<% @current_non_armor_orders.each do |order| %>
+					<%= render partial: "order", locals: { order: order } %>
+				<% end %>
+		<% else %>
+		<div class="row">
+			<div class="small-12 columns">
+				<div class="panel dashboard-order-tile">
+					<h3>(No Orders)</h3>
+				</div>
+			</div>
+		</div>
+		<% end %>
+
+		<h4><strong>Submitted Orders</strong></h4>
+		<% if @submitted_non_armor_orders.present?  %>
+				<% @submitted_non_armor_orders.each do |order| %>
+					<%= render partial: "order", locals: { order: order } %>
+				<% end %>
+		<% else %>
+		<div class="row">
+			<div class="small-12 columns">
+				<div class="panel dashboard-order-tile">
+					<h3>(No Orders)</h3>
+				</div>
+			</div>
+		</div>
+		<% end %>
+
+
+		</div>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<% end %>

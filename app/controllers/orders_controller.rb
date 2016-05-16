@@ -39,7 +39,7 @@ class OrdersController < ApplicationController
 
 	def pending
 		if params[:confirm].to_i == 1
-			@order.pending
+			@order.pending(user: @current_user)
 			if @order.errors.any?
 				flash.now[:notice] = @order.errors.full_messages
 			end
