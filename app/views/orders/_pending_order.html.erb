@@ -9,7 +9,116 @@
 			<%= link_to "OK", orders_url(@order), class: "landing-button", id: "submit-close" %>
 		</div><!--/.small-12-->
 	</div><!--/.row-->
+
+<% elsif !@current_user.armor_user_id %>
+
+	<div class="row">
+		<div class="small-12 columns">
+			<h2>Almost There!<br>There are two steps you need to complete before you can send this updated order to <strong><%= @order.orderer.company_name %></strong>.</h2>
+			<hr>
+			<h3>Landing International has partnered with <%= link_to "Armor Payments, a Payoneer company", "//armorpayments.com", target: "_blank" %> to provide payment escrow services for B2B eCommerce.</h3>
+			<h3>All payment transactions on Landing Interational will take place via Armor Payments (Payoneer) payment escrow service.</h3>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+
+	<% allow, missing, errors = @current_user.allows_armor_signup %>
+	<% if @current_user.company.armor_account_id.blank? && allow %>
+
+		<div class="row">
+			<div class="small-12 columns">
+				<h3>In order to participate, you'll need to do the following:
+				<h3><strong>1) Enable Armor Payments (Payoneer) Escrow by accepting their <a href="https://app.armorpayments.com/terms/160405182787" target="_BLANK">Terms and Conditions</a>.</strong></h3>
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+		<div class="row">
+			<div class="small-12 columns">
+				<h3><strong>2) After enabling Armor Payments (Payoneer) Escrow, you will need to enter your bank information to ensure that Armor Payments (Payoneer) can disburse payment to you upon order completion.</strong></h3>
+				<hr>
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+		<div class="row">
+			<div class="small-12 columns text-center">
+				<h3><strong>Complete Step One:</strong><br>
+			<%= form_tag ap_create_account_url, method: "post", id: "armor-signup", remote: true do %>
+				<%= render 'shared/profileform/armor/armor_signup_form' %>
+				<span class="error" id="order-flow-armor-error" style="display:none;"></span>
+				<%= submit_tag "Enable Armor Payments (Payoneer) Escrow", class: "landing-button" %>
+				<%= link_to "Not Yet", order_url(@order), class: "landing-button secondary", id: "submit-close" %>
+			<% end %>
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+
+	<% else %>
+
+		<div class="row">
+			<div class="small-12 columns">
+				<h3><strong>In order to participate you'll need to enable Armor Payments (Payoneer) Escrow, but there are a few profile fields you'll need to fill out first (i.e. company name, mailing address and contact info).</strong></h3>
+				<hr>
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+
+		<div class="row">
+			<div class="small-12 columns">
+			<h3>You need to complete/fix some profile items before you can continue:</h3> 
+
+				<div class="panel" style="background-color: #f2f2f2;">
+					<% if missing.present? %>
+						<h3>Please complete the following:</h3>
+						<ul style="font-weight: 100;">
+						<% missing.each do |err| %>
+							<% if err == "Phone" %>
+								<li><%= err %><%= flash[:error] ? " <span style='color: red;'>(#{flash[:error]})</span>".html_safe : "" %></li>
+							<% else %>
+								<li><%= err %></li>
+							<% end %>
+						<% end %>
+						</ul>
+					<% end %>
+					<% if errors.present? %>
+						<h3>Please fix the following:</h3>
+						<ul style="font-weight: 100;">
+						<% errors.each do |k,v| %>
+							<li><%= v %></li>
+						<% end %>
+					<% end %>
+					</ul>
+				</div>
+
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+
+		<div class="row">
+			<div class="small-12 columns text-center">
+				<%= link_to "Go to your Profile Edit Page", eval("#{@current_user.company_type.downcase}_url") + "#a-armor", class: "landing-button" %>
+				<%= link_to "Not Yet", order_url(@order), class: "landing-button secondary", id: "submit-close" %>
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+
+	<% end %>
+
+
+<% elsif !@current_user.brand.armor_bank_info_complete %>
+
+	<div class="row">
+		<div class="small-12 columns">
+
+			<h2>Almost There!<br>There's one last step you need to complete before you can send this updated order to <%= @order.orderer.company_name %>.</h2>
+			<hr>
+			<h3><strong>Next step:<br>
+				You need to input your bank information on your Profile Edit Page before you can send an order for final approval and payment by the buyer.</strong>
+			</h3>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+
+	<div class="row">
+		<div class="small-12 columns text-center">
+			<%= link_to "Go to your Profile Edit Page", eval("#{@current_user.company_type.downcase}_url") + "#a-armor", class: "landing-button", target: "_blank" %>
+			<%= link_to "Not Yet", order_url(@order), class: "landing-button secondary", id: "submit-close" %>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+
 <% else %>
+
 	<div class="row">
 		<div class="small-12 columns text-center">
 			<h2 style="line-height: 1em;">Order subtotal:<br><small>(goods)<br></small><strong><%= number_to_currency(@order.subtotal_price) %></strong></h2>
@@ -21,7 +130,7 @@
 	<div class="row">
 		<div class="small-12 columns text-center">
 			<%= link_to "Yes", pending_order_url(@order,1), class: "landing-button", remote: true %>
-			<%= link_to "Not Yet", orders_url(@order), class: "landing-button secondary", id: "submit-close" %>
+			<%= link_to "Not Yet", order_url(@order), class: "landing-button secondary", id: "submit-close" %>
 		</div><!--/.small-12-->
 	</div><!--/.row-->
 <% end %>

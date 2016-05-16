@@ -95,8 +95,11 @@ class Order # for V2 ordering
   def submission(user:)
     self.armor_buyer_user_id = user.armor_user_id if self.armor_buyer_user_id.blank?
     self.armor_buyer_account_id = user.company.armor_account_id if self.armor_buyer_account_id.blank?
-    self.armor_seller_user_id = self.brand.users.with_armor_user_id.first.armor_user_id if self.armor_seller_user_id.blank? 
-    self.armor_seller_email = self.brand.users.with_armor_user_id.first.email if self.armor_seller_email.blank?
+    self.armor_seller_account_id = brand.armor_account_id if self.armor_seller_account_id.blank?
+    if self.brand.users.with_armor_user_id.present?
+      self.armor_seller_user_id = self.brand.users.with_armor_user_id.first.armor_user_id if self.armor_seller_user_id.blank? 
+      self.armor_seller_email = self.brand.users.with_armor_user_id.first.email if self.armor_seller_email.blank?
+    end
     self.status = "submitted"
     self.submission_date = DateTime.now
     self.save!
@@ -108,9 +111,12 @@ class Order # for V2 ordering
       ).deliver
   end
 
-  def pending
+  def pending(user:)
     self.status = "pending"
     self.pending_date = DateTime.now
+    self.armor_seller_account_id = brand.armor_account_id if self.armor_seller_account_id.blank?
+    self.armor_seller_user_id = user.armor_user_id if self.armor_seller_user_id.blank?
+    self.armor_seller_email = user.email if self.armor_seller_email.blank?
     self.save!
     OrderMailer.send_order(
       order: self, 

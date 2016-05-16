@@ -1,13 +1,21 @@
 <div class="row">
 	<div class="small-12 columns text-left">
 		<h2>Success!</h2>
+		<h2>You've enabled Armor Payments (Payoneer) Escrow</h2>
 		<hr>
-		<h3>You've enabled Armor Payments (Payoneer) Escrow and can now submit orders</h3>
+		<% if @current_user.company_type == "Brand" %>
+		<h3><strong>One more step:<br>
+			You need to <%= link_to "input your bank information (via your Brand Profile)", brand_url + "#a-armor", target: "_blank" %> before you can send an order for final approval and payment by the buyer.</strong>
+		</h3>
+		<% else %>
+		<h3>You can now submit orders</h3>
+		<% end %>
 		<hr>
 	</div><!--/.small-12-->
 </div><!--/.row-->
 <div class="row">
 	<div class="small-12 columns text-center">
-		<%= link_to "OK", "#", class: "landing-button", id: "submit-close" %>
+		<%= link_to "Go to your Profile Edit Page", eval("#{@current_user.company_type.downcase}_url") + "#a-armor", class: "landing-button", target: "_blank" %>
+		<%= link_to "Not Yet", order_url(@order), class: "landing-button secondary", id: "submit-close" %>
 	</div><!--/.small-12-->
 </div><!--/.row-->
