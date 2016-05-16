@@ -34,15 +34,17 @@ class HomeController < ApplicationController
 
 			@profile = @current_user.get_parent
 
-			@current_orders = @profile.orders.current
-			@submitted_orders = @profile.orders.submitted
-			@pending_orders = @profile.orders.pending
-			@approved_orders = @profile.orders.approved
-			@paid_orders = @profile.orders.paid
-			@shipped_orders = @profile.orders.shipped
-			@delivered_orders = @profile.orders.delivered
-			@completed_orders = @profile.orders.completed
-			@error_orders = @profile.orders.error
+			@current_non_armor_orders = @profile.orders.without_armor_account.current
+			@submitted_non_armor_orders = @profile.orders.without_armor_account.submitted
+			@current_orders = @profile.orders.with_armor_account.current
+			@submitted_orders = @profile.orders.with_armor_account.submitted
+			@pending_orders = @profile.orders.with_armor_account.pending
+			@approved_orders = @profile.orders.with_armor_account.approved
+			@paid_orders = @profile.orders.with_armor_account.paid
+			@shipped_orders = @profile.orders.with_armor_account.shipped
+			@delivered_orders = @profile.orders.with_armor_account.delivered
+			@completed_orders = @profile.orders.with_armor_account.completed
+			@error_orders = @profile.orders.with_armor_account.error
 
 			matches = @profile.matches
 			@unread_list = Array.new
