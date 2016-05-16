@@ -21,6 +21,7 @@ $('.dropmenu').dropit();
 
 
 
+
 // MODIFICATIONS FOR NO SVG SUPPORT
   if(!Modernizr.svg) {
     /* swap png for svgs */
@@ -492,6 +493,13 @@ function initialize () {
       var thisForm = $(this).parents('form');
       $(thisForm).submit(); 
   });
+
+jQuery(function() {
+  jQuery('.ss_button').on('click',function() {
+    jQuery('.ss_content').not($(this).next()).slideUp(500);
+    jQuery(this).next('.ss_content').slideDown(500);
+  });
+});
 
 }
 

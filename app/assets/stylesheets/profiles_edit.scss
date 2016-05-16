@@ -81,3 +81,24 @@ a.itemformlink.profilelink {
     }
   }
 }
+
+
+// SIMPLE ACCORDION
+
+.ss_button { 
+  background-color: $landing-middle-gray;
+  border-bottom: 1px solid #FFFFFF;
+  cursor: pointer;
+  padding: rem-calc(5) rem-calc(10);
+  color: $landing-light-gray;
+  font-weight: 200;
+}
+
+.ss_content {
+  background-color: $landing-light-gray;
+  display: none;
+  // padding: 10px;
+  &.active {
+    display: block;
+  }
+}
