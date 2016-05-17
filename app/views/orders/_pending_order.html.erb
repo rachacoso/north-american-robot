@@ -112,7 +112,7 @@
 
 	<div class="row">
 		<div class="small-12 columns text-center">
-			<%= link_to "Go to your Profile Edit Page", eval("#{@current_user.company_type.downcase}_url") + "#a-armor", class: "landing-button", target: "_blank" %>
+			<%= link_to "Go to your Profile Edit Page", eval("#{@current_user.company_type.downcase}_url") + "#a-armor", class: "landing-button", id: "submit-go-and-close", target: "_blank" %>
 			<%= link_to "Not Yet", order_url(@order), class: "landing-button secondary", id: "submit-close" %>
 		</div><!--/.small-12-->
 	</div><!--/.row-->

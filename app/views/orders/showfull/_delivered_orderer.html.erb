@@ -17,10 +17,9 @@
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
 						<br>
-						<h1>NEXT STEP: Review Shipment and Release Payment</h1>
+						<h1>NEXT STEP: Review Shipment and Release Payment or Initiate Dispute</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 						<div class="panel">
-							<h2>Release Payment from Escrow</h2>
 							<% if order.errors.any? %>
 								<h4>Sorry, there was an error. Please reload the page</h4>
 								<% order.errors.full_messages.each do |m| %>
@@ -28,7 +27,7 @@
 								<% end %>
 							<% else %>
 								<% if @armor_payment_release_payment_url.present? %>
-									<%= render partial: "orders/showfull/delivered_orderer_payment_release", locals: {url: @armor_payment_release_payment_url} %>
+									<%= render partial: "orders/showfull/delivered_orderer_payment_release", locals: {url: @armor_payment_release_payment_url, disputeurl: @armor_payment_dispute_url} %>
 								<% end %>
 							<% end %>
 							<div class="landing-notice"><h3>The order status on this page may take time to update after you've approved the release of funds. <br>Please <%= link_to "reload this page", order_url(order) %> after you have released funds to see the most current status.</h3></div>

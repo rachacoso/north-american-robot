@@ -24,6 +24,10 @@ class OrdersController < ApplicationController
 			unless @order.errors.any?
 				@armor_payment_release_payment_url = url
 			end
+			disputeurl = @order.api_get_dispute_url
+			unless @order.errors.any?
+				@armor_payment_dispute_url = disputeurl
+			end
 		end
 	end
 

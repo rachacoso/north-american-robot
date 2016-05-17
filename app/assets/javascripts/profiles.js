@@ -16,6 +16,12 @@ function setModalActions () {
 		e.preventDefault();
 		$('#order-item').fadeOut();
 		$('.overlay').fadeOut();
+	});
+
+	$('a#submit-go-and-close').on('click', function(e){
+		// e.preventDefault();
+		$('#order-item').fadeOut();
+		$('.overlay').fadeOut();
 	});	
 
 	$('.overlay#order-overlay, a#close-order, a#continue-ordering').on('click', function(e){
