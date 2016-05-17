@@ -65,7 +65,7 @@ class ArmorPaymentsController < ApplicationController
 				end
 			elsif account_event_types.include? event_type # get company if account type event
 				get_company(params[:event][:account_id])
-				if @account.blank?
+				if @company.blank?
 					render :nothing => true
 					return
 				end
@@ -98,12 +98,14 @@ class ArmorPaymentsController < ApplicationController
 	private
 
 	def get_order(order_id)
-		unless @order = Order.find_by(armor_order_id: order_id)
+		@order = Order.find_by(armor_order_id: order_id)
+		if @order.blank?
 			logger.info "Armor Webhook Order Not Found. Order ID: #{order_id}"
 		end
 	end
 	def get_company(account_id)
-		unless @company = Brand.find_by(armor_account_id: account_id) || Retailer.find_by(armor_account_id: account_id) || Distributor.find_by(armor_account_id: account_id)
+		@company = Brand.find_by(armor_account_id: account_id) || Retailer.find_by(armor_account_id: account_id) || Distributor.find_by(armor_account_id: account_id)
+		if @company.blank?
 			logger.info "Armor Webhook Company (w/ account) Not Found. Account ID: #{account_id}"
 		end
 	end
