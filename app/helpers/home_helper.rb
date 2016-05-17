@@ -40,7 +40,9 @@ module HomeHelper
 		when "completed"
 			return "<span id='#{status.downcase}'>COMPLETED (PAYMENT RELEASED)</span> on #{order.completed_date.strftime('%b %d, %Y')}"
 		when "error"
-			return "<span id='#{status.downcase}'>IN ERROR/IN DISPUTE</span> on #{order.error_date.strftime('%b %d, %Y')}"
+			return "<span id='#{status.downcase}'>IN ERROR</span> on #{order.error_date.strftime('%b %d, %Y')}"
+		when "disputed"
+			return "<span id='#{status.downcase}'>IN DISPUTE</span> on #{order.disputed_date.strftime('%b %d, %Y')}"
 
 		end
 	end

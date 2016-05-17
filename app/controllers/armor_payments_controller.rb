@@ -83,6 +83,7 @@ class ArmorPaymentsController < ApplicationController
 			when 4
 				@order.delivered
 			when 5
+				@order.disputed
 				# order dispute method TBD
 			when 6
 				@order.completed

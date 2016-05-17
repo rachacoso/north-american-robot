@@ -125,7 +125,22 @@
 		</div>
 		<% end %>
 
-		<h4><strong>Orders with Errors / In Dispute</strong></h4>
+		<h4><strong>Orders In Dispute</strong></h4>
+		<% if @disputed_orders.present?  %>
+				<% @disputed_orders.each do |order| %>
+					<%= render partial: "order", locals: { order: order } %>
+				<% end %>
+		<% else %>
+		<div class="row">
+			<div class="small-12 columns">
+				<div class="panel dashboard-order-tile">
+					<h3>(No Orders)</h3>
+				</div>
+			</div>
+		</div>
+		<% end %>
+
+		<h4><strong>Orders with Errors</strong></h4>
 		<% if @error_orders.present?  %>
 				<% @error_orders.each do |order| %>
 					<%= render partial: "order", locals: { order: order } %>

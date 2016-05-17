@@ -17,7 +17,7 @@ class Order # for V2 ordering
   accepts_nested_attributes_for :order_items, :order_additional_charges, :shipping_address
 
 
-  field :status, type: String, default: "open" # Values: OPEN, SUBMITTED, PENDING, APPROVED, PAID, SHIPPED, DELIVERED, COMPLETED, ERROR
+  field :status, type: String, default: "open" # Values: OPEN, SUBMITTED, PENDING, APPROVED, PAID, SHIPPED, DELIVERED, COMPLETED, DISPUTED, ERROR
   field :status_error_message, type: String
   field :orderer_company_name, type: String
   field :brand_company_name, type: String
@@ -27,6 +27,7 @@ class Order # for V2 ordering
   field :paid_date, type: DateTime
   field :shipped_date, type: DateTime
   field :delivered_date, type: DateTime
+  field :disputed_date, type: DateTime
   field :completed_date, type: DateTime
   field :error_date, type: DateTime
 
@@ -41,8 +42,9 @@ class Order # for V2 ordering
   scope :shipped, ->{where(status: "shipped")}
   scope :delivered, ->{where(status: "delivered")}
   scope :completed, ->{where(status: "completed")}
+  scope :disputed, ->{where(status: "disputed")}
   scope :error, ->{where(status: "error")}
-  scope :active, ->{any_of(:status.in => ["open","submitted","pending","approved","paid", "shipped","delivered"])}
+  scope :active, ->{any_of(:status.in => ["open","submitted","pending","approved","paid", "shipped","delivered","disputed"])}
 
   def subtotal_price # price before addtional fees in dollars
     price = 0
@@ -177,6 +179,25 @@ class Order # for V2 ordering
     return if self.status == "delivered" # exit if already set
     self.status = "delivered"
     self.delivered_date = DateTime.now
+    self.save!
+    OrderMailer.send_order(
+      order: self,
+      status: "delivered",
+      email: self.user.email, # send to orderer email (using the order creator's email in this case)
+      subject: "Landing International: Order Delivered"
+      ).deliver
+    OrderMailer.send_order(
+      order: self,
+      status: "delivered",
+      email: "order@landingintl.com", # send to brand/landing (currently just sending to Landing)
+      subject: "Landing International: Order Delivered"
+      ).deliver
+  end
+
+  def disputed
+    return if self.status == "disputed" # exit if already set
+    self.status = "disputed"
+    self.disputed_date = DateTime.now
     self.save!
     OrderMailer.send_order(
       order: self,

@@ -7,6 +7,9 @@
 	<li <%= status == "paid" ? "class=active" : "" %>><%= status == "paid" ? "Order " : "" %>Paid</li>
 	<li <%= status == "shipped" ? "class=active" : "" %>><%= status == "shipped" ? "Order " : "" %>Shipped</li>
 	<li <%= status == "delivered" ? "class=active" : "" %>><%= status == "delivered" ? "Order " : "" %>Delivered</li>
+	<% if status == "disputed" %>
+	<li class="active">Order in Disupte</li>
+	<% end %>
 	<li <%= status == "completed" ? "class=active" : "" %>><%= status == "completed" ? "Order " : "" %> Completed</li>
 	<% end %>
 </ul>

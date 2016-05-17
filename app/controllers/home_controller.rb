@@ -45,6 +45,7 @@ class HomeController < ApplicationController
 			@delivered_orders = @profile.orders.with_armor_account.delivered
 			@completed_orders = @profile.orders.with_armor_account.completed
 			@error_orders = @profile.orders.with_armor_account.error
+			@disputed_orders = @profile.orders.with_armor_account.disputed
 
 			matches = @profile.matches
 			@unread_list = Array.new

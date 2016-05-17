@@ -87,6 +87,7 @@ class AdminController < ApplicationController
     @orders_by[:delivered] = Order.delivered
     @orders_by[:completed] = Order.completed
     @orders_by[:error] = Order.error
+    @orders_by[:disputed] = Order.disputed
 
     case params[:group]
     when "d"
