@@ -300,6 +300,27 @@ module LandingArmorPayments
 
     end
 
+    def api_get_dispute_status_url(company:,user:)
+
+      armororder = LandingArmorOrder.new
+
+      account_id = company.armor_account_id # The account_id of the viewer
+      user_id = user.armor_user_id # The user_id of the viewer
+      auth_data = {
+        'uri' => "/accounts/#{self.armor_seller_account_id}/orders/#{self.armor_order_id}/createdispute",
+        'action' => 'view'
+      }
+
+      armororder.get_url(account_id, user_id, auth_data)
+
+      if armororder.errors.any?
+        self.errors[:base] << armororder.errors.full_messages
+      else
+        return armororder.url
+      end
+
+    end
+
     #FOR TESTING ONLY
     def api_testing_set_to_paid
       armororder = LandingArmorOrder.new

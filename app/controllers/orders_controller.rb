@@ -28,6 +28,11 @@ class OrdersController < ApplicationController
 			unless @order.errors.any?
 				@armor_payment_dispute_url = disputeurl
 			end
+		elsif @order.status == "disputed"
+			disputeurl = @order.api_get_dispute_status_url(company: @current_user.company, user: @current_user)
+			unless @order.errors.any?
+				@armor_payment_dispute_url = disputeurl
+			end
 		end
 	end
 

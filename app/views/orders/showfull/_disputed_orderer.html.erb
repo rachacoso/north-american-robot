@@ -20,7 +20,16 @@
 						<h1>NEXT STEP: Resolve dispute</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 						<div class="panel">
-							<h3>[SOME TEXT HERE]</h3>
+							<% if order.errors.any? %>
+								<h4>Sorry, there was an error. Please reload the page</h4>
+								<% order.errors.full_messages.each do |m| %>
+									<%= m %><br>
+								<% end %>
+							<% else %>
+								<% if @armor_payment_dispute_url.present? %>
+									<%= render partial: "orders/showfull/disputed_order_status", locals: { disputeurl: @armor_payment_dispute_url} %>
+								<% end %>
+							<% end %>
 						</div>
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->
