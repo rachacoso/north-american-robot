@@ -15,7 +15,12 @@
 </div><!--/.row-->
 <div class="row">
 	<div class="small-12 columns text-center">
+		<% if @current_user.company_type == "Brand" %>
 		<%= link_to "Go to your Profile Edit Page", eval("#{@current_user.company_type.downcase}_url") + "#a-armor", class: "landing-button", target: "_blank" %>
-		<%= link_to "Not Yet", order_url(@order), class: "landing-button secondary", id: "submit-close" %>
+		<%= link_to "Not Yet", "#", class: "landing-button secondary", id: "submit-close" %>
+		<% else %>
+		<%= link_to "OK", "#", class: "landing-button", id: "submit-close" %>
+		<% end %>
+
 	</div><!--/.small-12-->
 </div><!--/.row-->

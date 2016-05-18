@@ -37,6 +37,8 @@ class ArmorPaymentsController < ApplicationController
 				flash[:error] = "Sorry, there was an error, please try again:"
 				flash[:errorlist] = u.errors.full_messages
 			else
+				flash[:error] = nil
+				flash[:errorlist] = nil
 				flash[:newaccount] = true
 			end
 		else
