@@ -45,6 +45,7 @@ class Order # for V2 ordering
   scope :disputed, ->{where(status: "disputed")}
   scope :error, ->{where(status: "error")}
   scope :active, ->{any_of(:status.in => ["open","submitted","pending","approved","paid", "shipped","delivered","disputed"])}
+  scope :in_progress, ->{any_of(:status.in => ["submitted","pending","approved","paid", "shipped","delivered","disputed"])}
 
   def subtotal_price # price before addtional fees in dollars
     price = 0
