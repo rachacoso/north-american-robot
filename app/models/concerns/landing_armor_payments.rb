@@ -168,6 +168,7 @@ module LandingArmorPayments
       field :armor_shipment_carrier_name, type: String
       field :armor_shipment_tracking_number, type: String
       field :armor_shipment_description, type: String
+      field :armor_dispute_id, type: String
       scope :without_armor_account, ->{where(:armor_seller_account_id => nil)}
       scope :with_armor_account, ->{where(:armor_seller_account_id.ne => nil)}
     end

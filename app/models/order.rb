@@ -195,9 +195,10 @@ class Order # for V2 ordering
       ).deliver
   end
 
-  def disputed
+  def disputed(dispute_id:)
     return if self.status == "disputed" # exit if already set
     self.status = "disputed"
+    self.armor_dispute_id = dispute_id
     self.disputed_date = DateTime.now
     self.save!
     OrderMailer.send_order(

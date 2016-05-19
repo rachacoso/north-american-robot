@@ -85,7 +85,8 @@ class ArmorPaymentsController < ApplicationController
 			when 4
 				@order.delivered
 			when 5
-				@order.disputed
+				armor_dispute_id = params[:event][:entity_id]
+				@order.disputed(dispute_id: armor_dispute_id)
 				# order dispute method TBD
 			when 6
 				@order.completed
