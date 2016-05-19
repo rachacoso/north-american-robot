@@ -308,7 +308,7 @@ module LandingArmorPayments
       account_id = company.armor_account_id # The account_id of the viewer
       user_id = user.armor_user_id # The user_id of the viewer
       auth_data = {
-        'uri' => "/accounts/#{self.armor_seller_account_id}/orders/#{self.armor_order_id}/createdispute",
+        'uri' => "/accounts/#{self.armor_seller_account_id}/orders/#{self.armor_order_id}/disputes/#{self.armor_dispute_id}",
         'action' => 'view'
       }
 
