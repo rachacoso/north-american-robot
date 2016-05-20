@@ -1,14 +1,26 @@
 # Preview all emails at http://landing.dev/rails/mailers/order_mailer
 class OrderMailerPreview < ActionMailer::Preview
 
-  # Preview this email at http://landing.dev/rails/mailers/order_mailer/send_submitted_order
-  def send_submitted_order
+  # Preview this email at http://landing.dev/rails/mailers/order_mailer/send_submitted_order_orderer
+  def send_submitted_order_orderer
     order = Order.where(status: "submitted").first
     OrderMailer.send_order(
-      order: order,
-      status: "submitted",
-      email: "order@landingintl.com", # send to brand/landing (currently just sending to Landing)
-      subject: "Landing International: Order Submitted"
+      order: order, 
+      status: "submitted_orderer", 
+      email: order.user.email, # send to buyer
+      subject: "Congratulations! You submitted an order on Landing!",
+      title: "Order Submitted"
+      )
+  end
+  # Preview this email at http://landing.dev/rails/mailers/order_mailer/send_submitted_order_brand
+  def send_submitted_order_brand
+    order = Order.where(status: "submitted").first
+    OrderMailer.send_order(
+      order: order, 
+      status: "submitted_brand", 
+      email: "orders@landingintl.com", # send to buyer
+      subject: "Good News! You have a new order request on Landing!",
+      title: "Order Submitted"
       )
   end
 
@@ -19,20 +31,11 @@ class OrderMailerPreview < ActionMailer::Preview
       order: order,
       status: "pending",
       email: order.user.email, # send to orderer email (using the order creator's email in this case)
-      subject: "Landing International: Order Updated"
+      subject: "Yippee! Your order has been approved.",
+      title: "Order Pending Approval and Payment"
       )
   end
 
-# Preview this email at http://landing.dev/rails/mailers/order_mailer/send_approved_order
-  def send_approved_order
-    order = Order.where(status: "approved").first
-    OrderMailer.send_order(
-      order: order,
-      status: "approved",
-      email: "order@landingintl.com", # send to brand/landing (currently just sending to Landing)
-      subject: "Landing International: Order Approved"
-      )
-  end
 
 # Preview this email at http://landing.dev/rails/mailers/order_mailer/send_paid_order
   def send_paid_order
@@ -40,8 +43,9 @@ class OrderMailerPreview < ActionMailer::Preview
     OrderMailer.send_order(
       order: order,
       status: "paid",
-      email: "order@landingintl.com", # send to brand/landing (currently just sending to Landing)
-      subject: "Landing International: Order Payment in Escrow"
+      email: "orders@landingintl.com", # send to brand/landing (currently just sending to Landing)
+      subject: "Yay! Get ready to ship!",
+      title: "Order Paid"
       )
   end
 
@@ -51,19 +55,33 @@ class OrderMailerPreview < ActionMailer::Preview
     OrderMailer.send_order(
       order: order,
       status: "shipped",
-      email: order.user.email, # send to brand/landing (currently just sending to Landing)
-      subject: "Landing International: Order Shipped"
+      email: order.user.email, # send to orderer
+      subject: "Hooray! Your beauty products are on their way! ",
+      title: "Order Shipped"
       )
   end
 
-# Preview this email at http://landing.dev/rails/mailers/order_mailer/send_delivered_order
-  def send_delivered_order
+# Preview this email at http://landing.dev/rails/mailers/order_mailer/send_delivered_orderer
+  def send_delivered_orderer
     order = Order.where(status: "delivered").first
     OrderMailer.send_order(
       order: order,
-      status: "delivered",
-      email: order.user.email, # send to brand/landing (currently just sending to Landing)
-      subject: "Landing International: Order Delivered"
+      status: "delivered_orderer",
+      email: order.user.email, # send to orderer
+      subject: "Woohoo! Your order was delivered.",
+      title: "Order Delivered"
+      )
+  end
+
+# Preview this email at http://landing.dev/rails/mailers/order_mailer/send_delivered_brand
+  def send_delivered_brand
+    order = Order.where(status: "delivered").first
+    OrderMailer.send_order(
+      order: order,
+      status: "delivered_brand",
+      email: "orders@landingintl.com", # send to brand/landing (currently just sending to Landing)
+      subject: "Nice Job! Your order was delivered.",
+      title: "Order Delivered"
       )
   end
 
@@ -73,8 +91,9 @@ class OrderMailerPreview < ActionMailer::Preview
     OrderMailer.send_order(
       order: order,
       status: "completed",
-      email: order.user.email, # send to brand/landing (currently just sending to Landing)
-      subject: "Landing International: Order Payment Released from Escrow"
+      email: "orders@landingintl.com", # send to brand/landing (currently just sending to Landing)
+      subject: "Woohoo! Your payment has been released!",
+      title: "Order Payment Released"
       )
   end
 

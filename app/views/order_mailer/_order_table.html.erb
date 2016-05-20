@@ -1,115 +1,350 @@
-
-<table style="width: 90%;margin: auto; padding: 5px; border: 1px solid #cdcdcd; font-weight: 200;" cellpadding="5" cellspacing="5" border="0">
+<table class="container float-center" style="Margin:0 auto;background:#fefefe;border-collapse:collapse;border-spacing:0;float:none;margin:0 auto;padding:0;text-align:center;vertical-align:top;width:600px">
 	<tbody>
-		<tr>
-			<td colspan="2" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">
-				<p>
-					<% if order.brand.logo_file_name %>
-						<%= image_tag order.brand.logo.url(:medium), alt: "Logo" %>
-					<% else %>
-						<% if !order.brand.facebook.blank? && fb_picture(order.brand.facebook) %>
-							<%= image_tag fb_picture(order.brand.facebook) %>
-						<% else %>
-							<%= image_tag order.brand.logo.url(:medium), width: "100", height: "100", alt: "Logo" %>
-						<% end %>
-					<% end %>
-					<br>
-					<%= order.brand.company_name %><br>
-					<%= "#{order.brand.address.address1}".html_safe unless order.brand.address.address1.blank? %>
-					<%= "<br>#{order.brand.address.address2}".html_safe unless order.brand.address.address2.blank? %>
-					<%= "<br>#{order.brand.address.city}".html_safe unless order.brand.address.city.blank? %>
-					<%= "#{order.brand.address.state}".html_safe unless order.brand.address.state.blank? %>
-					<%= "#{order.brand.address.postcode}".html_safe unless order.brand.address.postcode.blank? %>
-					<%= "<br>#{order.brand.address.country}".html_safe unless order.brand.address.country.blank? %>
-				</p>
-			</td>
-			<td colspan="2" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;">
-				<p>
-					<span style="font-weight: 900;">Bill to:</span>
-					<br>
-					<%= order.orderer.company_name %>
-					<%= "<br>#{order.orderer.address.address1}".html_safe unless order.orderer.address.address1.blank? %>
-					<%= "<br>#{order.orderer.address.address2}".html_safe unless order.orderer.address.address2.blank? %>
-					<%= "<br>#{order.orderer.address.city}".html_safe unless order.orderer.address.city.blank? %>
-					<%= "#{order.orderer.address.state}".html_safe unless order.orderer.address.state.blank? %>
-					<%= "#{order.orderer.address.postcode}".html_safe unless order.orderer.address.postcode.blank? %>
-					<%= "<br>#{order.orderer.address.country}".html_safe unless order.orderer.address.country.blank? %>
-				</p>
-			</td>
-			<td colspan="2" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;">
-				<p>
-					<span style="font-weight: 900;">Ship to:</span>
-					<br>
-					<% if order.shipping_address %>
-					<%= order.ship_to_name %>
-					<%= "<br>#{order.shipping_address.address1}".html_safe unless order.shipping_address.address1.blank? %>
-					<%= "<br>#{order.shipping_address.address2}".html_safe unless order.shipping_address.address2.blank? %>
-					<%= "<br>#{order.shipping_address.city}".html_safe unless order.shipping_address.city.blank? %>
-					<%= "#{order.shipping_address.state}".html_safe unless order.shipping_address.state.blank? %>
-					<%= "#{order.shipping_address.postcode}".html_safe unless order.shipping_address.postcode.blank? %>
-					<%= "<br>#{order.shipping_address.country}".html_safe unless order.shipping_address.country.blank? %>
-					<% else %>
-					<%= order.orderer.company_name %>
-					<%= "<br>#{order.orderer.address.address1}".html_safe unless order.orderer.address.address1.blank? %>
-					<%= "<br>#{order.orderer.address.address2}".html_safe unless order.orderer.address.address2.blank? %>
-					<%= "<br>#{order.orderer.address.city}".html_safe unless order.orderer.address.city.blank? %>
-					<%= "#{order.orderer.address.state}".html_safe unless order.orderer.address.state.blank? %>
-					<%= "#{order.orderer.address.postcode}".html_safe unless order.orderer.address.postcode.blank? %>
-					<%= "<br>#{order.orderer.address.country}".html_safe unless order.orderer.address.country.blank? %>
-					<% end %>
-				</p>
-			</td>
-		</tr>
-		<tr style="background-color: #efefef;"><th colspan="6" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;"> Products </th></tr>
-		<tr style="background-color: #efefef; font-weight: 900;">
-			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">Item</td>
-			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">Description</td>
-			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">Quantity</td>
-			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">MSRP</td>
-			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">Unit Price</td>
-			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">Amount</td>
-		</tr>
-		<% get_sorted_order_items(order).each do |lineitem| %>
-		<tr>
-		<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;"><%= lineitem.item_id.present? ? "#{lineitem.item_id}" : "&nbsp;".html_safe %></td>
-		<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;"><%= lineitem.name %></td>
-		<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;"><%= lineitem.quantity %></td>
-		<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;"><%= number_to_currency(lineitem.price_in_dollars) %></td>
-		<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom;"><%= number_to_currency(lineitem.tiered_price_in_dollars) %></td>
-		<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; vertical-align:bottom; text-align: right;"><%= number_to_currency(lineitem.total_price) %></td>
-		</tr>
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<td style="-moz-hyphens:auto;-webkit-hyphens:auto;Margin:0;border-collapse:collapse!important;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;hyphens:auto;line-height:19px;margin:0;padding:0;text-align:left;vertical-align:top;word-wrap:break-word">
+	<table class="row" style="border-collapse:collapse;border-spacing:0;display:table;padding:0;position:relative;text-align:left;vertical-align:top;width:100%">
+	<tbody>
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<th class="small-12 large-12 columns first last" style="Margin:0 auto;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0 auto;padding:0;padding-bottom:16px;padding-left:16px;padding-right:16px;text-align:left;width:584px">
+	<table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<th style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;padding:0;text-align:left">
+	<hr style="Margin:20px auto;border-bottom:1px solid #cacaca;border-left:0;border-right:0;border-top:0;clear:both;height:0;margin:20px auto;max-width:600px">
+<h4 style="Margin:0;Margin-bottom:10px;color:inherit;font-family:Helvetica,Arial,sans-serif;font-size:24px;font-weight:lighter;line-height:1.3;margin:0;margin-bottom:10px;padding:0;text-align:left;word-wrap:normal">
+	Order Details</h4>
+<table class="callout" style="Margin-bottom:16px;border-collapse:collapse;border-spacing:0;margin-bottom:16px;padding:0;text-align:left;vertical-align:top;width:100%">
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<th class="callout-inner secondary" style="Margin:0;background:#ebebeb;border:1px solid #000;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;padding:10px;text-align:left;width:100%">
+	<p style="Margin:0;Margin-bottom:10px;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;margin-bottom:10px;padding:0;text-align:left">
+	<%= order.orderer.company_name %> to <%= order.brand.company_name %></p>
+<table class="container" style="Margin:0 auto;background:#fefefe;border-collapse:collapse;border-spacing:0;margin:0 auto;padding:0;text-align:inherit;vertical-align:top;width:100%">
+	<tbody>
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<td style="-moz-hyphens:auto;-webkit-hyphens:auto;Margin:0;border-collapse:collapse!important;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;hyphens:auto;line-height:19px;margin:0;padding:0;text-align:left;vertical-align:top;word-wrap:break-word">
+	<table class="row" style="border-collapse:collapse;border-spacing:0;display:table;padding:0;position:relative;text-align:left;vertical-align:top;width:100%">
+	<tbody>
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<th class="small-12 large-12 columns first last" style="Margin:0 auto;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0 auto;padding:0;padding-bottom:16px;padding-left:16px;padding-right:16px;text-align:left;width:100%">
+	<table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<th style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;padding:0;text-align:left">
+	<% if order.brand.logo_file_name %>
+		<%= image_tag order.brand.logo.url(:medium), alt: "Logo", style: "-ms-interpolation-mode:bicubic;clear:both;display:block;max-width:100%;outline:0;text-decoration:none;width:auto" %>
+	<% else %>
+		<% if !order.brand.facebook.blank? && fb_picture(order.brand.facebook) %>
+			<%= image_tag fb_picture(order.brand.facebook), style: "-ms-interpolation-mode:bicubic;clear:both;display:block;max-width:100%;outline:0;text-decoration:none;width:auto"  %>
+		<% else %>
+			<%= image_tag order.brand.logo.url(:medium), width: "100", height: "100", alt: "Logo", style: "-ms-interpolation-mode:bicubic;clear:both;display:block;max-width:100%;outline:0;text-decoration:none;width:auto"  %>
 		<% end %>
-		<tr>
-			<td colspan="5" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; text-align: right;">Subtotal <small>(before taxes/fees/shipping)</small></td>
-			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: bolder; line-height: 20px; text-align: right;"><%= number_to_currency(order.subtotal_price) %></td>
-		</tr>
-
-
-
-		<tr style="background-color: #efefef;"><th colspan="6" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;"> Additional Charges (e.g. shipping) </th></tr>
-		<tr style="background-color: #efefef; font-weight: 900;">
-			<td>&nbsp;</td>
-			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;" colspan="2">Charge</td>
-			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;" colspan="2">Description</td>
-			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;">Amount</td>
-		</tr>
-		<% order.order_additional_charges.each.each do |lineitem| %>
-		<tr>
-			<td>&nbsp;</td>
-			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;" colspan="2"><%= lineitem.name %></td>
-			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px;" colspan="2"><%= lineitem.description %></td>
-			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; text-align: right;"><%= number_to_currency(lineitem.amount_in_dollars) %></td>
-		</tr>
-		<% end %>
-		<tr>
-			<td colspan="5" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; text-align: right;">Additional Charges Subtotal </td>
-			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: bolder; line-height: 20px; text-align: right;"><%= number_to_currency(order.charges_subtotal_price) %></td>
-		</tr>
-
-		<tr style="background-color: #efefef;">
-			<td colspan="5" class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: lighter; line-height: 20px; text-align: right;">Order Total</td>
-			<td class="body-text" style="color: #444444; font-family: 'Open Sans', Arial, sans-serif; font-size: 12px; font-weight: bolder; line-height: 20px; text-align: right;"><%= number_to_currency(order.total_price) %></td>
-		</tr>
-	</tbody>
+	<% end %>
+</th>
+<th class="expander" style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;padding:0!important;text-align:left;visibility:hidden;width:0">
+</th>
+</tr>
+</table>
+</th>
+</tr>
+</tbody>
+</table>
+<table class="row" style="border-collapse:collapse;border-spacing:0;display:table;padding:0;position:relative;text-align:left;vertical-align:top;width:100%">
+	<tbody>
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<th class="small-12 large-6 columns first" style="Margin:0 auto;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0 auto;padding:0;padding-bottom:16px;padding-left:16px;padding-right:8px;text-align:left;width:50%">
+	<table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<th style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;padding:0;text-align:left">
+	<p style="Margin:0;Margin-bottom:10px;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;margin-bottom:10px;padding:0;text-align:left">
+<%= order.brand.company_name %><br>
+<%= "#{order.brand.address.address1}".html_safe unless order.brand.address.address1.blank? %>
+<%= "<br>#{order.brand.address.address2}".html_safe unless order.brand.address.address2.blank? %>
+<%= "<br>#{order.brand.address.city}".html_safe unless order.brand.address.city.blank? %>
+<%= "#{order.brand.address.state}".html_safe unless order.brand.address.state.blank? %>
+<%= "#{order.brand.address.postcode}".html_safe unless order.brand.address.postcode.blank? %>
+<%= "<br>#{order.brand.address.country}".html_safe unless order.brand.address.country.blank? %>
+</p>
+</th>
+</tr>
+</table>
+</th>
+<th class="small-12 large-6 columns last" style="Margin:0 auto;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0 auto;padding:0;padding-bottom:16px;padding-left:8px;padding-right:16px;text-align:left;width:50%">
+	<table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<th style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;padding:0;text-align:left">
+	<p style="Margin:0;Margin-bottom:10px;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;margin-bottom:10px;padding:0;text-align:left">
+	<em>
+	Ship to:</em>
+<br>
+	<% if order.shipping_address %>
+	<%= order.ship_to_name %>
+	<%= "<br>#{order.shipping_address.address1}".html_safe unless order.shipping_address.address1.blank? %>
+	<%= "<br>#{order.shipping_address.address2}".html_safe unless order.shipping_address.address2.blank? %>
+	<%= "<br>#{order.shipping_address.city}".html_safe unless order.shipping_address.city.blank? %>
+	<%= "#{order.shipping_address.state}".html_safe unless order.shipping_address.state.blank? %>
+	<%= "#{order.shipping_address.postcode}".html_safe unless order.shipping_address.postcode.blank? %>
+	<%= "<br>#{order.shipping_address.country}".html_safe unless order.shipping_address.country.blank? %>
+	<% else %>
+	<%= order.orderer.company_name %>
+	<%= "<br>#{order.orderer.address.address1}".html_safe unless order.orderer.address.address1.blank? %>
+	<%= "<br>#{order.orderer.address.address2}".html_safe unless order.orderer.address.address2.blank? %>
+	<%= "<br>#{order.orderer.address.city}".html_safe unless order.orderer.address.city.blank? %>
+	<%= "#{order.orderer.address.state}".html_safe unless order.orderer.address.state.blank? %>
+	<%= "#{order.orderer.address.postcode}".html_safe unless order.orderer.address.postcode.blank? %>
+	<%= "<br>#{order.orderer.address.country}".html_safe unless order.orderer.address.country.blank? %>
+	<% end %>
+<small style="color:#8a8a8a;font-size:70%">
+	<br>Contact:</small>
+ <%= order.user.contact.firstname %> <%= order.user.contact.lastname %><br>
+ <small style="color:#8a8a8a;font-size:70%">
+	Phone:</small>
+ <%= order.user.contact.phone %></p>
+</th>
+</tr>
+</table>
+</th>
+</tr>
+</tbody>
+</table>
+<table class="row" style="border-collapse:collapse;border-spacing:0;display:table;padding:0;position:relative;text-align:left;vertical-align:top;width:100%">
+	<tbody>
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<th class="small-12 large-12 columns first last" style="Margin:0 auto;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0 auto;padding:0;padding-bottom:16px;padding-left:16px;padding-right:16px;text-align:left;width:100%">
+	<table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<th style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;padding:0;text-align:left">
+	<table class="callout" style="Margin-bottom:16px;border-collapse:collapse;border-spacing:0;margin-bottom:16px;padding:0;text-align:left;vertical-align:top;width:100%">
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<th class="callout-inner" style="Margin:0;background:#fefefe;border:1px solid #cbcbcb;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;padding:10px;text-align:left;width:100%">
+	<table class="row" style="border-collapse:collapse;border-spacing:0;display:table;padding:0;position:relative;text-align:left;vertical-align:top;width:100%">
+	<tbody>
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<th class="small-12 large-12 columns first last" style="Margin:0 auto;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0 auto;padding:0;padding-bottom:16px;padding-left:16px;padding-right:16px;text-align:left;width:100%">
+	<table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<th style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;padding:0;text-align:left">
+	<br>
+	<strong>
+	Products</strong>
+<hr style="Margin:20px auto;border-bottom:1px solid #cacaca;border-left:0;border-right:0;border-top:0;clear:both;height:0;margin:20px auto;max-width:600px">
+</th>
+<th class="expander" style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;padding:0!important;text-align:left;visibility:hidden;width:0">
+</th>
+</tr>
+</table>
+</th>
+</tr>
+</tbody>
 </table>
 
+
+<% get_sorted_order_items(order).each do |lineitem| %>
+<table class="row" style="border-collapse:collapse;border-spacing:0;display:table;padding:0;position:relative;text-align:left;vertical-align:top;width:100%">
+<tbody>
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<th class="small-12 large-5 columns first" style="Margin:0 auto;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0 auto;padding:0;padding-bottom:16px;padding-left:16px;padding-right:8px;text-align:left;width:41.66667%">
+	<table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<th style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;padding:0;text-align:left">
+	<p style="Margin:0;Margin-bottom:10px;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;margin-bottom:10px;padding:0;text-align:left">
+	<small style="color:#8a8a8a;font-size:70%">
+	&#xA0;</small>
+<br>
+<%= lineitem.name %>
+<%= "<br>#{lineitem.item_id}".html_safe if lineitem.item_id.present? %></p>
+</th>
+</tr>
+</table>
+</th>
+<th class="small-12 large-3 columns" style="Margin:0 auto;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0 auto;padding:0;padding-bottom:16px;padding-left:8px;padding-right:8px;text-align:left;width:25%">
+	<table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<th style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;padding:0;text-align:left">
+	<p class="text-right" style="Margin:0;Margin-bottom:10px;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;margin-bottom:10px;padding:0;text-align:right">
+	<small style="color:#8a8a8a;font-size:70%">
+	Unit Price (MSRP) </small>
+<br>
+<%= number_to_currency(lineitem.tiered_price_in_dollars) %> (<%= number_to_currency(lineitem.price_in_dollars) %>)</p>
+</th>
+</tr>
+</table>
+</th>
+<th class="small-12 large-2 columns" style="Margin:0 auto;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0 auto;padding:0;padding-bottom:16px;padding-left:8px;padding-right:8px;text-align:left;width:16.66667%">
+	<table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<th style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;padding:0;text-align:left">
+	<p class="text-right" style="Margin:0;Margin-bottom:10px;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;margin-bottom:10px;padding:0;text-align:right">
+	<small style="color:#8a8a8a;font-size:70%">
+	Quantity</small>
+<br>
+<%= lineitem.quantity %></p>
+</th>
+</tr>
+</table>
+</th>
+<th class="small-12 large-2 columns last" style="Margin:0 auto;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0 auto;padding:0;padding-bottom:16px;padding-left:8px;padding-right:16px;text-align:left;width:16.66667%">
+	<table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<th style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;padding:0;text-align:left">
+	<p class="text-right" style="Margin:0;Margin-bottom:10px;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;margin-bottom:10px;padding:0;text-align:right">
+	<small style="color:#8a8a8a;font-size:70%">
+	Amount</small>
+<br>
+<%= number_to_currency(lineitem.total_price) %></p>
+</th>
+</tr>
+</table>
+</th>
+</tr>
+</tbody>
+</table>
+<% end %>
+
+<table class="row" style="border-collapse:collapse;border-spacing:0;display:table;padding:0;position:relative;text-align:left;vertical-align:top;width:100%">
+<tbody>
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<th class="small-12 large-12 columns first last" style="Margin:0 auto;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0 auto;padding:0;padding-bottom:16px;padding-left:16px;padding-right:16px;text-align:left;width:100%">
+	<table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<th style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;padding:0;text-align:left">
+	
+<p class="text-right" style="Margin:0;Margin-bottom:10px;color:#a3a3a3;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;margin-bottom:10px;padding:0;text-align:right">
+	<strong>
+	PRODUCTS SUBTOTAL: <%= number_to_currency(order.subtotal_price) %></strong>
+	<hr style="Margin:20px auto;border-bottom:1px solid #cacaca;border-left:0;border-right:0;border-top:0;clear:both;height:0;margin:20px auto;max-width:600px">
+</p>
+</th>
+<th class="expander" style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;padding:0!important;text-align:left;visibility:hidden;width:0">
+</th>
+</tr>
+</table>
+</th>
+</tr>
+</tbody>
+</table>
+
+
+<% if order.order_additional_charges.present? %>
+<table class="row" style="border-collapse:collapse;border-spacing:0;display:table;padding:0;position:relative;text-align:left;vertical-align:top;width:100%">
+<tbody>
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<th class="small-12 large-12 columns first last" style="Margin:0 auto;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0 auto;padding:0;padding-bottom:16px;padding-left:16px;padding-right:16px;text-align:left;width:100%">
+	<table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<th style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;padding:0;text-align:left">
+	<strong>
+	Charges</strong>
+<hr style="Margin:20px auto;border-bottom:1px solid #cacaca;border-left:0;border-right:0;border-top:0;clear:both;height:0;margin:20px auto;max-width:600px">
+</th>
+<th class="expander" style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;padding:0!important;text-align:left;visibility:hidden;width:0">
+</th>
+</tr>
+</table>
+</th>
+</tr>
+</tbody>
+</table>
+<% order.order_additional_charges.each.each do |lineitem| %>
+<table class="row" style="border-collapse:collapse;border-spacing:0;display:table;padding:0;position:relative;text-align:left;vertical-align:top;width:100%">
+<tbody>
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<th class="small-12 large-5 columns first" style="Margin:0 auto;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0 auto;padding:0;padding-bottom:16px;padding-left:16px;padding-right:8px;text-align:left;width:41.66667%">
+	<table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<th style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;padding:0;text-align:left">
+<p style="Margin:0;Margin-bottom:10px;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;margin-bottom:10px;padding:0;text-align:left">
+	<small style="color:#8a8a8a;font-size:70%">
+	&#xA0;</small>
+	<br>
+	<%= lineitem.name %></p>
+</th>
+</tr>
+</table>
+</th>
+<th class="small-12 large-5 columns" style="Margin:0 auto;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0 auto;padding:0;padding-bottom:16px;padding-left:8px;padding-right:8px;text-align:left;width:41.66667%">
+	<table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<th style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;padding:0;text-align:left">
+	<p class="text-right" style="Margin:0;Margin-bottom:10px;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;margin-bottom:10px;padding:0;text-align:right">
+	<small style="color:#8a8a8a;font-size:70%">
+	Description </small>
+<br>
+<%= lineitem.description %></p>
+</th>
+</tr>
+</table>
+</th>
+<th class="small-12 large-2 columns last" style="Margin:0 auto;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0 auto;padding:0;padding-bottom:16px;padding-left:8px;padding-right:16px;text-align:left;width:16.66667%">
+	<table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<th style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;padding:0;text-align:left">
+	<p class="text-right" style="Margin:0;Margin-bottom:10px;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;margin-bottom:10px;padding:0;text-align:right">
+	<small style="color:#8a8a8a;font-size:70%">
+	Amount</small>
+<br>
+<%= number_to_currency(lineitem.amount_in_dollars) %></p>
+</th>
+</tr>
+</table>
+</th>
+</tr>
+</tbody>
+</table>
+<% end %>
+
+<table class="row" style="border-collapse:collapse;border-spacing:0;display:table;padding:0;position:relative;text-align:left;vertical-align:top;width:100%">
+<tbody>
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<th class="small-12 large-12 columns first last" style="Margin:0 auto;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0 auto;padding:0;padding-bottom:16px;padding-left:16px;padding-right:16px;text-align:left;width:100%">
+	<table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+	<tr style="padding:0;text-align:left;vertical-align:top">
+	<th style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;padding:0;text-align:left">
+	
+<p class="text-right" style="Margin:0;Margin-bottom:10px;color:#a3a3a3;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;margin-bottom:10px;padding:0;text-align:right">
+	<strong>
+	CHARGES SUBTOTAL: <%= number_to_currency(order.charges_subtotal_price) %></strong>
+	<hr style="Margin:20px auto;border-bottom:1px solid #cacaca;border-left:0;border-right:0;border-top:0;clear:both;height:0;margin:20px auto;max-width:600px">
+</p>
+</th>
+<th class="expander" style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;padding:0!important;text-align:left;visibility:hidden;width:0">
+</th>
+</tr>
+</table>
+</th>
+</tr>
+</tbody>
+</table>
+<% end %>
+
+<table class="row" style="border-collapse:collapse;border-spacing:0;display:table;padding:0;position:relative;text-align:left;vertical-align:top;width:100%"><tbody><tr style="padding:0;text-align:left;vertical-align:top"><th class="small-12 large-12 columns first last" style="Margin:0 auto;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0 auto;padding:0;padding-bottom:16px;padding-left:16px;padding-right:16px;text-align:left;width:100%"><table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%"><tr style="padding:0;text-align:left;vertical-align:top"><th style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;padding:0;text-align:left"><p class="text-right" style="Margin:0;Margin-bottom:10px;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;margin-bottom:10px;padding:0;text-align:right"><strong>ORDER TOTAL: <%= number_to_currency(order.total_price) %></strong></p></th><th class="expander" style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;padding:0!important;text-align:left;visibility:hidden;width:0"></th></tr></table></th></tr></tbody></table>
+
+</th>
+<th class="expander" style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;padding:0!important;text-align:left;visibility:hidden;width:0">
+</th>
+</tr>
+</table>
+</th>
+</tr>
+</table>
+</th>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</th>
+<th class="expander" style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0;padding:0!important;text-align:left;visibility:hidden;width:0">
+</th>
+</tr>
+</table>
+</th>
+</tr>
+</table>
+</th>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>

@@ -108,9 +108,17 @@ class Order # for V2 ordering
     self.save!
     OrderMailer.send_order(
       order: self, 
-      status: "submitted", 
-      email: "order@landingintl.com", # send to brand/landing (currently just sending to Landing)
-      subject: "Landing International: Order Submitted"
+      status: "submitted_brand", 
+      email: "orders@landingintl.com", # send to brand/landing (currently just sending to Landing)
+      subject: "Good News! You have a new order request on Landing!",
+      title: "Order Submitted"
+      ).deliver
+    OrderMailer.send_order(
+      order: self, 
+      status: "submitted_orderer", 
+      email: self.user.email, # send to buyer
+      subject: "Congratulations! You submitted an order on Landing!",
+      title: "Order Submitted"
       ).deliver
   end
 
@@ -125,7 +133,8 @@ class Order # for V2 ordering
       order: self, 
       status: "pending", 
       email: self.user.email, # send to orderer email (using the order creator's email in this case)
-      subject: "Landing International: Order Updated"
+      subject: "Yippee! Your order has been approved.",
+      title: "Order Pending Approval and Payment"
       ).deliver
   end
 
@@ -135,12 +144,6 @@ class Order # for V2 ordering
       self.status = "approved"
       self.approved_date = DateTime.now
       self.save!
-      OrderMailer.send_order(
-        order: self, 
-        status: "approved", 
-        email: "order@landingintl.com", # send to brand/landing (currently just sending to Landing)
-        subject: "Landing International: Order Approved"
-        ).deliver
     end
   end
 
@@ -152,14 +155,9 @@ class Order # for V2 ordering
     OrderMailer.send_order(
       order: self,
       status: "paid",
-      email: "order@landingintl.com", # send to brand/landing (currently just sending to Landing)
-      subject: "Landing International: Order Funds Have Posted to Escrow"
-      ).deliver
-    OrderMailer.send_order(
-      order: self,
-      status: "paid",
-      email: self.armor_buyer_email, # send to buyer
-      subject: "Landing International: Order Funds Have Posted to Escrow"
+      email: "orders@landingintl.com", # send to brand/landing (currently just sending to Landing)
+      subject: "Yay! Get ready to ship!",
+      title: "Order Paid"
       ).deliver
   end
 
@@ -172,7 +170,8 @@ class Order # for V2 ordering
       order: self,
       status: "shipped",
       email: self.user.email, # send to orderer email (using the order creator's email in this case)
-      subject: "Landing International: Order Shipped"
+      subject: "Hooray! Your beauty products are on their way!",
+      title: "Order Shipped"
       ).deliver
   end
 
@@ -183,15 +182,17 @@ class Order # for V2 ordering
     self.save!
     OrderMailer.send_order(
       order: self,
-      status: "delivered",
+      status: "delivered_orderer",
       email: self.user.email, # send to orderer email (using the order creator's email in this case)
-      subject: "Landing International: Order Delivered"
+      subject: "Woohoo! Your order was delivered.",
+      title: "Order Delivered"
       ).deliver
     OrderMailer.send_order(
       order: self,
-      status: "delivered",
-      email: "order@landingintl.com", # send to brand/landing (currently just sending to Landing)
-      subject: "Landing International: Order Delivered"
+      status: "delivered_brand",
+      email: "orders@landingintl.com", # send to brand/landing (currently just sending to Landing)
+      subject: "Nice Job! Your order was delivered.",
+      title: "Order Delivered"
       ).deliver
   end
 
@@ -203,15 +204,17 @@ class Order # for V2 ordering
     self.save!
     OrderMailer.send_order(
       order: self,
-      status: "delivered",
+      status: "disputed_orderer",
       email: self.user.email, # send to orderer email (using the order creator's email in this case)
-      subject: "Landing International: Order Delivered"
+      subject: "Landing International: Order Dispute",
+      title: "Order in Dispute"
       ).deliver
     OrderMailer.send_order(
       order: self,
-      status: "delivered",
-      email: "order@landingintl.com", # send to brand/landing (currently just sending to Landing)
-      subject: "Landing International: Order Delivered"
+      status: "disputed_brand",
+      email: "orders@landingintl.com", # send to brand/landing (currently just sending to Landing)
+      subject: "Landing International: Order Dispute",
+      title: "Order in Dispute"
       ).deliver
   end
 
@@ -223,14 +226,9 @@ class Order # for V2 ordering
     OrderMailer.send_order(
       order: self,
       status: "completed",
-      email: self.user.email, # send to orderer email (using the order creator's email in this case)
-      subject: "Landing International: Order Funds Released from Escrow"
-      ).deliver
-    OrderMailer.send_order(
-      order: self,
-      status: "completed",
-      email: "order@landingintl.com", # send to brand/landing (currently just sending to Landing)
-      subject: "Landing International: Order Funds Released from Escrow"
+      email: "orders@landingintl.com", # send to brand/landing (currently just sending to Landing)
+      subject: "Woohoo! Your payment has been released!",
+      title: "Order Payment Released"
       ).deliver
   end
 
@@ -243,13 +241,15 @@ class Order # for V2 ordering
       order: self,
       status: "error",
       email: self.user.email, # send to orderer email (using the order creator's email in this case)
-      subject: "Landing International: Order Completed"
+      subject: "Landing International: Order Completed",
+      title: "Order Errors"
       ).deliver
     OrderMailer.send_order(
       order: self,
       status: "error",
-      email: "order@landingintl.com", # send to brand/landing (currently just sending to Landing)
-      subject: "Landing International: Order Errors"
+      email: "orders@landingintl.com", # send to brand/landing (currently just sending to Landing)
+      subject: "Landing International: Order Errors",
+      title: "Order Errors"
       ).deliver
   end
 
