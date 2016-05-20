@@ -1,14 +1,24 @@
-Order Updated
-Hello, your order has been updated with shipping and fees
+Hello! 
+<%= order.brand.company_name %> is super excited for your order. They have updated your order with the applicable shipping and fees. Hurry and approve your final invoice so they can ship your goodies!
 
-Order Description:
-Landing International Marketplace:
-Purchase of goods from <%= order.brand.company_name %> by <%= order.orderer.company_name %>
+What’s next? 
+1. Review the order 
+2. Approve if you accept all charges
+3. Post payment to escrow
+
+Once that is done, <%= order.brand.company_name %> will be ready to ship the order. If you have questions or issues with your order or charges, contact <%= order.brand.company_name %> at: <%= order.brand.users.first.email %>
+
+Check your order status at any time on your dashboard at landinginternational.com.
+
+Thanks and enjoy your day!
+
+-Team Landing
 
 
-Next Step:
-Please review the order and approve if you accept all charges.
 
+If you have any questions, please email us at orders@landinginternational.com.
+
+Order: <%= order.orderer.company_name %> to <%= order.brand.company_name %>
 
 Click or Copy/Paste the link below into your browser to view the order:
-<%= link %>
+<%= order_url(order) %>

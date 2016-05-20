@@ -1,0 +1,18 @@
+How exciting! 
+Now it’s time to race to work because your shipment of beauty goods has been delivered! 
+
+Review your order and, if you are happy, release payment to <%= order.brand.company_name %>. If we don’t hear from you, we’ll assume you are happy as a clam and <%= order.brand.company_name %> gets their payment in three days. 
+
+Love it? Order it again. Or, try something new on landinginternational.com
+
+Thank you and see you again soon!
+
+-Team Landing
+
+
+If you have any questions, please email us at orders@landinginternational.com.
+
+Order: <%= order.orderer.company_name %> to <%= order.brand.company_name %>
+
+Click or Copy/Paste the link below into your browser to view the order:
+<%= order_url(order) %>

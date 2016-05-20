@@ -1,17 +1,20 @@
-Order Funds in Escrow
+Hello!  <%= order.orderer.company_name %> has approved the order and has posted funds to escrow. 
+   
+Now what?
+1. Get the order ready for shipping
+2. Enter the shipment tracking details into the order details on landinginternational.com
+3. Ship your orders 
 
-Hello, funds have been posted to escrow for the following order:
+Check your order status at any time on your dashboard at landinginternational.com.
+
+Thanks and see you again soon!
+
+-Team Landing
 
 
-Order Description:
-Landing International Marketplace:
-Purchase of goods from <%= order.brand.company_name %> by <%= order.orderer.company_name %>
+If you have any questions, please email us at orders@landinginternational.com.
 
-
-Next Step:
-The order is ready for shipment.
-
-
+Order: <%= order.orderer.company_name %> to <%= order.brand.company_name %>
 
 Click or Copy/Paste the link below into your browser to view the order:
-<%= link %>
+<%= order_url(order) %>

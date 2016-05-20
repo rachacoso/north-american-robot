@@ -1,16 +1,26 @@
-Order Submitted
-Hello, a new order has been submitted.
-<%= order.orderer.company_name %> has placed an order for goods from <%= order.brand.company_name %>
+Congratulations! 
+You have a new order request on Landing International from <%= order.orderer.company_name %>.
+
+What’s next?
+
+Please log-in to Landing International and follow these steps:
+
+1. Review the order
+2. Ensure all items are available 
+3. Input shipping and any other fees
+4. Wait for payment notification
+
+Check your order status at any time on your dashboard at landinginternational.com.
+
+Thanks and have a great day!
+
+-Team Landing
 
 
-Order Description:
-Landing International Marketplace:<br>
-Purchase of goods from <%= order.brand.company_name %> by <%= order.orderer.company_name %>
 
+If you have any questions, please email us at orders@landinginternational.com.
 
-Next Step:
-Add any shipping costs or fees.
-
+Order: <%= order.orderer.company_name %> to <%= order.brand.company_name %>
 
 Click or Copy/Paste the link below into your browser to view the order:
-<%= link %>
+<%= order_url(order) %>

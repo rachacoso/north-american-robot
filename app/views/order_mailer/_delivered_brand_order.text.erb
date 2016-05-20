@@ -1,15 +1,16 @@
-Order Delivered
-Hello, your order has been delivered.
+It’s us again!
+We just wanted to let you know your order has arrived. Barring any complications, your payment should be released to your bank in the next few days. 
+
+Check your order status at any time on your dashboard at landinginternational.com.
+
+Thank you and see you again soon!
+
+-Team Landing
 
 
-Order Description:
-Landing International Marketplace:
-Purchase of goods from <%= order.brand.company_name %> by <%= order.orderer.company_name %>
+If you have any questions, please email us at orders@landinginternational.com.
 
-
-Next Step:
-Review of shipment and release of payment.
-
+Order: <%= order.orderer.company_name %> to <%= order.brand.company_name %>
 
 Click or Copy/Paste the link below into your browser to view the order:
-<%= link %>
+<%= order_url(order) %>

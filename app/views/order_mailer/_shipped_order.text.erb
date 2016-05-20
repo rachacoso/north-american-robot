@@ -1,15 +1,19 @@
-Order Shipped
-Hello, your order has shipped.
+Hello! 
+Your order has shipped and your beauty products are on their way! You can track your shipment on landinginternational.com.
+
+What to do now?
+Please review the shipment once delivered and, if you are happy, release payment to <%= order.brand.company_name %> or hang back and the funds will release in three days. Give us a shout if there are any issues, you have these three days to dispute an order.
+
+Check your order status at any time on your dashboard at landinginternational.com.
+
+Thank you and have a great day!
+
+-Team Landing
 
 
-Order Description:
-Landing International Marketplace:
-Purchase of goods from <%= order.brand.company_name %> by <%= order.orderer.company_name %>
+If you have any questions, please email us at orders@landinginternational.com.
 
-
-Next Step:
-Review shipment on delivery.
-
+Order: <%= order.orderer.company_name %> to <%= order.brand.company_name %>
 
 Click or Copy/Paste the link below into your browser to view the order:
-<%= link %>
+<%= order_url(order) %>
