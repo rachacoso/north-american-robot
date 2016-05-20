@@ -19,11 +19,10 @@
 					<div class="medium-11 medium-centered columns">
 						<a name="form"></a>
 						<br>
-						<h1>NEXT STEP: Await Review and Payment Release</h1>
+						<h1>Next Step: Await Review and Payment Release</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 						<div class="panel">
-							<h3><%= order.orderer.company_name %> will review the shipment before release of payment from escrow.<br> You will be notified via email when payment is released.</h3>
-							<div class="landing-notice"><h3>Please ensure that your Armor Payments account has your complete banking information for payment disbursement.</h3></div>
+							<h3><%= order.orderer.company_name %> will review the shipment before release of payment.<br> You will be notified via email when payment is released.</h3>
 						</div>
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->

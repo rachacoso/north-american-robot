@@ -7,7 +7,7 @@
 					<div id="order-panel-top">
 						<%= render partial: "orders/showfull/order_flow_header", locals: { status: order.status , armor: true } %>
 						<hr>
-						<h3>Payment for this order has been placed into escrow. Order can now be shipped to <%= order.orderer.company_name %>.</h3>
+						<h3>Payment for this order has been received and placed into escrow. Order can now be shipped to <%= order.orderer.company_name %>.</h3>
 					</div>
 				</div><!--/.small-12-->
 			</div><!--/.row-->
@@ -41,7 +41,7 @@
 								<%= form_tag order_shipment_info_url(order) + "#form" , method: "post" do %>
 								<div class="row">
 									<div class="medium-6 columns medium-centered">
-										<h2>1 ) Enter Shipping Company</h2><h3>Landing International's partner Armor Payments is able to automatically track delivery via numerous international shippers. <br><br>Type in the shipping company name to search for it below.</h3>
+										<h2>1 ) Enter Shipping Company</h2><h3>For your convenience, we can track delivery of  numerous international shippers and notify you of delivery status. <br><br>Type in the shipping company name to search for it below.</h3>
 									</div><!--/.medium-6-->
 								</div><!--/.row-->
 								<div class="row">
