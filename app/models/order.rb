@@ -204,17 +204,27 @@ class Order # for V2 ordering
     self.save!
     OrderMailer.send_order(
       order: self,
-      status: "disputed_orderer",
-      email: self.user.email, # send to orderer email (using the order creator's email in this case)
-      subject: "Landing International: Order Dispute",
+      status: "dispute_initiated",
+      email: "orders@landingintl.com", # send to brand/landing (currently just sending to Landing)
+      subject: "Order in Dispute",
       title: "Order in Dispute"
+      ).deliver
+  end
+
+  def dispute_update
+    OrderMailer.send_order(
+      order: self,
+      status: "dispute_updated",
+      email: "orders@landingintl.com", # send to brand/landing (currently just sending to Landing)
+      subject: "Order Dispute Updated",
+      title: "Order Dispute Updated"
       ).deliver
     OrderMailer.send_order(
       order: self,
-      status: "disputed_brand",
-      email: "orders@landingintl.com", # send to brand/landing (currently just sending to Landing)
-      subject: "Landing International: Order Dispute",
-      title: "Order in Dispute"
+      status: "dispute_updated",
+      email: self.armor_buyer_email, # send to orderer
+      subject: "Order Dispute Updated",
+      title: "Order Dispute Updated"
       ).deliver
   end
 

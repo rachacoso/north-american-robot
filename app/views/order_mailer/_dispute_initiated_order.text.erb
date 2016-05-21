@@ -1,0 +1,25 @@
+Hello.
+Your order was received by <%= order.orderer.company_name %>, but unfortunately there appears to be a problem and <%= order.orderer.company_name %> has initiated a dispute.
+ 
+Next steps:
+
+Please log-in to Landing International and follow these steps:
+
+1) Review the dispute
+2) Offer a settlement or move to arbitration
+
+You have 30 days from the initial dispute to make a settlement offer before the dispute automatically moves to arbitration.
+
+ 
+Check your order status at any time on your dashboard at landinginternational.com.
+
+Thank you!
+ 
+-Team Landing
+
+
+If you have any questions, please email us at orders@landinginternational.com.
+
+
+Click or Copy/Paste the link below into your browser to view the order:
+<%= order_url(order) %>

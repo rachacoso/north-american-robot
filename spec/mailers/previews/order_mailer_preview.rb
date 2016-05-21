@@ -97,6 +97,30 @@ class OrderMailerPreview < ActionMailer::Preview
       )
   end
 
+# Preview this email at http://landing.dev/rails/mailers/order_mailer/send_dispute_initiated
+  def send_dispute_initiated
+    order = Order.where(status: "disputed").first
+    OrderMailer.send_order(
+      order: order,
+      status: "dispute_initiated",
+      email: "orders@landingintl.com", # send to brand/landing (currently just sending to Landing)
+      subject: "Order in Dispute",
+      title: "Order in Dispute"
+      )
+  end
+
+# Preview this email at http://landing.dev/rails/mailers/order_mailer/send_dispute_updated
+  def send_dispute_updated
+    order = Order.where(status: "disputed").first
+    OrderMailer.send_order(
+      order: order,
+      status: "dispute_updated",
+      email: order.armor_buyer_email, # send to orderer
+      subject: "Order Dispute Updated",
+      title: "Order Dispute Updated"
+      )
+  end
+
 # Preview this email at http://landing.dev/rails/mailers/order_mailer/send_error_order
   def send_error_order
     order = Order.where(status: "error").first

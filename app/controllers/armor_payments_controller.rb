@@ -84,12 +84,20 @@ class ArmorPaymentsController < ApplicationController
 				@order.shipped
 			when 4
 				@order.delivered
-			when 5
+			when 5 # dispute initiated
 				armor_dispute_id = params[:event][:entity_id]
 				@order.disputed(dispute_id: armor_dispute_id)
 				# order dispute method TBD
 			when 6
 				@order.completed
+			when 7 # dispute to arbitration
+				@order.dispute_update
+			when 10 # dispute offer made
+				@order.dispute_update
+			when 11 # dispute offer accepted
+				@order.dispute_update
+			when 13 # dispute offer countered
+				@order.dispute_update
 			when 1001
 				@company.set_armor_bank
 			else
