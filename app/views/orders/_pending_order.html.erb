@@ -12,16 +12,16 @@
 
 <% elsif !@current_user.armor_user_id %>
 
-	<div class="row">
-		<div class="small-12 columns">
-			<h2>Almost There!<br>There are two steps you need to complete before you can send this updated order to <strong><%= @order.orderer.company_name %></strong>.</h2>
-			<hr>
-			<h3>For your security and convenience, Landing International has partnered with <%= link_to "Armor Payments, a Payoneer company", "//armorpayments.com", target: "_blank" %> to handle all payment transactions via secure escrow.</h3>
-		</div><!--/.small-12-->
-	</div><!--/.row-->
-
 	<% allow, missing, errors = @current_user.allows_armor_signup %>
 	<% if @current_user.company.armor_account_id.blank? && allow %>
+
+		<div class="row">
+			<div class="small-12 columns">
+				<h2>Almost There!<br>There are two steps you need to complete before you can send this updated order to <strong><%= @order.orderer.company_name %></strong>.</h2>
+				<hr>
+				<h3>For your security and convenience, Landing International has partnered with <%= link_to "Armor Payments, a Payoneer company", "//armorpayments.com", target: "_blank" %> to handle all payment transactions via secure escrow.</h3>
+			</div><!--/.small-12-->
+		</div><!--/.row-->
 
 		<div class="row">
 			<div class="small-12 columns">
@@ -48,6 +48,14 @@
 		</div><!--/.row-->
 
 	<% else %>
+
+		<div class="row">
+			<div class="small-12 columns">
+				<h2>Almost There!<br>There are a few more steps you need to complete before you can send this updated order to <strong><%= @order.orderer.company_name %></strong>.</h2>
+				<hr>
+				<h3>For your security and convenience, Landing International has partnered with <%= link_to "Armor Payments, a Payoneer company", "//armorpayments.com", target: "_blank" %> to handle all payment transactions via secure escrow.</h3>
+			</div><!--/.small-12-->
+		</div><!--/.row-->
 
 		<div class="row">
 			<div class="small-12 columns">
