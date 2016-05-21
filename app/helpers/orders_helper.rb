@@ -62,8 +62,8 @@ module OrdersHelper
 		shipping_address += "<br>#{address1}" if address1.present?
 		shipping_address += "<br>#{address2}" if address2.present?
 		shipping_address += "<br>#{city}" if city.present?
-		shipping_address += "#{state}" if state.present?
-		shipping_address += "#{postcode}" if postcode.present?
+		shipping_address += " #{state}" if state.present?
+		shipping_address += " #{postcode}" if postcode.present?
 		shipping_address += "<br>#{country}" if country.present?
 
 		return shipping_address.html_safe
