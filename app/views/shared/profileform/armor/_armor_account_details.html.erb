@@ -34,9 +34,6 @@
 </div><!--/.row-->
 <br><br>
 
-
-
-
 	<% content_for :javascript_foot do %>
 		<script type="text/javascript">
 			var ArmorInstructionsClicked = false;
@@ -46,9 +43,11 @@
 					showArmorPaymentsLightboxUi(url, 250, true);
 					ArmorInstructionsClicked = true;
 				} else {
-					$('#order-item-data').html("<div class='text-center'><h3>Sorry, there was an error, please reload the page and try again.</h3></div>");
+					$('#order-item-data').html("<div class='text-center'><h3>Sorry, the link has expired. Reloading page...</h3></div>");
 					$('.overlay#order-item-overlay').fadeIn();
 					$('#order-item').fadeIn();
+					window.location.replace('<%= eval("#{u.company_type.downcase}_url") + "#a-armor" %>');
+					window.location.reload(true);
 				}
 			});
 		</script>

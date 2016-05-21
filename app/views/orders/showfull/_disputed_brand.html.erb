@@ -29,7 +29,7 @@
 								<% end %>
 							<% else %>
 								<% if @armor_payment_dispute_url.present? %>
-									<%= render partial: "orders/showfull/disputed_order_status", locals: { disputeurl: @armor_payment_dispute_url} %>
+									<%= render partial: "orders/showfull/disputed_order_status", locals: { disputeurl: @armor_payment_dispute_url, order: order } %>
 								<% end %>
 							<% end %>
 						</div>

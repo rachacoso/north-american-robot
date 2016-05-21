@@ -32,7 +32,7 @@
 								<% end %>
 							<% else %>
 								<% if @armor_payment_instructions_url.present? %>
-									<%= render partial: "orders/showfull/approved_orderer_payment_instructions", locals: {url: @armor_payment_instructions_url} %>
+									<%= render partial: "orders/showfull/approved_orderer_payment_instructions", locals: {url: @armor_payment_instructions_url, order: order} %>
 								<% end %>
 							<% end %>
 							<br><br>
