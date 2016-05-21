@@ -5,7 +5,7 @@
 		<hr>
 		<% if @current_user.company_type == "Brand" %>
 		<h3><strong>One more step:<br>
-			You need to <%= link_to "input your bank information (via your Brand Profile)", brand_url + "#a-armor", target: "_blank" %> before you can send an order for final approval and payment by the buyer.</strong>
+			You need to <%= link_to "input your bank information (via your Brand Profile)", brand_url + "#a-armor", target: "_blank" %> before you can send an order for final approval and payment by the buyer. Missing or incorrect bank information may delay the disbursement of your payment and we wouldn’t want that to happen.</strong>
 		</h3>
 		<% else %>
 		<h3>You can now submit orders</h3>
