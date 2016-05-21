@@ -74,23 +74,7 @@
 	<em>
 	Ship to:</em>
 <br>
-	<% if order.shipping_address %>
-	<%= order.ship_to_name %>
-	<%= "<br>#{order.shipping_address.address1}".html_safe unless order.shipping_address.address1.blank? %>
-	<%= "<br>#{order.shipping_address.address2}".html_safe unless order.shipping_address.address2.blank? %>
-	<%= "<br>#{order.shipping_address.city}".html_safe unless order.shipping_address.city.blank? %>
-	<%= "#{order.shipping_address.state}".html_safe unless order.shipping_address.state.blank? %>
-	<%= "#{order.shipping_address.postcode}".html_safe unless order.shipping_address.postcode.blank? %>
-	<%= "<br>#{order.shipping_address.country}".html_safe unless order.shipping_address.country.blank? %>
-	<% else %>
-	<%= order.orderer.company_name %>
-	<%= "<br>#{order.orderer.address.address1}".html_safe unless order.orderer.address.address1.blank? %>
-	<%= "<br>#{order.orderer.address.address2}".html_safe unless order.orderer.address.address2.blank? %>
-	<%= "<br>#{order.orderer.address.city}".html_safe unless order.orderer.address.city.blank? %>
-	<%= "#{order.orderer.address.state}".html_safe unless order.orderer.address.state.blank? %>
-	<%= "#{order.orderer.address.postcode}".html_safe unless order.orderer.address.postcode.blank? %>
-	<%= "<br>#{order.orderer.address.country}".html_safe unless order.orderer.address.country.blank? %>
-	<% end %>
+	<%= display_shipping_address(order: @order) %>
 <small style="color:#8a8a8a;font-size:70%">
 	<br>Contact:</small>
  <%= order.user.contact.firstname %> <%= order.user.contact.lastname %><br>
