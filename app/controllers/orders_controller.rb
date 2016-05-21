@@ -134,7 +134,7 @@ class OrdersController < ApplicationController
 	private
 
 	def set_order
-		@order = Order.find(params[:id])
+		@order = @current_user.company.orders.find(params[:id])
 	end
 
 	def order_params
