@@ -34,4 +34,15 @@ module OrdersHelper
 		end
 		return tracking_list.sort_by {|s| s[:value] }
 	end
+
+	def profile_link(company)
+		case company.class.to_s
+		when "Brand"
+			return view_brand_url(company)
+		when "Retailer"
+			return view_retailer_url(company)
+		when "Distributor"
+			return view_distributor_url(company)
+		end
+	end
 end
