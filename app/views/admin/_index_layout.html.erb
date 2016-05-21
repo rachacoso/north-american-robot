@@ -3,18 +3,20 @@
 	<div class="small-12 columns">
 		<div class="panel">
 			<h2>
-				<%= @distributors ? "Distributors" : "" %>
-				<%= @brands ? "Brands" : "" %>
-				<%= @retailers ? "Retailers" : "" %>
-				<%= @Orders ? "Orders" : "" %>
+				<% type = "brands" if @brands %>
+				<% type = "distributors" if @distributors %>
+				<% type = "retailers" if @retailers %>
+				<% type = "orders" if @orders %>
+				<%= type.capitalize %>
 			</h2>
 		</div>
 	</div>
 </div>
+<% unless type == "orders" %>
 <div class="row collapse">
 	<div class="small-12 columns">
 		<div class="panel">
-			<%= form_tag(eval("admin_#{@distributors ? "distributors" : "brands"}_index_path"), method: "get") do %>
+			<%= form_tag(eval("admin_#{type}_index_path"), method: "get") do %>
 			<div class="row collapse">
 			<div class="small-1 columns">
 				<span class="prefix"><i class="fi-magnifying-glass"></i></span>
@@ -22,7 +24,7 @@
 			<div class="small-11 columns">
 				<%= text_field_tag(:q, "", :placeholder => 'Search by Company Name', :value => @query, :style => "margin-bottom: 0;") %>
 				<% if @query %>
-					<small><%= link_to "BACK TO ALL #{@distributors ? "DISTRIBUTORS" : "BRANDS"} LIST", eval("admin_#{@distributors ? "distributors" : "brands"}_index_path") %></small>
+					<small><%= link_to "BACK TO ALL #{type.upcase} LIST", eval("admin_#{type}_index_path") %></small>
 				<% end %>
 			</div><!--/.small-11-->
 
@@ -31,6 +33,7 @@
 		</div>
 	</div>
 </div>
+<% end %>
 <div class="row collapse">
 	<div class="small-12 columns">
 		<div class="panel">

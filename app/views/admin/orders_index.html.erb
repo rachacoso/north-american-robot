@@ -5,7 +5,6 @@
 	<% if !@orders.empty? %>
 	<div class="row">
 		<div class="small-12 columns">
-		<h2 style="margin-bottom: 0;">Orders</h2>
 		<ul class="filterlist">
 			<li <%= @group_type == "b" ? "class=active" : "" %>><%= link_to "by Brand", admin_orders_index_url("b") %></li>
 			<li <%= @group_type == "r" ? "class=active" : "" %>><%= link_to "by Retailer", admin_orders_index_url("r") %></li>
@@ -22,7 +21,8 @@
 					<%= render partial: 'order', locals: { order: order, group_type: @group_type }  %>
 				<% end %>
 				</div>
-			<% end %>				
+			<% end %>
+			<hr style="border-top: 1px solid #e3e3e3;">
 		<% end %>
 		</div><!--/.medium-6-->
 	</div><!--/.row-->

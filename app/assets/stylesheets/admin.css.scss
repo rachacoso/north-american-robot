@@ -10,5 +10,8 @@
 .admin-order-set {
 	padding: rem-calc(5);
 	margin: rem-calc(5) 0;
-	border: 1px solid $landing-middle-gray;
+
+	& h3 {
+		background-color: $landing-light-gray;
+	}
 }
