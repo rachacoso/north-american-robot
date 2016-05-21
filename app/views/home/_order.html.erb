@@ -5,7 +5,7 @@
 				<div class="medium-3 columns">
 					<h2>
 						<%= @current_user.brand ? "<small>from</small><br>".html_safe : "" %>
-						<%= @current_user.brand ? order.orderer_company_name : order.brand_company_name %>
+						<%= @current_user.brand ? (link_to order.orderer_company_name, profile_link(order.orderer)) : (link_to order.brand_company_name, profile_link(order.brand)) %>
 						<%= @current_user.brand ? "<small>[#{order.orderer_type}]</small>".html_safe : "" %>
 					</h2>
 					<h4>
