@@ -22,6 +22,7 @@
 						<h1>Next Step: Resolve dispute</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 						<div class="panel">
+							<h3>Dispute settlement will be handled via Armor Payments, a Payoneer company.  You can view the latest information and take any actions regarding the dispute via the button below. </h3>
 							<% if order.errors.any? %>
 								<h4>Sorry, there was an error. Please reload the page</h4>
 								<% order.errors.full_messages.each do |m| %>
