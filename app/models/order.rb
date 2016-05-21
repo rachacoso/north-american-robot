@@ -116,7 +116,7 @@ class Order # for V2 ordering
     OrderMailer.send_order(
       order: self, 
       status: "submitted_orderer", 
-      email: self.user.email, # send to buyer
+      email: self.armor_buyer_email, # send to buyer
       subject: "Congratulations! You submitted an order on Landing!",
       title: "Order Submitted"
       ).deliver
@@ -132,7 +132,7 @@ class Order # for V2 ordering
     OrderMailer.send_order(
       order: self, 
       status: "pending", 
-      email: self.user.email, # send to orderer email (using the order creator's email in this case)
+      email: self.armor_buyer_email, # send to orderer email
       subject: "Yippee! Your order has been approved.",
       title: "Order Pending Approval and Payment"
       ).deliver
@@ -169,7 +169,7 @@ class Order # for V2 ordering
     OrderMailer.send_order(
       order: self,
       status: "shipped",
-      email: self.user.email, # send to orderer email (using the order creator's email in this case)
+      email: self.armor_buyer_email, # send to orderer email
       subject: "Hooray! Your beauty products are on their way!",
       title: "Order Shipped"
       ).deliver
@@ -183,7 +183,7 @@ class Order # for V2 ordering
     OrderMailer.send_order(
       order: self,
       status: "delivered_orderer",
-      email: self.user.email, # send to orderer email (using the order creator's email in this case)
+      email: self.armor_buyer_email, # send to orderer email
       subject: "Woohoo! Your order was delivered.",
       title: "Order Delivered"
       ).deliver
