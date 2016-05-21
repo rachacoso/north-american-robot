@@ -50,23 +50,7 @@
 					<%= "<br>#{@order.orderer.address.country}".html_safe unless !@order.orderer.address.country || @order.orderer.address.country.empty? %>
 				</h3>
 				<h3 style="margin-top:1.5em; margin-bottom: 2em;">Ship to:<br>
-				<% if @order.shipping_address %>
-					<%= @order.ship_to_name %>
-					<%= "<br>#{@order.shipping_address.address1}".html_safe unless !@order.shipping_address.address1 || @order.shipping_address.address1.empty? %>
-					<%= "<br>#{@order.shipping_address.address2}".html_safe unless !@order.shipping_address.address2 || @order.shipping_address.address2.empty? %>
-					<%= "<br>#{@order.shipping_address.city}".html_safe unless !@order.shipping_address.city || @order.shipping_address.city.empty? %>
-					<%= "#{@order.shipping_address.state}".html_safe unless !@order.shipping_address.state || @order.shipping_address.state.empty? %>
-					<%= "#{@order.shipping_address.postcode}".html_safe unless !@order.shipping_address.postcode || @order.shipping_address.postcode.empty? %>
-					<%= "<br>#{@order.shipping_address.country}".html_safe unless !@order.shipping_address.country || @order.shipping_address.country.empty? %>
-				<% else %>
-					<%= @order.orderer_company_name %>
-					<%= "<br>#{@order.orderer.address.address1}".html_safe unless !@order.orderer.address.address1 || @order.orderer.address.address1.empty? %>
-					<%= "<br>#{@order.orderer.address.address2}".html_safe unless !@order.orderer.address.address2 || @order.orderer.address.address2.empty? %>
-					<%= "<br>#{@order.orderer.address.city}".html_safe unless !@order.orderer.address.city || @order.orderer.address.city.empty? %>
-					<%= "#{@order.orderer.address.state}".html_safe unless !@order.orderer.address.state || @order.orderer.address.state.empty? %>
-					<%= "#{@order.orderer.address.postcode}".html_safe unless !@order.orderer.address.postcode || @order.orderer.address.postcode.empty? %>
-					<%= "<br>#{@order.orderer.address.country}".html_safe unless !@order.orderer.address.country || @order.orderer.address.country.empty? %>
-				<% end %>
+					<%= display_shipping_address(order: @order) %>
 					<br><small>Contact Name &amp; Phone:</small>
 					<br><%= @order.user.contact.firstname if @order.user.contact.firstname.present? %> <%= @order.user.contact.lastname if @order.user.contact.lastname.present? %>
 					<%= @order.user.contact.phone.present? ? "<br>#{@order.user.contact.phone.phony_formatted(format: :international , spaces: '-')}".html_safe : "<br>Phone n/a".html_safe %>

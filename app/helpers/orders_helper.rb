@@ -45,4 +45,27 @@ module OrdersHelper
 			return view_distributor_url(company)
 		end
 	end
+
+	def display_shipping_address(order:)
+		company = order.orderer
+
+		name = order.ship_to_name.present? ? order.ship_to_name : company.company_name
+		address1 = order.shipping_address.address1.present? ? order.shipping_address.address1 : company.address.address1
+		address2 = order.shipping_address.address2.present? ? order.shipping_address.address2 : company.address.address2
+		city = order.shipping_address.city.present? ? order.shipping_address.city : company.address.city
+		state = order.shipping_address.state.present? ? order.shipping_address.state : company.address.state
+		postcode = order.shipping_address.postcode.present? ? order.shipping_address.postcode : company.address.postcode
+		country = order.shipping_address.country.present? ? order.shipping_address.country : company.address.country
+
+		shipping_address = ""
+		shipping_address += "#{name}" if name.present?
+		shipping_address += "<br>#{address1}" if address1.present?
+		shipping_address += "<br>#{address2}" if address2.present?
+		shipping_address += "<br>#{city}" if city.present?
+		shipping_address += "#{state}" if state.present?
+		shipping_address += "#{postcode}" if postcode.present?
+		shipping_address += "<br>#{country}" if country.present?
+
+		return shipping_address.html_safe
+	end
 end
