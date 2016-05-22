@@ -36,6 +36,7 @@ class HomeController < ApplicationController
 
 			@current_non_armor_orders = @profile.orders.without_armor_account.current
 			@submitted_non_armor_orders = @profile.orders.without_armor_account.submitted
+			@completed_non_armor_orders = @profile.orders.without_armor_account.completed
 			@current_orders = @profile.orders.with_armor_account.current
 			@submitted_orders = @profile.orders.with_armor_account.submitted
 			@pending_orders = @profile.orders.with_armor_account.pending

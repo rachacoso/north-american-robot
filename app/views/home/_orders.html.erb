@@ -159,7 +159,7 @@
 	</div><!--/.small-12-->
 </div><!--/.row-->
 
-<% unless @current_non_armor_orders.blank? && @submitted_non_armor_orders.blank? %>
+<% unless @current_non_armor_orders.blank? && @submitted_non_armor_orders.blank? && @completed_non_armor_orders.blank? %>
 <div class="row">
 	<div class="small-12 columns">
 		<div class="panel" id="dashboard-order-section">
@@ -196,6 +196,20 @@
 		</div>
 		<% end %>
 
+		<h4><strong>Completed Orders</strong></h4>
+		<% if @completed_non_armor_orders.present?  %>
+				<% @completed_non_armor_orders.each do |order| %>
+					<%= render partial: "order", locals: { order: order } %>
+				<% end %>
+		<% else %>
+		<div class="row">
+			<div class="small-12 columns">
+				<div class="panel dashboard-order-tile">
+					<h3>(No Orders)</h3>
+				</div>
+			</div>
+		</div>
+		<% end %>
 
 		</div>
 	</div><!--/.small-12-->
