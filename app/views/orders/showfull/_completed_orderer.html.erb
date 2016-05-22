@@ -5,9 +5,13 @@
 			<div class="row">
 				<div class="small-12 columns">
 					<div id="order-panel-top">
-						<%= render partial: "orders/showfull/order_flow_header", locals: { status: order.status , armor: true } %>
+						<%= render partial: "orders/showfull/order_flow_header", locals: { status: order.status , armor: (order.armor_enabled? ? true : false ) } %>
 						<hr>
+						<% if order.armor_enabled? %>
 						<h3>Payment has been released and this order is complete.</h3>
+						<% else %>
+						<h3>This order is complete.</h3>
+						<% end %>
 					</div>
 				</div><!--/.small-12-->
 			</div><!--/.row-->
