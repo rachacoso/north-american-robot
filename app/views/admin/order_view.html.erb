@@ -33,6 +33,11 @@
 			<strong><%= @order.brand.company_name %></strong> order from <strong><%= @order.orderer.company_name %></strong>
 		</h2>
 		<h3><%= @order.status.upcase %></h3>
+		<%= "<h3>ORDER NOT ARMOR ENABLED</h3>".html_safe if !@order.armor_enabled? %>
+
+		<% if !@order.armor_enabled? && @order.status == "submitted" %>
+			<%= link_to "Mark Order Complete", complete_order_url(@order,0), class: "landing-button", remote: true %>
+		<% end %>
 		</div>
 	</div>
 </div>

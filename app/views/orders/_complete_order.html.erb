@@ -1,0 +1,24 @@
+<% if @order.status == "completed" %>
+	<div class="row">
+		<div class="small-12 columns text-center">
+			<h3>You have set this order to <strong><%= @order.brand.company_name %></strong> as COMPLETE</h3>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+	<div class="row">
+		<div class="small-12 columns text-center">
+			<%= link_to "OK", orders_url(@order), class: "landing-button", id: "submit-close" %>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+<% else %>
+	<div class="row">
+		<div class="small-12 columns text-center">
+			<h2>Would you like to set this order to COMPLETE?</h2>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+	<div class="row">
+		<div class="small-12 columns text-center">
+			<%= link_to "Yes", complete_order_url(@order,1), class: "landing-button", remote: true %>
+			<%= link_to "Not Yet", admin_order_view_url(@order), class: "landing-button secondary", id: "submit-close" %>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+<% end %>

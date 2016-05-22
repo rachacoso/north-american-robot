@@ -242,6 +242,13 @@ class Order # for V2 ordering
       ).deliver
   end
 
+  def completed_no_armor
+    return if self.status == "completed" # exit if already set
+    self.status = "completed"
+    self.completed_date = DateTime.now
+    self.save!
+  end
+
   def error(status:, message:)
     self.status = "error"
     self.status_error_message = "Status #{status}: #{message}"

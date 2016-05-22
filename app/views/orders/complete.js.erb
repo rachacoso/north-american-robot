@@ -1,0 +1,14 @@
+<% if @success %>
+	$('#order-item-data').html("<div class='text-center'><h2>Success!<br>Loading...<br>Please wait...</h2></div>");
+	window.location.replace("<%= admin_order_view_url(@order) %>");
+<% elsif flash[:notice] %>
+	$('#order-item-data').html("<div class='text-center'><h3>Sorry, there was an error, please try again.</h3><hr><p><%= flash[:notice] %></p></div>");
+	$('.overlay#order-item-overlay').fadeIn();
+	$('#order-item').fadeIn();
+<% else %>
+	$('#order-item-data').html("<%= j (render partial: 'complete_order') %>");
+	$('.overlay#order-item-overlay').fadeIn();
+	$('#order-item').fadeIn();
+<% end %>
+
+setModalActions();

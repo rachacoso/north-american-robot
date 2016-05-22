@@ -1,9 +1,9 @@
 class OrdersController < ApplicationController
 
-	before_action :set_order, only: [:show, :edit, :update, :destroy, :submit, :pending, :approve, :shipment, :paid, :delivered]
+	before_action :set_order, only: [:show, :edit, :update, :destroy, :submit, :pending, :approve, :shipment, :paid, :delivered, :complete]
 
 	#setting of paid only done for testing & by admin only
-	before_action :administrators_only, only: [:paid]
+	before_action :administrators_only, only: [:paid, :delivered, :complete]
 
 	def show
 		unless @order.viewable_by? @current_user
@@ -64,6 +64,22 @@ class OrdersController < ApplicationController
 			@order.approval
 			if @order.errors.any?
 				flash.now[:notice] = @order.errors.full_messages
+			end
+		end
+		respond_to do |format|
+			format.html  { redirect_to order_url(@order) }
+			format.js
+		end
+	end
+
+	def complete
+		if params[:confirm].to_i == 1
+			@order.completed_no_armor
+			if @order.errors.any?
+				flash.now[:notice] = @order.errors.full_messages
+			else
+				@success = true
+				sleep(5) #pause to allow update of status from webhook
 			end
 		end
 		respond_to do |format|
@@ -134,7 +150,11 @@ class OrdersController < ApplicationController
 	private
 
 	def set_order
-		@order = @current_user.company.orders.find(params[:id])
+		if @current_user.administrator
+			@order = Order.find(params[:id])
+		else
+			@order = @current_user.company.orders.find(params[:id])
+		end
 	end
 
 	def order_params

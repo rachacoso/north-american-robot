@@ -34,6 +34,8 @@ Rails.application.routes.draw do
   get   '/order/p/:id/:confirm' => 'orders#pending', as: 'pending_order'
   get   '/order/a/:id/:confirm' => 'orders#approve', as: 'approve_order'
   post  '/order/shipment/:id' => 'orders#shipment', as: 'order_shipment_info'
+  # for non armor orders
+  get   '/order/c/:id/:confirm' => 'orders#complete', as: 'complete_order'
 
   # ARMOR PAYMENTS TESTING
   get   '/order/paid/:id/:confirm' => 'orders#paid', as: 'paid_order'
