@@ -113,7 +113,7 @@
 		<h4><strong>Completed Orders</strong></h4>
 		<% if @completed_orders.present?  %>
 				<% @completed_orders.each do |order| %>
-					<%= render partial: "order", locals: { order: order } %>
+					<%= render partial: "order_short", locals: { order: order } %>
 				<% end %>
 		<% else %>
 		<div class="row">
@@ -199,7 +199,7 @@
 		<h4><strong>Completed Orders</strong></h4>
 		<% if @completed_non_armor_orders.present?  %>
 				<% @completed_non_armor_orders.each do |order| %>
-					<%= render partial: "order", locals: { order: order } %>
+					<%= render partial: "order_short", locals: { order: order } %>
 				<% end %>
 		<% else %>
 		<div class="row">

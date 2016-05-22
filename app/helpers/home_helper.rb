@@ -38,7 +38,11 @@ module HomeHelper
 		when "delivered"
 			return "<span id='#{status.downcase}'>DELIVERED</span> on #{order.delivered_date.strftime('%b %d, %Y')}"
 		when "completed"
-			return "<span id='#{status.downcase}'>COMPLETED (PAYMENT RELEASED)</span> on #{order.completed_date.strftime('%b %d, %Y')}"
+			if order.armor_enabled?
+				return "<span id='#{status.downcase}'>COMPLETED (PAYMENT RELEASED)</span> on #{order.completed_date.strftime('%b %d, %Y')}"
+			else
+				return "<span id='#{status.downcase}'>COMPLETED</span> on #{order.completed_date.strftime('%b %d, %Y')}"
+			end
 		when "error"
 			return "<span id='#{status.downcase}'>IN ERROR</span> on #{order.error_date.strftime('%b %d, %Y')}"
 		when "disputed"
