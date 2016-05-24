@@ -92,11 +92,15 @@ class ArmorPaymentsController < ApplicationController
 				@order.completed
 			when 7 # dispute to arbitration
 				@order.dispute_update
+			when 9 # dispute upload document
+				@order.dispute_update
 			when 10 # dispute offer made
 				@order.dispute_update
 			when 11 # dispute offer accepted
 				@order.dispute_update
 			when 13 # dispute offer countered
+				@order.dispute_update
+			when 14 # dispute note added
 				@order.dispute_update
 			when 1001
 				@company.set_armor_bank
