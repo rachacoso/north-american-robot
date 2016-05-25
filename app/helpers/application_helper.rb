@@ -234,10 +234,12 @@ module ApplicationHelper
 
 	end
 
-
-
-
-
-
+	def armor_lightbox_script
+		if Rails.env.production?
+			return "<script src='https://app.armorpayments.com/static/external/js/lightbox-ui.min.js' type='text/javascript'></script>".html_safe
+		else
+			return "<script src='https://sandbox.armorpayments.com/static/external/js/lightbox-ui.min.js' type='text/javascript'></script>".html_safe
+		end
+	end
 
 end
