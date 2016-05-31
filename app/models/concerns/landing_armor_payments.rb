@@ -363,8 +363,11 @@ module LandingArmorPayments
 
     def initialize
       @errors = ActiveModel::Errors.new(self)
-      should_use_sandbox = true
-      # @client =  ArmorPayments::API.new ENV["ARMOR_KEY"], ENV["ARMOR_SECRET"], should_use_sandbox
+      if Rails.env.production?
+        should_use_sandbox = false
+      else
+        should_use_sandbox = true
+      end
       @client =  ArmorPayments::API.new Rails.configuration.armor_payments[:key], Rails.configuration.armor_payments[:secret], should_use_sandbox
     end
 
