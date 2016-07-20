@@ -120,7 +120,7 @@ module LandingArmorPayments
     extend ActiveSupport::Concern
 
     included do
-      field :use_armor_payments, type: Mongoid::Boolean
+      field :disable_armor_payments, type: Mongoid::Boolean
       field :armor_account_id, type: String
       field :armor_bank_info_complete, type: Mongoid::Boolean, default: false
     end
