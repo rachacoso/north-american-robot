@@ -175,7 +175,7 @@ module LandingArmorPayments
     end
 
     def armor_enabled?
-      return true if self.armor_seller_account_id.present?
+      return true if self.armor_buyer_account_id.present?
     end
     def api_create_order
 
