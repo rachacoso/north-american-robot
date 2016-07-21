@@ -10,41 +10,54 @@
 			<%= link_to "OK", view_brand_url(@order.brand), class: "landing-button", id: "submit-close" %>
 		</div><!--/.small-12-->
 	</div><!--/.row-->
-<% elsif !@current_user.armor_user_id %>
+<% elsif !@current_user.armor_user_id && !@current_user.company.disable_armor_payments %>
 
 	<div class="row">
 		<div class="small-12 columns">
 			<h2>Almost There!<br>There's one last step you need to complete before you can submit this order to <strong><%= @order.brand.company_name %></strong>.</h2>
 			<hr>
-			<h3>For your security and convenience, Landing International has partnered with <%= link_to "Armor Payments, a Payoneer company", "//armorpayments.com", target: "_blank" %> to handle all payment transactions via secure escrow.</h3>
 		</div><!--/.small-12-->
 	</div><!--/.row-->
 
 	<% allow, missing, errors = @current_user.allows_armor_signup %>
 	<% if @current_user.company.armor_account_id.blank? && allow %>
 
+
 		<div class="row">
 			<div class="small-12 columns">
-				<h3><strong>In order to participate you'll need to enable Armor Payments (Payoneer) Escrow by accepting their <a href="https://app.armorpayments.com/terms/160405182787" target="_BLANK">Terms and Conditions</a>.</strong></h3>
-				<hr>				
+				<h3>For your security and convenience, Landing International has partnered with <%= link_to "Armor Payments, a Payoneer company", "//armorpayments.com", target: "_blank" %> to handle all payment transactions via secure escrow. <strong>In order to participate you'll need to enable Armor Payments (Payoneer) Escrow by accepting their <a href="https://app.armorpayments.com/terms/160405182787" target="_BLANK">Terms and Conditions</a>.</strong></h3>
+				<%= form_tag ap_create_account_url, method: "post", id: "armor-signup", remote: true do %>
+					<%= render 'shared/profileform/armor/armor_signup_form' %>
+					<span class="error" id="order-flow-armor-error" style="display:none;"></span>
+					<%= submit_tag "Enable Armor Payments (Payoneer) Escrow", class: "landing-button" %>
+				<% end %>
+
+				<hr>
+
+				<h3> OR </h3>	
+
+				<h3>You can use a different payment method (e.g. Net Terms) by clicking below.</strong></h3>
+
+				<%= form_tag ap_disable_url, method: "post", id: "armor-disable", remote: true do %>
+					<%= submit_tag "Use Different Payment Method", class: "landing-button" %>
+				<% end %>
+
+				<hr>
 			</div><!--/.small-12-->
 		</div><!--/.row-->
 		<div class="row">
-			<div class="small-12 columns text-center">
-			<%= form_tag ap_create_account_url, method: "post", id: "armor-signup", remote: true do %>
-				<%= render 'shared/profileform/armor/armor_signup_form' %>
-				<span class="error" id="order-flow-armor-error" style="display:none;"></span>
-				<%= submit_tag "Enable Armor Payments (Payoneer) Escrow", class: "landing-button" %>
-				<%= link_to "Not Yet", view_brand_url(@order.brand), class: "landing-button secondary", id: "submit-close" %>
-			<% end %>
+			<div class="small-12 columns text-right">
+				<%= link_to "Cancel", view_brand_url(@order.brand), class: "landing-button secondary", id: "submit-close" %>
 			</div><!--/.small-12-->
 		</div><!--/.row-->
+				
+				
 
 	<% else %>
 
 		<div class="row">
 			<div class="small-12 columns">
-				<h3><strong>In order to participate you'll need to enable Armor Payments (Payoneer) Escrow, but there are a few profile fields you'll need to fill out first (i.e. company name, mailing address and contact info).</strong></h3>
+				<h3><strong>We need a bit more information before you can submit this order (e.g. company name, mailing address and contact info).</strong></h3>
 				<hr>				
 			</div><!--/.small-12-->
 		</div><!--/.row-->

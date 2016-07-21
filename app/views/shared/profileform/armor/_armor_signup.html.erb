@@ -1,47 +1,86 @@
-<div class="row">
-	<div class="small-12 columns">
-		<h2>Enable Armor Payments (Payoneer) Escrow</h2>
-		<h3>Accept Armor Payments (Payoneer) Terms and Conditions below to enable.</h3>
-		<div class="landing-notice"><h3>Companies domiciled in Arizona or Idaho are currently unable to use Armor Payments due to escrow licensing issues. You will be unable to use Armor Payments (Payoneer) Escrow service if your company is headquartered in either of those states.</h3></div>
-	</div><!--/.small-12-->
-</div><!--/.row-->
 
-<div class="row">
-	<div class="small-12 columns">
-		<% if flash[:error] %>
-			<div class="row">
-				<div class="small-12 columns">
-					<br>
-					<span class="error"><%= flash[:error] %><br>
-						<% if flash[:errorlist] %>
-							<% flash[:errorlist].each do |error| %>
-								<%= error %><br>
+
+	<div class="row">
+		<div class="small-12 columns">
+			<h2><% unless @current_user.company.class.to_s == "Brand" %>Option A) <% end %>Enable Armor Payments (Payoneer) Escrow</h2>
+			<% if c.disable_armor_payments %>	
+			<div class="panel text-center" style="background-color: #f2f2f2;"><h3><strong>Armor Payments (Payoneer) is disabled.</strong></h3></div>
+			<% else %>
+			<h3><strong> Accept Armor Payments (Payoneer) Terms and Conditions below to enable.</strong></h3>
+			<div class="landing-notice"><h3>Companies domiciled in Arizona or Idaho are currently unable to use Armor Payments due to escrow licensing issues. You will be unable to use Armor Payments (Payoneer) Escrow service if your company is headquartered in either of those states.</h3></div>
+			<% end %>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+
+<% unless c.disable_armor_payments %>
+	<div class="row">
+		<div class="small-12 columns">
+			<% if flash[:error] %>
+				<div class="row">
+					<div class="small-12 columns">
+						<br>
+						<span class="error"><%= flash[:error] %><br>
+							<% if flash[:errorlist] %>
+								<% flash[:errorlist].each do |error| %>
+									<%= error %><br>
+								<% end %>
 							<% end %>
-						<% end %>
-					</span>
-				</div><!--/.small-12-->
-			</div><!--/.row-->
+						</span>
+					</div><!--/.small-12-->
+				</div><!--/.row-->
+			<% end %>
+			<table class="armor-account-summary">
+				<tr><td colspan="2"><h3>You will be sharing the following information with Armor Payments (Payoneer):</h3></td></tr>
+				<tr><td class="fieldname">Company Name</td><td><%= c.company_name %></td></tr>
+				<tr><td class="fieldname">User Name</td><td><%= u.contact.firstname %> <%=u.contact.lastname %></td></tr>
+				<tr><td class="fieldname">Email</td> <td><%= u.email %></td></tr>
+				<tr><td class="fieldname">Phone</td><td><%= u.contact.phone.phony_formatted(format: :international , spaces: '-') %></td></tr>
+				<tr><td class="fieldname">Address</td> <td><%= c.address.address1 %><%= ", #{c.address.address2}" %></td></tr>
+				<tr><td class="fieldname">City/Town/Department</td> <td><%= c.address.city %></td></tr>
+				<tr><td class="fieldname">State/Province/Region/County</td> <td><%= c.address.state_2 %></td></tr>
+				<tr><td class="fieldname">Zip/Postal Code</td> <td><%= c.address.postcode %></td></tr>
+				<tr><td class="fieldname">Country</td> <td><%= c.address.country_2 %></td></tr>
+			</table>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+	<br>
+	<div class="row">
+		<div class="small-12 columns text-right">
+		<%= form_tag ap_create_account_url + "#a-armor", method: "post", id: "armor-signup" do %>
+			<%= render 'shared/profileform/armor/armor_signup_form' %>
+			<%= submit_tag "Enable Armor Payments (Payoneer) Escrow", class: "landing-button" %>
 		<% end %>
-		<table class="armor-account-summary">
-			<tr><td colspan="2"><h3>You will be sharing the following information with Armor Payments (Payoneer):</h3></td></tr>
-			<tr><td class="fieldname">Company Name</td><td><%= c.company_name %></td></tr>
-			<tr><td class="fieldname">User Name</td><td><%= u.contact.firstname %> <%=u.contact.lastname %></td></tr>
-			<tr><td class="fieldname">Email</td> <td><%= u.email %></td></tr>
-			<tr><td class="fieldname">Phone</td><td><%= u.contact.phone.phony_formatted(format: :international , spaces: '-') %></td></tr>
-			<tr><td class="fieldname">Address</td> <td><%= c.address.address1 %><%= ", #{c.address.address2}" %></td></tr>
-			<tr><td class="fieldname">City/Town/Department</td> <td><%= c.address.city %></td></tr>
-			<tr><td class="fieldname">State/Province/Region/County</td> <td><%= c.address.state_2 %></td></tr>
-			<tr><td class="fieldname">Zip/Postal Code</td> <td><%= c.address.postcode %></td></tr>
-			<tr><td class="fieldname">Country</td> <td><%= c.address.country_2 %></td></tr>
-		</table>
-	</div><!--/.small-12-->
-</div><!--/.row-->
-<br>
-<div class="row">
-	<div class="small-12 columns text-right">
-	<%= form_tag ap_create_account_url + "#a-armor", method: "post", id: "armor-signup" do %>
-		<%= render 'shared/profileform/armor/armor_signup_form' %>
-		<%= submit_tag "Enable Armor Payments (Payoneer) Escrow", class: "landing-button" %>
-	<% end %>
-	</div><!--/.small-12-->
-</div><!--/.row-->
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+<% end %>
+
+<% unless @current_user.company.class.to_s == "Brand" %>
+	<div class="row">
+		<div class="small-12 columns">
+			<h1 style="border-top: 1px solid black; border-bottom: 1px solid black;padding-bottom: 0;margin-top: 1em; margin-bottom: 1em;">OR</h1>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+<% end %>
+
+<% unless @current_user.company.class.to_s == "Brand" %>
+	<div class="row">
+		<div class="small-12 columns">
+				<h2>Option B) Use Other Payment Methods</h2>
+				<h3>
+					<strong>If you'd like to use other methods of payment (e.g. Net Terms), you can turn the system off.</strong>
+				</h3>
+				<div class="panel text-center" style="background-color: #f2f2f2;">
+						<h3 >ARMOR PAYMENTS is:</h3>
+						<%= form_for @current_user.company, :html => {id: 'disableArmorForm'}, remote: true do |f| %>
+							<div class="switch" style="margin-bottom:0;">
+								<%= f.check_box('disable_armor_payments', id: 'disableArmor', label: false) %>
+								<label for="disableArmor">
+									<span class="switch-on">OFF</span>
+									<span class="switch-off">ON</span>
+								</label>
+							</div> 
+						<% end %>
+				</div>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+<% end %>

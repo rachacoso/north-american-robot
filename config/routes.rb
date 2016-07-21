@@ -51,6 +51,7 @@ Rails.application.routes.draw do
   # ARMOR PAYMENTS
   post  '/ap/complete' => 'armor_payments#complete_required', as: 'ap_complete_required'
   post  '/ap/create' => 'armor_payments#create_account', as: 'ap_create_account'
+  post  '/ap/disable' => 'armor_payments#disable', as: 'ap_disable'
   post  '/ap/wh' => 'armor_payments#webhook'
 
   # "static" pages

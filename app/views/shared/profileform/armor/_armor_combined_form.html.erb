@@ -1,7 +1,12 @@
 <div class="row">
 	<div class="small-12 columns">
-		<h2>Enable Armor Payments (Payoneer) Escrow</h2>
-		<h3>In order to use Armor Payments (Payoneer) Escrow you will need to complete these profile items. These fields can be updated via the form below or via the <%= link_to "Company Info", '#a-companyinfo' %> or <%= link_to "Your Login Info", '#a-login-info' %> sections on this page.</h3>
+		<% if c.class.to_s == "Brand" %>
+			<h2>Enable Armor Payments (Payoneer) Escrow</h2>
+			<h3>In order to use Armor Payments (Payoneer) Escrow you will need to complete these profile items. These fields can be updated via the form below or via the <%= link_to "Company Info", '#a-companyinfo' %> or <%= link_to "Your Login Info", '#a-login-info' %> sections on this page.</h3>
+		<% else %>
+			<h2>Enable Ordering</h2>
+			<h3>In order to submit orders you will need to complete these profile items. These fields can be updated via the form below or via the <%= link_to "Company Info", '#a-companyinfo' %> or <%= link_to "Your Login Info", '#a-login-info' %> sections on this page.</h3>
+		<% end %>
 	</div><!--/.small-12-->
 </div><!--/.row-->
 

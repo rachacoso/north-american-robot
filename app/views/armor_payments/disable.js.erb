@@ -1,0 +1,5 @@
+$('#order-item-data').html("<div class='text-center'><h2>Please wait...</h2></div>");
+setTimeout(function(){
+	$('#order-item-data').html("<%= j (render partial: 'disable_success') %>");
+	setModalActions();
+}, 1000);

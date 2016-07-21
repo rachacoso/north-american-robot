@@ -52,6 +52,11 @@ class ArmorPaymentsController < ApplicationController
 
 	end
 
+	def disable
+		company = @current_user.company
+		company.disable_armor_payments = true
+		company.save!
+	end
 
 	def webhook
 		if params[:event].present?
