@@ -286,6 +286,7 @@ class DistributorsController < ApplicationController
       :verification_brand_display_photo,
       :verification_business_certificate,
       :active,
+      :disable_armor_payments,
       address_attributes: [ 
         :address1,
         :address2,

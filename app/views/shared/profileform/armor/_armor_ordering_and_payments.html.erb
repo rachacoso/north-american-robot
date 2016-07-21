@@ -1,5 +1,6 @@
 <div class="row">
 	<div class="small-12 columns">
+		<br>
 		<h1>Ordering &amp; Payments</h1>
 		<h3>Landing International has partnered with <%= link_to "Armor Payments, a Payoneer Company", "//armorpayments.com", target: "_blank" %> to provide payment escrow services for B2B eCommerce giving you peace of mind with secure transactions:</h3>
 
@@ -11,6 +12,24 @@
 				<strong>In order to participate please follow the instructions below to enable your account with Armor Payments (Payoneer).</strong>
 			<% end %>
 		</h3>
+
+		<br>
+		<h3>
+			<strong>The system is enabled by default, but if you'd like to use other methods of payment, you can turn the system off here:</strong>
+		</h3>
+		
+<div class="panel text-center">
+		<h3 >ARMOR PAYMENTS is:</h3>
+		<%= form_for company, :html => {id: 'disableArmorForm'}, remote: true do |f| %>
+			<div class="switch" style="margin-bottom:0;">
+				<%= f.check_box('disable_armor_payments', id: 'disableArmor', label: false) %>
+				<label for="disableArmor">
+      <span class="switch-on">OFF</span>
+      <span class="switch-off">ON</span>
+				</label>
+			</div> 
+		<% end %>
+</div>
 
 	</div>
 </div>

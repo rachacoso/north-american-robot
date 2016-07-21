@@ -359,6 +359,7 @@ class BrandsController < ApplicationController
 			:social_organizations,
 			:social_give_back,
 			:active,
+			:disable_armor_payments,
       address_attributes: [ 
         :address1,
         :address2,
