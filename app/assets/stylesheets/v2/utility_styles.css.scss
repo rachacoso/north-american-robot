@@ -98,43 +98,6 @@ ul.tablist {
 	}
 }
 
-
-ul.order-flow-header {
-	list-style-type: none; /*to remove bullets*/
-	// margin-left:0;
-	margin-bottom: 0;
-	padding: 0px;
-	zoom:1;
-	margin-left: 0;
-	overflow: hidden;
-	li {
-		color: $landing-middle-gray;
-		vertical-align: top;
-		font-weight:100;
-		font-size: rem-calc(25);
-		display: inline-block;
-		// margin: 0 rem-calc(5);
-		// padding: rem-calc(10) rem-calc(0) rem-calc(0) rem-calc(0);
-		&::before {
-			content: "\00a0\002F\00a0";
-		}
-		&:first-child {
-			margin-left: 0;
-		}
-		&:first-child::before {
-			content: " ";
-		}
-		&.active {
-			color: $landing-dark-gray;
-			font-weight:500;
-			&::before {
-				font-weight: 100;
-				color: $landing-middle-gray;
-			}
-		}
-	}
-}
-
 .landing-notice {
 	padding: rem-calc(25);
 	border: 1px solid $landing-middle-gray;
