@@ -5,7 +5,7 @@
 			<div class="row">
 				<div class="small-12 columns">
 					<div id="order-panel-top">
-						<%= render partial: "orders/showfull/order_flow_header", locals: { status: order.status , armor: true } %>
+						<%= render partial: "orders/showfull/order_flow_header", locals: { status: order.status , armor: (order.armor_enabled? ? true : false ) } %>
 						<hr>
 						<h3>This order is now awaiting shipment.</h3>
 					</div>

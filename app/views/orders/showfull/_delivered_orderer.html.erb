@@ -5,7 +5,7 @@
 			<div class="row">
 				<div class="small-12 columns">
 					<div id="order-panel-top">
-						<%= render partial: "orders/showfull/order_flow_header", locals: { status: order.status , armor: true } %>
+						<%= render partial: "orders/showfull/order_flow_header", locals: { status: order.status , armor: (order.armor_enabled? ? true : false ) } %>
 						<hr>
 						<h3>This order has been delivered.</h3>
 					</div>
@@ -16,6 +16,7 @@
 
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
+					<% if order.armor_enabled? %>
 						<br>
 						<h1>Next Step: Review Shipment and Release Payment or Initiate Dispute</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
@@ -32,6 +33,14 @@
 							<% end %>
 							<div class="landing-notice"><h3>The order status on this page may take time to update after you've approved the release of funds. <br>Please <%= link_to "reload this page", order_url(order) %> after you have released funds to see the most current status.</h3></div>
 						</div>
+					<% else %>
+						<br>
+						<h1>Next Step: Send Payment</h1>
+						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
+						<div class="panel">
+							<h3> Please send payment. <br><br>Contact <a href="mailto:info@landingintl.com">info@landingintl.com</a> for information on how to process your payment.</h3>
+						</div>
+					<% end %>
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->
 

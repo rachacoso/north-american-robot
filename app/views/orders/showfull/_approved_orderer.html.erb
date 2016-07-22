@@ -5,9 +5,13 @@
 			<div class="row">
 				<div class="small-12 columns">
 					<div id="order-panel-top">
-						<%= render partial: "orders/showfull/order_flow_header", locals: { status: order.status , armor: true } %>
+						<%= render partial: "orders/showfull/order_flow_header", locals: { status: order.status , armor: (order.armor_enabled? ? true : false ) } %>
 						<hr>
-						<h3>This order is awaiting payment.</h3>
+						<% if order.armor_enabled? %>
+							<h3>This order is awaiting payment.</h3>
+						<% else %>
+							<h3>This order is awaiting shipment.</h3>
+						<% end %>
 					</div>
 				</div><!--/.small-12-->
 			</div><!--/.row-->
@@ -18,26 +22,34 @@
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
 						<br>
-						<h1>Next Step: Submit Payment</h1>
-						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
-						<div class="panel">
-							<h3>
-								For your security and convenience, Landing International has partnered with <%= link_to "//armorpayments.com", target: "_blank" do %>Armor Payments, a Payoneer company<% end %> to handle payment via secure escrow.</h3>
+						<% if order.armor_enabled? %>
+							<h1>Next Step: Submit Payment</h1>
+							<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
+							<div class="panel">
+								<h3>
+									For your security and convenience, Landing International has partnered with <%= link_to "//armorpayments.com", target: "_blank" do %>Armor Payments, a Payoneer company<% end %> to handle payment via secure escrow.</h3>
 
-							<h3>Click on the button below to view instructions on how to complete payment.</h3>
-							<% if order.errors.any? %>
-								<h4>Sorry, there was an error. Please reload the page</h4>
-								<% order.errors.full_messages.each do |m| %>
-									<%= m %><br>
+								<h3>Click on the button below to view instructions on how to complete payment.</h3>
+								<% if order.errors.any? %>
+									<h4>Sorry, there was an error. Please reload the page</h4>
+									<% order.errors.full_messages.each do |m| %>
+										<%= m %><br>
+									<% end %>
+								<% else %>
+									<% if @armor_payment_instructions_url.present? %>
+										<%= render partial: "orders/showfull/approved_orderer_payment_instructions", locals: {url: @armor_payment_instructions_url, order: order} %>
+									<% end %>
 								<% end %>
-							<% else %>
-								<% if @armor_payment_instructions_url.present? %>
-									<%= render partial: "orders/showfull/approved_orderer_payment_instructions", locals: {url: @armor_payment_instructions_url, order: order} %>
-								<% end %>
-							<% end %>
-							<br><br>
-							<div class="landing-notice"><h3>It may take from 1 day (via Wire Transfer) to 3 days (via Bank Transfer - ACH) for funds to post to the escrow account, and a further 24 hours for the order status to be updated. You will receive an email when the funds have posted and the order has shipped. If you have any questions, please feel free to contact us at <a href="mailto:orders@landingintl.com">orders@landingintl.com</a></h3></div>
-						</div>
+								<br><br>
+								<div class="landing-notice"><h3>It may take from 1 day (via Wire Transfer) to 3 days (via Bank Transfer - ACH) for funds to post to the escrow account, and a further 24 hours for the order status to be updated. You will receive an email when the funds have posted and the order has shipped. If you have any questions, please feel free to contact us at <a href="mailto:orders@landingintl.com">orders@landingintl.com</a></h3></div>
+							</div>
+						<% else %>
+							<h1>Next Step: Await Shipment</h1>
+							<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
+							<div class="panel">
+								<h3>You will receive notice via email when the order has been shipped.</h3>
+							</div>
+						<% end %>
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->
 

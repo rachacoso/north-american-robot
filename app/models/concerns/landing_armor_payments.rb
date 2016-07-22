@@ -226,20 +226,29 @@ module LandingArmorPayments
     end
 
     def api_add_shipment_info(carrier_id:,carrier_name:,tracking_id:,description:,other_shipper:)
-      armororder = LandingArmorOrder.new
-      account_id = self.armor_seller_account_id
-      order_id = self.armor_order_id
-      action_data = {
-        "user_id" => self.armor_seller_user_id, # The user_id of the user shipping the goods (usually the seller on the order)     
-        "carrier_id" => carrier_id,
-        "tracking_id" => tracking_id,
-        "description" => description
-      }
-      armororder.add_shipment_info(account_id, order_id, action_data)
-      if armororder.errors.any?
-        self.errors[:base] << armororder.errors.full_messages
-      else
-        self.armor_shipment_id = armororder.shipment_id
+      if self.armor_enabled?
+        armororder = LandingArmorOrder.new
+        account_id = self.armor_seller_account_id
+        order_id = self.armor_order_id
+        action_data = {
+          "user_id" => self.armor_seller_user_id, # The user_id of the user shipping the goods (usually the seller on the order)     
+          "carrier_id" => carrier_id,
+          "tracking_id" => tracking_id,
+          "description" => description
+        }
+        armororder.add_shipment_info(account_id, order_id, action_data)
+        if armororder.errors.any?
+          self.errors[:base] << armororder.errors.full_messages
+        else
+          self.armor_shipment_id = armororder.shipment_id
+          self.armor_other_shipper = other_shipper if other_shipper.present?
+          self.armor_shipment_carrier_name = carrier_name
+          self.armor_shipment_tracking_number = tracking_id
+          self.armor_shipment_description = description
+          self.shipped
+          self.save!
+        end
+      else 
         self.armor_other_shipper = other_shipper if other_shipper.present?
         self.armor_shipment_carrier_name = carrier_name
         self.armor_shipment_tracking_number = tracking_id

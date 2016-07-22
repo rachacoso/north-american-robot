@@ -139,7 +139,9 @@ class Order # for V2 ordering
   end
 
   def approval
-    self.api_create_order
+    if self.armor_enabled?
+      self.api_create_order
+    end
     unless self.errors.any?
       self.status = "approved"
       self.approved_date = DateTime.now

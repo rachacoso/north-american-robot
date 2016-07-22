@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
 
-	before_action :set_order, only: [:show, :edit, :update, :destroy, :submit, :pending, :approve, :shipment, :paid, :delivered, :complete]
+	before_action :set_order, only: [:show, :edit, :update, :destroy, :submit, :pending, :approve, :shipment, :paid, :delivered, :armor_disabled_delivered, :armor_disabled_completed, :complete]
 
 	#setting of paid only done for testing & by admin only
 	before_action :administrators_only, only: [:paid, :delivered, :complete]
@@ -10,23 +10,34 @@ class OrdersController < ApplicationController
 			redirect_to root_url
 		end
 		if @order.status == "approved"
-			url = @order.api_get_payment_url(@current_user)
-			unless @order.errors.any?
-				@armor_payment_instructions_url = url
+			if @order.armor_enabled?
+				url = @order.api_get_payment_url(@current_user)
+				unless @order.errors.any?
+					@armor_payment_instructions_url = url
+				end
+			else
+				list = @order.api_get_shippers
+				unless @order.errors.any?
+					@armor_shippers_list = list
+				end
 			end
 		elsif @order.status == "paid"
-			list = @order.api_get_shippers
-			unless @order.errors.any?
-				@armor_shippers_list = list
+			if @order.armor_enabled?
+				list = @order.api_get_shippers
+				unless @order.errors.any?
+					@armor_shippers_list = list
+				end
 			end
 		elsif @order.status == "delivered"
-			url = @order.api_get_release_payment_url
-			unless @order.errors.any?
-				@armor_payment_release_payment_url = url
-			end
-			disputeurl = @order.api_get_dispute_url
-			unless @order.errors.any?
-				@armor_payment_dispute_url = disputeurl
+			if @order.armor_enabled?
+				url = @order.api_get_release_payment_url
+				unless @order.errors.any?
+					@armor_payment_release_payment_url = url
+				end
+				disputeurl = @order.api_get_dispute_url
+				unless @order.errors.any?
+					@armor_payment_dispute_url = disputeurl
+				end
 			end
 		elsif @order.status == "disputed"
 			disputeurl = @order.api_get_dispute_status_url(company: @current_user.company, user: @current_user)
@@ -89,21 +100,23 @@ class OrdersController < ApplicationController
 	end
 
 	def shipment
-		@order.api_add_shipment_info(
-			carrier_id: params[:shipper_id],
-			carrier_name: params[:shipper_name],
-			tracking_id: params[:armor_shipment_tracking_number],
-			description: params[:armor_shipment_description],
-			other_shipper: params[:armor_other_shipper]
-			)
-		if @order.errors.any?
-			flash.now[:error] = "Sorry, there was an error submitting your shipment details. <br> #{@order.errors.full_messages}"
-			@armor_shippers_list = @order.api_get_shippers
-			render :show
-		else
-			sleep(5) #pause to allow update of status from webhook
-			redirect_to order_url(@order)
-		end
+
+			@order.api_add_shipment_info(
+				carrier_id: params[:shipper_id],
+				carrier_name: params[:shipper_name],
+				tracking_id: params[:armor_shipment_tracking_number],
+				description: params[:armor_shipment_description],
+				other_shipper: params[:armor_other_shipper]
+				)
+			if @order.errors.any?
+				flash.now[:error] = "Sorry, there was an error submitting your shipment details. <br> #{@order.errors.full_messages}"
+				@armor_shippers_list = @order.api_get_shippers
+				render :show
+			else
+				sleep(5) #pause to allow update of status from webhook
+				redirect_to order_url(@order)
+			end
+
 	end
 
 	# FOR TESTING ARMOR ONLY
@@ -132,6 +145,28 @@ class OrdersController < ApplicationController
 				@success = true
 				sleep(5) #pause to allow update of status from webhook
 			end
+		end
+		respond_to do |format|
+			format.html  { redirect_to order_url(@order) }
+			format.js
+		end
+	end
+
+	def armor_disabled_delivered
+		if params[:confirm].to_i == 1
+			@order.delivered
+			@success = true
+		end
+		respond_to do |format|
+			format.html  { redirect_to order_url(@order) }
+			format.js
+		end
+	end
+
+	def armor_disabled_completed
+		if params[:confirm].to_i == 1
+			@order.completed_no_armor
+			@success = true
 		end
 		respond_to do |format|
 			format.html  { redirect_to order_url(@order) }

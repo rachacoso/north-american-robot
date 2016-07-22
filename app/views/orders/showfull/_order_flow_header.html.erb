@@ -10,6 +10,12 @@
 	<% if status == "disputed" %>
 	<li class="active">Order in Disupte</li>
 	<% end %>
-	<% end %>
 	<li <%= status == "completed" ? "class=active" : "" %>><%= status == "completed" ? "Order " : "" %> Completed</li>
+	<% else %>
+	<li <%= status == "pending" ? "class=active" : "" %>><%= status == "pending" ? "Order " : "" %>Pending<%= status == "pending" ? " Approval" : "" %></li>
+	<li <%= status == "approved" ? "class=active" : "" %>><%= status == "approved" ? "Order " : "" %>Approved</li>
+	<li <%= status == "shipped" ? "class=active" : "" %>><%= status == "shipped" ? "Order " : "" %>Shipped</li>
+	<li <%= status == "delivered" ? "class=active" : "" %>><%= status == "delivered" ? "Order " : "" %>Delivered</li>
+	<li <%= status == "completed" ? "class=active" : "" %>><%= status == "completed" ? "Order " : "" %>Paid &amp; Completed</li>
+	<% end %>
 </ul>
