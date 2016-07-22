@@ -182,13 +182,15 @@ class Order # for V2 ordering
     self.status = "delivered"
     self.delivered_date = DateTime.now
     self.save!
-    OrderMailer.send_order(
-      order: self,
-      status: "delivered_orderer",
-      email: self.armor_buyer_email, # send to orderer email
-      subject: "Woohoo! Your order was delivered.",
-      title: "Order Delivered"
-      ).deliver
+    if self.armor_enabled?
+      OrderMailer.send_order(
+        order: self,
+        status: "delivered_orderer",
+        email: self.armor_buyer_email, # send to orderer email
+        subject: "Woohoo! Your order was delivered.",
+        title: "Order Delivered"
+        ).deliver
+    end
     OrderMailer.send_order(
       order: self,
       status: "delivered_brand",
