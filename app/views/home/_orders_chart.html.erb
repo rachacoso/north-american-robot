@@ -1,0 +1,55 @@
+<div class="row">
+	<div class="small-12 columns">
+		<table id="orders_chart">
+			<thead>
+				<tr><th colspan=2>ORDERS</th></tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><%= @current_orders.count > 0 ? (link_to 'Open', orders_url(f:'o')) : 'Open' %></td>
+					<td><%= @current_orders.count > 0 ? (link_to @current_orders.count, orders_url(f:'o')) : @current_orders.count %></td>
+				</tr>
+				<tr>
+					<td><%= @submitted_orders.count > 0 ? (link_to 'Submitted', orders_url(f:'sub')) : 'Submitted' %></td>
+					<td><%= @submitted_orders.count > 0 ? (link_to @submitted_orders.count, orders_url(f:'sub')) : @submitted_orders.count %></td>
+				</tr>
+				<tr>
+					<td><%= @pending_orders.count > 0 ? (link_to 'Pending', orders_url(f:'pend')) : 'Pending' %></td>
+					<td><%= @pending_orders.count > 0 ? (link_to @pending_orders.count, orders_url(f:'pend')) : @pending_orders.count %></td>
+				</tr>
+				<tr>
+					<td><%= @approved_orders.count > 0 ? (link_to 'Approved', orders_url(f:'a')) : 'Approved' %></td>
+					<td><%= @approved_orders.count > 0 ? (link_to @approved_orders.count, orders_url(f:'a')) : @approved_orders.count %></td>
+				</tr>
+				<tr>
+					<td><%= @paid_orders.count > 0 ? (link_to 'Paid', orders_url(f:'paid')) : 'Paid' %></td>
+					<td><%= @paid_orders.count > 0 ? (link_to @paid_orders.count, orders_url(f:'paid')) : @paid_orders.count %></td>
+				</tr>
+				<tr>
+					<td><%= @shipped_orders.count > 0 ? (link_to 'Shipped', orders_url(f:'s')) : 'Shipped' %></td>
+					<td><%= @shipped_orders.count > 0 ? (link_to @shipped_orders.count, orders_url(f:'s')) : @shipped_orders.count %></td>
+				</tr>
+				<tr>
+					<td><%= @delivered_orders.count > 0 ? (link_to 'Delivered', orders_url(f:'d')) : 'Delivered' %></td>
+					<td><%= @delivered_orders.count > 0 ? (link_to @delivered_orders.count, orders_url(f:'d')) : @delivered_orders.count %></td>
+				</tr>
+				<tr>
+					<td><%= @completed_orders.count > 0 ? (link_to 'Completed', orders_url(f:'c')) : 'Completed' %></td>
+					<td><%= @completed_orders.count > 0 ? (link_to @completed_orders.count, orders_url(f:'c')) : @completed_orders.count %></td>
+				</tr>
+				<% if @error_orders.count > 0 %>
+				<tr>
+					<td><%= link_to 'Errors', orders_url(f:'err') %></td>
+					<td><%= link_to @error_orders.count, orders_url(f:'err') %></td>
+				</tr>
+				<% end %>
+				<% if @disputed_orders.count > 0 %>
+				<tr>
+					<td><%= link_to 'Errors', orders_url(f:'dispute') %></td>
+					<td><%= link_to @disputed_orders.count, orders_url(f:'dispute') %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div><!--/.small-12-->
+</div><!--/.row-->
