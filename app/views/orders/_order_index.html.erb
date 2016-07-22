@@ -1,0 +1,20 @@
+<table class="sortable" id="order-index">
+	<thead>
+		<tr>
+			<th><%= @current_user.type? == "brand" ? "Retailer/Distributor" : "Brand" %></th>
+			<th>Value</th>
+			<th>Date</th>
+			<th>Status</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% orders.each do |o| %>
+		<tr>
+			<td><%= @current_user.type? == "brand" ? o.orderer.company_name : o.brand.company_name %></td>
+			<td><%= number_to_currency(o.total_price) %></td>
+			<td><%= o.c_at.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%Y at %R %Z") %></td>
+			<td><%= o.status.capitalize %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>

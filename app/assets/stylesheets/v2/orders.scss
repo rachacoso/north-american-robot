@@ -49,7 +49,7 @@ table.order {
 	}
 }
 
-ul.order-flow-header {
+ul.order-flow-header, ul.order-index-filters {
 	list-style-type: none; /*to remove bullets*/
 	// margin-left:0;
 	margin-bottom: 0;
@@ -83,4 +83,27 @@ ul.order-flow-header {
 			}
 		}
 	}
+}
+ul.order-index-filters {
+	li {
+		font-size: rem-calc(20);
+	}
+	a {
+		color: $landing-dark-gray;
+	}
+}
+
+table#order-index {
+	th {
+		font-weight: 200;
+	}
+	font-weight: 100;
+	width: 100%;
+}
+/* Sortable tables */
+table.sortable thead {
+    background-color: $landing-light-gray;
+    color:#666666;
+    font-weight: bold;
+    cursor: default;
 }

@@ -1,0 +1,41 @@
+<%= render partial: "shared/topbar" %>
+
+<br>
+<div class="row">
+	<div class="small-11 small-centered columns">
+
+		<div class="row">
+			<div class="small-12 columns">
+
+				<div id="dashboard-marketplace-header">
+					<%= image_tag "logo_header_marketplace.svg" %>
+				</div>
+
+				<div class="row">
+					<div class="small-12 columns">
+						<div class="panel">
+							<h2>Orders</h2>
+							<%= render partial: 'order_index_filters', locals: { filter: @filter } %>
+						</div>
+					</div><!--/.small-12-->
+				</div><!--/.row-->
+
+				<div class="row">
+					<div class="small-12 columns">
+						<div class="panel">
+							<%= render partial: 'order_index', locals: { orders: @orders } %>
+						</div>
+					</div><!--/.small-12-->
+				</div><!--/.row-->
+
+
+
+
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+
+	</div><!--/.small-11-->
+</div><!--/.row-->
+
+
+<%= render partial: 'shared/v2/footer/main' %>

@@ -5,6 +5,31 @@ class OrdersController < ApplicationController
 	#setting of paid only done for testing & by admin only
 	before_action :administrators_only, only: [:paid, :delivered, :complete]
 
+	def index
+		if f = params[:f]
+			if [
+				"current", 
+				"submitted", 
+				"pending", 
+				"approved",
+				"paid",
+				"shipped",
+				"delivered",
+				"disputed",
+				"error",
+				"completed"
+				].include? f
+				@orders = @current_user.company.orders.send(f).order_by(:c_at => 'desc')
+				@filter = f
+			else
+				@orders = @current_user.company.orders.active.order_by(:c_at => 'desc')
+			end		
+		else
+			@orders = @current_user.company.orders.active.order_by(:c_at => 'desc')
+		end
+
+	end
+
 	def show
 		unless @order.viewable_by? @current_user
 			redirect_to root_url
