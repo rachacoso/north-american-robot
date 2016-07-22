@@ -43,6 +43,7 @@
 //= require jquery.vide.min
 //= require owl.carousel
 //= require dropit
+//= require sortable
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
