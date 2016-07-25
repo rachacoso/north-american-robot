@@ -26,11 +26,11 @@
 							<td style="padding: 20px;">
 								<span style="font-size:25px;font-weight:light;">
 									<% if @cc %>
-										<h4>Thanks for you message to <%= @message.recipient %></h4>
+										<h4>Thanks for you message to <%= @recipient_name %></h4>
 											<small>Copy of message:</small>
 											<%= simple_format(@message.text) %>
 									<% else %>
-										<h4><%= @message.sender %> has sent <%= @message.recipient %> the following message:</h4>
+										<h4><%= @message.sender %> has sent <%= @recipient_name %> the following message:</h4>
 										<%= simple_format(@message.text) %>
 										<h4>You can respond to them at <%= @message.sender_email %></h4>
 									<% end %>

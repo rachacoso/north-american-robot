@@ -7,7 +7,7 @@ class Message
   # id of distributor/brand match
   field :sender, type: String
   field :sender_email, type: String # for simple_message
-  field :recipient, type: String # for simple_message
+  field :recipient, type: BSON::ObjectId # for simple_message
   field :subject, type: String
   field :text, type: String
   field :read, type: Mongoid::Boolean

@@ -10,7 +10,7 @@
 		<%= form_for @message, url: new_simple_message_url(@recipient), remote: true do |f| %>
 			<%= f.hidden_field :sender, value: @current_user.get_parent.company_name %>
 			<%= f.hidden_field :sender_email, value: @current_user.email %>
-			<%= f.hidden_field :recipient, value: @recipient.company_name %>
+			<%= f.hidden_field :recipient_id, value: @recipient.id %>
 			<%= f.text_area :text, rows: 10, label:false, placeholder: "Message Text Here" %>
 			<%= f.submit 'Send Message', class: "landing-button" %>
 		<% end %>

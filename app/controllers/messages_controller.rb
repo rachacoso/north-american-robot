@@ -45,9 +45,10 @@ class MessagesController < ApplicationController
 		@message = Message.new(
 			sender: params[:message][:sender],
 			sender_email: params[:message][:sender_email],
-			recipient: params[:message][:recipient],
+			recipient: params[:message][:recipient_id],
 			text: params[:message][:text]
 			)
+		@recipient = Brand.find(params[:recipient_id]) || Distributor.find(params[:recipient_id]) || Retailer.find(params[:recipient_id])
 		@message.simple_messages
 	end
 

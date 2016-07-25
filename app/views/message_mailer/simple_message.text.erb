@@ -1,12 +1,12 @@
 LANDING INTERNATIONAL
 
 <% if @cc %>
-Thanks for you message to <%= @message.recipient %>
+Thanks for you message to <%= @recipient_name %>
 
 Copy of message:
 <%= @message.text %>
 <% else %>
-<%= @message.sender %> has sent <%= @message.recipient %> the following message:
+<%= @message.sender %> has sent <%= @recipient_name %> the following message:
 <%= @message.text %>
 
 
