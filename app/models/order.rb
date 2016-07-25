@@ -109,6 +109,13 @@ class Order # for V2 ordering
     OrderMailer.send_order(
       order: self, 
       status: "submitted_brand", 
+      email: self.brand.users.pluck(:email), # send to brand/landing (currently just sending to Landing)
+      subject: "Good News! You have a new order request on Landing!",
+      title: "Order Submitted"
+      ).deliver
+    OrderMailer.send_order(
+      order: self, 
+      status: "submitted_brand", 
       email: "orders@landingintl.com", # send to brand/landing (currently just sending to Landing)
       subject: "Good News! You have a new order request on Landing!",
       title: "Order Submitted"
@@ -116,7 +123,7 @@ class Order # for V2 ordering
     OrderMailer.send_order(
       order: self, 
       status: "submitted_orderer", 
-      email: self.armor_buyer_email, # send to buyer
+      email: self.orderer.users.pluck(:email), # send to buyer
       subject: "Congratulations! You submitted an order on Landing!",
       title: "Order Submitted"
       ).deliver
@@ -132,7 +139,7 @@ class Order # for V2 ordering
     OrderMailer.send_order(
       order: self, 
       status: "pending", 
-      email: self.armor_buyer_email, # send to orderer email
+      email: self.orderer.users.pluck(:email), # send to orderer email
       subject: "Yippee! Your order has been approved.",
       title: "Order Pending Approval and Payment"
       ).deliver
@@ -157,6 +164,13 @@ class Order # for V2 ordering
     OrderMailer.send_order(
       order: self,
       status: "paid",
+      email: self.brand.users.pluck(:email), # send to brand/landing (currently just sending to Landing)
+      subject: "Yay! Get ready to ship!",
+      title: "Order Paid"
+      ).deliver
+    OrderMailer.send_order(
+      order: self,
+      status: "paid",
       email: "orders@landingintl.com", # send to brand/landing (currently just sending to Landing)
       subject: "Yay! Get ready to ship!",
       title: "Order Paid"
@@ -171,7 +185,7 @@ class Order # for V2 ordering
     OrderMailer.send_order(
       order: self,
       status: "shipped",
-      email: self.armor_buyer_email, # send to orderer email
+      email: self.orderer.users.pluck(:email), # send to orderer email
       subject: "Hooray! Your beauty products are on their way!",
       title: "Order Shipped"
       ).deliver
@@ -186,11 +200,18 @@ class Order # for V2 ordering
       OrderMailer.send_order(
         order: self,
         status: "delivered_orderer",
-        email: self.armor_buyer_email, # send to orderer email
+        email: self.orderer.users.pluck(:email), # send to orderer email
         subject: "Woohoo! Your order was delivered.",
         title: "Order Delivered"
         ).deliver
     end
+    OrderMailer.send_order(
+      order: self,
+      status: "delivered_brand",
+      email: self.brand.users.pluck(:email), # send to brand/landing (currently just sending to Landing)
+      subject: "Nice Job! Your order was delivered.",
+      title: "Order Delivered"
+      ).deliver
     OrderMailer.send_order(
       order: self,
       status: "delivered_brand",
@@ -209,6 +230,13 @@ class Order # for V2 ordering
     OrderMailer.send_order(
       order: self,
       status: "dispute_initiated",
+      email: self.brand.users.pluck(:email), # send to brand/landing (currently just sending to Landing)
+      subject: "Order in Dispute",
+      title: "Order in Dispute"
+      ).deliver
+    OrderMailer.send_order(
+      order: self,
+      status: "dispute_initiated",
       email: "orders@landingintl.com", # send to brand/landing (currently just sending to Landing)
       subject: "Order in Dispute",
       title: "Order in Dispute"
@@ -219,6 +247,13 @@ class Order # for V2 ordering
     OrderMailer.send_order(
       order: self,
       status: "dispute_updated",
+      email: self.brand.users.pluck(:email), # send to brand/landing (currently just sending to Landing)
+      subject: "Order Dispute Updated",
+      title: "Order Dispute Updated"
+      ).deliver
+    OrderMailer.send_order(
+      order: self,
+      status: "dispute_updated",
       email: "orders@landingintl.com", # send to brand/landing (currently just sending to Landing)
       subject: "Order Dispute Updated",
       title: "Order Dispute Updated"
@@ -226,7 +261,7 @@ class Order # for V2 ordering
     OrderMailer.send_order(
       order: self,
       status: "dispute_updated",
-      email: self.armor_buyer_email, # send to orderer
+      email: self.orderer.users.pluck(:email), # send to orderer
       subject: "Order Dispute Updated",
       title: "Order Dispute Updated"
       ).deliver
@@ -237,6 +272,13 @@ class Order # for V2 ordering
     self.status = "completed"
     self.completed_date = DateTime.now
     self.save!
+    OrderMailer.send_order(
+      order: self,
+      status: "completed",
+      email: self.brand.users.pluck(:email), # send to brand/landing (currently just sending to Landing)
+      subject: "Woohoo! Your payment has been released!",
+      title: "Order Payment Released"
+      ).deliver
     OrderMailer.send_order(
       order: self,
       status: "completed",
@@ -261,8 +303,15 @@ class Order # for V2 ordering
     OrderMailer.send_order(
       order: self,
       status: "error",
-      email: self.user.email, # send to orderer email (using the order creator's email in this case)
+      email: self.orderer.users.pluck(:email), # send to orderer email
       subject: "Landing International: Order Completed",
+      title: "Order Errors"
+      ).deliver
+    OrderMailer.send_order(
+      order: self,
+      status: "error",
+      email: self.brand.users.pluck(:email), # send to brand/landing (currently just sending to Landing)
+      subject: "Landing International: Order Errors",
       title: "Order Errors"
       ).deliver
     OrderMailer.send_order(
