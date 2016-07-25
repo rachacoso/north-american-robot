@@ -30,7 +30,8 @@
 					        <%= link_to dashboard_url do %><%= image_tag 'https://s3.amazonaws.com/landingintl-us/general/landing_icon_b.png', width: 32, height: 32, alt: "Landing Users" %><% end %>
 					        <ul>
 					        	<li class="section-title">Welcome to Landing International<br> <%= @current_user.email %></li>
-				            <li><%= link_to 'ORDERS DASHBOARD', dashboard_url, id: "menu-dashboard", class: 'text-right' %></li>
+				            <li><%= link_to 'DASHBOARD', dashboard_url, id: "menu-dashboard", class: 'text-right' %></li>
+				            <li><%= link_to 'ORDERS', orders_url, id: "menu-dashboard", class: 'text-right' %></li>
 				            <li><%= link_to 'PREVIEW YOUR PROFILE', eval("#{@current_user.type?}_full_profile_path"), class: 'text-right' %></li>
 				            <li><%= link_to 'EDIT YOUR PROFILE', eval("#{@current_user.type?}_path"), class: 'text-right' %></li>
 				            <li><%= link_to "HELP", "/pages/contact" %></li>

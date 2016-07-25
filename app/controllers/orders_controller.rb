@@ -6,6 +6,18 @@ class OrdersController < ApplicationController
 	before_action :administrators_only, only: [:paid, :delivered, :complete]
 
 	def index
+		@profile = @current_user.get_parent
+		@current_orders = @profile.orders.current.count
+		@submitted_orders = @profile.orders.submitted.count
+		@pending_orders = @profile.orders.pending.count
+		@approved_orders = @profile.orders.approved.count
+		@paid_orders = @profile.orders.paid.count
+		@shipped_orders = @profile.orders.shipped.count
+		@delivered_orders = @profile.orders.delivered.count
+		@completed_orders = @profile.orders.completed.count
+		@error_orders = @profile.orders.error.count
+		@disputed_orders = @profile.orders.disputed.count
+		@active_orders = @profile.orders.active.count
 		if f = params[:f]
 			if [
 				"current", 
@@ -17,15 +29,18 @@ class OrdersController < ApplicationController
 				"delivered",
 				"disputed",
 				"error",
-				"completed"
+				"completed",
+				"active"
 				].include? f
 				@orders = @current_user.company.orders.send(f).order_by(:c_at => 'desc')
 				@filter = f
 			else
 				@orders = @current_user.company.orders.active.order_by(:c_at => 'desc')
+				@filter = "active"
 			end		
 		else
 			@orders = @current_user.company.orders.active.order_by(:c_at => 'desc')
+			@filter = "active"
 		end
 
 	end

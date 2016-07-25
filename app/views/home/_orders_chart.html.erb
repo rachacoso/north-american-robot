@@ -1,54 +1,59 @@
 <div class="row">
 	<div class="small-12 columns">
 		<table id="orders_chart">
-			<thead>
-				<tr><th colspan=2>ORDERS</th></tr>
-			</thead>
 			<tbody>
-				<tr>
-					<td><%= @current_orders.count > 0 ? (link_to 'Open', orders_url(f:'current')) : 'Open' %></td>
-					<td><%= @current_orders.count > 0 ? (link_to @current_orders.count, orders_url(f:'current')) : @current_orders.count %></td>
+				<tr <%= filter == "current" ? "class=active" : "" %>>
+					<td><%= @current_orders > 0 ? (link_to 'Open', orders_url(f:'current')) : 'Open' %></td>
+					<td><%= @current_orders > 0 ? (link_to @current_orders, orders_url(f:'current')) : @current_orders %></td>
 				</tr>
-				<tr>
-					<td><%= @submitted_orders.count > 0 ? (link_to 'Submitted', orders_url(f:'submitted')) : 'Submitted' %></td>
-					<td><%= @submitted_orders.count > 0 ? (link_to @submitted_orders.count, orders_url(f:'submitted')) : @submitted_orders.count %></td>
+				<tr <%= filter == "submitted" ? "class=active" : "" %>>
+					<td><%= @submitted_orders > 0 ? (link_to 'Submitted', orders_url(f:'submitted')) : 'Submitted' %></td>
+					<td><%= @submitted_orders > 0 ? (link_to @submitted_orders, orders_url(f:'submitted')) : @submitted_orders %></td>
 				</tr>
-				<tr>
-					<td><%= @pending_orders.count > 0 ? (link_to 'Pending', orders_url(f:'pending')) : 'Pending' %></td>
-					<td><%= @pending_orders.count > 0 ? (link_to @pending_orders.count, orders_url(f:'pending')) : @pending_orders.count %></td>
+				<tr <%= filter == "pending" ? "class=active" : "" %>>
+					<td><%= @pending_orders > 0 ? (link_to 'Pending', orders_url(f:'pending')) : 'Pending' %></td>
+					<td><%= @pending_orders > 0 ? (link_to @pending_orders, orders_url(f:'pending')) : @pending_orders %></td>
 				</tr>
-				<tr>
-					<td><%= @approved_orders.count > 0 ? (link_to 'Approved', orders_url(f:'approved')) : 'Approved' %></td>
-					<td><%= @approved_orders.count > 0 ? (link_to @approved_orders.count, orders_url(f:'approved')) : @approved_orders.count %></td>
+				<tr <%= filter == "approved" ? "class=active" : "" %>>
+					<td><%= @approved_orders > 0 ? (link_to 'Approved', orders_url(f:'approved')) : 'Approved' %></td>
+					<td><%= @approved_orders > 0 ? (link_to @approved_orders, orders_url(f:'approved')) : @approved_orders %></td>
 				</tr>
-				<tr>
-					<td><%= @paid_orders.count > 0 ? (link_to 'Paid', orders_url(f:'paid')) : 'Paid' %></td>
-					<td><%= @paid_orders.count > 0 ? (link_to @paid_orders.count, orders_url(f:'paid')) : @paid_orders.count %></td>
+				<tr <%= filter == "paid" ? "class=active" : "" %>>
+					<td><%= @paid_orders > 0 ? (link_to 'Paid', orders_url(f:'paid')) : 'Paid' %></td>
+					<td><%= @paid_orders > 0 ? (link_to @paid_orders, orders_url(f:'paid')) : @paid_orders %></td>
 				</tr>
-				<tr>
-					<td><%= @shipped_orders.count > 0 ? (link_to 'Shipped', orders_url(f:'shipped')) : 'Shipped' %></td>
-					<td><%= @shipped_orders.count > 0 ? (link_to @shipped_orders.count, orders_url(f:'shipped')) : @shipped_orders.count %></td>
+				<tr <%= filter == "shipped" ? "class=active" : "" %>>
+					<td><%= @shipped_orders > 0 ? (link_to 'Shipped', orders_url(f:'shipped')) : 'Shipped' %></td>
+					<td><%= @shipped_orders > 0 ? (link_to @shipped_orders, orders_url(f:'shipped')) : @shipped_orders %></td>
 				</tr>
-				<tr>
-					<td><%= @delivered_orders.count > 0 ? (link_to 'Delivered', orders_url(f:'delivered')) : 'Delivered' %></td>
-					<td><%= @delivered_orders.count > 0 ? (link_to @delivered_orders.count, orders_url(f:'delivered')) : @delivered_orders.count %></td>
+				<tr <%= filter == "delivered" ? "class=active" : "" %>>
+					<td><%= @delivered_orders > 0 ? (link_to 'Delivered', orders_url(f:'delivered')) : 'Delivered' %></td>
+					<td><%= @delivered_orders > 0 ? (link_to @delivered_orders, orders_url(f:'delivered')) : @delivered_orders %></td>
 				</tr>
-				<tr>
-					<td><%= @completed_orders.count > 0 ? (link_to 'Completed', orders_url(f:'completed')) : 'Completed' %></td>
-					<td><%= @completed_orders.count > 0 ? (link_to @completed_orders.count, orders_url(f:'completed')) : @completed_orders.count %></td>
-				</tr>
-				<% if @error_orders.count > 0 %>
-				<tr>
+				<% if @error_orders > 0 %>
+				<tr <%= filter == "errors" ? "class=active" : "" %>>
 					<td><%= link_to 'Errors', orders_url(f:'error') %></td>
-					<td><%= link_to @error_orders.count, orders_url(f:'error') %></td>
+					<td><%= link_to @error_orders, orders_url(f:'error') %></td>
 				</tr>
 				<% end %>
-				<% if @disputed_orders.count > 0 %>
-				<tr>
-					<td><%= link_to 'Errors', orders_url(f:'disputed') %></td>
-					<td><%= link_to @disputed_orders.count, orders_url(f:'disputed') %></td>
+				<% if @disputed_orders > 0 %>
+				<tr <%= filter == "disputed" ? "class=active" : "" %>>
+					<td><%= link_to 'Disputed', orders_url(f:'disputed') %></td>
+					<td><%= link_to @disputed_orders, orders_url(f:'disputed') %></td>
 				</tr>
 				<% end %>
+			</tbody>
+		</table>
+		<table id="orders_chart">
+			<tbody>
+				<tr <%= filter == "active" ? "class=active" : "" %>>
+					<td><%= @active_orders > 0 ? (link_to 'All Active', orders_url(f:'active')) : 'Active' %></td>
+					<td><%= @active_orders > 0 ? (link_to @active_orders, orders_url(f:'active')) : @active_orders %></td>
+				</tr>
+				<tr <%= filter == "completed" ? "class=active" : "" %>>
+					<td><%= @completed_orders > 0 ? (link_to 'Completed', orders_url(f:'completed'), class: "completed") : 'Completed' %></td>
+					<td><%= @completed_orders > 0 ? (link_to @completed_orders, orders_url(f:'completed'), class: "completed") : @completed_orders %></td>
+				</tr>
 			</tbody>
 		</table>
 	</div><!--/.small-12-->

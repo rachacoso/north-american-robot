@@ -15,21 +15,18 @@
 					<div class="small-12 columns">
 						<div class="panel">
 							<h2>Orders</h2>
-							<%= render partial: 'order_index_filters', locals: { filter: @filter } %>
 						</div>
 					</div><!--/.small-12-->
 				</div><!--/.row-->
 
 				<div class="row">
-					<div class="small-12 columns">
-						<div class="panel">
+					<div class="medium-2 columns">
+						<%= render partial: "home/orders_chart", locals: { filter: @filter } %>
+					</div><!--/.medium-2-->
+					<div class="medium-10 columns">
 							<%= render partial: 'order_index', locals: { orders: @orders } %>
-						</div>
-					</div><!--/.small-12-->
+					</div><!--/.medium-10-->
 				</div><!--/.row-->
-
-
-
 
 			</div><!--/.small-12-->
 		</div><!--/.row-->

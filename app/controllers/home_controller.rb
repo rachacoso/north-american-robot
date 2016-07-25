@@ -34,16 +34,17 @@ class HomeController < ApplicationController
 
 			@profile = @current_user.get_parent
 
-			@current_orders = @profile.orders.current
-			@submitted_orders = @profile.orders.submitted
-			@pending_orders = @profile.orders.pending
-			@approved_orders = @profile.orders.approved
-			@paid_orders = @profile.orders.paid
-			@shipped_orders = @profile.orders.shipped
-			@delivered_orders = @profile.orders.delivered
-			@completed_orders = @profile.orders.completed
-			@error_orders = @profile.orders.error
-			@disputed_orders = @profile.orders.disputed
+			@current_orders = @profile.orders.current.count
+			@submitted_orders = @profile.orders.submitted.count
+			@pending_orders = @profile.orders.pending.count
+			@approved_orders = @profile.orders.approved.count
+			@paid_orders = @profile.orders.paid.count
+			@shipped_orders = @profile.orders.shipped.count
+			@delivered_orders = @profile.orders.delivered.count
+			@completed_orders = @profile.orders.completed.count
+			@error_orders = @profile.orders.error.count
+			@disputed_orders = @profile.orders.disputed.count
+			@active_orders = @profile.orders.active.count
 
 			matches = @profile.matches
 			@unread_list = Array.new
