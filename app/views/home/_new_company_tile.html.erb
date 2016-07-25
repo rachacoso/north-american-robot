@@ -1,0 +1,13 @@
+<div class="index-item filtered">
+<%= link_to preview_brand_url(brand), remote: true do %>
+<div class="image">
+	<% type, photo = index_item_photo(brand) %>
+	<% if type == "logo" %>
+		<%= image_tag photo %>
+	<% else %>
+		<%= image_tag photo %>
+	<% end %>
+</div>
+<div class="name"><%= brand.company_name %></div>
+<% end %>
+</div><!--/.index-item-->

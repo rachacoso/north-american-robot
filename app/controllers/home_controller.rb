@@ -46,6 +46,8 @@ class HomeController < ApplicationController
 			@disputed_orders = @profile.orders.disputed.count
 			@active_orders = @profile.orders.active.count
 
+			@new_brands = Brand.activated.international.desc('_id').limit(10)
+
 			matches = @profile.matches
 			@unread_list = Array.new
 			matches.each do |m|

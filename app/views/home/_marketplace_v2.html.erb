@@ -13,13 +13,18 @@
 
 <div class="row">
 	<div class="medium-2 columns">
-		<div class="panel" style="padding-top:0.25em;padding-bottom:0.25em;"><h3 class="text-center">Orders</h3></div>
+		<div class="panel" style="padding-top:0.25em;padding-bottom:0.25em;"><h3 class="text-center"><strong>Orders</strong></h3></div>
 		<%= render partial: "home/orders_chart", locals: { filter: @filter } %>
 	</div><!--/.medium-2-->
 	<div class="medium-10 columns">
-		<div class="panel" style="padding-top:0.25em;padding-bottom:0.25em;"><h3 class="text-center">Latest </h3></div>
+		<div class="panel" style="padding-top:0.25em;padding-bottom:0.25em;"><h3 class="text-center"><strong>The Latest</strong></h3></div>
 		<div class="panel">
-			[new brands]
+			<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-5">
+			<% @new_brands.each do |b| %>
+				<li><%= render partial: "new_company_tile", locals: {brand: b} %></li>
+			<% end %>
+			</ul>
 		</div>
 	</div><!--/.medium-10-->
 </div><!--/.row-->
+
