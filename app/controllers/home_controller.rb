@@ -46,7 +46,14 @@ class HomeController < ApplicationController
 			@disputed_orders = @profile.orders.disputed.count
 			@active_orders = @profile.orders.active.count
 
-			@new_brands = Brand.activated.international.desc('_id').limit(10)
+			@new_brands = Brand.activated.international.desc('c_at').limit(10)
+			@updated_brands = Brand.activated.international.desc('u_at').limit(5)
+
+
+			products_with_photos = ProductPhoto.pluck(:photographable_id).uniq
+			active_brands = Brand.activated.international.pluck(:id)
+			@updated_products = Product.where(:brand_id.in => active_brands, :_id.in => products_with_photos).desc('u_at').desc('_id').limit(5)
+
 
 			matches = @profile.matches
 			@unread_list = Array.new

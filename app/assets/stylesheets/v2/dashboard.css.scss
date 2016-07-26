@@ -10,3 +10,28 @@
 #dashboard-order-section {
 	background: $landing-light-gray;
 }
+
+.dashboard-display-item {
+	a { 
+		color: $landing-dark-gray;
+	}
+	.image {
+		text-align: center;
+		height: 150px;
+		overflow: hidden;
+	}
+	.image img {
+		height: 100%;
+	}
+	.name {
+		text-align: center;
+		font-weight: 100;
+		font-size: rem-calc(12);
+		a {
+			color: $landing-dark-gray;
+		}
+	}
+	&.filtered {
+		margin-bottom: rem-calc(60);
+	}	
+}

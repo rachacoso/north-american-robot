@@ -1,6 +1,7 @@
 class Product
   include Mongoid::Document
-
+	include Mongoid::Timestamps::Short
+	
  	field :name, type: String, default: ""
  	field :description, type: String, default: ""
  	field :msrp, type: String, default: "" # old version & now will be used for display purposes only
