@@ -5,7 +5,7 @@
 <div class="row">
 	<div class="small-12 columns">
 		<div class="panel">
-			<h2>Marketplace Dashboard</h2>
+			<h2>Dashboard</h2>
 			<p> Welcome to Landing International! This is your marketplace dashboard where you will be able to view all your Landing International activity.</p>
 		</div>
 	</div><!--/.small-12-->
@@ -13,11 +13,11 @@
 
 <div class="row">
 	<div class="medium-2 columns">
-		<div class="panel" style="padding-top:0.25em;padding-bottom:0.25em;"><h3 class="text-center"><strong>Orders</strong></h3></div>
+		<div class="panel shaded" style="padding-top:0.25em;padding-bottom:0.25em;"><h3 class="text-center"><strong>Orders</strong></h3></div>
 		<%= render partial: "home/orders_chart", locals: { filter: @filter } %>
 	</div><!--/.medium-2-->
 	<div class="medium-10 columns">
-		<div class="panel" style="padding-top:0.25em;padding-bottom:0.25em;"><h3 class="text-center"><strong>New Brands</strong></h3></div>
+		<div class="panel shaded" style="padding-top:0.25em;padding-bottom:0.25em;"><h3 class="text-center"><strong>New Brands</strong></h3></div>
 		<div class="panel">
 			<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-5">
 			<% @new_brands.each do |b| %>
@@ -25,7 +25,7 @@
 			<% end %>
 			</ul>
 		</div>
-		<div class="panel" style="padding-top:0.25em;padding-bottom:0.25em;"><h3 class="text-center"><strong>Brands Just Updated</strong></h3></div>
+		<div class="panel shaded" style="padding-top:0.25em;padding-bottom:0.25em;"><h3 class="text-center"><strong>Brands Just Updated</strong></h3></div>
 		<div class="panel">
 			<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-5">
 			<% @updated_brands.each do |b| %>
@@ -33,7 +33,7 @@
 			<% end %>
 			</ul>
 		</div>
-		<div class="panel" style="padding-top:0.25em;padding-bottom:0.25em;"><h3 class="text-center"><strong>Products Just Updated</strong></h3></div>
+		<div class="panel shaded" style="padding-top:0.25em;padding-bottom:0.25em;"><h3 class="text-center"><strong>Products Just Updated</strong></h3></div>
 		<div class="panel">
 			<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-5">
 			<% @updated_products.each do |p| %>

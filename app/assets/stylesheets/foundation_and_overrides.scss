@@ -1118,8 +1118,9 @@ $sub-nav-active-bg: gray;
 // $include-html-table-classes: $include-html-classes;
 
 // These control the background color for the table and even rows
-// $table-bg: #fff;
-$table-even-row-bg: #fff;
+// $table-bg: #fff;;
+// $table-even-row-bg: #fff;
+$table-even-row-bg: $landing-cream;
 // These control the table cell border style
 $table-border-style: dotted;
 // $table-border-size: 1px;

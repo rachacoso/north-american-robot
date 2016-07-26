@@ -87,7 +87,12 @@ ul.order-flow-header, ul.order-index-filters {
 
 table#order-index {
 	th {
-		font-weight: 200;
+		background-color: $landing-blue;
+		font-weight: 500;
+		color: white;
+	}
+	tbody tr {
+		background-color: white;
 	}
 	td a{
     display:block;
@@ -106,6 +111,7 @@ table.sortable thead {
 }
 
 table#orders_chart {
+	background-color: $landing-cream;
 	width: 100%;
 	font-weight: 100;
 	border-spacing: 0;
