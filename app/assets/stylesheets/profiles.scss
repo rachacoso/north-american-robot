@@ -16,6 +16,11 @@
     padding-bottom: 0.4em;
     font-weight: 100;
   }
+  &.info-panel {
+    @media #{$small-only} { 
+      margin-bottom: 0;
+    }
+  }
 }
 
 .profile-edit-form-onboard {
