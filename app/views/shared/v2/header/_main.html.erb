@@ -22,12 +22,12 @@
 		<div class="small-6 columns text-right">
 			<div class="row">
 
-				<div class="medium-2 columns medium-push-10">
+				<div class="medium-2 columns medium-push-10 text-right">
 
 				<% if @current_user && show_top_menu %>
 					<ul class="dropmenu">
 					    <li>
-					        <%= link_to dashboard_url do %><%= image_tag 'https://s3.amazonaws.com/landingintl-us/general/landing_icon_b.png', width: 32, height: 32, alt: "Landing Users" %><% end %>
+					        <%= link_to dashboard_url do %><%= image_tag 'https://s3.amazonaws.com/landingintl-us/general/landing_icon_b.png', width: 32, height: 32, alt: "Landing Users" %><br><small>WELCOME</small><% end %>
 					        <ul>
 					        	<li class="section-title">Welcome to Landing International<br> <%= @current_user.email %></li>
 				            <li><%= link_to 'DASHBOARD', dashboard_url, id: "menu-dashboard", class: 'text-right' %></li>
@@ -40,7 +40,7 @@
 					    </li>
 					</ul>
 				<% else %>
-					<%= link_to dashboard_url do %><%= image_tag 'https://s3.amazonaws.com/landingintl-us/general/landing_icon_a.png', width: 32, height: 32, alt: "Landing Users" %><% end %>
+					<%= link_to dashboard_url do %> <%= image_tag 'https://s3.amazonaws.com/landingintl-us/general/landing_icon_a.png', width: 32, height: 32, alt: "Landing Users" %><br><small>LOGIN</small><% end %>
 				<% end %>
 
 				</div><!--/.medium-2-->
