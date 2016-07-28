@@ -46,50 +46,54 @@ class RetailersController < ApplicationController
 
   def update
 
-    retailer = @current_user.retailer
+    @retailer = @current_user.retailer
 
     # set general fields
-    retailer.update(retailer_parameters)
+    @retailer.update(retailer_parameters)
 
     # set other fields
 
     # set year established
     if params[:year_established]
-      retailer.update(year_established: Date.new(params[:year_established].to_i))
+      @retailer.update(year_established: Date.new(params[:year_established].to_i))
     end
 
 
     if params[:sectors]
-			retailer.set_sectors(params[:sectors])
+			@retailer.set_sectors(params[:sectors])
     end
 
     if params[:subsectors]
-			retailer.set_subsectors(params[:subsectors])
+			@retailer.set_subsectors(params[:subsectors])
     end
 
-    if retailer.save
-      # successful
-      
-      # update completeness
-      # retailer.update_completeness
-
-			if params[:redirect_anchor]
-        redirect_to retailer_url + "#" + params[:redirect_anchor]
-      else
-				redirect_to retailer_url
-			end
-
-
-    else
-      # not successful  
-      # STILL INCOMPLETE NEED TO ADD VALIDATIONS
-      flash[:error] = "Sorry, there were errors"
-
-      redirect_to retailer_url, :flash => {
-        :name_error => retailer.errors[:name].first
-      }
-
+    if params[:disable_armor_payments]
+      @armor_payments = true
     end
+
+    respond_to do |format|
+      format.html { 
+        if @retailer.save
+          # successful
+          # update completeness
+          # retailer.update_completeness
+          if params[:redirect_anchor]
+            redirect_to retailer_url + "#" + params[:redirect_anchor]
+          else
+            redirect_to retailer_url
+          end
+        else
+          # not successful  
+          # STILL INCOMPLETE NEED TO ADD VALIDATIONS
+          flash[:error] = "Sorry, there were errors"
+          redirect_to retailer_url, :flash => {
+            :name_error => @retailer.errors[:name].first
+          }
+        end
+      } 
+      format.js
+    end
+    
 
 
   end

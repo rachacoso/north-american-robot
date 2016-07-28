@@ -1,18 +1,11 @@
+<br>
+<% if company.disable_armor_payments %>	
+<div class="panel text-center" style="background-color: #f2f2f2;"><h3><strong>Armor Payments (Payoneer) is <span style="color:red;">OFF</span>.</strong></h3></div>
+<% end %>
 <div class="row">
 	<div class="small-12 columns">
-		<br>
-		<h1>Ordering &amp; Payments</h1>
-		<h3>Landing International has partnered with <%= link_to "Armor Payments, a Payoneer Company", "//armorpayments.com", target: "_blank" %> to provide payment escrow services for B2B eCommerce giving you peace of mind with secure transactions:</h3>
-
+		<h3>How it works:</h3>
 		<%= image_tag "https://s3.amazonaws.com/landingintl-us/general/orderpayments.png" %>
-
-		<h3>
-			Payment transactions on Landing Interational will take place via Armor Paymets (a Payoneer company) payment escrow service. 
-			<% unless company.armor_account_id || company.disable_armor_payments %>
-				<strong>In order to participate please follow the instructions below to enable your account with Armor Payments (Payoneer).</strong>
-			<% end %>
-		</h3>
-
 	</div>
 </div>
 
@@ -20,7 +13,6 @@
 <div class="row">
 	<div class="small-12 columns">
 		<a class="anchor" id="a-armor"></a>
-		<hr>		
 	</div><!--/.small-12-->
 </div><!--/.row-->
 
@@ -29,6 +21,7 @@
 	
 	<div class="row">
 		<div class="small-12 columns">
+			<hr>
 			<h2>Armor Payments (Payoneer) Escrow Enabled</h2>
 
 			<h3>You are now able to complete transactions via Armor Payments (Payoneer) and can now 

@@ -1,18 +1,13 @@
-
-
+<% unless c.disable_armor_payments %>
 	<div class="row">
 		<div class="small-12 columns">
-			<h2><% unless @current_user.company.class.to_s == "Brand" %>Option A) <% end %>Enable Armor Payments (Payoneer) Escrow</h2>
-			<% if c.disable_armor_payments %>	
-			<div class="panel text-center" style="background-color: #f2f2f2;"><h3><strong>Armor Payments (Payoneer) is disabled.</strong></h3></div>
-			<% else %>
+			<hr>
+			<h2>Enable Armor Payments (Payoneer) Escrow</h2>
 			<h3><strong> Accept Armor Payments (Payoneer) Terms and Conditions below to enable.</strong></h3>
 			<div class="landing-notice"><h3>Companies domiciled in Arizona or Idaho are currently unable to use Armor Payments due to escrow licensing issues. You will be unable to use Armor Payments (Payoneer) Escrow service if your company is headquartered in either of those states.</h3></div>
-			<% end %>
 		</div><!--/.small-12-->
 	</div><!--/.row-->
 
-<% unless c.disable_armor_payments %>
 	<div class="row">
 		<div class="small-12 columns">
 			<% if flash[:error] %>
@@ -50,37 +45,6 @@
 			<%= render 'shared/profileform/armor/armor_signup_form' %>
 			<%= submit_tag "Enable Armor Payments (Payoneer) Escrow", class: "landing-button" %>
 		<% end %>
-		</div><!--/.small-12-->
-	</div><!--/.row-->
-<% end %>
-
-<% unless @current_user.company.class.to_s == "Brand" %>
-	<div class="row">
-		<div class="small-12 columns">
-			<h1 style="border-top: 1px solid black; border-bottom: 1px solid black;padding-bottom: 0;margin-top: 1em; margin-bottom: 1em;">OR</h1>
-		</div><!--/.small-12-->
-	</div><!--/.row-->
-<% end %>
-
-<% unless @current_user.company.class.to_s == "Brand" %>
-	<div class="row">
-		<div class="small-12 columns">
-				<h2>Option B) Use Other Payment Methods</h2>
-				<h3>
-					<strong>If you'd like to use other methods of payment (e.g. Net Terms), you can turn the system off.</strong>
-				</h3>
-				<div class="panel text-center" style="background-color: #f2f2f2;">
-						<h3 >ARMOR PAYMENTS is:</h3>
-						<%= form_for @current_user.company, :html => {id: 'disableArmorForm'}, remote: true do |f| %>
-							<div class="switch" style="margin-bottom:0;">
-								<%= f.check_box('disable_armor_payments', id: 'disableArmor', label: false) %>
-								<label for="disableArmor">
-									<span class="switch-on">OFF</span>
-									<span class="switch-off">ON</span>
-								</label>
-							</div> 
-						<% end %>
-				</div>
 		</div><!--/.small-12-->
 	</div><!--/.row-->
 <% end %>
