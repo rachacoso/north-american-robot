@@ -1,32 +1,28 @@
-					<div class="row">
-						<div class="small-12 columns">
-							<a class="anchor" id="a-brand-photos"></a>
-							<h1>Brand Photos</h1>
-						</div>
-					</div>
-					<div class="row">
-						<div class="small-12 columns">
-							<ul class="small-block-grid-2 medium-block-grid-6">
-									<% @brand.brand_photos.each do |photo| %>
-										<li>
-											<a data-dropdown="d_<%= photo.id %>" href="#"><%= image_tag photo.photo.url(:small) %></a>
-											<div id="d_<%= photo.id %>" data-dropdown-content class="f-dropdown content medium" aria-hidden="true" tabindex="-1">
-											  <%= image_tag photo.photo.url(:large), width: "400"%>
-											</div><br>
+<br>
+<a class="anchor" id="a-brand-photos"></a>
+<div class="row">
+	<div class="small-12 columns">
+		<ul class="small-block-grid-2 medium-block-grid-6">
+				<% @brand.brand_photos.each do |photo| %>
+					<li>
+						<a data-dropdown="d_<%= photo.id %>" href="#"><%= image_tag photo.photo.url(:small) %></a>
+						<div id="d_<%= photo.id %>" data-dropdown-content class="f-dropdown content medium" aria-hidden="true" tabindex="-1">
+						  <%= image_tag photo.photo.url(:large), width: "400"%>
+						</div><br>
 
-											<%= link_to 'delete', brand_photo_url(photo), :method => 'delete', data: { :confirm => 'Are you sure you want to delete this photo?'}, class: "itemformlink"  %>
-										</li>
-									<% end %>
-									<li class="text-center">
-										<%= form_for BrandPhoto.new, :html => {id: 'brand-photo-upload'} do |f| %>
-											<%= f.label :photo do %>
-											<%= image_tag '/images/image_add.svg', alt: "Upload Brand Photo" %><br>
-											<small>Add a Brand Photo</small>
-											<% end %>
-											<br>
-											<%= f.file_field :photo, class: 'hide-upload', label: false, accept: 'image/png,image/gif,image/jpeg' %>
-										<% end %>
-									</li>							
-								</ul>
-						</div>
-					</div>	
+						<%= link_to 'delete', brand_photo_url(photo), :method => 'delete', data: { :confirm => 'Are you sure you want to delete this photo?'}, class: "itemformlink"  %>
+					</li>
+				<% end %>
+				<li class="text-center">
+					<%= form_for BrandPhoto.new, :html => {id: 'brand-photo-upload'} do |f| %>
+						<%= f.label :photo do %>
+						<%= image_tag '/images/image_add.svg', alt: "Upload Brand Photo" %><br>
+						<small>Add a Brand Photo</small>
+						<% end %>
+						<br>
+						<%= f.file_field :photo, class: 'hide-upload', label: false, accept: 'image/png,image/gif,image/jpeg' %>
+					<% end %>
+				</li>							
+			</ul>
+	</div>
+</div>	

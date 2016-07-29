@@ -20,14 +20,19 @@
     margin-top: 0;
     border-radius: 0px 0px 3px 3px;
   }
+  @media #{$medium-up} { 
+    border-top: 5px solid $landing-middle-gray;
+  }
   &.info-panel {
     @media #{$small-only} { 
       margin-bottom: 0;
-      border-bottom: 3px solid $landing-middle-gray;
+      border-bottom: none;
+      border-top: 5px solid $landing-middle-gray;
       border-radius: 3px 3px 0px 0px;
     }
     @media #{$medium-up} { 
-      border-right: 5px solid $landing-middle-gray;
+      border-top: 5px solid $landing-middle-gray;
+      // border-right: 5px solid $landing-middle-gray;
     }
   }
 }
@@ -35,6 +40,19 @@
 a.profile-edit-links {
   color: $landing-dark-gray;
   font-weight: 100;
+  &.required {
+    font-weight: 900;
+    &:before {
+      // content: ">> ";
+    }
+  }
+  &.attention {
+    font-weight: 900;
+    color: red;
+    &:before {
+      content: ">> ";
+    }
+  }
 }
 
 .profile-edit-form-onboard {

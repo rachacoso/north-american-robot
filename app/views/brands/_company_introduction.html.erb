@@ -1,7 +1,7 @@
+<br>
+<a class="anchor" id="a-company-introduction"></a>
 <div class="row">
 	<div class="small-12 columns">
-		<a class="anchor" id="a-company-introduction"></a>
-		<h1>Company Introduction <br><small>Introduce yourself to potential partners with a short (50-100 words) description.</small></h1>
 		<% text_length = 500 - ( @brand.brand_positioning ? @brand.brand_positioning.length : 0 ) %>
 		<h4><span id="company-info-feedback"><%= text_length < 0 ? text_length * -1 : text_length %> <%= text_length < 0 ? "characters over" : "characters remaining" %></span></h4>
 	</div>
