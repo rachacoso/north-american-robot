@@ -1,9 +1,5 @@
-<div class="row">
-	<div class="small-12 columns">
-		<a class="anchor" id="a-companyinfo"></a>
-		<h1>Company Info</h1>
-	</div>
-</div>
+<br>
+<a class="anchor" id="a-companyinfo"></a>
 <%= form_for @distributor, :html => {id: 'company-info-form'}, url: distributor_url do |f| %>
 	<%= hidden_field_tag "redirect_anchor", "a-companyinfo" %>
 	<div class="row">

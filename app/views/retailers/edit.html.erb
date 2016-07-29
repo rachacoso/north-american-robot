@@ -55,7 +55,7 @@
 							<%= link_to "Sectors", "#a-sectors", class: "profile-edit-links" %><br>
 							<%= link_to "Locations &amp; Brands".html_safe, "#a-locations-brands", class: "profile-edit-links" %><br>
 							<%= link_to "Countries of Operation", "#a-exportcountries", class: "profile-edit-links" %><br>
-							<%= link_to "Marketing &amp; PR".html_safe, "#a-marketing", class: "profile-edit-links" %><br>
+							<%= link_to "Marketing / PR Capabilities", "#a-marketing", class: "profile-edit-links" %><br>
 							<%= link_to "Tradeshows", "#a-tradeshows", class: "profile-edit-links" %><br>
 							<%= link_to "Social Ethos &amp; Impact".html_safe, "#a-social-fields", class: "profile-edit-links" %><br>
 							<%= link_to "Verifications".html_safe, "#a-verification", class: "profile-edit-links" %>
@@ -108,7 +108,7 @@
 					<% end %>
 
 					<% unless @current_user.company.class.to_s == "Brand" || @current_user.company.armor_account_id.present? %>
-						<h4 style="border-top: 1px solid #B3B3B3; border-bottom: 1px solid #B3B3B3;padding-bottom: 0;margin-top: 1em; margin-bottom: 1em;">OR</h4>
+						<h4 style="border-top: 1px solid #B3B3B3; border-bottom: 1px solid #B3B3B3;padding-bottom: 0;margin-top: 1em; margin-bottom: 1em;" class="text-center">OR</h4>
 							<h3>To Use Other Payment Methods:</h3>
 							<h3>
 								<strong>If you'd like to use other methods of payment (e.g. Net Terms), you can turn the system off.</strong>

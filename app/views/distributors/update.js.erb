@@ -1,0 +1,7 @@
+
+	$('#armor-ordering-and-payments').fadeOut(function(){
+		$('#armor-ordering-and-payments').html("<%= j (render partial: 'shared/profileform/armor/armor_ordering_and_payments', locals: { company: @distributor }) %>");
+	});
+	$('#armor-ordering-and-payments').fadeIn();
+
+

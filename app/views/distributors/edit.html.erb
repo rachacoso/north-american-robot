@@ -34,21 +34,49 @@
 		</div>
 
 		<div class="row">
+			<div class="small-12 columns"><br></div><!--/.small-12-->
 			<div class="medium-8 medium-push-4 columns">
-				<div class="profile-edit-form">
 					<div class="row">
 						<div class="small-12 columns">
-							<br>
-							<h3>Please complete your retailer profile so your potential partners can learn about you and be better matched to your customer base</h3>
-							<br>
+							<h2 style="margin-top:15px;">Please complete your distributor profile so your potential partners can learn about you and be better matched to your customer base</h2>
+							<h3 style="margin-top:15px;">The profile sections <strong>in bold</strong> are required before you can start purchasing products on Landing International. Filling out the other profile sections will help Brands find you!</h3>
 						</div>
 					</div>
-				</div>
 			</div>
+			<div class="medium-4 medium-pull-8 columns medium-text-right">
+				<div class="profile-edit-form info-panel">
+							<h1>Profile Sections</h1>
+							<%= link_to "Company Info", "#a-companyinfo", class: "profile-edit-links required" %><br>
+							<%= link_to "Contact Info", "#a-login-info", class: "profile-edit-links required" %><br>
+							<%= link_to "Ordering &amp; Payments".html_safe, "#a-ordering-and-payments", class: "profile-edit-links required" %><br>
+							<%= link_to "Company Introduction", "#a-company-introduction", class: "profile-edit-links" %><br>
+							<%= link_to "Global Good Tags", "#a-social-tags", class: "profile-edit-links" %><br>
+							<%= link_to "Sectors", "#a-sectors", class: "profile-edit-links" %><br>
+							<%= link_to "Channels", "#a-channels", class: "profile-edit-links" %><br>
+							<%= link_to "Channel Capacities", "#a-channelcapacities", class: "profile-edit-links" %><br>
+							<%= link_to "Countries of Distribution", "#a-exportcountries", class: "profile-edit-links" %><br>
+							<%= link_to "Brand Portfolio", "#a-brand-portfolio", class: "profile-edit-links" %><br>
+							<%= link_to "Sales &amp; Education".html_safe, "#a-sales", class: "profile-edit-links" %><br>
+							<%= link_to "Marketing / PR Capabilities", "#a-marketing", class: "profile-edit-links" %><br>
+							<%= link_to "Tradeshows", "#a-tradeshows", class: "profile-edit-links" %><br>
+							<%= link_to "Social Ethos &amp; Impact".html_safe, "#a-social-fields", class: "profile-edit-links" %><br>
+							<%= link_to "Verifications".html_safe, "#a-verification", class: "profile-edit-links" %>
+							<br>
+				</div>
+			</div><!--/.medium-4-->
 		</div>
+		<div class="row">
+			<div class="small-12 columns"><hr style="border-top: 1px solid #B3B3B3;"></div><!--/.small-12-->
+		</div><!--/.row-->
 
 		<div class="row">
-			<div class="medium-8 medium-push-4 columns">
+			<div class="medium-4 columns medium-text-right">
+				<div class="profile-edit-form info-panel basic-sticky-example">
+				<h1>Company Info</h1>
+				<h3>This is your general company info. You won't be able to order any products unless you have a Company Name &amp; Address!</h3>
+				</div>
+			</div><!--/.medium-4-->
+			<div class="medium-8 columns">
 				<div class="profile-edit-form">
 					<%= render "company_info" %>
 				</div>
@@ -56,7 +84,13 @@
 		</div><!-- /.row -->
 
 		<div class="row">
-			<div class="medium-8 medium-push-4 columns">
+			<div class="medium-4 columns medium-text-right">
+				<div class="profile-edit-form info-panel">
+				<h1>Contact Info</h1>
+				<h3>This is your login contact info. You won't be able to order any products unless you have a first name, last name &amp; phone number!</h3>
+				</div>
+			</div><!--/.medium-4-->
+			<div class="medium-8 columns">
 				<div class="profile-edit-form">
 					<%= render "account_logins" %>
 				</div>
@@ -64,8 +98,41 @@
 		</div>
 
 		<div class="row">
-			<div class="medium-8 medium-push-4 columns">
-				<div class="profile-edit-form">
+			<div class="medium-4 columns medium-text-right">
+				<div class="profile-edit-form info-panel">
+					<h1>Ordering &amp; Payments</h1>
+					<h3>Landing International has partnered with <%= link_to "Armor Payments, a Payoneer Company", "//armorpayments.com", target: "_blank" %> to provide payment escrow services for B2B eCommerce giving you peace of mind with secure transactions.</h3>
+					<h3>
+						Payment transactions on Landing Interational will take place via Armor Paymets (a Payoneer company) payment escrow service. 
+					</h3>
+					<% unless @distributor.armor_account_id || @distributor.disable_armor_payments %>
+						<h3><strong>In order to participate please follow the instructions to enable your account with Armor Payments (Payoneer).</strong></h3>
+					<% end %>
+
+					<% unless @current_user.company.class.to_s == "Brand" || @current_user.company.armor_account_id.present? %>
+						<h4 style="border-top: 1px solid #B3B3B3; border-bottom: 1px solid #B3B3B3;padding-bottom: 0;margin-top: 1em; margin-bottom: 1em;" class="text-center">OR</h4>
+							<h3>To Use Other Payment Methods:</h3>
+							<h3>
+								<strong>If you'd like to use other methods of payment (e.g. Net Terms), you can turn the system off.</strong>
+							</h3>
+							<div class="panel text-center" style="background-color: #f2f2f2;">
+									<h3 >ARMOR PAYMENTS is:</h3>
+									<%= form_for @current_user.company, :html => {id: 'disableArmorForm'}, remote: true do |f| %>
+										<div class="switch" style="margin-bottom:0;">
+											<%= f.check_box('disable_armor_payments', id: 'disableArmor', label: false) %>
+											<label for="disableArmor">
+												<span class="switch-on" style="color: red">OFF</span>
+												<span class="switch-off" style="color: green">ON</span>
+											</label>
+										</div> 
+									<% end %>
+							</div>
+					<% end %>
+
+				</div>
+			</div><!--/.medium-4-->
+			<div class="medium-8 columns">
+				<div class="profile-edit-form" id="armor-ordering-and-payments">
 					<%= render partial: "shared/profileform/armor/armor_ordering_and_payments", locals: { company: @distributor } %>
 				</div>
 			</div>
@@ -81,23 +148,41 @@
 <%#		</div> %>
 
 		<div class="row">
-			<div class="medium-8 medium-push-4 columns">
+			<div class="medium-4 columns medium-text-right">
+				<div class="profile-edit-form info-panel">
+				<h1>Company Introduction</h1>
+				<h3>Introduce yourself to potential partners with a short (50-100 words) description.</h3>
+				</div>
+			</div><!--/.medium-4-->
+			<div class="medium-8 columns">
 				<div class="profile-edit-form">
 					<%= render "company_introduction" %>
 				</div>
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="medium-8 medium-push-4 columns">
-				<div class="profile-edit-form">
+		<div class="row" data-equalizer>
+			<div class="medium-4 columns medium-text-right">
+				<div class="profile-edit-form info-panel" data-equalizer-watch>
+					<h1>Global Good Tags</h1>
+					<h3>Tag yourself!<br>Show everyone how you help people and planet!<br>Stuff like: 'Biodegradable' or 'All-Natural' or 'No Animal Testing'. Don't limit yourself - feel free to enter anything you want!</h3>
+				</div>
+			</div><!--/.medium-4-->
+			<div class="medium-8 columns">
+				<div class="profile-edit-form" data-equalizer-watch>
 					<%= render "social_tags" %>
 				</div>
 			</div>
 		</div><!-- /.row -->
 
 		<div class="row">
-			<div class="medium-8 medium-push-4 columns">
+			<div class="medium-4 columns medium-text-right">
+				<div class="profile-edit-form info-panel">
+					<h1>Sectors</h1>
+					<h3>In which sectors do you specialize?</h3>
+				</div>
+			</div><!--/.medium-4-->
+			<div class="medium-8 columns">
 				<div class="profile-edit-form">
 					<%= render "sectors" %>
 				</div>
@@ -105,31 +190,55 @@
 		</div><!-- /.row -->
 
 		<div class="row">
-			<div class="medium-8 medium-push-4 columns">
+			<div class="medium-4 columns medium-text-right">
+				<div class="profile-edit-form info-panel">
+					<h1>Channels</h1>
+					<h3>In which channels are your products currently sold?</h3>
+				</div>
+			</div><!--/.medium-4-->
+			<div class="medium-8 columns">
 				<div class="profile-edit-form">
 					<%= render "channels" %>
 				</div>
 			</div>
-		</div><!-- /.row -->
+		</div>
 
 		<div class="row">
-			<div class="medium-8 medium-push-4 columns">
+			<div class="medium-4 columns medium-text-right">
+				<div class="profile-edit-form info-panel">
+					<h1>Channel Capacities</h1>
+					<h3>What are your current channel capacities?</h3>
+				</div>
+			</div><!--/.medium-4-->
+			<div class="medium-8 columns">
 				<div class="profile-edit-form">
 					<%= render "channel_capacities" %>
 				</div>
 			</div>
-		</div><!-- /.row -->
+		</div>
 
 		<div class="row">
-			<div class="medium-8 medium-push-4 columns">
+			<div class="medium-4 columns medium-text-right">
+				<div class="profile-edit-form info-panel">
+					<h1>Countries of Distribution</h1>
+					<h3>In which countries are you currently sold?</h3>
+				</div>
+			</div><!--/.medium-4-->
+			<div class="medium-8 columns">
 				<div class="profile-edit-form">
 					<%= render "countries_of_distribution" %>
 				</div>
 			</div>
-		</div><!-- /.row -->
+		</div>
 
 		<div class="row">
-			<div class="medium-8 medium-push-4 columns">
+			<div class="medium-4 columns medium-text-right">
+				<div class="profile-edit-form info-panel">
+				<h1>Brand Portfolio</h1>
+				<h3>What other brands do you work with?</h3>
+				</div>
+			</div><!--/.medium-4-->
+			<div class="medium-8 columns">
 				<div class="profile-edit-form">
 					<%= render "brand_portfolio" %>
 				</div>
@@ -138,7 +247,13 @@
 
 
 		<div class="row">
-			<div class="medium-8 medium-push-4 columns">
+			<div class="medium-4 columns medium-text-right">
+				<div class="profile-edit-form info-panel">
+				<h1>Sales &amp; Education</h1>
+				<h3>What is your sales &amp; education support?</h3>
+				</div>
+			</div><!--/.medium-4-->
+			<div class="medium-8 columns">
 				<div class="profile-edit-form">
 					<%= render "sales_education" %>
 				</div>
@@ -146,7 +261,13 @@
 		</div><!-- /.row -->
 
 		<div class="row">
-			<div class="medium-8 medium-push-4 columns">
+			<div class="medium-4 columns medium-text-right">
+				<div class="profile-edit-form info-panel">
+					<h1>Marketing / PR Capabilities</h1>
+					<h3>What are your marketing &amp; PR capabilities?</h3>
+				</div>
+			</div><!--/.medium-4-->
+			<div class="medium-8 columns">
 				<div class="profile-edit-form">
 					<%= render "marketing_pr" %>
 				</div>
@@ -154,7 +275,13 @@
 		</div><!-- /.row -->
 
 		<div class="row">
-			<div class="medium-8 medium-push-4 columns">
+			<div class="medium-4 columns medium-text-right">
+				<div class="profile-edit-form info-panel">
+					<h1>Tradeshows</h1>
+					<h3>What tradeshows do you participate in?</h3>
+				</div>
+			</div><!--/.medium-4-->
+			<div class="medium-8 columns">
 				<div class="profile-edit-form">
 					<%= render "tradeshows" %>
 				</div>
@@ -162,7 +289,13 @@
 		</div><!-- /.row -->
 
 		<div class="row">
-			<div class="medium-8 medium-push-4 columns">
+			<div class="medium-4 columns medium-text-right">
+				<div class="profile-edit-form info-panel">
+					<h1>Social Ethos &amp; Impact</h1>
+					<h3>Let everyone know how you help people &amp; planet!</h3>
+				</div>
+			</div><!--/.medium-4-->
+			<div class="medium-8 columns">
 				<div class="profile-edit-form">
 					<%= render "social_fields" %>
 				</div>
@@ -170,7 +303,13 @@
 		</div><!-- /.row -->
 
 		<div class="row">
-			<div class="medium-8 medium-push-4 columns">
+			<div class="medium-4 columns medium-text-right">
+				<div class="profile-edit-form info-panel">
+					<h1>Verifications</h1>
+					<h3>Help us keep the quality of our members high!</h3>
+				</div>
+			</div><!--/.medium-4-->
+			<div class="medium-8 columns">
 				<div class="profile-edit-form">
 					<%= render "verification" %>
 				</div>

@@ -67,26 +67,26 @@ class DistributorsController < ApplicationController
 
   def update
 
-    distributor = @current_user.distributor
+    @distributor = @current_user.distributor
 
     # set general fields
-    distributor.update(distributor_parameters)
+    @distributor.update(distributor_parameters)
 
     # set other fields
 
     # set year established
     if params[:year_established]
-      distributor.update(year_established: Date.new(params[:year_established].to_i))
+      @distributor.update(year_established: Date.new(params[:year_established].to_i))
     end
 
     if params[:sectors]
       # set sectors
       assigned_sectors = Sector.find(params[:sectors].values) rescue []
       unless assigned_sectors.blank?
-        distributor.sectors = [] # clear current ones before update
+        @distributor.sectors = [] # clear current ones before update
       end
       assigned_sectors.each do |s|
-        distributor.sectors << s
+        @distributor.sectors << s
       end
     end
 
@@ -95,13 +95,13 @@ class DistributorsController < ApplicationController
       assigned_subsectors = Subsector.find(params[:subsectors].values) rescue []
       subsector_parents = assigned_subsectors.map { |s| s.sector }
 
-      distributor.subsectors = [] # clear current ones before update
+      @distributor.subsectors = [] # clear current ones before update
       assigned_subsectors.each do |s|
-        distributor.subsectors << s
+        @distributor.subsectors << s
       end
 
       subsector_parents.each do |p|
-        distributor.sectors << p
+        @distributor.sectors << p
       end
 
     end
@@ -111,21 +111,21 @@ class DistributorsController < ApplicationController
       assigned_channels = Channel.find(params[:channels].values) rescue []
 
       # delete channel capacities for disabled channels
-      distributor.channel_capacities.each do |cc|
+      @distributor.channel_capacities.each do |cc|
         if !params[:channels].values.include?(cc.channel_id)
           cc.delete
         end
       end
       # initiate channel capacities for any new added
       assigned_channels.each do |ac|
-        distributor.channel_capacities.find_or_create_by(channel_id: ac.id)
+        @distributor.channel_capacities.find_or_create_by(channel_id: ac.id)
       end
 
       unless assigned_channels.blank? 
-        distributor.channels = [] # clear current ones before update
+        @distributor.channels = [] # clear current ones before update
       end
       assigned_channels.each do |s|
-        distributor.channels << s
+        @distributor.channels << s
       end
     end
 
@@ -133,57 +133,60 @@ class DistributorsController < ApplicationController
 
       params[:customchannels].each do |k,v|
         cname = v
-        cchannel = distributor.channel_capacities.find_or_create_by(custom_channel_name: cname, channel_id: 0)
+        cchannel = @distributor.channel_capacities.find_or_create_by(custom_channel_name: cname, channel_id: 0)
         cchannel.save
       end
 
     end
 
-    if distributor.save
-      # successful
-      
-      # update completeness
-      distributor.update_completeness
-
-      # allow redirect via passed parameter only if in this array else redirect to the first onboard screen
-      allowable_redirect = [
-        'two',
-        'three',
-        'four',
-        'complete'
-      ]
-
-      if params[:redirect]
-        if allowable_redirect.include? params[:redirect]
-          if params[:redirect] == 'complete'
-            redirect_to dashboard_url
-          else
-            redir = "onboard_distributor_#{params[:redirect]}_url"
-            redirect_to send(redir)
-          end
-          
-        else
-          redirect_to onboard_distributor_one_url
-          # allow redirect via passed parameter only if in 'allowed' array, else redirect to the first onboard screen
-        end
-      elsif params[:redirect_anchor]
-        redirect_to distributor_url + "#" + params[:redirect_anchor] 
-      else
-        redirect_to distributor_url
-      end
-
-    else
-      # not successful  
-      # STILL INCOMPLETE NEED TO ADD VALIDATIONS
-      flash[:error] = "Sorry, there were errors"
-
-      redirect_to distributor_url, :flash => {
-        :name_error => distributor.errors[:name].first
-      }
-
+    if params[:disable_armor_payments]
+      @armor_payments = true
     end
 
+    respond_to do |format|
+      format.html { 
+        if @distributor.save
+          # successful
+          # update completeness
+          @distributor.update_completeness
+          # allow redirect via passed parameter only if in this array else redirect to the first onboard screen
+          allowable_redirect = [
+            'two',
+            'three',
+            'four',
+            'complete'
+          ]
+          if params[:redirect]
+            if allowable_redirect.include? params[:redirect]
+              if params[:redirect] == 'complete'
+                redirect_to dashboard_url
+              else
+                redir = "onboard_distributor_#{params[:redirect]}_url"
+                redirect_to send(redir)
+              end
+              
+            else
+              redirect_to onboard_distributor_one_url
+              # allow redirect via passed parameter only if in 'allowed' array, else redirect to the first onboard screen
+            end
+          elsif params[:redirect_anchor]
+            redirect_to distributor_url + "#" + params[:redirect_anchor] 
+          else
+            redirect_to distributor_url
+          end
+        else
+          # not successful  
+          # STILL INCOMPLETE NEED TO ADD VALIDATIONS
+          flash[:error] = "Sorry, there were errors"
 
+          redirect_to distributor_url, :flash => {
+            :name_error => @distributor.errors[:name].first
+          }
+        end
+      } 
+      format.js
+    end
+    
   end
 
   def adminupdate
