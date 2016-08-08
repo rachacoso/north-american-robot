@@ -45,7 +45,7 @@ class SessionController < ApplicationController
 					redirect_url = eval("#{@user.type?}_url")
 					flash[:newuser] = true
 				else
-					redirect_url = root_url
+					redirect_url = dashboard_url
 				end
 			end
 		else
