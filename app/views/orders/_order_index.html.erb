@@ -8,13 +8,17 @@
 		</tr>
 	</thead>
 	<tbody>
-		<% orders.each do |o| %>
-		<tr>
-			<td><%= link_to order_url(o) do %><%= @current_user.type? == "brand" ? o.orderer.company_name : o.brand.company_name %><% end %></td>
-			<td><%= link_to order_url(o) do %><%= number_to_currency(o.total_price) %><% end %></td>
-			<td><%= link_to order_url(o) do %><%= o.c_at.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%Y at %R %Z") %><% end %></td>
-			<td><%= link_to order_url(o) do %><%= o.status.capitalize %><% end %></td>
-		</tr>
+		<% if orders.any? %>
+			<% orders.each do |o| %>
+			<tr>
+				<td><%= link_to order_url(o) do %><%= @current_user.type? == "brand" ? o.orderer.company_name : o.brand.company_name %><% end %></td>
+				<td><%= link_to order_url(o) do %><%= number_to_currency(o.total_price) %><% end %></td>
+				<td><%= link_to order_url(o) do %><%= o.c_at.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%Y at %R %Z") %><% end %></td>
+				<td><%= link_to order_url(o) do %><%= o.status.capitalize %><% end %></td>
+			</tr>
+			<% end %>
+		<% else %>
+			<tr><td colspan="4" class="text-center">No Orders</td></tr>
 		<% end %>
 	</tbody>
 </table>

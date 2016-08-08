@@ -107,7 +107,8 @@
 						<h3><strong>In order to participate please follow the instructions to enable your account with Armor Payments (Payoneer).</strong></h3>
 					<% end %>
 
-					<% unless @current_user.company.class.to_s == "Brand" || @current_user.company.armor_account_id.present? %>
+					<%# unless @current_user.company.class.to_s == "Brand" || @current_user.company.armor_account_id.present? %>
+					<% unless @current_user.company.class.to_s == "Brand" %>
 						<h4 style="border-top: 1px solid #B3B3B3; border-bottom: 1px solid #B3B3B3;padding-bottom: 0;margin-top: 1em; margin-bottom: 1em;" class="text-center">OR</h4>
 							<h3>To Use Other Payment Methods:</h3>
 							<h3>

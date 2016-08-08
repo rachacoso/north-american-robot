@@ -76,13 +76,14 @@ class Order # for V2 ordering
     order.user =  user
     order.brand = brand
     order.brand_company_name = brand.company_name
-    order.armor_seller_account_id = brand.armor_account_id
-    order.armor_seller_user_id = brand.users.with_armor_user_id.first.armor_user_id if brand.users.with_armor_user_id.present? 
-    order.armor_seller_email = brand.users.with_armor_user_id.first.email if brand.users.with_armor_user_id.present?
-    order.armor_buyer_account_id = user.company.armor_account_id
-    order.armor_buyer_user_id = user.armor_user_id
-    order.armor_buyer_email = user.email
-
+    unless user.company.disable_armor_payments
+      order.armor_seller_account_id = brand.armor_account_id
+      order.armor_seller_user_id = brand.users.with_armor_user_id.first.armor_user_id if brand.users.with_armor_user_id.present? 
+      order.armor_seller_email = brand.users.with_armor_user_id.first.email if brand.users.with_armor_user_id.present?
+      order.armor_buyer_account_id = user.company.armor_account_id
+      order.armor_buyer_user_id = user.armor_user_id
+      order.armor_buyer_email = user.email
+    end
     order.build_shipping_address(
       address1: user.company.address.address1,
       address2: user.company.address.address2,
@@ -96,12 +97,22 @@ class Order # for V2 ordering
   end
 
   def submission(user:)
-    self.armor_buyer_user_id = user.armor_user_id if self.armor_buyer_user_id.blank?
-    self.armor_buyer_account_id = user.company.armor_account_id if self.armor_buyer_account_id.blank?
-    self.armor_seller_account_id = brand.armor_account_id if self.armor_seller_account_id.blank?
-    if self.brand.users.with_armor_user_id.present?
-      self.armor_seller_user_id = self.brand.users.with_armor_user_id.first.armor_user_id if self.armor_seller_user_id.blank? 
-      self.armor_seller_email = self.brand.users.with_armor_user_id.first.email if self.armor_seller_email.blank?
+    if self.orderer.disable_armor_payments # remove all armor ids if buyer turns off armor
+      self.armor_buyer_account_id = nil if self.armor_buyer_account_id.present?
+      self.armor_buyer_user_id = nil if self.armor_buyer_user_id.present?
+      self.armor_buyer_email = nil if self.armor_buyer_email.present?
+      self.armor_seller_account_id = nil if self.armor_seller_account_id.present?
+      self.armor_seller_user_id = nil if self.armor_seller_user_id.present?
+      self.armor_seller_email = nil if self.armor_seller_email.present?
+    else
+      self.armor_buyer_user_id ||= user.armor_user_id
+      self.armor_buyer_account_id ||= user.company.armor_account_id
+      self.armor_buyer_email ||= user.email
+      self.armor_seller_account_id ||= brand.armor_account_id
+      if self.brand.users.with_armor_user_id.present?
+        self.armor_seller_user_id ||= self.brand.users.with_armor_user_id.first.armor_user_id
+        self.armor_seller_email ||= self.brand.users.with_armor_user_id.first.email
+      end
     end
     self.status = "submitted"
     self.submission_date = DateTime.now
@@ -132,9 +143,18 @@ class Order # for V2 ordering
   def pending(user:)
     self.status = "pending"
     self.pending_date = DateTime.now
-    self.armor_seller_account_id = brand.armor_account_id if self.armor_seller_account_id.blank?
-    self.armor_seller_user_id = user.armor_user_id if self.armor_seller_user_id.blank?
-    self.armor_seller_email = user.email if self.armor_seller_email.blank?
+    if self.orderer.disable_armor_payments # remove all armor ids if buyer turns off armor
+      self.armor_buyer_account_id = nil if self.armor_buyer_account_id.present?
+      self.armor_buyer_user_id = nil if self.armor_buyer_user_id.present?
+      self.armor_buyer_email = nil if self.armor_buyer_email.present?
+      self.armor_seller_account_id = nil if self.armor_seller_account_id.present?
+      self.armor_seller_user_id = nil if self.armor_seller_user_id.present?
+      self.armor_seller_email = nil if self.armor_seller_email.present?
+    else
+      self.armor_seller_account_id ||= brand.armor_account_id
+      self.armor_seller_user_id ||= user.armor_user_id
+      self.armor_seller_email ||= user.email
+    end
     self.save!
     OrderMailer.send_order(
       order: self, 
@@ -146,7 +166,14 @@ class Order # for V2 ordering
   end
 
   def approval
-    if self.armor_enabled?
+    if self.orderer.disable_armor_payments # remove all armor ids if buyer turns off armor
+      self.armor_buyer_account_id = nil if self.armor_buyer_account_id.present?
+      self.armor_buyer_user_id = nil if self.armor_buyer_user_id.present?
+      self.armor_buyer_email = nil if self.armor_buyer_email.present?
+      self.armor_seller_account_id = nil if self.armor_seller_account_id.present?
+      self.armor_seller_user_id = nil if self.armor_seller_user_id.present?
+      self.armor_seller_email = nil if self.armor_seller_email.present?
+    elsif self.armor_enabled?
       self.api_create_order
     end
     unless self.errors.any?
