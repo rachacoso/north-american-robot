@@ -20,6 +20,16 @@ module HomeHelper
 		return articles
 	end
 
+	def get_grid_articles
+		articles = Article.active.order_by(:date.desc).limit(4)
+		return articles
+	end
+
+	def get_remaining_articles
+		articles = Article.active.order_by(:date.desc).skip(4)
+		return articles
+	end
+
 	def order_status(order)
 		status = order.status
 		case status

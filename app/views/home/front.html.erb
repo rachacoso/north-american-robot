@@ -5,6 +5,19 @@
 
 <div class="v2front">
 
+<div class="front-grid">
+	<div class="row">
+		<div class="small-12 columns">
+
+			<% glist = get_grid_articles() %>
+			<% glist.each_with_index do |a, i| %>
+				<%= render partial: "/articles/front_grid_tile", locals: { a: a } %>
+			<% end %>
+			
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+</div><!--/.front-grid-->
+
 <div class="row">
 	<div class="small-10 small-centered columns">
 
