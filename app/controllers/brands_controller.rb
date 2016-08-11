@@ -127,8 +127,8 @@ class BrandsController < ApplicationController
 
 		@brand = @current_user.brand
 
-		if @brand.armor_account_id && @current_user.armor_user_id
-			url = @brand.api_get_bank_account_setup_url(armor_account_id: @brand.armor_account_id, armor_user_id: @current_user.armor_user_id)
+		if @brand.armor_account_id && @brand.users.with_armor_user_id.present?
+			url = @brand.api_get_bank_account_setup_url(armor_account_id: @brand.armor_account_id, armor_user_id: @brand.users.with_armor_user_id.first.armor_user_id)
 			unless @brand.errors.any?
 				@armor_bank_url = url
 			end

@@ -51,7 +51,7 @@ class OrdersController < ApplicationController
 		end
 		if @order.status == "approved"
 			if @order.armor_enabled?
-				url = @order.api_get_payment_url(@current_user)
+				url = @order.api_get_payment_url
 				unless @order.errors.any?
 					@armor_payment_instructions_url = url
 				end

@@ -10,7 +10,7 @@
 			<%= link_to "OK", view_brand_url(@order.brand), class: "landing-button", id: "submit-close" %>
 		</div><!--/.small-12-->
 	</div><!--/.row-->
-<% elsif !@current_user.armor_user_id && !@current_user.company.disable_armor_payments %>
+<% elsif !@order.armor_complete? && !@current_user.company.disable_armor_payments %>
 
 	<div class="row">
 		<div class="small-12 columns">

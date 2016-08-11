@@ -177,6 +177,16 @@ module LandingArmorPayments
     def armor_enabled?
       return true if self.armor_buyer_account_id.present?
     end
+    def armor_complete?
+      if  self.armor_seller_user_id.present? &&
+          self.armor_seller_email.present? &&
+          self.armor_seller_account_id.present? &&
+          self.armor_buyer_user_id.present? &&
+          self.armor_buyer_email.present? &&
+          self.armor_buyer_account_id.present? 
+        return true 
+      end
+    end
     def api_create_order
 
       armororder = LandingArmorOrder.new
@@ -204,12 +214,12 @@ module LandingArmorPayments
 
     end
 
-    def api_get_payment_url(user)
+    def api_get_payment_url
 
       armororder = LandingArmorOrder.new
 
-      account_id = user.company.armor_account_id # The account_id of the user viewing payment instructions (the buyer for the order)
-      user_id = user.armor_user_id # The user_id of the user viewing the payment instructions
+      account_id = self.armor_buyer_account_id # The account_id of the user viewing payment instructions (the buyer for the order)
+      user_id = self.armor_buyer_user_id # The user_id of the user viewing the payment instructions
       auth_data = {
         'uri' => "/accounts/#{self.armor_seller_account_id}/orders/#{self.armor_order_id}/paymentinstructions",
         'action' => 'view'

@@ -36,9 +36,9 @@
 			<div class="landing-notice">In order to receive payment (for Brands) or refunds (for Retailers and Distributors), you need to ensure that Armor Payments (Payoneer) has your bank account information. Order payment and processing may be delayed if your banking information is incomplete. <a href="#a-armor-bank-info">You can submit your bank account information to Armor/Payoneer below.</a></div>
 
 			<% if company.errors.any? %>
-				<%= render partial: 'shared/profileform/armor/armor_account_details', locals: { c: company, u: @current_user, url: nil, errors: company.errors.full_messages } %>
+				<%= render partial: 'shared/profileform/armor/armor_account_details', locals: { c: company, u: @current_user.company.users.with_armor_user_id.first, url: nil, errors: company.errors.full_messages } %>
 			<% elsif @armor_bank_url.present? %>
-				<%= render partial: 'shared/profileform/armor/armor_account_details', locals: { c: company, u: @current_user, url: @armor_bank_url, errors: nil } %>
+				<%= render partial: 'shared/profileform/armor/armor_account_details', locals: { c: company, u: @current_user.company.users.with_armor_user_id.first , url: @armor_bank_url, errors: nil } %>
 			<% end %>
 
 			

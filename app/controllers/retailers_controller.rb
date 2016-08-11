@@ -26,8 +26,8 @@ class RetailersController < ApplicationController
 
     @retailer = @current_user.retailer
 
-    if @retailer.armor_account_id && @current_user.armor_user_id
-      url = @retailer.api_get_bank_account_setup_url(armor_account_id: @retailer.armor_account_id, armor_user_id: @current_user.armor_user_id)
+    if @retailer.armor_account_id && @retailer.users.with_armor_user_id.present?
+      url = @retailer.api_get_bank_account_setup_url(armor_account_id: @retailer.armor_account_id, armor_user_id: @retailer.users.with_armor_user_id.first.armor_user_id)
       unless @retailer.errors.any?
         @armor_bank_url = url
       end

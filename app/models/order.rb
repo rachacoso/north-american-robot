@@ -80,9 +80,9 @@ class Order # for V2 ordering
       order.armor_seller_account_id = brand.armor_account_id
       order.armor_seller_user_id = brand.users.with_armor_user_id.first.armor_user_id if brand.users.with_armor_user_id.present? 
       order.armor_seller_email = brand.users.with_armor_user_id.first.email if brand.users.with_armor_user_id.present?
-      order.armor_buyer_account_id = user.company.armor_account_id
-      order.armor_buyer_user_id = user.armor_user_id
-      order.armor_buyer_email = user.email
+      order.armor_buyer_account_id = order.orderer.armor_account_id
+      order.armor_buyer_user_id = order.orderer.users.with_armor_user_id.first.armor_user_id if order.orderer.users.with_armor_user_id.present?
+      order.armor_buyer_email = order.orderer.users.with_armor_user_id.first.email if order.orderer.users.with_armor_user_id.present?
     end
     order.build_shipping_address(
       address1: user.company.address.address1,
@@ -105,9 +105,9 @@ class Order # for V2 ordering
       self.armor_seller_user_id = nil if self.armor_seller_user_id.present?
       self.armor_seller_email = nil if self.armor_seller_email.present?
     else
-      self.armor_buyer_user_id ||= user.armor_user_id
-      self.armor_buyer_account_id ||= user.company.armor_account_id
-      self.armor_buyer_email ||= user.email
+      self.armor_buyer_account_id ||= self.orderer.armor_account_id
+      self.armor_buyer_user_id ||= self.orderer.users.with_armor_user_id.first.armor_user_id if self.orderer.users.with_armor_user_id.present?
+      self.armor_buyer_email ||= self.orderer.users.with_armor_user_id.first.email if self.orderer.users.with_armor_user_id.present?
       self.armor_seller_account_id ||= brand.armor_account_id
       if self.brand.users.with_armor_user_id.present?
         self.armor_seller_user_id ||= self.brand.users.with_armor_user_id.first.armor_user_id

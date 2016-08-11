@@ -10,7 +10,7 @@
 		</div><!--/.small-12-->
 	</div><!--/.row-->
 
-<% elsif !@current_user.armor_user_id %>
+<% elsif !@order.armor_complete? %>
 
 	<% allow, missing, errors = @current_user.allows_armor_signup %>
 	<% if @current_user.company.armor_account_id.blank? && allow %>
