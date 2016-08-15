@@ -21,7 +21,7 @@ module HomeHelper
 	end
 
 	def get_grid_articles
-		articles = Article.active.order_by(:date.desc).limit(6)
+		articles = Article.active.order_by(:date.desc)
 		return articles
 	end
 
