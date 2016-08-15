@@ -4,7 +4,7 @@
 @import "mixins";
 
 .v2front {
-	margin-bottom: rem-calc(200);
+	margin-bottom: rem-calc(30);
 	.articlepreviewtext {
 		margin-top: rem-calc(39);
 	}
@@ -40,7 +40,7 @@
 	}
 
 	.browseblock {
-		margin: rem-calc(150) 0 0 0;
+		margin: rem-calc(30) 0 0 0;
 		h1 {
 			z-index: 10;
 			font-weight: 100;
@@ -69,4 +69,54 @@
 		}
 	}
 
+}
+
+// FRONT GRID
+
+$fg-text-padding: rem-calc(10);
+$text-color: #979797;
+$background-color: #D8D8D8;
+
+.front-grid {
+	background-color: $background-color;
+	padding-top: rem-calc(20);
+	.article-tile {
+		&:hover {			
+			-moz-box-shadow: 0px 0px 7px $landing-dark-gray;
+			-webkit-box-shadow: 0px 0px 7px $landing-dark-gray;
+			box-shadow: 0px 0px 7px $landing-dark-gray;
+			-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=7, Direction=0, Color='#333333')";
+			filter: progid:DXImageTransform.Microsoft.Shadow(Strength=7, Direction=0, Color='#333333');
+			cursor:pointer;
+		}
+		position: relative;
+		margin: rem-calc(10);
+		height: rem-calc(400);
+		.image {
+			height: 75%;
+			background: center;
+			background-size: cover;
+		}
+		.text {
+	    position:relative;
+			-webkit-box-shadow: 0 -2px 16px 0px rgba(0, 0, 0, 0.1);
+			-moz-box-shadow: 0 -2px 16px 0px rgba(0, 0, 0, 0.1);
+			box-shadow: 0 -2px 16px 0px rgba(0, 0, 0, 0.1);
+			height: 25%;
+			padding: $fg-text-padding;
+			background-color: white;
+			color: $text-color;
+			.headline {
+				font-size: rem-calc(14);
+				line-height: 1.2em;
+				font-weight: 500;
+			}
+			.date {
+				position: absolute;
+				bottom: $fg-text-padding;
+				right: $fg-text-padding;
+				font-weight: 200;
+			}		
+		}
+	}
 }
