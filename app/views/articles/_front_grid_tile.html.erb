@@ -1,0 +1,9 @@
+<%= link_to public_view_article_url(a) do %>
+<div class="article-tile">
+<div class="image" style="background-image: url(<%= a.article_photos.first.photo.url(:large)%>) "></div>
+<div class="text">
+	<div class="headline"><%= a.headline %></div>
+	<div class="date"><%= a.date.strftime("%m.%d.%Y") %></div>
+</div>
+</div>
+<% end %>

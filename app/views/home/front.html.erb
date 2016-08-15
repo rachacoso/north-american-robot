@@ -7,43 +7,18 @@
 
 <div class="front-grid">
 	<div class="row">
-		<div class="small-12 columns">
-
+		<div class="small-11 medium-10 small-centered columns">
+			<ul class="small-block-grid-1 medium-block-grid-3">
 			<% glist = get_grid_articles() %>
 			<% glist.each_with_index do |a, i| %>
-				<%= render partial: "/articles/front_grid_tile", locals: { a: a } %>
+				<li><%= render partial: "/articles/front_grid_tile", locals: { a: a } %></li>
 			<% end %>
-			
+			</ul>
 		</div><!--/.small-12-->
 	</div><!--/.row-->
 </div><!--/.front-grid-->
 
-<div class="row">
-	<div class="small-10 small-centered columns">
 
-<% if get_main_article() %>
-	<%= render partial: "/articles/main_preview", locals: { a: get_main_article() } %>
-	<div class="row">
-		<div class="small-10 small-centered columns">
-			<hr>		
-		</div><!--/.small-10-small-centered -->
-	</div><!--/.row-->
-<% end %>
-
-<% alist = get_sub_articles() %>
-<% alist.each_with_index do |a, i| %>
-	<%= render partial: "/articles/sub_preview", locals: { a: a } %>
-	<% unless i == alist.count - 2 %>
-		<div class="row">
-			<div class="small-10 small-centered columns">
-				<hr>
-			</div><!--/.small-10-small-centered -->
-		</div><!--/.row-->
-	<% end %>
-<% end %>
-
-	</div><!--/.small-10-->
-</div><!--/.row-->
 
 <div class="browseblock">
 	<div class="row">

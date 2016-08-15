@@ -21,12 +21,12 @@ module HomeHelper
 	end
 
 	def get_grid_articles
-		articles = Article.active.order_by(:date.desc).limit(4)
+		articles = Article.active.order_by(:date.desc).limit(6)
 		return articles
 	end
 
 	def get_remaining_articles
-		articles = Article.active.order_by(:date.desc).skip(4)
+		articles = Article.active.order_by(:date.desc).skip(6)
 		return articles
 	end
 
