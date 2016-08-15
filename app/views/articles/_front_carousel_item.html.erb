@@ -1,0 +1,6 @@
+<%= link_to public_view_article_url(a) do %>
+	<div class="item" style="background-image: url(<%= a.article_photos.first.photo.url(:large)%>) ">
+		
+		<div class="text"><%= a.headline %></div>
+	</div>
+<% end %>

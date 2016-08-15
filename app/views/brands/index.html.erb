@@ -87,7 +87,7 @@
 					</span>
 					<div id="owl-example-<%= bc.id %>" class="owl-carousel owl-theme">
 					<% get_brands(bc, @type).each do |b| %>
-						<div><%= render partial: "index_item", locals: {brand: b} %></div>
+						<%= render partial: "index_item", locals: {brand: b} %>
 					<% end %>
 					</div>
 				</div><!--/.small-11 small-centered-->

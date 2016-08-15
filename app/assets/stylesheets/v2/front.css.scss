@@ -75,7 +75,7 @@
 
 $fg-text-padding: rem-calc(10);
 $text-color: #979797;
-$background-color: #D8D8D8;
+$background-color: $landing-light-gray;
 
 .front-grid {
 	background-color: $background-color;
@@ -118,5 +118,37 @@ $background-color: #D8D8D8;
 				font-weight: 200;
 			}		
 		}
+	}
+}
+
+
+// FRONT CAROUSEL
+
+.front-carousel-container {
+	background-color: $landing-middle-gray;
+	.item {
+		position: relative;
+		height: 50vh;
+		background: center;
+		background-size: cover;
+		.text {
+			padding: 0 rem-calc(8) 0 rem-calc(8);
+			background: rgba(255,255,255,0.7); /* For browsers that do not support gradients */
+			color: $landing-dark-gray;
+			font-weight: 900;
+			font-size: rem-calc(30);
+			text-align: right;
+			position: absolute;
+			right: 0;
+			bottom: rem-calc(50);
+		}
+	}
+	.item img {
+		display: block;
+		// width: auto;
+		height: 50vh;
+		margin:auto;
+		overflow-y: hidden;
+		max-width: none;
 	}
 }

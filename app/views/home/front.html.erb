@@ -5,6 +5,19 @@
 
 <div class="v2front">
 
+
+<div class="front-carousel-container">
+	<div class="row">
+		<div id="owl-front-carousel" class="owl-carousel owl-theme">
+			<% glist = get_carousel_articles() %>
+			<% glist.each_with_index do |a, i| %>
+				<%= render partial: "/articles/front_carousel_item", locals: { a: a } %>
+			<% end %>
+		</div>
+	</div><!--/.row-->
+</div><!--/.front-grid-->
+
+
 <div class="front-grid">
 	<div class="row">
 		<div class="small-11 medium-10 small-centered columns">

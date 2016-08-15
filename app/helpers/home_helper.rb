@@ -20,6 +20,11 @@ module HomeHelper
 		return articles
 	end
 
+	def get_carousel_articles
+		articles = Article.active.order_by(:date.desc)
+		return articles
+	end
+
 	def get_grid_articles
 		articles = Article.active.order_by(:date.desc)
 		return articles
