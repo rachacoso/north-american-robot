@@ -15,7 +15,10 @@
 				<% elsif @order.c_at.present? %>
 					<%= @order.c_at.strftime("Date: %d %b %Y") %><br>
 				<% end %>
-				Status: <%= @order.status.capitalize %> 
+				Status: <%= @order.status.capitalize %>
+				<% if @order.armor_order_id.present? %>
+					<br>Armor/Payoneer Order ID: <%= @order.armor_order_id %>
+				<% end %>
 				</h3>
 
 			</div><!--/.medium-6-->
