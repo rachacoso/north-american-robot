@@ -125,7 +125,7 @@ $background-color: $landing-light-gray;
 // FRONT CAROUSEL
 
 .front-carousel-container {
-	background-color: $landing-middle-gray;
+	background-color: white;
 	.item {
 		position: relative;
 		height: 50vh;
@@ -133,7 +133,7 @@ $background-color: $landing-light-gray;
 		background-size: cover;
 		.text {
 			padding: 0 rem-calc(8) 0 rem-calc(8);
-			background: rgba(255,255,255,0.7); /* For browsers that do not support gradients */
+			background: rgba(255,255,255,0.9); /* For browsers that do not support gradients */
 			color: $landing-dark-gray;
 			font-weight: 900;
 			font-size: rem-calc(30);
