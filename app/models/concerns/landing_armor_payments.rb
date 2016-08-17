@@ -126,7 +126,7 @@ module LandingArmorPayments
     end
 
     def can_sell?
-      # return true if self.armor_account_id
+      return true if self.armor_account_id
       return true if self.company_name.present?
     end
 
