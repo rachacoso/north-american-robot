@@ -31,6 +31,9 @@ class Order # for V2 ordering
   field :completed_date, type: DateTime
   field :error_date, type: DateTime
 
+  field :ship_date, type: DateTime
+  field :cancel_date, type: DateTime
+
   field :discount, type: Integer, default: 50 # discount in % - defaults to 50% discount
   validates :discount, numericality: { less_than_or_equal_to: 100, greater_than_or_equal_to: 0 }
 

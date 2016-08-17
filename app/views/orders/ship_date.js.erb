@@ -1,0 +1,6 @@
+
+$('#order-item-data').html("<%= j (render partial: 'ship_date', locals: {order: @order}) %>");
+$('.overlay#order-item-overlay').fadeIn();
+$('#order-item').fadeIn();
+
+initialize ();

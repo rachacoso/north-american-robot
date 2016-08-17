@@ -36,7 +36,7 @@
 						<br>
 						<h1>2) Update Shipping Address</h1>
 						<div class="panel text-center">
-							<%= form_for order do |f| %>
+							<%= form_for order, :html => {id: 'shipping-address-form'}, remote: true, authenticity_token: true do |f| %>
 							<div class="row">
 								<div class="medium-6 medium-centered columns">
 									<div class="small-12 columns">
@@ -62,16 +62,40 @@
 								<% end %>
 								</div><!--/.medium-6-->
 							</div><!--/.row-->
-							<div class="row">
-								<div class="medium-6 medium-centered columns">
-									<%= f.submit "Update Shipping Address", class: "landing-button" %>
-								</div><!--/.medium-6-->
-							</div><!--/.row-->
 							<% end %>
-						</div>
+						</div><!--.panel text-center-->
+
 
 						<br>
-						<h1>3) Submit Order to <%= order.brand.company_name %></h1>
+						<h1>3) Add Ship Date and Cancel Date (Optional)</h1>
+						<div class="panel text-center">
+
+							<div class="add-ship-cancel-form">
+								
+								<div class="row">
+									<div class="medium-6 medium-centered columns">
+										<div class="row">
+											<div class="medium-6 columns">
+													<div class="small-12 columns">
+														<h3><%= order.ship_date ? order.ship_date.strftime("%m-%d-%Y") : "(no ship date)" %></h3>
+														<%= link_to "Add Ship Date", ship_date_url, remote: true, class: "landing-button" %>
+													</div><!--/.small-12-->
+											</div><!--/.medium-6-->
+											<div class="medium-6 columns">
+													<div class="small-12 columns">
+														<h3><%= order.cancel_date ? order.cancel_date.strftime("%m-%d-%Y") : "(no cancel date)" %></h3>
+														<%= link_to "Add Cancel Date", cancel_date_url, remote: true, class: "landing-button" %>
+													</div><!--/.medium-7 medium-centered-->
+											</div><!--/.medium-6-->
+										</div><!--/.row-->
+									</div><!--/.medium-6 medium-centered-->
+								</div><!--/.row-->
+							</div><!--/.add-ship-cancel-form-->
+						</div><!--.panel text-center-->
+
+
+						<br>
+						<h1>4) Submit Order to <%= order.brand.company_name %></h1>
 						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 						<div class="panel text-center">
 						<%= link_to "Submit Order to #{order.brand.company_name}", submit_order_url(order,0), class: "landing-button", remote: true %> <span style="font-weight: 100;">or</span>

@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
 
-	before_action :set_order, only: [:show, :edit, :update, :destroy, :submit, :pending, :approve, :shipment, :paid, :delivered, :armor_disabled_delivered, :armor_disabled_completed, :complete]
+	before_action :set_order, only: [:show, :edit, :update, :destroy, :submit, :pending, :approve, :shipment, :paid, :delivered, :armor_disabled_delivered, :armor_disabled_completed, :complete, :ship_date, :cancel_date]
 
 	#setting of paid only done for testing & by admin only
 	before_action :administrators_only, only: [:paid, :delivered, :complete]
@@ -217,11 +217,45 @@ class OrdersController < ApplicationController
 	end
 
 	def update
+		
+		# add ship/cancel dates
+		if params[:order][:ship_date].present?
+			params[:order][:ship_date] = Date.strptime(params[:order][:ship_date], '%m-%d-%Y') 
+			@render_this = "ship_date"
+		end
+		if params[:order][:cancel_date].present?	
+			params[:order][:cancel_date] = Date.strptime(params[:order][:cancel_date], '%m-%d-%Y') 
+			@render_this = "cancel_date"
+		end
+
+		# remove ship/cancel dates
+		if params[:remove_ship_date].present?
+			order.ship_date = nil
+			order.save!
+			@render_this = "ship_date"
+		end
+		if params[:remove_cancel_date].present?
+			order.cancel_date = nil
+			order.save!
+			@render_this = "cancel_date"
+		end
+
 		@order.update(order_params)
 		if !@order.save
 			flash[:error] = "Sorry, Discount must be a number between 0 and 100"
 		end
-		redirect_to order_url(@order)
+		respond_to do |format|
+			format.html  { redirect_to order_url(@order) }
+			format.js { render @render_this }
+		end
+	end
+
+	def ship_date
+
+	end
+
+	def cancel_date
+
 	end
 
 	private
@@ -238,6 +272,8 @@ class OrdersController < ApplicationController
 		params.require(:order).permit(
 			:discount,
 			:ship_to_name,
+			:ship_date,
+			:cancel_date,
 			shipping_address_attributes: [
 			  :address1,
 			  :address2,
@@ -248,4 +284,18 @@ class OrdersController < ApplicationController
 			]
 		)
 	end
+
+  # def save_ship_date(date, order)
+  #   unless date.empty?
+  #     order.ship_date = Date.strptime(date, '%m-%d-%Y')
+  #     order.save!
+  #   end 
+  # end
+  # def save_cancel_date(date, order)
+  #   unless date.empty?
+  #     order.cancel_date = Date.strptime(date, '%m-%d-%Y')
+  #     order.save!
+  #   end 
+  # end
+
 end
