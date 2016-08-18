@@ -10,7 +10,7 @@
 		</div><!--/.small-12-->
 	</div><!--/.row-->
 
-<% elsif !@order.armor_complete? %>
+<% elsif !@order.armor_complete? && !@order.orderer.disable_armor_payments %>
 
 	<% allow, missing, errors = @current_user.allows_armor_signup %>
 	<% if @current_user.company.armor_account_id.blank? && allow %>
@@ -103,28 +103,20 @@
 
 	<% end %>
 
-
-<% elsif !@current_user.brand.armor_bank_info_complete %>
-
-	<div class="row">
-		<div class="small-12 columns">
-
-			<h2>Almost There!<br>There's one last step you need to complete before you can send this updated order to <%= @order.orderer.company_name %>.</h2>
-			<hr>
-			<h3><strong>Next step:<br>
-				You need to input your bank information on your Profile Edit Page before you can send an order for final approval and payment by the buyer. Missing or incorrect bank information may delay the disbursement of your payment and we wouldn’t want that to happen.</strong>
-			</h3>
-		</div><!--/.small-12-->
-	</div><!--/.row-->
-
-	<div class="row">
-		<div class="small-12 columns text-center">
-			<%= link_to "Go to your Profile Edit Page", eval("#{@current_user.company_type.downcase}_url") + "#a-armor", class: "landing-button", id: "submit-go-and-close", target: "_blank" %>
-			<%= link_to "Not Yet", order_url(@order), class: "landing-button secondary", id: "submit-close" %>
-		</div><!--/.small-12-->
-	</div><!--/.row-->
-
 <% else %>
+
+	<% if !@current_user.brand.armor_bank_info_complete && !@order.orderer.disable_armor_payments  %>
+
+		<div class="row">
+			<div class="small-12 columns landing-notice">
+				<h4>
+					Your bank payout information is incomplete. While you can still continute with this order, you will need to input your bank information on your <%= link_to "Profile Edit Page", eval("#{@current_user.company_type.downcase}_url") + "#a-armor", id: "submit-go-and-close", target: "_blank" %> before you can receive payment. Missing or incorrect bank information may delay the disbursement of your payment and we wouldn’t want that to happen!
+				</h4>
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+		<br>
+
+	<% end %>
 
 	<div class="row">
 		<div class="small-12 columns text-center">
