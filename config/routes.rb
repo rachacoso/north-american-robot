@@ -38,9 +38,6 @@ Rails.application.routes.draw do
   get   '/order/c/:id/:confirm' => 'orders#complete', as: 'complete_order'
   get   '/order/add/:id/:confirm' => 'orders#armor_disabled_delivered', as: 'armor_disabled_received_order'
   get   '/order/adc/:id/:confirm' => 'orders#armor_disabled_completed', as: 'armor_disabled_completed_order'
-  # for ship/cancel date
-  get   '/order/ship_date/:id' => 'orders#ship_date', as: 'ship_date'
-  get   '/order/cancel_date/:id' => 'orders#cancel_date', as: 'cancel_date'
 
   # ARMOR PAYMENTS TESTING
   get   '/order/paid/:id/:confirm' => 'orders#paid', as: 'paid_order'

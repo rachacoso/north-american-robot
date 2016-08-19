@@ -219,25 +219,24 @@ class OrdersController < ApplicationController
 	def update
 		
 		# add ship/cancel dates
-		if params[:order][:ship_date].present?
-			params[:order][:ship_date] = Date.strptime(params[:order][:ship_date], '%m-%d-%Y') 
+		if params[:order][:ship_date]
+			if params[:order][:ship_date].present?
+				params[:order][:ship_date] = Date.strptime(params[:order][:ship_date], '%m-%d-%Y') 
+			end
+			@complete = true
 			@render_this = "ship_date"
 		end
-		if params[:order][:cancel_date].present?	
-			params[:order][:cancel_date] = Date.strptime(params[:order][:cancel_date], '%m-%d-%Y') 
+		if params[:order][:cancel_date]
+			if params[:order][:cancel_date].present?
+				params[:order][:cancel_date] = Date.strptime(params[:order][:cancel_date], '%m-%d-%Y')
+			end
+			@complete = true
 			@render_this = "cancel_date"
 		end
 
-		# remove ship/cancel dates
-		if params[:remove_ship_date].present?
-			order.ship_date = nil
-			order.save!
-			@render_this = "ship_date"
-		end
-		if params[:remove_cancel_date].present?
-			order.cancel_date = nil
-			order.save!
-			@render_this = "cancel_date"
+		# address update
+		if params[:order][:shipping_address_attributes].present?
+			@render_this = "shipping_address"
 		end
 
 		@order.update(order_params)
@@ -248,14 +247,6 @@ class OrdersController < ApplicationController
 			format.html  { redirect_to order_url(@order) }
 			format.js { render @render_this }
 		end
-	end
-
-	def ship_date
-
-	end
-
-	def cancel_date
-
 	end
 
 	private

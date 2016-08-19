@@ -29,7 +29,7 @@
 							</div><!--/.medium-6-->
 						</div><!--/.row-->
 
-						<div class="panel">
+						<div class="panel" id="order-display">
 							<%= render "shared/orders/show" %>		
 						</div>
 
@@ -69,27 +69,8 @@
 						<br>
 						<h1>3) Add Ship Date and Cancel Date (Optional)</h1>
 						<div class="panel text-center">
-
-							<div class="add-ship-cancel-form">
-								
-								<div class="row">
-									<div class="medium-6 medium-centered columns">
-										<div class="row">
-											<div class="medium-6 columns">
-													<div class="small-12 columns">
-														<h3><%= order.ship_date ? order.ship_date.strftime("%m-%d-%Y") : "(no ship date)" %></h3>
-														<%= link_to "Add Ship Date", ship_date_url, remote: true, class: "landing-button" %>
-													</div><!--/.small-12-->
-											</div><!--/.medium-6-->
-											<div class="medium-6 columns">
-													<div class="small-12 columns">
-														<h3><%= order.cancel_date ? order.cancel_date.strftime("%m-%d-%Y") : "(no cancel date)" %></h3>
-														<%= link_to "Add Cancel Date", cancel_date_url, remote: true, class: "landing-button" %>
-													</div><!--/.medium-7 medium-centered-->
-											</div><!--/.medium-6-->
-										</div><!--/.row-->
-									</div><!--/.medium-6 medium-centered-->
-								</div><!--/.row-->
+							<div id="ship-cancel-add">
+								<%= render partial: "ship_cancel_add", locals: {order: order} %>
 							</div><!--/.add-ship-cancel-form-->
 						</div><!--.panel text-center-->
 

@@ -11,9 +11,10 @@
 
 				<h3>
 				<% if @order.u_at.present? %>
-					<%= @order.u_at.strftime("Date: %d %b %Y") %><br>
-				<% elsif @order.c_at.present? %>
-					<%= @order.c_at.strftime("Date: %d %b %Y") %><br>
+					<%= @order.u_at.strftime("Last Updated: %d %b %Y") %><br>
+				<% end %>
+				<% if @order.c_at.present? %>
+					<%= @order.c_at.strftime("Created: %d %b %Y") %>
 				<% end %>
 				Status: <%= @order.status.capitalize %>
 				<% if @order.armor_order_id.present? %>
@@ -52,6 +53,15 @@
 					<%= "#{@order.orderer.address.postcode}".html_safe unless !@order.orderer.address.postcode || @order.orderer.address.postcode.empty? %>
 					<%= "<br>#{@order.orderer.address.country}".html_safe unless !@order.orderer.address.country || @order.orderer.address.country.empty? %>
 				</h3>
+
+				<% if @order.ship_date.present? %>
+					<h3>Ship Date: <%= @order.ship_date.strftime("%m/%d/%Y") %></h3>
+				<% end %>
+
+				<% if @order.cancel_date.present? %>
+					<h3>Cancel Date: <%= @order.cancel_date.strftime("%m/%d/%Y") %></h3>
+				<% end %>
+
 				<h3 style="margin-top:1.5em; margin-bottom: 2em;">Ship to:<br>
 					<%= display_shipping_address(order: @order) %>
 					<br><small>Contact Name &amp; Phone:</small>

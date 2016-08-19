@@ -1,0 +1,40 @@
+<div class="row">
+	<div class="medium-6 medium-centered text-center columns">
+		<div class="row">
+			<div class="medium-6 columns">
+
+				<div class="row collapse">
+					<div class="small-4 columns text-left">
+						<span class="prefix">Ship Date</span>
+					</div><!--/.small-4-->
+					<div class="small-8 columns">
+						<%= form_for order, :html => {id: 'ship-date-form'}, remote: true, authenticity_token: true do |f| %>
+							<% if order.ship_date %>
+								<%= f.text_field :ship_date, label: false, value: order.ship_date.strftime("%m/%d/%Y"), placeholder: "(none)" , class: "datepick ship-cancel" %>
+							<% else %>
+								<%= f.text_field :ship_date, label: false, value: "(none)", placeholder: "(none)", class: "datepick ship-cancel" %>
+							<% end %>
+						<% end %>
+					</div><!--/.small-8-->
+				</div><!--/.row-->
+
+			</div><!--/.medium-6-->
+			<div class="medium-6 columns">
+				<div class="row collapse">
+					<div class="small-4 columns text-left">
+						<span class="prefix">Cancel Date</span>
+					</div><!--/.small-4-->
+					<div class="small-8 columns">
+						<%= form_for order, :html => {id: 'cancel-date-form'}, remote: true, authenticity_token: true do |f| %>
+							<% if order.cancel_date %>
+								<%= f.text_field :cancel_date, label: false, value: order.cancel_date.strftime("%m/%d/%Y"), placeholder: '(none)' , class: "datepick ship-cancel" %>
+							<% else %>
+								<%= f.text_field :cancel_date, label: false, value: "(none)", placeholder: "(none)", class: "datepick ship-cancel"%>
+							<% end %>
+						<% end %>
+					</div><!--/.small-8-->
+				</div><!--/.row-->
+			</div><!--/.medium-6-->
+		</div><!--/.row-->
+	</div><!--/.medium-6 medium-centered-->
+</div><!--/.row-->

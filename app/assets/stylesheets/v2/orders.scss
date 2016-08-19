@@ -141,3 +141,23 @@ table#orders_chart {
 		}
 	}
 }
+
+table.date-control {
+	width: 100%;
+	border: none;
+	input[type=text] {
+		margin-bottom: 0;
+		background: none;
+		border: 1px solid $landing-light-gray;
+		font-weight: 500;
+	}
+	margin: auto;
+	td:first-child {
+		background: $landing-light-gray;
+		color: $landing-dark-gray;
+	}
+	td:nth-child(2) {
+		border: 1px solid $landing-light-gray;
+		font-weight: 500;
+	}
+}
