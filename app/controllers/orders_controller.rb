@@ -6,49 +6,143 @@ class OrdersController < ApplicationController
 	before_action :administrators_only, only: [:paid, :delivered, :complete]
 
 	def index
-		@profile = @current_user.get_parent
-		@current_orders = @profile.orders.current.count
-		@submitted_orders = @profile.orders.submitted.count
-		@pending_orders = @profile.orders.pending.count
-		@approved_orders = @profile.orders.approved.count
-		@paid_orders = @profile.orders.paid.count
-		@shipped_orders = @profile.orders.shipped.count
-		@delivered_orders = @profile.orders.delivered.count
-		@completed_orders = @profile.orders.completed.count
-		@error_orders = @profile.orders.error.count
-		@disputed_orders = @profile.orders.disputed.count
-		@active_orders = @profile.orders.active.count
-		if f = params[:f]
-			if [
-				"current", 
-				"submitted", 
-				"pending", 
-				"approved",
-				"paid",
-				"shipped",
-				"delivered",
-				"disputed",
-				"error",
-				"completed",
-				"active"
-				].include? f
-				@orders = @current_user.company.orders.send(f).order_by(:c_at => 'desc')
-				@filter = f
+
+		if company_id = params[:company_id] #with company filter
+
+			@profile = @current_user.company
+			type = Brand.find(company_id) ? "brand" : "other"
+
+			@current_orders = @profile.orders.of_company(company_id: company_id, type: type).current.count
+			@submitted_orders = @profile.orders.of_company(company_id: company_id, type: type).submitted.count
+			@pending_orders = @profile.orders.of_company(company_id: company_id, type: type).pending.count
+			@approved_orders = @profile.orders.of_company(company_id: company_id, type: type).approved.count
+			@paid_orders = @profile.orders.of_company(company_id: company_id, type: type).paid.count
+			@shipped_orders = @profile.orders.of_company(company_id: company_id, type: type).shipped.count
+			@delivered_orders = @profile.orders.of_company(company_id: company_id, type: type).delivered.count
+			@completed_orders = @profile.orders.of_company(company_id: company_id, type: type).completed.count
+			@error_orders = @profile.orders.of_company(company_id: company_id, type: type).error.count
+			@disputed_orders = @profile.orders.of_company(company_id: company_id, type: type).disputed.count
+			@active_orders = @profile.orders.of_company(company_id: company_id, type: type).active.count
+			if f = params[:f]
+				if [
+					"current", 
+					"submitted", 
+					"pending", 
+					"approved",
+					"paid",
+					"shipped",
+					"delivered",
+					"disputed",
+					"error",
+					"completed",
+					"active"
+					].include? f
+					@orders = @profile.orders.of_company(company_id: company_id, type: type).send(f).order_by(:c_at => 'desc')
+					@filter = f
+				else
+					@orders = @profile.orders.of_company(company_id: company_id, type: type).active.order_by(:c_at => 'desc')
+					@filter = "active"
+				end		
 			else
-				@orders = @current_user.company.orders.active.order_by(:c_at => 'desc')
+				@orders = @profile.orders.of_company(company_id: company_id, type: type).active.order_by(:c_at => 'desc')
 				@filter = "active"
-			end		
-		else
-			@orders = @current_user.company.orders.active.order_by(:c_at => 'desc')
-			@filter = "active"
+			end
+
+			@company_filter = company_id
+
+		else # no company filter
+
+			@profile = @current_user.company
+			@current_orders = @profile.orders.current.count
+			@submitted_orders = @profile.orders.submitted.count
+			@pending_orders = @profile.orders.pending.count
+			@approved_orders = @profile.orders.approved.count
+			@paid_orders = @profile.orders.paid.count
+			@shipped_orders = @profile.orders.shipped.count
+			@delivered_orders = @profile.orders.delivered.count
+			@completed_orders = @profile.orders.completed.count
+			@error_orders = @profile.orders.error.count
+			@disputed_orders = @profile.orders.disputed.count
+			@active_orders = @profile.orders.active.count
+			if f = params[:f]
+				if [
+					"current", 
+					"submitted", 
+					"pending", 
+					"approved",
+					"paid",
+					"shipped",
+					"delivered",
+					"disputed",
+					"error",
+					"completed",
+					"active"
+					].include? f
+					@orders = @profile.orders.send(f).order_by(:c_at => 'desc')
+					@filter = f
+				else
+					@orders = @profile.orders.active.order_by(:c_at => 'desc')
+					@filter = "active"
+				end		
+			else
+				@orders = @profile.orders.active.order_by(:c_at => 'desc')
+				@filter = "active"
+			end
+
 		end
 
 	end
+
+	# def company_index
+	# 	company_id = params[:company_id]
+	# 	@profile = @current_user.get_parent
+
+	# 	@current_orders = @profile.orders.where(orderer_id: company_id).current.count || @profile.orders.where(brand_id: company_id).current.count
+	# 	@submitted_orders = @profile.orders.where(orderer_id: company_id).submitted.count || @profile.orders.where(brand_id: company_id).submitted.count
+	# 	@pending_orders = @profile.orders.where(orderer_id: company_id).pending.count || @profile.orders.where(brand_id: company_id).pending.count
+	# 	@approved_orders = @profile.orders.where(orderer_id: company_id).approved.count || @profile.orders.where(brand_id: company_id).approved.count
+	# 	@paid_orders = @profile.orders.where(orderer_id: company_id).paid.count || @profile.orders.where(brand_id: company_id).paid.count
+	# 	@shipped_orders = @profile.orders.where(orderer_id: company_id).shipped.count || @profile.orders.where(brand_id: company_id).shipped.count
+	# 	@delivered_orders = @profile.orders.where(orderer_id: company_id).delivered.count || @profile.orders.where(brand_id: company_id).delivered.count
+	# 	@completed_orders = @profile.orders.where(orderer_id: company_id).completed.count || @profile.orders.where(brand_id: company_id).completed.count
+	# 	@error_orders = @profile.orders.where(orderer_id: company_id).error.count || @profile.orders.where(brand_id: company_id).error.count
+	# 	@disputed_orders = @profile.orders.where(orderer_id: company_id).disputed.count || @profile.orders.where(brand_id: company_id).disputed.count
+	# 	@active_orders = @profile.orders.where(orderer_id: company_id).active.count || @profile.orders.where(brand_id: company_id).active.count
+	# 	if f = params[:f]
+	# 		if [
+	# 			"current", 
+	# 			"submitted", 
+	# 			"pending", 
+	# 			"approved",
+	# 			"paid",
+	# 			"shipped",
+	# 			"delivered",
+	# 			"disputed",
+	# 			"error",
+	# 			"completed",
+	# 			"active"
+	# 			].include? f
+	# 			@orders = @current_user.company.orders.where(orderer_id: company_id).send(f).order_by(:c_at => 'desc') || @current_user.company.orders.where(brand_id: company_id).send(f).order_by(:c_at => 'desc') 
+	# 			@filter = f
+	# 		else
+	# 			@orders = @current_user.company.orders.where(orderer_id: company_id).active.order_by(:c_at => 'desc') || @current_user.company.orders.where(brand_id: company_id).active.order_by(:c_at => 'desc')
+	# 			@filter = "active"
+	# 		end		
+	# 	else
+	# 		@orders = @current_user.company.orders.where(orderer_id: company_id).active.order_by(:c_at => 'desc') || @current_user.company.orders.where(brand_id: company_id).active.order_by(:c_at => 'desc')
+	# 		@filter = "active"
+	# 	end
+
+	# end
 
 	def show
 		unless @order.viewable_by? @current_user
 			redirect_to root_url
 		end
+		
+		@brand = @order.brand
+		@orderer = @order.orderer
+
 		if @order.status == "approved"
 			if @order.armor_enabled?
 				url = @order.api_get_payment_url

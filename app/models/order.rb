@@ -50,6 +50,14 @@ class Order # for V2 ordering
   scope :active, ->{any_of(:status.in => ["open","submitted","pending","approved","paid", "shipped","delivered","disputed"])}
   scope :in_progress, ->{any_of(:status.in => ["submitted","pending","approved","paid", "shipped","delivered","disputed"])}
 
+  def self.of_company(company_id:, type:)
+    if type == "brand"
+      where(brand_id: company_id)
+    else #isn't a brand
+      where(orderer_id: company_id)
+    end
+  end
+
   def subtotal_price # price before addtional fees in dollars
     price = 0
     self.order_items.each do |item|

@@ -19,6 +19,13 @@ module OrdersHelper
 			return profile.orders.active.where(brand: @current_user.get_parent.id).first
 		end
 	end
+	def open_order(profile)
+		if profile.class.to_s == "Brand"
+			return profile.orders.current.where(orderer_id: @current_user.get_parent.id).first
+		elsif profile.class.to_s == "Distributor" || profile.class.to_s == "Retailer"
+			return profile.orders.current.where(brand: @current_user.get_parent.id).first
+		end
+	end
 	def order_in_progress(profile)
 		if profile.class.to_s == "Brand"
 			return profile.orders.in_progress.where(orderer_id: @current_user.get_parent.id).first

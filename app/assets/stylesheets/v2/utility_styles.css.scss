@@ -84,16 +84,16 @@ ul.tablist {
 	zoom:1;
 	overflow: hidden;
 	li {
+		vertical-align: bottom;
 		a{color: $landing-blue;}
 		font-weight:200;
 		font-size: rem-calc(18);
 		display: inline-block;
 		margin: 0 rem-calc(5);
 		padding: rem-calc(10) rem-calc(0) rem-calc(5) rem-calc(0);
+		border-bottom: rem-calc(3) solid transparent;
 		&.active {
-			a{color: $landing-dark-gray;}
-			font-weight:300;
-			border-bottom: rem-calc(3) solid $landing-dark-gray;
+			border-bottom: rem-calc(3) solid $landing-middle-gray;
 		}
 	}
 }
@@ -110,3 +110,80 @@ ul.tablist {
 	}
 }
 
+.shopping-cart {
+	position: relative;
+	height: rem-calc(50);
+	width: rem-calc(50);
+	background: url("/images/cart.png");
+	background-size: 80%;
+	background-position: top center;
+	background-repeat: no-repeat;
+	&:after {
+		content: "CART";
+		font-size: rem-calc(5);
+		color: $landing-middle-gray;
+		position: absolute;
+		bottom: 0;
+		margin-left: auto;
+		margin-right: auto;
+		left: 0;
+		right: 0;
+	}
+	.count {
+		position: absolute;
+		font-size: rem-calc(12);
+		right: rem-calc(7);
+		top: rem-calc(2);
+		background: red;
+		border-radius: 0.8em;
+		-moz-border-radius: 0.8em;
+		-webkit-border-radius: 0.8em;
+		color: #ffffff;
+		display: inline-block;
+		// font-weight: bold;
+		line-height: 1.2em;
+		text-align: center;
+		width: 1.2em; 
+	}
+}
+
+.profile {
+	position: relative;
+	height: rem-calc(50);
+	width: rem-calc(50);
+	background: url("/images/profile.png");
+	background-size: 80%;
+	background-position: top center;
+	background-repeat: no-repeat;
+	&:after {
+		content: "PROFILE";
+		font-size: rem-calc(5);
+		color: $landing-middle-gray;
+		position: absolute;
+		bottom: 0;
+		margin-left: auto;
+		margin-right: auto;
+		left: 0;
+		right: 0;
+	}
+}
+.orders {
+	position: relative;
+	height: rem-calc(50);
+	width: rem-calc(50);
+	background: url("/images/orders.png");
+	background-size: 80%;
+	background-position: top center;
+	background-repeat: no-repeat;
+	&:after {
+		content: "ORDERS";
+		font-size: rem-calc(5);
+		color: $landing-middle-gray;
+		position: absolute;
+		bottom: 0;
+		margin-left: auto;
+		margin-right: auto;
+		left: 0;
+		right: 0;
+	}
+}
