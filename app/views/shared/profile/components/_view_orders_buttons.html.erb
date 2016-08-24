@@ -9,7 +9,7 @@
 			<div class="orders"></div>
 		<% end %>
 	</li>
-	<% if order = open_order(profile) %>
+	<% if @current_user.type? != "brand" && order = open_order(profile) %>
 	<li>
 		<%= link_to order_url(order) do %>
 			<div class="shopping-cart"><div class="count"><%= order.order_items.count %></div></div>
