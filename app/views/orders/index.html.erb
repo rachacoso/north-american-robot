@@ -7,21 +7,27 @@
 		<div class="row">
 			<div class="small-12 columns">
 
+				<% if @company_filter %>
+				<div class="text-center" id="profile-tabs">
+				<span id="view-orders-buttons"><%= render partial: "shared/profile/components/view_orders_buttons", locals: {profile: get_company(@company_filter)} %></span>
+				</div>
+				<br>
+				<% else %>
 				<div id="dashboard-marketplace-header">
-					<%= image_tag "logo_header_marketplace.svg" %>
+					<%#= image_tag "logo_header_marketplace.svg" %>
 				</div>
 
 				<div class="row">
 					<div class="small-12 columns">
 						<div class="panel">
-							<h2><%= link_to "Dashboard", dashboard_url, style: "color:black;"%> > Orders</h2>
+							<h2>All Orders</h2>
 						</div>
 					</div><!--/.small-12-->
 				</div><!--/.row-->
-
+				<% end %>
 				<div class="row">
 					<div class="medium-2 columns">
-						<%= render partial: "home/orders_chart", locals: { filter: @filter } %>
+						<%= render partial: "home/orders_chart", locals: { filter: @filter, company_id: @company_filter} %>
 					</div><!--/.medium-2-->
 					<div class="medium-10 columns">
 							<%= render partial: 'order_index', locals: { orders: @orders } %>

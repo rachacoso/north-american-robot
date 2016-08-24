@@ -1,5 +1,8 @@
 module OrdersHelper
 
+	def get_company(id)
+		return Brand.find(id) || Retailer.find(id) || Distributor.find(id)
+	end
 	def current_order(brand)
 		return brand.orders.current.where(orderer_id: @current_user.get_parent.id).first
 	end
