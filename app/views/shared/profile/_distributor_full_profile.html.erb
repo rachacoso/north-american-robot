@@ -6,11 +6,7 @@
 		<div id="profile-status-and-contact">
 			<div class="row">
 				<div class="medium-6 columns text-left">
-					<span id="profile-status">
-					<% if order = active_order(profile) %>
-					<%= render partial: "shared/profile/components/profile_status", locals: { order: order } %>
-					<% end %>
-					</span>
+
 				</div><!--/.medium-6-->
 				<div class="medium-6 columns text-right">
 					<h3>Have questions? <%= link_to "Contact #{profile.company_name}", new_simple_message_url(profile), remote:true %></h3>
