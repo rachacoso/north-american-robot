@@ -1,32 +1,5 @@
 <%= render partial: 'shared/v2/header/main' %>
 
-<% if @current_user.brand %>
-<div class="row">
-	<div class="small-12 columns">
-		<nav class="breadcrumbs">
-			<% if @order.orderer_type == "Retailer" %>
-			<%= link_to "Retailers", "#" %>
-			<%= link_to "Find", "#" %>
-		  <a class="current" href="#"><%=@order.orderer.company_name%></a>
-		  <% elsif @order.orderer_type == "Distributor" %>
-			<%= link_to "Distributors", "#" %>
-			<%= link_to "Find", "#" %>
-		  <a class="current" href="#"><%=@order.orderer.company_name%></a>
-		  <% end %>
-		</nav>
-	</div>
-</div>
-<% else %>
-<div class="row">
-	<div class="small-12 columns">
-		<nav class="breadcrumbs">
-			<%= link_to "Beauty", root_url %>
-		  <%= link_to "Find", brands_url %>
-		  <a class="current" href="#"><%=@order.brand.company_name%></a>
-		</nav>
-	</div>
-</div>
-<% end %>
-
-
 <%= render partial: "show_order_full", locals: { order: @order } %>
+
+<%= render partial: 'shared/v2/footer/main' %>

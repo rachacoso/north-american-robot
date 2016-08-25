@@ -15,6 +15,11 @@ class OrderItemsController < ApplicationController
 	end
 
 	def update
+		if request.referer.include? "orders" # for profile button updates
+			@section = "cart"
+		else
+			@section = "profile"
+		end
 		@order = @current_user.get_parent.orders.current.find(params[:o])
 		if @order # only update if there is a current order
 			@order_item = @order.order_items.find(params[:id])
@@ -39,6 +44,11 @@ class OrderItemsController < ApplicationController
 	end
 
 	def create
+		if request.referer.include? "orders" # for profile button updates
+			@section = "cart"
+		else
+			@section = "profile"
+		end
 
 		if !@order  # create new order if doesnt exist
 			@order = Order.create_new(user: @current_user, brand: @order_product.brand)

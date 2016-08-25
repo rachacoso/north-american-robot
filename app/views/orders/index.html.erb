@@ -1,5 +1,8 @@
 <%= render partial: "shared/topbar" %>
 
+<% if @company_filter %>
+<%= render partial: "/shared/profile/components/profile_nav", locals: { profile: get_company(@company_filter), section: "orders"  } %>
+<% end %>
 <br>
 <div class="row">
 	<div class="small-11 small-centered columns">
@@ -8,10 +11,7 @@
 			<div class="small-12 columns">
 
 				<% if @company_filter %>
-				<div class="text-center" id="profile-tabs">
-				<span id="view-orders-buttons"><%= render partial: "shared/profile/components/view_orders_buttons", locals: {profile: get_company(@company_filter)} %></span>
-				</div>
-				<br>
+
 				<% else %>
 				<div id="dashboard-marketplace-header">
 					<%#= image_tag "logo_header_marketplace.svg" %>

@@ -1,18 +1,20 @@
 <ul class="tablist">
 	<li>
 		<%= link_to eval("view_#{profile.class.to_s.downcase}_url(profile)") do %>
-		<div class="profile"></div>
+		<div id="profile" <%= section == "profile" ? "class=active" : "" %>></div>
 		<% end %>
 	</li>
 	<li>
+		<% if @current_user.company.orders.of_company(company_id: profile.id, type: profile.class.to_s.downcase).count > 0 %>
 		<%= link_to orders_url(company_id: profile) do %>
-			<div class="orders"></div>
+			<div id="orders" <%= section == "orders" ? "class=active" : "" %>></div>
+		<% end %>
 		<% end %>
 	</li>
 	<% if @current_user.type? != "brand" && order = open_order(profile) %>
 	<li>
 		<%= link_to order_url(order) do %>
-			<div class="shopping-cart"><div class="count"><%= order.order_items.count %></div></div>
+			<div id="shopping-cart" <%= section == "cart" ? "class=active" : "" %>><div class="count"><%= order.order_items.count %></div></div>
 		<% end %>
 	</li>
 	<% end %>

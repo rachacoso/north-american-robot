@@ -6,12 +6,121 @@
 
 // PROFILE DISPLAY
 
-#profile-tabs { 
-  // background-color: scale-color($landing-light-gray, $lightness: 40%);
+#shopping-cart {
+  position: relative;
+  height: rem-calc(50);
+  width: rem-calc(50);
+  background: url("/images/cart.png");
+  background-color: white;
+  background-size: 80%;
+  background-position: top center;
+  background-repeat: no-repeat;
+  &:after {
+    content: "CART";
+    font-size: rem-calc(5);
+    color: $landing-middle-gray;
+    position: absolute;
+    bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+  }
+  .count {
+    position: absolute;
+    font-size: rem-calc(12);
+    right: rem-calc(7);
+    top: rem-calc(2);
+    background: red;
+    border-radius: 0.8em;
+    -moz-border-radius: 0.8em;
+    -webkit-border-radius: 0.8em;
+    color: #ffffff;
+    display: inline-block;
+    // font-weight: bold;
+    line-height: 1.2em;
+    text-align: center;
+    width: 1.2em; 
+  }
+  &.active {
+    &:after {
+      color: $landing-light-gray;
+      font-weight: 500;
+      background: $landing-middle-gray;
+    }
+  }
+}
+
+#profile {
+  position: relative;
+  height: rem-calc(50);
+  width: rem-calc(50);
+  background: url("/images/profile.png");
+  background-color: white;
+  background-size: 80%;
+  background-position: top center;
+  background-repeat: no-repeat;
+  &:after {
+    content: "PROFILE";
+    font-size: rem-calc(5);
+    color: $landing-middle-gray;
+    position: absolute;
+    bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+  }
+  &.active {
+    &:after {
+      color: $landing-light-gray;
+      font-weight: 500;
+      background: $landing-middle-gray;
+    }
+  }
+}
+#orders {
+  position: relative;
+  height: rem-calc(50);
+  width: rem-calc(50);
+  background: url("/images/orders.png");
+  background-color: white;
+  background-size: 80%;
+  background-position: top center;
+  background-repeat: no-repeat;
+  &:after {
+    content: "ORDERS";
+    font-size: rem-calc(5);
+    color: $landing-middle-gray;
+    position: absolute;
+    bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+  }
+  &.active {
+    &:after {
+      color: $landing-light-gray;
+      font-weight: 500;
+      background: $landing-middle-gray;
+    }
+  }
+}
+
+
+#profile-nav {
+  position: relative;
   border-bottom: 1px solid $landing-middle-gray;
-  // padding-top: rem-calc(5);
-  // padding-bottom: rem-calc(5);
-  // margin-bottom: rem-calc(0);
+  background: $landing-light-gray;
+  padding: 0 rem-calc(5);
+  margin-bottom: rem-calc(10);
+  #header {
+  }
+  #nav {
+  }
+  #contact {
+  }
 }
 
 .profile-tabs {

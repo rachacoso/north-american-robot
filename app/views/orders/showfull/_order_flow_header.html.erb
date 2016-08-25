@@ -1,5 +1,5 @@
 <ul class="order-flow-header">
-	<li <%= status == "open" ? "class=active" : "" %>>Open <%= status == "open" ? " Order" : "" %></li>
+	<li <%= status == "open" ? "class=active" : "" %>>Open<%= status == "open" ? " Order (In Cart)" : "" %></li>
 	<li <%= status == "submitted" ? "class=active" : "" %>><%= status == "submitted" ? "Order " : "" %>Submitted</li>
 	<% if armor %>
 	<li <%= status == "pending" ? "class=active" : "" %>><%= status == "pending" ? "Order " : "" %>Pending<%= status == "pending" ? " Approval" : "" %></li>

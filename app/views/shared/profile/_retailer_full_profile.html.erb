@@ -1,20 +1,4 @@
-<div class="row">
-	<div class="small-12 columns">
-		<div class="text-center" id="profile-tabs">
-			<span id="view-orders-buttons"><%= render partial: "shared/profile/components/view_orders_buttons", locals: {profile: profile} %></span>
-		</div>
-		<div id="profile-status-and-contact">
-			<div class="row">
-				<div class="medium-6 columns text-left">
-
-				</div><!--/.medium-6-->
-				<div class="medium-6 columns text-right">
-					<h3>Have questions? <%= link_to "Contact #{profile.company_name}", new_simple_message_url(profile), remote:true %></h3>
-				</div><!--/.medium-6-->
-			</div><!--/.row-->
-		</div>
-	</div><!--/.small-12-->
-</div><!--/.row-->
+<%= render partial: "/shared/profile/components/profile_nav", locals: { profile: profile, section: "profile"  } %>
 
 <% if @messages && @current_user.subscriber? %>
 <div class="row">
@@ -47,9 +31,6 @@
 		<% end %>
 	</div><!--/.medium-4-->
 	<div class="medium-8 columns medium-pull-4 medium-text-left">
-		<span id="profile-company-name">
-		<h1><%= profile.company_name %></h1>
-		</span>
 
 		<div>
 			<% profile.tags.each do |tag| %>
