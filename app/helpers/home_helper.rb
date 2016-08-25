@@ -21,7 +21,7 @@ module HomeHelper
 	end
 
 	def get_carousel_articles
-		articles = Article.active.order_by(:date.desc)
+		articles = Article.active.carousel.order_by(:date.desc)
 		return articles
 	end
 

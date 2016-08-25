@@ -487,6 +487,11 @@ function initialize () {
       // select the form and submit
       $('#article-photo-upload').submit(); 
   });
+  $('#article_carousel_photo').change(function() { 
+      // select the form and submit
+      var thisForm = $(this).parents('form');
+      $(thisForm).submit(); 
+  });
   // FOR PRODUCT PHOTO UPLOAD
   $('.product-photo-photo').change(function() { 
       // select the form and submit

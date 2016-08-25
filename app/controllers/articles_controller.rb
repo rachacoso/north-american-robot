@@ -2,7 +2,7 @@ class ArticlesController < ApplicationController
 
 	skip_before_action :require_login, only: [:public_view]
 	before_action :administrators_only, except: [:public_view]
-	before_action :get_article, only: [:show, :edit, :update, :destroy, :featured_brand, :delete_featured_brand, :public_view]
+	before_action :get_article, only: [:show, :edit, :update, :destroy, :featured_brand, :delete_featured_brand, :public_view, :delete_carousel_photo]
 
 	def public_view
 
@@ -74,6 +74,15 @@ class ArticlesController < ApplicationController
 	  end 
 	end
 
+	def delete_carousel_photo
+		@article.carousel_photo = nil
+    if @article.save!
+     redirect_to @article, notice: "#{@article.headline} was successfully updated."
+    else
+      render :edit
+    end
+	end
+
 	def destroy
 		n = "#{@article.headline} was successfully deleted."
 		@article.destroy
@@ -101,7 +110,8 @@ class ArticlesController < ApplicationController
 			:body,
 			:date,
 			:article_type,
-			:active
+			:active,
+			:carousel_photo
 		)
 	end	
 

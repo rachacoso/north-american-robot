@@ -65,6 +65,7 @@ Rails.application.routes.draw do
   post  '/article/new/:type' => 'articles#create', as: 'create_article'
   post  '/article/fb/:id' => 'articles#featured_brand', as: 'article_featured_brand'
   delete  '/article/fb/:id/:fb_id' => 'articles#delete_featured_brand', as: 'delete_article_featured_brand'
+  delete  '/article/carousel/:id/' => 'articles#delete_carousel_photo', as: 'delete_article_carousel_photo'
 
   resources :article_photos, only: [:create]
   delete '/article_photos/:id/:article_id' => 'article_photos#destroy', as: 'delete_article_photo'
