@@ -119,6 +119,45 @@ $background-color: $landing-light-gray;
 			}		
 		}
 	}
+	.article-tile-2 {
+		&:hover {			
+			-moz-box-shadow: 0px 0px 7px $landing-dark-gray;
+			-webkit-box-shadow: 0px 0px 7px $landing-dark-gray;
+			box-shadow: 0px 0px 7px $landing-dark-gray;
+			-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=7, Direction=0, Color='#333333')";
+			filter: progid:DXImageTransform.Microsoft.Shadow(Strength=7, Direction=0, Color='#333333');
+			cursor:pointer;
+		}
+		position: relative;
+		margin: rem-calc(10);
+		height: rem-calc(300);
+		.image {
+			height: 100%;
+			background: center;
+			background-size: cover;
+		}
+		.headline {
+			position: absolute;
+			top: rem-calc(10);
+			left: 0;
+			font-size: rem-calc(20);
+			color: #E66E6E;
+			background-color: rgba(255,255,255,0.9);
+			padding: rem-calc(5);
+			line-height: 1.2em;
+			font-weight: 500;
+			max-width: 80%;
+		}
+		.date {
+			position: absolute;
+			bottom: rem-calc(10);
+			right: 0;
+			color: $text-color;
+			background-color: rgba(255,255,255,0.9);
+			padding: rem-calc(5);
+			font-weight: 200;
+		}	
+	}
 }
 
 
@@ -141,7 +180,7 @@ $background-color: $landing-light-gray;
 			text-align: right;
 			position: absolute;
 			right: 0;
-			bottom: rem-calc(50);
+			bottom: 40%;
 		}
 	}
 	.item img {

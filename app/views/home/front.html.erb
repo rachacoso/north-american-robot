@@ -17,6 +17,18 @@
 	</div><!--/.row-->
 </div><!--/.front-grid-->
 
+<div class="front-grid">
+	<div class="row">
+		<div class="small-11 medium-10 small-centered columns">
+			<ul class="small-block-grid-1 medium-block-grid-3">
+			<% glist = get_grid_articles() %>
+			<% glist.each_with_index do |a, i| %>
+				<li><%= render partial: "/articles/front_grid_tile2", locals: { a: a } %></li>
+			<% end %>
+			</ul>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+</div><!--/.front-grid-->
 
 <div class="front-grid">
 	<div class="row">
@@ -24,14 +36,12 @@
 			<ul class="small-block-grid-1 medium-block-grid-3">
 			<% glist = get_grid_articles() %>
 			<% glist.each_with_index do |a, i| %>
-				<li><%= render partial: "/articles/front_grid_tile", locals: { a: a } %></li>
+				<li><%#= render partial: "/articles/front_grid_tile", locals: { a: a } %></li>
 			<% end %>
 			</ul>
 		</div><!--/.small-12-->
 	</div><!--/.row-->
 </div><!--/.front-grid-->
-
-
 
 <div class="browseblock">
 	<div class="row">
