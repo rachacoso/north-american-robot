@@ -80,7 +80,7 @@
 						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 						<div class="panel text-center">
 						<%= link_to "Submit Order to #{order.brand.company_name}", submit_order_url(order,0), class: "landing-button", remote: true %> <span style="font-weight: 100;">or</span>
-						<%= link_to "Add More Items to Order", view_brand_url(order.brand), class: "landing-button secondary" %>
+						<%= link_to "Add More Items", view_brand_url(order.brand), class: "landing-button secondary" %>
 						</div>
 
 					</div><!--/.medium-11 medium-centered-->

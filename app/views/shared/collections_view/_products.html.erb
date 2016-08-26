@@ -54,7 +54,7 @@
 		<% if @current_user.can_order? && collitem.brand.can_sell? && !collitem.price.blank? && collitem.current %>
 		<div class="row">
 			<div class="small-12 columns">
-				<%= link_to "Order this SKU", new_order_item_url(collitem.id), remote: true, class: "landing-button order-sku-button" %>
+				<%= link_to "Add SKU to Cart", new_order_item_url(collitem.id), remote: true, class: "landing-button order-sku-button" %>
 			</div><!--/.small-12-->
 		</div><!--/.row-->
 		<% end %>
