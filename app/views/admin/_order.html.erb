@@ -6,4 +6,5 @@
 			<%= order.orderer.company_name %>
 		<% end %>
 	<% end %>
+	<%= order.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("(created on %e %b %Y %H:%M:%S%p %Z)") %>
 </p>

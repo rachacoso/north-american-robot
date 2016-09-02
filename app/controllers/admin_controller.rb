@@ -109,6 +109,15 @@ class AdminController < ApplicationController
     @order = Order.find(params[:id])
   end
 
+  def order_destroy
+    @order = Order.find(params[:id])
+    if params[:confirm].to_i == 1
+      if @order.can_be_deleted?
+        @success = true if @order.destroy!
+      end
+    end
+  end
+
   def new_bulk_upload
 
   end

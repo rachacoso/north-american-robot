@@ -1,0 +1,14 @@
+<% if @success %>
+
+	$('#order-item-data').html("<div class='text-center'><h2>Deleting Order...<br>Please wait...</h2></div>");
+	window.location.replace("<%= admin_orders_index_url("b") %>");
+
+<% else %>
+
+	$('#order-item-data').html("<%= j (render partial: 'destroy_order') %>");
+	$('.overlay#order-item-overlay').fadeIn();
+	$('#order-item').fadeIn();
+
+<% end %>
+
+setModalActions();

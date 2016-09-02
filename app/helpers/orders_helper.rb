@@ -46,13 +46,24 @@ module OrdersHelper
 	end
 
 	def profile_link(company)
-		case company.class.to_s
-		when "Brand"
-			return view_brand_url(company)
-		when "Retailer"
-			return view_retailer_url(company)
-		when "Distributor"
-			return view_distributor_url(company)
+		if @current_user.administrator
+			case company.class.to_s
+			when "Brand"
+				return admin_brand_view_url(company)
+			when "Retailer"
+				return admin_retailer_view_url(company)
+			when "Distributor"
+				return admin_distributor_view_url(company)
+			end
+		else
+			case company.class.to_s
+			when "Brand"
+				return view_brand_url(company)
+			when "Retailer"
+				return view_retailer_url(company)
+			when "Distributor"
+				return view_distributor_url(company)
+			end
 		end
 	end
 

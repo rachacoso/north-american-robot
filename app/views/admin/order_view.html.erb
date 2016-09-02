@@ -17,10 +17,10 @@
 <div class="row">
 	<div class="small-12 columns panel">
 		
-				<div data-alert class="alert-box alert round">
-			  	<%= flash[:notice] %>
-				  <a href="#" class="close">&times;</a>
-				</div>
+		<div data-alert class="alert-box alert round">
+			<%= flash[:notice] %>
+			<a href="#" class="close">&times;</a>
+		</div>
 		
 	</div>
 </div>
@@ -38,6 +38,7 @@
 		<% if !@order.armor_enabled? && @order.status == "submitted" %>
 			<%= link_to "Mark Order Complete", complete_order_url(@order,0), class: "landing-button", remote: true %>
 		<% end %>
+		<%= (link_to "Delete Order", admin_order_destroy_url(@order,0), class: "landing-button alert", remote: true) if @order.can_be_deleted?  %>
 		</div>
 	</div>
 </div>

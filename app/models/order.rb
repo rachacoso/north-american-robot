@@ -58,6 +58,14 @@ class Order # for V2 ordering
     end
   end
 
+  def can_be_deleted?
+    if ["open","submitted","pending"].include? self.status
+      return true
+    else
+      return false
+    end
+  end
+
   def subtotal_price # price before addtional fees in dollars
     price = 0
     self.order_items.each do |item|
