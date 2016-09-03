@@ -62,9 +62,9 @@ gem "mongoid-paperclip", :require => "mongoid_paperclip"
 gem 'aws-sdk', '~> 1.3.4'
 
 
-# gem 'foundation-rails', '5.5.2.1'
+gem 'foundation-rails', '5.5.2.1'
 # gem 'foundation-rails', '5.4.5'
-gem 'foundation-rails'
+# gem 'foundation-rails'
 # gem 'foundation-rails', '5.4.3.1'
 gem 'foundation_rails_helper'
 gem 'foundation-icons-sass-rails'
