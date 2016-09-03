@@ -172,14 +172,17 @@ class UsersController < ApplicationController
     # end   
 
     if params[:page_users]
+      @active_section = 'users'
+      if params[:search_users]
+        @users = User.where(email: /#{params[:search_users]}/i ).reject{ |r| r.administrator }
+        @active_search = 'true'
+      end  
       @users = do_kaminari_array(@users, params[:page_users])
-      @active_section = 'users'
-    elsif params[:search_users]
-      @users = User.where(email: /#{params[:search_users]}/i ).reject{ |r| r.administrator }
-      @users = do_kaminari_array(@users, 1)
-      @active_section = 'users'
-      @active_search = 'true'
+      # @users = do_kaminari_array(@users, 1)
     else
+      if params[:search_users]
+        @users = User.where(email: /#{params[:search_users]}/i ).reject{ |r| r.administrator }
+      end
       @users = do_kaminari_array(@users, 1)
     end  
 
