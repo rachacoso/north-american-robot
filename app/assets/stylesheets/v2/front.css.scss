@@ -120,20 +120,29 @@ $background-color: $landing-light-gray;
 		}
 	}
 	.article-tile-2 {
-		&:hover {			
-			-moz-box-shadow: 0px 0px 7px $landing-dark-gray;
-			-webkit-box-shadow: 0px 0px 7px $landing-dark-gray;
-			box-shadow: 0px 0px 7px $landing-dark-gray;
-			-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=7, Direction=0, Color='#333333')";
-			filter: progid:DXImageTransform.Microsoft.Shadow(Strength=7, Direction=0, Color='#333333');
-			cursor:pointer;
-		}
+		-moz-box-shadow: 0px 0px 7px $landing-dark-gray;
+		-webkit-box-shadow: 0px 0px 7px $landing-dark-gray;
+		box-shadow: 0px 0px 7px $landing-dark-gray;
+		-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=7, Direction=0, Color='#333333')";
+		filter: progid:DXImageTransform.Microsoft.Shadow(Strength=7, Direction=0, Color='#333333');
 		position: relative;
 		margin: rem-calc(10);
 		height: rem-calc(300);
+    overflow: hidden;
+    position: relative;
 		.image {
+			position: absolute;
 			height: 100%;
+			width: 100%;
 			background: center;
+			-moz-transition: all .5s;
+			-webkit-transition: all .5s;
+			transition: all .5s;
+			-moz-transform: scale(1,1);
+			-webkit-transform: scale(1,1);
+			transform: scale(1,1);
+			-moz-background-size: cover;
+			-webkit-background-size: cover;
 			background-size: cover;
 		}
 		.headline {
@@ -157,6 +166,19 @@ $background-color: $landing-light-gray;
 			padding: rem-calc(5);
 			font-weight: 200;
 		}	
+		&:hover {			
+			-moz-box-shadow: 0px 0px 17px $landing-dark-gray;
+			-webkit-box-shadow: 0px 0px 17px $landing-dark-gray;
+			box-shadow: 0px 0px 17px $landing-dark-gray;
+			-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=17, Direction=0, Color='#333333')";
+			filter: progid:DXImageTransform.Microsoft.Shadow(Strength=17, Direction=0, Color='#333333');
+			cursor:pointer;
+			.image {
+				-moz-transform: scale(1.1,1.1);
+				-webkit-transform: scale(1.1,1.1);
+				transform: scale(1.1,1.1);  
+			}
+		}
 	}
 }
 
