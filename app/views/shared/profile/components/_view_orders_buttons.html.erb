@@ -4,6 +4,7 @@
 		<div id="profile" <%= section == "profile" ? "class=active" : "" %>></div>
 		<% end %>
 	</li>
+	<% if @current_user.type? != "brand"  %>
 	<li>
 		<% if @current_user.company.orders.of_company(company_id: profile.id, type: profile.class.to_s.downcase).count > 0 %>
 		<%= link_to orders_url(company_id: profile) do %>
@@ -11,6 +12,7 @@
 		<% end %>
 		<% end %>
 	</li>
+	<% end %>
 	<% if @current_user.type? != "brand" && order = open_order(profile) %>
 	<li>
 		<%= link_to order_url(order) do %>
