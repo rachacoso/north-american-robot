@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>Close</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="READ" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD" transform="translate(-1355.000000, -200.000000)">
+            <g id="Article-Container" transform="translate(52.000000, 182.000000)">
+                <g id="Close" transform="translate(1303.000000, 18.000000)">
+                    <g>
+                        <circle id="Oval" fill="#007DC1" cx="10" cy="10" r="10"></circle>
+                        <path d="M8.68312751,9.99999992 L4.73251028,6.04938269 L4.07407407,5.39094649 L5.39094649,4.07407407 L6.04938269,4.73251028 L9.99999994,8.68312753 L13.9506173,4.73251027 L14.6090535,4.07407407 L15.9259259,5.39094651 L15.2674897,6.0493827 L11.3168724,9.99999994 L15.2674896,13.9506172 L15.9259258,14.6090534 L14.6090534,15.9259258 L13.9506172,15.2674896 L9.99999992,11.3168723 L6.04938268,15.2674894 L5.39094647,15.9259256 L4.07407407,14.6090532 L4.73251029,13.950617 L8.68312751,9.99999992 Z" id="Combined-Shape" fill="#FFFFFF"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
