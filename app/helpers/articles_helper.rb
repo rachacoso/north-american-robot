@@ -3,10 +3,15 @@ module ArticlesHelper
 	def get_article_type(type)
 		case type
 		when 1
-			return "BRANDS"
+			return "BRAND SPOTLIGHT"
 		when 2
-			return "TRENDS"
+			return "TREND REPORT"
+		when 3
+			return "PRODUCT SPOTLIGHT"
+		when 4
+			return "HOW TO"
 		end
+
 	end
 
 	def get_brand_photo(brand)
