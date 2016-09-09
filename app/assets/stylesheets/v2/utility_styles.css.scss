@@ -4,6 +4,32 @@
 @import "mixins";
 
 
+.container {
+	margin-top: rem-calc(30);
+	background-color: #fff;
+	& > #lead {
+		position: relative;
+		height: rem-calc(40);
+		& > #title {
+			position: absolute;
+			left: 0;
+			top: 0;
+			background-color: $landing-middle-gray;
+			padding: rem-calc(5) rem-calc(30);
+			font-weight: 900;
+		}
+		& > #close {
+			position: absolute;
+			right: 0;
+			top: 0;
+			padding: rem-calc(5);
+		}
+	}
+	& > #main-body {
+		padding: rem-calc(30);
+	}	
+}
+
 ul.filterlist {
 	list-style-type: none; /*to remove bullets*/
 	text-align: left;
