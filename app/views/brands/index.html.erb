@@ -2,134 +2,143 @@
 <%= render partial: 'shared/v2/header/main' %>
 <%#= render partial: 'shared/v2/header/sub_beauty' %>
 
-
-<div class="brandindex-top">
-
 <div class="row">
-	<div class="small-12 columns">
+	<div class="medium-11 medium-centered columns">
+		
+		<div class="container">
 
-		<nav class="breadcrumbs">
-			<%= link_to "Beauty", brands_url %>
-		  <a class="current" href="#">Find</a>
-		</nav>
-		<br>
+			<div id="lead">
+				<div id="title">FIND</div><div id="close"><%= link_to root_url do %><%= image_tag "/images/close.svg"%><% end %></div>
+			</div><!--/#lead-->
 
+			<div id="main-body">
 
-		<h1>BEAUTY BRANDS by 
-			<% if @type == "t" %>
-				<strong class="active">TREND</strong>
-			<% else %>
-				<strong><%= link_to 'TREND', brands_url(type: "t") %></strong> 
-			<% end %>
-			/ 
-			<% if @type == "c" || @type.blank? %>
-				<strong class="active">CATEGORY</strong>
-			<% else %>
-				<strong><%= link_to 'CATEGORY', brands_url(type: "c") %></strong> 
-			<% end %>
-		</h1>
+				<div class="brandindex-top">
 
-	</div><!--/.small-12-->
-</div><!--/.row-->
+				<div class="row">
+					<div class="small-12 columns">
 
-<div class="row">
-	<div class="small-12 columns">
-		<ul class="index-tag-list">
-			<% @brand_chunk.each do |bc| %>
-				<% if @filtered && @filtered.name == bc.name %>
-					<li class="active"><%= bc.name %></li>
-				<% else %>
-					<%= link_to brands_url(filter: "#{bc.id}", type: @type) do %><li><%= bc.name %></li><% end %>
-				<% end %>
-			<% end %>
-			<% if @filtered %>
-				<%= link_to brands_url(type: @type) do %><li>ALL</li><% end %>
-			<% else %>
-				<li class="active">ALL</li>
-			<% end %>
-		</ul>
-	</div><!--/.small-12-->
-</div><!--/.row-->
+						<h1>BEAUTY BRANDS by 
+							<% if @type == "t" %>
+								<strong class="active">TREND</strong>
+							<% else %>
+								<strong><%= link_to 'TREND', brands_url(type: "t") %></strong> 
+							<% end %>
+							/ 
+							<% if @type == "c" || @type.blank? %>
+								<strong class="active">CATEGORY</strong>
+							<% else %>
+								<strong><%= link_to 'CATEGORY', brands_url(type: "c") %></strong> 
+							<% end %>
+						</h1>
 
-<% if @filtered %>
-	<div class="filtered-results">
-	<div class="row">
-		<div class="small-12 columns">
-			<h3><strong><%= @filtered.name %></strong></h3>
-		</div><!--/.small-12-->
-	</div><!--/.row-->
-	<div class="row">
-		<div class="small-11 small-centered columns small-text-center medium-text-left">		
-		<% if @filtered_brands.blank? %>
-			<h3>No Brands</h3>
-		<% else %>
-			<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-5">
-				<% @filtered_brands.each do |fb| %>
-					<li>
-					<%= render partial: "index_item_filtered", locals: {brand: fb} %>
-					</li>
-				<% end %>
-			</ul>
-		<% end %>
-		</div>
-	</div>
-	</div>
-<% else %>
+					</div><!--/.small-12-->
+				</div><!--/.row-->
 
-	<div class="all-results">
-		<% @brand_chunk.each do |bc| %>
-			
-			<div class="row">
-				<div class="small-11 small-centered columns">
-					<h2><%= bc.name %></h2>
-					<span id="owlStatus-<%= bc.id %>" class="owlStatus">
-						<span class="owlItems"><span class="result"><%= get_brands(bc, @type).blank? ? '0' : '' %></span></span> brands
-					</span>
-					<div id="owl-example-<%= bc.id %>" class="owl-carousel owl-theme">
-					<% get_brands(bc, @type).each do |b| %>
-						<%= render partial: "index_item", locals: {brand: b} %>
-					<% end %>
+				<div class="row">
+					<div class="small-12 columns">
+						<ul class="index-tag-list">
+							<% @brand_chunk.each do |bc| %>
+								<% if @filtered && @filtered.name == bc.name %>
+									<li class="active"><%= bc.name %></li>
+								<% else %>
+									<%= link_to brands_url(filter: "#{bc.id}", type: @type) do %><li><%= bc.name %></li><% end %>
+								<% end %>
+							<% end %>
+							<% if @filtered %>
+								<%= link_to brands_url(type: @type) do %><li>ALL</li><% end %>
+							<% else %>
+								<li class="active">ALL</li>
+							<% end %>
+						</ul>
+					</div><!--/.small-12-->
+				</div><!--/.row-->
+
+				<% if @filtered %>
+					<div class="filtered-results">
+					<div class="row">
+						<div class="small-12 columns">
+							<h3><strong><%= @filtered.name %></strong></h3>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="small-11 small-centered columns small-text-center medium-text-left">		
+						<% if @filtered_brands.blank? %>
+							<h3>No Brands</h3>
+						<% else %>
+							<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-5">
+								<% @filtered_brands.each do |fb| %>
+									<li>
+									<%= render partial: "index_item_filtered", locals: {brand: fb} %>
+									</li>
+								<% end %>
+							</ul>
+						<% end %>
+						</div>
 					</div>
-				</div><!--/.small-11 small-centered-->
-			</div><!--/.row-->
+					</div>
+				<% else %>
 
-			<% content_for :javascript_foot do %>
-			  <%= javascript_tag do %>
-					$(document).ready(function() {
+					<div class="all-results">
+						<% @brand_chunk.each do |bc| %>
+							
+							<div class="row">
+								<div class="small-11 small-centered columns">
+									<h2><%= bc.name %></h2>
+									<span id="owlStatus-<%= bc.id %>" class="owlStatus">
+										<span class="owlItems"><span class="result"><%= get_brands(bc, @type).blank? ? '0' : '' %></span></span> brands
+									</span>
+									<div id="owl-example-<%= bc.id %>" class="owl-carousel owl-theme">
+									<% get_brands(bc, @type).each do |b| %>
+										<%= render partial: "index_item", locals: {brand: b} %>
+									<% end %>
+									</div>
+								</div><!--/.small-11 small-centered-->
+							</div><!--/.row-->
 
-					  $("#owl-example-<%= bc.id %>").owlCarousel({
-							lazyLoad : true,
-							lazyFollow : true,
-							lazyEffect : "fade",
-							navigation : true,
-							navigationText : [
-								"<img src='images/v2/left-arrow.svg'>",
-								"<img src='images/v2/right-arrow.svg'>",
-							],
-							items : 6,
-							pagination : true,
-							scrollPerPage : true,
-							afterAction : afterAction
-						});
+							<% content_for :javascript_foot do %>
+							  <%= javascript_tag do %>
+									$(document).ready(function() {
 
-						function updateResult(pos,value){
-							$("#owlStatus-<%= bc.id %>").find(pos).find(".result").text(value);
-						}
+									  $("#owl-example-<%= bc.id %>").owlCarousel({
+											lazyLoad : true,
+											lazyFollow : true,
+											lazyEffect : "fade",
+											navigation : true,
+											navigationText : [
+												"<img src='images/v2/left-arrow.svg'>",
+												"<img src='images/v2/right-arrow.svg'>",
+											],
+											items : 6,
+											pagination : true,
+											scrollPerPage : true,
+											afterAction : afterAction
+										});
 
-						function afterAction(){
-							updateResult(".owlItems", this.owl.owlItems.length);
-						}
+										function updateResult(pos,value){
+											$("#owlStatus-<%= bc.id %>").find(pos).find(".result").text(value);
+										}
 
-					});
-			  <% end %>
-			<% end %>
+										function afterAction(){
+											updateResult(".owlItems", this.owl.owlItems.length);
+										}
 
-		<% end %>
-	</div>
+									});
+							  <% end %>
+							<% end %>
 
-<% end %>
+						<% end %>
+					</div>
 
-</div>
+				<% end %>
+
+				</div>
+
+			</div><!--/#main-body-->
+		</div><!--/#container-->
+
+	</div><!--/.medium-11 medium-centered-->
+</div><!--/.row-->
 
 <%= render partial: 'shared/v2/footer/main' %>
 
