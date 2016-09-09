@@ -4,8 +4,8 @@
 @import "mixins";
 
 #v2header {
-
-	margin-top: rem-calc(20);
+	background-color: #fff;
+	padding-top: rem-calc(20);
 
 	font-weight: 200;
 
@@ -27,14 +27,13 @@
 }
 
 #v2subheader {
-
-	margin-top: rem-calc(5);
-
+	// background-color: #fff;
 	font-weight: 200;
 
 
 	a {
 		color: #000000;
+		font-weight: 500;
 	}
 
 	// FOR INACTIVE MENU ITEMS
@@ -58,6 +57,7 @@
 		padding: 0px;
 		zoom:1;
 		overflow: hidden;
+		margin-bottom: 0;
 		// :first-child {text-align: left;}
 		// :last-child {text-align: right;}
 	}

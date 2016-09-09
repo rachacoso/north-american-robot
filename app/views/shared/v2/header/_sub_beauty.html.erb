@@ -1,15 +1,14 @@
 <div id="v2subheader">
-	<div class="row hide-for-small-only">
-		<div class="medium-12 columns text-center">
+	<div class="hide-for-small-only text-center">
+		
 			<div class="navbar">
 			    <ul>
 			<% @brand_chunk.each do |bc| %>
 				<li><%= link_to brands_url(filter: "#{bc.id}", type: "c") do %><%= bc.name %><% end %></li>
 			<% end %>
 			    </ul>
-			    <hr>
 			</div>
-		</div><!--/.small-12-->
-	</div><!--/.row-->
+		
+	</div><!--/.hide-for-small-only-->
 </div>
 

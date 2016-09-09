@@ -4,7 +4,9 @@
 @import "mixins";
 
 #v2footer {
-	
+	background-color: #fff;
+	padding: rem-calc(20) 0;
+	margin-top: rem-calc(20);
 	hr {
 		margin-top: rem-calc(20);
 		margin-bottom: rem-calc(20);

@@ -1,5 +1,5 @@
 var hasBG = typeof bgImage != 'undefined';
-var bgDefaultColor = "#FFFFFF";
+var bgDefaultColor = "#F2F2F2";
 var shippersArray = [];
 
 function doBackstretch (location, photos, durationTime, fadeTime) {
