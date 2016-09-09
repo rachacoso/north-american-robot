@@ -3,6 +3,30 @@ module OrdersHelper
 	def get_company(id)
 		return Brand.find(id) || Retailer.find(id) || Distributor.find(id)
 	end
+	def get_company_type(id)
+		if Brand.find(id)
+			return "BRAND"
+		elsif Retailer.find(id)
+			return "RETAILER"
+		elsif Distributor.find(id)
+			return "DISTRIBUTOR"
+		end
+	end
+	def show_orders(profile)
+		if @current_user.type? == "brand"
+			if profile.class.to_s == "Brand"
+				return false
+			else
+				return true
+			end
+		else
+			if profile.class.to_s == "Brand"
+				return true
+			else
+				return false
+			end
+		end
+	end
 	def current_order(brand)
 		return brand.orders.current.where(orderer_id: @current_user.get_parent.id).first
 	end

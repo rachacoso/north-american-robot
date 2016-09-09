@@ -1,21 +1,38 @@
-<% if @current_user.company_type == "Brand" %>
-	<% if order.status == "open" %>
-		<%= render partial: "/shared/profile/components/profile_nav", locals: { profile: order.orderer, section: "cart" } %>
-	<% else %>
-		<%= render partial: "/shared/profile/components/profile_nav", locals: { profile: order.orderer, section: "orders" } %>
-		<div class="row">
-			<div class="small-12 columns text-left"><h3><%= link_to orders_url(company_id: order.orderer) do %>&lt;&lt; View All Orders<% end %></h3></div><!--/.small-12-->
-		</div><!--/.row-->
-	<% end %>
-	<%= render partial: "orders/showfull/#{order.status}_brand", locals: {order: order} %>
-<% elsif @current_user.company_type != "Brand" %>
-	<% if order.status == "open" %>
-		<%= render partial: "/shared/profile/components/profile_nav", locals: { profile: order.brand, section: "cart" } %>
-	<% else %>
-		<%= render partial: "/shared/profile/components/profile_nav", locals: { profile: order.brand, section: "orders" } %>
-		<div class="row">
-			<div class="small-12 columns text-left"><h3><%= link_to orders_url(company_id: order.brand) do %>&lt;&lt; View All Orders<% end %></h3></div><!--/.small-12-->
-		</div><!--/.row-->
-	<% end %>
-	<%= render partial: "orders/showfull/#{order.status}_orderer", locals: {order: order} %>
-<% end %>
+<div class="container">
+
+	<div id="lead">
+		<div id="title">
+			<% if @current_user.type? == "brand" %>
+				<%= get_company_type(order.orderer) %> PROFILE
+			<% else %>
+				BRAND PROFILE
+			<% end %>
+		</div>
+		<div id="close"><%= link_to root_url do %><%= image_tag "/images/close.svg"%><% end %></div>
+	</div><!--/#lead-->
+
+	<div id="main-body">
+		<% if @current_user.company_type == "Brand" %>
+			<% if order.status == "open" %>
+				<%= render partial: "/shared/profile/components/profile_nav", locals: { profile: order.orderer, section: "cart" } %>
+			<% else %>
+				<%= render partial: "/shared/profile/components/profile_nav", locals: { profile: order.orderer, section: "orders" } %>
+				<div class="row">
+					<div class="small-12 columns text-left"><h3><%= link_to orders_url(company_id: order.orderer) do %>&lt;&lt; View All Orders<% end %></h3></div><!--/.small-12-->
+				</div><!--/.row-->
+			<% end %>
+			<%= render partial: "orders/showfull/#{order.status}_brand", locals: {order: order} %>
+		<% elsif @current_user.company_type != "Brand" %>
+			<% if order.status == "open" %>
+				<%= render partial: "/shared/profile/components/profile_nav", locals: { profile: order.brand, section: "cart" } %>
+			<% else %>
+				<%= render partial: "/shared/profile/components/profile_nav", locals: { profile: order.brand, section: "orders" } %>
+				<div class="row">
+					<div class="small-12 columns text-left"><h3><%= link_to orders_url(company_id: order.brand) do %>&lt;&lt; View All Orders<% end %></h3></div><!--/.small-12-->
+				</div><!--/.row-->
+			<% end %>
+			<%= render partial: "orders/showfull/#{order.status}_orderer", locals: {order: order} %>
+		<% end %>
+
+	</div><!--/#main-body-->
+</div><!--/#container-->

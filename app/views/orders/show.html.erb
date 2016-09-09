@@ -1,5 +1,9 @@
 <%= render partial: 'shared/v2/header/main' %>
 
-<%= render partial: "show_order_full", locals: { order: @order } %>
+<div class="row">
+	<div class="medium-11 medium-centered columns">
+		<%= render partial: "show_order_full", locals: { order: @order } %>
+	</div><!--/.medium-11 medium-centered-->
+</div><!--/.row-->
 
 <%= render partial: 'shared/v2/footer/main' %>

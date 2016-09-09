@@ -1,44 +1,55 @@
 <%= render partial: "shared/topbar" %>
 
-<% if @company_filter %>
-<%= render partial: "/shared/profile/components/profile_nav", locals: { profile: get_company(@company_filter), section: "orders"  } %>
-<% end %>
-<br>
-<div class="row">
-	<div class="small-11 small-centered columns">
 
-		<div class="row">
-			<div class="small-12 columns">
+<div class="row">
+	<div class="medium-11 medium-centered columns">
+		<div class="container">
+
+			<div id="lead">
+				<div id="title">
+				<% if @company_filter %>
+					<%= get_company_type(@company_filter) %> PROFILE
+				<% else %>
+					ALL ORDERS
+				<% end %>
+				</div><div id="close"><%= link_to root_url do %><%= image_tag "/images/close.svg"%><% end %></div>
+			</div><!--/#lead-->
+
+			<div id="main-body">
 
 				<% if @company_filter %>
-
-				<% else %>
-				<div id="dashboard-marketplace-header">
-					<%#= image_tag "logo_header_marketplace.svg" %>
-				</div>
-
-				<div class="row">
-					<div class="small-12 columns">
-						<div class="panel">
-							<h2>All Orders</h2>
-						</div>
-					</div><!--/.small-12-->
-				</div><!--/.row-->
+				<%= render partial: "/shared/profile/components/profile_nav", locals: { profile: get_company(@company_filter), section: "orders"  } %>
 				<% end %>
+				<br>
 				<div class="row">
-					<div class="medium-2 columns">
-						<%= render partial: "home/orders_chart", locals: { filter: @filter, company_id: @company_filter} %>
-					</div><!--/.medium-2-->
-					<div class="medium-10 columns">
-							<%= render partial: 'order_index', locals: { orders: @orders } %>
-					</div><!--/.medium-10-->
+					<div class="small-11 small-centered columns">
+
+						<div class="row">
+							<div class="small-12 columns">
+
+								<% if @company_filter %>
+
+								<% else %>
+
+								<% end %>
+								<div class="row">
+									<div class="medium-2 columns">
+										<%= render partial: "home/orders_chart", locals: { filter: @filter, company_id: @company_filter} %>
+									</div><!--/.medium-2-->
+									<div class="medium-10 columns">
+											<%= render partial: 'order_index', locals: { orders: @orders } %>
+									</div><!--/.medium-10-->
+								</div><!--/.row-->
+
+							</div><!--/.small-12-->
+						</div><!--/.row-->
+
+					</div><!--/.small-11-->
 				</div><!--/.row-->
 
-			</div><!--/.small-12-->
-		</div><!--/.row-->
+			</div><!--/#main-body-->
+		</div><!--/#container-->
 
-	</div><!--/.small-11-->
+	</div><!--/.medium-11 medium-centered-->
 </div><!--/.row-->
-
-
 <%= render partial: 'shared/v2/footer/main' %>
