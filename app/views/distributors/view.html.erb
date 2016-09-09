@@ -1,7 +1,11 @@
 <%= render partial: 'shared/v2/header/main' %>
 
 <% if @current_user %>
-	<%= render partial: "/shared/profile/distributor_full_profile", locals: {profile: @profile} %>
+<div class="row">
+	<div class="medium-11 medium-centered columns">
+		<%= render partial: "/shared/profile/distributor_full_profile", locals: {profile: @profile} %>
+	</div><!--/.medium-11 medium-centered-->
+</div><!--/.row-->
 <% else %>
 	<br><br>
 	<div class="row">

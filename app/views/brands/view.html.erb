@@ -2,7 +2,13 @@
 <%= render partial: "newuser", locals: { content: "shared/newusers/neworderer_content" } if flash[:newuser] %>
 
 <% if @current_user %>
-	<%= render partial: "/shared/profile/brand_full_profile", locals: {profile: @profile} %>
+
+<div class="row">
+	<div class="medium-11 medium-centered columns">
+		<%= render partial: "/shared/profile/brand_full_profile", locals: {profile: @profile} %>
+	</div><!--/.medium-11 medium-centered-->
+</div><!--/.row-->
+
 <% else %>
 	<br><br>
 	<div class="row">

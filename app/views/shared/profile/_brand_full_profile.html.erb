@@ -1,316 +1,326 @@
-<%= render partial: "/shared/profile/components/profile_nav", locals: { profile: profile, section: "profile" } %>
+<div class="container">
 
-<% if @messages && @current_user.subscriber? %>
-<div class="row">
-	<div class="small-6 columns">
-		&nbsp;
-	</div><!--/.small-6-->
-	<div class="small-6 columns text-right profile-tabs">
-		<h2 class="active" id="tab-conversation">conversation</h3>
-		<h2 id="tab-profile">profile</h3>
-	</div><!--/.small-6-->
-</div><!--/.row-->
-<% end %>
+	<div id="lead">
+		<div id="title">BRAND PROFILE</div><div id="close"><%= link_to root_url do %><%= image_tag "/images/close.svg"%><% end %></div>
+	</div><!--/#lead-->
 
-<div id="profile-conversation-wrapper">
-	<div id="profile-conversation">
-	<%= render partial: "matches/conversation", locals: {profile: profile} %>
-	</div>
-</div>
+	<div id="main-body">
 
-<div class="row">
-	<div class="medium-4 columns medium-push-8 medium-text-right">
-		<% if profile.logo_file_name %>
-			<%= image_tag profile.logo.url(:medium), alt: "Logo" %>
-		<% else %>
-			<% if !profile.facebook.blank? && fb_picture(profile.facebook) %>
-				<%= image_tag fb_picture(profile.facebook) %>
-			<% else %>
-				<%= image_tag profile.logo.url(:medium), width: "100", height: "100", alt: "Logo" %>
-			<% end %>					
+		<%= render partial: "/shared/profile/components/profile_nav", locals: { profile: profile, section: "profile" } %>
+
+		<% if @messages && @current_user.subscriber? %>
+		<div class="row">
+			<div class="small-6 columns">
+				&nbsp;
+			</div><!--/.small-6-->
+			<div class="small-6 columns text-right profile-tabs">
+				<h2 class="active" id="tab-conversation">conversation</h3>
+				<h2 id="tab-profile">profile</h3>
+			</div><!--/.small-6-->
+		</div><!--/.row-->
 		<% end %>
-	</div><!--/.medium-4-->
-	<div class="medium-8 columns medium-pull-4 medium-text-left">
 
-		<div>
-			<% profile.tags.each do |tag| %>
-				<span data-tooltip aria-haspopup="true" class="has-tip radius tip-right" title="GLOBAL GOOD TAGS"><span class="tag"><%= tag.name %></span></span>
-			<% end %>
+		<div id="profile-conversation-wrapper">
+			<div id="profile-conversation">
+			<%= render partial: "matches/conversation", locals: {profile: profile} %>
+			</div>
 		</div>
-		
-		<% if profile.class.to_s == "Brand" && !profile.trends.blank? %>
-		<div>
-			<% profile.trends.pluck(:name).each do |trend| %>
-				<span data-tooltip aria-haspopup="true" class="has-tip radius tip-right" title="TRENDS"><span class="tag trend"><%= trend %></span></span>
-			<% end %>
-		</div>				
-		<% end %>
-	</div><!--/.medium-8-->
-</div><!--/.row-->
 
-
-<div class="row">
-	<div class="medium-8 columns">
-		<div class="profile-general-info">
-			<div class="data">
-				Based in 
-				<strong>
-				<% if profile.country_of_origin.blank? %>
-				 Unknown Country
+		<div class="row">
+			<div class="medium-4 columns medium-push-8 medium-text-right">
+				<% if profile.logo_file_name %>
+					<%= image_tag profile.logo.url(:medium), alt: "Logo" %>
 				<% else %>
-				<%= profile.country_of_origin %>
+					<% if !profile.facebook.blank? && fb_picture(profile.facebook) %>
+						<%= image_tag fb_picture(profile.facebook) %>
+					<% else %>
+						<%= image_tag profile.logo.url(:medium), width: "100", height: "100", alt: "Logo" %>
+					<% end %>					
 				<% end %>
-				</strong>
-				with
-				<strong>
-				<% if profile.company_size.blank? %>
-					unknown number of employees
-				<% else %>
-					<%= CompanySize.find(profile.company_size).name rescue nil %>
-				<% end %>
-				</strong>
-			</div>
-			<div class="data">
-			<% if profile.sectors.blank? %>
-				<strong>n/a</strong>
-			<% else %>
-				<% profile.sectors.order_by(:name => "asc").each do |s| %>
-					<strong>
-					<%= s.name %>
-					<% unless profile.subsectors.where(:sector => s).blank? %>
-					( <%= profile.subsectors.where(:sector => s).pluck(:name).to_a.join(", ") %> )
+			</div><!--/.medium-4-->
+			<div class="medium-8 columns medium-pull-4 medium-text-left">
+
+				<div>
+					<% profile.tags.each do |tag| %>
+						<span data-tooltip aria-haspopup="true" class="has-tip radius tip-right" title="GLOBAL GOOD TAGS"><span class="tag"><%= tag.name %></span></span>
 					<% end %>
-					</strong>
-					<br>
-				<% end %>
-			<% end %>
-			</div>
-			<div class="data">
-				<%= render partial: "shared/profile/components/links", locals: {profile: profile} %>
-			</div>
-		</div>
-
-	</div><!--/.medium-8-->
-	<div class="medium-4 columns medium-text-right">
-
-	</div><!--/.medium-4-->
-</div><!--/.row-->
-
-
-<div class="row">
-	<div class="small-12 columns">
-		<%= render partial: "shared/profile/components/gallery", locals: {gallery: @gallery, profile: profile} %>
-	</div><!--/.small-12-->
-</div><!--/.row-->
-
-
-<div class="row">
-	<div class="small-12 columns">
-		<div class="brand-positioning">
-			<%= simple_format(profile.brand_positioning) %>
-		</div>
-	</div><!--/.small-12-->
-</div><!--/.row-->
-
-
-<div class="row">
-	<div class="small-12 columns">
-		<%#= render partial: "shared/profile/components/indicators", locals: {match: profile} %>
-	</div><!--/.small-12 -->
-</div><!--/.row -->
-
-<div class="row profile-skus" id="skus-list">
-	
-	<%= render partial: "shared/profile/components/skus", locals: {profile: profile} %>
-	
-</div><!--/.row-->
-
-<div id="profile-profile-wrapper">
-
-
-	<%= render partial: "matches/conversation_start", locals: {profile: profile} %>
-
-
-
-	<div class="row collapse">
-		<div class="small-12 columns">
-	
-
-
-					<% unless profile.brand_photos.blank? %>
-
-					<div class="profile-container">
-						<div class="row">
-							<div class="small-12 columns">
-								<div class="profile-section-head">
-									BRAND GALLERY
-								</div><!--.profile-section-head-->								
-							</div><!--/.small-12-->
-						</div><!--/.row-->
-						<div class="profile-content">
-					
-							<div class="galleria-brand-photos">
-								<% profile.brand_photos.each do |photo| %>
-									<%= link_to photo.photo.url(:large) do %>
-										<%= image_tag photo.photo.url(:small) %>
-									<% end %>
-						    <% end %>
-								<% content_for :javascript_foot do %>
-									<% javascript_tag do %>
-									initializeGallery(".galleria-brand-photos")
-									<% end %>
-								<% end %>					    
-							</div>
-
-						</div><!--.profile-content-->
-					</div><!--.profile-container-->
-					<br>
-
+				</div>
+				
+				<% if profile.class.to_s == "Brand" && !profile.trends.blank? %>
+				<div>
+					<% profile.trends.pluck(:name).each do |trend| %>
+						<span data-tooltip aria-haspopup="true" class="has-tip radius tip-right" title="TRENDS"><span class="tag trend"><%= trend %></span></span>
 					<% end %>
+				</div>				
+				<% end %>
+			</div><!--/.medium-8-->
+		</div><!--/.row-->
 
-					<% if profile.press_hits.length > 0 %>
-					<div class="profile-container">
-						<div class="row">
-							<div class="small-12 columns">
-								<div class="profile-section-head">
-									PRESS CLIPS
-								</div><!--.profile-section-head-->								
-							</div><!--/.small-12-->
-						</div><!--/.row-->
-						<div class="profile-content">
 
-						<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
-						<% profile.press_hits.order_by(:date.desc).each do |p| %>
-							<li><%= render partial: "shared/collections_view/press_hits", locals: {
-								collitem: p
-							} %></li>
+		<div class="row">
+			<div class="medium-8 columns">
+				<div class="profile-general-info">
+					<div class="data">
+						Based in 
+						<strong>
+						<% if profile.country_of_origin.blank? %>
+						 Unknown Country
+						<% else %>
+						<%= profile.country_of_origin %>
 						<% end %>
-						</ul>
-
-						</div><!--.profile-content-->
-					</div><!--.profile-container-->
-					<br>
-					<% end %>
-
-
-					<% if profile.trade_shows.length > 0 %>
-					<div class="profile-container">
-						<div class="row">
-							<div class="small-12 columns">
-								<div class="profile-section-head">
-									TRADE SHOWS
-								</div><!--.profile-section-head-->								
-							</div><!--/.small-12-->
-						</div><!--/.row-->
-						<div class="profile-content">
-							<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
-							<% profile.trade_shows.order_by(:date.desc).each do |p| %>
-								<li><%= render partial: "shared/collections_view/trade_shows", locals: {
-									collitem: p
-								} %></li>
+						</strong>
+						with
+						<strong>
+						<% if profile.company_size.blank? %>
+							unknown number of employees
+						<% else %>
+							<%= CompanySize.find(profile.company_size).name rescue nil %>
+						<% end %>
+						</strong>
+					</div>
+					<div class="data">
+					<% if profile.sectors.blank? %>
+						<strong>n/a</strong>
+					<% else %>
+						<% profile.sectors.order_by(:name => "asc").each do |s| %>
+							<strong>
+							<%= s.name %>
+							<% unless profile.subsectors.where(:sector => s).blank? %>
+							( <%= profile.subsectors.where(:sector => s).pluck(:name).to_a.join(", ") %> )
 							<% end %>
-							</ul>
-						</div><!--.profile-content-->
-					</div><!--.profile-container-->
-					<br>
-					<% end %>
-
-
-					<% if profile.patents.length > 0 %>
-					<div class="profile-container">
-						<div class="row">
-							<div class="small-12 columns">
-								<div class="profile-section-head">
-									PATENTS
-								</div><!--.profile-section-head-->								
-							</div><!--/.small-12-->
-						</div><!--/.row-->
-						<div class="profile-content">
-						
-						<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
-						<% profile.patents.order_by(:country.asc, :date.desc).each do |p| %>
-							<li><%= render partial: "shared/collections_view/patents", locals: {
-								collitem: p
-							} %></li>
+							</strong>
+							<br>
 						<% end %>
-						</ul>
-														
-						</div><!--.profile-content-->
-					</div><!--.profile-container-->
-					<br>
 					<% end %>
+					</div>
+					<div class="data">
+						<%= render partial: "shared/profile/components/links", locals: {profile: profile} %>
+					</div>
+				</div>
+
+			</div><!--/.medium-8-->
+			<div class="medium-4 columns medium-text-right">
+
+			</div><!--/.medium-4-->
+		</div><!--/.row-->
 
 
-					<% if profile.trademarks.length > 0 %>
-					<div class="profile-container">
-						<div class="row">
-							<div class="small-12 columns">
-								<div class="profile-section-head">
-									TRADEMARKS
-								</div><!--.profile-section-head-->								
-							</div><!--/.small-12-->
-						</div><!--/.row-->
-						<div class="profile-content">
-						
-						<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
-						<% profile.trademarks.order_by(:country.asc, :date.desc).each do |p| %>
-							<li><%= render partial: "shared/collections_view/trademarks", locals: {
-								collitem: p
-							} %></li>
-						<% end %>
-						</ul>
-
-						</div><!--.profile-content-->
-					</div><!--.profile-container-->
-					<br>
-					<% end %>
+		<div class="row">
+			<div class="small-12 columns">
+				<%= render partial: "shared/profile/components/gallery", locals: {gallery: @gallery, profile: profile} %>
+			</div><!--/.small-12-->
+		</div><!--/.row-->
 
 
-					<% if profile.compliances.length > 0 %>
-					<div class="profile-container">
-						<div class="row">
-							<div class="small-12 columns">
-								<div class="profile-section-head">
-									BUSINESS CERTIFICATIONS
-								</div><!--.profile-section-head-->								
-							</div><!--/.small-12-->
-						</div><!--/.row-->
-						<div class="profile-content">
-
-						<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
-						<% profile.compliances.order_by(:country.asc, :date.desc).each do |p| %>
-							<li><%= render partial: "shared/collections_view/compliances", locals: {
-								collitem: p
-							} %></li>
-						<% end %>
-						</ul>
-
-						</div><!--.profile-content-->
-					</div><!--.profile-container-->
-					<% end %>
+		<div class="row">
+			<div class="small-12 columns">
+				<div class="brand-positioning">
+					<%= simple_format(profile.brand_positioning) %>
+				</div>
+			</div><!--/.small-12-->
+		</div><!--/.row-->
 
 
-		</div><!--/.small-11 small-centered-->
-	</div><!--/.row-->
-</div>
-		
-<%# set default product photo %>
-<% content_for :javascript_head do %>
-	<%= javascript_tag do %>
-		var profileType = "<%=profile.class.to_s.downcase%>";
-		var hasConversation = <%= @messages && @current_user.subscriber? ? "true" : "false" %>;
-		var bsPhotos = [
-		<% profile.sectors.each do |sector| %>
-			'/images/SECTORS_<%= sector.name.gsub(/\s+/, "").gsub(/\//, "").downcase %>.svg',
+		<div class="row">
+			<div class="small-12 columns">
+				<%#= render partial: "shared/profile/components/indicators", locals: {match: profile} %>
+			</div><!--/.small-12 -->
+		</div><!--/.row -->
+
+		<div class="row profile-skus" id="skus-list">
+			
+			<%= render partial: "shared/profile/components/skus", locals: {profile: profile} %>
+			
+		</div><!--/.row-->
+
+		<div id="profile-profile-wrapper">
+
+
+			<%= render partial: "matches/conversation_start", locals: {profile: profile} %>
+
+
+
+			<div class="row collapse">
+				<div class="small-12 columns">
+			
+
+
+							<% unless profile.brand_photos.blank? %>
+
+							<div class="profile-container">
+								<div class="row">
+									<div class="small-12 columns">
+										<div class="profile-section-head">
+											BRAND GALLERY
+										</div><!--.profile-section-head-->								
+									</div><!--/.small-12-->
+								</div><!--/.row-->
+								<div class="profile-content">
+							
+									<div class="galleria-brand-photos">
+										<% profile.brand_photos.each do |photo| %>
+											<%= link_to photo.photo.url(:large) do %>
+												<%= image_tag photo.photo.url(:small) %>
+											<% end %>
+								    <% end %>
+										<% content_for :javascript_foot do %>
+											<% javascript_tag do %>
+											initializeGallery(".galleria-brand-photos")
+											<% end %>
+										<% end %>					    
+									</div>
+
+								</div><!--.profile-content-->
+							</div><!--.profile-container-->
+							<br>
+
+							<% end %>
+
+							<% if profile.press_hits.length > 0 %>
+							<div class="profile-container">
+								<div class="row">
+									<div class="small-12 columns">
+										<div class="profile-section-head">
+											PRESS CLIPS
+										</div><!--.profile-section-head-->								
+									</div><!--/.small-12-->
+								</div><!--/.row-->
+								<div class="profile-content">
+
+								<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
+								<% profile.press_hits.order_by(:date.desc).each do |p| %>
+									<li><%= render partial: "shared/collections_view/press_hits", locals: {
+										collitem: p
+									} %></li>
+								<% end %>
+								</ul>
+
+								</div><!--.profile-content-->
+							</div><!--.profile-container-->
+							<br>
+							<% end %>
+
+
+							<% if profile.trade_shows.length > 0 %>
+							<div class="profile-container">
+								<div class="row">
+									<div class="small-12 columns">
+										<div class="profile-section-head">
+											TRADE SHOWS
+										</div><!--.profile-section-head-->								
+									</div><!--/.small-12-->
+								</div><!--/.row-->
+								<div class="profile-content">
+									<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
+									<% profile.trade_shows.order_by(:date.desc).each do |p| %>
+										<li><%= render partial: "shared/collections_view/trade_shows", locals: {
+											collitem: p
+										} %></li>
+									<% end %>
+									</ul>
+								</div><!--.profile-content-->
+							</div><!--.profile-container-->
+							<br>
+							<% end %>
+
+
+							<% if profile.patents.length > 0 %>
+							<div class="profile-container">
+								<div class="row">
+									<div class="small-12 columns">
+										<div class="profile-section-head">
+											PATENTS
+										</div><!--.profile-section-head-->								
+									</div><!--/.small-12-->
+								</div><!--/.row-->
+								<div class="profile-content">
+								
+								<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
+								<% profile.patents.order_by(:country.asc, :date.desc).each do |p| %>
+									<li><%= render partial: "shared/collections_view/patents", locals: {
+										collitem: p
+									} %></li>
+								<% end %>
+								</ul>
+																
+								</div><!--.profile-content-->
+							</div><!--.profile-container-->
+							<br>
+							<% end %>
+
+
+							<% if profile.trademarks.length > 0 %>
+							<div class="profile-container">
+								<div class="row">
+									<div class="small-12 columns">
+										<div class="profile-section-head">
+											TRADEMARKS
+										</div><!--.profile-section-head-->								
+									</div><!--/.small-12-->
+								</div><!--/.row-->
+								<div class="profile-content">
+								
+								<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
+								<% profile.trademarks.order_by(:country.asc, :date.desc).each do |p| %>
+									<li><%= render partial: "shared/collections_view/trademarks", locals: {
+										collitem: p
+									} %></li>
+								<% end %>
+								</ul>
+
+								</div><!--.profile-content-->
+							</div><!--.profile-container-->
+							<br>
+							<% end %>
+
+
+							<% if profile.compliances.length > 0 %>
+							<div class="profile-container">
+								<div class="row">
+									<div class="small-12 columns">
+										<div class="profile-section-head">
+											BUSINESS CERTIFICATIONS
+										</div><!--.profile-section-head-->								
+									</div><!--/.small-12-->
+								</div><!--/.row-->
+								<div class="profile-content">
+
+								<ul class="small-block-grid-1 medium-block-grid-3" data-equalizer>
+								<% profile.compliances.order_by(:country.asc, :date.desc).each do |p| %>
+									<li><%= render partial: "shared/collections_view/compliances", locals: {
+										collitem: p
+									} %></li>
+								<% end %>
+								</ul>
+
+								</div><!--.profile-content-->
+							</div><!--.profile-container-->
+							<% end %>
+
+
+				</div><!--/.small-11 small-centered-->
+			</div><!--/.row-->
+		</div>
+				
+		<%# set default product photo %>
+		<% content_for :javascript_head do %>
+			<%= javascript_tag do %>
+				var profileType = "<%=profile.class.to_s.downcase%>";
+				var hasConversation = <%= @messages && @current_user.subscriber? ? "true" : "false" %>;
+				var bsPhotos = [
+				<% profile.sectors.each do |sector| %>
+					'/images/SECTORS_<%= sector.name.gsub(/\s+/, "").gsub(/\//, "").downcase %>.svg',
+				<% end %>	
+				]
+			<% end %>
 		<% end %>	
-		]
-	<% end %>
-<% end %>	
-<% content_for :javascript_foot do %>
-	<%= javascript_tag do %>
-		$( document ).ready(function() {
-			initFullProfile();
-		});		
-	<% end %>
-<% end %>
+		<% content_for :javascript_foot do %>
+			<%= javascript_tag do %>
+				$( document ).ready(function() {
+					initFullProfile();
+				});		
+			<% end %>
+		<% end %>
 
+	</div><!--/#main-body-->
+</div><!--/#container-->
