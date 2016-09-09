@@ -65,6 +65,8 @@ Rails.application.routes.draw do
   post  '/article/new/:type' => 'articles#create', as: 'create_article'
   post  '/article/fb/:id' => 'articles#featured_brand', as: 'article_featured_brand'
   delete  '/article/fb/:id/:fb_id' => 'articles#delete_featured_brand', as: 'delete_article_featured_brand'
+  post  '/article/fp/:id' => 'articles#featured_product', as: 'article_featured_product'
+  delete  '/article/fp/:id/:fp_id' => 'articles#delete_featured_product', as: 'delete_article_featured_product'
   delete  '/article/carousel/:id/' => 'articles#delete_carousel_photo', as: 'delete_article_carousel_photo'
 
   resources :article_photos, only: [:create]
@@ -147,6 +149,8 @@ Rails.application.routes.draw do
 
   # for article brand link
   get    '/brands/list' => 'brands#list', as: 'brand_list'
+  # for article product link
+  get    '/products/list' => 'products#list', as: 'product_list'
 
   get '/onboard/distributor/one' => 'onboard_distributor#one', as: 'onboard_distributor_one'
   get '/onboard/distributor/two' => 'onboard_distributor#two', as: 'onboard_distributor_two'

@@ -17,6 +17,8 @@ class Product
 	has_many :tags, as: :taggable, dependent: :destroy
 
  	belongs_to :brand
+
+ 	scope :featureable, ->{where(current: true)}
   
 	def save_price(p)
 		unless p.blank?

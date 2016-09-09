@@ -116,6 +116,24 @@ class ProductsController < ApplicationController
 
 	end
 
+	def list
+		beauty_sector = Sector.where(name: 'Beauty / Personal Care').pluck(:id)
+		products = Product.featureable.where(:brand_id.in => Brand.activated.where(:sector_ids.in => beauty_sector).pluck(:id)).map { |p| {:id => p.id.to_s , :name => "#{p.brand.company_name}: #{p.name}"}}.sort_by { |p| p[:name] }
+		@list = Hash.new
+		@list['suggestions'] = Array.new
+
+		if !params[:query].blank?
+			q = params[:query]
+			products = products.select {|product| product[:name][/#{q}/i] }
+		end
+
+		products.each do |p|
+			@list['suggestions'] << { "value": p[:name], "data": p[:id] }
+		end
+
+		render json: @list
+
+	end
 
   private
   def product_parameters

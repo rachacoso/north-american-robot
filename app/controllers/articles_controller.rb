@@ -2,7 +2,7 @@ class ArticlesController < ApplicationController
 
 	skip_before_action :require_login, only: [:public_view]
 	before_action :administrators_only, except: [:public_view]
-	before_action :get_article, only: [:show, :edit, :update, :destroy, :featured_brand, :delete_featured_brand, :public_view, :delete_carousel_photo]
+	before_action :get_article, only: [:show, :edit, :update, :destroy, :featured_brand, :delete_featured_brand, :featured_product, :delete_featured_product, :public_view, :delete_carousel_photo]
 
 	def public_view
 
@@ -67,6 +67,30 @@ class ArticlesController < ApplicationController
 		unless params[:fb_id].blank?
 			brand = Brand.find(params[:fb_id])
 			@article.brands.delete(brand)
+		end
+
+	  respond_to do |format|
+	    format.js
+	  end 
+	end
+
+	def featured_product
+
+		unless params[:fp_id].blank?
+			product = Product.find(params[:fp_id])
+			@article.products << product
+		end
+
+	  respond_to do |format|
+	    format.js
+	  end 
+
+	end
+
+	def delete_featured_product
+		unless params[:fp_id].blank?
+			product = Product.find(params[:fp_id])
+			@article.products.delete(product)
 		end
 
 	  respond_to do |format|

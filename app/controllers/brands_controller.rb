@@ -98,10 +98,10 @@ class BrandsController < ApplicationController
 
 
 	def list
-		beauty_sector = Sector.where(name: 'Beauty / Personal Care').first
+		beauty_sector = Sector.where(name: 'Beauty / Personal Care').pluck(:id)
 
 		# :messages.last.from_user => {'$ne' => current_user}
-		brands = Brand.activated.order_by(:company_name => 'asc')
+		brands = Brand.activated.where(:sector_ids.in => beauty_sector).order_by(:company_name => 'asc')
 		# brands = Brand.activated
 		@list = Hash.new
 		@list['suggestions'] = Array.new

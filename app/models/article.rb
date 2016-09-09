@@ -8,11 +8,14 @@ class Article
 	field :author, type: String, default: ""
   field :date, type: Date, default: -> { DateTime.now }
   field :active, type: Mongoid::Boolean, default: false
-  field :article_type, type: Integer
+  field :article_type, type: Integer # 1 = on brands ; 2 = on trends ; 3 = product spotlight ; 4 = instructional
 
   # list of associated brands
   has_and_belongs_to_many :brands, inverse_of: nil
-  
+
+  # list of associated products
+  has_and_belongs_to_many :products, inverse_of: nil
+
 	#photos
 	has_many :article_photos, dependent: :destroy
 
@@ -27,6 +30,9 @@ class Article
 
 	scope :on_brands, ->{where(article_type: 1)}
 	scope :on_trends, ->{where(article_type: 2)}
+  scope :brand_and_trends, -> {where(:article_type.in => [1,2])}
+  scope :spotlight, ->{where(article_type: 3)}
+  scope :instructional, ->{where(article_type: 4)}
 	scope :active, ->{where(active: true)}
 	scope :inactive, ->{where(active: false)}
   scope :carousel, ->{where(:carousel_photo_file_name.nin => ["", nil])}

@@ -14,7 +14,7 @@
 </div><!--/.row-->
 
 <div class="row">
-	<div class="medium-6 columns">
+	<div class="medium-3 columns">
 		<h2>Articles on Brands</h2>
 		<h3>PUBLISHED</h3>
 		<% @articles.active.on_brands.each do |a| %>
@@ -30,8 +30,8 @@
 		<% end %>
 		<br>
 		<%= link_to "Create New Article on Brands", create_article_url(1), method: :post, class: "article-cm-action-link " %>
-	</div><!--/.small-6-->
-	<div class="medium-6 columns">
+	</div><!--/.medium-3-->
+	<div class="medium-3 columns">
 		<h2>Articles on Trends</h2>
 		<h3>PUBLISHED</h3>
 		<% @articles.on_trends.active.each do |a| %>
@@ -47,5 +47,41 @@
 		<% end %>
 		<br>
 		<%= link_to "Create New Article on Trends", create_article_url(2), method: :post, class: "article-cm-action-link "  %>
-	</div><!--/.small-6-->
+	</div><!--/.medium-3-->
+
+	<div class="medium-3 columns">
+		<h2>Product Spotlights</h2>
+		<h3>PUBLISHED</h3>
+		<% @articles.spotlight.active.each do |a| %>
+		<p>
+			<strong><%= a.headline %></strong> by <%= a.author %> // <%= a.date %> <%= link_to 'edit', a %> <%= link_to 'delete', a, method: :delete, data: { confirm: 'Are you sure?' } %>
+		</p>
+		<% end %>
+		<h3>WAITING</h3>
+		<% @articles.spotlight.inactive.each do |a| %>
+		<p>
+			<strong><%= a.headline %></strong> by <%= a.author %> // <%= a.date %> <%= link_to 'edit', a %> <%= link_to 'delete', a, method: :delete, data: { confirm: 'Are you sure?' } %>
+		</p>
+		<% end %>
+		<br>
+		<%= link_to "Create New Product Spotlight", create_article_url(3), method: :post, class: "article-cm-action-link "  %>
+	</div><!--/.medium-3-->
+
+	<div class="medium-3 columns">
+		<h2>Instructional Articles</h2>
+		<h3>PUBLISHED</h3>
+		<% @articles.instructional.active.each do |a| %>
+		<p>
+			<strong><%= a.headline %></strong> by <%= a.author %> // <%= a.date %> <%= link_to 'edit', a %> <%= link_to 'delete', a, method: :delete, data: { confirm: 'Are you sure?' } %>
+		</p>
+		<% end %>
+		<h3>WAITING</h3>
+		<% @articles.instructional.inactive.each do |a| %>
+		<p>
+			<strong><%= a.headline %></strong> by <%= a.author %> // <%= a.date %> <%= link_to 'edit', a %> <%= link_to 'delete', a, method: :delete, data: { confirm: 'Are you sure?' } %>
+		</p>
+		<% end %>
+		<br>
+		<%= link_to "Create New Instructional Article", create_article_url(4), method: :post, class: "article-cm-action-link "  %>
+	</div><!--/.medium-3-->
 </div><!--/.row-->

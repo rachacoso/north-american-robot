@@ -1,0 +1,5 @@
+<% @article.products.sort_by {|p| p.brand.company_name }.each do |p| %>
+	<p><%= p.brand.company_name %> : <%= p.name %>
+		<%#= link_to 'delete', admin_delete_user_path(user), :method => 'delete', data: { :confirm => 'Are you sure you want to delete this user?'}, class: "itemformlink"  %>
+	 <%= link_to 'delete', delete_article_featured_product_path(@article, p), method: 'delete', remote: true %></p>
+<% end %>
