@@ -8,7 +8,7 @@
 			<div id="lead">
 				<div id="title">
 				<% if @company_filter %>
-					MARKETPLACE <span id="sub"><%= get_company_type(@company_filter).capitalize %> Orders</span>
+					MARKETPLACE <span id="sub"><%= get_company_type(@company_filter).capitalize %> View - Orders</span>
 				<% else %>
 					MARKETPLACE <span id="sub">All Orders</span>
 				<% end %>
@@ -20,31 +20,26 @@
 				<% if @company_filter %>
 				<%= render partial: "/shared/profile/components/profile_nav", locals: { profile: get_company(@company_filter), section: "orders"  } %>
 				<% end %>
-				<br>
+
+
 				<div class="row">
-					<div class="small-11 small-centered columns">
+					<div class="small-12 columns">
 
+						<% if @company_filter %>
+
+						<% else %>
+
+						<% end %>
 						<div class="row">
-							<div class="small-12 columns">
-
-								<% if @company_filter %>
-
-								<% else %>
-
-								<% end %>
-								<div class="row">
-									<div class="medium-2 columns">
-										<%= render partial: "home/orders_chart", locals: { filter: @filter, company_id: @company_filter} %>
-									</div><!--/.medium-2-->
-									<div class="medium-10 columns">
-											<%= render partial: 'order_index', locals: { orders: @orders } %>
-									</div><!--/.medium-10-->
-								</div><!--/.row-->
-
-							</div><!--/.small-12-->
+							<div class="medium-2 columns">
+								<%= render partial: "home/orders_chart", locals: { filter: @filter, company_id: @company_filter} %>
+							</div><!--/.medium-2-->
+							<div class="medium-10 columns">
+									<%= render partial: 'order_index', locals: { orders: @orders } %>
+							</div><!--/.medium-10-->
 						</div><!--/.row-->
 
-					</div><!--/.small-11-->
+					</div><!--/.small-12-->
 				</div><!--/.row-->
 
 			</div><!--/#main-body-->
