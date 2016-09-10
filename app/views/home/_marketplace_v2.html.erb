@@ -1,44 +1,56 @@
-
-
 <div class="row">
-	<div class="small-12 columns">
-		<div class="panel">
-			<h2>Dashboard</h2>
-			<p> Welcome to Landing International! This is your marketplace dashboard where you will be able to view all your Landing International activity.</p>
-		</div>
-	</div><!--/.small-12-->
-</div><!--/.row-->
+	<div class="medium-11 medium-centered columns">
+		<div class="container marketplace">
 
-<div class="row">
-	<div class="medium-2 columns">
-		<div class="panel shaded" style="padding-top:0.25em;padding-bottom:0.25em;"><h3 class="text-center"><strong>Orders</strong></h3></div>
-		<%= render partial: "home/orders_chart", locals: { filter: @filter } %>
-	</div><!--/.medium-2-->
-	<div class="medium-10 columns">
-		<div class="panel shaded" style="padding-top:0.25em;padding-bottom:0.25em;"><h3 class="text-center"><strong>New Brands</strong></h3></div>
-		<div class="panel">
-			<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-5">
-			<% @new_brands.each do |b| %>
-				<li><%= render partial: "company_tile", locals: {brand: b} %></li>
-			<% end %>
-			</ul>
-		</div>
-		<div class="panel shaded" style="padding-top:0.25em;padding-bottom:0.25em;"><h3 class="text-center"><strong>Brands Just Updated</strong></h3></div>
-		<div class="panel">
-			<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-5">
-			<% @updated_brands.each do |b| %>
-				<li><%= render partial: "company_tile", locals: {brand: b} %></li>
-			<% end %>
-			</ul>
-		</div>
-		<div class="panel shaded" style="padding-top:0.25em;padding-bottom:0.25em;"><h3 class="text-center"><strong>Products Just Updated</strong></h3></div>
-		<div class="panel">
-			<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-5">
-			<% @updated_products.each do |p| %>
-				<li><%= render partial: "product_tile", locals: {product: p, brand: p.brand} %></li>
-			<% end %>
-			</ul>
-		</div>
-	</div><!--/.medium-10-->
-</div><!--/.row-->
+			<div id="lead">
+				<div id="title">MARKETPLACE <span id="sub">Dashboard</span></div><div id="close"><%= link_to root_url do %><%= image_tag "/images/close.svg"%><% end %></div>
+			</div><!--/#lead-->
 
+			<div id="main-body">
+
+				<div class="row">
+					<div class="small-12 columns">
+						
+							<p> Welcome to Landing International! This is your marketplace dashboard where you will be able to view all your Landing International activity.</p>
+						<br>
+					</div><!--/.small-12-->
+				</div><!--/.row-->
+
+				<div class="row">
+					<div class="medium-2 columns">
+						<div class="panel shaded" style="padding-top:0.25em;padding-bottom:0.25em;"><h3 class="text-center"><strong>Orders</strong></h3></div>
+						<%= render partial: "home/orders_chart", locals: { filter: @filter } %>
+					</div><!--/.medium-2-->
+					<div class="medium-10 columns">
+						<div class="panel shaded" style="padding-top:0.25em;padding-bottom:0.25em;"><h3 class="text-center"><strong>New Brands</strong></h3></div>
+						<div class="panel">
+							<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-5">
+							<% @new_brands.each do |b| %>
+								<li><%= render partial: "company_tile", locals: {brand: b} %></li>
+							<% end %>
+							</ul>
+						</div>
+						<div class="panel shaded" style="padding-top:0.25em;padding-bottom:0.25em;"><h3 class="text-center"><strong>Brands Just Updated</strong></h3></div>
+						<div class="panel">
+							<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-5">
+							<% @updated_brands.each do |b| %>
+								<li><%= render partial: "company_tile", locals: {brand: b} %></li>
+							<% end %>
+							</ul>
+						</div>
+						<div class="panel shaded" style="padding-top:0.25em;padding-bottom:0.25em;"><h3 class="text-center"><strong>Products Just Updated</strong></h3></div>
+						<div class="panel">
+							<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-5">
+							<% @updated_products.each do |p| %>
+								<li><%= render partial: "product_tile", locals: {product: p, brand: p.brand} %></li>
+							<% end %>
+							</ul>
+						</div>
+					</div><!--/.medium-10-->
+				</div><!--/.row-->
+
+			</div><!--/#main-body-->
+		</div><!--/.container-->
+
+	</div><!--/.medium-11 medium-centered-->
+</div><!--/.row-->
