@@ -27,12 +27,15 @@
 }
 
 #v2subheader {
-	// background-color: #fff;
+	background-color: $landing-blue;
 	font-weight: 200;
-
-
+	h3 {
+		color: white;
+		// line-height: 1em;
+		margin-bottom: 0;
+	}
 	a {
-		color: #000000;
+		color: white;
 		font-weight: 500;
 	}
 
