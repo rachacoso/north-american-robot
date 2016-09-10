@@ -1,23 +1,30 @@
-<ul class="tablist">
-	<li>
+<ul class="navlist" id="left">
+	<li <%= section == "profile" ? "class=active" : "" %>>
 		<%= link_to eval("view_#{profile.class.to_s.downcase}_url(profile)") do %>
-		<div id="profile" <%= section == "profile" ? "class=active" : "" %>></div>
+		<div id="profile">PROFILE</div>
 		<% end %>
 	</li>
 	<% if show_orders(profile) %>
-	<li>
-		<% if @current_user.company.orders.of_company(company_id: profile.id, type: profile.class.to_s.downcase).count > 0 %>
+	<% if @current_user.company.orders.of_company(company_id: profile.id, type: profile.class.to_s.downcase).count > 0 %>
+	<li <%= section == "orders" ? "class=active" : "" %>>
+		
 		<%= link_to orders_url(company_id: profile) do %>
-			<div id="orders" <%= section == "orders" ? "class=active" : "" %>></div>
+			<div id="orders">ORDERS</div>
 		<% end %>
-		<% end %>
+		
 	</li>
+	<% end %>
 	<% end %>
 	<% if @current_user.type? != "brand" && order = open_order(profile) %>
-	<li>
+	<li <%= section == "cart" ? "class=active" : "" %>>
 		<%= link_to order_url(order) do %>
-			<div id="shopping-cart" <%= section == "cart" ? "class=active" : "" %>><div class="count"><%= order.order_items.count %></div></div>
+			<div id="shopping-cart">CART <div class="count"><%= order.order_items.count %></div></div>
 		<% end %>
 	</li>
 	<% end %>
+</ul>
+<ul class="navlist" id="right">
+	<li>
+		<%= link_to "CONTACT #{profile.company_name}", new_simple_message_url(profile), remote:true %>
+	</li>
 </ul>
