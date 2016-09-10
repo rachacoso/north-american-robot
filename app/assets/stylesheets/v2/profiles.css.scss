@@ -53,16 +53,16 @@
 
 #profile {
   position: relative;
-  height: rem-calc(50);
-  width: rem-calc(50);
-  background: url("/images/profile.png");
-  background-color: white;
-  background-size: 80%;
-  background-position: top center;
-  background-repeat: no-repeat;
+  height: rem-calc(20);
+  // width: rem-calc(50);
+  // background: url("/images/profile.png");
+  // background-color: white;
+  // background-size: 80%;
+  // background-position: top center;
+  // background-repeat: no-repeat;
   &:after {
     content: "PROFILE";
-    font-size: rem-calc(5);
+    font-size: rem-calc(20);
     color: $landing-middle-gray;
     position: absolute;
     bottom: 0;

@@ -14,15 +14,32 @@
 			position: absolute;
 			left: 0;
 			top: 0;
-			background-color: #D8D8D8;
+			// background-color: #D8D8D8;
 			padding: rem-calc(5) rem-calc(30);
 			font-weight: 900;
+			#sub {
+				font-weight: 300;
+			}
 		}
 		& > #close {
 			position: absolute;
 			right: 0;
 			top: 0;
 			padding: rem-calc(5);
+		}
+	}
+	&.marketplace {
+		border-top: 3px solid $landing-blue;
+		& > #lead > #title {
+			background-color: $landing-blue;
+			color: white;
+		}
+	}
+	&.insights {
+		border-top: 3px solid green;
+		& > #lead > #title {
+			background-color: green;
+			color: white;
 		}
 	}
 	& > #main-body {

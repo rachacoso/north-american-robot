@@ -1,11 +1,11 @@
-<div class="container">
+<div class="container marketplace">
 
 	<div id="lead">
 		<div id="title">
 			<% if @current_user.type? == "brand" %>
-				<%= get_company_type(order.orderer) %> PROFILE
+				<div id="title">MARKETPLACE <span id="sub"><%= get_company_type(order.orderer).capitalize %> <%= order.status == "open" ? "Cart" : "Order" %></span></div>
 			<% else %>
-				BRAND PROFILE
+				<div id="title">MARKETPLACE <span id="sub">Brand <%= order.status == "open" ? "Cart" : "Order" %></span></div>
 			<% end %>
 		</div>
 		<div id="close"><%= link_to root_url do %><%= image_tag "/images/close.svg"%><% end %></div>
