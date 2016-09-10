@@ -10,6 +10,9 @@
 	& > #lead {
 		position: relative;
 		height: rem-calc(40);
+		i {
+			margin-right: rem-calc(10);
+		}
 		& > #title {
 			position: absolute;
 			left: 0;
