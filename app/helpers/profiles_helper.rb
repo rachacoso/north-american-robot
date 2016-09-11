@@ -83,4 +83,20 @@ module ProfilesHelper
 		end
 	end
 
+
+	def show_logo(profile)
+
+		if profile.logo_file_name
+			return image_tag profile.logo.url(:medium), alt: "Logo", id: "logo"
+		else
+			if !profile.facebook.blank? && fb_picture(profile.facebook)
+				return image_tag fb_picture(profile.facebook), id: "logo"
+			else
+				return image_tag profile.logo.url(:medium), width: "100", height: "100", alt: "Logo", id: "logo"
+			end
+		end
+
+	end
+
+
 end

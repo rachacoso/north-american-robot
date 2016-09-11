@@ -28,15 +28,7 @@
 
 		<div class="row">
 			<div class="medium-4 columns medium-push-8 medium-text-right">
-				<% if profile.logo_file_name %>
-					<%= image_tag profile.logo.url(:medium), alt: "Logo" %>
-				<% else %>
-					<% if !profile.facebook.blank? && fb_picture(profile.facebook) %>
-						<%= image_tag fb_picture(profile.facebook) %>
-					<% else %>
-						<%= image_tag profile.logo.url(:medium), width: "100", height: "100", alt: "Logo" %>
-					<% end %>					
-				<% end %>
+
 			</div><!--/.medium-4-->
 			<div class="medium-8 columns medium-pull-4 medium-text-left">
 
@@ -51,7 +43,7 @@
 					<% profile.trends.pluck(:name).each do |trend| %>
 						<span data-tooltip aria-haspopup="true" class="has-tip radius tip-right" title="TRENDS"><span class="tag trend"><%= trend %></span></span>
 					<% end %>
-				</div>				
+				</div>
 				<% end %>
 			</div><!--/.medium-8-->
 		</div><!--/.row-->
