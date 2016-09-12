@@ -148,6 +148,8 @@
     .profile-tag {
       display: block;
       margin-bottom: rem-calc(5);
+      font-size: rem-cal(10);
+      font-weight: 500;
     }
     &::after {
       content: "";
