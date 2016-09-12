@@ -116,7 +116,6 @@ Rails.application.routes.draw do
   patch    '/user/lu/:id' => 'users#limited_update', as: 'user_limited_update'
 
   get    '/distributor/edit' => 'distributors#edit', as: 'distributor'
-  get    '/distributor/public_profile' => 'distributors#public_profile', as: 'distributor_public_profile'
   get    '/distributor/full_profile' => 'distributors#full_profile', as: 'distributor_full_profile'
   patch  '/distributor/edit' => 'distributors#update'
   patch  '/distributor_brands' => 'distributor_brands#update'
@@ -124,7 +123,6 @@ Rails.application.routes.draw do
   delete '/distributor/validation/delitem' => 'distributors#validation_delete', as: 'distributor_validation_delete'
 
   get    '/retailer/edit' => 'retailers#edit', as: 'retailer'
-  get    '/retailer/public_profile' => 'retailers#public_profile', as: 'retailer_public_profile'
   get    '/retailer/full_profile' => 'retailers#full_profile', as: 'retailer_full_profile'
   patch  '/retailer/edit' => 'retailers#update'
   patch  '/retailer/adminupdate/:id' => 'retailers#adminupdate', as: 'retailer_admin_update'
@@ -142,7 +140,6 @@ Rails.application.routes.draw do
 
   # for brand editing
   get    '/brand/edit' => 'brands#edit', as: 'brand'
-  get    '/brand/public_profile' => 'brands#public_profile', as: 'brand_public_profile'
   get    '/brand/full_profile' => 'brands#full_profile', as: 'brand_full_profile'
   patch  '/brand/edit' => 'brands#update'
   patch  '/brand/adminupdate/:id' => 'brands#adminupdate', as: 'brand_admin_update'
