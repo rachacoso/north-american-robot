@@ -4,16 +4,16 @@
 		<div class="row profile-logo">
 
 			<div class="medium-8 columns">
-				<h2><%= @profile.company_name %></h2>
+				<h2><%= profile.company_name %></h2>
 			</div><!--/.medium-8 -->
 			<div class="medium-4 columns text-right">
-				<% if @profile.logo_file_name %>
-					<%= image_tag @profile.logo.url(:medium), alt: "Logo" %>
+				<% if profile.logo_file_name %>
+					<%= image_tag profile.logo.url(:medium), alt: "Logo" %>
 				<% else %>
-					<% if !@profile.facebook.blank? && fb_picture(@profile.facebook) %>
-						<%= image_tag fb_picture(@profile.facebook) %>
+					<% if !profile.facebook.blank? && fb_picture(profile.facebook) %>
+						<%= image_tag fb_picture(profile.facebook) %>
 					<% else %>
-						<%= image_tag @profile.logo.url(:medium), width: "100", height: "100", alt: "Logo" %>
+						<%= image_tag profile.logo.url(:medium), width: "100", height: "100", alt: "Logo" %>
 					<% end %>					
 				<% end %>
 			</div><!--/.medium-4-->
@@ -23,21 +23,21 @@
 		<div class="row">
 			<div class="small-12 columns">
 				<div class="brand-positioning">
-					<%= link_to view_brand_url(@profile), remote: true do %>
-						<%= simple_format(truncate(@profile.brand_positioning, length: 600, separator: ' ', omission: '... (more)') ) %>
+					<%= link_to view_brand_url(profile), remote: true do %>
+						<%= simple_format(truncate(profile.brand_positioning, length: 600, separator: ' ', omission: '... (more)') ) %>
 					<% end %>
 				</div>
 			</div><!--/.small-12-->
 			<div class="small-12 columns">
 				<div class="brand-snapshot" id="preview">
-					<%= render partial: "shared/profile/components/general_info_preview", locals: {profile: @profile} %>
+					<%= render partial: "shared/profile/components/general_info_preview", locals: {profile: profile} %>
 				</div>
 			</div><!--/.small-12-->
 
 			<div class="small-12 columns text-center">
-				<% if !@gallery.empty? %>
-				<div id="owl-example-preview" class="owl-carousel owl-theme">
-				<% @gallery.each do |b| %>
+				<% if !gallery.empty? %>
+				<div id="profile-preview-carousel" class="owl-carousel owl-theme">
+				<% gallery.each do |b| %>
 					<div><img class="lazyOwl" data-src="<%= b.photo.url(:small) %>"></div>
 				<% end %>
 				</div>
@@ -46,7 +46,7 @@
 				<% end %>
 			</div><!--/.small-12-->
 			<div class="small-12 columns text-center">
-				<%= link_to 'View Full Profile', view_brand_url(@profile), remote: true, id: "full-profile-link" %>
+				<%= link_to 'View Full Profile', view_brand_url(profile), remote: true, id: "full-profile-link" %>
 			</div>
 		</div><!--/.row-->
 

@@ -212,7 +212,7 @@
 
 				<hr>
 
-				<% percentf = check_brand_full_profile %>
+				<% percentf = check_brand_full_profile(@profile) %>
 				<div class="row">
 					<div class="medium-6 columns">
 						<h3>Your <strong><%= link_to 'Full Profile', brand_full_profile_url %></strong> is <%= percentf == 100 ? "" : "#{percentf}%" %> complete!

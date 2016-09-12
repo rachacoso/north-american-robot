@@ -1,9 +1,9 @@
 
-$('#profile-preview-data').html("<%= j (render partial: 'preview') %>");
+$('#profile-preview-data').html("<%= j (render partial: 'preview', locals: { profile: @profile, gallery: @gallery }) %>");
 $('.overlay#profile-preview-overlay').fadeIn();
 $('#profile-preview').fadeIn();
 
-$("#owl-example-preview").owlCarousel({
+$("#profile-preview-carousel").owlCarousel({
 	lazyLoad : true,
 	lazyFollow : true,
 	lazyEffect : "fade",
