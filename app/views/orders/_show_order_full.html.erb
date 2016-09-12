@@ -17,6 +17,7 @@
 				<%= render partial: "/shared/profile/components/profile_nav", locals: { profile: order.orderer, section: "cart" } %>
 			<% else %>
 				<%= render partial: "/shared/profile/components/profile_nav", locals: { profile: order.orderer, section: "orders" } %>
+				<%= render partial: "company_order_header", locals: { profile: order.orderer} %>
 			<% end %>
 			<%= render partial: "orders/showfull/#{order.status}_brand", locals: {order: order} %>
 		<% elsif @current_user.company_type != "Brand" %>
@@ -24,6 +25,7 @@
 				<%= render partial: "/shared/profile/components/profile_nav", locals: { profile: order.brand, section: "cart" } %>
 			<% else %>
 				<%= render partial: "/shared/profile/components/profile_nav", locals: { profile: order.brand, section: "orders" } %>
+				<%= render partial: "company_order_header", locals: { profile: order.brand, order: order } %>
 			<% end %>
 			<%= render partial: "orders/showfull/#{order.status}_orderer", locals: {order: order} %>
 		<% end %>

@@ -1,0 +1,8 @@
+<div class="row">
+	<div class="small-12 columns">
+		<ul class="order-breadcrumb">
+			<li id="back"><%= link_to orders_url(company_id: profile) do %>All <%= profile.company_name %> Orders<% end %></li>
+			<li id="active"><%= order.c_at.strftime("Order created on %b %d %Y") %></li>
+		</ul>
+	</div><!--/.small-12-->
+</div><!--/.row-->

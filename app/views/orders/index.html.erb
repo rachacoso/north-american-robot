@@ -17,16 +17,20 @@
 
 			<div id="main-body">
 
-				<% if @company_filter %>
-				<%= render partial: "/shared/profile/components/profile_nav", locals: { profile: get_company(@company_filter), section: "orders"  } %>
+				<% if company = get_company(@company_filter) %>
+				<%= render partial: "/shared/profile/components/profile_nav", locals: { profile: company, section: "orders"  } %>
 				<% end %>
 
 
 				<div class="row">
 					<div class="small-12 columns">
 
-						<% if @company_filter %>
-
+						<% if company = get_company(@company_filter) %>
+							<div class="row">
+								<div class="small-12 columns">
+									<h2><strong>All <%= company.company_name %> Orders</strong></h2>
+								</div><!--/.small-12-->
+							</div><!--/.row-->
 						<% else %>
 
 						<% end %>

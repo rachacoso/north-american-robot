@@ -1,7 +1,9 @@
 module OrdersHelper
 
 	def get_company(id)
-		return Brand.find(id) || Retailer.find(id) || Distributor.find(id)
+		unless id.blank?
+			return Brand.find(id) || Retailer.find(id) || Distributor.find(id)
+		end
 	end
 	def get_company_type(id)
 		if Brand.find(id)
