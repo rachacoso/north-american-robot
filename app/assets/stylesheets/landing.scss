@@ -71,7 +71,7 @@ label {
 
 a.landing-button, input[type=submit].landing-button {
   display: inline-block;
-  background-color: $landing-blue;
+  background-color: $link-color;
   border: none;
   color: white;
   font-size: rem-calc(12);
@@ -82,7 +82,7 @@ a.landing-button, input[type=submit].landing-button {
   font-size: rem-calc(12);
   letter-spacing: 1.5px;
   &:hover {
-    background-color: scale-color($landing-blue, $lightness: -25%);;
+    background-color: scale-color($link-color, $lightness: -25%);;
   }
   &.secondary {
     background-color: $landing-middle-gray;

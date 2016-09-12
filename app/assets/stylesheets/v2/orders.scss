@@ -24,13 +24,13 @@ table.order {
 		}
 	}
 	a {
-		color: $landing-blue;
+		color: $link-color;
 		text-decoration: underline;
 	}
 }
 
 .full-order-container {
-	margin-top: rem-calc(20);
+	// margin-top: rem-calc(20);
 	margin-bottom: rem-calc(100);
 	.panel.outer, .panel.order-alert {
 		background: $landing-light-gray;
