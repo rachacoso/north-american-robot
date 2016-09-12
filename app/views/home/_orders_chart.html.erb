@@ -4,7 +4,7 @@
 		<table id="orders_chart">
 			<tbody>
 				<tr <%= filter == "current" ? "class=active" : "" %>>
-					<td><%= @current_orders > 0 ? (link_to 'Open (In Cart)', orders_url(f:'current', company_id: company_id)) : 'Open (In Cart)' %></td>
+					<td><%= @current_orders > 0 ? (link_to 'In Cart', orders_url(f:'current', company_id: company_id)) : 'In Cart' %></td>
 					<td><%= @current_orders > 0 ? (link_to @current_orders, orders_url(f:'current', company_id: company_id)) : @current_orders %></td>
 				</tr>
 				<tr <%= filter == "submitted" ? "class=active" : "" %>>
