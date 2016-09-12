@@ -8,131 +8,6 @@
 
 		<%= render partial: "/shared/profile/components/profile_nav", locals: { profile: profile, section: "profile"  } %>
 
-		<% if @messages && @current_user.subscriber? %>
-		<div class="row">
-			<div class="small-6 columns">
-				&nbsp;
-			</div><!--/.small-6-->
-			<div class="small-6 columns text-right profile-tabs">
-				<h2 class="active" id="tab-conversation">conversation</h3>
-				<h2 id="tab-profile">profile</h3>
-			</div><!--/.small-6-->
-		</div><!--/.row-->
-		<% end %>
-
-		<div id="profile-conversation-wrapper">
-			<div id="profile-conversation">
-			<%= render partial: "matches/conversation", locals: {profile: profile} %>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="medium-4 columns medium-push-8 medium-text-right">
-				
-			</div><!--/.medium-4-->
-			<div class="medium-8 columns medium-pull-4 medium-text-left">
-
-				<div>
-					<% profile.tags.each do |tag| %>
-						<span data-tooltip aria-haspopup="true" class="has-tip radius tip-right" title="GLOBAL GOOD TAGS"><span class="tag"><%= tag.name %></span></span>
-					<% end %>
-				</div>
-				
-				<% if profile.class.to_s == "Brand" && !profile.trends.blank? %>
-				<div>
-					<% profile.trends.pluck(:name).each do |trend| %>
-						<span data-tooltip aria-haspopup="true" class="has-tip radius tip-right" title="TRENDS"><span class="tag trend"><%= trend %></span></span>
-					<% end %>
-				</div>				
-				<% end %>
-				
-			</div><!--/.medium-8-->
-		</div><!--/.row-->
-
-		<div class="row">
-			<div class="medium-8 columns">
-
-				<div class="profile-general-info">
-					<div class="data">
-						Distributor
-						<% unless profile.year_established.blank? %>
-						established in <strong><%= profile.year_established.strftime('%Y') %></strong>
-						<% end %>
-						with
-						<strong>
-						<% if profile.company_size.blank? %>
-							unknown number of employees
-						<% else %>
-							<%= CompanySize.find(profile.company_size).name rescue nil %>
-						<% end %>
-						</strong>
-						based in 
-						<strong>
-						<% if profile.country_of_origin.blank? %>
-						 Unknown Country
-						<% else %>
-						<%= profile.country_of_origin %>
-						<% end %>
-						</strong>
-					</div>
-
-				</div>
-			</div><!--/.medium-8-->
-			<div class="medium-4 columns medium-text-right">
-
-			</div><!--/.medium-4-->
-		</div><!--/.row-->
-
-		<div class="row">
-			<div class="small-12 columns">
-					<ul class="small-block-grid-1 medium-block-grid-3">
-					<% unless profile.sectors.blank? %>
-					<li><div class="data">
-					Sectors (subsectors)<br>
-						<strong>
-						<% profile.sectors.order_by(:name => "asc").each do |s| %>
-							<%= s.name %>
-							<% unless profile.subsectors.where(:sector => s).blank? %>
-							( <%= profile.subsectors.where(:sector => s).pluck(:name).to_a.join(", ") %> )
-							<% end %>
-							<br>
-						<% end %>
-						</strong>
-
-					</div></li>
-					<% end %>
-
-					<% unless profile.channels.blank? %>
-					<li><div class="data">
-						Channels (capacity)<br>
-							<% profile.channels.each do |ch| %>
-								<strong><%= ch.name  %> <%= profile.channel_capacities.where(channel_id: ch.id).first.capacity.blank? ? "" : "(#{profile.channel_capacities.where(channel_id: ch.id).first.capacity})" %></strong><br>
-							<% end %>
-							<% if profile.channel_capacities.where(channel_id: 0).length > 0 %>
-								<% profile.channel_capacities.where(channel_id: 0).each do |cch| %>
-									<strong><%= cch.custom_channel_name %> <small>(Custom Channel)</small> (<%= cch.capacity %>)</strong><br>
-								<% end %>
-							<% end %>								
-					</div></li>
-					<% end %>
-
-					<% unless profile.export_countries.blank? %>
-					<li><div class="data">
-						Countries of Disribution<br>
-						<strong><%= profile.export_countries.pluck(:country).join("<br> ").html_safe %></strong>
-					</div></li>
-					<% end %>
-					</ul>
-			</div><!--/.small-12-->
-		</div><!--/.row-->
-
-		<div class="row">
-			<div class="small-12 columns">
-					<div class="data">
-						<%= render partial: "shared/profile/components/links", locals: {profile: profile} %>
-					</div>
-			</div><!--/.small-12-->
-		</div><!--/.row-->
 		<div class="row">
 			<div class="small-12 columns">
 				<div class="company-introduction">
@@ -141,19 +16,26 @@
 			</div><!--/.small-12-->
 		</div><!--/.row-->
 
-
 		<div class="row">
-			<div class="small-12 columns">
-				<%#= render partial: "shared/profile/components/indicators", locals: {match: profile} %>
-			</div><!--/.small-12 -->
-		</div><!--/.row -->
-
-
+			<div class="medium-4 columns">
+				<div class="general-info">
+					<%= show_website_url(profile) %>
+					<%= show_links(profile) %>
+					<%= show_global_good_tags(profile) %>
+					<%= show_country_of_origin(profile) %>
+					<%= show_company_size(profile) %>
+					<%= show_sectors(profile) %>
+					<%= show_channels(profile) %>
+					<%= show_countries_of_distribution(profile) %>
+				</div><!--/.general-info-->
+			</div><!--/.medium-4-->
+			<div class="medium-8 columns">
+				<%= render partial: "shared/profile/components/gallery", locals: {gallery: @gallery, profile: profile} %>
+			</div><!--/.medium-8-->
+		</div><!--/.row-->
 
 
 		<div id="profile-profile-wrapper">
-
-			<%= render partial: "matches/conversation_start", locals: {profile: profile} %>
 
 			<div class="row collapse">
 				<div class="small-12 columns">

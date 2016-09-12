@@ -128,6 +128,41 @@
   }
 }
 
+.general-info {
+  padding: rem-calc(10);
+  // border: 1px solid $landing-middle-gray;
+  background-color: $landing-light-gray;
+  border-radius: rem-calc(5);
+
+  .profile-general-info-item {
+    padding: rem-calc(5);
+    line-height: 1em;
+    margin: auto;
+    font-weight: 200;
+    .title {
+      font-weight: 500;
+      color: $landing-middle-gray;
+      font-size: rem-calc(10);
+      // text-transform: uppercase;
+    }
+    .profile-tag {
+      display: block;
+      margin-bottom: rem-calc(5);
+    }
+    &::after {
+      content: "";
+      display: block;
+      height: 1px;
+      width: 100%;
+      margin-top: rem-calc(5);
+      background: white;
+    }
+    &:last-child::after {
+      background: none;
+    }
+  }  
+}
+
 .profile-tabs {
   padding-top: rem-calc(5);
   h2 {
@@ -286,9 +321,9 @@ a.profile-sq-left {
 
 
 .gallery-window {
-  padding-top: rem-calc(20);
+  // padding-top: rem-calc(20);
   padding-bottom: rem-calc(20);
-  max-height: rem-calc(200);
+  min-height: rem-calc(200);
   overflow-y: hidden;
 
   // THESE ARE FOR BLANK GALLERIES
@@ -306,10 +341,6 @@ a.profile-sq-left {
     background: transparent url("/images/SECTORS_fashionaccessories.svg") center;
     background-size: cover;
   }
-}
-.tags-window {
-  padding: rem-calc(10);
-  // border-left: 1px solid $landing-middle-gray;
 }
 .profile-header {
   padding: rem-calc(9) rem-calc(10) rem-calc(5) rem-calc(10);
@@ -331,7 +362,7 @@ a.profile-sq-left {
 }
 
 .brand-positioning, .company-introduction {
-  margin-top: rem-calc(40);
+  margin-top: rem-calc(10);
   margin-bottom: rem-calc(40);
 }
 .profile-logo {
