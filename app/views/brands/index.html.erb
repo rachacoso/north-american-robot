@@ -8,7 +8,7 @@
 		<div class="container marketplace">
 
 			<div id="lead">
-				<div id="title">MARKETPLACE <span id="sub">Search</span></div><div id="close"><%= link_to root_url do %><i class="fi-x"></i><% end %></div>
+				<div id="title">MARKETPLACE <span id="sub">Browse</span></div><div id="close"><%= link_to root_url do %><i class="fi-x"></i><% end %></div>
 			</div><!--/#lead-->
 
 			<div id="main-body">
@@ -19,16 +19,14 @@
 					<div class="small-12 columns">
 
 						<h1>BEAUTY BRANDS by 
-							<% if @type == "t" %>
-								<strong class="active">TREND</strong>
-							<% else %>
-								<strong><%= link_to 'TREND', brands_url(type: "t") %></strong> 
-							<% end %>
-							/ 
 							<% if @type == "c" || @type.blank? %>
 								<strong class="active">CATEGORY</strong>
-							<% else %>
-								<strong><%= link_to 'CATEGORY', brands_url(type: "c") %></strong> 
+
+								<%= link_to brands_url(type: "t") do %> or view by <strong>TREND</strong> <% end %>
+							<% elsif @type == "t" %>
+								<strong class="active">TREND</strong>
+
+								<%= link_to brands_url(type: "c") do %> or view by <strong>CATEGORY</strong><% end %>
 							<% end %>
 						</h1>
 

@@ -22,7 +22,8 @@
 		color: #9B9B9B;
 	}
 	a {
-		color: #9B9B9B;
+		color: $link-color;
+		font-size: 50%;
 		&:hover { 
 			color: $landing-dark-gray;
 		}
@@ -58,11 +59,11 @@ ul.index-tag-list {
 	zoom:1;
 	overflow: hidden;
 	li {
-		color: $landing-middle-gray;
+		color: $link-color;
 		font-size: rem-calc(10);
 		font-weight:400;
 		display: inline-block;
-		border: 1px solid $landing-middle-gray;
+		border: 1px solid $link-color;
 		margin: rem-calc(5);
 		padding: rem-calc(4) rem-calc(10) rem-calc(6) rem-calc(10);
 	}
