@@ -611,6 +611,15 @@ a.profile-sq-left {
   padding: rem-calc(20) rem-calc(10);
   overflow-x: scroll;
   h2 { font-weight: 600;}
+  #close-profile-preview {
+    position: absolute;
+    top: rem-calc(-40);
+    right: rem-calc(10);
+    font-size: rem-calc(60);
+    font-weight: 900;
+    color: $landing-middle-gray;
+    z-index: 100022;
+  }
   &#profile-preview {
     position: fixed;
     top: 10%;
@@ -670,15 +679,7 @@ a.profile-sq-left {
   overflow-y: scroll;
   padding: rem-calc(5);
 }
-#close-profile-preview {
-  position: absolute;
-  top: rem-calc(-40);
-  right: rem-calc(10);
-  font-size: rem-calc(60);
-  font-weight: 900;
-  color: $landing-middle-gray;
-  z-index: 100022;
-}
+
 
 // resized font for BRAND PREVIEW
 .brand-snapshot#preview .profile-general-info {
