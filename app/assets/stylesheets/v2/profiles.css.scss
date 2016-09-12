@@ -660,13 +660,16 @@ a.profile-sq-left {
     display: inline-block;
     margin-top: rem-calc(40);
     margin-bottom: rem-calc(10);
-    font-weight: 200;
-    color: $landing-dark-gray;
-    border: 1px solid $landing-middle-gray;
+    font-weight: 500;
+    text-transform: uppercase;
+    // color: $landing-dark-gray;
+    // border: 1px solid $landing-middle-gray;
+    color: white;
+    background-color: $link-color;
     padding: rem-calc(5) rem-calc(10);
   }
   & a#full-profile-link:hover {
-    color: $landing-dark-gray;
+    // color: $landing-dark-gray;
   }
 
   & .owl-carousel {
