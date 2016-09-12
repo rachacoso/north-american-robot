@@ -5,15 +5,13 @@
 		<% end %>
 	</li>
 	<% if show_orders(profile) %>
-	<% if @current_user.company.orders.of_company(company_id: profile.id, type: profile.class.to_s.downcase).count > 0 %>
-	<li <%= section == "orders" ? "class=active" : "" %>>
-		
-		<%= link_to orders_url(company_id: profile) do %>
-			<div id="orders">ORDERS</div>
+		<% if @current_user.company.orders.of_company(company_id: profile.id, type: profile.class.to_s.downcase).count > 0 %>
+		<li <%= section == "orders" ? "class=active" : "" %>>
+			<%= link_to orders_url(company_id: profile) do %>
+				<div id="orders">ORDERS</div>
+			<% end %>
+		</li>
 		<% end %>
-		
-	</li>
-	<% end %>
 	<% end %>
 	<% if @current_user.type? != "brand" && order = open_order(profile) %>
 	<li <%= section == "cart" ? "class=active" : "" %>>
@@ -22,6 +20,7 @@
 		<% end %>
 	</li>
 	<% end %>
+
 </ul>
 <ul class="navlist" id="right">
 	<li>

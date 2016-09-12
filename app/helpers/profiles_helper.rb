@@ -33,7 +33,7 @@ module ProfilesHelper
 			profile.tags.each do |tag|
 				tags += "<span class='profile-tag'>#{tag.name}</span>"
 			end
-			return "<div class='profile-general-info-item'><div class='title'>Global Good Tags:</div>#{tags.html_safe}</div>".html_safe
+			return "<div class='profile-general-info-item'><div class='title'>Global Good Tags:</div><div class='tagset'>#{tags.html_safe}</div></div>".html_safe
 		end
 	end
 
@@ -43,7 +43,7 @@ module ProfilesHelper
 			profile.trends.pluck(:name).each do |trend|
 				tags += "<span class='profile-tag'>#{trend}</span>"
 			end
-			return "<div class='profile-general-info-item'><div class='title'>Trend Tags:</div>#{tags}</div>".html_safe
+			return "<div class='profile-general-info-item'><div class='title'>Trend Tags:</div><div class='tagset'>#{tags}</div></div>".html_safe
 		end
 	end
 

@@ -17,9 +17,6 @@
 				<%= render partial: "/shared/profile/components/profile_nav", locals: { profile: order.orderer, section: "cart" } %>
 			<% else %>
 				<%= render partial: "/shared/profile/components/profile_nav", locals: { profile: order.orderer, section: "orders" } %>
-				<div class="row">
-					<div class="small-12 columns text-left"><h3><%= link_to orders_url(company_id: order.orderer) do %>&lt;&lt; View All Orders<% end %></h3></div><!--/.small-12-->
-				</div><!--/.row-->
 			<% end %>
 			<%= render partial: "orders/showfull/#{order.status}_brand", locals: {order: order} %>
 		<% elsif @current_user.company_type != "Brand" %>
@@ -27,9 +24,6 @@
 				<%= render partial: "/shared/profile/components/profile_nav", locals: { profile: order.brand, section: "cart" } %>
 			<% else %>
 				<%= render partial: "/shared/profile/components/profile_nav", locals: { profile: order.brand, section: "orders" } %>
-				<div class="row">
-					<div class="small-12 columns text-left"><h3><%= link_to orders_url(company_id: order.brand) do %>&lt;&lt; View All Orders<% end %></h3></div><!--/.small-12-->
-				</div><!--/.row-->
 			<% end %>
 			<%= render partial: "orders/showfull/#{order.status}_orderer", locals: {order: order} %>
 		<% end %>
