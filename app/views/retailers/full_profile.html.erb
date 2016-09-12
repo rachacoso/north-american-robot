@@ -2,42 +2,58 @@
 <%= render partial: "shared/topbar" %>
 
 <div class="row">
-	<div class="small-12 columns marketplace-subpage-header">
-		<div class="row">
-			<div class="medium-6 columns" id="your-profile-header">
-				<h1>YOUR PROFILE</h1>
-				<h3>Preview &amp; Edit your marketplace profile.</h3>				
-			</div><!--/.medium-6-->
-			<div class="medium-6 columns">
-				<div class="row">
-					<div class="small-4 columns">
-						<h2>Full Profile</h2>
-							<small><span data-tooltip aria-haspopup="true" class="has-tip radius" title="Your full profile is viewable only by premium brand subscribers. It contains information that helps brands determine whether your company is a good fit for their international expansion.">What is this?</span></small>							
+	<div class="medium-11 medium-centered columns">
+		<div class="container marketplace">
+			<div id="lead">
+				<div id="title">MARKETPLACE <span id="sub">Profile Settings</span></div><div id="close"><%= link_to dashboard_url do %><i class="fi-x"></i><% end %></div>
+			</div><!--/#lead-->
+			<div id="main-body">
+
+				<div id="edit-profile-nav">
+					<div id="top">
+						<div class="row">
+							<div class="medium-6 columns">
+								<h1>Your Profile</h1>
+								Complete your distributor profile so your potential brand partners can learn about you and be better matched to your brand assortment and customer base.
+							</div><!--/.medium-6-->
+							<div class="medium-6 columns">
+								
+							</div><!--/.medium-6-->
+						</div><!--/.row-->
 					</div>
-					<div class="small-8 columns" id="profile-completeness">					
-						<%# TBD %>
-					</div>			
+					<div id="bottom">
+						<div class="row">
+							<div class="small-12 columns text-left" id="nav">
+								<ul class="navlist" id="left">
+									<li><%= link_to 'EDIT Profile', retailer_url %></li>
+									<li class="active"><%= link_to 'PREVIEW Profile', retailer_full_profile_url %></li>
+								</ul>
+							</div><!--/.small-12-->
+						</div><!--/.row-->
+					</div><!--/.bottom-->
+				</div><!--/.edit-profile-nav-->
+
+				<br>
+				<div class="row collapse">
+					<div class="small-12 columns" id="settings-preview-top">
+						<h2 style="margin-bottom: 0;">Full Profile Preview</h2>
+					</div><!--/.small-12 small-centered-->
+				</div><!--/.row-->
+				<div class="row collapse">
+					<div class="small-12 columns" id="settings-preview-bottom">
+						<div class="row">
+							<div class="medium-11 medium-centered columns">
+
+								<%= render partial: "/shared/profile/retailer_full_profile", locals: {profile: @profile}  %>
+								<br><br>
+							</div><!--/.medium-11 medium-centered-->
+						</div><!--/.row-->
+
+					</div>
 				</div>
 
-			</div><!--/.medium-6-->
-		</div><!--/.row-->
-	</div>
-</div>
-
-<div class="row collapse">
-	<div class="small-12 columns marketplace-content">
-		<div class="row collapse">
-			<div class="medium-6 push-6 columns">
-				<ul class="button-group even-3">
-			  <li><%= link_to 'PUBLIC Profile', retailer_public_profile_url, class: "tiny button secondary" %></li>
-			  <li><%= link_to 'FULL Profile', "#", class: "tiny button info"%></li>
-			  <li><%= link_to 'EDIT Profile', retailer_url, class: "tiny button secondary" %></li>
-			  </ul>
-			</div>
-		</div>
-
-		<%= render partial: "/shared/profile/retailer_full_profile", locals: {profile: @profile}  %>
-
-	</div>
-</div><!-- /.row -->
+			</div><!--/#main-body-->
+		</div><!--/#container-->
+	</div><!--/.medium-11 medium-centered-->
+</div><!--/.row-->
 	

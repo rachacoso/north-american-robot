@@ -3,36 +3,40 @@
 
 
 <div class="row">
-	<div class="small-12 columns marketplace-subpage-header">
-		<div class="medium-6 columns" id="your-profile-header">
-			<h1>YOUR PROFILE</h1>
-			<h3>Preview &amp; Edit your marketplace profile.</h3>			
-		</div><!--/.medium-6-->		
-		<div class="medium-6 columns">
-			<div class="row">
-				<div class="small-6 columns">
-					<h2>Edit Profile</h2>
-					<small><span data-tooltip aria-haspopup="true" class="has-tip radius" title="Complete your retailer profile so your potential brand partners can learn about you and be better matched to your brand assortment and customer base.">What is this?</span></small>							
-				</div>
-				<div class="small-6 columns">
-				</div>		
-			</div>
-		</div><!--/.medium-6-->
-	</div>
-</div>
+	<div class="medium-11 medium-centered columns">
+		<div class="container marketplace">
+			<div id="lead">
+				<div id="title">MARKETPLACE <span id="sub">Profile Settings</span></div><div id="close"><%= link_to dashboard_url do %><i class="fi-x"></i><% end %></div>
+			</div><!--/#lead-->
+			<div id="main-body">
+
+				<div id="edit-profile-nav">
+					<div id="top">
+						<div class="row">
+							<div class="medium-6 columns">
+								<h1>Your Profile</h1>
+								Complete your retailer profile so your potential brand partners can learn about you and be better matched to your brand assortment and customer base.
+							</div><!--/.medium-6-->
+							<div class="medium-6 columns">
+
+							</div><!--/.medium-6-->
+						</div><!--/.row-->
+					</div>
+					<div id="bottom">
+						<div class="row">
+							<div class="small-12 columns text-left" id="nav">
+								<ul class="navlist" id="left">
+									<li class="active"><%= link_to 'EDIT Profile', retailer_url %></li>
+									<li><%= link_to 'PREVIEW Profile', retailer_full_profile_url %></li>
+								</ul>
+							</div><!--/.small-12-->
+						</div><!--/.row-->
+					</div><!--/.bottom-->
+				</div><!--/.edit-profile-nav-->
+
 
 <div class="row collapse">
-	<div class="small-12 columns marketplace-content">
-
-		<div class="row collapse">
-			<div class="medium-6 push-6 columns">
-				<ul class="button-group even-3">
-			  <li><%= link_to 'PUBLIC Profile', retailer_public_profile_url, class: "tiny button secondary" %></li>
-			  <li><%= link_to 'FULL Profile', retailer_full_profile_url, class: "tiny button secondary" %></li>
-			  <li><%= link_to 'EDIT Profile', "#", class: "tiny button info"%></li>
-			  </ul>
-			</div>
-		</div>
+	<div class="small-12 columns">
 
 		<div class="row">
 			<div class="small-12 columns"><br></div><!--/.small-12-->
@@ -275,3 +279,8 @@
 
 	</div>
 </div>
+
+
+		</div><!--/#container-->
+	</div><!--/.medium-11 medium-centered-->
+</div><!--/.row-->

@@ -89,9 +89,9 @@ module ApplicationHelper
 
 	end
 
-	def check_distributor_full_profile # check "completeness" of full profile
+	def check_distributor_full_profile(profile) # check "completeness" of full profile
 
-		return @profile.completeness_percentage
+		return profile.completeness_percentage
 
 	end
 
