@@ -1,16 +1,9 @@
 <div class="container marketplace">
-
-	<div id="lead">
-		<div id="title">
-			<% if @current_user.type? == "brand" %>
-				<div id="title">MARKETPLACE <span id="sub"><%= get_company_type(order.orderer).capitalize %> View</span></div>
-			<% else %>
-				<div id="title">MARKETPLACE <span id="sub">Brand View</span></div>
-			<% end %>
-		</div>
-		<div id="close"><%= link_to dashboard_url do %><i class="fi-x"></i><% end %></div>
-	</div><!--/#lead-->
-
+	<% if @current_user.type? == "brand" %>
+	<%= render partial: "shared/v2/container/marketplace_lead", locals: {close_link: dashboard_url , subhead: "view #{get_company_type(order.orderer).capitalize}"} %>
+	<% else %>
+	<%= render partial: "shared/v2/container/marketplace_lead", locals: {close_link: dashboard_url , subhead: "view brand"} %>
+	<% end %>
 	<div id="main-body">
 		<% if @current_user.company_type == "Brand" %>
 			<% if order.status == "open" %>

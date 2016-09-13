@@ -5,7 +5,7 @@
 
 
 .container {
-	margin-top: rem-calc(30);
+	margin-top: rem-calc(15);
 	background-color: #fff;
 	& > #lead {
 		position: relative;
@@ -18,7 +18,7 @@
 			left: 0;
 			top: 0;
 			// background-color: #D8D8D8;
-			padding: rem-calc(5) rem-calc(30);
+			padding: 0 rem-calc(30);
 			font-weight: 900;
 			#sub {
 				font-weight: 300;
@@ -33,7 +33,7 @@
 		}
 	}
 	&.marketplace {
-		border-top: 3px solid $landing-blue;
+		// border-top: 3px solid $landing-blue;
 		& > #lead > #title {
 			background-color: $landing-blue;
 			color: white;

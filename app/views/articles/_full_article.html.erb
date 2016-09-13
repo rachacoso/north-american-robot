@@ -1,9 +1,5 @@
 <div class="container marketplace">
-
-	<div id="lead">
-		<div id="title">MARKETPLACE <span id="sub">Insights</span></div><div id="close"><%= link_to root_url do %><i class="fi-x"></i><% end %></div>
-	</div><!--/#lead-->
-
+	<%= render partial: "shared/v2/container/marketplace_lead", locals: {close_link: root_url , subhead: "insights"} %>
 	<div id="main-body">
 
 		<div class="article">

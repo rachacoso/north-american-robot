@@ -1,7 +1,7 @@
 <div id="v2subheader">
 	<div class="hide-for-small-only text-center">
-		<h3>BEAUTY MARKETPLACE</h3>
-			<div class="navbar">
+		<h3><strong>marketplace</strong></h3>
+			<div class="navbar" id="marketplace">
 			    <ul>
 			<% @brand_chunk.each do |bc| %>
 				<li><%= link_to brands_url(filter: "#{bc.id}", type: "c") do %><%= bc.name %><% end %></li>

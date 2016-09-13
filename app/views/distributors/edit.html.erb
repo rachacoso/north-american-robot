@@ -1,12 +1,11 @@
-<%= render partial: "shared/topbar" %>
+<%= render partial: 'shared/v2/header/main' %>
+<%= render partial: 'shared/v2/header/marketplace' %>
 <%= render "newuser" if flash[:newuser] %>
 
 <div class="row">
 	<div class="medium-11 medium-centered columns">
 		<div class="container marketplace">
-			<div id="lead">
-				<div id="title">MARKETPLACE <span id="sub">Profile Settings</span></div><div id="close"><%= link_to dashboard_url do %><i class="fi-x"></i><% end %></div>
-			</div><!--/#lead-->
+			<%= render partial: "shared/v2/container/marketplace_lead", locals: {close_link: dashboard_url , subhead: "profile settings"} %>
 			<div id="main-body">
 
 				<div id="edit-profile-nav">
