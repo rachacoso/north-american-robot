@@ -1,13 +1,15 @@
-<div class="index-item filtered">
-<%= link_to preview_brand_url(brand), remote: true do %>
-<div class="image">
-	<% type, photo = index_item_photo(brand) %>
-	<% if type == "logo" %>
-		<%= image_tag photo %>
-	<% else %>
-		<%= image_tag photo %>
+<div class="index-item-conatiner">
+	<div class="index-item filtered">
+	<%= link_to preview_brand_url(brand), remote: true do %>
+	<div class="image">
+		<% type, photo = index_item_photo(brand) %>
+		<% if type == "logo" %>
+			<%= image_tag photo %>
+		<% else %>
+			<%= image_tag photo %>
+		<% end %>
+	</div>
+	<div class="name"><%= brand.company_name %></div>
 	<% end %>
-</div>
-<div class="name"><%= brand.company_name %></div>
-<% end %>
-</div><!--/.index-item-->
+	</div><!--/.index-item-->
+</div><!--/.index-item-conatainer-->
