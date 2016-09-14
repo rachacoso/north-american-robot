@@ -31,11 +31,14 @@ ul.order-breadcrumb {
 
 table.order {
 	width: 90%;
-	th {
+	border-collapse: collapse;
+	border: 1px solid $landing-light-gray;
+	th,tr {
 		color: $landing-dark-gray;
 		background: white;
-		border: 1px dotted $landing-middle-gray;
+		
 	}
+	th{border: 1px solid $landing-middle-gray;}
 	tr.subtotal {
 		background: scale-color($landing-light-gray, $lightness: 50%);;
 		font-weight: 800;
