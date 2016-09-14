@@ -74,6 +74,10 @@
 	    width: 10%;
 	    display:inline-block;
 	    border-bottom: 2px solid transparent;
+	    -webkit-transition: border-bottom 0.5s linear;
+	    -moz-transition: border-bottom 0.5s linear;
+	    -o-transition: border-bottom 0.5s linear;
+	    transition: border-bottom 0.5s linear;
 	    &:hover {
 	    	border-bottom: 2px solid $landing-blue;
 	    }

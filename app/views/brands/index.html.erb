@@ -12,17 +12,17 @@
 				<div class="brandindex-top">
 
 				<div class="row">
-					<div class="small-12 columns">
+					<div class="small-12 columns text-center">
 
-						<h1>BEAUTY BRANDS by 
+						<h1>browse beauty brands by 
 							<% if @type == "c" || @type.blank? %>
 								<strong class="active">CATEGORY</strong>
-
-								<%= link_to brands_url(type: "t") do %> or view by <strong>TREND</strong> <% end %>
+								or
+								<%= link_to brands_url(type: "t") do %> <strong>TREND</strong> <% end %>
 							<% elsif @type == "t" %>
+								<%= link_to brands_url(type: "c") do %> <strong>CATEGORY</strong><% end %>
+								or
 								<strong class="active">TREND</strong>
-
-								<%= link_to brands_url(type: "c") do %> or view by <strong>CATEGORY</strong><% end %>
 							<% end %>
 						</h1>
 
@@ -31,20 +31,22 @@
 
 				<div class="row">
 					<div class="small-12 columns">
-						<ul class="index-tag-list">
-							<% @brand_chunk.each do |bc| %>
-								<% if @filtered && @filtered.name == bc.name %>
-									<li class="active"><%= bc.name %></li>
-								<% else %>
-									<%= link_to brands_url(filter: "#{bc.id}", type: @type) do %><li><%= bc.name %></li><% end %>
+						<div class="center-menu">
+							<ul class="index-tag-list">
+								<% @brand_chunk.each do |bc| %>
+									<% if @filtered && @filtered.name == bc.name %>
+										<li class="active"><%= bc.name %></li>
+									<% else %>
+										<li><%= link_to brands_url(filter: "#{bc.id}", type: @type) do %><%= bc.name %><% end %></li>
+									<% end %>
 								<% end %>
-							<% end %>
-							<% if @filtered %>
-								<%= link_to brands_url(type: @type) do %><li>ALL</li><% end %>
-							<% else %>
-								<li class="active">ALL</li>
-							<% end %>
-						</ul>
+								<% if @filtered %>
+									<li><%= link_to brands_url(type: @type) do %>ALL<% end %></li>
+								<% else %>
+									<li class="active">ALL</li>
+								<% end %>
+							</ul>
+						</div><!--/.center-menu-->
 					</div><!--/.small-12-->
 				</div><!--/.row-->
 
@@ -56,7 +58,7 @@
 						</div><!--/.small-12-->
 					</div><!--/.row-->
 					<div class="row">
-						<div class="small-11 small-centered columns small-text-center medium-text-left">		
+						<div class="small-12 small-centered columns small-text-center medium-text-left">		
 						<% if @filtered_brands.blank? %>
 							<h3>No Brands</h3>
 						<% else %>
