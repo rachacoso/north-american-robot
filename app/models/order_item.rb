@@ -42,4 +42,12 @@ class OrderItem # for V2 ordering
     end
   end
 
+  def can_be_edited(controller:, user:)
+    return false if controller == "home"
+    if self.order.status == "open" && !user.brand
+      return true
+    elsif self.order.status == "submitted" && user.brand
+      return true
+    end
+  end
 end

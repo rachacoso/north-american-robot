@@ -93,6 +93,32 @@ module OrdersHelper
 		end
 	end
 
+	def display_lineitem_name(lineitem)
+		if lineitem.can_be_edited(controller: controller_name, user: @current_user)
+			return link_to lineitem.name, edit_order_item_url(lineitem,o:lineitem.order.id), remote: true
+		else
+			return lineitem.name
+		end
+	end
+	def display_lineitem_quantity(lineitem)
+		unless lineitem.quantity.blank?
+			if lineitem.can_be_edited(controller: controller_name, user: @current_user)
+				return link_to lineitem.quantity, edit_order_item_url(lineitem,o:lineitem.order.id), remote: true
+			else
+				return lineitem.quantity
+			end
+		end
+	end
+	def display_lineitem_quantity_testers(lineitem)
+		unless lineitem.quantity_testers.blank?
+			if lineitem.can_be_edited(controller: controller_name, user: @current_user)
+				return link_to lineitem.quantity_testers, edit_order_item_url(lineitem,o:lineitem.order.id), remote: true
+			else
+				return lineitem.quantity_testers
+			end
+		end
+	end
+
 	def display_shipping_address(order:)
 		company = order.orderer
 

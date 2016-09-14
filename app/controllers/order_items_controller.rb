@@ -20,8 +20,8 @@ class OrderItemsController < ApplicationController
 		else
 			@section = "profile"
 		end
-		@order = @current_user.get_parent.orders.current.find(params[:o])
-		if @order # only update if there is a current order
+		@order = @current_user.get_parent.orders.editable.find(params[:o])
+		if @order # only update if there is an editable order
 			@order_item = @order.order_items.find(params[:id])
 			params[:order_item][:quantity] = nil if params[:order_item][:quantity].to_i == 0
 			params[:order_item][:quantity_testers] = nil if params[:order_item][:quantity_testers].to_i == 0

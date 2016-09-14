@@ -15,9 +15,9 @@
 				<% get_sorted_order_items(order).each do |lineitem| %>
 				<tr>
 				<td><%= lineitem.item_id.present? ? "#{lineitem.item_id}" : "&nbsp;".html_safe %></td>
-				<td><%= order.status == "open" && controller_name != "home" && !@current_user.brand ? (link_to lineitem.name, edit_order_item_url(lineitem,o:order.id), remote: true) : lineitem.name %> <%= lineitem.product ? "" : "(err: 33!)" %></td>
-				<td><%= lineitem.quantity.blank? ? "" : (order.status == "open" && controller_name != "home" && !@current_user.brand ? (link_to lineitem.quantity, edit_order_item_url(lineitem,o:order.id), remote: true) : lineitem.quantity) %></td>
-				<td><%= lineitem.quantity_testers.blank? ? "" : (order.status == "open" && controller_name != "home" && !@current_user.brand ? (link_to lineitem.quantity_testers, edit_order_item_url(lineitem,o:order.id), remote: true) : lineitem.quantity_testers) %></td>
+				<td><%= display_lineitem_name(lineitem) %> <%= lineitem.product ? "" : "(err: 33!)" %></td>
+				<td><%= display_lineitem_quantity(lineitem) %></td>
+				<td><%= display_lineitem_quantity_testers(lineitem) %></td>
 				<td><%= number_to_currency(lineitem.price_in_dollars) %></td>
 				<td><%= number_to_currency(lineitem.tiered_price_in_dollars) %></td>
 				<td class="text-right"><%= number_to_currency(lineitem.total_price) %></td>

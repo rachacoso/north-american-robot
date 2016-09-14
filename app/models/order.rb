@@ -49,6 +49,7 @@ class Order # for V2 ordering
   scope :error, ->{where(status: "error")}
   scope :active, ->{any_of(:status.in => ["open","submitted","pending","approved","paid", "shipped","delivered","disputed"])}
   scope :in_progress, ->{any_of(:status.in => ["submitted","pending","approved","paid", "shipped","delivered","disputed"])}
+  scope :editable, ->{any_of(:status.in => ["open","submitted","pending"])}
 
   def self.of_company(company_id:, type:)
     if type == "brand"
