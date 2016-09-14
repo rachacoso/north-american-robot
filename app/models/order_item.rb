@@ -4,7 +4,8 @@ class OrderItem # for V2 ordering
   
   embedded_in :order
 
-  field :quantity, type: Integer
+  field :quantity, type: Integer, default: nil
+  field :quantity_testers, type: Integer, default: nil
 
   field :name, type: String, default: ""
   field :price, type: Integer # store MSRP price as cents (to be used in calculations for orders)
@@ -34,7 +35,11 @@ class OrderItem # for V2 ordering
     return (self.price * (1-(self.order.discount.to_f/100)))
   end
   def total_price # in dollars
-    return ((self.quantity * self.tiered_price) / 100)
+    if self.quantity.blank?
+      return nil
+    else
+      return ((self.quantity * self.tiered_price) / 100)
+    end
   end
 
 end

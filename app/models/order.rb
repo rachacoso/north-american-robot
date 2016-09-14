@@ -69,6 +69,7 @@ class Order # for V2 ordering
   def subtotal_price # price before addtional fees in dollars
     price = 0
     self.order_items.each do |item|
+      next if item.quantity.blank?
       price += item.quantity * item.tiered_price
     end
     return price / 100

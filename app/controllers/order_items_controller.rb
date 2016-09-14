@@ -23,7 +23,10 @@ class OrderItemsController < ApplicationController
 		@order = @current_user.get_parent.orders.current.find(params[:o])
 		if @order # only update if there is a current order
 			@order_item = @order.order_items.find(params[:id])
-			if params[:order_item][:quantity].to_i == 0
+			params[:order_item][:quantity] = nil if params[:order_item][:quantity].to_i == 0
+			params[:order_item][:quantity_testers] = nil if params[:order_item][:quantity_testers].to_i == 0
+			@order_item.update!(order_item_parameters)
+			if ( @order_item.quantity.blank? || @order_item.quantity.to_i == 0 ) && ( @order_item.quantity_testers.blank? || @order_item.quantity_testers.to_i == 0 ) 
 				@order_item.destroy
 				flash.now[:notice] = "#{@order_item.name} has been removed from the order"
 				if @order.order_items.empty?
@@ -31,8 +34,6 @@ class OrderItemsController < ApplicationController
 					@order.destroy
 					redirect_to view_brand_url(brand) and return
 				end
-			else
-				@order_item.update!(order_item_parameters)
 			end
 			respond_to do |format|
 				format.html  { redirect_to order_url(@order) }
@@ -54,10 +55,17 @@ class OrderItemsController < ApplicationController
 			@order = Order.create_new(user: @current_user, brand: @order_product.brand)
 		end
 		if @order # only create/update if there is active order
-			if params[:order_item][:quantity].to_i > 0
+			if params[:order_item][:quantity].to_i > 0 || params[:order_item][:quantity_testers].to_i > 0 
 				@order_item = @order.order_items.find_or_create_by(product_id: @order_product.id) # dont product duplicate order items if somehow was already created
+				if params[:order_item][:quantity].to_i == 0
+					params[:order_item][:quantity] = nil
+				end
+				if params[:order_item][:quantity_testers].to_i == 0
+					params[:order_item][:quantity_testers] = nil
+				end
 				@order_item.update(
-					quantity: params[:order_item][:quantity].to_i,
+					quantity: params[:order_item][:quantity],
+					quantity_testers: params[:order_item][:quantity_testers],
 					price: @order_product.price,
 					name: @order_product.name,
 					item_id: @order_product.item_id,
@@ -81,7 +89,8 @@ class OrderItemsController < ApplicationController
 
 	def order_item_parameters
 		params.require(:order_item).permit(
-			:quantity
+			:quantity,
+			:quantity_testers
 			)
 	end
 
