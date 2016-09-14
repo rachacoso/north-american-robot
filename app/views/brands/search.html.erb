@@ -14,12 +14,11 @@
 				<div id="main-body">
 
 
-
+				<h3>Your search: <strong><%= @query %></strong></h3>
 				<div class="filtered-results">
 				
 				<div class="row">
 					<div class="small-11 small-centered columns small-text-center medium-text-left">
-					<h3>Your search: <strong><%= @query %></strong></h3><br>	
 					<% if @searchresults.blank? %>
 						<h3>No Brands</h3>
 					<% else %>
