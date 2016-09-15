@@ -28,7 +28,7 @@
 
 						<div class="row">
 							<div class="medium-2 columns">
-								<%= render partial: "home/orders_chart", locals: { filter: @filter, company_id: @company_filter} %>
+								<%= render partial: "shared/orders/orders_chart", locals: { filter: @filter, company_id: @company_filter} %>
 							</div><!--/.medium-2-->
 							<div class="medium-10 columns">
 									<%= render partial: 'order_index', locals: { orders: @orders } %>
