@@ -34,7 +34,7 @@ class HomeController < ApplicationController
 
 			@profile = @current_user.get_parent
 
-			@current_orders = @profile.orders.current.count
+			@current_orders = @profile.orders.current.count unless @current_user.brand
 			@submitted_orders = @profile.orders.submitted.count
 			@pending_orders = @profile.orders.pending.count
 			@approved_orders = @profile.orders.approved.count
@@ -44,7 +44,8 @@ class HomeController < ApplicationController
 			@completed_orders = @profile.orders.completed.count
 			@error_orders = @profile.orders.error.count
 			@disputed_orders = @profile.orders.disputed.count
-			@active_orders = @profile.orders.active.count
+			# @active_orders = @profile.orders.active.count
+			@active_orders = @current_user.brand ? @profile.orders.active_brand.count : @profile.orders.active.count
 
 			@new_brands = Brand.activated.international.desc('c_at').limit(10)
 			@updated_brands = Brand.activated.international.desc('u_at').limit(5)

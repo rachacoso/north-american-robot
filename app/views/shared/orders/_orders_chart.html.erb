@@ -3,10 +3,12 @@
 	<div class="small-12 columns">
 		<table id="orders_chart">
 			<tbody>
+				<% if @current_orders %>
 				<tr <%= filter == "current" ? "class=active" : "" %>>
 					<td><%= @current_orders > 0 ? (link_to 'In Cart', orders_url(f:'current', company_id: company_id)) : 'In Cart' %></td>
 					<td><%= @current_orders > 0 ? (link_to @current_orders, orders_url(f:'current', company_id: company_id)) : @current_orders %></td>
 				</tr>
+				<% end %>
 				<tr <%= filter == "submitted" ? "class=active" : "" %>>
 					<td><%= @submitted_orders > 0 ? (link_to 'Submitted', orders_url(f:'submitted', company_id: company_id)) : 'Submitted' %></td>
 					<td><%= @submitted_orders > 0 ? (link_to @submitted_orders, orders_url(f:'submitted', company_id: company_id)) : @submitted_orders %></td>

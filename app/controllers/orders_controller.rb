@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
 			@profile = @current_user.company
 			type = Brand.find(company_id) ? "brand" : "other"
 
-			@current_orders = @profile.orders.of_company(company_id: company_id, type: type).current.count
+			@current_orders = @profile.orders.of_company(company_id: company_id, type: type).current.count unless @current_user.brand
 			@submitted_orders = @profile.orders.of_company(company_id: company_id, type: type).submitted.count
 			@pending_orders = @profile.orders.of_company(company_id: company_id, type: type).pending.count
 			@approved_orders = @profile.orders.of_company(company_id: company_id, type: type).approved.count
@@ -22,7 +22,8 @@ class OrdersController < ApplicationController
 			@completed_orders = @profile.orders.of_company(company_id: company_id, type: type).completed.count
 			@error_orders = @profile.orders.of_company(company_id: company_id, type: type).error.count
 			@disputed_orders = @profile.orders.of_company(company_id: company_id, type: type).disputed.count
-			@active_orders = @profile.orders.of_company(company_id: company_id, type: type).active.count
+			# @active_orders = @profile.orders.of_company(company_id: company_id, type: type).active.count
+			@active_orders = @current_user.brand ? @profile.orders.of_company(company_id: company_id, type: type).active_brand.count : @profile.orders.of_company(company_id: company_id, type: type).active.count
 			if f = params[:f]
 				if [
 					"current", 
@@ -37,14 +38,20 @@ class OrdersController < ApplicationController
 					"completed",
 					"active"
 					].include? f
-					@orders = @profile.orders.of_company(company_id: company_id, type: type).send(f).order_by(:c_at => 'desc')
+					if f == "current" && @current_user.brand
+						@orders = nil
+					elsif f == "active" && @current_user.brand
+						@orders = @profile.orders.of_company(company_id: company_id, type: type).active_brand.order_by(:c_at => 'desc')
+					else
+						@orders = @profile.orders.of_company(company_id: company_id, type: type).send(f).order_by(:c_at => 'desc')
+					end
 					@filter = f
 				else
-					@orders = @profile.orders.of_company(company_id: company_id, type: type).active.order_by(:c_at => 'desc')
+					@orders = @current_user.brand ? @profile.orders.of_company(company_id: company_id, type: type).active_brand.order_by(:c_at => 'desc') : @profile.orders.of_company(company_id: company_id, type: type).active.order_by(:c_at => 'desc')
 					@filter = "active"
 				end		
 			else
-				@orders = @profile.orders.of_company(company_id: company_id, type: type).active.order_by(:c_at => 'desc')
+				@orders = @current_user.brand ? @profile.orders.of_company(company_id: company_id, type: type).active_brand.order_by(:c_at => 'desc') : @profile.orders.of_company(company_id: company_id, type: type).active.order_by(:c_at => 'desc')
 				@filter = "active"
 			end
 
@@ -53,7 +60,7 @@ class OrdersController < ApplicationController
 		else # no company filter
 
 			@profile = @current_user.company
-			@current_orders = @profile.orders.current.count
+			@current_orders = @profile.orders.current.count unless @current_user.brand
 			@submitted_orders = @profile.orders.submitted.count
 			@pending_orders = @profile.orders.pending.count
 			@approved_orders = @profile.orders.approved.count
@@ -63,7 +70,8 @@ class OrdersController < ApplicationController
 			@completed_orders = @profile.orders.completed.count
 			@error_orders = @profile.orders.error.count
 			@disputed_orders = @profile.orders.disputed.count
-			@active_orders = @profile.orders.active.count
+			# @active_orders = @profile.orders.active.count
+			@active_orders = @current_user.brand ? @profile.orders.active_brand.count : @profile.orders.active.count
 			if f = params[:f]
 				if [
 					"current", 
@@ -78,14 +86,20 @@ class OrdersController < ApplicationController
 					"completed",
 					"active"
 					].include? f
-					@orders = @profile.orders.send(f).order_by(:c_at => 'desc')
+					if f == "current" && @current_user.brand
+						@orders = nil
+					elsif f == "active" && @current_user.brand
+						@orders = @profile.orders.active_brand.order_by(:c_at => 'desc')
+					else
+						@orders = @profile.orders.send(f).order_by(:c_at => 'desc')
+					end
 					@filter = f
 				else
-					@orders = @profile.orders.active.order_by(:c_at => 'desc')
+					@orders = @current_user.brand ? @profile.orders.active_brand.order_by(:c_at => 'desc') : @profile.orders.active.order_by(:c_at => 'desc')
 					@filter = "active"
 				end		
 			else
-				@orders = @profile.orders.active.order_by(:c_at => 'desc')
+				@orders = @current_user.brand ? @profile.orders.active_brand.order_by(:c_at => 'desc') : @profile.orders.active.order_by(:c_at => 'desc')
 				@filter = "active"
 			end
 
