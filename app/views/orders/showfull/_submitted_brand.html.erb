@@ -30,7 +30,9 @@
 						<div class="row">
 							<div class="small-12 columns">
 								<div class="panel">
-									<h3>Updates the discount rate for this order, overriding the default 50% unit discount rate.</h3>
+									<h3>Update the discount rate for this order, overriding the default 50% unit discount rate.</h3>
+								</div>
+								<div class="panel">
 									<%= form_for order, :html => {id: 'order-discount-form'}, remote: true do |f| %>
 										<div class="row">
 											<div class="small-12 columns">
@@ -67,7 +69,10 @@
 						<div class="row">
 							<div class="small-12 columns">
 								<div class="panel">
-									<h3>Additional charges or discounts (e.g. Shipping, Fees).</h3>
+									<h3>Add any additional charges or discounts (e.g. Shipping, Fees).</h3>
+								</div>
+								<div class="panel">
+									<h3><strong>Additional Charges</strong></h3>
 									<% if order.order_additional_charges.present? %>
 									<div class="row" id="additional-cost-headers">
 											<div class="medium-3 columns">
@@ -147,6 +152,9 @@
 						<br>
 						<h1>3) Review Order</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
+						<div class="panel">
+							<h3>You can edit order Items by clicking on item name or quantity</h3>							
+						</div>
 						<div class="panel" id="order-display">
 							<%= render "shared/orders/show" %>		
 						</div>
