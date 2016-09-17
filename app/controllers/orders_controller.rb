@@ -342,6 +342,11 @@ class OrdersController < ApplicationController
 			@render_this = "cancel_date"
 		end
 
+		if params[:order][:discount]
+
+			@render_this = "discount"
+		end
+
 		# address update
 		if params[:order][:shipping_address_attributes].present?
 			@render_this = "shipping_address"
@@ -349,7 +354,7 @@ class OrdersController < ApplicationController
 
 		@order.update(order_params)
 		if !@order.save
-			flash[:error] = "Sorry, Discount must be a number between 0 and 100"
+			flash.now[:error] = "Sorry, Discount must be a number between 0 and 100"
 		end
 		respond_to do |format|
 			format.html  { redirect_to order_url(@order) }

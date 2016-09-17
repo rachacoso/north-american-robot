@@ -17,13 +17,57 @@
 
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
+					<h1>Next Steps:</h1>
+					</div><!--/.medium-11 medium-centered-->
+				</div><!--/.row-->
+
+				<div class="row">
+					<div class="medium-11 medium-centered columns">
+
 						<br>
-						<h1>Next Steps:</h1>
-						<h1>1) Add Additional Charges <small>(e.g. shipping, fees)</small></h1>
+						<h2>1) Change Order Discount Rate (Optional)</h2>
 						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 						<div class="row">
 							<div class="small-12 columns">
 								<div class="panel">
+									<h3>Updates the discount rate for this order, overriding the default 50% unit discount rate.</h3>
+									<%= form_for order, :html => {id: 'order-discount-form'}, remote: true do |f| %>
+										<div class="row">
+											<div class="small-12 columns">
+												<%= f.label :discount, "Order Discount" %>
+											</div><!--/.small-12-->
+										</div><!--/.row-->
+										<div class="row">
+											<div class="medium-2 columns">
+												<div class="row collapse">
+													<div class="small-8 columns">
+														<%= f.number_field :discount, label: false %>
+													</div><!--/.small-4-->
+													<div class="small-4 columns">
+														<span class="postfix">%</span>
+													</div><!--/.small-2-->
+												</div><!--/.row-->
+											</div><!--/.small-12-->
+										</div><!--/.row-->
+										<div class="row">
+											<div class="small-12 columns">
+												<%= f.submit "Update Discount", class: "landing-button" %>
+												<div class="inline-error" id="discount-error"></div>
+											</div><!--/.small-12-->
+										</div><!--/.row-->
+									<% end %>
+								</div> <!--.panel-->
+							</div><!--/.small-12-->
+						</div><!--/.row-->
+
+
+						<br>
+						<h2>2) Add Additional Charges (Optional)</h2>
+						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
+						<div class="row">
+							<div class="small-12 columns">
+								<div class="panel">
+									<h3>Additional charges or discounts (e.g. Shipping, Fees).</h3>
 									<% if order.order_additional_charges.present? %>
 									<div class="row" id="additional-cost-headers">
 											<div class="medium-3 columns">
@@ -94,21 +138,20 @@
 								</div> <!--.panel-->
 							</div><!--/.small-12-->
 						</div><!--/.row-->
-					</div><!--/.medium-11 medium-centered-->
-				</div><!--/.row-->
 
+					</div><!--/.medium-11-->
+				</div><!--/.row-->
 
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
 						<br>
-						<h1>2) Review Order</h1>
+						<h1>3) Review Order</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
-						<div class="panel">
+						<div class="panel" id="order-display">
 							<%= render "shared/orders/show" %>		
 						</div>
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->
-
 
 				<div class="row">
 					<div class="medium-11 medium-centered columns">

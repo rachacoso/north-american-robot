@@ -1,10 +1,10 @@
 $( document ).ready(function() {
 
-	initializeShipCancel();
+	initializeOrderControl();
 
 });
 
-function initializeShipCancel() {
+function initializeOrderControl() {
 	$("#ship-date-form input[type=text]").change(function(){
 		$("#ship-date-form").submit();
 	});
