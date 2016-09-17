@@ -17,24 +17,10 @@
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
 
-						<div class="row">
-							<div class="medium-6 columns">
-								<br>
-								<h1>What's next?</h1>
-								<h1>1) Confirm Order Details</h1>
-								<h3>Click on any item to edit. Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
-							</div><!--/.medium-6-->
-							<div class="medium-6 columns text-right">
-								<%#= link_to "View Brand Profile - #{order.brand.company_name}", view_brand_url(order.brand), class: "landing-button" %>
-							</div><!--/.medium-6-->
-						</div><!--/.row-->
-
-						<div class="panel" id="order-display">
-							<%= render "shared/orders/show" %>		
-						</div>
-
 						<br>
-						<h1>2) Update Shipping Address</h1>
+						<h1>What's next?</h1>
+						<h1>1) Update Shipping Address</h1>
+						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 						<div class="panel text-center">
 							<%= form_for order, :html => {id: 'shipping-address-form'}, remote: true, authenticity_token: true do |f| %>
 							<div class="row">
@@ -67,16 +53,32 @@
 
 
 						<br>
-						<h1>3) Add Ship Date and Cancel Date (Optional)</h1>
+						<h1>2) Add Ship Date and Cancel Date (Optional)</h1>
+						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 						<div class="panel text-center">
 							<div id="ship-cancel-add">
 								<%= render partial: "ship_cancel_add", locals: {order: order} %>
 							</div><!--/.add-ship-cancel-form-->
 						</div><!--.panel text-center-->
 
+						<br>
+						<h1>3) Add Comments (Optional)</h1>
+						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
+						<div class="panel text-center">
+							<div id="add-comments">
+								<%= render partial: "add_comments", locals: {order: order} %>
+							</div><!--/.add-ship-cancel-form-->
+						</div><!--.panel text-center-->
 
 						<br>
-						<h1>4) Submit Order to <%= order.brand.company_name %></h1>
+						<h1>4) Confirm Order Details</h1>
+						<h3>Click on any order item to edit. <br>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
+
+						<div class="panel" id="order-display">
+							<%= render "shared/orders/show" %>		
+						</div>
+						<br>
+						<h1>5) Submit Order to <%= order.brand.company_name %></h1>
 						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 						<div class="panel text-center">
 						<%= link_to "Submit Order to #{order.brand.company_name}", submit_order_url(order,0), class: "landing-button", remote: true %> <span style="font-weight: 100;">or</span>

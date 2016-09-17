@@ -1,0 +1,5 @@
+<% if comment = order.comments.find_by(order_status: 'open') %>
+	<%= render partial: "update_order_comments", locals: {comment: comment} %>
+<% else %>
+	<%= render partial: "new_order_comments", locals: {order: order} %>
+<% end %>

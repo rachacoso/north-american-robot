@@ -343,8 +343,13 @@ class OrdersController < ApplicationController
 		end
 
 		if params[:order][:discount]
-
 			@render_this = "discount"
+		end
+
+		# add comment
+		if params[:order][:comment][:text]
+			@order.comments.create(text: params[:order][:comment][:text], author: @current_user.type?, order_status: @order.status)
+			@render_this = "comment"
 		end
 
 		# address update
@@ -354,7 +359,8 @@ class OrdersController < ApplicationController
 
 		@order.update(order_params)
 		if !@order.save
-			flash.now[:error] = "Sorry, Discount must be a number between 0 and 100"
+			# flash.now[:error] = "Sorry, Discount must be a number between 0 and 100"
+			flash.now[:error] = @order.errors.full_messages
 		end
 		respond_to do |format|
 			format.html  { redirect_to order_url(@order) }
@@ -385,6 +391,10 @@ class OrdersController < ApplicationController
 			  :state,
 			  :postcode,
 			  :country
+			],
+			comment_attributes: [
+				:text,
+				:author
 			]
 		)
 	end

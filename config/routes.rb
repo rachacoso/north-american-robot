@@ -39,6 +39,8 @@ Rails.application.routes.draw do
   get   '/order/c/:id/:confirm' => 'orders#complete', as: 'complete_order'
   get   '/order/add/:id/:confirm' => 'orders#armor_disabled_delivered', as: 'armor_disabled_received_order'
   get   '/order/adc/:id/:confirm' => 'orders#armor_disabled_completed', as: 'armor_disabled_completed_order'
+  # for order comments
+  patch   '/order/comments/:id' => 'comments#update', as: 'order_update_comment'
 
   # ARMOR PAYMENTS TESTING
   get   '/order/paid/:id/:confirm' => 'orders#paid', as: 'paid_order'

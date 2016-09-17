@@ -1,0 +1,11 @@
+<%= form_for order, :html => {id: 'order-comments-form'}, remote: true, authenticity_token: true do |f| %>
+<div class="row">
+	<div class="medium-11 medium-centered columns">
+	<%= f.fields_for :comment do |ff| %>
+		<%= ff.text_area :text, rows: 15, label: "<small>Comments</small>".html_safe %>
+	<% end %>
+	<%= f.submit "Add Comment", class: "landing-button" %>
+	<div class="inline-error" id="comment-error"></div>
+	</div><!--/.medium-6-->
+</div><!--/.row-->
+<% end %>

@@ -14,8 +14,8 @@ class Order # for V2 ordering
   embeds_many :order_additional_charges, cascade_callbacks: true
   field :ship_to_name, type: String
   embeds_one :shipping_address, class_name: "Address", inverse_of: :addressable
-  accepts_nested_attributes_for :order_items, :order_additional_charges, :shipping_address
-
+  embeds_many :comments, as: :commentable
+  accepts_nested_attributes_for :order_items, :order_additional_charges, :shipping_address, :comments
 
   field :status, type: String, default: "open" # Values: OPEN, SUBMITTED, PENDING, APPROVED, PAID, SHIPPED, DELIVERED, COMPLETED, DISPUTED, ERROR
   field :status_error_message, type: String

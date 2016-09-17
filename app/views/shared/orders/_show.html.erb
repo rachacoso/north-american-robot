@@ -72,6 +72,11 @@
 			</div><!--/.medium-6-->
 		</div><!--/.row-->
 
+		<%= @order.comments.present? ? "<h2>Comments:</h2>".html_safe : ""%>
+		<% @order.comments.each do |comment| %>
+			<p><%= comment.text %><br><small>Comment Added by <%= comment.author == "brand" ? @order.brand.comapny_name : @order.orderer.company_name %> at <%= comment.c_at.strftime("%b %m %Y") %></p>
+		<% end %>
+
 	</div><!--/.medium-11 medium-centered-->
 </div><!--/.row-->
 
