@@ -4,7 +4,7 @@
 	$('#discount-error').fadeIn();
 <% else %>
 	$('#discount-error').fadeOut(); // hide any error messages
-	$('#ajax-success-data').html("Discount Successfully Updated");
+	$('#ajax-success-data').html("Discount Updated");
 	$('#ajax-message').fadeIn().delay( 1500 ).fadeOut();
 	$('#order-display').html("<%= j (render partial: 'shared/orders/show') %>");
 <% end %>

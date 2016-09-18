@@ -1,0 +1,28 @@
+<%= form_for order, :html => {id: 'shipping-address-form'}, remote: true, authenticity_token: true do |f| %>
+<div class="row">
+	<div class="medium-7 medium-centered columns">
+		<div class="small-12 columns">
+			<%= f.text_field :ship_to_name, label: "<small>Ship to</small>".html_safe %>
+		</div>
+	<%= f.fields_for :shipping_address do |ff| %>
+	<div class="small-12 columns">
+		<%= ff.text_field :address1, label: "<small>Street Address</small>".html_safe %>
+		<%= ff.text_field :address2, label: false %>
+	</div>
+	<div class="medium-4 columns">
+		<%= ff.text_field :city, label: "<small>City/Town/Department</small>".html_safe %>
+	</div>
+	<div class="medium-5 columns">
+		<%= ff.text_field :state, label: "<small>State/Province/Region/County</small>".html_safe %>
+	</div>
+	<div class="medium-3 columns">
+		<%= ff.text_field :postcode, label: "<small>Zip/Postal Code</small>".html_safe %>
+	</div>
+	<div class="medium-6 columns">
+		<%= ff.text_field :country, class: "country-autocomplete", placeholder: 'Country', label: "<small>Country</small>".html_safe %>
+	</div>
+	<% end %>
+	</div><!--/.medium-6-->
+</div><!--/.row-->
+<%= f.submit "Update Shipping Address", class: "landing-button" %>
+<% end %>

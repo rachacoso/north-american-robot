@@ -8,5 +8,7 @@
 	$('#order-item').fadeIn();
 <% end %>
 $('#order-display').html("<%= j (render partial: 'shared/orders/show') %>");
+$('#ajax-success-data').html("Cancel Date Updated");
+$('#ajax-message').fadeIn().delay( 1500 ).fadeOut();
 initialize ();
 initializeOrderControls();

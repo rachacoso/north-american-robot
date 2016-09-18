@@ -347,7 +347,7 @@ class OrdersController < ApplicationController
 		end
 
 		# add comment
-		if params[:order][:comment][:text]
+		if params[:order][:comment] && params[:order][:comment][:text]
 			@order.comments.create(text: params[:order][:comment][:text], author: @current_user.type?, order_status: @order.status)
 			@render_this = "comment"
 		end
