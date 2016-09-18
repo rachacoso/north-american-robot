@@ -6,10 +6,14 @@ class OrderAdditionalChargesController < ApplicationController
 			new_charge = @order.order_additional_charges.create(order_additional_charge_params)
 			new_charge.set_amount(params[:order_additional_charge][:amount])
 			new_charge.save!
+			@message = "Added"
 		else
-			flash[:error] = "Please input a NAME and AMOUNT"
+			flash.now[:error] = "Please input a NAME and AMOUNT"
 		end
-		redirect_to order_url(@order)
+		respond_to do |format|
+			format.html  { redirect_to order_url(@order) }
+			format.js { render 'orders/additional_charges' }
+		end
 	end
 
 	def update
@@ -18,14 +22,22 @@ class OrderAdditionalChargesController < ApplicationController
 		@order = add_charge.order
 		add_charge.update(order_additional_charge_params)
 		add_charge.set_amount(params[:order_additional_charge][:amount])
-		redirect_to order_url(@order)
+		@message = "Updated"
+		respond_to do |format|
+			format.html  { redirect_to order_url(@order) }
+			format.js { render 'orders/additional_charges' }
+		end
 	end
 
 	def destroy
 		@order = Order.find(params[:order_id])
 		delete_charge = @order.order_additional_charges.find(params[:id])
 		delete_charge.destroy
-		redirect_to order_url(@order)
+		@message = "Deleted"
+		respond_to do |format|
+			format.html  { redirect_to order_url(@order) }
+			format.js { render 'orders/additional_charges' }
+		end
 	end
 
 	private

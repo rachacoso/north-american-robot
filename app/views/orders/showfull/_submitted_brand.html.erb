@@ -73,51 +73,10 @@
 								</div>
 								<div class="panel">
 									<h3><strong>Additional Charges</strong></h3>
-									<% if order.order_additional_charges.present? %>
-									<div class="row" id="additional-cost-headers">
-											<div class="medium-3 columns">
-												<span style="font-weight: 100;">Name</span>
-											</div><!--/"medium-3-->
-											<div class="medium-4 columns">
-												<span style="font-weight: 100;">Description</span>
-											</div><!--/"medium-3-->
-											<div class="medium-1 columns">
-												<span style="font-weight: 100;">Amount</span>
-											</div><!--/"medium-3-->
-											<div class="medium-4 columns">
-												&nbsp;
-											</div><!--/.medium-3-->
-										</div><!--/.row-->
-									<% order.order_additional_charges.each do |c| %>
-										<%= form_for c, url: update_order_additional_charge_url(order,c) do |f| %>
-										<div class="row">
-											<div class="medium-3 columns">
-												<%= f.text_field :name, label: false %>	
-											</div><!--/"medium-3-->
-											<div class="medium-4 columns">
-												<%= f.text_field :description, label: false %>	
-											</div><!--/"medium-4-->
-											<div class="medium-2 columns">
-												<div class="row collapse">
-													<div class="small-2 columns">
-														<span class="prefix">$</span>
-													</div><!--/.small-2-->
-													<div class="small-10 columns">
-														<%= f.number_field :amount, step: "any", value: display_price(c.amount), label: false %>
-													</div><!--/.small-10-->
-												</div><!--/.row-->
-											</div><!--/"medium-2-->
-											<div class="medium-3 columns">
-											<%= f.submit "Update", class: "landing-button", style: "margin-top: 0;" %>
-											<%= link_to 'Delete', delete_order_additional_charge_url(order,c), :method => 'Delete', data: { :confirm => 'Are you sure you want to delete this charge?'}, class: "landing-button", style: "margin-top: 0;"  %>
-											</div><!--/.medium-3-->
-										</div><!--/.row-->
-										<% end %>
-									<% end %>
-									<hr style="margin-top: 0; margin-bottom: 16;">
-									<% end %>
-									<%= flash[:error] ? "<span class='error'>#{flash[:error]}</span>".html_safe : "" %>
-									<%= form_for OrderAdditionalCharge.new, url: create_order_additional_charge_url(order) do |f| %>
+
+									<span id="additional-charges-display"><%= render partial: "additional_charges", locals: { order: order } %></span>
+									<div class="inline-error" id="additional-charge-error"></div>
+									<%= form_for OrderAdditionalCharge.new, url: create_order_additional_charge_url(order), remote: true do |f| %>
 										<div class="row">
 											<div class="medium-3 columns">
 												<%= f.text_field :name, placeholder: 'Name (required)', label: false %>
