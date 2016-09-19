@@ -71,9 +71,13 @@
 
 						<%= display_shipping_address(order: order) %>
 
-						Contact:<br>
+						<ul>
+						<li>Contact</li>
+						<li><span id="title">
 						<%= order.user.contact.firstname if order.user.contact.firstname.present? %> <%= order.user.contact.lastname if order.user.contact.lastname.present? %>
-						<%= order.user.contact.phone.present? ? "/ #{order.user.contact.phone.phony_formatted(format: :international , spaces: '-')}".html_safe : "<br>Phone n/a".html_safe %>
+						<%= order.user.contact.phone.present? ? "/ #{order.user.contact.phone.phony_formatted(format: :international , spaces: '-')}".html_safe : "<br>Phone n/a".html_safe %></span>
+						</li>
+						</ul>
 
 						<% if order.ship_date.present? || order.cancel_date.present? %>
 							<hr>
