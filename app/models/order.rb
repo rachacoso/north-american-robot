@@ -94,6 +94,7 @@ class Order # for V2 ordering
 
   def self.create_new(user:, brand:)
     order = Order.new
+    order.generate_id(:landing_order_reference_id)
 
     order.orderer = user.company
     order.orderer_company_name = user.company.company_name
@@ -385,6 +386,13 @@ class Order # for V2 ordering
 
   def viewable_by?(user)
     return true if self.orderer == user.company || self.brand == user.company
+  end
+
+  def generate_id(column)
+    begin
+      numberstring = Order.all.count + 1001 # lets start at 1000!
+      self[column] = "LAN" + numberstring.to_s
+    end while Order.where(column => self[column]).exists?
   end
 
 end
