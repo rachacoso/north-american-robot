@@ -180,6 +180,21 @@ class Order # for V2 ordering
       ).deliver
   end
 
+  def decline_approval(requests:, user:)
+    self.status = "submitted"
+    # self.pending_date = DateTime.now
+    self.comments.create(text: requests, author: user.type?, order_status: "submitted")
+    self.save!
+    # NEED TO ADD MAILER FOR DECLINING APPROVAL
+    # OrderMailer.send_order(
+    #   order: self, 
+    #   status: "pending", 
+    #   email: self.orderer.users.pluck(:email), # send to orderer email
+    #   subject: "Yippee! Your order has been approved.",
+    #   title: "Order Pending Approval and Payment"
+    #   ).deliver
+  end
+
   def approval
     if self.orderer.disable_armor_payments # remove all armor ids if buyer turns off armor
       self.armor_buyer_account_id = nil if self.armor_buyer_account_id.present?

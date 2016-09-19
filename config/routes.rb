@@ -34,6 +34,8 @@ Rails.application.routes.draw do
   get   '/order/s/:id/:confirm' => 'orders#submit', as: 'submit_order'
   get   '/order/p/:id/:confirm' => 'orders#pending', as: 'pending_order'
   get   '/order/a/:id/:confirm' => 'orders#approve', as: 'approve_order'
+  get   '/order/da/:id/:confirm' => 'orders#decline_approval', as: 'decline_approval_order'
+  patch '/order/da/:id/:confirm' => 'orders#decline_approval'
   post  '/order/shipment/:id' => 'orders#shipment', as: 'order_shipment_info'
   # for non armor orders
   get   '/order/c/:id/:confirm' => 'orders#complete', as: 'complete_order'

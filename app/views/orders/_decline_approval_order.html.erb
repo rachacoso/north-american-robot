@@ -1,0 +1,19 @@
+<%= form_for order, url: decline_approval_order_url(order,1), remote: true do |f| %>
+<div class="row">
+	<div class="small-12 columns text-center">
+		<h2 style="line-height: 1em;"><strong>Wait!<br> I'd like to ask for some changes!</strong></h2>
+		<hr>
+		<h2>Send this order back to <%= order.brand.company_name %><br> with your change requests.</h2>
+			<%= label_tag 'requests', 'Enter change requests below' %>
+			<%= text_area_tag 'requests', nil, rows: 10, label: "<strong>Enter your requests below</strong>".html_safe %>
+			
+			<div class="inline-error" id="decline-approval-error"><%= flash[:error] ? flash[:error] : "" %></div>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<div class="row">
+	<div class="small-12 columns text-center">
+		<%= f.submit "Request Changes", class: "landing-button" %>
+		<%= link_to "Never Mind", orders_url(order), class: "landing-button secondary", id: "submit-close" %>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<% end %>

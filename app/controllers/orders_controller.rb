@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
 
-	before_action :set_order, only: [:show, :edit, :update, :destroy, :submit, :pending, :approve, :shipment, :paid, :delivered, :armor_disabled_delivered, :armor_disabled_completed, :complete, :ship_date, :cancel_date]
+	before_action :set_order, only: [:show, :edit, :update, :destroy, :submit, :pending, :approve, :decline_approval, :shipment, :paid, :delivered, :armor_disabled_delivered, :armor_disabled_completed, :complete, :ship_date, :cancel_date]
 
 	#setting of paid only done for testing & by admin only
 	before_action :administrators_only, only: [:paid, :delivered, :complete]
@@ -107,47 +107,6 @@ class OrdersController < ApplicationController
 
 	end
 
-	# def company_index
-	# 	company_id = params[:company_id]
-	# 	@profile = @current_user.get_parent
-
-	# 	@current_orders = @profile.orders.where(orderer_id: company_id).current.count || @profile.orders.where(brand_id: company_id).current.count
-	# 	@submitted_orders = @profile.orders.where(orderer_id: company_id).submitted.count || @profile.orders.where(brand_id: company_id).submitted.count
-	# 	@pending_orders = @profile.orders.where(orderer_id: company_id).pending.count || @profile.orders.where(brand_id: company_id).pending.count
-	# 	@approved_orders = @profile.orders.where(orderer_id: company_id).approved.count || @profile.orders.where(brand_id: company_id).approved.count
-	# 	@paid_orders = @profile.orders.where(orderer_id: company_id).paid.count || @profile.orders.where(brand_id: company_id).paid.count
-	# 	@shipped_orders = @profile.orders.where(orderer_id: company_id).shipped.count || @profile.orders.where(brand_id: company_id).shipped.count
-	# 	@delivered_orders = @profile.orders.where(orderer_id: company_id).delivered.count || @profile.orders.where(brand_id: company_id).delivered.count
-	# 	@completed_orders = @profile.orders.where(orderer_id: company_id).completed.count || @profile.orders.where(brand_id: company_id).completed.count
-	# 	@error_orders = @profile.orders.where(orderer_id: company_id).error.count || @profile.orders.where(brand_id: company_id).error.count
-	# 	@disputed_orders = @profile.orders.where(orderer_id: company_id).disputed.count || @profile.orders.where(brand_id: company_id).disputed.count
-	# 	@active_orders = @profile.orders.where(orderer_id: company_id).active.count || @profile.orders.where(brand_id: company_id).active.count
-	# 	if f = params[:f]
-	# 		if [
-	# 			"current", 
-	# 			"submitted", 
-	# 			"pending", 
-	# 			"approved",
-	# 			"paid",
-	# 			"shipped",
-	# 			"delivered",
-	# 			"disputed",
-	# 			"error",
-	# 			"completed",
-	# 			"active"
-	# 			].include? f
-	# 			@orders = @current_user.company.orders.where(orderer_id: company_id).send(f).order_by(:c_at => 'desc') || @current_user.company.orders.where(brand_id: company_id).send(f).order_by(:c_at => 'desc') 
-	# 			@filter = f
-	# 		else
-	# 			@orders = @current_user.company.orders.where(orderer_id: company_id).active.order_by(:c_at => 'desc') || @current_user.company.orders.where(brand_id: company_id).active.order_by(:c_at => 'desc')
-	# 			@filter = "active"
-	# 		end		
-	# 	else
-	# 		@orders = @current_user.company.orders.where(orderer_id: company_id).active.order_by(:c_at => 'desc') || @current_user.company.orders.where(brand_id: company_id).active.order_by(:c_at => 'desc')
-	# 		@filter = "active"
-	# 	end
-
-	# end
 
 	def show
 		unless @order.viewable_by? @current_user
@@ -225,6 +184,23 @@ class OrdersController < ApplicationController
 			@order.approval
 			if @order.errors.any?
 				flash.now[:notice] = @order.errors.full_messages
+			end
+		end
+		respond_to do |format|
+			format.html  { redirect_to order_url(@order) }
+			format.js
+		end
+	end
+
+	def decline_approval
+		if params[:confirm].to_i == 1
+			if params[:requests].blank?
+				flash.now[:error] = "Sorry, please enter any change requests!"
+			else
+				@order.decline_approval(requests: params[:requests], user: @current_user)
+				if @order.errors.any?
+					flash.now[:notice] = @order.errors.full_messages
+				end
 			end
 		end
 		respond_to do |format|
