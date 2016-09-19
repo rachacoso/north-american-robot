@@ -1,0 +1,50 @@
+<% if order.comments.present? %>
+<div id="order-comments">
+	<div class="row">
+		<div class="small-12 columns">
+			<div id="header-row">
+			order history &amp; comments
+			</div>
+			<div id="data">
+				<ul>
+					<%= display_history_and_comments(order: order) %>
+					<% if order.status == "open" && order.comments.open.present? %>
+						<li>
+							<%= render partial: "shared/orders/order_comment_display", locals: { comment: order.comments.open.first } %>
+						</li>
+					<% end %>
+					<% if order.submission_date.present? %>
+					<li>
+						<span id='title'>SUBMITTED by <%= order.orderer_company_name %></span> <%= order.submission_date.in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M %Z") %>
+						<% if comment = order.comments.open.first %>
+							<%= render partial: "shared/orders/order_comment_display", locals: { comment: comment } %>
+						<% end %>
+					</li>
+					<% end %>
+
+					<% if order.pending_date.present? %>
+					<li>
+						<span id='title'>SENT FOR APPROVAL by <%= order.brand_company_name %></span> <%= order.pending_date[0].in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M %Z") %>
+					</li>
+					<% end %>
+
+
+					<% if change_requests = order.comments.submitted_comment_from_orderer %>
+						<% change_requests.each_with_index do |c,index| %>
+						<li>
+							<span id='title'>CHANGES REQUESTED by <%= order.orderer_company_name %></span> <%= c.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M %Z") %>
+							<%= render partial: "shared/orders/order_comment_display", locals: { comment: c } %>
+						</li>
+							<% if order.pending_date[index.to_i+1] %>
+								<li>
+									<span id='title'>SENT FOR APPROVAL by <%= order.brand_company_name %></span> <%= order.pending_date[index.to_i+1].in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M %Z") %>
+								</li>
+							<% end %>
+						<% end %>
+					<% end %>
+				</ul>
+			</div><!--/.data-->
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+</div>
+<% end %>

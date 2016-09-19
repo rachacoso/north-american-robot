@@ -11,4 +11,8 @@ class Comment
   validates :text, presence: true
   validates :author, presence: true
 
+	scope :open, ->{where(order_status: "open")}
+  scope :submitted_comment_from_brand, ->{where(order_status: "submitted", author: "brand")}
+  scope :submitted_comment_from_orderer, ->{where(order_status: "submitted", :author.in => ["retailer", "distributor"])}
+
 end

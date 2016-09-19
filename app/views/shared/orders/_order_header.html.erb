@@ -1,0 +1,99 @@
+<div id="order-header">
+	<div class="row">
+		<div class="small-6 columns">
+		</div><!--/.small-6-->
+		<div class="small-6 columns text-right">
+			<h2><%= "[Estimated]" if ['open','submitted','pending'].include? order.status %> Invoice</h2>
+			<small>by</small>
+			<%= image_tag 'https://s3.amazonaws.com/landingintl-us/general/landing-logo.png', width: "100", alt: "Landing International" %>
+
+			<ul id="order-header-data">
+				<li><span id="title">Status</span> <%= order.status.capitalize %></li>
+				<% if order.c_at.present? %>
+					<li><span id="title">Created</span><%= order.c_at.strftime(" %d %b %Y") %></li>
+				<% end %>
+				<% if order.u_at.present? %>
+					<li><span id="title">Updated</span><%= order.u_at.strftime(" %d %b %Y") %></li>
+				<% end %>
+				<% if order.landing_order_reference_id.present? %>
+					<li><span id="title">Landing Order ID</span> <%= order.landing_order_reference_id %></li>
+				<% end %>
+				<% if order.armor_order_id.present? %>
+					<li><span id="title">Armor/Payoneer Order ID</span> <%= order.armor_order_id %></li>
+				<% end %>
+				<% if order.brand_order_reference_id.present? %>
+					<li><span id="title"><%= order.brand_company_name %> Order Reference ID</span> <%= order.brand_order_reference_id %></li>
+				<% end %>
+				<% if order.orderer_order_reference_id.present? %>
+					<li><span id="title"><%= order.orderer_company_name %> Order Reference ID</span> <%= order.orderer_order_reference_id %></li>
+				<% end %>
+			</ul>
+		</div><!--/.small-6-->
+	</div><!--/.row-->
+	<div class="row" id="order-shipping-data">
+		<div class="small-12 columns">
+			<div id="header-row">
+				<div class="row">
+					<div class="medium-3 columns">brand</div><!--/.medium-3-->
+					<div class="medium-3 columns">buyer</div><!--/.medium-3-->
+					<div class="medium-6 columns">ship to</div><!--/.medium-6-->
+				</div><!--/.row-->
+			</div>
+			<div id="body">
+				<div class="row">
+					<div class="medium-3 columns">
+					<ul>
+					<li><span id="title"><%= link_to order.brand_company_name, profile_link(order.brand), target: "_blank" %></span></li>
+					<%= "<li>#{order.brand.address.address1}</li>".html_safe unless !order.brand.address.address1 || order.brand.address.address1.empty? %>
+					<%= "<li>#{order.brand.address.address2}</li>".html_safe unless !order.brand.address.address2 || order.brand.address.address2.empty? %>
+					<li>
+					<%= "#{order.brand.address.city}".html_safe unless !order.brand.address.city || order.brand.address.city.empty? %>
+					<%= "#{order.brand.address.state}".html_safe unless !order.brand.address.state || order.brand.address.state.empty? %>
+					<%= "#{order.brand.address.postcode}".html_safe unless !order.brand.address.postcode || order.brand.address.postcode.empty? %>
+					</li>
+					<%= "<li>#{order.brand.address.country}</li>".html_safe unless !order.brand.address.country || order.brand.address.country.empty? %>
+					</ul>
+					</div><!--/.medium-3-->
+					<div class="medium-3 columns">
+					<ul>
+					<li><span id="title"><%= link_to order.orderer_company_name, profile_link(order.orderer), target: "_blank" %></span></li>
+					<%= "<li>#{order.orderer.address.address1}</li>".html_safe unless !order.orderer.address.address1 || order.orderer.address.address1.empty? %>
+					<%= "<li>#{order.orderer.address.address2}</li>".html_safe unless !order.orderer.address.address2 || order.orderer.address.address2.empty? %>
+					<li>
+					<%= "#{order.orderer.address.city}".html_safe unless !order.orderer.address.city || order.orderer.address.city.empty? %>
+					<%= "#{order.orderer.address.state}".html_safe unless !order.orderer.address.state || order.orderer.address.state.empty? %>
+					<%= "#{order.orderer.address.postcode}".html_safe unless !order.orderer.address.postcode || order.orderer.address.postcode.empty? %>
+					</li>
+					<%= "<li>#{order.orderer.address.country}</li>".html_safe unless !order.orderer.address.country || order.orderer.address.country.empty? %>
+					</ul>
+					</div><!--/.medium-3-->
+					<div class="medium-6 columns">
+
+						<%= display_shipping_address(order: order) %>
+
+						Contact:<br>
+						<%= order.user.contact.firstname if order.user.contact.firstname.present? %> <%= order.user.contact.lastname if order.user.contact.lastname.present? %>
+						<%= order.user.contact.phone.present? ? "/ #{order.user.contact.phone.phony_formatted(format: :international , spaces: '-')}".html_safe : "<br>Phone n/a".html_safe %>
+
+						<% if order.ship_date.present? || order.cancel_date.present? %>
+							<hr>
+						<% end %>
+
+						<div class="row">
+							<div class="small-6 columns">
+								<% if order.ship_date.present? %>
+									<span id="title">ship date</span><br><%= order.ship_date.strftime("%m/%d/%Y") %></h3>
+								<% end %>						
+							</div><!--/.small-6-->
+							<div class="small-6 columns">
+								<% if order.cancel_date.present? %>
+									<span id="title">cancel date</span><br><%= order.cancel_date.strftime("%m/%d/%Y") %></h3>
+								<% end %>
+							</div><!--/.small-6-->
+						</div><!--/.row-->
+					</div><!--/.medium-6-->
+				</div><!--/.row-->
+			</div>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+</div>

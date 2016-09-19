@@ -43,7 +43,7 @@ module HomeHelper
 		when "submitted"
 			return "<span id='#{status.downcase}'>SUBMITTED</span> on #{order.submission_date.strftime('%b %d, %Y')}"
 		when "pending"
-			return "<span id='#{status.downcase}'>PENDING</span> on #{order.pending_date.strftime('%b %d, %Y')}"
+			return "<span id='#{status.downcase}'>PENDING</span> on #{order.pending_date.first.strftime('%b %d, %Y')}"
 		when "approved"
 			return "<span id='#{status.downcase}'>APPROVED</span> on #{order.approved_date.strftime('%b %d, %Y')}"
 		when "paid"

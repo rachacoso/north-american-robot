@@ -1,85 +1,16 @@
 <div class="row">
 	<div class="medium-11 medium-centered columns">
-
-		<div class="row">
-			<div class="medium-6 columns medium-text-right  medium-push-6">
-				<h2 style="line-height: 1.5em;">
-					<%= "[Estimated]" if ['open','submitted','pending'].include? @order.status %> Invoice<br>
-					<small>by</small>
-					<%= image_tag 'https://s3.amazonaws.com/landingintl-us/general/landing-logo.png', width: "100", alt: "Landing International" %>
-				</h2>
-
-				<h3>
-				<% if @order.u_at.present? %>
-					<%= @order.u_at.strftime("Last Updated: %d %b %Y") %><br>
-				<% end %>
-				<% if @order.c_at.present? %>
-					<%= @order.c_at.strftime("Created: %d %b %Y") %>
-				<% end %>
-				Status: <%= @order.status.capitalize %>
-				<% if @order.armor_order_id.present? %>
-					<br>Armor/Payoneer Order ID: <%= @order.armor_order_id %>
-				<% end %>
-				</h3>
-
-			</div><!--/.medium-6-->
-			<div class="medium-6 columns text-left medium-pull-6">
-				<% if @order.brand.logo_file_name %>
-					<%= image_tag @order.brand.logo.url(:medium), alt: "Logo" %>
-				<% else %>
-					<% if !@order.brand.facebook.blank? && fb_picture(@order.brand.facebook) %>
-						<%= image_tag fb_picture(@order.brand.facebook) %>
-					<% else %>
-						<%= image_tag @order.brand.logo.url(:medium), width: "100", height: "100", alt: "Logo" %>
-					<% end %>
-				<% end %>
-
-				<h3 style="margin-top: 2em;">
-					<%= link_to @order.brand_company_name, profile_link(@order.brand), target: "_blank" %>
-					<%= "<br>#{@order.brand.address.address1}".html_safe unless !@order.brand.address.address1 || @order.brand.address.address1.empty? %>
-					<%= "<br>#{@order.brand.address.address2}".html_safe unless !@order.brand.address.address2 || @order.brand.address.address2.empty? %>
-					<%= "<br>#{@order.brand.address.city}".html_safe unless !@order.brand.address.city || @order.brand.address.city.empty? %>
-					<%= "#{@order.brand.address.state}".html_safe unless !@order.brand.address.state || @order.brand.address.state.empty? %>
-					<%= "#{@order.brand.address.postcode}".html_safe unless !@order.brand.address.postcode || @order.brand.address.postcode.empty? %>
-					<%= "<br>#{@order.brand.address.country}".html_safe unless !@order.brand.address.country || @order.brand.address.country.empty? %>
-				</h3>
-
-				<h3 style="margin-top:1.5em; margin-bottom: 2em;">
-					<%= link_to @order.orderer_company_name, profile_link(@order.orderer), target: "_blank" %>
-					<%= "<br>#{@order.orderer.address.address1}".html_safe unless !@order.orderer.address.address1 || @order.orderer.address.address1.empty? %>
-					<%= "<br>#{@order.orderer.address.address2}".html_safe unless !@order.orderer.address.address2 || @order.orderer.address.address2.empty? %>
-					<%= "<br>#{@order.orderer.address.city}".html_safe unless !@order.orderer.address.city || @order.orderer.address.city.empty? %>
-					<%= "#{@order.orderer.address.state}".html_safe unless !@order.orderer.address.state || @order.orderer.address.state.empty? %>
-					<%= "#{@order.orderer.address.postcode}".html_safe unless !@order.orderer.address.postcode || @order.orderer.address.postcode.empty? %>
-					<%= "<br>#{@order.orderer.address.country}".html_safe unless !@order.orderer.address.country || @order.orderer.address.country.empty? %>
-				</h3>
-
-				<% if @order.ship_date.present? %>
-					<h3>Ship Date: <%= @order.ship_date.strftime("%m/%d/%Y") %></h3>
-				<% end %>
-
-				<% if @order.cancel_date.present? %>
-					<h3>Cancel Date: <%= @order.cancel_date.strftime("%m/%d/%Y") %></h3>
-				<% end %>
-
-				<h3 style="margin-top:1.5em; margin-bottom: 2em;">Ship to:<br>
-					<%= display_shipping_address(order: @order) %>
-					<br><small>Contact Name &amp; Phone:</small>
-					<br><%= @order.user.contact.firstname if @order.user.contact.firstname.present? %> <%= @order.user.contact.lastname if @order.user.contact.lastname.present? %>
-					<%= @order.user.contact.phone.present? ? "<br>#{@order.user.contact.phone.phony_formatted(format: :international , spaces: '-')}".html_safe : "<br>Phone n/a".html_safe %>
-				</h3>
-
-			</div><!--/.medium-6-->
-		</div><!--/.row-->
-
-		<%= @order.comments.present? ? "<h2>Comments:</h2>".html_safe : ""%>
-		<% @order.comments.each do |comment| %>
-			<p><%= comment.text %><br><small>Comment Added by <%= comment.author == "brand" ? @order.brand.comapny_name : @order.orderer.company_name %> at <%= comment.c_at.strftime("%b %m %Y") %></p>
-		<% end %>
-
+		<%= render partial: "shared/orders/order_header", locals: { order: @order } %>
 	</div><!--/.medium-11 medium-centered-->
 </div><!--/.row-->
 
 <div id="order-table-data">
 <%= render partial: "shared/orders/order_table", locals: { order: @order } %>
 </div>
+
+
+<div class="row">
+	<div class="medium-11 medium-centered columns">
+		<%= render partial: "shared/orders/order_comments", locals: { order: @order } %>
+	</div><!--/.medium-11 medium-centered-->
+</div><!--/.row-->

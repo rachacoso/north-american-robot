@@ -190,3 +190,79 @@ table.date-control {
 		font-weight: 500;
 	}
 }
+
+
+// ORDER HEADER STYLING
+#order-header, #order-comments {
+	hr { border-top: 1px solid $landing-middle-gray;}
+	#title {
+		font-weight: 500;
+	}
+	margin-bottom: rem-calc(20);
+
+	#header-row {
+		padding-left: rem-calc(5);
+		background-color: $landing-middle-gray;
+		color: white;
+		font-weight: 500;
+	}
+
+	ul {
+		list-style-type: none; /*to remove bullets*/
+		li {
+		}
+	}
+	font-weight: 100;
+}
+
+#order-header {
+	margin-top: rem-calc(20);
+	h2 { margin-bottom: rem-calc(5);}
+	ul#order-header-data {
+		margin-top: rem-calc(10);
+	}
+	#order-shipping-data {
+		#body {
+			padding-left: rem-calc(5);
+			ul {
+				font-size: rem-calc(15);
+				margin-left: 0;
+				margin-top: rem-calc(5);
+				li {
+					line-height: 1.25em;
+				}
+			}
+			ul#shipping-address {
+				font-weight: 500;
+			}
+		}
+	}
+}
+
+#order-comments {
+	margin-top: rem-calc(20);
+	ul { 
+		list-style-type: none;
+		margin-left: 0;
+		margin-top: rem-calc(20);
+		li {
+			margin: rem-calc(20) 0;
+			padding: rem-calc(10);
+			background-color: $landing-light-gray;
+		}
+	}
+	.order-comment-display {
+		margin: rem-calc(10);
+		#comment-title {
+
+		}
+		#comment-body {
+			padding: rem-calc(10);
+			background-color: white;
+		}
+	}
+
+	#data {
+		margin-left: rem-calc(5);
+	}
+}
