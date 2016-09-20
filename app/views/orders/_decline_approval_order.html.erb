@@ -5,7 +5,7 @@
 		<hr>
 		<h2>Send this order back to <%= order.brand.company_name %><br> with your change requests.</h2>
 			<%= label_tag 'requests', 'Enter change requests below' %>
-			<%= text_area_tag 'requests', nil, rows: 10, label: "<strong>Enter your requests below</strong>".html_safe %>
+			<%= text_area_tag 'requests', nil, rows: 10 %>
 			
 			<div class="inline-error" id="decline-approval-error"><%= flash[:error] ? flash[:error] : "" %></div>
 	</div><!--/.small-12-->

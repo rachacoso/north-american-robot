@@ -118,18 +118,43 @@
 
 	<% end %>
 
-	<div class="row">
-		<div class="small-12 columns text-center">
-			<h2 style="line-height: 1em;">Order subtotal:<br><small>(goods)<br></small><strong><%= number_to_currency(@order.subtotal_price) %></strong></h2>
-			<h2 style="line-height: 1em;">Additional Charges:<br><small>(shipping and other fees)<br></small><strong><%= number_to_currency(@order.charges_subtotal_price) %></strong></h2>
-			<hr>
-			<h2>Would you like to submit this updated order to <br><strong><%= @order.orderer.company_name %></strong></h2>
-		</div><!--/.small-12-->
-	</div><!--/.row-->
-	<div class="row">
-		<div class="small-12 columns text-center">
-			<%= link_to "Yes", pending_order_url(@order,1), class: "landing-button", remote: true %>
-			<%= link_to "Not Yet", order_url(@order), class: "landing-button secondary", id: "submit-close" %>
-		</div><!--/.small-12-->
-	</div><!--/.row-->
+	<% if @order.comments.submitted_comment_from_orderer.present? %>
+
+		<%= form_for @order, url: pending_order_url(@order,1), remote: true do |f| %>
+		<div class="row">
+			<div class="small-12 columns text-center">
+				<h2 style="line-height: 1em;">Order subtotal:<br><small>(goods)<br></small><strong><%= number_to_currency(@order.subtotal_price) %></strong></h2>
+				<h2 style="line-height: 1em;">Additional Charges:<br><small>(shipping and other fees)<br></small><strong><%= number_to_currency(@order.charges_subtotal_price) %></strong></h2>
+				<hr>
+				<h2>Would you like to submit this updated order to <br><strong><%= @order.orderer.company_name %></strong>?</h2>
+					<%= label_tag 'comments', 'Add any comments below' %>
+					<%= text_area_tag 'comments', nil, rows: 10 %>
+					<div class="inline-error" id="pending-error"><%= flash[:error] ? flash[:error] : "" %></div>
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+		<div class="row">
+			<div class="small-12 columns text-center">
+				<%= f.submit "Yes", class: "landing-button" %>
+				<%= link_to "Not Now", orders_url(@order), class: "landing-button secondary", id: "submit-close" %>
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+		<% end %>
+
+	<% else %>
+		<div class="row">
+			<div class="small-12 columns text-center">
+				<h2 style="line-height: 1em;">Order subtotal:<br><small>(goods)<br></small><strong><%= number_to_currency(@order.subtotal_price) %></strong></h2>
+				<h2 style="line-height: 1em;">Additional Charges:<br><small>(shipping and other fees)<br></small><strong><%= number_to_currency(@order.charges_subtotal_price) %></strong></h2>
+				<hr>
+				<h2>Would you like to submit this updated order to <br><strong><%= @order.orderer.company_name %></strong></h2>
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+		<div class="row">
+			<div class="small-12 columns text-center">
+				<%= link_to "Yes", pending_order_url(@order,1), class: "landing-button", remote: true %>
+				<%= link_to "Not Yet", order_url(@order), class: "landing-button secondary", id: "submit-close" %>
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+	<% end %>
+
 <% end %>

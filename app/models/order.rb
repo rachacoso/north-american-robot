@@ -171,9 +171,10 @@ class Order # for V2 ordering
       ).deliver
   end
 
-  def pending(user:)
+  def pending(user:, comments: nil)
     self.status = "pending"
     self.push(pending_date: DateTime.now)
+    self.comments.create(text: comments, author: user.type?, order_status: "pending")
     self.save!
     OrderMailer.send_order(
       order: self, 

@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   post   '/order/new' => 'orders#create', as: 'new_order'
   get   '/order/s/:id/:confirm' => 'orders#submit', as: 'submit_order'
   get   '/order/p/:id/:confirm' => 'orders#pending', as: 'pending_order'
+  patch   '/order/p/:id/:confirm' => 'orders#pending'
   get   '/order/a/:id/:confirm' => 'orders#approve', as: 'approve_order'
   get   '/order/da/:id/:confirm' => 'orders#decline_approval', as: 'decline_approval_order'
   patch '/order/da/:id/:confirm' => 'orders#decline_approval'

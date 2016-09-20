@@ -168,7 +168,11 @@ class OrdersController < ApplicationController
 	def pending
 		@order.armor_update # update any missing armor info
 		if params[:confirm].to_i == 1
-			@order.pending(user: @current_user)
+			if params[:comments] && params[:comments].present?
+				@order.pending(user: @current_user, comments: params[:comments])
+			else
+				@order.pending(user: @current_user)
+			end
 			if @order.errors.any?
 				flash.now[:notice] = @order.errors.full_messages
 			end
