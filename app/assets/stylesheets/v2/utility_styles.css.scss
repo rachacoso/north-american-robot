@@ -183,6 +183,7 @@ ul.tablist {
 	width: 100%;
 	height: 100%;
 	display: none;
+	z-index: 1000001; /* 1px higher than the overlay layer */
 	.ajax-wait-inner {
 		background-image: url('/images/landing_loading.gif');
 		background-repeat: no-repeat;
@@ -197,7 +198,7 @@ ul.tablist {
 		border: 1px solid $landing-middle-gray;
 		border-radius: 5px;
 		text-align: center;
-		z-index: 1000001; /* 1px higher than the overlay layer */
+		z-index: 1000002; /* 1px higher than the overlay layer */
 		font-weight: 700;
 	}
 }
