@@ -26,8 +26,7 @@ ul.order-breadcrumb {
 		}
 		&#active {
 			padding-left: rem-calc(10);
-			background-color: #D1F4FF;
-			// border: 10px solid #D1F4FF;
+			background-color: $landing-lighter-blue;
 		}
 	}
 }
@@ -62,17 +61,14 @@ table.order {
 }
 
 .full-order-container {
-	// margin-top: rem-calc(20);
-	// margin-bottom: rem-calc(100);
 	.panel.outer, .panel.order-alert {
-		// background: #D1F4FF;
 		border: none;
 		.panel {
 			border: 1px solid $landing-middle-gray;
 		}
 	}
 	#order-panel-top {
-		background-color: #D1F4FF;
+		background-color: $landing-lighter-blue;
 		h2 { 
 			margin: 0;
 			line-height: 1em;
@@ -294,7 +290,7 @@ table.date-control {
     content: attr(data-step);
     display: inline-block;
     // margin: 0 auto;
-    background: $landing-blue;
+    background: $landing-lighter-blue;
     width: 1.5em;
     height: 1.5em;
     text-align: center; //IE8 doesn't inherit this style
@@ -303,7 +299,7 @@ table.date-control {
     border-radius: 100%;
     position: relative;
     z-index: 1000;
-    color: white;
+    color: $landing-dark-gray;
     font-weight: 500;
   }
 }
