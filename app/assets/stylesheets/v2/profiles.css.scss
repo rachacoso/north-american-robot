@@ -506,10 +506,10 @@ a.profile-sq-left {
   padding-left: rem-calc(3);
 }
 
-
 #restricted-view-container {
   border: 1px solid black;
   padding: rem-calc(10) rem-calc(20);
+  background-color: white;
 }
 
 
@@ -519,6 +519,7 @@ a.profile-sq-left {
 
 #profile-restricted-view {
   a.action-link {
+    background-color: white;
     font-weight: 300;
     color: $landing-dark-gray;
     padding: rem-calc(5) rem-calc(10);
