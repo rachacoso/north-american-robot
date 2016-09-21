@@ -25,7 +25,7 @@
 					<div class="medium-11 medium-centered columns">
 
 						<br>
-						<h2>1) Change Order Discount Rate (Optional)</h2>
+						<h2><span class="step" data-step="1"></span> Change Order Discount Rate (Optional)</h2>
 						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 						<div class="row">
 							<div class="small-12 columns">
@@ -64,7 +64,7 @@
 
 
 						<br>
-						<h2>2) Add Additional Charges (Optional)</h2>
+						<h2><span class="step" data-step="2"></span> Add Additional Charges (Optional)</h2>
 						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 						<div class="row">
 							<div class="small-12 columns">
@@ -109,7 +109,7 @@
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
 						<br>
-						<h1>3) Review Order</h1>
+						<h1><span class="step" data-step="3"></span> Review Order</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 						<div class="panel">
 							<h3>You can edit order Items by clicking on item name or quantity</h3>							
@@ -123,7 +123,7 @@
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
 						<br>
-						<h1>3) Send <%= order.orderer.company_name %> the Updated Order</h1>
+						<h1><span class="step" data-step="4"></span> Send <%= order.orderer.company_name %> the Updated Order</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 						<div class="panel text-center">
 							<%= link_to "Submit Updated Order to #{order.orderer.company_name}", pending_order_url(order,0), class: "landing-button", remote: true %>

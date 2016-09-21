@@ -19,7 +19,7 @@
 
 						<br>
 						<h1>What's next?</h1>
-						<h1>1) Confirm Shipping Address</h1>
+						<h1><span class="step" data-step="1"></span> Confirm Shipping Address</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 						<div class="panel text-center">
 							<%= render partial: "shipping_address_form", locals: {order: order} %>
@@ -27,7 +27,7 @@
 
 
 						<br>
-						<h1>2) Add Ship Date and Cancel Date (Optional)</h1>
+						<h1><span class="step" data-step="2"></span> Add Ship Date and Cancel Date (Optional)</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 						<div class="panel text-center">
 							<div id="ship-cancel-add">
@@ -36,7 +36,7 @@
 						</div><!--.panel text-center-->
 
 						<br>
-						<h1>3) Add Comments (Optional)</h1>
+						<h1><span class="step" data-step="3"></span> Add Comments (Optional)</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 						<div class="panel text-center">
 							<div id="add-comments">
@@ -45,14 +45,14 @@
 						</div><!--.panel text-center-->
 
 						<br>
-						<h1>4) Confirm Order Details</h1>
+						<h1><span class="step" data-step="4"></span> Confirm Order Details</h1>
 						<h3>Click on any order item to edit. <br>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 
 						<div class="panel" id="order-display">
 							<%= render "shared/orders/show" %>		
 						</div>
 						<br>
-						<h1>5) Submit Order to <%= order.brand.company_name %></h1>
+						<h1><span class="step" data-step="5"></span> Submit Order to <%= order.brand.company_name %></h1>
 						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 						<div class="panel text-center">
 						<%= link_to "Submit Order to #{order.brand.company_name}", submit_order_url(order,0), class: "landing-button", remote: true %> <span style="font-weight: 100;">or</span>
