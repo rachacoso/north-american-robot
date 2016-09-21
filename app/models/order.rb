@@ -94,8 +94,6 @@ class Order # for V2 ordering
 
   def self.create_new(user:, brand:)
     order = Order.new
-    order.generate_id(:landing_order_reference_id)
-
     order.orderer = user.company
     order.orderer_company_name = user.company.company_name
     order.ship_to_name = user.company.company_name
@@ -144,7 +142,7 @@ class Order # for V2 ordering
   end
 
   def submission(user:)
-
+    self.generate_id(:landing_order_reference_id)
     self.status = "submitted"
     self.submission_date = DateTime.now
     self.save!
@@ -397,8 +395,9 @@ class Order # for V2 ordering
   end
 
   def generate_id(column)
+    numberstring = Order.all.count + 1000 # lets start at 1000!
     begin
-      numberstring = Order.all.count + 1001 # lets start at 1000!
+      numberstring += 1
       self[column] = "LAN" + numberstring.to_s
     end while Order.where(column => self[column]).exists?
   end
