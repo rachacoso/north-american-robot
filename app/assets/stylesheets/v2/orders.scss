@@ -94,25 +94,35 @@ ul.order-flow-header, ul.order-index-filters {
 	li {
 		color: $landing-middle-gray;
 		vertical-align: top;
-		font-weight:100;
+		font-weight:200;
 		font-size: rem-calc(25);
 		display: inline-block;
 		// margin: 0 rem-calc(5);
 		// padding: rem-calc(10) rem-calc(0) rem-calc(0) rem-calc(0);
 		&::before {
 			// content: "\00a0\002F\00a0";
-			content: "\00a0 \2192 \00a0";
-			width: 50%;
+			// content: "\00a0 \203A \00a0";
+    background-image: url('/images/pinkarrow.png');
+    // background-size: 10px 20px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 20px; 
+    height: 20px;
+    margin: 0 rem-calc(5);
+    content:"";
 		}
 		&:first-child {
 			margin-left: 0;
 		}
 		&:first-child::before {
-			content: " ";
+			// content: " ";
+			display: none;
 		}
 		&.active {
 			color: $landing-dark-gray;
-			font-weight:500;
+			font-weight:600;
 			&::before {
 				font-weight: 100;
 				color: $landing-middle-gray;
