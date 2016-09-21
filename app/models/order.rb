@@ -191,13 +191,20 @@ class Order # for V2 ordering
     self.comments.create(text: requests, author: user.type?, order_status: "submitted")
     self.save!
     # NEED TO ADD MAILER FOR DECLINING APPROVAL
-    # OrderMailer.send_order(
-    #   order: self, 
-    #   status: "pending", 
-    #   email: self.orderer.users.pluck(:email), # send to orderer email
-    #   subject: "Yippee! Your order has been approved.",
-    #   title: "Order Pending Approval and Payment"
-    #   ).deliver
+    OrderMailer.send_order(
+      order: self, 
+      status: "resubmitted_brand", 
+      email: self.brand.users.pluck(:email), # send to brand/landing (currently just sending to Landing)
+      subject: "#{self.orderer_company_name} has requested changes to an order on Landing!",
+      title: "Order Changes Requested"
+      ).deliver
+    OrderMailer.send_order(
+      order: self, 
+      status: "resubmitted_brand", 
+      email: "orders@landingintl.com", # send to brand/landing (currently just sending to Landing)
+      subject: "#{self.orderer_company_name} has requested changes to an order on Landing!",
+      title: "Order Changes Requested"
+      ).deliver
   end
 
   def approval
