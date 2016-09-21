@@ -60,16 +60,21 @@ table.order {
 
 .full-order-container {
 	// margin-top: rem-calc(20);
-	margin-bottom: rem-calc(100);
+	// margin-bottom: rem-calc(100);
 	.panel.outer, .panel.order-alert {
-		background: $landing-light-gray;
+		// background: #D1F4FF;
+		border: none;
+		.panel {
+			border: 1px solid $landing-middle-gray;
+		}
 	}
 	#order-panel-top {
+		background-color: #D1F4FF;
 		h2 { 
 			margin: 0;
 			line-height: 1em;
 		}
-		border: 1px dotted $landing-middle-gray;
+		// border: 1px dotted $landing-middle-gray;
 		padding: rem-calc(10);
 		hr {
 			border-top: 1px solid $landing-middle-gray;
@@ -95,7 +100,9 @@ ul.order-flow-header, ul.order-index-filters {
 		// margin: 0 rem-calc(5);
 		// padding: rem-calc(10) rem-calc(0) rem-calc(0) rem-calc(0);
 		&::before {
-			content: "\00a0\002F\00a0";
+			// content: "\00a0\002F\00a0";
+			content: "\00a0 \2192 \00a0";
+			width: 50%;
 		}
 		&:first-child {
 			margin-left: 0;
@@ -265,4 +272,25 @@ table.date-control {
 	#data {
 		margin-left: rem-calc(5);
 	}
+}
+
+
+// NUMBER IN A CIRCLE
+.step {
+  &:before {
+    content: attr(data-step);
+    display: inline-block;
+    // margin: 0 auto;
+    background: $landing-blue;
+    width: 1.5em;
+    height: 1.5em;
+    text-align: center; //IE8 doesn't inherit this style
+    margin-bottom: 0.25em;
+    line-height: 1.5em;
+    border-radius: 100%;
+    position: relative;
+    z-index: 1000;
+    color: white;
+    font-weight: 500;
+  }
 }
