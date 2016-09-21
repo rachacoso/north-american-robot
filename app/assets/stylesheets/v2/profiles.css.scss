@@ -610,16 +610,8 @@ a.profile-sq-left {
   z-index: 100021;
   padding: rem-calc(20) rem-calc(10);
   overflow-x: scroll;
+  display: none;
   h2 { font-weight: 600;}
-  #close-profile-preview {
-    position: absolute;
-    top: rem-calc(-40);
-    right: rem-calc(10);
-    font-size: rem-calc(60);
-    font-weight: 900;
-    color: $landing-middle-gray;
-    z-index: 100022;
-  }
   &#profile-preview {
     position: fixed;
     top: 10%;
@@ -628,6 +620,15 @@ a.profile-sq-left {
     width:75%;
     max-height: 85%;
     display: none;
+  }
+  #close-profile-preview {
+    position: absolute;
+    top: rem-calc(-40);
+    right: rem-calc(10);
+    font-size: rem-calc(60);
+    font-weight: 900;
+    color: $landing-middle-gray;
+    z-index: 100022;
   }
   &#settings-preview {
     display: block;
