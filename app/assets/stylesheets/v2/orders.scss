@@ -7,24 +7,27 @@
 // from profile view > orders
 ul.order-breadcrumb { 
 	list-style-type: none; /*to remove bullets*/
-	margin: rem-calc(10) 0 rem-calc(15) 0;
+	margin: rem-calc(10) 0 0 0;
 	padding: 0px;
 	zoom:1;
 	overflow: hidden;
 	li {
 		vertical-align: bottom;
-		// a{color: $link-color;}
-		font-weight:500;
 		font-size: rem-calc(18);
-		display: inline-block;
+		display: block;
+		border: 1px solid transparent;
+		font-weight:500;
 		&#back {
-			a {  }
-			&::after {
-				content: " >";
+			a:hover {
+				text-decoration: underline; 
 			}
+			font-size: rem-calc(12);
+			padding-left: rem-calc(2);
 		}
 		&#active {
-			
+			padding-left: rem-calc(10);
+			background-color: #D1F4FF;
+			// border: 10px solid #D1F4FF;
 		}
 	}
 }
