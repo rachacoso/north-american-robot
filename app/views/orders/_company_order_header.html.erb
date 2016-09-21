@@ -2,7 +2,7 @@
 	<div class="small-12 columns">
 		<ul class="order-breadcrumb">
 			<li id="back"><%= link_to orders_url(company_id: profile) do %>view all <%= profile.company_name %> orders<% end %></li>
-			<li id="active">Order created on <strong><%= order.c_at.strftime("%b %d %Y") %></strong></li>
+			<li id="active"><%= order.status == "open" ? "Cart started on" : "Order created on" %><strong><%= order.c_at.strftime(" %b %d %Y") %></strong></li>
 		</ul>
 	</div><!--/.small-12-->
 </div><!--/.row-->
