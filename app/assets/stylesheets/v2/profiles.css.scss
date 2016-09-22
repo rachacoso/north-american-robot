@@ -47,7 +47,7 @@
   #top {
     position: relative;
     padding: rem-calc(5);
-    background: $landing-light-gray;
+    background: $landing-lighter-blue;
     border-bottom: 1px solid $landing-light-gray;
     border-top: 1px solid $landing-light-gray;
     h1 {font-weight:700; color: landing-dark-gray;}
@@ -73,7 +73,7 @@
       background-image: linear-gradient(to right,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 80%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
       filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 */
       }
-      opacity: .8;
+      opacity: .9;
     }
     #left {
       min-height: rem-calc(100);
@@ -183,8 +183,8 @@
 
 .general-info {
   padding: rem-calc(10);
-  // border: 1px solid $landing-middle-gray;
-  background-color: $landing-light-gray;
+  border: 1px solid $landing-middle-gray;
+  // background-color: $landing-lighter-blue;
   border-radius: rem-calc(5);
 
   .profile-general-info-item {
@@ -199,7 +199,7 @@
       // text-transform: uppercase;
     }
     .tagset {
-      background-color: white;
+      // background-color: white;
       padding: rem-calc(5) 0;
       .profile-tag {
         display: block;
@@ -213,8 +213,8 @@
       display: block;
       height: 1px;
       width: 100%;
-      margin-top: rem-calc(5);
-      background: white;
+      margin-top: rem-calc(15);
+      background: $landing-middle-gray;
     }
     &:last-child::after {
       background: none;
