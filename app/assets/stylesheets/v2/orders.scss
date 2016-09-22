@@ -9,20 +9,24 @@ ul.order-breadcrumb {
 	list-style-type: none; /*to remove bullets*/
 	margin: rem-calc(10) 0 0 0;
 	padding: 0px;
-	zoom:1;
 	overflow: hidden;
 	li {
-		vertical-align: bottom;
+		// vertical-align: bottom;
 		font-size: rem-calc(18);
 		display: block;
-		border: 1px solid transparent;
+		// border: 1px solid transparent;
 		font-weight:500;
 		&#back {
-			a:hover {
-				text-decoration: underline; 
-			}
+			border-top: 1px dotted $landing-pink;
 			font-size: rem-calc(12);
 			padding-left: rem-calc(2);
+			a {
+				display: inline-block;
+				&:hover {
+					text-decoration: underline;
+					left: -5px;
+				}
+			}
 		}
 		&#active {
 			padding-left: rem-calc(9);
@@ -99,18 +103,15 @@ ul.order-flow-header, ul.order-index-filters {
 		// margin: 0 rem-calc(5);
 		// padding: rem-calc(10) rem-calc(0) rem-calc(0) rem-calc(0);
 		&::before {
-			// content: "\00a0\002F\00a0";
-			// content: "\00a0 \203A \00a0";
-    background-image: url('/images/pinkarrow.png');
-    // background-size: 10px 20px;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: inline-block;
-    width: 20px; 
-    height: 20px;
-    margin: 0 rem-calc(5);
-    content:"";
+			background-image: url('/images/pinkarrow.png');
+			background-size: contain;
+			background-position: center;
+			background-repeat: no-repeat;
+			display: inline-block;
+			width: 20px; 
+			height: 20px;
+			margin: 0 rem-calc(5);
+			content:"";
 		}
 		&:first-child {
 			margin-left: 0;
