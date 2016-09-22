@@ -1,5 +1,39 @@
 module OrdersHelper
 
+	def order_flow_cart(status:, step:)
+		case step
+		when "cart"
+			return "done"
+		when "submitted"
+			unless status == "open"
+				return "done"
+			end
+		when "pending"
+			unless ["open","submitted"].include? status
+				return "done"
+			end
+		when "approved"
+			unless ["open","submitted","pending"].include? status
+				return "done"
+			end
+		when "paid"
+			unless ["open","submitted","pending","approved"].include? status
+				return "done"
+			end
+		when "shipped"
+			unless ["open","submitted","pending","approved","paid"].include? status
+				return "done"
+			end
+		when "delivered"
+			unless ["open","submitted","pending","approved","paid","shipped"].include? status
+				return "done"
+			end
+		when "completed"
+			unless ["open","submitted","pending","approved","paid","shipped","delivered"].include? status
+				return "done"
+			end
+		end
+	end
 	def get_company(id)
 		unless id.blank?
 			return Brand.find(id) || Retailer.find(id) || Distributor.find(id)

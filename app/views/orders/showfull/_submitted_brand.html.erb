@@ -5,9 +5,20 @@
 			<div class="row">
 				<div class="small-12 columns">
 					<div id="order-panel-top">
+						<h1>Order 
+						<% if order.comments.submitted_comment_from_orderer.present? %>
+						Resubmitted with changes requested
+						<% else %>
+						Submitted
+						<% end %>
+						</h1>
 						<%= render partial: "orders/showfull/order_flow_header", locals: { status: order.status , armor: (order.armor_enabled? ? true : false ) } %>
-						<hr>
-						<h3>This order has been submitted by <%= order.orderer.company_name %></h3>
+						
+						<% if order.comments.submitted_comment_from_orderer.present? %>
+							<h3>This order has been sent back to you with changes requested. Please review the changes and respond.</h3>
+						<% else %>
+							<h3>This order has been submitted by <%= order.orderer.company_name %></h3>
+						<% end %>
 						<%= flash[:notice] ? "<span class='error'>#{flash[:notice]}</span>".html_safe : "" %>
 					</div>
 				</div><!--/.small-12-->

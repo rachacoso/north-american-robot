@@ -1,21 +1,25 @@
-<ul class="order-flow-header">
-	<li <%= status == "open" ? "class=active" : "" %>><%= status == "open" ? " In Cart" : "Cart" %></li>
-	<li <%= status == "submitted" ? "class=active" : "" %>><%= status == "submitted" ? "Order " : "" %>Submitted</li>
-	<% if armor %>
-	<li <%= status == "pending" ? "class=active" : "" %>><%= status == "pending" ? "Order " : "" %>Pending<%= status == "pending" ? " Approval" : "" %></li>
-	<li <%= status == "approved" ? "class=active" : "" %>><%= status == "approved" ? "Order " : "" %>Approved</li>
-	<li <%= status == "paid" ? "class=active" : "" %>><%= status == "paid" ? "Order " : "" %>Paid</li>
-	<li <%= status == "shipped" ? "class=active" : "" %>><%= status == "shipped" ? "Order " : "" %>Shipped</li>
-	<li <%= status == "delivered" ? "class=active" : "" %>><%= status == "delivered" ? "Order " : "" %>Delivered</li>
+<% if armor %>
+<ul class="order-flow-header" data-steps="8">
+	<li class="<%= order_flow_cart(status:status, step:"cart") %>"><span>Cart</span><i></i></li>
+	<li class="<%= order_flow_cart(status:status, step:"submitted") %>"><span>Submitted</span></li>
+	<li class="<%= order_flow_cart(status:status, step:"pending") %>"><span>Pending</span></li>
+	<li class="<%= order_flow_cart(status:status, step:"approved") %>"><span>Approved</span></li>
+	<li class="<%= order_flow_cart(status:status, step:"paid") %>"><span>Paid</span></li>
+	<li class="<%= order_flow_cart(status:status, step:"shipped") %>"><span>Shipped</span></li>
+	<li class="<%= order_flow_cart(status:status, step:"delivered") %>"><span>Delivered</span></li>
 	<% if status == "disputed" %>
 	<li class="active">Order in Disupte</li>
 	<% end %>
-	<li <%= status == "completed" ? "class=active" : "" %>><%= status == "completed" ? "Order " : "" %> Completed</li>
-	<% else %>
-	<li <%= status == "pending" ? "class=active" : "" %>><%= status == "pending" ? "Order " : "" %>Pending<%= status == "pending" ? " Approval" : "" %></li>
-	<li <%= status == "approved" ? "class=active" : "" %>><%= status == "approved" ? "Order " : "" %>Approved</li>
-	<li <%= status == "shipped" ? "class=active" : "" %>><%= status == "shipped" ? "Order " : "" %>Shipped</li>
-	<li <%= status == "delivered" ? "class=active" : "" %>><%= status == "delivered" ? "Order " : "" %>Delivered</li>
-	<li <%= status == "completed" ? "class=active" : "" %>><%= status == "completed" ? "Order " : "" %>Paid &amp; Completed</li>
-	<% end %>
+	<li class="<%= order_flow_cart(status:status, step:"completed") %>"><span>Complete</span><i></i></li>
 </ul>
+<% else %>
+<ul class="order-flow-header" data-steps="8">
+	<li class="<%= order_flow_cart(status:status, step:"cart") %>"><span>Cart</span><i></i></li>
+	<li class="<%= order_flow_cart(status:status, step:"submitted") %>"><span>Submitted</span></li>
+	<li class="<%= order_flow_cart(status:status, step:"pending") %>"><span>Pending</span></li>
+	<li class="<%= order_flow_cart(status:status, step:"approved") %>"><span>Approved</span></li>
+	<li class="<%= order_flow_cart(status:status, step:"shipped") %>"><span>Shipped</span></li>
+	<li class="<%= order_flow_cart(status:status, step:"delivered") %>"><span>Delivered</span></li>
+	<li class="<%= order_flow_cart(status:status, step:"completed") %>"><span>Paid &amp; Complete</span><i></i></li>
+</ul>
+<% end %>

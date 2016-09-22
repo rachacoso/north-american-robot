@@ -17,7 +17,7 @@ ul.order-breadcrumb {
 		// border: 1px solid transparent;
 		font-weight:500;
 		&#back {
-			border-top: 1px dotted $landing-pink;
+			// border-top: 1px dotted $landing-pink;
 			font-size: rem-calc(12);
 			padding-left: rem-calc(2);
 			a {
@@ -30,7 +30,11 @@ ul.order-breadcrumb {
 		}
 		&#active {
 			padding-left: rem-calc(9);
-			background-color: $landing-lighter-blue;
+			border-top: 1px dotted $landing-middle-gray;
+			border-left: 1px dotted $landing-middle-gray;
+			border-right: 1px dotted $landing-middle-gray;
+			// padding-top: rem-calc(9);
+			// background-color: $landing-lighter-blue;
 		}
 	}
 }
@@ -72,13 +76,13 @@ table.order {
 		}
 	}
 	#order-panel-top {
-		background-color: $landing-lighter-blue;
+		background-color: $landing-light-gray;
 		h2 { 
 			margin: 0;
 			line-height: 1em;
 		}
-		// border: 1px dotted $landing-middle-gray;
-		padding: rem-calc(10);
+		border: 1px dotted $landing-middle-gray;
+		padding: rem-calc(4) rem-calc(10) rem-calc(10) rem-calc(10);
 		hr {
 			border-top: 1px solid $landing-middle-gray;
 			margin: 0;
@@ -88,38 +92,112 @@ table.order {
 
 ul.order-flow-header, ul.order-index-filters {
 	list-style-type: none; /*to remove bullets*/
-	// margin-left:0;
-	margin-bottom: 0;
-	padding: 0px;
+	display: table;
+	// background-color: white;
+	width: 100%;
+	margin: auto;
+	// border: 1px solid $landing-middle-gray;
+	padding: 0 rem-calc(10) 0 rem-calc(10);
 	zoom:1;
-	margin-left: 0;
+	text-align: center;
 	overflow: hidden;
+	&[data-steps="3"] li { width: 33%; }
+	&[data-steps="4"] li { width: 25%; }
+	&[data-steps="5"] li { width: 20%; }
+	&[data-steps="8"] li { width: 12.5%; }
+
 	li {
-		color: $landing-middle-gray;
+		display: inline-block;
+		position: relative;
+		// border: 1px solid red;
+		color: white;
+		background-color: $landing-middle-gray;
 		vertical-align: top;
 		font-weight:200;
-		font-size: rem-calc(25);
+		font-size: rem-calc(18);
+		@media #{$small-only} {
+			font-size: rem-calc(12);
+		}
 		display: inline-block;
-		// margin: 0 rem-calc(5);
-		// padding: rem-calc(10) rem-calc(0) rem-calc(0) rem-calc(0);
-		&::before {
-			background-image: url('/images/pinkarrow.png');
-			background-size: contain;
-			background-position: center;
-			background-repeat: no-repeat;
-			display: inline-block;
-			width: 20px; 
-			height: 20px;
-			margin: 0 rem-calc(5);
-			content:"";
+		& > span {
+			display: block;
+			text-transform: lowercase;
+			margin-left: rem-calc(15);
+			&:after, &:before {
+				content: "";
+				display: block;
+				width: 0px;
+				height: 0px;
+				position: absolute;
+				top: 0;
+				left: 0;
+				border: solid transparent;
+				border-left-color: $landing-middle-gray;
+				border-width: 15px;
+			}
+			&:after {
+				top: -5px;
+				z-index: 1;
+				border-left-color: $landing-light-gray;
+				border-width: 20px;
+			}
+			&:before {
+				z-index: 2;
+			}
 		}
-		&:first-child {
-			margin-left: 0;
+		&.done, &.done > span {
+			color: white;
+			font-weight: 600;
+			background-color: $landing-blue;
 		}
-		&:first-child::before {
-			// content: " ";
+		&.done + li > span:before {
+			border-left-color: $landing-blue;
+		}
+		&:first-child > span:after, &:first-child > span:before {
 			display: none;
 		}
+		&:first-child i, &:last-child i {
+			display: block;
+			height: 0;
+			width: 0;
+			position: absolute;
+			top: 0;
+			left: 0;
+			border: solid transparent;
+			border-left-color: $landing-light-gray;
+			border-width: 15px;
+		}
+		&:last-child i {
+			left: auto;
+			right: -15px;
+			border-left-color: transparent;
+			border-top-color: $landing-light-gray;
+			border-bottom-color: $landing-light-gray;
+		}
+		// margin: 0 rem-calc(5);
+		// padding: rem-calc(10) rem-calc(0) rem-calc(0) rem-calc(0);
+		// &::before {
+		// 	background-image: url('/images/pinkarrow.png');
+		// 	background-size: contain;
+		// 	background-position: center;
+		// 	background-repeat: no-repeat;
+		// 	display: inline-block;
+		// 	width: 20px;
+		// 	height: 18px;
+		// 	@media #{$small-only} {
+		// 		width: 10px;
+		// 		height: 10px;
+		// 	}
+		// 	margin: 0 rem-calc(5);
+		// 	content:"";
+		// }
+		// &:first-child {
+		// 	margin-left: 0;
+		// }
+		// &:first-child::before {
+		// 	// content: " ";
+		// 	display: none;
+		// }
 		&.active {
 			color: $landing-dark-gray;
 			font-weight:600;

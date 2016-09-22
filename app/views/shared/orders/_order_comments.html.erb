@@ -39,8 +39,8 @@
 							<% if order.pending_date[index.to_i+1] %>
 								<li>
 									<span id='title'>SENT FOR APPROVAL by <%= order.brand_company_name %></span> <%= order.pending_date[index.to_i+1].in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M %Z") %>
-									<% if order.comments.pending_comment_from_brand[index.to_i].text.present? %>
-										<%= render partial: "shared/orders/order_comment_display", locals: { comment: order.comments.pending_comment_from_brand[index.to_i] } %>
+									<% if order.comments.pending_comment_from_brand[index.to_i+1] && order.comments.pending_comment_from_brand[index.to_i+1].text.present? %>
+										<%= render partial: "shared/orders/order_comment_display", locals: { comment: order.comments.pending_comment_from_brand[index.to_i+1] } %>
 									<% end %>
 								</li>
 							<% end %>
