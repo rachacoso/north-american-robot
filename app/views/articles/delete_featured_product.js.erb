@@ -1,1 +1,8 @@
 $('#featured_products').hide().html("<%= j (render partial: '/articles/featured_products_edit_list') %>").fadeIn(500);
+
+$('#article-error').fadeOut(); // hide any error messages
+$('#ajax-success-data').html("Featured Product Deleted");
+$('#ajax-message').fadeIn().delay( 1500 ).fadeOut();
+$('#full-article-preview').html("<%= j (render partial: 'full_article') %>");
+
+initializeArticleImages();

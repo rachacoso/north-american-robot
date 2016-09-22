@@ -33,35 +33,6 @@
 										<% end %>
 									</div>
 
-									<% content_for :javascript_foot do %>
-									  <%= javascript_tag do %>
-											$(document).ready(function() {
-
-										  $("#article-carousel").owlCarousel({
-										 
-										      navigation : true, // Show next and prev buttons
-										      slideSpeed : 300,
-										      paginationSpeed : 400,
-										      singleItem:true,
-										      navigation : true,
-										      navigationText : [
-										      	"<img src='/images/v2/left-arrow.svg'>",
-										      	"<img src='/images/v2/right-arrow.svg'>",
-										      ],
-										 
-										      // "singleItem:true" is a shortcut for:
-										      // items : 1, 
-										      // itemsDesktop : false,
-										      // itemsDesktopSmall : false,
-										      // itemsTablet: false,
-										      // itemsMobile : false
-										 
-										  });
-
-											});
-									  <% end %>
-									<% end %>
-
 								<% end %>
 								</div><!--/.small-12-->
 							</div><!--/.row-->

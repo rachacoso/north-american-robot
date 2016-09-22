@@ -1,3 +1,6 @@
+$(document).ready(function() {
+  initializeArticleImages();
+});
 
 $('#article-featured-brands-input').devbridgeAutocomplete({
   serviceUrl: '/brands/list',
@@ -24,3 +27,29 @@ $('#article-featured-products-input').devbridgeAutocomplete({
     $('#fp-id').val(suggestion.data);
   }
 });
+
+
+
+function initializeArticleImages() {
+  $("#article-carousel").owlCarousel({
+
+      navigation : true, // Show next and prev buttons
+      slideSpeed : 300,
+      paginationSpeed : 400,
+      singleItem:true,
+      navigation : true,
+      navigationText : [
+        "<img src='/images/v2/left-arrow.svg'>",
+        "<img src='/images/v2/right-arrow.svg'>",
+      ],
+
+      // "singleItem:true" is a shortcut for:
+      // items : 1, 
+      // itemsDesktop : false,
+      // itemsDesktopSmall : false,
+      // itemsTablet: false,
+      // itemsMobile : false
+
+  });
+}
+                      

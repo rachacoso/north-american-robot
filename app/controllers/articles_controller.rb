@@ -42,11 +42,14 @@ class ArticlesController < ApplicationController
 
 	def update
 
-    if @article.update(article_params)
-     redirect_to @article, notice: "#{@article.headline} was successfully updated."
-    else
-      render :edit
-    end
+    @article.update(article_params)
+		if @article.errors.any?
+			flash.now[:error] = @article.errors.full_messages
+		end
+		respond_to do |format|
+			format.html  { redirect_to @article, notice: "#{@article.headline} was successfully updated." }
+			format.js
+		end
 
 	end
 
