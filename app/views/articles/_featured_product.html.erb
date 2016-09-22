@@ -1,0 +1,19 @@
+<li>
+	
+		<div class="outer">
+			<%= link_to "#", remote: true do %>
+			<% if photo = get_product_photo(product) %>
+			<div class="inner" style="background-image: url(<%= photo.photo.url(:small)%>) ">
+			<% else %>
+			<div class="inner">
+			<% end %>
+			</div>
+			<% end %>
+		</div>
+		<div class="name">
+			<%= link_to "#", remote: true do %>
+			<%= product.name %> <br><span style="font-weight: 100;">by <%= product.brand.company_name %></span>
+			<% end %>
+		</div>
+	
+</li>

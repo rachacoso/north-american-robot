@@ -1,0 +1,25 @@
+<div class="browseblock">
+	<div class="row">
+		<div class="medium-4 columns">
+			<hr>
+		</div><!--/.medium-4-->
+		<div class="medium-4 columns text-center">
+			<h1>
+				BROWSE<br>
+				BEAUTY BRANDS by <strong>TREND</strong>
+			</h1>
+		</div><!--/.medium-4-->
+		<div class="medium-4 columns">
+			<hr>
+		</div><!--/.medium-4-->
+	</div><!--/.row-->
+	<div class="row">
+		<div class="small-12 columns">
+			<ul>
+				<% trends.each do |t| %>
+					<%= link_to brands_url(filter: "#{t.id}", type: "t") do %><li><%= t.name %></li><% end %>
+				<% end %>
+			</ul>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+</div>

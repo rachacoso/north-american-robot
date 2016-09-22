@@ -20,28 +20,38 @@
 		color: $landing-dark-gray;
 	}
 	h1 {
-		font-size: rem-calc(24);
+		font-size: rem-calc(50);
 		font-weight: 800;
 		line-height: 1em;
 		text-transform: uppercase;
 		color: $landing-blue;
+		text-shadow: 1px 1px 1px $landing-middle-gray;
 	}
 	h2 {
+		display: inline-block;
 		font-size: rem-calc(20);
 		font-weight: 800;
 		color: $landing-pink;
 	}
+	.article-body > h2 {
+		display: block;
+		color: $landing-pink;
+	}
 	h3{
 		font-weight: 600;
+		&#featured-products, &#featured-brands {
+			color: $landing-blue;
+		}
 	}
 	p{
 		font-size: rem-calc(14);
-		text-align: justify;
+		// text-align: justify;
 		margin: rem-calc(20) 0;
 	}
 	.byline {
-		font-weight: 500;
-		font-size: rem-calc(14);
+		display: inline-block;
+		font-weight: 100;
+		font-size: rem-calc(20);
 	}
 	.social {
 		font-weight: 100;
@@ -56,6 +66,7 @@
 		zoom:1;
 		overflow: hidden;
 		li {
+			// text-align: center;
 			font-weight:700;
 			display: block;
 			vertical-align: top;
@@ -72,6 +83,34 @@
 					margin: auto;
 					width: 100%
 				}
+			}
+			.outer {
+				width: rem-calc(125);
+				height: rem-calc(125);
+				margin: auto;
+				overflow: hidden;
+				border: 1px solid $landing-light-gray;
+			}
+			.inner {
+				width: 90%;
+				height: 90%;
+				margin: auto;
+				background-size: contain;
+				background-position: center;
+				background-repeat: no-repeat;
+				-moz-transition: all .5s;
+				-webkit-transition: all .5s;
+				transition: all .5s;
+				&:hover {
+					-moz-transform: scale(1.1,1.1);
+					-webkit-transform: scale(1.1,1.1);
+					transform: scale(1.1,1.1);  
+				}
+			}
+			.name {
+				width: 80%;
+				text-align: center;
+				margin:auto;
 			}
 		}
 	}
@@ -144,4 +183,25 @@
 #article-carousel.owl-theme .owl-controls .owl-buttons .owl-next{
   right: 45px;
   top: 250px;
+}
+#article-carousel {
+	.item {
+		text-align: center;
+		img {
+		  // height: 100%;
+		  // width: auto;
+		}
+	}
+}
+
+#article-image-top {
+	display: relative;
+	// height: 50vh;
+	#article-headline {
+		position: absolute;
+		padding-right: rem-calc(10);
+		left:0;
+		top: 10%;
+		@include transparent(#fff, 0.9);
+	}
 }
