@@ -1,7 +1,7 @@
 <li>
 	
 		<div class="outer">
-			<%= link_to "#", remote: true do %>
+			<%= link_to product_preview_url(product), remote: true do %>
 			<% if photo = get_product_photo(product) %>
 			<div class="inner" style="background-image: url(<%= photo.photo.url(:small)%>) ">
 			<% else %>
