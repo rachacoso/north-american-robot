@@ -28,12 +28,15 @@
 <%= yield %>
 
 
-<div class="overlay"></div>
-<div class="modal ajax-wait"><%= image_tag 'landing_loading.gif' %></div>
+<div class="ajax-wait">
+  <div class="ajax-wait-inner">
+  </div>
+</div>
+<div class="overlay" id="ajax-wait-overlay"></div>
 
 <div id="quick-view">
-	<a id="close-quick-view" aria-label="Close"><i class="fi-x"></i></a>
-	<div id="quick-view-data"></div>
+  <a id="close-quick-view" aria-label="Close"><i class="fi-x"></i></a>
+  <div id="quick-view-data"></div>
 </div>
 <div class="overlay" id="quick-view-overlay"></div>
 
@@ -42,6 +45,28 @@
   <div id="profile-preview-data"></div>
 </div>
 <div class="overlay" id="profile-preview-overlay"></div>
+
+<div id="order-item">
+  <a id="close-order-item" aria-label="Close"><i class="fi-x"></i></a>
+  <div id="order-item-data"></div>
+</div>
+<div class="overlay" id="order-item-overlay"></div>
+
+<div id="order">
+  <a id="close-order" aria-label="Close"><i class="fi-x"></i></a>
+  <div id="order-data"></div>
+</div>
+<div class="overlay" id="order-overlay"></div>
+
+<div id="ajax-message">
+  <div id="ajax-message-inner" id="success">
+    <div class="row">
+      <div class="small-12 columns text-center">
+        <div id="ajax-success-data">ad</div>
+      </div><!--/.small-12-->
+    </div><!--/.row-->
+  </div>
+</div>
 
 <%= javascript_include_tag "application" %>
 <%= content_for?(:javascript_foot) ? yield(:javascript_foot) : "" %>
