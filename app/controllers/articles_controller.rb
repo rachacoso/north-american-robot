@@ -6,13 +6,24 @@ class ArticlesController < ApplicationController
 
 	def public_view
 
-		# for submenu
-		@brand_chunk = Subsector.where(sector_id: Sector.where(name: 'Beauty / Personal Care').first.id).uniq { |p| p.name }.sort_by { |p| p.name }
-
-		# for find links
-		@trends = Trend.all.sort_by { |p| p.name }
-		# @key_retailers = KeyRetailer.all.sort_by { |p| p.name }
-
+		if @article.article_type == 5 # is product link then display product
+			@profile = @article.brands.first
+			# GALLERY
+			@product_list = @profile.products.pluck(:id)
+			@product_photos = ProductPhoto.where(:photographable_id.in => @product_list).shuffle[0..8]
+			@brand_photos = @profile.brand_photos.shuffle[0..8]
+			@gallery = @product_photos.concat @brand_photos
+			respond_to do |format|
+				format.html { redirect_to view_brand_url(@profile) }
+				format.js { render 'brands/preview' }
+			end
+		else
+			# for submenu
+			@brand_chunk = Subsector.where(sector_id: Sector.where(name: 'Beauty / Personal Care').first.id).uniq { |p| p.name }.sort_by { |p| p.name }
+			# for find links
+			@trends = Trend.all.sort_by { |p| p.name }
+			# @key_retailers = KeyRetailer.all.sort_by { |p| p.name }
+		end
 	end
 
 	def index

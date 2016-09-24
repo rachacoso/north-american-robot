@@ -1,6 +1,17 @@
-<%= link_to public_view_article_url(a) do %>
-	<div class="item" style="background-image: url(<%= a.carousel_photo.url(:full)%>) ">
-		
-		<!-- <div class="text"><%= a.headline %></div> -->
-	</div>
+<% if a.article_type == 5 %>
+
+	<%= link_to public_view_article_url(a), remote: true do %>
+		<div class="item" style="background-image: url(<%= a.carousel_photo.url(:full)%>) ">
+			<!-- <div class="text"><%= a.headline %></div> -->
+		</div>
+	<% end %>
+
+<% else %>
+
+	<%= link_to public_view_article_url(a) do %>
+		<div class="item" style="background-image: url(<%= a.carousel_photo.url(:full)%>) ">
+			<!-- <div class="text"><%= a.headline %></div> -->
+		</div>
+	<% end %>
+
 <% end %>

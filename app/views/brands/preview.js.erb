@@ -1,5 +1,5 @@
 
-$('#profile-preview-data').html("<%= j (render partial: 'preview', locals: { profile: @profile, gallery: @gallery }) %>");
+$('#profile-preview-data').html("<%= j (render partial: 'brands/preview', locals: { profile: @profile, gallery: @gallery }) %>");
 $('.overlay#profile-preview-overlay').fadeIn();
 $('#profile-preview').fadeIn();
 
