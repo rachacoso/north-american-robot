@@ -98,6 +98,7 @@ Rails.application.routes.draw do
   resources :press_hits, only: [:create, :update, :destroy]
   delete '/press_hits/file_delete/:id' => 'press_hits#file_destroy', as: 'press_hits_file_delete'
   resources :products, only: [:create, :update, :destroy]
+  get   'product/preview/:id' => 'products#preview', as: 'product_preview'
   resources :patents, only: [:create, :update, :destroy]
   resources :trademarks, only: [:create, :update, :destroy]
   resources :compliances, only: [:create, :update, :destroy]

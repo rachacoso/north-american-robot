@@ -7,15 +7,16 @@ class ArticlesController < ApplicationController
 	def public_view
 
 		if @article.article_type == 5 # is product link then display product
-			@profile = @article.brands.first
-			# GALLERY
-			@product_list = @profile.products.pluck(:id)
-			@product_photos = ProductPhoto.where(:photographable_id.in => @product_list).shuffle[0..8]
-			@brand_photos = @profile.brand_photos.shuffle[0..8]
-			@gallery = @product_photos.concat @brand_photos
+			@product = @article.products.first
+			# @profile = @article.brands.first
+			# # GALLERY
+			# @product_list = @profile.products.pluck(:id)
+			# @product_photos = ProductPhoto.where(:photographable_id.in => @product_list).shuffle[0..8]
+			# @brand_photos = @profile.brand_photos.shuffle[0..8]
+			# @gallery = @product_photos.concat @brand_photos
 			respond_to do |format|
 				format.html { redirect_to view_brand_url(@profile) }
-				format.js { render 'brands/preview' }
+				format.js { render 'products/preview' }
 			end
 		else
 			# for submenu

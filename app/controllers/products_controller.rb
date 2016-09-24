@@ -135,6 +135,10 @@ class ProductsController < ApplicationController
 
 	end
 
+	def preview
+		@product = Product.find(params[:id])
+	end
+
   private
   def product_parameters
     params.require(:product).permit(

@@ -44,7 +44,11 @@
 <div class="row">
 	<div class="small-12 columns text-center">
 		<%= link_to "Checkout", order_url(@order), class: "landing-button" %>
-		<%= link_to "Add More Items", view_brand_url(@order.brand), class: "landing-button secondary", id: "continue-ordering" %>
+		<% if URI(request.referer).path.match(/brand\/view\//) %>
+			<%= link_to "Add More Items", view_brand_url(@order.brand), class: "landing-button secondary", id: "continue-ordering" %>
+		<% else %>
+			<%= link_to "Add More Items from #{@order.brand_company_name}", view_brand_url(@order.brand), class: "landing-button secondary", id: "continue-ordering-disable" %>
+		<% end %>
 	</div><!--/.small-12-->
 </div><!--/.row-->
 <% end %>

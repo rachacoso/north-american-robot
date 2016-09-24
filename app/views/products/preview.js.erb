@@ -1,0 +1,4 @@
+$('#profile-preview-data').html("<%= j (render partial: 'products/preview', locals: { product: @product }) %>");
+$('.overlay#profile-preview-overlay').fadeIn();
+$('#profile-preview').fadeIn();
+initializeGallery("#galleria-product-photos-<%=@product.id%>",300);
