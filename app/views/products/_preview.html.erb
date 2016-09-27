@@ -1,84 +1,65 @@
+<div id="product-preview">
+	<div class="row">
+		<div class="medium-8 medium-push-4 columns">
+			<div class="row">
+				<div class="medium-8 columns">
+					<h1><%= product.brand.company_name %></h1>
+					<h2><strong style="color: #5f5f5f;"><%= product.name.empty? ? "( No Name )" : product.name  %></strong><br>
+					<% unless product.country_of_manufacture.blank? %>
+						<small>Manufactured in <%= product.country_of_manufacture %></small>
+					<% end %>
+					</h2>
+					<% if product.price.present? %>
+						<h4><%= number_to_currency(product.price_in_dollars) %> MSRP</h4>
+					<% elsif product.msrp.present? %>
+						<h4>$<%= product.msrp %> MSRP</h4>
+					<% end %>
 
-<div class="row profile-sku-item">
-	<div class="small-12 columns">
-		<%= product.brand.company_name %>
-	</div><!--/.small-12-->
-	<div class="medium-4 columns">
-		<div class="collections-view-product-top">
-			<div class="galleria-product-photos" id="galleria-product-photos-<%=product.id%>">
-			<% if !product.product_photos.blank? %>
-				<div class="galleria-product-photos" id="galleria-product-photos-<%=product.id%>">
-					<% product.product_photos.each do |photo| %>
-						<%= link_to photo.photo.url(:large) do %>
-							<%= image_tag photo.photo.url(:small) %>
+					<% if product.item_id.present? %>
+						<h4>Product ID Number: <%= product.item_id %></h4>
+					<% end %>
+
+					<% if product.item_size.present? %>
+						<h4>Size: <%= product.item_size %></h4>
+					<% end %>
+
+					<% product.tags.each do |tag| %>
+						<span class="tag"><%= tag.name %></span>
+					<% end %>
+				</div><!--/.medium-8-->
+				<div class="medium-4 columns">
+					<%= link_to "View Brand Profile", view_brand_url(product.brand), class: "landing-button" %><br>
+					<% if @current_user %>
+						<% if @current_user.can_order? && product.brand.can_sell? && !product.price.blank? && product.current %>
+							<%= link_to "Add SKU to Cart", new_order_item_url(product.id), remote: true, class: "landing-button order-sku-button" %>
 						<% end %>
-			    <% end %>
-				</div>	
-			<% else %>
-			<div class="galleria-product-photos brand-default"></div>
-			<% end %>
-			</div>
-		</div>
-	</div><!--/.medium-4-->
-	<div class="medium-4 columns">
-
-		<h2><strong style="color: #5f5f5f;"><%= product.name.empty? ? "( No Name )" : product.name  %></strong><br>
-		<% unless product.country_of_manufacture.blank? %>
-			<small>Manufactured in <%= product.country_of_manufacture %></small>
-		<% end %>
-		</h2>
-		<% if product.price.present? %>
-			<h4><%= number_to_currency(product.price_in_dollars) %> MSRP</h4>
-		<% elsif product.msrp.present? %>
-			<h4>$<%= product.msrp %> MSRP</h4>
-		<% end %>
-
-		<% if product.item_id.present? %>
-			<h4>Product ID Number: <%= product.item_id %></h4>
-		<% end %>
-
-		<% if product.item_size.present? %>
-			<h4>Size: <%= product.item_size %></h4>
-		<% end %>
-
-		<% product.tags.each do |tag| %>
-			<span class="tag"><%= tag.name %></span>
-		<% end %>
-
-		<% if @current_user %>
-			<% if @current_user.can_order? && product.brand.can_sell? && !product.price.blank? && product.current %>
+					<% end %>
+				</div><!--/.medium-4-->
+			</div><!--/.row-->
 			<div class="row">
 				<div class="small-12 columns">
-					<%= link_to "Add SKU to Cart", new_order_item_url(product.id), remote: true, class: "landing-button order-sku-button" %>
+					<% unless product.description.blank? %>
+						<div class="products-description">
+							<%= simple_format(product.description) %>
+						</div>
+					<% end %>
 				</div><!--/.small-12-->
 			</div><!--/.row-->
-			<% end %>
-		<% end %>
-		
-		<div class="row">
-			<div class="small-12 columns">
-				<%= link_to "View Brand Profile", view_brand_url(product.brand), class: "landing-button" %>
-			</div><!--/.small-12-->
-		</div><!--/.row-->
-
-	</div><!--/.medium-4-->
-	<div class="medium-4 columns">
-
-		<% unless product.description.blank? %>
-			<div class="products-description">
-				<h3>Description</h3>
-				<%= simple_format(product.description) %>
-			</div>
-		<% end %>
-		<% unless product.description.blank? || product.key_benefits.blank? %>
-			<br>
-		<% end %>
-		<% unless product.key_benefits.blank? %>
-			<div class="products-key-benefits">
-				<h3>Key Benefits</h3>
-				<%= simple_format(product.key_benefits) %>
-			</div>
-		<% end %>		
-
-	</div><!--/.medium-4-->
-</div><!--/.row-->
+		</div><!--/.medium-8-->
+		<div class="medium-4 medium-pull-8 columns">
+				<div class="galleria-product-photos" id="galleria-product-photos-<%=product.id%>">
+				<% if !product.product_photos.blank? %>
+					<div class="galleria-product-photos" id="galleria-product-photos-<%=product.id%>">
+						<% product.product_photos.each do |photo| %>
+							<%= link_to photo.photo.url(:large) do %>
+								<%= image_tag photo.photo.url(:small) %>
+							<% end %>
+				    <% end %>
+					</div>	
+				<% else %>
+				<div class="galleria-product-photos brand-default"></div>
+				<% end %>
+				</div>
+		</div><!--/.medium-4-->
+	</div>
+</div>

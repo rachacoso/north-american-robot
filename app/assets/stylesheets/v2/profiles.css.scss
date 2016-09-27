@@ -443,6 +443,13 @@ a.profile-sq-left {
   }
 
 }
+
+#product-preview {
+  .products-description {
+    margin-top: rem-calc(25); 
+  }
+}
+
 .profile-general-info-preview {
   color: $landing-dark-gray;
   width: 100%;
