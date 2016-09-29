@@ -17,11 +17,11 @@ ul.order-breadcrumb {
 		// border: 1px solid transparent;
 		font-weight:500;
 		&#back {
-			// border-top: 1px dotted $landing-pink;
 			font-size: rem-calc(12);
 			padding-left: rem-calc(2);
+			padding-right: rem-calc(4);
+			display: inline-block;
 			a {
-				display: inline-block;
 				&:hover {
 					text-decoration: underline;
 					left: -5px;
