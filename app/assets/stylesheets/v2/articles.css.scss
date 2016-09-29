@@ -198,12 +198,12 @@
 	display: relative;
 	min-height: rem-calc(250);
 	#article-headline {
-		@media #{$medium-up} {
-			position: absolute;
-			padding-right: rem-calc(10);
-			left:0;
-			top: 10%;
-			@include transparent(#fff, 0.9);
-		}
+		// @media #{$medium-up} {
+		// 	position: absolute;
+		// 	padding-right: rem-calc(10);
+		// 	left:0;
+		// 	top: 10%;
+		// 	@include transparent(#fff, 0.9);
+		// }
 	}
 }
