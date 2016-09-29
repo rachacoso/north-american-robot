@@ -1,4 +1,4 @@
-<div class="container marketplace">
+<div class="container marketplace" id="article">
 	<%= render partial: "shared/v2/container/marketplace_lead", locals: {close_link: root_url , subhead: "news"} %>
 	<div id="main-body">
 
@@ -12,7 +12,7 @@
 
 					<div id="article-carousel" class="owl-carousel owl-theme">
 						<% @article.article_photos.each do |photo| %>
-					  <div class="item"><%= image_tag photo.photo.url(:large) %></div>
+					  <div class="item"><%= image_tag photo.photo.url(:carousel) %></div>
 						<% end %>
 					</div>
 

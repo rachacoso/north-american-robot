@@ -11,11 +11,13 @@ class ArticlePhoto
 	    :preview  => ['268x178'],
 	    :medium		=> ['400x400'],
 	    :large    => ['800>'],
+	    :carousel	=> ['828x300^']
 	  },
 		:convert_options => { 
 			:small => "-alpha remove -background white", 
 			:medium => "-alpha remove -background white", 
-			:large => "-alpha remove -background white" 
+			:large => "-alpha remove -background white",
+			:carousel => "-alpha remove -background white -gravity center -crop '828x300+0+0' ",
 		}
 
 	validates_attachment_content_type :photo, :content_type=>['image/jpeg', 'image/png', 'image/gif']

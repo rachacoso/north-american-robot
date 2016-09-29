@@ -7,6 +7,7 @@
 .container {
 	margin-top: rem-calc(15);
 	margin-bottom: rem-calc(15);
+	margin: rem-calc(15) auto;
 	background-color: #fff;
 	& > #lead {
 		position: relative;
@@ -49,7 +50,10 @@
 	}
 	& > #main-body {
 		padding: 0 rem-calc(30) rem-calc(30) rem-calc(30);
-	}	
+	}
+	&#article {
+		max-width: rem-calc(1000);
+	}
 }
 
 ul.filterlist {

@@ -198,10 +198,12 @@
 	display: relative;
 	// height: 50vh;
 	#article-headline {
-		position: absolute;
-		padding-right: rem-calc(10);
-		left:0;
-		top: 10%;
-		@include transparent(#fff, 0.9);
+		@media #{$medium-up} {
+			position: absolute;
+			padding-right: rem-calc(10);
+			left:0;
+			top: 10%;
+			@include transparent(#fff, 0.9);
+		}
 	}
 }
