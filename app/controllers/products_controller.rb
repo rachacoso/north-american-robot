@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
 
+	skip_before_action :require_login, only: [:preview]
+
 	def create
 		brand = @current_user.brand
 		new_item = brand.products.create!(product_parameters)
