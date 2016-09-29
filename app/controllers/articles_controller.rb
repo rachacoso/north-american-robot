@@ -2,7 +2,7 @@ class ArticlesController < ApplicationController
 
 	skip_before_action :require_login, only: [:public_view]
 	before_action :administrators_only, except: [:public_view]
-	before_action :get_article, only: [:show, :edit, :update, :destroy, :featured_brand, :delete_featured_brand, :featured_product, :delete_featured_product, :public_view, :delete_carousel_photo]
+	before_action :get_article, only: [:show, :edit, :update, :destroy, :featured_brand, :delete_featured_brand, :featured_product, :delete_featured_product, :public_view, :delete_carousel_photo, :delete_tile_photo]
 
 	def public_view
 
@@ -122,6 +122,15 @@ class ArticlesController < ApplicationController
     end
 	end
 
+	def delete_tile_photo
+		@article.tile_photo = nil
+    if @article.save!
+     redirect_to @article, notice: "#{@article.headline} was successfully updated."
+    else
+      render :edit
+    end
+	end
+
 	def destroy
 		n = "#{@article.headline} was successfully deleted."
 		@article.destroy
@@ -150,7 +159,8 @@ class ArticlesController < ApplicationController
 			:date,
 			:article_type,
 			:active,
-			:carousel_photo
+			:carousel_photo,
+			:tile_photo
 		)
 	end	
 

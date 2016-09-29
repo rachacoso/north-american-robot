@@ -73,6 +73,7 @@ Rails.application.routes.draw do
   post  '/article/fp/:id' => 'articles#featured_product', as: 'article_featured_product'
   delete  '/article/fp/:id/:fp_id' => 'articles#delete_featured_product', as: 'delete_article_featured_product'
   delete  '/article/carousel/:id/' => 'articles#delete_carousel_photo', as: 'delete_article_carousel_photo'
+  delete  '/article/tile/:id/' => 'articles#delete_tile_photo', as: 'delete_article_tile_photo'
 
   resources :article_photos, only: [:create]
   delete '/article_photos/:id/:article_id' => 'article_photos#destroy', as: 'delete_article_photo'

@@ -26,6 +26,16 @@ class Article
     :default_style => :full
   validates_attachment_content_type :carousel_photo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
 
+  has_mongoid_attached_file :tile_photo, 
+    :styles => {
+      :tile    => ['350x350^'],
+    },
+    :default_style => :tile,
+    :convert_options => { 
+      :tile => "-alpha remove -background white -gravity center -extent 350x350 ",
+    }
+  validates_attachment_content_type :tile_photo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
+
 	validates :headline, presence: true
 
 	scope :on_brands, ->{where(article_type: 1)}

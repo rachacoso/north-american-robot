@@ -480,6 +480,11 @@ function initialize () {
       var thisForm = $(this).parents('form');
       $(thisForm).submit(); 
   });
+  $('#article_tile_photo').change(function() { 
+      // select the form and submit
+      var thisForm = $(this).parents('form');
+      $(thisForm).submit(); 
+  });
   // FOR PRODUCT PHOTO UPLOAD
   $('.product-photo-photo').change(function() { 
       // select the form and submit

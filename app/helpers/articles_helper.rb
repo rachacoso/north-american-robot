@@ -25,6 +25,14 @@ module ArticlesHelper
 	  end
 	end
 
+	def get_tile_photo_url(article)
+		if article.tile_photo.present?
+			return article.tile_photo.url(:tile)
+		elsif article.article_photos.present?
+			return article.article_photos.first.photo.url(:large)
+		end
+	end
+
 	def get_brand_photo_backup(brand)
     return brand.brand_photos.shuffle[0]
 	end

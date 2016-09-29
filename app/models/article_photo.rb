@@ -17,7 +17,7 @@ class ArticlePhoto
 			:small => "-alpha remove -background white", 
 			:medium => "-alpha remove -background white", 
 			:large => "-alpha remove -background white",
-			:carousel => "-alpha remove -background white -gravity center -crop '828x300+0+0' ",
+			:carousel => "-alpha remove -background white -gravity center -extent 828x300 ",
 		}
 
 	validates_attachment_content_type :photo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
