@@ -33,16 +33,17 @@ $('#article-featured-products-input').devbridgeAutocomplete({
 function initializeArticleImages() {
   $("#article-carousel").owlCarousel({
 
-      navigation : true, // Show next and prev buttons
+      loop:true,
+      autoPlay: 5000,
+      stopOnHover:true,
       slideSpeed : 300,
       paginationSpeed : 400,
       singleItem:true,
-      navigation : true,
-      navigationText : [
-        "<img src='/images/v2/left-arrow.svg'>",
-        "<img src='/images/v2/right-arrow.svg'>",
-      ],
-
+      // navigation : true,
+      // navigationText : [
+      //   "<img src='/images/v2/left-arrow.svg'>",
+      //   "<img src='/images/v2/right-arrow.svg'>",
+      // ],
       // "singleItem:true" is a shortcut for:
       // items : 1, 
       // itemsDesktop : false,
