@@ -1,15 +1,19 @@
 <li>
-	<%= link_to preview_brand_url(brand), remote: true do %>
+	
 		<div class="outer">
-			<% if photo = get_brand_photo(brand) %>
-			<div class="inner" style="background-image: url(<%= photo.photo.url(:small)%>) ">
+			<%= link_to preview_brand_url(brand), remote: true do %>
+			<% if photo_url = get_brand_photo_url(brand) %>
+			<div class="inner" style="background-image: url(<%= photo_url %>) ">
 			<% else %>
 			<div class="inner">
 			<% end %>
 			</div>
+			<% end %>
 		</div>
 		<div class="name">
+			<%= link_to preview_brand_url(brand), remote: true do %>
 			<%= brand.company_name %>
+			<% end %>
 		</div>
-	<% end %>
+	
 </li>

@@ -14,12 +14,17 @@ module ArticlesHelper
 
 	end
 
-	def get_brand_photo(brand)
+	def get_brand_photo_url(brand)
     product_list = brand.products.pluck(:id)
-    if photo = ProductPhoto.where(:photographable_id.in => product_list).shuffle[0]
-	    return photo
+
+		if brand.logo_file_name
+			return brand.logo.url(:medium)
+		elsif !brand.facebook.blank? && fb_picture(brand.facebook)
+			return fb_picture(brand.facebook)
+    elsif photo = ProductPhoto.where(:photographable_id.in => product_list).shuffle[0]
+	    return photo.photo.url(:small)
 	  elsif brand.brand_photos.shuffle[0]
-			return brand.brand_photos.shuffle[0]
+			return brand.brand_photos.shuffle[0].photo.url(:small)
 		else 
 			return false
 	  end
@@ -31,10 +36,6 @@ module ArticlesHelper
 		elsif article.article_photos.present?
 			return article.article_photos.first.photo.url(:large)
 		end
-	end
-
-	def get_brand_photo_backup(brand)
-    return brand.brand_photos.shuffle[0]
 	end
 
 	def get_product_photo(product)
