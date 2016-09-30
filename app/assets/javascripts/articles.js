@@ -23,6 +23,11 @@ $('#article-featured-products-input').devbridgeAutocomplete({
   noSuggestionNotice: 'Sorry, no matching results',
   triggerSelectOnValidInput: true,
   tabDisabled: true,
+  params: {
+    'article_id': function() {
+      return $('#article-id').val();
+    }
+  },
   onSelect: function (suggestion) {
     $('#fp-id').val(suggestion.data);
   }

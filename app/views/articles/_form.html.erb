@@ -95,6 +95,7 @@
 	<div class="small-12 columns">
 		<hr>
 		<h2>Article Featured Products</h2>
+		<h3>To select a Featured Product, you must first select at least one Featured Brand above.<br> You will then be able to select products from your Featured Brands below.</h3>
 	</div>
 </div>
 
@@ -109,6 +110,7 @@
 			<div class="small-12 columns">
 				<div class="row collapse">
 					<div class="small-10 columns">
+						<input type="hidden" id="article-id" name="article_id" value="<%= @article.id %>" />
 						<input type="hidden" id="fp-id" name="fp_id" value="" />
 						<%= text_field_tag 'article-featured-products-input' %>
 					</div><!--/.small-11-->
