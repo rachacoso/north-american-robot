@@ -45,6 +45,7 @@
 						</a>
 					</div>
 					<div class="show-for-small-only"><br></div>
+					<% unless @article.brands.blank? %>
 					<h3 id="featured-brands">FEATURED BRANDS</h3>
 					<ul class="featuringlist">
 						<% @article.brands.each do |b| %>
@@ -52,6 +53,8 @@
 							<%#= b.company_name %>
 						<% end %>
 					</ul>
+					<% end %>
+					<% unless @article.products.blank? %>
 					<h3 id="featured-products">FEATURED PRODUCTS</h3>
 					<ul class="featuringlist">
 						<% @article.products.each do |p| %>
@@ -59,6 +62,7 @@
 							<%#= b.company_name %>
 						<% end %>
 					</ul>
+					<% end %>
 				</div><!--/.medium-3-->
 			</div><!--/.row-->
 		
