@@ -26,7 +26,7 @@ module ArticlesHelper
 	  elsif brand.brand_photos.shuffle[0]
 			return brand.brand_photos.shuffle[0].photo.url(:small)
 		else 
-			return false
+			return brand.logo.url(:medium)
 	  end
 	end
 
