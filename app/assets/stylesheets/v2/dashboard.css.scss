@@ -15,13 +15,31 @@
 	a { 
 		color: $landing-dark-gray;
 	}
-	.image {
-		text-align: center;
+	.image-outer {
 		height: 150px;
-		overflow: hidden;
+		width: 150px;
+		margin: auto;
 	}
-	.image img {
-		height: 100%;
+	.image-inner {
+		margin:auto;
+		text-align: center;
+		width: 90%;
+		height: 90%;
+		overflow: hidden;
+		-moz-background-size: contain;
+		-o-background-size: contain;
+		-webkit-background-size: contain;
+		background-size: contain;
+		background-position: center;
+		background-repeat: no-repeat;
+		-moz-transition: all .5s;
+		-webkit-transition: all .5s;
+		transition: all .5s;
+		&:hover {
+			-moz-transform: scale(1.1,1.1);
+			-webkit-transform: scale(1.1,1.1);
+			transform: scale(1.1,1.1);  
+		}
 	}
 	.name {
 		text-align: center;
@@ -39,3 +57,14 @@
 .panel.shaded{
 	background-color: $landing-cream;
 }
+
+#marketplace-dashboard {
+	h3{
+		font-size: rem-calc(20);
+		font-weight: 800;
+		color: $landing-middle-gray;
+		border-bottom: 2px solid $landing-middle-gray;
+		border-top: 2px solid $landing-middle-gray;
+	}
+}
+

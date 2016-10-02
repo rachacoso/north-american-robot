@@ -1,11 +1,11 @@
 <div class="dashboard-display-item">
 <%= link_to preview_brand_url(brand), remote: true do %>
-<div class="image">
-	<% type, photo = index_item_photo(brand) %>
-	<% if type == "logo" %>
-		<%= image_tag photo %>
+<% photo = get_brand_photo_url(brand) %>
+<div class="image-outer">
+	<% if photo %>
+		<div class="image-inner" style="background-image: url(<%= photo %>)"></div>
 	<% else %>
-		<%= image_tag photo %>
+		<div class="image-inner"></div>
 	<% end %>
 </div>
 <div class="name"><%= brand.company_name %></div>

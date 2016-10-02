@@ -1,7 +1,7 @@
 <div class="dashboard-display-item">
 <%= link_to preview_brand_url(brand), remote: true do %>
-<div class="image">
-	<%= image_tag product.product_photos.first.photo.url(:medium) %>
+<div class="image-outer">
+<div class="image-inner" style="background-image: url(<%= product.product_photos.first.photo.url(:medium) %>)"></div>
 </div>
 <div class="name"><%= product.name %><br>from<br><%= brand.company_name %></div>
 <% end %>

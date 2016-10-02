@@ -12,38 +12,40 @@
 					</div><!--/.small-12-->
 				</div><!--/.row-->
 
+				<div id="marketplace-dashboard">
 				<div class="row">
 					<div class="medium-2 columns">
-						<div class="panel shaded" style="padding-top:0.25em;padding-bottom:0.25em;"><h3 class="text-center"><strong>Orders</strong></h3></div>
+						<h3>Orders</h3>
 						<%= render partial: "shared/orders/orders_chart", locals: { filter: @filter } %>
 					</div><!--/.medium-2-->
 					<div class="medium-10 columns">
-						<div class="panel shaded" style="padding-top:0.25em;padding-bottom:0.25em;"><h3 class="text-center"><strong>New Brands</strong></h3></div>
-						<div class="panel">
+						<h3>New Brands</h3>
+						
 							<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-5">
 							<% @new_brands.each do |b| %>
 								<li><%= render partial: "company_tile", locals: {brand: b} %></li>
 							<% end %>
 							</ul>
-						</div>
-						<div class="panel shaded" style="padding-top:0.25em;padding-bottom:0.25em;"><h3 class="text-center"><strong>Brands Just Updated</strong></h3></div>
-						<div class="panel">
+						
+						<h3>Brands Just Updated</h3>
+						
 							<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-5">
 							<% @updated_brands.each do |b| %>
 								<li><%= render partial: "company_tile", locals: {brand: b} %></li>
 							<% end %>
 							</ul>
-						</div>
-						<div class="panel shaded" style="padding-top:0.25em;padding-bottom:0.25em;"><h3 class="text-center"><strong>Products Just Updated</strong></h3></div>
-						<div class="panel">
+						
+						<h3>Products Just Updated</h3>
+						
 							<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-5">
 							<% @updated_products.each do |p| %>
 								<li><%= render partial: "product_tile", locals: {product: p, brand: p.brand} %></li>
 							<% end %>
 							</ul>
-						</div>
+						
 					</div><!--/.medium-10-->
 				</div><!--/.row-->
+				</div>
 
 			</div><!--/#main-body-->
 		</div><!--/.container-->
