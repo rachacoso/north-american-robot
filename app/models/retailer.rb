@@ -289,4 +289,21 @@ end
 
 	# end
 
+	def onboard_stage
+
+		if 
+			self.address.blank? || 
+			self.company_name.blank? || 
+			self.country_of_origin.blank? || 
+			self.year_established.blank? ||
+			self.company_size.blank? ||
+			self.website.blank? ||
+			self.contacts.blank?
+				return 1
+		else
+			return 2
+		end
+
+	end
+
 end

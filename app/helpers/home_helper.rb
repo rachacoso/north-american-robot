@@ -66,4 +66,58 @@ module HomeHelper
 		end
 	end
 
+	def get_onboard_stage(company)
+		return company.onboard_stage
+	end
+
+	def get_onboard_stage_class(current_stage:,stage:)
+
+		if current_stage == 1
+			case stage
+			when 1
+				return "class=active"
+			else
+				return nil
+			end
+		elsif current_stage == 2
+			case stage
+			when 1
+				return "class=done"
+			when 2
+				return "class=active"
+			else
+				return nil
+			end 
+		elsif current_stage == 3
+			case stage
+			when 1..2
+				return "class=done"
+			when 3
+				return "class=active"
+			else
+				return nil
+			end
+		elsif current_stage == 4
+			case stage
+			when 1..3
+				return "class=done"
+			when 4
+				return "class=active"
+			else
+				return nil
+			end
+		elsif current_stage == 5
+			case stage
+			when 1..4
+				return "class=done"
+			when 5
+				return "class=active"
+			else
+				return nil
+			end
+		else 
+			return "class=done"
+		end
+		
+	end
 end

@@ -1,7 +1,8 @@
 <h2 class="text-center">Complete your Profile to Reach More Brands</h2>
+<% stage = get_onboard_stage(@current_user.company) %>
 <ul class="onboard-flow-header" data-steps="4">
-	<li class="active"><span><%= image_tag "/images/create_profile.png" %></span></li>
-	<li><span><%= image_tag "/images/enable_payment.png" %><br>(BASIC)</span></li>
-	<li><span><%= image_tag "/images/introduce_yourself.png" %><br>(INTERMEDIATE)</span></li>
-	<li><span><%= image_tag "/images/tell_us_more.png" %><br>(ADVANCED)</span></li>
+	<li <%= get_onboard_stage_class(current_stage: stage, stage: 1)%>><span><%= image_tag "/images/create_profile.png" %></span></li>
+	<li <%= get_onboard_stage_class(current_stage: stage, stage: 2)%>><span><%= image_tag "/images/enable_payment.png" %><br>(BASIC)</span></li>
+	<li <%= get_onboard_stage_class(current_stage: stage, stage: 3)%>><span><%= image_tag "/images/introduce_yourself.png" %><br>(INTERMEDIATE)</span></li>
+	<li <%= get_onboard_stage_class(current_stage: stage, stage: 4)%>><span><%= image_tag "/images/tell_us_more.png" %><br>(ADVANCED)</span></li>
 </ul>
