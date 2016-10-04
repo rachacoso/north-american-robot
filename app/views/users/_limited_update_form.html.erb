@@ -1,6 +1,6 @@
 <a class="anchor" id="a-logins"></a>
 
-<%= form_for user, url: user_limited_update_url(user) do |f| %>
+<%= form_for user, url: user_limited_update_url(user), remote: true do |f| %>
 	<%= f.fields_for :contact do |ff| %>
 	<div class="row">
 		<div class="small-12 columns">

@@ -3,6 +3,15 @@ $('#user-limited-update-form').fadeIn().html("<%= j( render partial: 'users/limi
 $('#user-limited-update-notice').fadeIn().html('<%= @notice %> &nbsp;&nbsp;');
 $('#contacts_list').html("<%= j (render partial: '/users/user_list', locals: {b_or_d: @current_user.get_parent}) %>");
 
+<% if @errors %>
+$('#ajax-success-data').html("<%= @notice %>");
+$('#ajax-message').fadeIn().delay( 1500 ).fadeOut();
+<% else %>
+$('#ajax-success-data').html("Contact Info Updated");
+$('#ajax-message').fadeIn().delay( 1500 ).fadeOut();
+<% end %>
+
+
 setTimeout(function(){
 	$('#user-limited-update-notice').fadeOut();
 }, 5000);
