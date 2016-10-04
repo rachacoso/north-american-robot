@@ -132,8 +132,17 @@ ul.onboard-flow-header {
 			}
 		}
 		&.active > span:before {
-			 content: "DO";
-			 border: 5px solid $landing-pink;
+			content: "DO";
+			border: 5px solid $landing-pink;
+	    -webkit-transition: color 0.5s, background-color 0.5s, border 0.5s; /* Safari */
+	    transition: color 0.5s, background-color 0.5s, border 0.5s;
+		}
+		&.active:hover {
+			& > span:before {
+				color: white;
+				background-color: $landing-blue;
+				border: 5px solid $landing-blue;
+			}
 		}
 		&.done > span:before {
 			content: "DONE";
