@@ -60,11 +60,106 @@
 
 #marketplace-dashboard {
 	h3{
-		font-size: rem-calc(20);
+		font-size: rem-calc(25);
 		font-weight: 800;
 		color: $landing-middle-gray;
 		border-bottom: 2px solid $landing-middle-gray;
 		border-top: 2px solid $landing-middle-gray;
 	}
+	#dashboard-alerts {
+		#onboard {
+			margin: rem-calc(20) 0;
+			// border: 1px solid $landing-middle-gray;
+			// background-color: $landing-light-gray;
+			padding: rem-calc(10);
+			// text-align: center;
+			h2 {
+				// font-family: serif;
+				text-transform: uppercase;
+				color: $landing-blue;
+				font-weight: 900;
+				margin-bottom: rem-calc(40);
+			}
+		}	
+	}
 }
+
+
+ul.onboard-flow-header {
+	list-style-type: none; /*to remove bullets*/
+	display: table;
+	width: 100%;
+	margin: auto;
+	padding: 0 rem-calc(10) 0 rem-calc(10);
+	zoom:1;
+	text-align: center;
+	overflow: hidden;
+	&[data-steps="4"] li {width: 25%; /* evenly space 4 steps */}
+	&[data-steps="5"] li {width: 20%; /* evenly space 5 steps */}
+	li {
+		display: inline-block;
+		position: relative;
+		vertical-align: top;
+		font-weight:200;
+		font-size: rem-calc(18);
+		@media #{$small-only} {
+			font-size: rem-calc(12);
+		}
+		display: inline-block;
+		& > span > img {
+			height: 60px;
+		}
+		& > span {
+			display: block;
+			margin-left: rem-calc(15);
+			&:before {
+				content: "";
+				display: block;
+				position: absolute;
+				margin: 0 auto;
+				background: $landing-lighter-blue;
+				width: rem-calc(75);
+				height: rem-calc(75);
+				text-align: center; //IE8 doesn't inherit this style
+				margin-bottom: 0.25em;
+				line-height: rem-calc(65);
+				border-radius: 100%;
+				position: relative;
+				z-index: 1000;
+				color: $landing-dark-gray;
+				font-weight: 900;
+				text-transform: uppercase;
+			}
+		}
+		&.active > span:before {
+			 content: "DO";
+			 border: 5px solid $landing-pink;
+		}
+		&.done > span:before {
+			content: "DONE";
+			background: $landing-pink;
+			border: 5px solid $landing-pink;
+			color: white;
+			font-size: 85%;
+		}
+		&:before {
+			content: "";
+			display: block;
+			width: 100%;
+			height: rem-calc(10);
+			position: absolute;
+			top: rem-calc(30);
+			right: 50%;
+			background: $landing-blue;
+			z-index: 4;
+		}
+		&.done:before {
+			background: $landing-pink;
+		}
+		&:first-child:before {
+			display: none;
+		}
+	}
+}
+
 

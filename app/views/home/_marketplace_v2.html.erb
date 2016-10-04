@@ -6,13 +6,27 @@
 
 				<div class="row">
 					<div class="small-12 columns">
-						
-							<p> Welcome to Landing International! This is your marketplace dashboard where you will be able to view all your Landing International activity.</p>
-						<br>
+							<h3> Welcome to Landing International! This is your marketplace dashboard where you will be able to view all your Landing International activity.</h3>
 					</div><!--/.small-12-->
 				</div><!--/.row-->
 
+
 				<div id="marketplace-dashboard">
+				<div class="row">
+					<div class="small-12 columns">
+						<h3 style="color: #EA84C7;">To Do</h3>
+						<div id="dashboard-alerts">
+							<div id="onboard">
+								
+								<% if @current_user.brand %>
+									<%= render partial: "onboard_brand.html.erb" %>
+								<% else %>
+									<%= render partial: "onboard_buyer.html.erb" %>
+								<% end %>
+							</div>
+						</div>
+					</div><!--/.small-12-->
+				</div><!--/.row-->
 				<div class="row">
 					<div class="medium-2 columns">
 						<h3>Orders</h3>

@@ -242,3 +242,29 @@ ul.tablist {
 	color: red;
 }
 
+
+// NUMBER IN A CIRCLE
+.step {
+  &:before {
+    content: attr(data-step);
+    display: inline-block;
+    // margin: 0 auto;
+    background: $landing-lighter-blue;
+    width: 1.5em;
+    height: 1.5em;
+    text-align: center; //IE8 doesn't inherit this style
+    margin-bottom: 0.25em;
+    line-height: 1.5em;
+    border-radius: 100%;
+    position: relative;
+    z-index: 1000;
+    color: $landing-dark-gray;
+    font-weight: 500;
+  }
+  &.dashboard {
+  	&:before {
+  		background: $landing-blue;
+  		color: white;
+  	}
+  }
+}
