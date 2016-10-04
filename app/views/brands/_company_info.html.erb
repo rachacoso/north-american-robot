@@ -32,13 +32,13 @@
 
 			<div class="row">
 				<div class="small-12 columns">
-					<%= f.text_area :company_name, rows: 2, style: "font-size:2em; font-weight:bold;", placeholder: "Company Name", class: (@brand.company_name.blank? ? "required" : "") %>
+					<%= f.text_area :company_name, rows: 2, style: "font-size:2em; font-weight:bold;", placeholder: "Company Name", required: "required" %>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="medium-6 columns">
-					<%= f.text_field :country_of_origin, placeholder: 'Country of origin', class: (@brand.country_of_origin.blank? ? "required country-autocomplete" : "country-autocomplete") %>
+					<%= f.text_field :country_of_origin, placeholder: 'Country of origin', class: "country-autocomplete", required: "required"  %>
 				</div>
 				<div class="medium-6 columns">				
 					<%= label_tag(:year_established, "Year established") %>
@@ -53,7 +53,7 @@
 							<span class="prefix">http://</span>
 						</div>
 						<div class="small-9 columns">
-							<%= f.text_field :website, label: false, class: (@brand.website.blank? ? "required" : "") %>
+							<%= f.text_field :website, label: false, required: "required"  %>
 						</div>
 					</div>
 				</div>
@@ -90,20 +90,20 @@
 			<div class="row">
 				<%= f.fields_for :address do |ff| %>
 				<div class="small-12 columns">					
-					<%= ff.text_field :address1, label: "Street Address", class: (@brand.address.address1.blank? ? "required" : "") %>
+					<%= ff.text_field :address1, label: "Street Address", required: "required"  %>
 					<%= ff.text_field :address2, label: false %>
 				</div>
 				<div class="medium-4 columns">
-					<%= ff.text_field :city, label: "<small>City/Town/Department</small>".html_safe, class: (@brand.address.city.blank? ? "required" : "") %>
+					<%= ff.text_field :city, label: "<small>City/Town/Department</small>".html_safe, required: "required"  %>
 				</div>
 				<div class="medium-5 columns">
 					<%= ff.text_field :state, label: "<small>State/Province/Region/County</small>".html_safe %>
 				</div>
 				<div class="medium-3 columns">
-					<%= ff.text_field :postcode, label: "<small>Zip/Postal Code</small>".html_safe, class: (@brand.address.postcode.blank? ? "required" : "") %>
+					<%= ff.text_field :postcode, label: "<small>Zip/Postal Code</small>".html_safe, required: "required"  %>
 				</div>
 				<div class="medium-6 columns">
-					<%= ff.text_field :country, placeholder: 'Country', class: (@brand.address.country.blank? ? "country-autocomplete required" : "country-autocomplete") %>
+					<%= ff.text_field :country, placeholder: 'Country', class: "country-autocomplete", required: "required"  %>
 				</div>
 				<% end %>
 			</div>
