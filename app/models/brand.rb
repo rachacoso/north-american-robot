@@ -215,9 +215,12 @@ class Brand
 	end
 
 	def onboard_stage
-		
+
 		if 
-			self.address.blank? || 
+			self.address.address1.blank? ||
+			self.address.city.blank? || 
+			self.address.postcode.blank? || 
+			self.address.country.blank? || 
 			self.company_name.blank? || 
 			self.country_of_origin.blank? || 
 			self.year_established.blank? ||
