@@ -289,16 +289,21 @@ end
 
 	# end
 
-	def onboard_stage
+	def onboard_stage(user)
 
 		if 
-			self.address.blank? || 
+			self.address.address1.blank? ||
+			self.address.city.blank? || 
+			self.address.postcode.blank? || 
+			self.address.country.blank? || 
 			self.company_name.blank? || 
 			self.country_of_origin.blank? || 
 			self.year_established.blank? ||
 			self.company_size.blank? ||
 			self.website.blank? ||
-			self.contacts.blank?
+			user.contact.firstname.blank? ||
+			user.contact.lastname.blank? ||
+			user.contact.phone.blank?
 				return 1
 		else
 			return 2

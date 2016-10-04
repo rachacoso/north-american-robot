@@ -66,8 +66,8 @@ module HomeHelper
 		end
 	end
 
-	def get_onboard_stage(company)
-		return company.onboard_stage
+	def get_onboard_stage(company:, user:)
+		return company.onboard_stage(user)
 	end
 
 	def get_onboard_stage_class(current_stage:,stage:)

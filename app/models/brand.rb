@@ -214,7 +214,7 @@ class Brand
 
 	end
 
-	def onboard_stage
+	def onboard_stage(user)
 
 		if 
 			self.address.address1.blank? ||
@@ -226,7 +226,9 @@ class Brand
 			self.year_established.blank? ||
 			self.company_size.blank? ||
 			self.website.blank? ||
-			self.contacts.blank? ||
+			user.contact.firstname.blank? ||
+			user.contact.lastname.blank? ||
+			user.contact.phone.blank? ||
 			self.products.blank?
 				return 1
 		else
