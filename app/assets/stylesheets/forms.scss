@@ -52,6 +52,9 @@ select {
   // background: $input-background-color;
   color: $input-text-color;
   box-shadow: none;
+  &.required {
+    @include transparent($landing-orange, 0.8);
+  }
 }
 input[type="password"],
 input[type="email"] {
@@ -83,6 +86,9 @@ input[type="number"].focus {
   // background: #2C3838;
   box-shadow: inset 0 2px 2px rgba(0,0,0,0.2);
   color: $input-text-color;
+  &.required {
+    background: scale-color($landing-orange, $lightness: 30%);
+  }
 }
 
 select:hover,
