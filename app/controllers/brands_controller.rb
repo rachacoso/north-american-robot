@@ -302,33 +302,49 @@ class BrandsController < ApplicationController
 				# 'complete'
 			]
 
-			if params[:redirect]
-				if allowable_redirect.include? params[:redirect]
-					if params[:redirect] == 'complete'
-						redirect_to dashboard_url
+	    respond_to do |format|
+	      format.html {
+					if params[:redirect]
+						if allowable_redirect.include? params[:redirect]
+							if params[:redirect] == 'complete'
+								redirect_to dashboard_url
+							else
+								redir = "onboard_brand_#{params[:redirect]}_url"
+								redirect_to send(redir)
+							end
+							
+						else
+							redirect_to onboard_brand_one_url
+							# allow redirect via passed parameter only if in 'allowed' array, else redirect to the first onboard screen
+						end
+					elsif params[:redirect_anchor]
+						redirect_to brand_url + "#" + params[:redirect_anchor] 
 					else
-						redir = "onboard_brand_#{params[:redirect]}_url"
-						redirect_to send(redir)
+						redirect_to brand_url
 					end
-					
-				else
-					redirect_to onboard_brand_one_url
-					# allow redirect via passed parameter only if in 'allowed' array, else redirect to the first onboard screen
-				end
-			elsif params[:redirect_anchor]
-				redirect_to brand_url + "#" + params[:redirect_anchor] 
-			else
-				redirect_to brand_url
-			end
+	      }
+	      format.js {
+
+	      }
+	    end
+
+
 
 		else
 			# not successful  
 			# STILL INCOMPLETE NEED TO ADD VALIDATIONS
 			flash[:error] = "Sorry, there were errors"
 
-			redirect_to brand_url, :flash => {
-				:name_error => brand.errors[:company_name].first
-			}
+	    respond_to do |format|
+	      format.html {
+					redirect_to brand_url, :flash => {
+						:name_error => brand.errors[:company_name].first
+					}
+	      }
+	      format.js {
+	      	
+	      }
+	    end
 
 		end
 

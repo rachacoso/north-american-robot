@@ -1,7 +1,7 @@
 
 <br>
 <a class="anchor" id="a-companyinfo"></a>
-<%= form_for @brand, :html => {id: 'company-info-form'}, url: brand_url do |f| %>
+<%= form_for @brand, :html => {id: 'company-info-form'}, url: brand_url, remote: true do |f| %>
 	<%= hidden_field_tag "redirect_anchor", "a-companyinfo" %>
 	<div class="row">
 		<div class="medium-4 columns">
