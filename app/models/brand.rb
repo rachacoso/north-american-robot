@@ -3,68 +3,21 @@ class Brand
   include Mongoid::Timestamps::Short
 	include Mongoid::Paperclip
 	include LandingArmorPayments::Company
-
-	field :subscriber, type: Mongoid::Boolean
-	field :active, type: Mongoid::Boolean, default: false
-	
-	# LOGINS/USERS WHO CAN ACT ON BEHALF OF BRAND
-	has_many :users, dependent: :destroy
-
-	# v2 brand/retailer/distributor relation
-	has_many :users, as: :company, dependent: :destroy
+	include CompanyCommons::BuyersAndSellers
 
   #####################
 	### Profile
 	#####################
- 	# General Info
- 	field :company_name, type: String
-	field :country_of_origin, type: String
-	field :year_established, type: Date
-	field :company_size, type: String
-	field :website, type: String
-	field :facebook, type: String
-	field :linkedin, type: String
-	field :twitter, type: String
-	field :instagram, type: String
+
+	# BRAND STORY
 	field :brand_positioning, type: String # now referenced as "company introduction" in ui
 
-	field :completeness, type: Integer, default: 0 # 0-3 depending on completeness of profile fields
-	field :last_login, type: DateTime
-	embeds_one :address, as: :addressable
-	has_many :contacts, as: :contactable, dependent: :destroy
-	has_many :tags, as: :taggable, dependent: :destroy
-
-	accepts_nested_attributes_for :contacts, :address
-
-	has_mongoid_attached_file :logo, 
-  	# :path => ':attachment/:id/:style.:extension',
-	  # :url => ":s3_domain_url",
-	  :default_url => "https://s3.amazonaws.com/landingintl-us/defaults/Default_Logo.png",
-	  :styles => {
-	    :medium    => ['200x90'],
-	    # :public    => ['200x200']
-	    :profile_tile => ['x90>']
-	  },
-	  # :convert_options => {:public => "-blur 0x20"},
-	  :default_style => :medium
-	validates_attachment_content_type :logo, :content_type=>['image/jpeg', 'image/png', 'image/gif']
-
-	# SOCIAL IMPACT
-
-	field :social_causes, type: String
-	field :social_organizations, type: String
-	field :social_give_back, type: String
-
-
-  has_and_belongs_to_many :sectors, inverse_of: nil
-  has_and_belongs_to_many :subsectors, inverse_of: nil 
 	has_and_belongs_to_many :channels, inverse_of: nil 
-  
+	has_many :channel_capacities, dependent: :destroy
 	has_and_belongs_to_many :key_retailers, inverse_of: nil
 	has_and_belongs_to_many :trends, inverse_of: nil
 
   has_many :brand_photos, dependent: :destroy
-
   has_many :library_documents, as: :documentable, dependent: :destroy
 
 	# Current/Future SKUs
@@ -72,19 +25,14 @@ class Brand
 
 	# Marketing Acivities
 	has_many :press_hits, dependent: :destroy
-	has_many :trade_shows, dependent: :destroy
 
-	# Channel Capacity
-	has_many :channel_capacities, dependent: :destroy
-
+	# REGULATORY
 	has_many :patents, dependent: :destroy
 	has_many :trademarks, dependent: :destroy
 	has_many :compliances, dependent: :destroy
 
-	# Countries Where Exported
-	# field :countries_where_exported, type: String
+	# EXPORT COUNTRIES
 	embeds_many :export_countries, as: :exportable, cascade_callbacks: true
-
 
 	# V2 ORDERING
 	has_many :orders
@@ -118,9 +66,6 @@ class Brand
 
 	# default_scope ->{ where(:country_of_origin.ne => "United States") }
 	scope :international, ->{ where(:country_of_origin.ne => "United States") }
-	scope :subscribed, ->{where(subscriber: true)}
-	scope :activated, ->{where(active: true)}
-
 
 ################
 # MODEL METHODS
