@@ -1,0 +1,48 @@
+<br>
+<a class="anchor" id="a-payment-shipping-terms"></a>
+<div class="row clearfix">
+	<%= form_for @retailer, url: retailer_url do |f| %>
+	<%= hidden_field_tag "redirect_anchor", "a-payment-shipping-terms" %>
+		<div class="small-12 columns editform">
+
+<div class="row">
+	<div class="small-12 columns">
+		<h3>Payment Terms</h3>
+<%= radio_button_tag("retailer[payment_terms]", "Prepayment", @retailer.payment_terms == 'Prepayment' || !@retailer.payment_terms ) %>
+<%= label_tag("retailer[payment_terms]_Prepayment", "Prepayment") %>
+<%= radio_button_tag("retailer[payment_terms]", "Net 30", @retailer.payment_terms == 'Net 30' ) %>
+<%= label_tag("retailer[payment_terms]_Net_30", "Net 30") %>
+<%= radio_button_tag("retailer[payment_terms]", "Net 45", @retailer.payment_terms == 'Net 45' ) %>
+<%= label_tag("retailer[payment_terms]_Net_45", "Net 45") %>
+<%= radio_button_tag("retailer[payment_terms]", "Net 60", @retailer.payment_terms == 'Net 60' ) %>
+<%= label_tag("retailer[payment_terms]_Net_60", "Net 60") %>
+
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
+<hr>
+<div class="row">
+	<div class="small-6 columns">
+		<h3>Shipments</h3>
+		<%= f.check_box :receives_direct_shipments, label: false %>
+		<%= f.label :receives_direct_shipments, 'Receives Direct Shipments' %>
+		<%= f.check_box :multiple_distribution_centers, label: false %>
+		<%= f.label :multiple_distribution_centers, 'Multiple Distribution Centers' %>
+	</div><!--/.small-6-->
+	<div class="small-6 columns">
+		<h3>Payment for Shipping</h3>
+		<%= f.check_box :pays_for_international_shipping, label: false %>
+		<%= f.label :pays_for_international_shipping, 'Pays for International Shipping' %>
+		<%= f.check_box :pays_for_domestic_shipping, label: false %>
+		<%= f.label :pays_for_domestic_shipping, 'Pays for Domestic Shipping' %>
+	</div><!--/.small-6-->
+</div><!--/.row-->
+
+
+
+
+<hr>
+			<%= f.submit 'Update Terms', class: "landing-button right" %>
+		</div>
+	<% end %>
+</div>

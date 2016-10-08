@@ -97,7 +97,7 @@ module CompanyCommons
 	  	field :company_introduction, type: String
 
 	  	# PAYMENTS & SHIPPING
-	    field :payment_terms, type: String # Prepayment, Net 30, Net 45, Net 60
+	    field :payment_terms, type: String, default: "Prepayment" # Prepayment, Net 30, Net 45, Net 60
 	    field :receives_direct_shipments, type: Boolean
 	    field :multiple_distribution_centers, type: Boolean
 	    field :pays_for_international_shipping, type: Boolean
