@@ -222,34 +222,13 @@ class BrandsController < ApplicationController
 			end
 		end
 
-		if params[:sectors]
-			# set sectors
-			assigned_sectors = Sector.find(params[:sectors].values) rescue []
-			unless assigned_sectors.blank?
-				brand.sectors = [] # clear current ones before update
-			end
-			assigned_sectors.each do |s|
-				brand.sectors << s
-			end
-		end
+    if params[:sectors]
+			brand.set_sectors(params[:sectors])
+    end
 
-		if params[:subsectors]
-			# set subsectors
-			assigned_subsectors = Subsector.find(params[:subsectors].values) rescue []
-			subsector_parents = assigned_subsectors.map { |s| s.sector }
-
-			brand.subsectors = [] # clear current ones before update
-			assigned_subsectors.each do |s|
-				brand.subsectors << s
-			end
-
-			subsector_parents.each do |p|
-				unless brand.sectors.find(p)
-					brand.sectors << p
-				end
-			end
-
-		end
+    if params[:subsectors]
+			brand.set_subsectors(params[:subsectors])
+    end
 
 		if params[:channels]
 			# set channels

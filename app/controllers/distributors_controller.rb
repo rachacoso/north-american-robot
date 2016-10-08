@@ -80,30 +80,11 @@ class DistributorsController < ApplicationController
     end
 
     if params[:sectors]
-      # set sectors
-      assigned_sectors = Sector.find(params[:sectors].values) rescue []
-      unless assigned_sectors.blank?
-        @distributor.sectors = [] # clear current ones before update
-      end
-      assigned_sectors.each do |s|
-        @distributor.sectors << s
-      end
+      @distributor.set_sectors(params[:sectors])
     end
 
     if params[:subsectors]
-      # set subsectors
-      assigned_subsectors = Subsector.find(params[:subsectors].values) rescue []
-      subsector_parents = assigned_subsectors.map { |s| s.sector }
-
-      @distributor.subsectors = [] # clear current ones before update
-      assigned_subsectors.each do |s|
-        @distributor.subsectors << s
-      end
-
-      subsector_parents.each do |p|
-        @distributor.sectors << p
-      end
-
+      @distributor.set_subsectors(params[:subsectors])
     end
 
     if params[:channels]
