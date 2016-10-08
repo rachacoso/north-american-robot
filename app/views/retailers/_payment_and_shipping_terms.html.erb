@@ -22,15 +22,16 @@
 
 <hr>
 <div class="row">
+	<div class="small-12 columns">
+		<h3>Other Terms</h3>
+	</div><!--/.small-12-->
 	<div class="small-6 columns">
-		<h3>Shipments</h3>
 		<%= f.check_box :receives_direct_shipments, label: false %>
 		<%= f.label :receives_direct_shipments, 'Receives Direct Shipments' %>
 		<%= f.check_box :multiple_distribution_centers, label: false %>
 		<%= f.label :multiple_distribution_centers, 'Multiple Distribution Centers' %>
 	</div><!--/.small-6-->
 	<div class="small-6 columns">
-		<h3>Payment for Shipping</h3>
 		<%= f.check_box :pays_for_international_shipping, label: false %>
 		<%= f.label :pays_for_international_shipping, 'Pays for International Shipping' %>
 		<%= f.check_box :pays_for_domestic_shipping, label: false %>
