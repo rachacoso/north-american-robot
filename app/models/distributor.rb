@@ -11,7 +11,6 @@ class Distributor
 	#####################
 
 	# DISTRIBUTOR STORY
-	field :company_introduction, type: String
 	field :rating, type: Integer, default: 0 # validation rating 0-7 based on validation criterion
 	has_and_belongs_to_many :channels, inverse_of: nil 
 	has_many :channel_capacities, dependent: :destroy

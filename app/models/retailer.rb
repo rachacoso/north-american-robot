@@ -11,7 +11,6 @@ class Retailer
 	#####################
 
 	# RETAILER STORY
-	field :company_introduction, type: String
 	field :number_of_locations, type: Integer
 	field :number_of_brands_sold, type: Integer
 	# Countries of Operation

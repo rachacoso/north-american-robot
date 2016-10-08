@@ -70,6 +70,10 @@ module CompanyCommons
 		extend ActiveSupport::Concern
 
 	  included do
+
+	  	# RETAILER/DISTRIBUTOR STORY
+	  	field :company_introduction, type: String
+
 	  	# PAYMENTS & SHIPPING
 	    field :payment_terms, type: String # Prepayment, Net 30, Net 45, Net 60
 	    field :receives_direct_shipments, type: Boolean
