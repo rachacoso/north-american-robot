@@ -68,11 +68,14 @@
 					</ul>
 					</div><!--/.medium-3-->
 					<div class="medium-6 columns">
-
+						
+						<ul id='shipping-address'>
+						<li class="title">Address</li>
 						<%= display_shipping_address(order: order) %>
+						</ul>
 
 						<ul>
-						<li>Contact</li>
+						<li class="title">Contact</li>
 						<li><span id="title">
 						<%= order.user.contact.firstname if order.user.contact.firstname.present? %> <%= order.user.contact.lastname if order.user.contact.lastname.present? %>
 						<%= order.user.contact.phone.present? ? "/ #{order.user.contact.phone.phony_formatted(format: :international , spaces: '-')}".html_safe : "<br>Phone n/a".html_safe %></span>
@@ -100,4 +103,47 @@
 			</div>
 		</div><!--/.small-12-->
 	</div><!--/.row-->
+
+<div class="row" id="order-shipping-data">
+		<div class="small-12 columns">
+			<div id="header-row">
+				<div class="row">
+					<div class="small-12 columns">terms</div><!--/.small-12-->
+				</div><!--/.row-->
+			</div>
+			<div id="body">
+				<div class="row">
+					<div class="medium-6 columns">
+						<% payment_terms, shipping_payment_terms, other_terms = get_order_terms(order:order) %>
+						<ul>
+							<% unless payment_terms.blank? %>
+							<li class="title">Payment Terms</li>
+							<li class="term"><%= payment_terms %></li>
+							<% end %>
+						</ul>
+						<br>
+						<ul>
+							<% unless shipping_payment_terms.blank? %>
+								<li class="title">Other Shipping/Payment Terms</li> 
+								<% shipping_payment_terms.each do |term| %>
+									<li class="term"><%= term %></li>
+								<% end %>
+							<% end %>
+						</ul>
+					</div><!--/.medium-6-->
+					<div class="medium-6 columns">
+						<ul>
+						<% unless other_terms.blank? %>
+							<li class="title">Additional Terms</li> 
+							<% other_terms.each do |term| %>
+								<li class="term"><%= term %></li>
+							<% end %>
+						<% end %>
+						</ul>
+					</div><!--/.medium-6-->
+				</div><!--/.row-->
+			</div>
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+
 </div>

@@ -1,34 +1,34 @@
 <br>
 <a class="anchor" id="a-ordering-requirements"></a>
 <div class="row clearfix">
-	<%= form_for @retailer, url: retailer_url do |f| %>
+	<%= form_for @retailer, url: retailer_url, remote: true do |f| %>
 	<%= hidden_field_tag "redirect_anchor", "a-ordering-requirements" %>
 		<div class="small-12 columns editform">
 
 
 			<div class="row">
 				<div class="small-6 columns">
-					<%= f.check_box :ticketing, label: false %>
+					<%= f.check_box :ticketing, label: false, class: "auto-form" %>
 					<%= f.label :ticketing %>
-					<%= f.check_box :testers, label: false %>
+					<%= f.check_box :testers, label: false, class: "auto-form" %>
 					<%= f.label :testers %>
-					<%= f.check_box :gratis, label: false %>
+					<%= f.check_box :gratis, label: false, class: "auto-form" %>
 					<%= f.label :gratis %>
-					<%= f.check_box :co_op, label: false %>
+					<%= f.check_box :co_op, label: false, class: "auto-form" %>
 					<%= f.label :co_op, "Co-Op" %>
 				</div><!--/.small-6-->
 				<div class="small-6 columns">
-					<%= f.check_box :damages_budget, label: false %>
+					<%= f.check_box :damages_budget, label: false, class: "auto-form" %>
 					<%= f.label :damages_budget, "Damages Budget" %>
-					<%= f.check_box :comissions, label: false %>
+					<%= f.check_box :comissions, label: false, class: "auto-form" %>
 					<%= f.label :comissions %>
-					<%= f.check_box :sales_training, label: false %>
+					<%= f.check_box :sales_training, label: false, class: "auto-form" %>
 					<%= f.label :sales_training, "Sales Training" %>
-					<%= f.check_box :education_materials, label: false %>
+					<%= f.check_box :education_materials, label: false, class: "auto-form" %>
 					<%= f.label :education_materials, "Education Materials" %>
 				</div><!--/.small-6-->
 			</div><!--/.row-->
-			<%= f.submit 'Update Requirements', class: "landing-button right" %>
+			<%#= f.submit 'Update Requirements', class: "landing-button right" %>
 		</div>
 	<% end %>
 </div>

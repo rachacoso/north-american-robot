@@ -164,7 +164,7 @@ module OrdersHelper
 		postcode = order.shipping_address.postcode.present? ? order.shipping_address.postcode : company.address.postcode
 		country = order.shipping_address.country.present? ? order.shipping_address.country : company.address.country
 
-		shipping_address = "<ul id='shipping-address'>"
+		shipping_address = ""
 		shipping_address += "<li>#{name}</li>" if name.present?
 		shipping_address += "<li>#{address1}</li>" if address1.present?
 		shipping_address += "<li>#{address2}</li>" if address2.present?
@@ -174,9 +174,39 @@ module OrdersHelper
 		shipping_address += " #{postcode}" if postcode.present?
 		shipping_address += "</li>"
 		shipping_address += "<li>#{country}</li>" if country.present?
-		shipping_address += "</ul>"
 
 		return shipping_address.html_safe
+	end
+
+	def get_order_terms(order:)
+	
+		shipping_payment_terms = []
+		other_terms = []
+
+		payment_terms = order.orderer.payment_terms if order.orderer.payment_terms.present?
+
+		shipping_termcheck = [	
+									:receives_direct_shipments,
+									:multiple_distribution_centers,
+									:pays_for_international_shipping,
+									:pays_for_domestic_shipping	]
+		shipping_termcheck.each do |term|
+			shipping_payment_terms << term.to_s.gsub(/_/,' ').capitalize if order.orderer.send(term)
+		end
+		other_termcheck = [	
+									:ticketing,
+									:testers,
+									:gratis,
+									:co_op,
+									:damages_budget,
+									:comissions,
+									:sales_training,
+									:education_materials	]
+		other_termcheck.each do |term|
+			other_terms << term.to_s.gsub(/_/,' ').capitalize if order.orderer.send(term)
+		end
+		return payment_terms, shipping_payment_terms, other_terms
+
 	end
 
 	def display_history_and_comments(order:)

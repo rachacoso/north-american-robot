@@ -303,8 +303,14 @@ table.date-control {
 	}
 
 	ul {
+		li.title {
+			font-weight: 300;
+			border-bottom: 1px solid $landing-middle-gray;
+			margin-bottom: rem-calc(5);
+		}
 		list-style-type: none; /*to remove bullets*/
-		li {
+		li.term {
+			font-weight: 200;
 		}
 	}
 	font-weight: 100;

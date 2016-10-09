@@ -1,7 +1,9 @@
-
+<% if @armor_payments %>
 	$('#armor-ordering-and-payments').fadeOut(function(){
 		$('#armor-ordering-and-payments').html("<%= j (render partial: 'shared/profileform/armor/armor_ordering_and_payments', locals: { company: @distributor }) %>");
 	});
 	$('#armor-ordering-and-payments').fadeIn();
-
+<% end %>
+$('#ajax-success-data').html("Profile Updated");
+$('#ajax-message').fadeIn().delay( 1500 ).fadeOut();
 
