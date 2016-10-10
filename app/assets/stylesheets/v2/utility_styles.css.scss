@@ -210,16 +210,18 @@ ul.tablist {
 
 #ajax-message {
 	position: fixed;
-	@include transparent($landing-dark-gray, 0.7);
+	@include transparent($landing-middle-gray, 0.7);
 	bottom: 0;
 	width: 100%;
 	z-index: 1000001;
+
 	display: none;
 	#ajax-message-inner {
-		background-color: green;
+		background-color: $landing-orange;
+		height: rem-calc(40);
 		color: white;
 		font-weight: 500;
-		font-size: rem-calc(15);
+		font-size: rem-calc(25);
 		position: relative;
 		@media only screen { 
 			width:95%; 

@@ -300,17 +300,18 @@ table.date-control {
 		background-color: $landing-middle-gray;
 		color: white;
 		font-weight: 500;
+		margin-top: rem-calc(20);
 	}
 
 	ul {
 		li.title {
-			font-weight: 300;
+			font-weight: 100;
 			border-bottom: 1px solid $landing-middle-gray;
 			margin-bottom: rem-calc(5);
 		}
 		list-style-type: none; /*to remove bullets*/
 		li.term {
-			font-weight: 200;
+			font-weight: 500;
 		}
 	}
 	font-weight: 100;
