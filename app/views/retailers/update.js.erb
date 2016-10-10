@@ -4,5 +4,17 @@
 	});
 	$('#armor-ordering-and-payments').fadeIn();
 <% end %>
-$('#ajax-success-data').html("Profile Updated");
-$('#ajax-message').fadeIn().delay( 1500 ).fadeOut();
+
+$('#ajax-success-data').html("Profile Updated <small><%= Time.now.strftime('%H:%M:%S %Z') %></small>");
+$('#ajax-message').fadeIn();    
+
+if (typeof timer !== 'undefined') {
+    clearTimeout(timer);
+    timer = null;
+}
+
+var timer = window.setTimeout( function() {  
+	$('#ajax-message').fadeOut();
+}, 1500);
+
+// $('#ajax-message').fadeIn().delay( 1500 ).fadeOut();
