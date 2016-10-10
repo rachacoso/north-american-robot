@@ -104,6 +104,8 @@ module CompanyCommons
 	    field :pays_for_domestic_shipping, type: Boolean
 	    
 	    # REQUIREMENTS
+			field :margin, type: Integer, default: 50 # discount in % - defaults to 50% discount
+			validates :margin, numericality: { less_than_or_equal_to: 100, greater_than_or_equal_to: 0 }
 	    field :ticketing, type: Boolean
 	    field :testers, type: Boolean
 	    field :gratis, type: Boolean

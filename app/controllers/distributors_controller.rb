@@ -131,6 +131,10 @@ class DistributorsController < ApplicationController
       end
     end
 
+    if !@distributor.save
+      flash.now[:error] = @distributor.errors.messages
+    end
+
     respond_to do |format|
       format.html { 
         if @distributor.save
@@ -282,7 +286,8 @@ class DistributorsController < ApplicationController
       :receives_direct_shipments, 
       :multiple_distribution_centers, 
       :pays_for_international_shipping, 
-      :pays_for_domestic_shipping, 
+      :pays_for_domestic_shipping,
+      :margin, 
       :ticketing,
       :testers,
       :gratis,

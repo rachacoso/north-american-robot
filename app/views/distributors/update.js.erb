@@ -5,4 +5,14 @@
 	$('#armor-ordering-and-payments').fadeIn();
 <% end %>
 
-<%= render partial: 'shared/ajax_message', locals: { updated_item: "Profile" } %>
+<% if flash[:error] %>
+	<% flash[:error].each do |k,v| %>
+		<% if k == :margin %>
+			$('#margin-error').html("Margin <%= v.join('<br>'.html_safe) %>");
+			$('#margin-error').fadeIn();
+		<% end %>
+	<% end %>
+<% else %>
+	$('.inline-error').fadeOut();
+	<%= render partial: 'shared/ajax_message', locals: { updated_item: "Profile" } %>
+<% end %>

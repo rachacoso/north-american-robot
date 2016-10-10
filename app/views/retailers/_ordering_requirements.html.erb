@@ -4,8 +4,29 @@
 	<%= form_for @retailer, url: retailer_url, remote: true do |f| %>
 	<%= hidden_field_tag "redirect_anchor", "a-ordering-requirements" %>
 		<div class="small-12 columns editform">
-
-
+			<div class="row">
+				<div class="medium-2 medium-centered columns">
+					<div class="row">
+						<div class="small-12 columns text-center">
+							<%= f.label :margin %>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+					<div class="row collapse">
+						<div class="small-8 columns">
+							<%= f.number_field :margin, label: false, class: "auto-form" %>
+						</div><!--/.small-8-->
+						<div class="small-4 columns">
+							<span class="postfix">%</span>
+						</div><!--/.small-4-->
+					</div><!--/.row-->
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+			<div class="row">
+				<div class="small-12 columns text-center">
+					<div class="inline-error" id="margin-error"></div>
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+			<hr>
 			<div class="row">
 				<div class="small-6 columns">
 					<%= f.check_box :ticketing, label: false, class: "auto-form" %>

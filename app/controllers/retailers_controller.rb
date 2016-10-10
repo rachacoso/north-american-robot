@@ -77,7 +77,11 @@ class RetailersController < ApplicationController
         @armor_bank_url = url
       end
     end
-    
+
+    if !@retailer.save
+      flash.now[:error] = @retailer.errors.messages
+    end
+
     respond_to do |format|
       format.html { 
         if @retailer.save
@@ -175,7 +179,8 @@ class RetailersController < ApplicationController
       :receives_direct_shipments, 
       :multiple_distribution_centers, 
       :pays_for_international_shipping, 
-      :pays_for_domestic_shipping, 
+      :pays_for_domestic_shipping,
+      :margin,
       :ticketing,
       :testers,
       :gratis,
