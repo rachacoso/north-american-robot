@@ -1,0 +1,8 @@
+$('.overlay#order-item-overlay').fadeOut();
+$('#order-item').fadeOut();
+$('#ship-cancel-add').html("<%= j (render partial: 'ship_cancel_add', locals: {order: @order}) %>");
+$('#order-display').html("<%= j (render partial: 'shared/orders/show') %>");
+$('#ajax-success-data').html("<%= @updated %> Updated");
+$('#ajax-message').fadeIn().delay( 1500 ).fadeOut();
+initialize ();
+initializeAutoForm();

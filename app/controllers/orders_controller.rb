@@ -311,15 +311,29 @@ class OrdersController < ApplicationController
 			if params[:order][:ship_date].present?
 				params[:order][:ship_date] = Date.strptime(params[:order][:ship_date], '%m-%d-%Y') 
 			end
-			@complete = true
-			@render_this = "ship_date"
+			@updated = "Ship Date"
+			@render_this = "date_update"
 		end
 		if params[:order][:cancel_date]
 			if params[:order][:cancel_date].present?
 				params[:order][:cancel_date] = Date.strptime(params[:order][:cancel_date], '%m-%d-%Y')
 			end
-			@complete = true
-			@render_this = "cancel_date"
+			@updated = "Cancel Date"
+			@render_this = "date_update"
+		end
+		if params[:order][:ship_to_us_date]
+			if params[:order][:ship_to_us_date].present?
+				params[:order][:ship_to_us_date] = Date.strptime(params[:order][:ship_to_us_date], '%m-%d-%Y')
+			end
+			@updated = "Ship to U.S. Date"
+			@render_this = "date_update"
+		end
+		if params[:order][:estimated_payment_date]
+			if params[:order][:estimated_payment_date].present?
+				params[:order][:estimated_payment_date] = Date.strptime(params[:order][:estimated_payment_date], '%m-%d-%Y')
+			end
+			@updated = "Estimated Payment Date"
+			@render_this = "date_update"
 		end
 
 		if params[:order][:discount]
@@ -363,7 +377,9 @@ class OrdersController < ApplicationController
 			:discount,
 			:ship_to_name,
 			:ship_date,
+			:ship_to_us_date,
 			:cancel_date,
+			:estimated_payment_date,
 			shipping_address_attributes: [
 			  :address1,
 			  :address2,
