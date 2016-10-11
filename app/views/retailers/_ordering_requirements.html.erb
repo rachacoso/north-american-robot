@@ -5,7 +5,8 @@
 	<%= hidden_field_tag "redirect_anchor", "a-ordering-requirements" %>
 		<div class="small-12 columns editform">
 			<div class="row">
-				<div class="medium-2 medium-centered columns">
+
+				<div class="medium-4 columns">
 					<div class="row">
 						<div class="small-12 columns text-center">
 							<%= f.label :margin %>
@@ -13,40 +14,72 @@
 					</div><!--/.row-->
 					<div class="row collapse">
 						<div class="small-8 columns">
-							<%= f.number_field :margin, label: false %>
+							<%= f.number_field :margin, label: false, min: "0", max: "100"  %>
 						</div><!--/.small-8-->
 						<div class="small-4 columns">
 							<span class="postfix">%</span>
 						</div><!--/.small-4-->
 					</div><!--/.row-->
-				</div><!--/.small-12-->
+					<div class="row">
+						<div class="small-12 columns text-center">
+							<div class="inline-error" id="margin-error"></div>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+				</div><!--/.medium-4-->
+
+				<div class="medium-4 columns">
+					<div class="row">
+						<div class="small-12 columns text-center">
+							<%= f.label :marketing_co_op, "Marketing Co-Op" %>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+					<div class="row collapse">
+						<div class="small-8 columns">
+							<%= f.number_field :marketing_co_op, label: false, min: "0", max: "100"  %>
+						</div><!--/.small-8-->
+						<div class="small-4 columns">
+							<span class="postfix">%</span>
+						</div><!--/.small-4-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="small-12 columns text-center">
+							<div class="inline-error" id="marketing-co-op-error"></div>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+				</div><!--/.medium-4-->
+
+				<div class="medium-4 columns">
+					<div class="row">
+						<div class="small-12 columns text-center">
+							<%= f.label :damages_budget, "Damages Budget" %>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+					<div class="row collapse">
+						<div class="small-8 columns">
+							<%= f.number_field :damages_budget, label: false, min: "0", max: "100"  %>
+						</div><!--/.small-8-->
+						<div class="small-4 columns">
+							<span class="postfix">%</span>
+						</div><!--/.small-4-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="small-12 columns text-center">
+							<div class="inline-error" id="damages-budget-error"></div>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+				</div><!--/.medium-4-->
+
 			</div><!--/.row-->
-			<div class="row">
-				<div class="small-12 columns text-center">
-					<div class="inline-error" id="margin-error"></div>
-				</div><!--/.small-12-->
-			</div><!--/.row-->
+
 			<hr>
 			<div class="row">
 				<div class="small-6 columns">
-					<%= f.check_box :ticketing, label: false %>
-					<%= f.label :ticketing %>
-					<%= f.check_box :testers, label: false %>
-					<%= f.label :testers %>
-					<%= f.check_box :gratis, label: false %>
-					<%= f.label :gratis %>
-					<%= f.check_box :co_op, label: false %>
-					<%= f.label :co_op, "Co-Op" %>
+					<%= f.check_box :product_ticketing, label: false %>
+					<%= f.label :product_ticketing, "Product Ticketing" %>
 				</div><!--/.small-6-->
 				<div class="small-6 columns">
-					<%= f.check_box :damages_budget, label: false %>
-					<%= f.label :damages_budget, "Damages Budget" %>
-					<%= f.check_box :comissions, label: false %>
-					<%= f.label :comissions %>
-					<%= f.check_box :sales_training, label: false %>
-					<%= f.label :sales_training, "Sales Training" %>
-					<%= f.check_box :education_materials, label: false %>
-					<%= f.label :education_materials, "Education Materials" %>
+					<%= f.check_box :retailer_edi, label: false %>
+					<%= f.label :retailer_edi, "Retailer EDI" %>
 				</div><!--/.small-6-->
 			</div><!--/.row-->
 			<%= f.submit 'Update Requirements', class: "landing-button right" %>

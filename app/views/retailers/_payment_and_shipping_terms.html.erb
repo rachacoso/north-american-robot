@@ -23,21 +23,30 @@
 <hr>
 <div class="row">
 	<div class="small-12 columns">
+		<h3>U.S. Shipping Terms</h3>
+	</div><!--/.small-12-->
+	<div class="small-6 columns">
+		<%= f.select(:us_shipping_terms, options_for_select([['Brand', 'Brand'], ['Retailer', 'Retailer'], ['Other', 'Other']], @retailer.us_shipping_terms), label: false, prompt: "Select U.S. Shipping Terms") %>
+	</div><!--/.small-6-->
+	<div class="small-6 columns">
+
+	</div><!--/.small-6-->
+</div><!--/.row-->
+
+<hr>
+<div class="row">
+	<div class="small-12 columns">
 		<h3>Other Terms</h3>
 	</div><!--/.small-12-->
 	<div class="small-6 columns">
-		<%= f.check_box :receives_direct_shipments, label: false %>
-		<%= f.label :receives_direct_shipments, 'Receives Direct Shipments' %>
-		<%= f.check_box :multiple_distribution_centers, label: false %>
-		<%= f.label :multiple_distribution_centers, 'Multiple Distribution Centers' %>
+		<%= f.check_box :accepts_overseas_shipment, label: false %>
+		<%= f.label :accepts_overseas_shipment, 'Accepts Overseas Shipment' %>
 	</div><!--/.small-6-->
 	<div class="small-6 columns">
-		<%= f.check_box :pays_for_international_shipping, label: false %>
-		<%= f.label :pays_for_international_shipping, 'Pays for International Shipping' %>
-		<%= f.check_box :pays_for_domestic_shipping, label: false %>
-		<%= f.label :pays_for_domestic_shipping, 'Pays for Domestic Shipping' %>
+		
 	</div><!--/.small-6-->
 </div><!--/.row-->
+
 
 
 

@@ -10,6 +10,12 @@
 		<% if k == :margin %>
 			$('#margin-error').html("Margin <%= v.join('<br>'.html_safe) %>");
 			$('#margin-error').fadeIn();
+		<% elsif k == :marketing_co_op %>
+			$('#marketing-co-op-error').html("Marketing Co-Op <%= v.join('<br>'.html_safe) %>");
+			$('#marketing-co-op-error').fadeIn();
+		<% elsif k == :damages_budget %>
+			$('#damages-budget-error').html("Damages Budget <%= v.join('<br>'.html_safe) %>");
+			$('#damages-budget-error').fadeIn();
 		<% end %>
 	<% end %>
 <% else %>
