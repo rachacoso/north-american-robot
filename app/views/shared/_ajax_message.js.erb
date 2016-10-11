@@ -1,11 +1,11 @@
 $('#ajax-success-data').html("<%= updated_item %> Updated <small><%= Time.now.strftime('%H:%M:%S %Z') %></small>");
 $('#ajax-message').fadeIn();    
 
-if (typeof timer !== 'undefined') {
-    clearTimeout(timer);
-    timer = null;
+if (typeof ajaxtimer !== 'undefined') {
+    clearTimeout(ajaxtimer);
+    ajaxtimer = null;
 }
 
-var timer = window.setTimeout( function() {  
+var ajaxtimer = window.setTimeout( function() {  
 	$('#ajax-message').fadeOut();
 }, 1500);
