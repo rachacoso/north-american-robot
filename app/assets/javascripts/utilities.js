@@ -5,20 +5,21 @@ $( document ).ready(function() {
 });
 
 function initializeAutoForm() {
-    $('.auto-form-text').on('change', function(e){
-        var thisForm = $(this).parents('form');
-        if (typeof timer !== 'undefined') {
-            clearTimeout(timer);
+
+    $('.auto-form-text').on('keyup', function(e){
+        var thisForm = $(this).parents('form');        
+        if (typeof autoformtimer !== 'undefined') {
+            clearTimeout(autoformtimer);
+            autoformtimer = null;
         }
-        var timer = window.setTimeout( (function( e ) {
-            return function() {
-                $(thisForm).submit();
-            };
-        }( e )), 500);
+        var autoformtimer = window.setTimeout( function() {
+            $(thisForm).submit();
+        }, 2000);
     });
 
     $('.auto-form').on('change', function(e){
         var thisForm = $(this).parents('form');
         $(thisForm).submit(); 
     });
+
 }
