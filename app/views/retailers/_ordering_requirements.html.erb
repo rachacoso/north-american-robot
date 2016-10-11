@@ -73,6 +73,11 @@
 
 			<hr>
 			<div class="row">
+				<div class="small-12 columns">
+					<h3>Additional Requirements</h3>
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+			<div class="row">
 				<div class="small-6 columns">
 					<%= f.check_box :product_ticketing, label: false, class: "auto-form" %>
 					<%= f.label :product_ticketing, "Product Ticketing" %>
@@ -82,7 +87,7 @@
 					<%= f.label :retailer_edi, "Retailer EDI" %>
 				</div><!--/.small-6-->
 			</div><!--/.row-->
-			<%= f.submit 'Update Requirements', class: "landing-button right" %>
+			<%#= f.submit 'Update Requirements', class: "landing-button right" %>
 		</div>
 	<% end %>
 </div>
