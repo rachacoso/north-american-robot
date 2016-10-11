@@ -14,7 +14,7 @@
 					</div><!--/.row-->
 					<div class="row collapse">
 						<div class="small-8 columns">
-							<%= f.number_field :margin, label: false, min: "0", max: "100"  %>
+							<%= f.number_field :margin, label: false, min: "0", max: "100", class: "auto-form-text" %>
 						</div><!--/.small-8-->
 						<div class="small-4 columns">
 							<span class="postfix">%</span>
@@ -35,7 +35,7 @@
 					</div><!--/.row-->
 					<div class="row collapse">
 						<div class="small-8 columns">
-							<%= f.number_field :marketing_co_op, label: false, min: "0", max: "100"  %>
+							<%= f.number_field :marketing_co_op, label: false, min: "0", max: "100", class: "auto-form-text" %>
 						</div><!--/.small-8-->
 						<div class="small-4 columns">
 							<span class="postfix">%</span>
@@ -56,7 +56,7 @@
 					</div><!--/.row-->
 					<div class="row collapse">
 						<div class="small-8 columns">
-							<%= f.number_field :damages_budget, label: false, min: "0", max: "100"  %>
+							<%= f.number_field :damages_budget, label: false, min: "0", max: "100", class: "auto-form-text" %>
 						</div><!--/.small-8-->
 						<div class="small-4 columns">
 							<span class="postfix">%</span>
@@ -74,11 +74,11 @@
 			<hr>
 			<div class="row">
 				<div class="small-6 columns">
-					<%= f.check_box :product_ticketing, label: false %>
+					<%= f.check_box :product_ticketing, label: false, class: "auto-form" %>
 					<%= f.label :product_ticketing, "Product Ticketing" %>
 				</div><!--/.small-6-->
 				<div class="small-6 columns">
-					<%= f.check_box :retailer_edi, label: false %>
+					<%= f.check_box :retailer_edi, label: false, class: "auto-form" %>
 					<%= f.label :retailer_edi, "Retailer EDI" %>
 				</div><!--/.small-6-->
 			</div><!--/.row-->
