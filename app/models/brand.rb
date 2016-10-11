@@ -3,7 +3,7 @@ class Brand
   include Mongoid::Timestamps::Short
 	include Mongoid::Paperclip
 	include LandingArmorPayments::Company
-	include CompanyCommons::BuyersAndSellers
+	include LandingCompany::BuyersAndSellers
 
   #####################
 	### Profile

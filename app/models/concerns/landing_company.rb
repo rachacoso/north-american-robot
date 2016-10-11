@@ -1,4 +1,4 @@
-module CompanyCommons
+module LandingCompany
 
 	module BuyersAndSellers
 		extend ActiveSupport::Concern
@@ -109,7 +109,7 @@ module CompanyCommons
 	    field :ticketing, type: Boolean
 	    field :testers, type: Boolean
 	    field :gratis, type: Boolean
-	    field :co_op, type: Boolean
+	    field :marketing_co_op, type: Boolean
 	    field :damages_budget, type: Boolean
 	    field :comissions, type: Boolean
 	    field :sales_training, type: Boolean

@@ -3,8 +3,8 @@ class Distributor
   include Mongoid::Timestamps::Short
 	include Mongoid::Paperclip
 	include LandingArmorPayments::Company
-	include CompanyCommons::BuyersAndSellers
-	include CompanyCommons::BuyersOnly
+	include LandingCompany::BuyersAndSellers
+	include LandingCompany::BuyersOnly
 
  	#####################
 	### Profile
