@@ -6,15 +6,17 @@ $( document ).ready(function() {
 
 function initializeAutoForm() {
 
-    $('.auto-form-text').on('keyup', function(e){
+    var autoformtimer;
+    $('.auto-form-text').on('input propertychange', function(e){
         var thisForm = $(this).parents('form');        
         if (typeof autoformtimer !== 'undefined') {
             clearTimeout(autoformtimer);
             autoformtimer = null;
         }
-        var autoformtimer = window.setTimeout( function() {
+        autoformtimer = window.setTimeout( function() {
             $(thisForm).submit();
-        }, 2000);
+        }, 750);
+
     });
 
     $('.auto-form').on('change', function(e){
