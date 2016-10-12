@@ -181,31 +181,46 @@ module OrdersHelper
 	def get_order_terms(order:)
 	
 		shipping_payment_terms = []
-		other_terms = []
+		order_requirements = []
 
 		payment_terms = order.orderer.payment_terms if order.orderer.payment_terms.present?
 
-		shipping_termcheck = [	
-									:receives_direct_shipments,
-									:multiple_distribution_centers,
-									:pays_for_international_shipping,
-									:pays_for_domestic_shipping	]
-		shipping_termcheck.each do |term|
-			shipping_payment_terms << term.to_s.gsub(/_/,' ').capitalize if order.orderer.send(term)
+		case terms = order.orderer.us_shipping_terms
+		when "Brand", "Retailer"
+			us_shipping_terms = terms
+		when nil
+			us_shipping_terms = nil
+		else #when 'Other'
+			matched_terms = terms.match(/^Other - (.+)/m)
+			us_shipping_terms = "(Other Shipping Terms) <br>".html_safe + matched_terms.captures.first rescue nil
 		end
-		other_termcheck = [	
-									:ticketing,
-									:testers,
-									:gratis,
-									:co_op,
-									:damages_budget,
-									:comissions,
-									:sales_training,
-									:education_materials	]
-		other_termcheck.each do |term|
-			other_terms << term.to_s.gsub(/_/,' ').capitalize if order.orderer.send(term)
+
+		#check accepts_overseas_shipment
+		if order.orderer.accepts_overseas_shipment
+			shipping_payment_terms << "Accepts Overseas Shipment"
+		else
+			shipping_payment_terms << "Requires U.S. Fulfillment"
 		end
-		return payment_terms, shipping_payment_terms, other_terms
+
+		# ORDER REQUIREMENTS
+
+		if order.orderer.margin.present?
+			order_requirements << "Margin: #{order.orderer.margin}%"
+		end
+
+		if order.orderer.marketing_co_op.present?
+			order_requirements << "Marketing Co-Op: #{order.orderer.marketing_co_op}%"
+		end
+
+		if order.orderer.damages_budget.present?
+			order_requirements << "Damages Budget: #{order.orderer.damages_budget}%"
+		end
+
+		order_requirements << "Product Ticketing" if order.orderer.product_ticketing
+		order_requirements << "Retailer EDI" if order.orderer.retailer_edi
+
+
+		return payment_terms, us_shipping_terms, shipping_payment_terms, order_requirements
 
 	end
 
