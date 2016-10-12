@@ -48,6 +48,11 @@ class RetailersController < ApplicationController
 
     @retailer = @current_user.retailer
 
+    if params[:retailer][:us_shipping_terms] == "Other"
+      other_terms = params[:retailer][:us_shipping_terms_other_comments]
+      params[:retailer][:us_shipping_terms] = "Other - " + other_terms
+    end
+
     # set general fields
     @retailer.update(retailer_parameters)
 

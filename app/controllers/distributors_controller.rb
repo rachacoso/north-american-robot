@@ -69,6 +69,11 @@ class DistributorsController < ApplicationController
 
     @distributor = @current_user.distributor
 
+    if params[:distributor][:us_shipping_terms] == "Other"
+      other_terms = params[:distributor][:us_shipping_terms_other_comments]
+      params[:distributor][:us_shipping_terms] = "Other - " + other_terms
+    end
+
     # set general fields
     @distributor.update(distributor_parameters)
 
@@ -376,6 +381,6 @@ class DistributorsController < ApplicationController
     if @current_user.type? != "distributor"
       redirect_to dashboard_url
     end
-  end  
+  end
 
 end
