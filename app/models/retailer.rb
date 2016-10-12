@@ -5,7 +5,8 @@ class Retailer
 	include LandingArmorPayments::Company
 	include LandingCompany::BuyersAndSellers
 	include LandingCompany::Buyers
-	include LandingCompany::Ordering
+	include LandingCompany::OrderTermsAndRequirements
+	include LandingCompany::OrderTermsAndRequirements::BuyerValidation
 
   #####################
 	### Profile

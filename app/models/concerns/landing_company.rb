@@ -169,34 +169,88 @@ module LandingCompany
 	  end
 	end
 
-	module Ordering
+	module OrderTermsAndRequirements
 		extend ActiveSupport::Concern
 
 		included do
-	  	# PAYMENTS & SHIPPING
-	    field :payment_terms, type: String, default: "Prepayment" # Prepayment, Net 30, Net 45, Net 60
-	    field :us_shipping_terms, type: String # "Brand", "Retailer", or "Other - [Manual Input...]"
-	    field :accepts_overseas_shipment, type: Boolean
-	    # field :multiple_distribution_centers, type: Boolean
-	    # field :pays_for_international_shipping, type: Boolean
-	    # field :pays_for_domestic_shipping, type: Boolean
-	    
-	    # REQUIREMENTS
+			# PAYMENTS & SHIPPING
+			field :payment_terms, type: String, default: "Prepayment" # Prepayment, Net 30, Net 45, Net 60
+			field :us_shipping_terms, type: String # "Brand", "Retailer", or "Other - [Manual Input...]"
+			field :accepts_overseas_shipment, type: Boolean
+			# field :multiple_distribution_centers, type: Boolean
+			# field :pays_for_international_shipping, type: Boolean
+			# field :pays_for_domestic_shipping, type: Boolean
+
+			# REQUIREMENTS
 			field :margin, type: Integer, default: 50 # discount in % - defaults to 50% discount
 			validates :margin, numericality: { less_than_or_equal_to: 100, greater_than_or_equal_to: 0 }
-	    field :marketing_co_op, type: Integer
+			field :marketing_co_op, type: Integer, default: 0
 			validates :marketing_co_op, numericality: { less_than_or_equal_to: 100, greater_than_or_equal_to: 0 }
-	    field :damages_budget, type: Integer
+			field :damages_budget, type: Integer, default: 0
 			validates :damages_budget, numericality: { less_than_or_equal_to: 100, greater_than_or_equal_to: 0 }
-	    field :product_ticketing, type: Boolean
-	    field :retailer_edi, type: Boolean
-	    # field :testers, type: Boolean
-	    # field :gratis, type: Boolean
-	    # field :comissions, type: Boolean
-	    # field :sales_training, type: Boolean
-	    # field :education_materials, type: Boolean
-    end
+			field :product_ticketing, type: Boolean
+			field :retailer_edi, type: Boolean
+			# field :testers, type: Boolean
+			# field :gratis, type: Boolean
+			# field :comissions, type: Boolean
+			# field :sales_training, type: Boolean
+			# field :education_materials, type: Boolean
+		end
+
+		module Orders
+			extend ActiveSupport::Concern
+
+			def add_terms_and_requirements
+				self.payment_terms = self.orderer.payment_terms
+				self.us_shipping_terms = self.orderer.us_shipping_terms
+				self.accepts_overseas_shipment = self.orderer.accepts_overseas_shipment
+
+				self.margin = self.orderer.margin
+				self.marketing_co_op = self.orderer.marketing_co_op unless self.orderer.marketing_co_op.blank? 
+				self.damages_budget = self.orderer.damages_budget unless self.orderer.damages_budget.blank?
+				self.product_ticketing = self.orderer.product_ticketing
+				self.retailer_edi = self.orderer.retailer_edi
+			end
+
+		end
+
+		module BuyerValidation
+			extend ActiveSupport::Concern
+			included do
+				field :payment_terms_accepted, type: Boolean
+				field :margin_accepted, type: Boolean
+
+				scope :margin_pending, ->{ where( :margin.gt => 50 ).where( :margin_accepted.ne => true ) }
+				scope :payment_terms_pending, ->{ 
+					any_of( 
+						{:payment_terms => "Net 30"},
+						{:payment_terms => "Net 45"},
+						{:payment_terms => "Net 60"}
+					).where( 
+						:payment_terms_accepted.ne => true 
+					) 
+				}
+			end
+
+			def payment_terms_valid?
+				case self.payment_terms
+				when "Net 30", "Net 45", "Net 60"
+					if self.payment_terms_accepted
+						return true
+					else
+						return false
+					end
+				when "Prepayment"
+					return true
+				end
+			end
+
+			# def
+		end
+
 
 	end
+
+
 
 end

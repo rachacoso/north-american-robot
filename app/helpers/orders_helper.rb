@@ -183,9 +183,9 @@ module OrdersHelper
 		shipping_payment_terms = []
 		order_requirements = []
 
-		payment_terms = order.orderer.payment_terms if order.orderer.payment_terms.present?
+		payment_terms = order.payment_terms if order.payment_terms.present?
 
-		case terms = order.orderer.us_shipping_terms
+		case terms = order.us_shipping_terms
 		when "Brand", "Retailer"
 			us_shipping_terms = terms
 		when nil
@@ -196,7 +196,7 @@ module OrdersHelper
 		end
 
 		#check accepts_overseas_shipment
-		if order.orderer.accepts_overseas_shipment
+		if order.accepts_overseas_shipment
 			shipping_payment_terms << "Accepts Overseas Shipment"
 		else
 			shipping_payment_terms << "Requires U.S. Fulfillment"
@@ -204,20 +204,20 @@ module OrdersHelper
 
 		# ORDER REQUIREMENTS
 
-		if order.orderer.margin.present?
-			order_requirements << "Margin: #{order.orderer.margin}%"
+		if order.margin.present?
+			order_requirements << "Margin: #{order.margin}%"
 		end
 
-		if order.orderer.marketing_co_op.present?
-			order_requirements << "Marketing Co-Op: #{order.orderer.marketing_co_op}%"
+		if order.marketing_co_op.present?
+			order_requirements << "Marketing Co-Op: #{order.marketing_co_op}%"
 		end
 
-		if order.orderer.damages_budget.present?
-			order_requirements << "Damages Budget: #{order.orderer.damages_budget}%"
+		if order.damages_budget.present?
+			order_requirements << "Damages Budget: #{order.damages_budget}%"
 		end
 
-		order_requirements << "Product Ticketing" if order.orderer.product_ticketing
-		order_requirements << "Retailer EDI" if order.orderer.retailer_edi
+		order_requirements << "Product Ticketing" if order.product_ticketing
+		order_requirements << "Retailer EDI" if order.retailer_edi
 
 
 		return payment_terms, us_shipping_terms, shipping_payment_terms, order_requirements

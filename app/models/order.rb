@@ -2,7 +2,8 @@ class Order # for V2 ordering
   include Mongoid::Document
 	include Mongoid::Timestamps::Short
   include LandingArmorPayments::Order
-  include LandingCompany::Ordering
+  include LandingCompany::OrderTermsAndRequirements
+  include LandingCompany::OrderTermsAndRequirements::Orders
   
   # Ordering FROM
   belongs_to :brand
@@ -103,6 +104,7 @@ class Order # for V2 ordering
     order.user =  user
     order.brand = brand
     order.brand_company_name = brand.company_name
+    order.add_terms_and_requirements
     unless user.company.disable_armor_payments
       order.armor_seller_account_id = brand.armor_account_id
       order.armor_seller_user_id = brand.users.with_armor_user_id.first.armor_user_id if brand.users.with_armor_user_id.present? 
