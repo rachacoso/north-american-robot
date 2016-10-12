@@ -20,7 +20,7 @@
 			<% if @order %>
 				<strong><%= number_to_currency(@order_product.tiered_price_in_dollars(@order.discount)) %> Unit Price <small>(<%= @order.discount %>%)</small></strong>
 			<% else %>
-				<strong><%= number_to_currency(@order_product.tiered_price_in_dollars) %> Unit Price <small>(50%)</small></strong>
+				<strong><%= number_to_currency(@order_product.tiered_price_in_dollars(@current_user.company.margin)) %> Unit Price <small>(<%= @current_user.company.margin %>%)</small></strong>
 			<% end %>
 		</p>
 	</div><!--/.medium-6-->
