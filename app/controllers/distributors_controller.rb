@@ -221,8 +221,13 @@ class DistributorsController < ApplicationController
     distributor.rating = new_rating
     distributor.save!   
 
-    redirect_to admin_distributor_view_url(distributor)
-
+    respond_to do |format|
+      format.html { 
+        redirect_to admin_distributor_view_url(distributor)
+      }
+      format.js 
+    end
+    
   end
 
   def validation_delete

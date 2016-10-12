@@ -149,7 +149,14 @@ class RetailersController < ApplicationController
   def adminupdate
     retailer = Retailer.find(params[:id])
     retailer.update!(admin_retailer_parameters)
-    redirect_to admin_retailer_view_url(retailer)
+    
+    respond_to do |format|
+      format.html { 
+        redirect_to admin_retailer_view_url(retailer)
+      }
+      format.js 
+    end
+
   end
 
   private

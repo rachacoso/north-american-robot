@@ -124,20 +124,20 @@
 			</div><!--/.small-12-->
 		</div><!--/.row-->
 		
-<%= form_for @retailer, url: retailer_admin_update_path(@retailer) do |f| %>
+<%= form_for @retailer, url: retailer_admin_update_path(@retailer), remote: true do |f| %>
 
 		<div class="row">
 			<div class="small-12 columns">
 			<div class="panel">
 				<h2>Subscriber Status</h2>
 				<small><span data-tooltip aria-haspopup="true" class="has-tip" title="This controls whether this profile has access to the subscriber functionality.">What is this?</span></small><br>
-				<%= f.check_box :subscriber %>
+				<%= f.check_box :subscriber, class: "auto-form" %>
 			</div>
 			<div class="panel">
 				<h2>Active/Visibility Status</h2>
 				<small><span data-tooltip aria-haspopup="true" class="has-tip" title="This controls whether this profile is visible/available for matching.">What is this?</span></small><br>
 				
-				<%= f.check_box :active, label: false %><%= f.label :active, "Active/Visible for matching" %>
+				<%= f.check_box :active, label: false, class: "auto-form" %><%= f.label :active, "Active/Visible for matching" %>
 			</div>
 
 			<div class="panel">
@@ -145,28 +145,28 @@
 				<strong>Margin is set for <%= @retailer.margin %>%.</strong>
 				<br><br>
 				
-				<%= f.check_box :margin_approved, label: false %><%= f.label :margin_approved, "Approve Margin" %>
+				<%= f.check_box :margin_approved, label: false, class: "auto-form" %><%= f.label :margin_approved, "Approve Margin" %>
 			</div>
 			<div class="panel">
 				<h2>Payment Terms</h2>
 				<strong>Payment Terms are set to <%= @retailer.payment_terms %></strong>
 				<br><br>
 				
-				<%= f.check_box :payment_terms_approved, label: false %><%= f.label :payment_terms_approved, "Approve Payment Terms" %>
+				<%= f.check_box :payment_terms_approved, label: false, class: "auto-form" %><%= f.label :payment_terms_approved, "Approve Payment Terms" %>
 			</div>
 
 			<div class="panel">
 				<h2>Validation</h2>
 				<div class="row">
 					<div class="small-12 columns">
-						<%= f.text_area :verification_notes, label: ' Notes (only visible to administrators)'  %>		
+						<%= f.text_area :verification_notes, label: ' Notes (only visible to administrators)', class: "auto-form-text"  %>		
 					</div><!--/.small-12-->
 				</div><!--/.row-->
 <hr>				
 
 				<div class="row">
 					<div class="medium-4 columns">
-						<%= f.check_box :verified_website, label: ' Website'  %>		
+						<%= f.check_box :verified_website, label: ' Website', class: "auto-form"  %>		
 					</div><!--/.medium-4-->
 					<div class="medium-8 columns">
 						<% if @retailer.website.blank?  %>
@@ -179,7 +179,7 @@
 <hr>				
 				<div class="row">
 					<div class="medium-4 columns">
-						<%= f.check_box :verified_social_media, label: ' Social Media'  %>		
+						<%= f.check_box :verified_social_media, label: ' Social Media', class: "auto-form"  %>		
 					</div><!--/.medium-4-->
 					<div class="medium-8 columns">
 						<% if @retailer.facebook.blank? && @retailer.linkedin.blank? && @retailer.twitter.blank? && @retailer.instagram.blank? %>
@@ -203,7 +203,7 @@
 <hr>			
 				<div class="row">
 					<div class="medium-4 columns">
-						<%= f.check_box :verified_business_registration, label: ' Business Registration'  %>		
+						<%= f.check_box :verified_business_registration, label: ' Business Registration', class: "auto-form"  %>		
 					</div><!--/.medium-4-->
 					<div class="medium-8 columns">
 
@@ -255,7 +255,7 @@
 <hr>		
 				<div class="row">
 					<div class="medium-4 columns">
-						<%= f.check_box :verified_client_brand, label: ' Client Brands'  %>		
+						<%= f.check_box :verified_client_brand, label: ' Client Brands', class: "auto-form"  %>		
 					</div><!--/.medium-4-->
 					<div class="medium-8 columns">
 						<div class="row">
@@ -280,7 +280,7 @@
 <hr>
 				<div class="row">
 					<div class="medium-4 columns">
-						<%= f.check_box :verified_business_certificate, label: ' Business Certificate'  %>		
+						<%= f.check_box :verified_business_certificate, label: ' Business Certificate', class: "auto-form"  %>		
 					</div><!--/.medium-4-->
 					<div class="medium-8 columns">
 						<h4>Business Certificate</h4>
@@ -297,7 +297,7 @@
 <hr>
 				<div class="row">
 					<div class="medium-4 columns">
-						<%= f.check_box :verified_location, label: ' Location'  %>		
+						<%= f.check_box :verified_location, label: ' Location', class: "auto-form"  %>		
 					</div><!--/.medium-4-->
 					<div class="medium-8 columns">
 								<h4>Location Photo</h4>
@@ -309,7 +309,7 @@
 				<hr>
 				<div class="row">
 					<div class="medium-4 columns">
-						<%= f.check_box :verified_brand_display, label: ' Brand Display' %>		
+						<%= f.check_box :verified_brand_display, label: ' Brand Display', class: "auto-form" %>		
 					</div><!--/.medium-4-->
 					<div class="medium-8 columns">
 						<h4>Brand Display Photo</h4>
@@ -328,7 +328,7 @@
 	</div><!--/.medium-7-->	
 	<div class="small-12 columns text-right">
 		<div class="panel">
-		<%= f.submit 'Update Retailer', class: 'button tiny alert' %>
+		<%#= f.submit 'Update Retailer', class: 'button tiny alert' %>
 		</div>
 	</div><!--/.small-12-->
 <% end %>
