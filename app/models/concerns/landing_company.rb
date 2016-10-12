@@ -245,7 +245,17 @@ module LandingCompany
 				end
 			end
 
-			# def
+			def margin_valid?
+				if self.margin > 50
+					if self.margin_accepted
+						return true
+					else
+						return false
+					end
+				else # doesn't need validation if less than 50
+					return true
+				end
+			end
 		end
 
 
