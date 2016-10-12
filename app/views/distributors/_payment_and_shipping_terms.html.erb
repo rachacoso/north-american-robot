@@ -17,6 +17,8 @@
 <%= radio_button_tag("distributor[payment_terms]", "Net 60", @distributor.payment_terms == 'Net 60', class: "auto-form") %>
 <%= label_tag("distributor[payment_terms]_Net_60", "Net 60") %>
 
+<span id="payment-terms-validation-notice"><%= render partial: "shared/profile/components/payment_terms_validation_notice", locals: { company: @distributor } %></span>
+
 	</div><!--/.small-12-->
 </div><!--/.row-->
 
