@@ -129,6 +129,14 @@ class DistributorsController < ApplicationController
       @armor_payments = true
     end
 
+    if params[:distributor][:payment_terms]
+      @payment_terms_updated = @distributor.set_payment_terms(params[:distributor][:payment_terms])
+    end
+
+    if params[:distributor][:margin]
+      @margin_updated = @distributor.set_margin(params[:distributor][:margin])
+    end
+
     if @distributor.armor_account_id && @current_user.armor_user_id
       url = @distributor.api_get_bank_account_setup_url(armor_account_id: @distributor.armor_account_id, armor_user_id: @current_user.armor_user_id)
       unless @distributor.errors.any?
@@ -287,10 +295,10 @@ class DistributorsController < ApplicationController
       :verification_business_certificate,
       :active,
       :disable_armor_payments,
-      :payment_terms,
+      # :payment_terms,
       :us_shipping_terms,
       :accepts_overseas_shipment, 
-      :margin,
+      # :margin,
       :marketing_co_op,
       :damages_budget,
       :product_ticketing,

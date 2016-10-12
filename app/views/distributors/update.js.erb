@@ -5,6 +5,14 @@
 	$('#armor-ordering-and-payments').fadeIn();
 <% end %>
 
+<% if @margin_updated %>
+	$('#margin-validation-notice').html("<%= j (render partial: 'shared/profileform/margin_validation_notice', locals: { company: @distributor }) %>");
+<% end %>
+
+<% if @payment_terms_updated %>
+	$('#payment-terms-validation-notice').html("<%= j (render partial: 'shared/profileform/payment_terms_validation_notice', locals: { company: @distributor }) %>");
+<% end %>
+
 <% if flash[:error] %>
 	<% flash[:error].each do |k,v| %>
 		<% if k == :margin %>

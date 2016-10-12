@@ -76,6 +76,14 @@ class RetailersController < ApplicationController
       @armor_payments = true
     end
 
+    if params[:retailer][:payment_terms]
+      @payment_terms_updated = @retailer.set_payment_terms(params[:retailer][:payment_terms])
+    end
+
+    if params[:retailer][:margin]
+      @margin_updated = @retailer.set_margin(params[:retailer][:margin])
+    end
+
     if @retailer.armor_account_id && @current_user.armor_user_id
       url = @retailer.api_get_bank_account_setup_url(armor_account_id: @retailer.armor_account_id, armor_user_id: @current_user.armor_user_id)
       unless @retailer.errors.any?
@@ -180,10 +188,10 @@ class RetailersController < ApplicationController
       :verification_brand_display_photo,
       :verification_business_certificate,
       :disable_armor_payments,
-      :payment_terms,
+      # :payment_terms,
       :us_shipping_terms,
       :accepts_overseas_shipment, 
-      :margin,
+      # :margin,
       :marketing_co_op,
       :damages_budget,
       :product_ticketing,

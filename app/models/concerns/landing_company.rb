@@ -232,6 +232,24 @@ module LandingCompany
 				}
 			end
 
+			def set_payment_terms(terms)
+				if terms == self.payment_terms # exit if no update needed
+					return false
+				else
+					self.payment_terms = terms
+					return true
+				end
+			end
+
+			def set_margin(margin)
+				if margin == self.margin # exit if no update needed
+					return false
+				else
+					self.margin = margin
+					return true
+				end
+			end
+
 			def payment_terms_valid?
 				case self.payment_terms
 				when "Net 30", "Net 45", "Net 60"
