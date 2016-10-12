@@ -191,8 +191,8 @@ module OrdersHelper
 		when nil
 			us_shipping_terms = nil
 		else #when 'Other'
-			matched_terms = terms.match(/^Other - (.+)/m)
-			us_shipping_terms = "(Other Shipping Terms) <br>".html_safe + matched_terms.captures.first rescue nil
+			matched_terms = terms.match(/^Other - (.+)/m).captures.first rescue nil
+			us_shipping_terms = "(Other Shipping Terms) <br>".html_safe + matched_terms
 		end
 
 		#check accepts_overseas_shipment
