@@ -213,5 +213,29 @@ module ProfilesHelper
 
 	end
 
+	def get_shipping_terms(profile)
+		case profile.us_shipping_terms
+		when "Brand"
+			return "Brand"
+		when "Retailer"
+			return "Retailer"
+		when nil 
+			return nil
+		else 
+			return "Other"
+		end
+	end
+
+	def get_other_shipping_terms(profile)
+		terms = profile.us_shipping_terms
+		case terms
+		when nil, "Brand", "Retailer"
+			return false, nil
+		else
+			matched_terms = terms.match(/^Other - (.+)/m)
+			other_terms = matched_terms.captures.first rescue nil
+			return true, other_terms
+		end
+	end
 
 end
