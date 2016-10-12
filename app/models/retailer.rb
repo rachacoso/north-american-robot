@@ -4,7 +4,8 @@ class Retailer
 	include Mongoid::Paperclip
 	include LandingArmorPayments::Company
 	include LandingCompany::BuyersAndSellers
-	include LandingCompany::BuyersOnly
+	include LandingCompany::Buyers
+	include LandingCompany::Ordering
 
   #####################
 	### Profile

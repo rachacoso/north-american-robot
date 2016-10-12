@@ -88,7 +88,7 @@ module LandingCompany
 
 	end
 
-	module BuyersOnly
+	module Buyers
 		extend ActiveSupport::Concern
 
 	  included do
@@ -96,28 +96,7 @@ module LandingCompany
 	  	# RETAILER/DISTRIBUTOR STORY
 	  	field :company_introduction, type: String
 
-	  	# PAYMENTS & SHIPPING
-	    field :payment_terms, type: String, default: "Prepayment" # Prepayment, Net 30, Net 45, Net 60
-	    field :us_shipping_terms, type: String # "Brand", "Retailer", or "Other - [Manual Input...]"
-	    field :accepts_overseas_shipment, type: Boolean
-	    # field :multiple_distribution_centers, type: Boolean
-	    # field :pays_for_international_shipping, type: Boolean
-	    # field :pays_for_domestic_shipping, type: Boolean
-	    
-	    # REQUIREMENTS
-			field :margin, type: Integer, default: 50 # discount in % - defaults to 50% discount
-			validates :margin, numericality: { less_than_or_equal_to: 100, greater_than_or_equal_to: 0 }
-	    field :marketing_co_op, type: Integer
-			validates :marketing_co_op, numericality: { less_than_or_equal_to: 100, greater_than_or_equal_to: 0 }
-	    field :damages_budget, type: Integer
-			validates :damages_budget, numericality: { less_than_or_equal_to: 100, greater_than_or_equal_to: 0 }
-	    field :product_ticketing, type: Boolean
-	    field :retailer_edi, type: Boolean
-	    # field :testers, type: Boolean
-	    # field :gratis, type: Boolean
-	    # field :comissions, type: Boolean
-	    # field :sales_training, type: Boolean
-	    # field :education_materials, type: Boolean
+
 
 			# MARKETING/PR CAPABILITIES
 			field :internal_marketing_size, type: Integer
@@ -188,6 +167,36 @@ module LandingCompany
 			validates_attachment_size :verification_business_certificate, :in => 0.megabytes..2.megabytes
 
 	  end
+	end
+
+	module Ordering
+		extend ActiveSupport::Concern
+
+		included do
+	  	# PAYMENTS & SHIPPING
+	    field :payment_terms, type: String, default: "Prepayment" # Prepayment, Net 30, Net 45, Net 60
+	    field :us_shipping_terms, type: String # "Brand", "Retailer", or "Other - [Manual Input...]"
+	    field :accepts_overseas_shipment, type: Boolean
+	    # field :multiple_distribution_centers, type: Boolean
+	    # field :pays_for_international_shipping, type: Boolean
+	    # field :pays_for_domestic_shipping, type: Boolean
+	    
+	    # REQUIREMENTS
+			field :margin, type: Integer, default: 50 # discount in % - defaults to 50% discount
+			validates :margin, numericality: { less_than_or_equal_to: 100, greater_than_or_equal_to: 0 }
+	    field :marketing_co_op, type: Integer
+			validates :marketing_co_op, numericality: { less_than_or_equal_to: 100, greater_than_or_equal_to: 0 }
+	    field :damages_budget, type: Integer
+			validates :damages_budget, numericality: { less_than_or_equal_to: 100, greater_than_or_equal_to: 0 }
+	    field :product_ticketing, type: Boolean
+	    field :retailer_edi, type: Boolean
+	    # field :testers, type: Boolean
+	    # field :gratis, type: Boolean
+	    # field :comissions, type: Boolean
+	    # field :sales_training, type: Boolean
+	    # field :education_materials, type: Boolean
+    end
+
 	end
 
 end

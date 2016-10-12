@@ -2,7 +2,8 @@ class Order # for V2 ordering
   include Mongoid::Document
 	include Mongoid::Timestamps::Short
   include LandingArmorPayments::Order
-
+  include LandingCompany::Ordering
+  
   # Ordering FROM
   belongs_to :brand
   # Ordered BY
