@@ -106,6 +106,14 @@ class User
 	  UserMailer.password_reset(self, share_id).deliver
 	end
   
+  def can_order?
+    # return true if self.armor_user_id  && self.company_type != "Brand"
+    if  self.company_type != "Brand" && # is not a brand
+        self.company.company_name.present? # has company name entered
+      return true 
+    end
+  end
+
 	def initial_setup(type)
 		if ['distributor','brand','retailer'].include? type # restrict to only allowed values
 			# createusertype = "create_" + type
