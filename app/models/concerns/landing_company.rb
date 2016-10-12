@@ -243,7 +243,7 @@ module LandingCompany
 			end
 
 			def set_margin(margin)
-				if margin == self.margin # exit if no update needed
+				if margin.to_i == self.margin # exit if no update needed
 					return false
 				else
 					self.margin = margin
@@ -255,7 +255,7 @@ module LandingCompany
 			def payment_terms_valid?
 				case self.payment_terms
 				when "Net 30", "Net 45", "Net 60"
-					if self.payment_terms_accepted
+					if self.payment_terms_approved
 						return true
 					else
 						return false
@@ -267,7 +267,7 @@ module LandingCompany
 
 			def margin_valid?
 				if self.margin > 50
-					if self.margin_accepted
+					if self.margin_approved
 						return true
 					else
 						return false
