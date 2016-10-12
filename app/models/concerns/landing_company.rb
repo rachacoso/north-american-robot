@@ -217,17 +217,17 @@ module LandingCompany
 		module BuyerValidation
 			extend ActiveSupport::Concern
 			included do
-				field :payment_terms_accepted, type: Boolean
-				field :margin_accepted, type: Boolean
+				field :payment_terms_approved, type: Boolean
+				field :margin_approved, type: Boolean
 
-				scope :margin_pending, ->{ where( :margin.gt => 50 ).where( :margin_accepted.ne => true ) }
+				scope :margin_pending, ->{ where( :margin.gt => 50 ).where( :margin_approved.ne => true ) }
 				scope :payment_terms_pending, ->{ 
 					any_of( 
 						{:payment_terms => "Net 30"},
 						{:payment_terms => "Net 45"},
 						{:payment_terms => "Net 60"}
 					).where( 
-						:payment_terms_accepted.ne => true 
+						:payment_terms_approved.ne => true 
 					) 
 				}
 			end
@@ -237,6 +237,7 @@ module LandingCompany
 					return false
 				else
 					self.payment_terms = terms
+					self.payment_terms_approved = false # reset approval if changed
 					return true
 				end
 			end
@@ -246,6 +247,7 @@ module LandingCompany
 					return false
 				else
 					self.margin = margin
+					self.margin_approved = false # reset approval if changed
 					return true
 				end
 			end
