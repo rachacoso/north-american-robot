@@ -374,6 +374,8 @@ class DistributorsController < ApplicationController
       :verification_notes,
       :subscriber,
       :active,
+      :payment_terms_approved,
+      :margin_approved,
       address_attributes: [ 
         :address1,
         :address2,

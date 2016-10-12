@@ -139,6 +139,22 @@
 				
 				<%= f.check_box :active, label: false %><%= f.label :active, "Active/Visible for matching" %>
 			</div>
+
+			<div class="panel">
+				<h2>Margin</h2>
+				<strong>Margin is set for <%= @retailer.margin %>%.</strong>
+				<br><br>
+				
+				<%= f.check_box :margin_approved, label: false %><%= f.label :margin_approved, "Approve Margin" %>
+			</div>
+			<div class="panel">
+				<h2>Payment Terms</h2>
+				<strong>Payment Terms are set to <%= @retailer.payment_terms %></strong>
+				<br><br>
+				
+				<%= f.check_box :payment_terms_approved, label: false %><%= f.label :payment_terms_approved, "Approve Payment Terms" %>
+			</div>
+
 			<div class="panel">
 				<h2>Validation</h2>
 				<div class="row">

@@ -218,7 +218,9 @@ class RetailersController < ApplicationController
       :verified_location,
       :verified_brand_display,
 			:subscriber,
-			:active
+			:active,
+      :payment_terms_approved,
+      :margin_approved
 		)
 	end	
 	def check_usertype

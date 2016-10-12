@@ -55,6 +55,8 @@ class AdminController < ApplicationController
     end
     distributors = distributors.sort_by{ |d| d.company_name.to_s }
     @distributors = do_kaminari_array(distributors, params[:page])
+    @distributors_margin = Distributor.margin_pending
+    @distributors_payment_terms = Distributor.payment_terms_pending
   end
 
   def distributor_view
@@ -69,6 +71,8 @@ class AdminController < ApplicationController
     end
     retailers = retailers.sort_by{ |d| d.company_name.to_s }
     @retailers = do_kaminari_array(retailers, params[:page])
+    @retailers_margin = Retailer.margin_pending
+    @retailers_payment_terms = Retailer.payment_terms_pending
   end
 
   def retailer_view
