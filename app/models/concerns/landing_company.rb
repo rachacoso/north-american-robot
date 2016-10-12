@@ -205,7 +205,8 @@ module LandingCompany
 				self.us_shipping_terms = self.orderer.us_shipping_terms
 				self.accepts_overseas_shipment = self.orderer.accepts_overseas_shipment
 
-				self.margin = self.orderer.margin
+				self.margin = self.orderer.margin unless self.orderer.margin.blank? 
+				self.discount = self.orderer.margin unless self.orderer.margin.blank? 
 				self.marketing_co_op = self.orderer.marketing_co_op unless self.orderer.marketing_co_op.blank? 
 				self.damages_budget = self.orderer.damages_budget unless self.orderer.damages_budget.blank?
 				self.product_ticketing = self.orderer.product_ticketing
