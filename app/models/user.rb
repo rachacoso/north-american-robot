@@ -109,7 +109,9 @@ class User
   def can_order?
     # return true if self.armor_user_id  && self.company_type != "Brand"
     if  self.company_type != "Brand" && # is not a brand
-        self.company.company_name.present? # has company name entered
+        self.company.company_name.present? && # has company name entered
+        self.company.payment_terms_valid? && # is 'prepayment' or has approved net terms
+        self.company.margin_valid? # has a margin at 50% or below or has approved other margin
       return true 
     end
   end
