@@ -2,9 +2,10 @@ $('#collection-<%= @collection.first.class.to_s.downcase %>').hide().html("<%= j
 
 $('#a_<%= @new_item_id %>,#a_head_<%= @new_item_id %>').addClass('active');
 
-<%= render partial: 'shared/ajax_message', locals: { updated_item: "Profile" } %>
+<%= render partial: 'shared/ajax_message', locals: { updated_item: "Press Hit" } %>
 
 $(document).foundation();
 $(document).foundation('accordion', 'reflow');
+$('.reveal-modal').foundation('reveal', 'close');
 initialize();
 initializeAutoForm();

@@ -1,7 +1,10 @@
-$('#collection-<%= @collection.first.class.to_s.downcase %>-<%= @iscurrent %>').hide().html("<%= j (render(partial: "shared/coll_item", collection:  @collection , as: :cb, locals: {identifier: @identifier, ob: @ob }) || "<h5>( #{no_item_message} )</h5>".html_safe) %>").fadeIn(1000);
+$('#collection-<%= @collection.first.class.to_s.downcase %>-<%= @iscurrent %>').hide().html("<%= j (render(partial: "shared/coll_item", collection:  @collection , as: :cb, locals: {identifier: @identifier, ob: @ob }) || "<h5>( #{no_item_message} )</h5>".html_safe) %>").fadeIn(100);
 
 $('#a_<%= @new_item_id %>,#a_head_<%= @new_item_id %>').addClass('active');
+
+<%= render partial: 'shared/ajax_message', locals: { updated_item: "Profile" } %>
 
 $(document).foundation();
 $(document).foundation('accordion', 'reflow');
 initialize();
+initializeAutoForm();

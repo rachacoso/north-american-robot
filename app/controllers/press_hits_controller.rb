@@ -40,7 +40,16 @@ class PressHitsController < ApplicationController
 		ph.file = nil
 		ph.save!
 
-		go_to_redirect(params[:id])	
+		@identifier = 'source'
+		@new_item_id = ph.id
+		
+		@collection = u.press_hits
+		
+		respond_to do |format|
+			format.html { go_to_redirect(params[:id])	 }
+			format.js
+		end 
+		
 
 	end
 

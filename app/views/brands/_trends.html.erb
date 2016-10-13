@@ -1,13 +1,13 @@
 <br>
 <a class="anchor" id="a-trends"></a>
-<%= form_for @brand, url: brand_url do |f| %>
+<%= form_for @brand, url: brand_url, remote: true do |f| %>
 	<%= f.hidden_field :company_name %>
 	<%= hidden_field_tag "redirect_anchor", "a-trends" %>
 
 	<div class="row editform">
 		<div class="medium-10 push-2 columns">
 			<% Trend.each do |t| %>
-				<%= check_box_tag "trends[#{t.id}]", t.id, (@brand.trends.find(t) rescue false) ? true : false  %>
+				<%= check_box_tag "trends[#{t.id}]", t.id, (@brand.trends.find(t) rescue false) ? true : false, class: "auto-form"  %>
 				<%= label_tag "trends[#{t.id}]" do %>
 					<%= t.name %>
 				<% end %>								
@@ -17,7 +17,7 @@
 
 	<div class="row">
 		<div class="medium-10 push-2 columns">
-			<%= f.submit 'Update Trends', class: "landing-button right" %>
+			<%#= f.submit 'Update Trends', class: "landing-button right" %>
 		</div>
 	</div>
 <% end %>

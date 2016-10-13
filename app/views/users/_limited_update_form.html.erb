@@ -9,23 +9,23 @@
 	</div><!--/.row-->
 	<div class="row">
 		<div class="medium-6 columns">
-			<%= ff.text_field :firstname, label: "First Name", required: "required"  %>
+			<%= ff.text_field :firstname, label: "First Name", required: "required", class: "auto-form-text"  %>
 		</div><!--/.medium-6-->
 		<div class="medium-6 columns">
-			<%= ff.text_field :lastname, label: "Last Name", required: "required"  %>	
+			<%= ff.text_field :lastname, label: "Last Name", required: "required", class: "auto-form-text"  %>	
 		</div><!--/.medium-6-->
 	</div><!--/.row-->
 	<div class="row">
 		<div class="medium-6 columns">
-			<%= ff.text_field :title %>
+			<%= ff.text_field :title, class: "auto-form-text" %>
 		</div><!--/.medium-6-->
 		<div class="medium-6 columns">
 			<%= ff.label :phone, "Phone (country code + number)" %>
 			<% if @errors && @errors[:phone] %>
-				<%= ff.text_field :phone, value: user.contact.phone.present? ? user.contact.phone.phony_formatted(format: :international , spaces: '-') : "", class: "error", label: false, required: "required"  %>
+				<%= ff.text_field :phone, value: user.contact.phone.present? ? user.contact.phone.phony_formatted(format: :international , spaces: '-') : "", class: "error", label: false, required: "required", class: "auto-form-text-delay"  %>
 				<small class="error error" style="margin-bottom: 0.2em;">Phone number was invalid</small>
 			<% else %>
-				<%= ff.text_field :phone, value: user.contact.phone.present? ? user.contact.phone.phony_formatted(format: :international , spaces: '-') : "", label: false, style: "margin-bottom: 0.2em;", required: "required"  %>
+				<%= ff.text_field :phone, value: user.contact.phone.present? ? user.contact.phone.phony_formatted(format: :international , spaces: '-') : "", label: false, style: "margin-bottom: 0.2em;", required: "required", class: "auto-form-text-delay" %>
 			<% end %>
 			<div class="row">
 				<div class="small-1 columns">
@@ -41,7 +41,7 @@
 	<% end %>
 	<div class="row">
 		<div class="small-12 columns text-right">
-			<span id="user-limited-update-notice" class="update-notice" ></span>  <%= f.submit "Update", class: "landing-button" %>
+			<span id="user-limited-update-notice" class="update-notice" ></span>  <%#= f.submit "Update", class: "landing-button" %>
 		</div><!--/.small-12-->
 	</div><!--/.row-->
 	

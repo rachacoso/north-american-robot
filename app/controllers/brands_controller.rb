@@ -227,7 +227,7 @@ class BrandsController < ApplicationController
     end
 
     if params[:subsectors]
-			brand.set_subsectors(params[:subsectors])
+			@sectors_set = brand.set_subsectors(params[:subsectors])
     end
 
 		if params[:channels]

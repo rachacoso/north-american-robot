@@ -66,9 +66,9 @@ module LandingCompany
 
 		def set_sectors(sec)
 			assigned_sectors = Sector.find(sec.values) rescue []
-			unless assigned_sectors.blank?
+			# unless assigned_sectors.blank?
 				self.sectors = [] # clear current ones before update
-			end
+			# end
 			assigned_sectors.each do |s|
 				self.sectors << s
 			end
@@ -84,6 +84,7 @@ module LandingCompany
 			subsector_parents.each do |p|
 				self.sectors << p
 			end
+			return subsector_parents.uniq
 		end
 
 	end

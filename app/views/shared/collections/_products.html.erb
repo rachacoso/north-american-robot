@@ -3,20 +3,38 @@
 
 		<div class="row">
 			<div class="medium-8 columns">
-				<%= f.text_field :name, label: "Product Name", placeholder: 'Product Name' %>
+				<% if defined?(cb) %>
+					<%= f.text_field :name, label: "Product Name", placeholder: 'Product Name', class: "auto-form-text" %>
+				<% else %>
+					<%= f.text_field :name, label: "Product Name", placeholder: 'Product Name' %>
+				<% end %>
 			</div>
 			<div class="medium-4 columns">
-				<%= f.text_field :country_of_manufacture, class: "country-autocomplete", label: "Manufactured in", placeholder: 'Country of Manufacture'  %>
+				<% if defined?(cb) %>
+					<%= f.text_field :country_of_manufacture, class: "country-autocomplete-auto", label: "Manufactured in", placeholder: 'Country of Manufacture'  %>
+				<% else %>
+					<%= f.text_field :country_of_manufacture, class: "country-autocomplete", label: "Manufactured in", placeholder: 'Country of Manufacture'  %>
+				<% end %>
 			</div>									
 		</div>
 		<div class="row">
 			<div class="medium-4 columns">
 				<%= f.label :item_id, "Product ID Number" %>
-				<%= f.text_field :item_id, label: false, placeholder: 'Product ID'  %>
+				<% if defined?(cb) %>
+					<%= f.text_field :item_id, label: false, placeholder: 'Product ID', class: "auto-form-text"  %>
+				<% else %>
+					<%= f.text_field :item_id, label: false, placeholder: 'Product ID' %>
+				<% end %>
+				
 			</div><!--/.medium-4-->
 			<div class="medium-4 columns">
 				<%= f.label :item_size, "Product Size" %>
-				<%= f.text_field :item_size, label: false, placeholder: 'Product Size'  %>
+				<% if defined?(cb) %>
+					<%= f.text_field :item_size, label: false, placeholder: 'Product Size', class: "auto-form-text"  %>
+				<% else %>
+					<%= f.text_field :item_size, label: false, placeholder: 'Product Size' %>
+				<% end %>
+				
 			</div><!--/.medium-4-->
 			<div class="medium-4 columns">
 				<%#= f.label :price, "MSRP" %>
@@ -32,9 +50,11 @@
 					</div><!--/.small-2-->
 					<div class="small-10 columns">
 						<% if defined?(cb) && cb.price.present? %>
-							<%= f.number_field :price, label: false, step: "any", placeholder: 'MSRP', value: display_price(cb.price)  %>
+							<%= f.number_field :price, label: false, step: "any", placeholder: 'MSRP', value: display_price(cb.price), class: "auto-form-text"  %>
+						<% elsif defined?(cb) %>
+							<%= f.number_field :price, label: false, step: "any", placeholder: 'MSRP', class: "auto-form-text" %>
 						<% else %>
-							<%= f.number_field :price, label: false, step: "any", placeholder: 'MSRP'  %>
+							<%= f.number_field :price, label: false, step: "any", placeholder: 'MSRP' %>
 						<% end %>
 					</div><!--/.medium-4-->
 				</div><!--/.row-->
@@ -42,15 +62,30 @@
 		</div><!--/.row-->
 		<div class="row">					
 			<div class="medium-6 columns">
-				<%= f.text_area :description, label: "Description", placeholder: 'Description' %>
+				<% if defined?(cb) %>
+					<%= f.text_area :description, label: "Description", placeholder: 'Description', class: "auto-form-text" %>
+				<% else %>
+					<%= f.text_area :description, label: "Description", placeholder: 'Description' %>
+				<% end %>
+				
 			</div>
 			<div class="medium-6 columns">
-				<%= f.text_area :key_benefits, label: "Key Benefits", placeholder: 'Key Benefits'  %>
+				<% if defined?(cb) %>
+					<%= f.text_area :key_benefits, label: "Key Benefits", placeholder: 'Key Benefits', class: "auto-form-text"  %>
+				<% else %>
+					<%= f.text_area :key_benefits, label: "Key Benefits", placeholder: 'Key Benefits'  %>
+				<% end %>
+				
 			</div>				
 		</div>
 		<div class="row">
 			<div class="small-12 columns">
-				<%= f.text_area :ingredients, label: "Ingredients", placeholder: 'Ingredients' %>
+				<% if defined?(cb) %>
+					<%= f.text_area :ingredients, label: "Ingredients", placeholder: 'Ingredients', class: "auto-form-text" %>
+				<% else %>
+					<%= f.text_area :ingredients, label: "Ingredients", placeholder: 'Ingredients' %>
+				<% end %>
+				
 			</div><!--/.small-12-->
 		</div><!--/.row-->
 

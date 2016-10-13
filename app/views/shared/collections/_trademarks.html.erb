@@ -1,21 +1,45 @@
 <div class="row">
 	<div class="medium-12 columns">
-		<%= f.text_field :product, label: "Product", placeholder: 'Product' %>
+		<% if defined?(cb) %>
+			<%= f.text_field :product, label: "Product", placeholder: 'Product', class: "auto-form-text" %>
+		<% else %>
+			<%= f.text_field :product, label: "Product", placeholder: 'Product' %>
+		<% end %>
+
+		
 	</div>
 </div>
 <div class="row">
 	<div class="medium-4 columns">
-<%= f.text_field :country, class: "country-autocomplete", label: "Country", placeholder: 'Country' %>
+		<% if defined?(cb) %>
+			<%= f.text_field :country, class: "country-autocomplete-auto", label: "Country", placeholder: 'Country' %>
+		<% else %>
+			<%= f.text_field :country, class: "country-autocomplete", label: "Country", placeholder: 'Country' %>
+		<% end %>
+
 	</div>
 	<div class="medium-4 columns">
-		<%= f.date_select :date, :order => [:month,:year], :with_css_classes => true, :start_year => Date.today.year - 10 %>
+		<% if defined?(cb) %>
+			<%= f.date_select :date, { :order => [:month,:year], :start_year => Date.today.year - 10 }, { :class => "auto-form dateselectmonthyear" }%>
+		<% else %>
+			<%= f.date_select :date, { :order => [:month,:year], :start_year => Date.today.year - 10 }, { :class => "dateselectmonthyear" }%>
+		<% end %>
 	</div>
 	<div class="medium-4 columns">
-<%= f.select(:status, options_for_select([['Granted', 'Granted'], ['Filed', 'Filed']], defined?(cb) ? cb.status : ""), label: "Status", prompt: "Select Status") %>
+		<% if defined?(cb) %>
+			<%= f.select(:status, options_for_select([['Granted', 'Granted'], ['Filed', 'Filed']], defined?(cb) ? cb.status : ""), {label: "Status", prompt: "Select Status"}, {class: "auto-form"}) %>
+		<% else %>
+			<%= f.select(:status, options_for_select([['Granted', 'Granted'], ['Filed', 'Filed']], defined?(cb) ? cb.status : ""), {label: "Status", prompt: "Select Status"}, {}) %>
+		<% end %>
 	</div>
 </div>
 <div class="row">				
 	<div class="medium-12 columns">
-		<%= f.text_area :trademark_description, label: "Trademark Description", placeholder: 'Trademark Description'%>
+		<% if defined?(cb) %>
+			<%= f.text_area :trademark_description, label: "Trademark Description", placeholder: 'Trademark Description', class: "auto-form-text" %>
+		<% else %>
+			<%= f.text_area :trademark_description, label: "Trademark Description", placeholder: 'Trademark Description'%>
+		<% end %>
+		
 	</div>				
 </div>

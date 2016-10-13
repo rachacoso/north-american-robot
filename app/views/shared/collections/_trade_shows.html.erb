@@ -1,12 +1,26 @@
 <div class="row">
 	<div class="medium-5 columns">
-		<%= f.text_field :name, label: "Trade Show Name", placeholder: 'Trade Show Name' %>
+		<% if defined?(cb) %>
+			<%= f.text_field :name, label: "Trade Show Name", placeholder: 'Trade Show Name', class: "auto-form-text" %>
+		<% else %>
+			<%= f.text_field :name, label: "Trade Show Name", placeholder: 'Trade Show Name' %>
+		<% end %>
+		
 	</div>
 	<div class="medium-4 columns">
-		<%= f.date_select :date, :order => [:month,:year], :with_css_classes => true, :start_year => Date.today.year - 10 %>
+		<% if defined?(cb) %>
+			<%= f.date_select :date, { :order => [:month,:year], :start_year => Date.today.year - 10 }, { :class => "auto-form dateselectmonthyear" }%>
+		<% else %>
+			<%= f.date_select :date, { :order => [:month,:year], :start_year => Date.today.year - 10 }, { :class => "dateselectmonthyear" }%>
+		<% end %>
 	</div>
 	<div class="medium-3 columns">
-		<%= f.text_field :country, class: "country-autocomplete", label: "Country", placeholder: 'Country' %>
+		<% if defined?(cb) %>
+			<%= f.text_field :country, class: "country-autocomplete-auto", label: "Country", placeholder: 'Country' %>
+		<% else %>
+			<%= f.text_field :country, class: "country-autocomplete", label: "Country", placeholder: 'Country' %>
+		<% end %>
+		
 	</div>
 </div>
 <div class="row">
@@ -14,7 +28,12 @@
 		<div class="row collapse">
 			<%= label_tag(:years_participated, "Participant for") %>
 			<div class="small-8 columns">
-				<%= f.text_field :years_participated, label: false, placeholder: '#' %>		
+				<% if defined?(cb) %>
+					<%= f.text_field :years_participated, label: false, placeholder: '#', class: "auto-form-text" %>
+				<% else %>
+					<%= f.text_field :years_participated, label: false, placeholder: '#' %>		
+				<% end %>
+				
 			</div><!--/.small-8-->
 			<div class="small-4 columns">
 				<span class="postfix">years</span>
@@ -28,7 +47,12 @@
 				<span class="prefix">http://</span>
 			</div>
 			<div class="small-10 columns">
-				<%= f.text_field :website, label: false %>
+				<% if defined?(cb) %>
+					<%= f.text_field :website, label: false, class: "auto-form-text" %>
+				<% else %>
+					<%= f.text_field :website, label: false %>
+				<% end %>
+				
 			</div>
 		</div>
 

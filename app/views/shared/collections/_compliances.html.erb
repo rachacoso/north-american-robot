@@ -1,21 +1,46 @@
 <div class="row">
 	<div class="medium-12 columns">
-		<%= f.text_field :product_or_category, label: "Product or Category", placeholder: 'Product or Category' %>
+		<% if defined?(cb) %>
+			<%= f.text_field :product_or_category, label: "Product or Category", placeholder: 'Product or Category', class: "auto-form-text" %>
+		<% else %>
+			<%= f.text_field :product_or_category, label: "Product or Category", placeholder: 'Product or Category' %>
+		<% end %>
+		
 	</div>							
 </div>
 <div class="row">
 	<div class="medium-4 columns">
-<%= f.text_field :country, class: "country-autocomplete", label: "Country", placeholder: 'Country' %>
+		<% if defined?(cb) %>
+			<%= f.text_field :country, class: "country-autocomplete-auto", label: "Country", placeholder: 'Country' %>
+		<% else %>
+			<%= f.text_field :country, class: "country-autocomplete", label: "Country", placeholder: 'Country' %>
+		<% end %>
+
 	</div>
 	<div class="medium-4 columns">
-		<%= f.date_select :date, :order => [:month,:year], :with_css_classes => true, :start_year => Date.today.year - 10 %>
+		<% if defined?(cb) %>
+			<%= f.date_select :date, { :order => [:month,:year], :start_year => Date.today.year - 10 }, { :class => "auto-form dateselectmonthyear" }%>
+		<% else %>
+			<%= f.date_select :date, { :order => [:month,:year], :start_year => Date.today.year - 10 }, { :class => "dateselectmonthyear" }%>
+		<% end %>
+		
 	</div>
 	<div class="medium-4 columns">
-<%= f.select(:status, options_for_select([['Compliant', 'Compliant'], ['Pending Compliance', 'Pending Compliance']], defined?(cb) ? cb.status : ""), label: "Status", prompt: "Select Status") %>
+		<% if defined?(cb) %>
+			<%= f.select(:status, options_for_select([['Compliant', 'Compliant'], ['Pending Compliance', 'Pending Compliance']], defined?(cb) ? cb.status : ""), {label: "Status", prompt: "Select Status"}, {class: "auto-form"}) %>
+		<% else %>
+			<%= f.select(:status, options_for_select([['Compliant', 'Compliant'], ['Pending Compliance', 'Pending Compliance']], defined?(cb) ? cb.status : ""), {label: "Status", prompt: "Select Status"}, {}) %>
+		<% end %>
+
 	</div>
 </div>
 <div class="row">						
 	<div class="medium-12 columns">
-		<%= f.text_area :compliance_description, label: "Compliance Description", placeholder: 'Compliance Description'%>
+		<% if defined?(cb) %>
+			<%= f.text_area :compliance_description, label: "Compliance Description", placeholder: 'Compliance Description', class: "auto-form-text" %>
+		<% else %>
+			<%= f.text_area :compliance_description, label: "Compliance Description", placeholder: 'Compliance Description' %>
+		<% end %>
+		
 	</div>				
 </div>

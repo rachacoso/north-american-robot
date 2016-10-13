@@ -1,1 +1,8 @@
+<% if @sectors_set %>
+	<% @sectors_set.each do |sector| %>
+		$('#sectors_<%=sector.id%>').prop( "checked", true );
+	<% end %>
+
+<% end %>
+
 <%= render partial: 'shared/ajax_message', locals: { updated_item: "Profile" } %>
