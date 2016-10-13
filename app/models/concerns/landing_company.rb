@@ -1,5 +1,18 @@
 module LandingCompany
 
+	module Sellers
+		extend ActiveSupport::Concern
+
+		included do
+			# V2 ORDERING
+			has_many :orders
+			field :order_minimum, type: Integer # minimum order as dollar amount / stored as cents
+		end
+
+	end
+
+
+
 	module BuyersAndSellers
 		extend ActiveSupport::Concern
 

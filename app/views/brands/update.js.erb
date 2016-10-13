@@ -2,7 +2,10 @@
 	<% @sectors_set.each do |sector| %>
 		$('#sectors_<%=sector.id%>').prop( "checked", true );
 	<% end %>
+<% end %>
 
+<% if @order_minimum_set %>
+	$('#brand_order_minimum').val('<%= display_price(@brand.order_minimum) %>');
 <% end %>
 
 <%= render partial: 'shared/ajax_message', locals: { updated_item: "Profile" } %>

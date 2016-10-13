@@ -189,6 +189,13 @@ class BrandsController < ApplicationController
 	def update
 
 		brand = @current_user.brand
+		@brand = brand
+		
+		# prep param for store as cents
+		if params[:brand][:order_minimum]
+			params[:brand][:order_minimum] = (params[:brand][:order_minimum].to_f * 100).round 
+			@order_minimum_set = true
+		end
 
 		# set general fields
 		brand.update(brand_parameters)
@@ -357,6 +364,7 @@ class BrandsController < ApplicationController
 			:logo,
 			:countries_where_exported,
 			:brand_positioning,
+			:order_minimum,
 			:social_causes,
 			:social_organizations,
 			:social_give_back,
@@ -400,7 +408,8 @@ class BrandsController < ApplicationController
         :country
       ]
 		)
-	end	
+	end
+
 	def check_usertype
 		if @current_user.type? != "brand"
 			redirect_to dashboard_url

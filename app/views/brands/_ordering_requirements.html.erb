@@ -1,0 +1,35 @@
+<br>
+<a class="anchor" id="a-ordering-requirements"></a>
+<div class="row clearfix">
+	<%= form_for @brand, url: brand_url, remote: true do |f| %>
+	<%= hidden_field_tag "redirect_anchor", "a-ordering-requirements" %>
+		<div class="small-12 columns editform">
+			<div class="row">
+				<div class="small-12 columns">
+					<div class="row">
+						<div class="medium-6 columns text-right">
+							<%= f.label :order_minimum do %>
+								<strong>Order Minimum</strong><br>
+								Your company's required minimum order value
+							<% end %>
+						</div><!--/.medium-6-->
+						<div class="medium-6 columns">
+							<div class="row collapse">
+								<div class="small-2 columns">
+									<span class="prefix">$</span>
+								</div><!--/.small-2-->
+								<div class="small-10 columns">
+									<% if @brand.order_minimum.present? %>
+										<%= f.number_field :order_minimum, label: false, step: "any", placeholder: 'Minimum Order Value', value: display_price(@brand.order_minimum), class: "auto-form-text"  %>
+									<% else %>
+										<%= f.number_field :order_minimum, label: false, step: "any", placeholder: 'Minimum Order Value', class: "auto-form-text"  %>
+									<% end %>
+								</div><!--/.small-10-->
+							</div><!--/.row-->
+						</div><!--/.medium-6-->
+					</div><!--/.row-->
+				</div><!--/.small-12-->
+			</div>
+		</div>
+	<% end %>
+</div>

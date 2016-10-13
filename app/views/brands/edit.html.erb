@@ -53,7 +53,6 @@
 							<div class="medium-8 medium-push-4 columns">
 									<div class="row">
 										<div class="small-12 columns">
-											<h2 style="margin-top:15px;">랜딩 마켓플레이스에 오신 것을 환영합니다. <a href="https://s3.amazonaws.com/landingintl-us/general/BrandsRequirementsKorean.pdf" target="_blank">브랜드 프로필</a> 은 귀사의 브랜드 스토리 및 경쟁력을 바이어에게 어필할 수 있도록 만들어주세요.</h2>
 											<h2 style="margin-top:15px;">Please complete your brand profile so your potential partners can learn about you and be better matched to your products and customer base. </h2>
 											<h3 style="margin-top:15px;">The profile sections <strong>in bold</strong> are required before you can start selling products on Landing International.  Filling out the other profile sections will help you stand out from the crowd!</h3>
 										</div>
@@ -64,6 +63,8 @@
 											<h1>Profile Sections</h1>
 											<%= link_to "Company Info", "#a-companyinfo", class: "profile-edit-links required" %><br>
 											<%= link_to "Contact Info", "#a-login-info", class: "profile-edit-links required" %><br>
+											<%= link_to "Ordering Requirements", "#a-ordering-requirements", class: "profile-edit-links" %><br>
+											
 											<%= link_to "Ordering &amp; Payments".html_safe, "#a-ordering-and-payments", class: "profile-edit-links required" %><br>
 											<%= link_to "Company Introduction", "#a-company-introduction", class: "profile-edit-links" %><br>
 											<%= link_to "Global Good Tags", "#a-social-tags", class: "profile-edit-links" %><br>
@@ -118,6 +119,19 @@
 							</div>
 						</div>
 
+						<div class="row">
+							<div class="medium-4 columns medium-text-right">
+								<div class="profile-edit-form info-panel">
+								<h1>Ordering Requirements</h1>
+								<h3>What are your ordering requirements?</h3>
+								</div>
+							</div><!--/.medium-4-->
+							<div class="medium-8 columns">
+								<div class="profile-edit-form">
+									<%= render "ordering_requirements" %>
+								</div>
+							</div>
+						</div>
 
 						<div class="row">
 							<div class="medium-4 columns medium-text-right">

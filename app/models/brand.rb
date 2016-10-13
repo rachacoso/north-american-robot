@@ -3,6 +3,7 @@ class Brand
   include Mongoid::Timestamps::Short
 	include Mongoid::Paperclip
 	include LandingArmorPayments::Company
+	include LandingCompany::Sellers
 	include LandingCompany::BuyersAndSellers
 
   #####################
@@ -34,8 +35,7 @@ class Brand
 	# EXPORT COUNTRIES
 	embeds_many :export_countries, as: :exportable, cascade_callbacks: true
 
-	# V2 ORDERING
-	has_many :orders
+
 
 	# array of saved distributor matches
 	has_and_belongs_to_many :saved_matches, class_name: "Distributor", inverse_of: nil
