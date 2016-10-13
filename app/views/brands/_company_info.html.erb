@@ -1,13 +1,14 @@
 
 <br>
 <a class="anchor" id="a-companyinfo"></a>
-<%= form_for @brand, :html => {id: 'company-info-form'}, url: brand_url, remote: true do |f| %>
-	<%= hidden_field_tag "redirect_anchor", "a-companyinfo" %>
+
 	<div class="row">
 		<div class="medium-4 columns">
 
 			<div class="row">
 				<div class="small-12 columns">
+				<%= form_for @brand, :html => {id: 'company-info-form'}, url: brand_url do |f| %>
+					<%= hidden_field_tag "redirect_anchor", "a-companyinfo" %>
 					<%= f.label :logo do %>
 						Company logo <br>
 						<div class="text-center">
@@ -25,11 +26,12 @@
 					<br>
 					<%= f.file_field :logo, class: 'hide-upload', label: false, accept: 'image/png,image/gif,image/jpeg' %>
 				</div>
+				<% end %>
 			</div>	
 
 		</div>
 		<div class="medium-8 columns">
-
+		<%= form_for @brand, url: brand_url, remote: true do |f| %>
 			<div class="row">
 				<div class="small-12 columns">
 					<%= f.text_area :company_name, rows: 2, style: "font-size:2em; font-weight:bold;", placeholder: "Company Name", required: "required", class: "auto-form-text" %>
@@ -109,6 +111,6 @@
 			</div>
 
 			<%#= f.submit 'Update Company Info', class: "landing-button right"  %>
+			<% end %>
 		</div>
 	</div>
-<% end %>
