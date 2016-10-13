@@ -383,13 +383,22 @@ function initialize () {
       .select();
     });
 
-  $('.country-autocomplete').autocomplete({
+  $('.country-autocomplete-auto').autocomplete({
     lookup: countriesArray,
     minChars: 0,
     onSelect: function (suggestion) {
       var thisForm = $(this).parents('form');
       $(thisForm).submit(); 
     },
+    triggerSelectOnValidInput: false,
+    showNoSuggestionNotice: true,
+    noSuggestionNotice: 'Sorry, no matching results',
+    tabDisabled: true
+  });
+
+  $('.country-autocomplete').autocomplete({
+    lookup: countriesArray,
+    minChars: 0,
     triggerSelectOnValidInput: false,
     showNoSuggestionNotice: true,
     noSuggestionNotice: 'Sorry, no matching results',
