@@ -362,6 +362,10 @@ class OrdersController < ApplicationController
 			# flash.now[:error] = "Sorry, Discount must be a number between 0 and 100"
 			flash.now[:error] = @order.errors.full_messages
 		end
+
+		# default render if none set
+		@render_this ||= "update"
+
 		respond_to do |format|
 			format.html  { redirect_to order_url(@order) }
 			format.js { render @render_this }
@@ -386,6 +390,8 @@ class OrdersController < ApplicationController
 			:ship_to_us_date,
 			:cancel_date,
 			:estimated_payment_date,
+			:brand_order_reference_id,
+			:orderer_order_reference_id,
 			shipping_address_attributes: [
 			  :address1,
 			  :address2,

@@ -36,7 +36,18 @@
 						</div><!--.panel text-center-->
 
 						<br>
-						<h1><span class="step" data-step="3"></span> Add Comments (Optional)</h1>
+						<h1><span class="step" data-step="3"></span> Add Reference Number (Optional)</h1>
+						<div class="panel">
+							<h3>Add a reference number to help you track this order in your system.</h3>
+						</div>
+						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
+						<div class="panel text-center">
+							<%= render partial: "add_reference_id", locals: {order: order} %>
+						</div><!--.panel text-center-->
+
+
+						<br>
+						<h1><span class="step" data-step="4"></span> Add Comments (Optional)</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 						<div class="panel text-center">
 							<div id="add-comments">
@@ -45,14 +56,14 @@
 						</div><!--.panel text-center-->
 
 						<br>
-						<h1><span class="step" data-step="4"></span> Confirm Order Details</h1>
+						<h1><span class="step" data-step="5"></span> Confirm Order Details</h1>
 						<h3>Click on any order item to edit. <br>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 
 						<div class="panel" id="order-display">
 							<%= render "shared/orders/show" %>		
 						</div>
 						<br>
-						<h1><span class="step" data-step="5"></span> Submit Order to <%= order.brand.company_name %></h1>
+						<h1><span class="step" data-step="6"></span> Submit Order to <%= order.brand.company_name %></h1>
 						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 						<div class="panel text-center">
 						<%= link_to "Submit Order to #{order.brand.company_name}", submit_order_url(order,0), class: "landing-button", remote: true %> 
