@@ -49,8 +49,9 @@ Rails.application.routes.draw do
   get   '/order/paid/:id/:confirm' => 'orders#paid', as: 'paid_order'
   get   '/order/delivered/:id/:confirm' => 'orders#delivered', as: 'delivered_order'
 
-  resources :order_items, only: [:create, :edit, :update, :destroy, :index]
+  resources :order_items, only: [:create, :edit, :update, :index]
   get   '/order/newitem/:product_id' => 'order_items#new', as: 'new_order_item'
+  delete '/order/order_items/:o/:id' => 'order_items#destroy', as: 'delete_order_item'
 
   post   'order/charges/a/:order_id' => 'order_additional_charges#create', as: 'create_order_additional_charge'
   patch   'order/:order_id/charges/u/:id' => 'order_additional_charges#update', as: 'update_order_additional_charge'

@@ -1,0 +1,20 @@
+// close any open order-items
+$('#order-item').fadeOut();
+$('.overlay').fadeOut();
+
+
+<% if URI(request.referer).path.match(/orders/) %>
+
+$('#order-table-data').html("<%= j (render partial: 'shared/orders/order_table', locals: {order: @order}) %>");
+$('#view-orders-buttons').html("<%= j (render partial: 'shared/profile/components/view_orders_buttons', locals: {profile: @order.brand, section: @section}) %>");
+
+<% else %>
+
+$('#view-orders-buttons').html("<%= j (render partial: 'shared/profile/components/view_orders_buttons', locals: {profile: @order.brand, section: @section}) %>");
+$('#order-data').html("<%= j (render partial: 'orders/show_order') %>");
+$('.overlay#order-overlay').fadeIn();
+$('#order').fadeIn();
+
+<% end %>
+
+setModalActions();

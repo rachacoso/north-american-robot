@@ -154,6 +154,12 @@ class OrdersController < ApplicationController
 		end
 	end
 
+	def destroy
+		brand = @order.brand
+		@order.destroy
+		redirect_to view_brand_url(brand), status: 303 and return
+	end
+
 	def submit
 		@order.armor_update # update any missing armor info
 		if params[:confirm].to_i == 1

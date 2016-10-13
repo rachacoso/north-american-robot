@@ -82,6 +82,7 @@
 			<div class="row">
 				<div class="small-12 columns text-center">
 					<%= f.submit "Update SKU Quantity", class: "landing-button" %>
+					<%= link_to "Delete SKU", delete_order_item_url(@order, @order_item), method: "delete", remote: true, class: "landing-button alert" %>
 				</div><!--/.small-12-->
 			</div><!--/.row-->
 			<span style="color: red;font-weight: 100;font-size: 0.75em;"><%= flash[:error] ? flash[:error] : "" %></span>

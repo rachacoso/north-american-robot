@@ -85,6 +85,17 @@ class OrderItemsController < ApplicationController
 
 	end
 
+	def destroy
+		@order = @current_user.get_parent.orders.find(params[:o])
+		@order_item = @order.order_items.find(params[:id])
+		@order_item.destroy
+		if @order.order_items.empty?
+			brand = @order.brand
+			@order.destroy
+			redirect_to view_brand_url(brand), status: 303 and return
+		end
+	end
+
 	private
 
 	def order_item_parameters
