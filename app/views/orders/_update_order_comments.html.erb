@@ -1,8 +1,8 @@
 <%= form_for comment, url: order_update_comment_url, :html => {id: 'order-comments-form'}, remote: true, authenticity_token: true do |f| %>
 <div class="row">
 	<div class="medium-11 medium-centered columns">
-	<%= f.text_area :text, rows: 15, label: "<small>Comments</small>".html_safe %>
-	<%= f.submit "Update Comment", class: "landing-button" %>
+	<%= f.text_area :text, rows: 15, label: "<small>Comments</small>".html_safe, class: "auto-form-text" %>
+	<%#= f.submit "Update Comment", class: "landing-button" %>
 	<div class="inline-error" id="comment-error"></div>
 	</div><!--/.medium-6-->
 </div><!--/.row-->
