@@ -332,7 +332,14 @@ class BrandsController < ApplicationController
   def adminupdate
     brand = Brand.find(params[:id])
     brand.update!(admin_brand_parameters)
-    redirect_to admin_brand_view_url(brand)
+    
+    respond_to do |format|
+      format.html { 
+        redirect_to admin_brand_view_url(brand)
+      }
+      format.js 
+    end
+
   end
 
   private
