@@ -13,6 +13,12 @@
 	$('#payment-terms-validation-notice').html("<%= j (render partial: 'shared/profileform/payment_terms_validation_notice', locals: { company: @distributor }) %>");
 <% end %>
 
+<% if @sectors_set %>
+	<% @sectors_set.each do |sector| %>
+		$('#sectors_<%=sector.id%>').prop( "checked", true );
+	<% end %>
+<% end %>
+
 <% if flash[:error] %>
 	<% flash[:error].each do |k,v| %>
 		<% if k == :margin %>

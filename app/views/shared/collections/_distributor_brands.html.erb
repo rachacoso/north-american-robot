@@ -9,10 +9,19 @@
 
 	<div class="row">
 		<div class="medium-8 columns">
-			<%= f.text_field :brand, label: "Brand Name" %>
+			<% if defined?(cb) %>
+				<%= f.text_field :brand, label: "Brand Name", class: "auto-form-text" %>
+			<% else %>
+				<%= f.text_field :brand, label: "Brand Name" %>
+			<% end %>
 		</div>
 		<div class="medium-4 columns">
-			<%= f.select :category, options_from_collection_for_select(Sector.all.sort_by {|m| m.name.downcase}, :id, :name, (defined? cb) ? cb.category : ''), :prompt => 'Select Category', label: "Category" %>
+		<% if defined?(cb) %>
+			<%= f.select :category, options_from_collection_for_select(Sector.all.sort_by {|m| m.name.downcase}, :id, :name, (defined? cb) ? cb.category : ''), {:prompt => 'Select Category', label: "Category"}, {class: "auto-form"} %>
+		<% else %>
+			<%= f.select :category, options_from_collection_for_select(Sector.all.sort_by {|m| m.name.downcase}, :id, :name, (defined? cb) ? cb.category : ''), {:prompt => 'Select Category', label: "Category"}, {} %>
+		<% end %>
+			
 		</div>					
 	</div>
 	<div class="row">					
@@ -24,12 +33,22 @@
 					<span class="prefix">http://</span>
 				</div>
 				<div class="small-10 columns">
-					<%= f.text_field :website, label: false %>
+					<% if defined?(cb) %>
+						<%= f.text_field :website, label: false, class: "auto-form-text" %>
+					<% else %>
+						<%= f.text_field :website, label: false %>
+					<% end %>
+					
 				</div>
 			</div>
 
 		</div>
 		<div class="medium-4 columns">
-			<%= f.text_field :country_of_manufacture, class: "country-autocomplete-multi", label: "Manufactured in", placeholder: 'Country of Manufacture' %>
+					<% if defined?(cb) %>
+						<%= f.text_field :country_of_manufacture, class: "country-autocomplete-multi-auto", label: "Manufactured in", placeholder: 'Country of Manufacture' %>
+					<% else %>
+						<%= f.text_field :country_of_manufacture, class: "country-autocomplete-multi", label: "Manufactured in", placeholder: 'Country of Manufacture' %>
+					<% end %>
+			
 		</div>				
 	</div>

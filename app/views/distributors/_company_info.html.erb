@@ -1,11 +1,11 @@
 <br>
 <a class="anchor" id="a-companyinfo"></a>
-<%= form_for @distributor, :html => {id: 'company-info-form'}, url: distributor_url do |f| %>
-	<%= hidden_field_tag "redirect_anchor", "a-companyinfo" %>
 	<div class="row">
 		<div class="medium-4 columns">
 			<div class="row">
 				<div class="medium-12 columns">
+				<%= form_for @distributor, :html => {id: 'company-info-form'}, url: distributor_url do |f| %>
+					<%= hidden_field_tag "redirect_anchor", "a-companyinfo" %>
 					<%= f.label :logo do %>
 						Company logo <br>
 						<div class="text-center">
@@ -22,22 +22,24 @@
 					<% end %>
 					<br>
 					<%= f.file_field :logo, class: 'hide-upload', label: false, accept: 'image/png,image/gif,image/jpeg' %>
+				<% end %>
 				</div>
 			</div>	
 		</div>
 		<div class="medium-8 columns">
+		<%= form_for @distributor, url: distributor_url, remote: true do |f| %>
 			<div class="row">
 				<div class="medium-12 columns">
-					<%= f.text_area :company_name, rows: 2, style: "font-size:2em; font-weight:bold;", placeholder: "Company Name" %>
+					<%= f.text_area :company_name, rows: 2, style: "font-size:2em; font-weight:bold;", placeholder: "Company Name", class: "auto-form-text" %>
 				</div>
 			</div>						
 			<div class="row">
 				<div class="medium-6 columns">
-					<%= f.text_field :country_of_origin, class: "country-autocomplete", placeholder: 'Country (Headquarters)' %>
+					<%= f.text_field :country_of_origin, class: "country-autocomplete-auto", placeholder: 'Country (Headquarters)' %>
 				</div>
 				<div class="medium-6 columns">				
 					<%= label_tag(:year_established, "Year established") %>
-					<%= select_tag :year_established, options_for_select(1900..Time.now.year, @distributor.year_established ? @distributor.year_established.strftime("%Y") : '2000') %>
+					<%= select_tag :year_established, options_for_select(1900..Time.now.year, @distributor.year_established ? @distributor.year_established.strftime("%Y") : '2000'), class: "auto-form" %>
 				</div>
 			</div>
 			<div class="row">
@@ -50,13 +52,13 @@
 							<span class="prefix">http://</span>
 						</div>
 						<div class="small-9 columns">
-							<%= f.text_field :website, label: false %>
+							<%= f.text_field :website, label: false, class: "auto-form-text" %>
 						</div>
 					</div>
 				</div>
 				<div class="medium-6 columns">
 					<%= label_tag(:company_size, "Company Size") %>
-					<%= f.collection_select(:company_size, CompanySize.all, :id, :name, :label => false) %>
+					<%= f.collection_select(:company_size, CompanySize.all, :id, :name, {:label => false}, {:class => "auto-form"}) %>
 				</div>
 			</div>
 			<hr>
@@ -66,44 +68,43 @@
 				</div><!--/.small-12-->							
 				<div class="medium-6 columns">
 					<%= label_tag(:facebook, "Facebook") %>
-					<%= f.text_field :facebook, label: false %>
+					<%= f.text_field :facebook, label: false, class: "auto-form-text" %>
 				</div>
 				<div class="medium-6 columns">
 					<%= label_tag(:linkedin, "LinkedIn") %>
-					<%= f.text_field :linkedin, label: false %>
+					<%= f.text_field :linkedin, label: false, class: "auto-form-text" %>
 				</div>
 				<div class="medium-6 columns">
 					<%= label_tag(:twitter, "Twitter") %>
-					<%= f.text_field :twitter, label: false %>
+					<%= f.text_field :twitter, label: false, class: "auto-form-text" %>
 				</div>
 				<div class="medium-6 columns">
 					<%= label_tag(:instagram, "Instagram") %>
-					<%= f.text_field :instagram, label: false %>
+					<%= f.text_field :instagram, label: false, class: "auto-form-text" %>
 				</div>
 			</div>
 			<hr>
 			<div class="row">
 				<%= f.fields_for :address do |ff| %>
 				<div class="small-12 columns">					
-					<%= ff.text_field :address1, label: "Street Address" %>
-					<%= ff.text_field :address2, label: false %>
+					<%= ff.text_field :address1, label: "Street Address", class: "auto-form-text" %>
+					<%= ff.text_field :address2, label: false, class: "auto-form-text" %>
 				</div>
 				<div class="medium-4 columns">
-					<%= ff.text_field :city, label: "<small>City/Town/Department</small>".html_safe %>
+					<%= ff.text_field :city, label: "<small>City/Town/Department</small>".html_safe, class: "auto-form-text" %>
 				</div>
 				<div class="medium-5 columns">
-					<%= ff.text_field :state, label: "<small>State/Province/Region/County</small>".html_safe %>
+					<%= ff.text_field :state, label: "<small>State/Province/Region/County</small>".html_safe, class: "auto-form-text" %>
 				</div>
 				<div class="medium-3 columns">
-					<%= ff.text_field :postcode, label: "<small>Zip/Postal Code</small>".html_safe %>
+					<%= ff.text_field :postcode, label: "<small>Zip/Postal Code</small>".html_safe, class: "auto-form-text" %>
 				</div>
 				<div class="medium-6 columns">
-					<%= ff.text_field :country, class: "country-autocomplete", placeholder: 'Country' %>
+					<%= ff.text_field :country, class: "country-autocomplete-auto", placeholder: 'Country' %>
 				</div>
 				<% end %>
 			</div>
-			<%= f.submit 'Update Company Info', class: "landing-button right"  %>
+			<%#= f.submit 'Update Company Info', class: "landing-button right"  %>
+		<% end %>
 		</div>
 	</div>
-	
-<% end %>

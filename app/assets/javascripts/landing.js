@@ -409,6 +409,16 @@ function initialize () {
     lookup: countriesArray,
     minChars: 0,
     delimiter: ', ',
+    triggerSelectOnValidInput: false,
+    showNoSuggestionNotice: true,
+    noSuggestionNotice: 'Sorry, no matching results',
+    tabDisabled: true
+  });
+
+  $('.country-autocomplete-multi-auto').autocomplete({
+    lookup: countriesArray,
+    minChars: 0,
+    delimiter: ', ',
     onSelect: function (suggestion) {
       var thisForm = $(this).parents('form');
       $(thisForm).submit();

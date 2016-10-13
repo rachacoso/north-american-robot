@@ -1,6 +1,6 @@
 <br>
 <a class="anchor" id="a-sales"></a>
-<%= form_for @distributor, url: distributor_url do |f| %>
+<%= form_for @distributor, url: distributor_url, remote: true do |f| %>
 	<%= hidden_field_tag "redirect_anchor", "a-sales" %>
 	<div class="row">
 		<div class="medium-12 columns">
@@ -14,8 +14,8 @@
 	</div>
 	<div class="row">
 		<div class="medium-12 columns">
-			<hr>
-			<%= f.submit 'Update Sales/Education Capabilities', class: "landing-button right" %>
+			
+			<%#= f.submit 'Update Sales/Education Capabilities', class: "landing-button right" %>
 		</div>
 	</div>
 <% end %>

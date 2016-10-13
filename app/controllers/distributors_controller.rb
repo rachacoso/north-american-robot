@@ -89,7 +89,7 @@ class DistributorsController < ApplicationController
     end
 
     if params[:subsectors]
-      @distributor.set_subsectors(params[:subsectors])
+      @sectors_set = @distributor.set_subsectors(params[:subsectors])
     end
 
     if params[:channels]
