@@ -1,4 +1,4 @@
 <% u = @distributor || @retailer %>
 <%= hidden_field_tag "#{type}[#{field}]", false, id: '' %>
-<%= check_box_tag "#{type}[#{field}]", true, (u.send(field) rescue false) ? true : false %>
+<%= check_box_tag "#{type}[#{field}]", true, (u.send(field) rescue false) ? true : false, class: "auto-form" %>
 <%= label_tag("#{type}[#{field}]", label) %>

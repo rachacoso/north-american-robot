@@ -1,5 +1,5 @@
 <br>
-<%= form_for @retailer, url: retailer_url do |f| %>
+<%= form_for @retailer, url: retailer_url, remote: true do |f| %>
 <%= f.hidden_field :company_name %>
 <%= hidden_field_tag "redirect_anchor", "a-sectors" %>
 <a class="anchor" id="a-sectors"></a>
@@ -7,7 +7,8 @@
 <div class="row editform">	
 	<div class="medium-10 push-2 columns">		
 		<% Sector.order_by(:name => "asc").each do |sc| %>
-			<%= check_box_tag "sectors[#{sc.id}]", sc.id, (@retailer.sectors.find(sc) rescue false) ? true : false %>
+			<%= hidden_field_tag "sectors[#{sc.id}]", 0, id: '' %>
+			<%= check_box_tag "sectors[#{sc.id}]", sc.id, (@brand.sectors.find(sc) rescue false) ? true : false, class: "auto-form" %>
 			<%= label_tag("sectors[#{sc.id}]", sc.name) %>
 			<% if sc.subsectors %>
 			<div class="row collapse">
@@ -17,7 +18,7 @@
 				<div class="small-11 columns">
 					<% sc.subsectors.order_by(:name => "asc").each do |ssc| %>
 						<%= hidden_field_tag "subsectors[#{ssc.id}]", 0, id: '' %>
-						<%= check_box_tag "subsectors[#{ssc.id}]", ssc.id, (@retailer.subsectors.find(ssc) rescue false) ? true : false %>
+						<%= check_box_tag "subsectors[#{ssc.id}]", ssc.id, (@retailer.subsectors.find(ssc) rescue false) ? true : false, class: "auto-form" %>
 						<%= label_tag("subsectors[#{ssc.id}]", ssc.name) %>
 					<% end %>					
 				</div><!--/.small-11-->
@@ -29,7 +30,7 @@
 
 <div class="row">
 	<div class="medium-10 push-2 columns">
-		<%= f.submit 'Update Sectors', class: "landing-button right" %>
+		<%#= f.submit 'Update Sectors', class: "landing-button right" %>
 	</div>
 </div>
 <% end %>

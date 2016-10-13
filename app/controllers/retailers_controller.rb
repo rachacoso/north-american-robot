@@ -69,7 +69,7 @@ class RetailersController < ApplicationController
     end
 
     if params[:subsectors]
-			@retailer.set_subsectors(params[:subsectors])
+			@sectors_set = @retailer.set_subsectors(params[:subsectors])
     end
 
     if params[:disable_armor_payments]

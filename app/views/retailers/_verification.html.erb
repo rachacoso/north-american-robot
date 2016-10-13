@@ -20,7 +20,7 @@
 		<hr>
 		<h3><strong>Business Registration:</strong> <br>
 			<%= render partial: "verification_indicator", locals: {item: @current_user.retailer.verified_business_registration } %></h3>
-		<%= form_for @retailer, url: retailer_url do |f| %>
+		<%= form_for @retailer, url: retailer_url, remote: true do |f| %>
 		<%= hidden_field_tag "redirect_anchor", "a-verification" %>
 		<div class="row">
 			<div class="small-7 columns small-centered">
@@ -28,12 +28,9 @@
 					<div class="small-12 columns">
 						<%= f.label :business_id, "Your BUSINESS ID number" %>
 					</div><!--/.small-12-->
-					<div class="medium-7 columns">
-						<%= f.text_field :business_id, placeholder: "Enter BUSINESS ID number", label: false %>
-					</div><!--/.small-8-->
-					<div class="medium-5 columns">
-						<%= f.submit (@retailer.business_id.blank? ? "ADD Business ID" : "UPDATE Business ID"), class: "button tiny postfix", style: "background-color: #33CCFF; color: white;" %>
-					</div><!--/.small-4-->
+					<div class="small-12 columns">
+						<%= f.text_field :business_id, placeholder: "Enter BUSINESS ID number", label: false, class: "auto-form-text" %>
+					</div><!--/.small-12-->
 					<div class="small-12 columns">
 						<h3 style="line-height: 1em;"><small>For example, in the US, this would be your <strong>Tax ID number</strong>,<br> in Korea, your <strong>Business ID number</strong></small></h3>
 					</div><!--/.small-12-->
