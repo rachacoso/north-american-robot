@@ -400,10 +400,11 @@ function initialize () {
     lookup: countriesArray,
     minChars: 0,
     delimiter: ', ',
-    // onSelect: function (suggestion) {
-    //     // $('#selection').html('You selected: ' + suggestion.value + ', ' + suggestion.data);
-    //     $('#<%=id_name%>_selected').val(suggestion.data);
-    // },
+    onSelect: function (suggestion) {
+      var thisForm = $(this).parents('form');
+      $(thisForm).submit();
+    },
+    triggerSelectOnValidInput: false,
     showNoSuggestionNotice: true,
     noSuggestionNotice: 'Sorry, no matching results',
     tabDisabled: true
