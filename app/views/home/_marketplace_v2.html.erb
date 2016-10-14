@@ -25,7 +25,7 @@
 					<div class="medium-10 columns">
 						<h3>New Brands</h3>
 						
-							<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-5">
+							<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
 							<% @new_brands.each do |b| %>
 								<li><%= render partial: "shared/tiles/company_tile", locals: {brand: b} %></li>
 							<% end %>
@@ -33,7 +33,7 @@
 						
 						<h3>Brands Just Updated</h3>
 						
-							<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-5">
+							<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
 							<% @updated_brands.each do |b| %>
 								<li><%= render partial: "shared/tiles/company_tile", locals: {brand: b} %></li>
 							<% end %>
@@ -41,7 +41,7 @@
 						
 						<h3>Products Just Updated</h3>
 						
-							<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-5">
+							<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
 							<% @updated_products.each do |p| %>
 								<li><%= render partial: "shared/tiles/product_tile", locals: {product: p, brand: p.brand} %></li>
 							<% end %>

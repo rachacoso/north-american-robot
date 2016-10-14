@@ -62,7 +62,7 @@
 						<% if @filtered_brands.blank? %>
 							<h3>No Brands</h3>
 						<% else %>
-							<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-5">
+							<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
 								<% @filtered_brands.each do |fb| %>
 									<li>
 									<%#= render partial: "index_item_filtered", locals: {brand: fb} %>
@@ -99,6 +99,7 @@
 									$(document).ready(function() {
 
 									  $("#owl-example-<%= bc.id %>").owlCarousel({
+										  center:true,
 											lazyLoad : true,
 											lazyFollow : true,
 											lazyEffect : "fade",
@@ -107,7 +108,7 @@
 												"<img src='images/v2/left-arrow.svg'>",
 												"<img src='images/v2/right-arrow.svg'>",
 											],
-											items : 6,
+											items : 5,
 											pagination : true,
 											scrollPerPage : true,
 											afterAction : afterAction

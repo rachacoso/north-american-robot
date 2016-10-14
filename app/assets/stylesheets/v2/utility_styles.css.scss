@@ -286,12 +286,18 @@ ul.tablist {
 // PRODUCT & COMPANY TILES
 
 .tiled-item {
+	border: 1px solid $landing-middle-gray;
+	padding: rem-calc(5);
+	width: rem-calc(180);
+	height: rem-calc(180);
+	overflow: hidden;
+	margin: auto;
 	a { 
-		color: $landing-dark-gray;
+		color: $landing-middle-gray;
 	}
 	.image-outer {
-		height: 150px;
-		width: 150px;
+		height: rem-calc(125);
+		width: rem-calc(125);
 		margin: auto;
 	}
 	.image-inner {
@@ -309,19 +315,30 @@ ul.tablist {
 		-moz-transition: all .5s;
 		-webkit-transition: all .5s;
 		transition: all .5s;
-		&:hover {
-			-moz-transform: scale(1.1,1.1);
-			-webkit-transform: scale(1.1,1.1);
-			transform: scale(1.1,1.1);  
-		}
+		// &:hover {
+		// 	-moz-transform: scale(1.1,1.1);
+		// 	-webkit-transform: scale(1.1,1.1);
+		// 	transform: scale(1.1,1.1);  
+		// }
 	}
 	.name {
 		text-align: center;
-		font-weight: 100;
+		font-weight: 400;
 		font-size: rem-calc(12);
-		a {
-			color: $landing-dark-gray;
-		}
+		-moz-transition: all .5s;
+		-webkit-transition: all .5s;
+		transition: all .5s;
+	}
+	&:hover .image-inner {
+		-moz-transform: scale(1.1,1.1);
+		-webkit-transform: scale(1.1,1.1);
+		transform: scale(1.1,1.1);  
+	}
+	&:hover {
+		border-color: $landing-blue;
+	}
+	&:hover .name {
+		color: $landing-dark-gray;
 	}
 	&.filtered {
 		margin-bottom: rem-calc(60);
