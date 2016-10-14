@@ -353,7 +353,7 @@ ul.tablist {
 	}
 	&:hover .name, &:hover .product-name {
 		color: $landing-light-gray;
-		@include transparent($landing-dark-gray, 0.95);
+		@include transparent($landing-dark-gray, 0.70);
 	}
 	&.filtered {
 		margin-bottom: rem-calc(60);
