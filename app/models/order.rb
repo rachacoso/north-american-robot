@@ -105,6 +105,7 @@ class Order # for V2 ordering
     order.brand = brand
     order.brand_company_name = brand.company_name
     order.add_terms_and_requirements
+    order.comments.build(text: nil, author: user.type?, order_status: "open") #auto-create comment
     unless user.company.disable_armor_payments
       order.armor_seller_account_id = brand.armor_account_id
       order.armor_seller_user_id = brand.users.with_armor_user_id.first.armor_user_id if brand.users.with_armor_user_id.present? 
@@ -150,6 +151,7 @@ class Order # for V2 ordering
     self.generate_id(:landing_order_reference_id)
     self.status = "submitted"
     self.submission_date = DateTime.now
+    self.comments.build(text: nil, author: "brand", order_status: "submitted") # auto-create first comment
     self.save!
     OrderMailer.send_order(
       order: self, 
@@ -177,7 +179,7 @@ class Order # for V2 ordering
   def pending(user:, comments: nil)
     self.status = "pending"
     self.push(pending_date: DateTime.now)
-    self.comments.create(text: comments, author: user.type?, order_status: "pending")
+    # self.comments.create(text: comments, author: user.type?, order_status: "submitted")
     self.save!
     OrderMailer.send_order(
       order: self, 
@@ -191,7 +193,8 @@ class Order # for V2 ordering
   def decline_approval(requests:, user:)
     self.status = "submitted"
     # self.pending_date = DateTime.now
-    self.comments.create(text: requests, author: user.type?, order_status: "submitted")
+    self.comments.create(text: requests, author: user.type?, order_status: "declined")
+    self.comments.create(text: nil, author: "brand", order_status: "submitted") #auto-create next comment
     self.save!
     # NEED TO ADD MAILER FOR DECLINING APPROVAL
     OrderMailer.send_order(

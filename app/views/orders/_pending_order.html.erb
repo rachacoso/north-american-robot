@@ -118,7 +118,7 @@
 
 	<% end %>
 
-	<% if @order.comments.submitted_comment_from_orderer.present? %>
+	<% if @order.comments.declined.present? %>
 
 		<%= form_for @order, url: pending_order_url(@order,1), remote: true do |f| %>
 		<div class="row">
@@ -127,8 +127,8 @@
 				<h2 style="line-height: 1em;">Additional Charges:<br><small>(shipping and other fees)<br></small><strong><%= number_to_currency(@order.charges_subtotal_price) %></strong></h2>
 				<hr>
 				<h2>Would you like to submit this updated order to <br><strong><%= @order.orderer.company_name %></strong>?</h2>
-					<%= label_tag 'comments', 'Add any comments below' %>
-					<%= text_area_tag 'comments', nil, rows: 10 %>
+					<%#= label_tag 'comments', 'Add any comments below' %>
+					<%#= text_area_tag 'comments', nil, rows: 10 %>
 					<div class="inline-error" id="pending-error"><%= flash[:error] ? flash[:error] : "" %></div>
 			</div><!--/.small-12-->
 		</div><!--/.row-->

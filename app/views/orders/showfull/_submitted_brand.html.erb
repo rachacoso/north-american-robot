@@ -6,7 +6,7 @@
 				<div class="small-12 columns">
 					<div id="order-panel-top">
 						<h1>Order 
-						<% if order.comments.submitted_comment_from_orderer.present? %>
+						<% if order.comments.declined.present? %>
 						Resubmitted with changes requested
 						<% else %>
 						Submitted
@@ -14,7 +14,7 @@
 						</h1>
 						<%= render partial: "orders/showfull/order_flow_header", locals: { status: order.status , armor: (order.armor_enabled? ? true : false ) } %>
 						
-						<% if order.comments.submitted_comment_from_orderer.present? %>
+						<% if order.comments.declined.present? %>
 							<h3>This order has been sent back to you with changes requested. Please review the changes and respond.</h3>
 						<% else %>
 							<h3>This order has been submitted by <%= order.orderer.company_name %></h3>
@@ -124,13 +124,31 @@
 							</div><!--/.small-12-->
 						</div><!--/.row-->
 
+					
+						<br>
+						<h1><span class="step" data-step="4"></span> Add Comments (Optional)</h1>
+						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
+						<div class="panel text-center">
+							<div id="add-comments">
+								<% if order.pending_date.blank? %>
+									<%= render partial: "add_comments", locals: {order: order} %>
+								<% else %>
+
+									<% comment = order.comments.submitted[order.pending_date.length.to_i] %>
+									<%= render partial: "update_order_comments", locals: {comment: comment} %>
+
+								<% end %>
+							</div><!--/.add-ship-cancel-form-->
+						</div><!--.panel text-center-->
+					
 					</div><!--/.medium-11-->
 				</div><!--/.row-->
+
 
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
 						<br>
-						<h1><span class="step" data-step="4"></span> Review Order</h1>
+						<h1><span class="step" data-step="5"></span> Review Order</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 						<div class="panel">
 							<h3>You can edit order Items by clicking on item name or quantity</h3>							
@@ -144,7 +162,7 @@
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
 						<br>
-						<h1><span class="step" data-step="5"></span> Send <%= order.orderer.company_name %> the Updated Order</h1>
+						<h1><span class="step" data-step="6"></span> Send <%= order.orderer.company_name %> the Updated Order</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 						<div class="panel text-center">
 							<%= link_to "Submit Updated Order to #{order.orderer.company_name}", pending_order_url(order,0), class: "landing-button", remote: true %>

@@ -4,9 +4,9 @@
 	$('#comment-error').fadeIn();
 <% else %>
 	$('#comment-error').fadeOut(); // hide any error messages
-	$('#ajax-success-data').html("Comment Updated");
-	$('#ajax-message').fadeIn().delay( 1500 ).fadeOut();
+	<%= render partial: 'shared/ajax_message', locals: { updated_item: "Order" } %>
 	$('#order-display').html("<%= j (render partial: 'shared/orders/show') %>");
 <% end %>
 
 initializeOrderControls();
+initializeAutoForm();

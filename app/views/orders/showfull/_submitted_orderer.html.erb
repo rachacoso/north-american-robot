@@ -6,14 +6,14 @@
 				<div class="small-12 columns">
 					<div id="order-panel-top">
 						<h1>Order 
-						<% if order.comments.submitted_comment_from_orderer.present? %>
+						<% if order.comments.declined.present? %>
 						Resubmitted with changes requested
 						<% else %>
 						Submitted
 						<% end %>
 						</h1>
 						<%= render partial: "orders/showfull/order_flow_header", locals: { status: order.status , armor: (order.armor_enabled? ? true : false ) } %>
-						<% if order.comments.submitted_comment_from_orderer.present? %>
+						<% if order.comments.declined.present? %>
 							<h3>This order has been sent back to <%= order.brand_company_name %> for updates. Please wait for <%= order.brand.company_name %> to respond.</h3>
 						<% else %>
 							<h3>This order has been submitted. Please wait for <%= order.brand.company_name %> to calculate final fees and costs.</h3>

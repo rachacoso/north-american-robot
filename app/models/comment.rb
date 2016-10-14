@@ -12,7 +12,11 @@ class Comment
   validates :author, presence: true
 
 	scope :open, ->{where(order_status: "open")}
-  scope :pending_comment_from_brand, ->{where(order_status: "pending", author: "brand")}
-  scope :submitted_comment_from_orderer, ->{where(order_status: "submitted", :author.in => ["retailer", "distributor"])}
+  scope :submitted, ->{where(order_status: "submitted")}
+  scope :declined, ->{where(order_status: "declined")}
+  # scope :submitted_comment_from_brand, ->{where(order_status: "submitted", author: "brand")}
+  # scope :submitted_comment_from_orderer, ->{where(order_status: "submitted", :author.in => ["retailer", "distributor"])}
+  # scope :pending_comment_from_brand, ->{where(order_status: "pending", author: "brand")}
+  
 
 end
