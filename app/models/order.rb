@@ -27,7 +27,8 @@ class Order # for V2 ordering
   field :brand_company_name, type: String
   field :brand_order_reference_id, type: String
   field :submission_date, type: DateTime
-  field :pending_date, type: Array
+  field :pending_date, type: DateTime
+  field :pending_date_array, type: Array
   field :approved_date, type: DateTime
   field :paid_date, type: DateTime
   field :shipped_date, type: DateTime
@@ -178,7 +179,7 @@ class Order # for V2 ordering
 
   def pending(user:)
     self.status = "pending"
-    self.push(pending_date: DateTime.now)
+    self.push(pending_date_array: DateTime.now)
     self.save!
     OrderMailer.send_order(
       order: self, 

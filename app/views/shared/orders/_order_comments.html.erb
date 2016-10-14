@@ -23,9 +23,9 @@
 						</li>
 					<% end %>
 
-					<% if order.pending_date.present? %>
+					<% if order.pending_date_array.present? %>
 					<li>
-						<span id='title'>SENT FOR APPROVAL by <%= order.brand_company_name %></span> <%= order.pending_date[0].in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M %Z") %>
+						<span id='title'>SENT FOR APPROVAL by <%= order.brand_company_name %></span> <%= order.pending_date_array[0].in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M %Z") %>
 							<% if (comment = order.comments.submitted.first) && order.comments.submitted.first.text.present? %>
 								<%= render partial: "shared/orders/order_comment_display", locals: { comment: comment } %>
 							<% end %>
@@ -38,9 +38,9 @@
 							<span id='title'>CHANGES REQUESTED by <%= order.orderer_company_name %></span> <%= c.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M %Z") %>
 							<%= render partial: "shared/orders/order_comment_display", locals: { comment: c } %>
 						</li>
-							<% if order.pending_date[index.to_i+1] %>
+							<% if order.pending_date_array[index.to_i+1] %>
 								<li>
-									<span id='title'>SENT FOR APPROVAL by <%= order.brand_company_name %></span> <%= order.pending_date[index.to_i+1].in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M %Z") %>
+									<span id='title'>SENT FOR APPROVAL by <%= order.brand_company_name %></span> <%= order.pending_date_array[index.to_i+1].in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M %Z") %>
 									<% if order.comments.submitted[index.to_i+1] && order.comments.submitted[index.to_i+1].text.present? %>
 										<%= render partial: "shared/orders/order_comment_display", locals: { comment: order.comments.submitted[index.to_i+1] } %>
 									<% end %>

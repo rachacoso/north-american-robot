@@ -130,11 +130,11 @@
 						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 						<div class="panel text-center">
 							<div id="add-comments">
-								<% if order.pending_date.blank? %>
+								<% if order.pending_date_array.blank? %>
 									<%= render partial: "add_comments", locals: {order: order} %>
 								<% else %>
 
-									<% comment = order.comments.submitted[order.pending_date.length.to_i] %>
+									<% comment = order.comments.submitted[order.pending_date_array.length.to_i] %>
 									<%= render partial: "update_order_comments", locals: {comment: comment} %>
 
 								<% end %>
