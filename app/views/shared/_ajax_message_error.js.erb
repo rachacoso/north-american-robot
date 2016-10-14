@@ -1,0 +1,11 @@
+$('#ajax-error-data').html("<%= updated_item %> <small>at <%= Time.now.strftime('%H:%M:%S %Z') %></small>");
+$('#ajax-message-error').fadeIn();    
+
+if (typeof ajaxtimer !== 'undefined') {
+    clearTimeout(ajaxtimer);
+    ajaxtimer = null;
+}
+
+var ajaxtimer = window.setTimeout( function() {  
+	$('#ajax-message-error').fadeOut();
+}, 1500);
