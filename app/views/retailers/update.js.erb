@@ -1,9 +1,9 @@
-
+<% if @update_armor_payments %>
 $('#armor-ordering-and-payments').fadeOut(function(){
 	$('#armor-ordering-and-payments').html("<%= j (render partial: 'shared/profileform/armor/armor_ordering_and_payments', locals: { company: @retailer }) %>");
 });
 $('#armor-ordering-and-payments').fadeIn();
-
+<% end %>
 
 <% if @margin_updated %>
 	$('#margin-validation-notice').html("<%= j (render partial: 'shared/profileform/margin_validation_notice', locals: { company: @retailer }) %>");

@@ -125,9 +125,9 @@ class DistributorsController < ApplicationController
 
     end
 
-    # if params[:distributor][:disable_armor_payments]
-    #   @update_armor_payments = true
-    # end
+    if params[:retailer][:address_attributes] || params[:retailer][:company_name]
+      @update_armor_payments = true
+    end
 
     if params[:distributor][:payment_terms]
       @payment_terms_updated = @distributor.set_payment_terms(params[:distributor][:payment_terms])

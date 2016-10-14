@@ -72,9 +72,9 @@ class RetailersController < ApplicationController
 			@sectors_set = @retailer.set_subsectors(params[:subsectors])
     end
 
-    # if params[:retailer][:disable_armor_payments]
-    #   @update_armor_payments = true
-    # end
+    if params[:retailer][:address_attributes] || params[:retailer][:company_name]
+      @update_armor_payments = true
+    end
 
     if params[:retailer][:payment_terms]
       @payment_terms_updated = @retailer.set_payment_terms(params[:retailer][:payment_terms])
