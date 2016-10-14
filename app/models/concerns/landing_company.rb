@@ -261,6 +261,12 @@ module LandingCompany
 				else
 					self.payment_terms = terms
 					self.payment_terms_approved = false # reset approval if changed
+					case terms
+					when "Net 30", "Net 45", "Net 60"
+						self.disable_armor_payments = true
+					when "Prepayment"
+						self.disable_armor_payments = false
+					end
 					return true
 				end
 			end

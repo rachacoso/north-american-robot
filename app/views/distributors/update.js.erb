@@ -1,4 +1,4 @@
-<% if @update_armor_payments %>
+<% if @update_armor_payments || @payment_terms_updated %>
 $('#armor-ordering-and-payments').fadeOut(function(){
 	$('#armor-ordering-and-payments').html("<%= j (render partial: 'shared/profileform/armor/armor_ordering_and_payments', locals: { company: @distributor }) %>");
 });
