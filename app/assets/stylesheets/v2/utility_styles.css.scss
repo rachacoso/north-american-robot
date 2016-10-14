@@ -271,6 +271,7 @@ ul.tablist {
   }
 }
 
+// NOTICES
 .notice {
 	padding: rem-calc(10);
 	margin: rem-calc(10) 0;
@@ -279,4 +280,50 @@ ul.tablist {
 	font-size: rem-calc(12);
 	background-color: $landing-light-gray;
 
+}
+
+
+// PRODUCT & COMPANY TILES
+
+.tiled-item {
+	a { 
+		color: $landing-dark-gray;
+	}
+	.image-outer {
+		height: 150px;
+		width: 150px;
+		margin: auto;
+	}
+	.image-inner {
+		margin:auto;
+		text-align: center;
+		width: 90%;
+		height: 90%;
+		overflow: hidden;
+		-moz-background-size: contain;
+		-o-background-size: contain;
+		-webkit-background-size: contain;
+		background-size: contain;
+		background-position: center;
+		background-repeat: no-repeat;
+		-moz-transition: all .5s;
+		-webkit-transition: all .5s;
+		transition: all .5s;
+		&:hover {
+			-moz-transform: scale(1.1,1.1);
+			-webkit-transform: scale(1.1,1.1);
+			transform: scale(1.1,1.1);  
+		}
+	}
+	.name {
+		text-align: center;
+		font-weight: 100;
+		font-size: rem-calc(12);
+		a {
+			color: $landing-dark-gray;
+		}
+	}
+	&.filtered {
+		margin-bottom: rem-calc(60);
+	}	
 }
