@@ -26,7 +26,8 @@
 						<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-5">
 							<% @searchresults.each do |b| %>
 								<li>
-								<%= render partial: "index_item_filtered", locals: {brand: b} %>
+								<%#= render partial: "index_item_filtered", locals: {brand: b} %>
+								<%= render partial: "shared/tiles/company_tile", locals: {brand: b} %>
 								</li>
 							<% end %>
 						</ul>
