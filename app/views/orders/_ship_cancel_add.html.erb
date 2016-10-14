@@ -18,8 +18,6 @@
 					</div><!--/.small-7-->
 				</div><!--/.row-->
 
-			</div><!--/.medium-6-->
-			<div class="medium-6 columns">
 				<div class="row collapse">
 					<div class="small-5 columns text-left">
 						<span class="prefix">Ship to U.S. Date</span>
@@ -34,12 +32,7 @@
 						<% end %>
 					</div><!--/.small-7-->
 				</div><!--/.row-->
-			</div><!--/.medium-6-->
 
-		</div><!--/.row-->
-		<div class="row">
-
-			<div class="medium-6 columns">
 				<div class="row collapse">
 					<div class="small-5 columns text-left">
 						<span class="prefix">Cancel Date</span>
@@ -54,25 +47,13 @@
 						<% end %>
 					</div><!--/.small-7-->
 				</div><!--/.row-->
-			</div><!--/.medium-6-->
 
+			</div><!--/.medium-6-->
 			<div class="medium-6 columns">
-				<div class="row collapse">
-					<div class="small-5 columns text-left">
-						<span class="prefix">Estimated Payment Date</span>
-					</div><!--/.small-5-->
-					<div class="small-7 columns">
-						<%= form_for order, remote: true, authenticity_token: true do |f| %>
-							<% if order.estimated_payment_date %>
-								<%= f.text_field :estimated_payment_date, label: false, value: order.estimated_payment_date.strftime("%m/%d/%Y"), placeholder: '(none)' , class: "datepick auto-form" %>
-							<% else %>
-								<%= f.text_field :estimated_payment_date, label: false, value: "(none)", placeholder: "(none)", class: "datepick auto-form"%>
-							<% end %>
-						<% end %>
-					</div><!--/.small-7-->
-				</div><!--/.row-->
+
 			</div><!--/.medium-6-->
 
 		</div><!--/.row-->
+
 	</div><!--/.medium-6 medium-centered-->
 </div><!--/.row-->

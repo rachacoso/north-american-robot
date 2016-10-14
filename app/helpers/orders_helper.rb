@@ -228,4 +228,32 @@ module OrdersHelper
 
 	end
 
+	def estimated_shipment_date(order:)
+		if order.payment_terms.blank? || order.payment_terms == "Prepayment"
+			ship_date = "5 days after receipt of products"
+		else
+			if order.cancel_date.present?
+				case order.payment_terms
+				when "Net 30"
+					ship_date = (order.cancel_date + 35)
+				when "Net 45"
+					ship_date = (order.cancel_date + 50)
+				when "Net 60"
+					ship_date = (order.cancel_date + 65)
+				end
+				ship_date = ship_date.strftime("%d %b %Y")
+			else
+				case order.payment_terms
+				when "Net 30"
+					ship_date = "35 days after Cancel Date"
+				when "Net 45"
+					ship_date = "50 days after Cancel Date"
+				when "Net 60"
+					ship_date = "65 days after Cancel Date"
+				end
+			end
+		end
+		return ship_date
+	end
+
 end

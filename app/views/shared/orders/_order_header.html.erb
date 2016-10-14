@@ -91,11 +91,11 @@
 								<ul>
 								<% if order.ship_date.present? %>
 									<li class="title">ship date</li>
-									<li class="term"><%= order.ship_date.strftime("%m/%d/%Y") %></li>
+									<li class="term"><%= order.ship_date.strftime("%d %b %Y") %></li>
 								<% end %>
 								<% if order.ship_to_us_date.present? %>
 									<li class="title">ship to U.S. date</li>
-									<li class="term"><%= order.ship_to_us_date.strftime("%m/%d/%Y") %></li>
+									<li class="term"><%= order.ship_to_us_date.strftime("%d %b %Y") %></li>
 								<% end %>
 								</ul>
 							</div><!--/.small-6-->
@@ -103,14 +103,18 @@
 								<ul>
 								<% if order.cancel_date.present? %>
 									<li class="title">cancel date</li>
-									<li class="term"><%= order.cancel_date.strftime("%m/%d/%Y") %></li>
-								<% end %>
-								<% if order.estimated_payment_date.present? %>
-									<li class="title">estimated payment date</li>
-									<li class="term"><%= order.estimated_payment_date.strftime("%m/%d/%Y") %></li>
+									<li class="term"><%= order.cancel_date.strftime("%d %b %Y") %></li>
 								<% end %>
 								</ul>
 							</div><!--/.small-6-->
+						</div><!--/.row-->
+						<div class="row">
+							<div class="small-12 columns">
+								<ul>
+									<li class="title">estimated payment date</li>
+									<li class="term"><%= estimated_shipment_date(order:order) %></li>
+								</ul>
+							</div><!--/.small-12-->
 						</div><!--/.row-->
 					</div><!--/.medium-6-->
 				</div><!--/.row-->
