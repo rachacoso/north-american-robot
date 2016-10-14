@@ -286,6 +286,7 @@ ul.tablist {
 // PRODUCT & COMPANY TILES
 
 .tiled-item {
+	position: relative;
 	border: 1px solid $landing-middle-gray;
 	padding: rem-calc(5);
 	width: rem-calc(180);
@@ -295,16 +296,15 @@ ul.tablist {
 	a { 
 		color: $landing-middle-gray;
 	}
-	.image-outer {
-		height: rem-calc(125);
-		width: rem-calc(125);
-		margin: auto;
-	}
 	.image-inner {
-		margin:auto;
+		// border: 1px solid red;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 80%;
+		height: 80%;
+		margin: -81px 0 0 -71px;
 		text-align: center;
-		width: 90%;
-		height: 90%;
 		overflow: hidden;
 		-moz-background-size: contain;
 		-o-background-size: contain;
@@ -315,19 +315,30 @@ ul.tablist {
 		-moz-transition: all .5s;
 		-webkit-transition: all .5s;
 		transition: all .5s;
-		// &:hover {
-		// 	-moz-transform: scale(1.1,1.1);
-		// 	-webkit-transform: scale(1.1,1.1);
-		// 	transform: scale(1.1,1.1);  
-		// }
 	}
-	.name {
-		text-align: center;
+	.name, .product-name {
+		// border: 1px solid green;
+		position: absolute;
+		padding: rem-calc(5);
+		width: 100%;
+		// @include transparent(#fff, 0.25);
+		text-align: right;
 		font-weight: 400;
 		font-size: rem-calc(12);
 		-moz-transition: all .5s;
 		-webkit-transition: all .5s;
 		transition: all .5s;
+	}
+	.name {
+		bottom: 0;
+		right: 0;
+	}
+	.product-name {
+		color: transparent;
+		font-weight: 600;
+		font-size: 115%;
+		top: 0;
+		right: 0;
 	}
 	&:hover .image-inner {
 		-moz-transform: scale(1.1,1.1);
@@ -335,10 +346,11 @@ ul.tablist {
 		transform: scale(1.1,1.1);  
 	}
 	&:hover {
-		border-color: $landing-blue;
+		border-color: $landing-dark-gray;
 	}
-	&:hover .name {
-		color: $landing-dark-gray;
+	&:hover .name, &:hover .product-name {
+		color: $landing-light-gray;
+		@include transparent($landing-dark-gray, 0.95);
 	}
 	&.filtered {
 		margin-bottom: rem-calc(60);

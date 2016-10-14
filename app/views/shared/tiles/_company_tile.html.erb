@@ -1,13 +1,13 @@
 <div class="tiled-item">
 <%= link_to preview_brand_url(brand), remote: true do %>
 <% photo = get_brand_photo_url(brand) %>
-<div class="image-outer">
-	<% if photo %>
-		<div class="image-inner" style="background-image: url(<%= photo %>)"></div>
-	<% else %>
-		<div class="image-inner"></div>
-	<% end %>
-</div>
+
+<% if photo %>
+	<div class="image-inner" style="background-image: url(<%= photo %>)"></div>
+<% else %>
+	<div class="image-inner"></div>
+<% end %>
+
 <div class="name"><%= brand.company_name %></div>
 <% end %>
 </div><!--/.index-item-->
