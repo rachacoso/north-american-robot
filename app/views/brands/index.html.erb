@@ -65,7 +65,8 @@
 							<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-5">
 								<% @filtered_brands.each do |fb| %>
 									<li>
-									<%= render partial: "index_item_filtered", locals: {brand: fb} %>
+									<%#= render partial: "index_item_filtered", locals: {brand: fb} %>
+									<%= render partial: "shared/tiles/company_tile", locals: {brand: fb} %>
 									</li>
 								<% end %>
 							</ul>
@@ -86,7 +87,8 @@
 									</span>
 									<div id="owl-example-<%= bc.id %>" class="owl-carousel owl-theme">
 									<% get_brands(bc, @type).each do |b| %>
-										<%= render partial: "index_item", locals: {brand: b} %>
+										<%#= render partial: "index_item", locals: {brand: b} %>
+										<%= render partial: "shared/tiles/company_tile", locals: {brand: b} %>
 									<% end %>
 									</div>
 								</div><!--/.small-11 small-centered-->
