@@ -162,7 +162,7 @@ class Distributor
 
 	end
 
-	def onboard_stage
+	def onboard_stage(user)
 
 		if 
 			self.address.blank? || 
@@ -171,8 +171,10 @@ class Distributor
 			self.year_established.blank? ||
 			self.company_size.blank? ||
 			self.website.blank? ||
-			self.contacts.blank? ||
-			self.products.blank?
+			self.distributor_brands.blank? ||
+			user.contact.firstname.blank? ||
+			user.contact.lastname.blank? ||
+			user.contact.phone.blank?
 				return 1
 		else
 			return 2
