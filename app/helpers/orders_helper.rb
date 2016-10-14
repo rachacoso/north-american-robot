@@ -205,7 +205,7 @@ module OrdersHelper
 		# ORDER REQUIREMENTS
 
 		if order.margin.present?
-			order_requirements << "Margin: #{order.margin}%"
+			order_requirements << "Margin: #{order.discount}%"
 		end
 
 		if order.marketing_co_op.present?
