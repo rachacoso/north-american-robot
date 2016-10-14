@@ -52,9 +52,9 @@
 							<h1>Profile Sections</h1>
 							<%= link_to "Company Info", "#a-companyinfo", class: "profile-edit-links required" %><br>
 							<%= link_to "Contact Info", "#a-login-info", class: "profile-edit-links required" %><br>
+							<%= link_to "Payment/Shipping Terms &amp; Requirements".html_safe, "#a-payment-shipping-terms", class: "profile-edit-links required" %><br>
+							<%= link_to "Ordering Requirements", "#a-ordering-requirements", class: "profile-edit-links required" %><br>
 							<%= link_to "Ordering &amp; Payments".html_safe, "#a-ordering-and-payments", class: "profile-edit-links required" %><br>
-							<%= link_to "Payment/Shipping Terms &amp; Requirements".html_safe, "#a-payment-shipping-terms", class: "profile-edit-links" %><br>
-							<%= link_to "Ordering Requirements", "#a-ordering-requirements", class: "profile-edit-links" %><br>
 							<%= link_to "Company Introduction", "#a-company-introduction", class: "profile-edit-links" %><br>
 							<%= link_to "Global Good Tags", "#a-social-tags", class: "profile-edit-links" %><br>
 							<%= link_to "Sectors", "#a-sectors", class: "profile-edit-links" %><br>
@@ -100,6 +100,45 @@
 			</div>
 		</div>
 
+
+
+<%#		HIDING FOR NOW UNTIL DETERMINE HOW USED  %>
+<%#		<div class="row">  %>
+<%#			<div class="medium-8 medium-push-4 columns">  %>
+<%#				<div class="profile-edit-form">  %>
+<%#					<%#= render "company_contacts" %>
+<%#				</div>  %>
+<%#			</div>  %>
+<%#		</div> %>
+
+		<div class="row">
+			<div class="medium-4 columns medium-text-right">
+				<div class="profile-edit-form info-panel">
+				<h1>Payment/Shipping Terms &amp; Requirements</h1>
+				<h3>What are your payment and shipping terms and requirements?</h3>
+				</div>
+			</div><!--/.medium-4-->
+			<div class="medium-8 columns">
+				<div class="profile-edit-form">
+					<%= render "payment_and_shipping_terms" %>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="medium-4 columns medium-text-right">
+				<div class="profile-edit-form info-panel">
+				<h1>Ordering Requirements</h1>
+				<h3>What are your ordering requirements?</h3>
+				</div>
+			</div><!--/.medium-4-->
+			<div class="medium-8 columns">
+				<div class="profile-edit-form">
+					<%= render "ordering_requirements" %>
+				</div>
+			</div>
+		</div>
+
 		<div class="row">
 			<div class="medium-4 columns medium-text-right">
 				<div class="profile-edit-form info-panel">
@@ -138,43 +177,6 @@
 			<div class="medium-8 columns">
 				<div class="profile-edit-form" id="armor-ordering-and-payments">
 					<%= render partial: "shared/profileform/armor/armor_ordering_and_payments", locals: { company: @retailer } %>
-				</div>
-			</div>
-		</div>
-
-<%#		HIDING FOR NOW UNTIL DETERMINE HOW USED  %>
-<%#		<div class="row">  %>
-<%#			<div class="medium-8 medium-push-4 columns">  %>
-<%#				<div class="profile-edit-form">  %>
-<%#					<%#= render "company_contacts" %>
-<%#				</div>  %>
-<%#			</div>  %>
-<%#		</div> %>
-
-		<div class="row">
-			<div class="medium-4 columns medium-text-right">
-				<div class="profile-edit-form info-panel">
-				<h1>Payment/Shipping Terms &amp; Requirements</h1>
-				<h3>What are your payment and shipping terms and requirements?</h3>
-				</div>
-			</div><!--/.medium-4-->
-			<div class="medium-8 columns">
-				<div class="profile-edit-form">
-					<%= render "payment_and_shipping_terms" %>
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="medium-4 columns medium-text-right">
-				<div class="profile-edit-form info-panel">
-				<h1>Ordering Requirements</h1>
-				<h3>What are your ordering requirements?</h3>
-				</div>
-			</div><!--/.medium-4-->
-			<div class="medium-8 columns">
-				<div class="profile-edit-form">
-					<%= render "ordering_requirements" %>
 				</div>
 			</div>
 		</div>
