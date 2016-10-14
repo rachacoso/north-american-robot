@@ -56,10 +56,21 @@
 					</tr>
 				<% end %>
 
+				<% if order.meets_minimum? %>
 					<tr class="total">
 						<td colspan="6" class="text-right">Order Total <small></small></td>
 						<td class="text-right"><%= number_to_currency(order.total_price) %></td>
 					</tr>
+				<% else %>
+					<tr class="total">
+						<td colspan="6" class="text-right" style="color: red;">Order Minimum <small></small></td>
+						<td class="text-right" style="color: red;"><%= number_to_currency(dollarize(order.brand.order_minimum)) %></td>
+					</tr>
+					<tr class="total">
+						<td colspan="6" class="text-right" >Current Order Total <small></small></td>
+						<td class="text-right" ><%= number_to_currency(order.total_price) %></td>
+					</tr>
+				<% end %>
 
 			</tbody>
 		</table>

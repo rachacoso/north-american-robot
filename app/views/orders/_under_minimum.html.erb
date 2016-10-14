@@ -1,0 +1,15 @@
+<div class="row">
+	<div class="small-12 columns text-center">
+		<h2 style="color: red;"><strong>Sorry!</strong></h2>
+		<h3><strong>Your order is under <%= @order.brand.company_name %>'s minimum order threshold of</strong></h3>
+		<h2 style="color: red;"><strong><%= number_to_currency(dollarize(@order.brand.order_minimum)) %></strong></h2>
+		<h3>
+			<strong>Please add more items to your order!</strong>
+		</h3>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<div class="row">
+	<div class="small-12 columns text-center">
+		<%= link_to "OK", view_brand_url(@order.brand), class: "landing-button", id: "submit-close" %>
+	</div><!--/.small-12-->
+</div><!--/.row-->

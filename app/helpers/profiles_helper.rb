@@ -73,6 +73,15 @@ module ProfilesHelper
 		return "<div class='profile-general-info-item'><div class='title'>Company Size:</div>#{item}</div>".html_safe
 	end
 
+	def show_order_minimum(profile)
+		if profile.order_minimum.blank?
+			item = "None"
+		else
+			item = display_price(profile.order_minimum)
+		end
+		return "<div class='profile-general-info-item'><div class='title'>Order Minimum:</div>$ #{item}</div>".html_safe
+	end
+
 	def show_sectors(profile)
 		if profile.sectors.blank? 
 			item = "n/a"

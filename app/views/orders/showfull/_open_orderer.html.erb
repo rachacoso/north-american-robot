@@ -60,17 +60,11 @@
 						<h3>Click on any order item to edit. <br>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 
 						<div class="panel" id="order-display">
-							<%= render "shared/orders/show" %>		
+							<%= render "shared/orders/show" %>
 						</div>
 						<br>
-						<h1><span class="step" data-step="6"></span> Submit Order to <%= order.brand.company_name %></h1>
-						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
-						<div class="panel text-center">
-						<%= link_to "Submit Order to #{order.brand.company_name}", submit_order_url(order,0), class: "landing-button", remote: true %> 
-						<span style="font-weight: 100;">or</span>
-						<%= link_to "Add More Items", view_brand_url(order.brand), class: "landing-button secondary" %>
-						<span style="font-weight: 100;">or</span>
-						<%= link_to "Empty Cart", order_url(order), method: "delete", remote: true, class: "landing-button alert" %>
+						<div id="open-orderer-submit">
+							<%= render partial: "orders/showfull/open_orderer_submit", locals: { order: order } %>
 						</div>
 
 					</div><!--/.medium-11 medium-centered-->

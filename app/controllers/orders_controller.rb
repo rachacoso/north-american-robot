@@ -161,9 +161,13 @@ class OrdersController < ApplicationController
 	end
 
 	def submit
-		@order.armor_update # update any missing armor info
-		if params[:confirm].to_i == 1
-			@order.submission(user: @current_user)
+		if @order.meets_minimum?
+			@order.armor_update # update any missing armor info
+			if params[:confirm].to_i == 1
+				@order.submission(user: @current_user)
+			end
+		else
+			@order_under_minimum = true
 		end
 		respond_to do |format|
 			format.html  { redirect_to order_url(@order) }

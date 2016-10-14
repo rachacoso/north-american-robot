@@ -242,4 +242,8 @@ module ApplicationHelper
 		end
 	end
 
+	def dollarize(amount)
+		return amount / 100
+	end
+
 end

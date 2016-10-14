@@ -1,0 +1,16 @@
+<h1 <%= !order.meets_minimum? ? "style=text-decoration:line-through;" : "" %>><span class="step" data-step="6"></span> Submit Order to <%= order.brand.company_name %></h1>
+<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
+<div class="panel text-center">
+	<% unless order.meets_minimum? %>
+	<h3 style="color: red;">Your cart is currently under the minimum order threshold. <br>Please add more items to your order!</h3>
+	<% end %>
+	<div>
+		<% if order.meets_minimum? %>
+			<%= link_to "Submit Order to #{order.brand.company_name}", submit_order_url(order,0), class: "landing-button", remote: true %> 
+			<span style="font-weight: 100;">or</span>
+		<% end %>
+		<%= link_to "Add More Items", view_brand_url(order.brand), class: "landing-button secondary" %>
+		<span style="font-weight: 100;">or</span>
+		<%= link_to "Empty Cart", order_url(order), method: "delete", data: { :confirm => 'Are you sure you want to empty your cart?'}, remote: true, class: "landing-button alert" %>
+	</div>
+</div>
