@@ -64,7 +64,7 @@
 											<div class="medium-2 columns">
 												<div class="row collapse">
 													<div class="small-8 columns">
-														<%= f.number_field :discount, label: false %>
+														<%= f.number_field :discount, label: false, class: "auto-form-text" %>
 													</div><!--/.small-4-->
 													<div class="small-4 columns">
 														<span class="postfix">%</span>
@@ -74,7 +74,7 @@
 										</div><!--/.row-->
 										<div class="row">
 											<div class="small-12 columns">
-												<%= f.submit "Update Discount", class: "landing-button" %>
+												<%#= f.submit "Update Discount", class: "landing-button" %>
 												<div class="inline-error" id="discount-error"></div>
 											</div><!--/.small-12-->
 										</div><!--/.row-->
