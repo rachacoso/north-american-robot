@@ -125,7 +125,7 @@ class DistributorsController < ApplicationController
 
     end
 
-    if params[:retailer][:address_attributes] || params[:retailer][:company_name]
+    if params[:distributor][:address_attributes] || params[:distributor][:company_name]
       @update_armor_payments = true
     end
 
