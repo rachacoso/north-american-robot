@@ -1,19 +1,16 @@
+$('#armor-ordering-and-payments').fadeOut(function(){
+	$('#armor-ordering-and-payments').html("<%= j (render partial: 'shared/profileform/armor/armor_ordering_and_payments', locals: { company: @current_user.get_parent }) %>");
+});
+$('#armor-ordering-and-payments').fadeIn();
 
 $('#user-limited-update-form').fadeIn().html("<%= j( render partial: 'users/limited_update_form', locals: {user: @current_user} ) %>");
-$('#user-limited-update-notice').fadeIn().html('<%= @notice %> &nbsp;&nbsp;');
+
 $('#contacts_list').html("<%= j (render partial: '/users/user_list', locals: {b_or_d: @current_user.get_parent}) %>");
 
 <% if @errors %>
-$('#ajax-success-data').html("<%= @notice %>");
-$('#ajax-message').fadeIn().delay( 1500 ).fadeOut();
+<%= render partial: 'shared/ajax_message_error', locals: { updated_item: @notice } %>
 <% else %>
-$('#ajax-success-data').html("Contact Info Updated");
-$('#ajax-message').fadeIn().delay( 1500 ).fadeOut();
+<%= render partial: 'shared/ajax_message', locals: { updated_item: "Profile" } %>
 <% end %>
-
-
-setTimeout(function(){
-	$('#user-limited-update-notice').fadeOut();
-}, 5000);
 
 initializeAutoForm();

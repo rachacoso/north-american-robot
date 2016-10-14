@@ -16,10 +16,11 @@
 	</div><!--/.small-12-->
 </div><!--/.row-->
 
+<% unless @current_user.company.disable_armor_payments %>
+
 <% allow, missing, errors = @current_user.allows_armor_signup %>
 <% if @current_user.company.armor_account_id %>
 	
-	<% unless @current_user.company.disable_armor_payments %>
 	<div class="row">
 		<div class="small-12 columns">
 			<hr>
@@ -45,7 +46,6 @@
 
 		</div><!--/.small-12-->
 	</div><!--/.row-->
-	<% end %>
 
 <% elsif @current_user.company.armor_account_id.blank? && allow %>
 	<%= render partial: 'shared/profileform/armor/armor_signup', locals: { c: @current_user.company, u: @current_user } %>
@@ -53,3 +53,4 @@
 	<%= render partial: 'shared/profileform/armor/armor_combined_form', locals: { c: @current_user.company, u: @current_user, m: missing, e: errors } %>
 <% end %>
 
+<% end %>
