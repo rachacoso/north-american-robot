@@ -49,6 +49,15 @@
 						<% end %>
 					<% end %>
 
+					<%# THIS IS THE BRAND'S PREVIEW OF THE COMMENTS TO BE SENT %>
+					<% if order.status == "submitted" && @current_user.brand && order.comments.submitted.last.text.present? %>
+						<li>
+							<span id='title'>by <%= order.brand_company_name %></span>
+							<%= render partial: "shared/orders/order_comment_display", locals: { comment: order.comments.submitted.last } %>
+						</li>
+					<% end %>
+
+
 					<% if order.approved_date.present? %>
 					<li>
 						<span id='title'>APPROVED by <%= order.orderer_company_name %></span> <%= order.approved_date.in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M %Z") %>
