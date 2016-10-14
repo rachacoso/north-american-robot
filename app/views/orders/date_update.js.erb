@@ -3,7 +3,7 @@ $('#order-item').fadeOut();
 $('#ship-cancel-add').html("<%= j (render partial: 'ship_cancel_add', locals: {order: @order}) %>");
 $('#order-display').html("<%= j (render partial: 'shared/orders/show') %>");
 
-<%= render partial: 'shared/ajax_message', locals: { updated_item: @updated } %>
+<%= render partial: 'shared/ajax_message', locals: { updated_item: "Order" } %>
 
 initialize ();
 initializeAutoForm();
