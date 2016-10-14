@@ -66,15 +66,23 @@
 <div class="overlay" id="order-overlay"></div>
 
 <div id="ajax-message">
-  <div id="ajax-message-inner" id="success">
+  <div class="ajax-message-inner" id="success">
     <div class="row">
       <div class="small-12 columns text-center">
-        <div id="ajax-success-data">ad</div>
+        <div id="ajax-success-data"></div>
+      </div><!--/.small-12-->
+    </div><!--/.row-->
+  </div>  
+</div>
+<div id="ajax-message-error">
+  <div class="ajax-message-inner" id="error">
+    <div class="row">
+      <div class="small-12 columns text-center">
+        <div id="ajax-error-data"></div>
       </div><!--/.small-12-->
     </div><!--/.row-->
   </div>
 </div>
-
 <%= javascript_include_tag "application" %>
 <%= content_for?(:javascript_foot) ? yield(:javascript_foot) : "" %>
 <%= armor_lightbox_script() %>
