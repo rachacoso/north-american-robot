@@ -20,12 +20,6 @@
 							<span class="postfix">%</span>
 						</div><!--/.small-4-->
 					</div><!--/.row-->
-					<div class="row">
-						<div class="small-12 columns text-center">
-							<div class="inline-error" id="margin-error"></div>
-							<span id="margin-validation-notice"><%= render partial: "shared/profileform/margin_validation_notice", locals: { company: @retailer } %></span>
-						</div><!--/.small-12-->
-					</div><!--/.row-->
 				</div><!--/.medium-4-->
 
 				<div class="medium-4 columns">
@@ -70,6 +64,13 @@
 					</div><!--/.row-->
 				</div><!--/.medium-4-->
 
+			</div><!--/.row-->
+
+			<div class="row">
+				<div class="small-12 columns">
+					<div class="inline-error" id="margin-error"></div>
+					<span id="margin-validation-notice"><%= render partial: "shared/profileform/margin_validation_notice", locals: { company: @retailer } %></span>
+				</div><!--/.small-12-->
 			</div><!--/.row-->
 
 			<hr>

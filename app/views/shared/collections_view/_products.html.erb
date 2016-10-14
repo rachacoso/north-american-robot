@@ -55,7 +55,7 @@
 
 		<% if !@current_user.brand && (!@current_user.company.payment_terms_valid? || !@current_user.company.margin_valid?) %>
 			<% if collitem.brand.can_sell? && !collitem.price.blank? && collitem.current %>
-				<div class="notice">Note: Your Margin or Payment Terms need to be approved by Landing International before you can order.</div>
+				<div class="notice">Hi there! Your Margin and/or Payment Terms need to be reviewed/approved by Landing International before you can submit any new orders.</div>
 			<% end %>
 		<% end %>
 
