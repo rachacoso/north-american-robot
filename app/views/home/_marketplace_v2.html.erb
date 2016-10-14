@@ -15,21 +15,8 @@
 					</div><!--/.small-12-->
 				</div><!--/.row-->
 
-				<div class="row">
-					<div class="small-12 columns">
-						<h3 style="color: #EA84C7;">To Do</h3>
-						<div id="dashboard-alerts">
-							<div id="onboard">
-								
-								<% if @current_user.brand %>
-									<%= render partial: "onboard_brand.html.erb" %>
-								<% else %>
-									<%= render partial: "onboard_buyer.html.erb" %>
-								<% end %>
-							</div>
-						</div>
-					</div><!--/.small-12-->
-				</div><!--/.row-->
+				<%= render partial: "to_do" %>
+
 				<div class="row">
 					<div class="medium-2 columns">
 						<h3>Orders</h3>
