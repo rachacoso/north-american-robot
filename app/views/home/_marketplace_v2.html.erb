@@ -27,7 +27,7 @@
 						
 							<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-5">
 							<% @new_brands.each do |b| %>
-								<li><%= render partial: "company_tile", locals: {brand: b} %></li>
+								<li><%= render partial: "shared/tiles/company_tile", locals: {brand: b} %></li>
 							<% end %>
 							</ul>
 						
@@ -35,7 +35,7 @@
 						
 							<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-5">
 							<% @updated_brands.each do |b| %>
-								<li><%= render partial: "company_tile", locals: {brand: b} %></li>
+								<li><%= render partial: "shared/tiles/company_tile", locals: {brand: b} %></li>
 							<% end %>
 							</ul>
 						
@@ -43,7 +43,7 @@
 						
 							<ul class="small-block-grid-1 medium-block-grid-4 large-block-grid-5">
 							<% @updated_products.each do |p| %>
-								<li><%= render partial: "product_tile", locals: {product: p, brand: p.brand} %></li>
+								<li><%= render partial: "shared/tiles/product_tile", locals: {product: p, brand: p.brand} %></li>
 							<% end %>
 							</ul>
 						
