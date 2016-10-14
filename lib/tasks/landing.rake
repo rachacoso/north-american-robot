@@ -89,3 +89,40 @@ task :reset_armor_ids => :environment do
 	end
 end
 
+# GENERATE COMMENTS FOR ALL OLD ORDERS SO DON'T BREAK
+
+task :prep_legacy_orders => :environment do
+	orders = Order.all
+	puts "Begin: Setting Pending Date Array from Pending Date for #{orders.count} Orders"
+	updated_count = 0
+	orders.each do |o|
+		next if o.pending_date.blank? || !o.pending_date_array.blank?
+		o.push(pending_date_array: o.pending_date)
+		updated_count +=1
+	end
+	puts "Completed: Setting Pending Date Array from Pending Date. Updated #{updated_count} Orders"
+	c_orders = Order.current
+	puts "Setting initial comments for #{c_orders.count} Open Orders"
+	c_orders.each do |o|
+		next if o.comments.present?
+		o.comments.build(text: nil, author: o.orderer.class.to_s.downcase, order_status: "open")
+		o.save
+	end
+	s_orders = Order.submitted
+	puts "Setting initial comments for #{s_orders.count} Submitted Orders"
+	s_orders.each do |o|
+		next if o.comments.present?
+		o.comments.build(text: nil, author: o.orderer.class.to_s.downcase, order_status: "open")
+		o.comments.build(text: nil, author: "brand", order_status: "submitted")
+		o.save
+	end
+	p_orders = Order.pending
+	puts "Setting initial comments for #{p_orders.count} Pending Orders"
+	p_orders.each do |o|
+		next if o.comments.present?
+		o.comments.build(text: nil, author: o.orderer.class.to_s.downcase, order_status: "open")
+		o.comments.build(text: nil, author: "brand", order_status: "submitted")
+		o.save
+	end
+end
+
