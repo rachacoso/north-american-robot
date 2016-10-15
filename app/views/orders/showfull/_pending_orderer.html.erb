@@ -20,6 +20,14 @@
 						<h1>Next Steps:</h1>
 						<h1><span class="step" data-step="1"></span> Review Order</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
+
+						<% if order.comments.submitted.last.text.present? %>
+						<div class="panel message">
+							<h3><%= order.brand_company_name %> responded to your request: </h3>
+							<h3><strong><%= simple_format(order.comments.submitted.last.text, {}, wrapper_tag: "div") %></strong></h3>
+						</div>
+						<% end %>
+
 						<div class="panel">
 							<%= render "shared/orders/show" %>		
 						</div>

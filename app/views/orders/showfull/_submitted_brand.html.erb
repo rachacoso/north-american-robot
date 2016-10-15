@@ -35,8 +35,18 @@
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
 
+						<% if order.comments.declined.present? %>
 						<br>
-						<h1><span class="step" data-step="1"></span> Add Reference Number (Optional)</h1>
+						<h1><span class="step" data-step="1"></span> Review Requested Changes</h1>
+						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
+						<div class="panel">
+							<h3><%= order.orderer_company_name %> requested the following changes: </h3>
+							<h3><strong><%= simple_format(order.comments.declined.last.text, {}, wrapper_tag: "div") %></strong></h3>
+						</div>
+						<% end %>
+
+						<br>
+						<h1><span class="step" <%= order.comments.declined.present? ? "data-step=2" : "data-step=1"  %> ></span> Add Reference Number (Optional)</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 						<div class="panel">
 							<h3>Add a reference number to help you track this order in your system.</h3>
@@ -46,7 +56,7 @@
 						</div><!--.panel text-center-->
 
 						<br>
-						<h2><span class="step" data-step="2"></span> Change Order Discount Rate (Optional)</h2>
+						<h2><span class="step" <%= order.comments.declined.present? ? "data-step=3" : "data-step=2" %> ></span> Change Order Discount Rate (Optional)</h2>
 						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 						<div class="row">
 							<div class="small-12 columns">
@@ -85,7 +95,7 @@
 
 
 						<br>
-						<h2><span class="step" data-step="3"></span> Add Additional Charges (Optional)</h2>
+						<h2><span class="step" <%= order.comments.declined.present? ? "data-step=4" : "data-step=3" %> ></span> Add Additional Charges (Optional)</h2>
 						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 						<div class="row">
 							<div class="small-12 columns">
@@ -126,7 +136,7 @@
 
 					
 						<br>
-						<h1><span class="step" data-step="4"></span> Add Comments (Optional)</h1>
+						<h1><span class="step" <%= order.comments.declined.present? ? "data-step=5" : "data-step=4" %> ></span> Add Comments (Optional)</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 						<div class="panel text-center">
 							<div id="add-comments">
@@ -148,7 +158,7 @@
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
 						<br>
-						<h1><span class="step" data-step="5"></span> Review Order</h1>
+						<h1><span class="step" <%= order.comments.declined.present? ? "data-step=6" : "data-step=5" %> ></span> Review Order</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 						<div class="panel">
 							<h3>You can edit order Items by clicking on item name or quantity</h3>							
@@ -162,7 +172,7 @@
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
 						<br>
-						<h1><span class="step" data-step="6"></span> Send <%= order.orderer.company_name %> the Updated Order</h1>
+						<h1><span class="step" <%= order.comments.declined.present? ? "data-step=7" : "data-step=6" %> ></span> Send <%= order.orderer.company_name %> the Updated Order</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 						<div class="panel text-center">
 							<%= link_to "Submit Updated Order to #{order.orderer.company_name}", pending_order_url(order,0), class: "landing-button", remote: true %>
