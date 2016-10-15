@@ -259,13 +259,40 @@ module OrdersHelper
 	def net_terms_payment_estimate(order:)
 		case order.payment_terms
 		when "Net 30"
-			payment = "35"
+			payment = "30"
+			receipt = "35"
 		when "Net 45"
-			payment = "50"
+			payment = "45"
+			receipt = "50"
 		when "Net 60"
-			payment = "65"
+			payment = "60"
+			receipt = "65"
 		end
-		return payment
+		return {receipt: receipt, payment: payment} 
+	end
+
+	def display_order_response(order:)
+		case order.status
+		when "submitted"
+			unless order.comments.declined.present?
+				text = order.comments.open.first.text
+				preface = "#{order.brand_company_name} sent a comment with the order:"
+			end
+		when "pending"
+			text = order.comments.submitted.last.text
+			if order.comments.declined.present?
+				preface = "#{order.orderer_company_name} has responded to your request:"
+			else
+				preface = "#{order.orderer_company_name} sent a comment with the order:"
+			end
+		end
+
+		if text.present?
+			return { preface: preface, text: text }
+		else
+			return false
+		end
+
 	end
 
 end

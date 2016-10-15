@@ -19,22 +19,49 @@
 					<div class="medium-11 medium-centered columns">
 						<a name="form"></a>
 						<br>
+						<% if order.armor_enabled? %>
 						<h1>Next Step: Await Review and Payment Release</h1>
+						<% else %>
+						<h1>Next Step: Await Payment</h1>
+						<% end %>
+						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
+						<% if order.armor_enabled? %>
+						<div class="info">
+							<h3><%= order.orderer.company_name %> will review the shipment before release of payment. You will be notified via email when payment has been released!</h3>
+						</div>
+						<% end %>
+					</div><!--/.medium-11 medium-centered-->
+				</div><!--/.row-->
+
+				<% unless @order.armor_enabled? %>
+				<div class="row">
+					<div class="medium-11 medium-centered columns">
+						<br>
+						<h1><span class="step" data-step="1"></span> Await Payment</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 						<div class="panel">
-
-							<% if order.armor_enabled? %>
-								<h3><%= order.orderer.company_name %> will review the shipment before release of payment.<br><br> You will be notified via email when payment is released.</h3>
-							<% else %>
-								<h3><%= order.orderer.company_name %> will review the shipment before release of payment.<br><br> You will be notified via email when payment is released.<br><br> When you have received payment and any outstanding issues resolved, please return here to mark the order as 'Paid &amp; Completed'</h3>
-								<% unless @order.armor_enabled? %>
-									<%= link_to "ORDER is 'PAID &amp; COMPLETED'".html_safe, armor_disabled_completed_order_url(@order,0), class: "landing-button", remote: true %>
-								<% end %>
-							<% end %>
-
+							<h3>According to <%= order.orderer_company_name %>'s Payment Terms (<%= order.payment_terms %>), you should receive payment by:</h3> 		
+							<h2><%= (order.delivered_date + net_terms_payment_estimate(order: order)[:receipt].to_i ).strftime("%d %b %Y") %> <br><small><%= net_terms_payment_estimate(order: order)[:payment] %> days after delivery on <%= (order.delivered_date ).strftime("%d %b %Y") %> (plus 5 days processing time)</small></h2>
 						</div>
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->
+
+				<div class="row">
+					<div class="medium-11 medium-centered columns">
+						<br>
+						<h1><span class="step" data-step="2"></span> Mark Order as Complete!</h1>
+						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
+						<div class="info">
+							<h3>When you have received payment and any outstanding issues resolved, please return here to mark the order as 'Paid &amp; Completed'</h3>
+						</div>
+						<div class="panel text-center">
+															
+							<%= link_to "Hooray! Order is 'Paid &amp; Complete'!".html_safe, armor_disabled_completed_order_url(@order,0), class: "landing-button", remote: true %>
+								
+						</div>
+					</div><!--/.medium-11 medium-centered-->
+				</div><!--/.row-->
+				<% end %>
 
 				<div class="row">
 					<div class="medium-11 medium-centered columns">

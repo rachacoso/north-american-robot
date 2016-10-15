@@ -1,14 +1,12 @@
 <%= form_for order, remote: true, authenticity_token: true do |f| %>
 <div class="row">
-	<div class="medium-7 medium-centered columns">
-		<div class="small-12 columns">
-			<% if @current_user.brand %>
-				<%= f.text_field :brand_order_reference_id, label: "Reference ID (e.g. PO Number, Reference Number)", class: "auto-form-text" %>
-			<% else %>
-				<%= f.text_field :orderer_order_reference_id, label: "Reference ID (e.g. PO Number, Reference Number)", class: "auto-form-text" %>
-			<% end %>
-		</div>
-	</div><!--/.medium-6-->
+	<div class="medium-5 columns">
+		<% if @current_user.brand %>
+			<%= f.text_field :brand_order_reference_id, label: "Reference ID (e.g. PO Number, Reference Number)", class: "auto-form-text" %>
+		<% else %>
+			<%= f.text_field :orderer_order_reference_id, label: "Reference ID (e.g. PO Number, Reference Number)", class: "auto-form-text" %>
+		<% end %>
+	</div>
 </div><!--/.row-->
 <%#= f.submit "Update Shipping Address", class: "landing-button" %>
 <% end %>

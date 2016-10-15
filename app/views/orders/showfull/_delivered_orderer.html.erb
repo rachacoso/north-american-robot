@@ -37,10 +37,24 @@
 						<br>
 						<h1>Next Step: Send Payment</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
-						<div class="panel">
-							<h3> Please send payment. <br><br>Contact <a href="mailto:info@landingintl.com">info@landingintl.com</a> for information on how to process your payment.</h3>
+						<div class="info">
+							<h3> Thanks for your order! </h3>
 						</div>
 					<% end %>
+					</div><!--/.medium-11 medium-centered-->
+				</div><!--/.row-->
+
+				<div class="row">
+					<div class="medium-11 medium-centered columns">
+						<br>
+						<h1><span class="step" data-step="1"></span> Send Payment</h1>
+						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
+						<div class="panel">
+							<h3>According to your Payment Terms (<%= order.payment_terms %>), please send payment by:</h3> 		
+							<h2><%= (order.delivered_date + net_terms_payment_estimate(order: order)[:payment].to_i ).strftime("%d %b %Y") %> <br><small><%= net_terms_payment_estimate(order: order)[:payment] %> days after delivery on <%= (order.delivered_date ).strftime("%d %b %Y") %></small></h2>
+							<h3>Contact <a href="mailto:info@landingintl.com">info@landingintl.com</a> for information on how to process your payment.</h3>
+
+						</div>
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->
 

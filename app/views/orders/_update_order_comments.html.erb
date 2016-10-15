@@ -2,7 +2,7 @@
 <div class="row">
 	<div class="medium-11 medium-centered columns">
 	<%= hidden_field_tag "comment_id", comment.id %>
-	<%= f.text_area :text, rows: 15, label: "<small>Comments</small>".html_safe, class: "auto-form-text" %>
+	<%= f.text_area :text, rows: 15, label: "Comments".html_safe, class: "auto-form-text" %>
 	<%#= f.submit "Update Comment", class: "landing-button" %>
 	<div class="inline-error" id="comment-error"></div>
 	</div><!--/.medium-6-->

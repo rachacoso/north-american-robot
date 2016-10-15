@@ -71,6 +71,12 @@ table.order {
 .full-order-container {
 	h1 {
 		font-weight: 400;
+		color: $landing-pink;
+	}
+	h2 {
+		font-weight: 400;
+		color: $landing-dark-gray;
+		margin: rem-calc(20) 0;
 	}
 	.panel.outer, .panel.order-alert {
 		border: none;
@@ -79,13 +85,46 @@ table.order {
 		}
 	}
 	.panel > h3 {
-		font-weight: 700;
+		font-weight: 600;
+		color: $landing-dark-gray;
+	}
+	.panel.message {
+		background-color: $landing-cream;
+		h3:first-of-type {
+			color: $landing-dark-gray;
+			font-weight: 700;
+		}
+		h3:nth-of-type(2) {
+			color: $landing-dark-gray;
+			font-weight: 300;
+			padding: rem-calc(10);
+			width: 100%;
+			background-color: white;
+		}
+	}
+	.info {
+		// background-color: $landing-light-gray;
+		padding: rem-calc(5) 0 rem-calc(20) 0;
+		:first-child {
+			margin: 0;
+		}
+		h2,h3 {
+			line-height: 1em;
+		}
+		h3 {
+			font-weight: 700;
+		}
 	}
 	#order-panel-top {
 		background-color: $landing-light-gray;
 		h2 { 
 			margin: 0;
 			line-height: 1em;
+		}
+		h1 {
+			color: $landing-dark-gray;
+			font-weight: 800;
+			// font-family: Century Gothic, sans-serif;
 		}
 		border: 1px dotted $landing-middle-gray;
 		padding: rem-calc(4) rem-calc(10) rem-calc(10) rem-calc(10);
@@ -376,6 +415,3 @@ table.date-control {
 	}
 }
 
-.panel.message {
-	background-color: $landing-cream;
-}
