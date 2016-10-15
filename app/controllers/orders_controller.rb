@@ -249,7 +249,7 @@ class OrdersController < ApplicationController
 				@armor_shippers_list = @order.api_get_shippers
 				render :show
 			else
-				sleep(5) #pause to allow update of status from webhook
+				sleep(5) if @order.armor_enabled? #pause to allow update of status from webhook
 				redirect_to order_url(@order)
 			end
 
