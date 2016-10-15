@@ -19,8 +19,9 @@
 
 						<br>
 						<h1>What's next?</h1>
-						<h1><span class="step" data-step="1"></span> Confirm Shipping Address</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
+
+						<h1><span class="step" data-step="1"></span> Confirm Shipping Address</h1>
 						<div class="panel text-center">
 							<%= render partial: "shipping_address_form", locals: {order: order} %>
 						</div><!--.panel text-center-->
@@ -28,7 +29,6 @@
 
 						<br>
 						<h1><span class="step" data-step="2"></span> Add Milestone Dates (Optional)</h1>
-						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 						<div class="panel text-center">
 							<div id="ship-cancel-add">
 								<%= render partial: "ship_cancel_add", locals: {order: order} %>
@@ -37,10 +37,9 @@
 
 						<br>
 						<h1><span class="step" data-step="3"></span> Add Reference Number (Optional)</h1>
-						<div class="panel">
+						<div class="info">
 							<h3>Add a reference number to help you track this order in your system.</h3>
 						</div>
-						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 						<div class="panel text-center">
 							<%= render partial: "add_reference_id", locals: {order: order} %>
 						</div><!--.panel text-center-->
@@ -48,7 +47,9 @@
 
 						<br>
 						<h1><span class="step" data-step="4"></span> Add Comments (Optional)</h1>
-						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
+						<div class="info">
+							<h3>Add comments to the order.</h3>
+						</div>
 						<div class="panel text-center">
 							<div id="add-comments">
 								<%= render partial: "add_comments", locals: {order: order} %>
@@ -57,8 +58,9 @@
 
 						<br>
 						<h1><span class="step" data-step="5"></span> Confirm Order Details</h1>
-						<h3>Click on any order item to edit. <br>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
-
+						<div class="info">
+							<h3>Click on any order item to edit. </h3>
+						</div>
 						<div class="panel" id="order-display">
 							<%= render "shared/orders/show" %>
 						</div>

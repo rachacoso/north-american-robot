@@ -21,8 +21,7 @@
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
 						<br>
-						<h1>Order complete on <%= order.completed_date.strftime("%d-%b-%Y") %></h1>
-						<h2>Thank you!</h2>
+						<h1>Thank You! Order complete on <%= order.completed_date.strftime("%d %b %Y") %></h1>
 						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 						<div class="panel">
 							<%= render "shared/orders/show" %>		

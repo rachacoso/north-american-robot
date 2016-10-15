@@ -38,7 +38,6 @@
 					<div class="medium-11 medium-centered columns">
 						<br>
 						<h1><span class="step" data-step="1"></span> Await Payment</h1>
-						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 						<div class="info">
 							<h3>According to <%= order.orderer_company_name %>'s Payment Terms (<%= order.payment_terms %>), you should receive payment by</h3>
 						</div>
@@ -58,7 +57,6 @@
 					<div class="medium-11 medium-centered columns">
 						<br>
 						<h1><span class="step" data-step="2"></span> Mark Order as Complete!</h1>
-						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 						<div class="info">
 							<h3>When you have received payment and any outstanding issues resolved, please return here to mark the order as 'Paid &amp; Completed'</h3>
 						</div>
@@ -75,7 +73,6 @@
 					<div class="medium-11 medium-centered columns">
 						<br>
 						<h1>Order</h1>
-						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 						<div class="panel">
 							<%= render "shared/orders/show" %>		
 						</div>

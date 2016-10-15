@@ -17,10 +17,11 @@
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
 						<br>
-						<h1>Next Steps:</h1>
-						<h1><span class="step" data-step="1"></span> Review Order</h1>
+						<h1><%= order.brand_company_name %> has sent this order for your final approval. <br>Next Steps:</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 
+						<br>
+						<h1><span class="step" data-step="1"></span> Review Order</h1>
 						<% if comment = display_order_response(order: order) %>
 						<div class="panel message">
 							<h3><%= comment[:preface] %></h3>
@@ -38,7 +39,6 @@
 					<div class="medium-11 medium-centered columns">
 						<br>
 						<h1><span class="step" data-step="2"></span> Approve the Final Order Costs</h1>
-						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 						<div class="panel text-center">
 						<%= link_to "Approve this Order", approve_order_url(order,0), class: "landing-button", remote: true %> or 
 						<%= link_to "Request Changes to this Order", decline_approval_order_url(order,0), class: "landing-button", remote: true %>

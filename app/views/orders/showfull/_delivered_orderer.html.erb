@@ -37,9 +37,6 @@
 						<br>
 						<h1>Next Step: Send Payment</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
-						<div class="info">
-							<h3> Thanks for your order! </h3>
-						</div>
 					<% end %>
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->
@@ -48,7 +45,6 @@
 					<div class="medium-11 medium-centered columns">
 						<br>
 						<h1><span class="step" data-step="1"></span> Send Payment</h1>
-						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 						<div class="info">
 							<h3>According to your Payment Terms (<%= order.payment_terms %>), please send payment of</h3>
 						</div>
@@ -69,7 +65,6 @@
 					<div class="medium-11 medium-centered columns">
 						<br>
 						<h1>Order</h1>
-						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 						<div class="panel">
 							<%= render "shared/orders/show" %>		
 						</div>

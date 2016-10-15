@@ -429,3 +429,17 @@ table.date-control {
 	}
 }
 
+ul.address-display {
+		list-style-type: none;
+		margin-left: 0;
+		font-size: rem-calc(15);
+		margin-left: 0;
+		margin-top: rem-calc(5);
+		font-weight: 500;
+		li {
+			line-height: 1.25em;
+			#title {
+				font-size: 140%;
+			}
+		}
+}

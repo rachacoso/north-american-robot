@@ -18,11 +18,11 @@
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
 						<br>
-						<h1>Next Step: Wait for approval and final payment from <%= order.orderer.company_name %></h1>
-						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
+						<h1>What's Next? <br>Wait for approval and final payment from <%= order.orderer.company_name %></h1>
 						<div class="info">
 							<h3>You will receive an email when <%= order.orderer.company_name %> has approved the final order costs.</h3>
 						</div>
+						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->
 
@@ -30,7 +30,6 @@
 					<div class="medium-11 medium-centered columns">
 						<br>
 						<h1>Order</h1>
-						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 						<div class="panel">
 							<%= render "shared/orders/show" %>		
 						</div>

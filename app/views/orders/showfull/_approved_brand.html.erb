@@ -25,22 +25,44 @@
 						<br>
 						<% if order.armor_enabled? %>
 							<h1>Next Step: Wait for payment from <%= order.orderer.company_name %></h1>
-							<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
-							<div class="panel">
+							<div class="info">
 								<h3><%= order.orderer.company_name %> has approved the final order costs and will place payment into escrow via Armor Payments.<br> You will receive notice via email when payment has been received.</h3>
 							</div>
+							<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 						<% else %>
 							<h1>Next Step: Ship the Order and Enter Shipment Tracking Information</h1>
 							<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
+							
+							<br>
+							<h1><span class="step" data-step="1"></span> Ship the order!</h1>
+							<div class="panel">
+
+								<div style="display: inline-block; vertical-align: top;">
+									<h3>Shipping Address</h3>
+									<ul class="address-display">
+									<%= display_shipping_address(order: order) %>
+									</ul>
+								</div>
+
+								<div style="display: inline-block; vertical-align: top; margin-left: 20px;">
+									<h3>Contact</h3>
+									<ul class="address-display">
+										<li>
+										<%= order.user.contact.firstname if order.user.contact.firstname.present? %> <%= order.user.contact.lastname if order.user.contact.lastname.present? %>
+										<br>
+										<%= order.user.contact.phone.present? ? "#{order.user.contact.phone.phony_formatted(format: :international , spaces: '-')}".html_safe : "<br>Phone n/a".html_safe %>
+										</li>
+									</ul>
+								</div>
+
+							</div>
+							
+							<br>
+							<h1><span class="step" data-step="2"></span> Enter Shipment Tracking Info</h1>
 							<div class="panel">
 
 								<div class="row">
-									<div class="small-12 columns medium-centered text-center">
-										<h2>Please ship the order and then enter shipment tracking info below.</h2>
-									</div>
-								</div>
-								<div class="row">
-									<div class="medium-6 columns medium-centered">
+									<div class="medium-8 columns">
 										<%= "<span class='error'>#{flash[:error]}</span>".html_safe if flash[:error] %>
 									</div><!--/.medium-6 -->
 								</div><!--/.row -->
@@ -52,43 +74,52 @@
 								<% end %>
 								<%= form_tag order_shipment_info_url(order) + "#form" , method: "post" do %>
 								<div class="row">
-									<div class="medium-6 columns medium-centered">
-										<h2><span class="step" data-step="1"></span> Enter Shipping Company</h2><h3>Type in the shipping company name to search for it below.</h3>
+									<div class="medium-8 columns">
+										<h2>Enter Shipping Company</h2>
 									</div><!--/.medium-6-->
 								</div><!--/.row-->
 								<div class="row">
-									<div class="medium-6 columns medium-centered">
+									<div class="medium-8 columns">
 									<label for="shipper_name">Shipping Company:</label>
 									<input type="text" name="shipper_name" id="shipper_name" class="shippers-autocomplete" required>
 									<input type="hidden" name="shipper_id" id="shipper_id" required>
+									<h3>Type in the shipping company name to search for it.</h3>
 									<h3>If your shipper is not listed, please type in 'Other' and select an appropriate 'Other' category.</h3>
 									<label for="armor_other_shipper" class="other-shippers" style="display: none;">Enter Other Shipping Company Name</label>
 									<input type="text" name="armor_other_shipper" id="armor_other_shipper" class="other-shippers" style="display: none;">	
 									</div><!--/.medium-6-->
 								</div><!--/.row-->
 								<div class="row">
-									<div class="medium-6 columns medium-centered">
-										<h2><span class="step" data-step="2"></span> Enter Tracking Information</h2>
+									<div class="medium-8 columns">
+										<h2>Enter Tracking Information</h2>
 									</div><!--/.medium-6-->
 								</div><!--/.row-->
 								<div class="row">
-									<div class="medium-6 columns medium-centered">
+									<div class="medium-8 columns">
 										<label for="armor_shipment_tracking_number">Tracking Number</label>
 										<input type="text" name="armor_shipment_tracking_number" id="armor_shipment_tracking_number" required>
 									</div><!--/.medium-6-->
 								</div><!--/.row-->
 								<div class="row">
-									<div class="medium-6 columns medium-centered">
+									<div class="medium-8 columns">
 										<label for="armor_shipment_description">Shipment Description<br> (e.g. Shipped via UPS ground in a protective box.)</label>
 										<input type="text" name="armor_shipment_description" id="armor_shipment_description" required>
 									</div><!--/.medium-6-->
 								</div><!--/.row-->
-								<div class="row">
-									<div class="medium-6 columns medium-centered text-center">
-									<%= submit_tag "Submit Order Shipment Tracking Information", class: "landing-button" %>
-									</div><!--/.medium-6-->
-								</div><!--/.row-->
-								<% end %>							
+								</div>
+
+
+								<br>
+								<h1><span class="step" data-step="3"></span> Submit Shipment Tracking Info</h1>
+								<div class="panel">
+									<div class="row">
+										<div class="small-11 columns small-centered text-center">
+										<%= submit_tag "Submit Order Shipment Tracking Information", class: "landing-button" %>
+										</div><!--/.small-11-->
+									</div><!--/.row-->
+								</div>
+								<% end %>
+
 								<% content_for :javascript_foot do %>
 									<%= javascript_tag do %>
 										$( document ).ready(function() {
@@ -98,16 +129,19 @@
 										});
 									<% end %>
 								<% end %>
+
 							<% else %>
+
 								<h4>Sorry, there was an error. Please reload the page</h4>
 								<% if order.errors.any? %>
 									<% order.errors.full_messages.each do |m| %>
 										<%= m %><br>
 									<% end %>
 								<% end %>
+
 							<% end %>
 
-							</div>
+							
 						<% end %>
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->
@@ -116,7 +150,6 @@
 					<div class="medium-11 medium-centered columns">
 						<br>
 						<h1>Order</h1>
-						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 						<div class="panel">
 							<%= render "shared/orders/show" %>		
 						</div>

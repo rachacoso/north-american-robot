@@ -1,5 +1,4 @@
 <h1 <%= !order.meets_minimum? ? "style=text-decoration:line-through;" : "" %>><span class="step" data-step="6"></span> Submit Order to <%= order.brand.company_name %></h1>
-<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
 <div class="panel text-center">
 	<% unless order.meets_minimum? %>
 	<h3 style="color: red;">Your cart is currently under the minimum order threshold. <br>Please add more items to your order!</h3>
