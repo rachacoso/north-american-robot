@@ -49,9 +49,16 @@
 						<br>
 						<h1><span class="step" data-step="1"></span> Send Payment</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
+						<div class="info">
+							<h3>According to your Payment Terms (<%= order.payment_terms %>), please send payment of</h3>
+						</div>
 						<div class="panel">
-							<h3>According to your Payment Terms (<%= order.payment_terms %>), please send payment by:</h3> 		
+							
+							<div class="payment-display">
+							<h2><%= number_to_currency(order.total_price) %></h2>
+							<h2><small>by</small></h2>
 							<h2><%= (order.delivered_date + net_terms_payment_estimate(order: order)[:payment].to_i ).strftime("%d %b %Y") %> <br><small><%= net_terms_payment_estimate(order: order)[:payment] %> days after delivery on <%= (order.delivered_date ).strftime("%d %b %Y") %></small></h2>
+							</div>
 							<h3>Contact <a href="mailto:info@landingintl.com">info@landingintl.com</a> for information on how to process your payment.</h3>
 
 						</div>
