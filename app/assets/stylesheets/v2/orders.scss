@@ -161,6 +161,7 @@ ul.order-flow-header, ul.order-index-filters {
 	&[data-steps="3"] li { width: 33%; }
 	&[data-steps="4"] li { width: 25%; }
 	&[data-steps="5"] li { width: 20%; }
+	&[data-steps="7"] li { width: 14.2%; }
 	&[data-steps="8"] li { width: 12.5%; }
 
 	li {
@@ -204,7 +205,8 @@ ul.order-flow-header, ul.order-index-filters {
 		}
 		&.done, &.done > span {
 			color: white;
-			font-weight: 600;
+			font-weight: 400;
+			// font-size: 80%;
 			background-color: $landing-blue;
 		}
 		&.done + li > span:before {
