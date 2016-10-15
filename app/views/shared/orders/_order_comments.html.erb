@@ -73,6 +73,16 @@
 					<% if order.shipped_date.present? %>
 					<li>
 						<span id='title'>SHIPPED by <%= order.brand_company_name %></span> <%= order.shipped_date.in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M %Z") %>
+						<div class="order-comment-display">
+							<div id="comment-title">
+								shipment info
+							</div>
+							<div id="comment-body">
+								<h4>Carrier: <strong><%= order.armor_shipment_carrier_name %></strong></h4>
+								<h4>Tracking ID: <strong><%= order.armor_shipment_tracking_number %></strong></h4>
+								<%= "<h4>Description: <strong>#{order.armor_shipment_description}</strong> </h4>".html_safe if order.armor_shipment_description.present? %>
+							</div>
+						</div>
 					</li>
 					<% end %>
 

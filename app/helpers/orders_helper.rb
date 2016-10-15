@@ -256,4 +256,16 @@ module OrdersHelper
 		return ship_date
 	end
 
+	def net_terms_payment_estimate(order:)
+		case order.payment_terms
+		when "Net 30"
+			payment = "35"
+		when "Net 45"
+			payment = "50"
+		when "Net 60"
+			payment = "65"
+		end
+		return payment
+	end
+
 end
