@@ -40,13 +40,13 @@
 						<h1><span class="step" data-step="1"></span> Await Payment</h1>
 						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
 						<div class="info">
-							<h3>According to <%= order.orderer_company_name %>'s Payment Terms (<%= order.payment_terms %>), you should receive payment of</h3>
+							<h3>According to <%= order.orderer_company_name %>'s Payment Terms (<%= order.payment_terms %>), you should receive payment by</h3>
 						</div>
 						<div class="panel">
 							
 							<div class="payment-display">
-							<h2><%= number_to_currency(order.total_price) %></h2>
-							<h2><small>by</small></h2>
+							<h2><%#= number_to_currency(order.total_price) %></h2>
+							<h2><small><%# by %></small></h2>
 							<h2><%= (order.delivered_date + net_terms_payment_estimate(order: order)[:receipt].to_i ).strftime("%d %b %Y") %> <br><small><%= net_terms_payment_estimate(order: order)[:payment] %> days after delivery on <%= (order.delivered_date ).strftime("%d %b %Y") %> <br>(plus 5 days processing time)</small></h2>
 							</div>
 							
