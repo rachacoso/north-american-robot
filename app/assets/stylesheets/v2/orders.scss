@@ -69,11 +69,17 @@ table.order {
 }
 
 .full-order-container {
+	h1 {
+		font-weight: 400;
+	}
 	.panel.outer, .panel.order-alert {
 		border: none;
 		.panel {
 			border: 1px solid $landing-middle-gray;
 		}
+	}
+	.panel > h3 {
+		font-weight: 700;
 	}
 	#order-panel-top {
 		background-color: $landing-light-gray;
