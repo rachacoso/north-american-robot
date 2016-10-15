@@ -227,14 +227,6 @@ module LandingCompany
 				self.retailer_edi = self.orderer.retailer_edi
 			end
 
-			def meets_minimum?
-				if self.brand.order_minimum.present?
-					return self.subtotal_price * 100 >= self.brand.order_minimum ?  true : false
-				else
-					return true
-				end
-			end
-
 		end
 
 		module BuyerValidation

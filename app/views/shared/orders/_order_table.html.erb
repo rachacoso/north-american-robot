@@ -24,9 +24,27 @@
 				</tr>
 				<% end %>
 				<tr class="subtotal">
-					<td colspan="6" class="text-right">Subtotal <small>(before taxes/fees/shipping)</small></td>
+					<td colspan="6" class="text-right">Item Subtotal</td>
 					<td class="text-right"><%= number_to_currency(order.subtotal_price) %></td>
 				</tr>
+				<% if order.markeing_co_op_discount > 0 %>
+				<tr class="discount">
+					<td colspan="6" class="text-right">Marketing Co-Op <small>(<%= order.marketing_co_op %> %)</small></td>
+					<td class="text-right">(<%= number_to_currency(order.markeing_co_op_discount) %>)</td>
+				</tr>
+				<% end %>
+				<% if order.damages_budget_discount > 0 %>
+				<tr class="discount">
+					<td colspan="6" class="text-right">Damages Budget <small>(<%= order.damages_budget %> %)</small></td>
+					<td class="text-right">(<%= number_to_currency(order.damages_budget_discount) %>)</td>
+				</tr>
+				<% end %>
+				<% if order.damages_budget_discount > 0 || order.markeing_co_op_discount > 0 %>
+				<tr class="subtotal">
+					<td colspan="6" class="text-right">Final Item Subtotal</td>
+					<td class="text-right"><%= number_to_currency(order.subtotal_price_less_discounts) %></td>
+				</tr>
+				<% end %>
 
 				<tr class="<%= order.status == 'open' ? 'inactive' : '' %>"><th colspan="7"> Additional Charges (e.g. shipping) </th></tr>
 				<tr class="<%= order.status == 'open' ? 'inactive' : '' %>">

@@ -93,8 +93,36 @@ class Order # for V2 ordering
     return amount.to_f / 100
   end
 
+  def markeing_co_op_discount
+    if self.damages_budget
+      return self.subtotal_price * ((self.damages_budget.to_d/100))
+    else
+      return 0
+    end
+  end
+
+  def damages_budget_discount
+    if self.marketing_co_op
+      return self.subtotal_price * ((self.marketing_co_op.to_d/100))
+    else 
+      return 0
+    end
+  end
+
+  def subtotal_price_less_discounts
+    return self.subtotal_price - self.markeing_co_op_discount - self.damages_budget_discount
+  end
+
   def total_price
-    return self.charges_subtotal_price + self.subtotal_price
+    return self.charges_subtotal_price + self.subtotal_price_less_discounts
+  end
+
+  def meets_minimum?
+    if self.brand.order_minimum.present?
+      return self.subtotal_price * 100 >= self.brand.order_minimum ?  true : false
+    else
+      return true
+    end
   end
 
   def self.create_new(user:, brand:)
