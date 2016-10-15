@@ -20,6 +20,7 @@ class Order # for V2 ordering
   accepts_nested_attributes_for :order_items, :order_additional_charges, :shipping_address, :comments
 
   field :status, type: String, default: "open" # Values: OPEN, SUBMITTED, PENDING, APPROVED, PAID, SHIPPED, DELIVERED, COMPLETED, DISPUTED, ERROR
+  field :post_delivery_status, type: String, default: "warehouse" # Values: WAREHOUSE, SENT, RECEIVED, AWAITING, PAID
   field :status_error_message, type: String
   field :landing_order_reference_id, type: String
   field :orderer_company_name, type: String

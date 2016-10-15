@@ -1,0 +1,9 @@
+<div class="sshow-for-large-up">
+<ul class="order-flow-header" id="post-delivery" data-steps="5">
+	<li class="<%= post_delivery_chart(status: order.post_delivery_status, step: "warehouse") %>"><span>at U.S. Warehouse</span><i></i></li>
+	<li class="<%= post_delivery_chart(status: order.post_delivery_status, step: "sent") %>"><span>Sent to Retailer</span><i></i></li>
+	<li class="<%= post_delivery_chart(status: order.post_delivery_status, step: "received") %>"><span>Received by Retailer</span><i></i></li>
+	<li class="<%= post_delivery_chart(status: order.post_delivery_status, step: "awaiting") %>"><span>Awaiting Payment</span><i></i></li>
+	<li class="<%= post_delivery_chart(status: order.post_delivery_status, step: "paid") %>"><span>Paid by Retailer</span><i></i></li>
+</ul>
+</div>

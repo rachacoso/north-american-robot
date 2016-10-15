@@ -45,6 +45,8 @@
 					<div class="medium-11 medium-centered columns">
 						<br>
 						<h1><span class="step" data-step="1"></span> Send Payment</h1>
+
+						<% if order.accepts_overseas_shipment %>
 						<div class="info">
 							<h3>According to your Payment Terms (<%= order.payment_terms %>), please send payment of</h3>
 						</div>
@@ -53,11 +55,68 @@
 							<div class="payment-display">
 							<h2><%= number_to_currency(order.total_price) %></h2>
 							<h2><small>by</small></h2>
-							<h2><%= (order.delivered_date + net_terms_payment_estimate(order: order)[:payment].to_i ).strftime("%d %b %Y") %> <br><small><%= net_terms_payment_estimate(order: order)[:payment] %> days after delivery on <%= (order.delivered_date ).strftime("%d %b %Y") %></small></h2>
+							<h2>
+								<%= (order.delivered_date + net_terms_payment_estimate(order: order)[:payment].to_i ).strftime("%d %b %Y") %> <br><small><%= net_terms_payment_estimate(order: order)[:payment] %> days after delivery on <%= (order.delivered_date ).strftime("%d %b %Y") %></small>
+							</h2>
 							</div>
 							<h3>Contact <a href="mailto:info@landingintl.com">info@landingintl.com</a> for information on how to process your payment.</h3>
 
 						</div>
+						
+						<% else %>
+
+
+						<div class="info">
+							<h3>According to your Payment Terms (<%= order.payment_terms %>), please send payment of</h3>
+						</div>
+						<div class="panel">
+							
+							<div class="payment-display">
+							<h2><%= number_to_currency(order.total_price) %></h2>
+							<h2><small>by</small></h2>
+							<h2>
+								<% if order.cancel_date.present? %>
+								<%= estimated_payment_date(order: order) %>
+								<br><small><%= net_terms_payment_estimate(order: order)[:payment] %> days after Cancel Date of <%= (order.cancel_date ).strftime("%d %b %Y") %></small>
+								<% else %>
+								<%= net_terms_payment_estimate(order: order)[:payment] %> days after Cancel Date
+								<% end %>
+							</h2>
+							</div>
+							<h3>Contact <a href="mailto:info@landingintl.com">info@landingintl.com</a> for information on how to process your payment.</h3>
+
+						</div>
+						<br>
+						<div class="info">
+							<h3>Let everyone know where the goods are!  <br>Keep everyone in the loop by updating the current status of the goods below:</h3>
+						</div>
+						<div class="panel">
+
+							<%= form_for order, remote: true, authenticity_token: true do |f| %>
+							<div class="row">
+								<div class="small-12 columns">
+
+							<%= radio_button_tag("order[post_delivery_status]", "warehouse", order.post_delivery_status == 'warehouse' || !order.post_delivery_status, class: "auto-form" ) %>
+							<%= label_tag("order[post_delivery_status]_warehouse", "At U.S. Warehouse") %>
+							<%= radio_button_tag("order[post_delivery_status]", "sent", order.post_delivery_status == 'sent', class: "auto-form" ) %>
+							<%= label_tag("order[post_delivery_status]_sent", "Sent to Retailer") %>
+							<%= radio_button_tag("order[post_delivery_status]", "received", order.post_delivery_status == 'received', class: "auto-form" ) %>
+							<%= label_tag("order[post_delivery_status]_received", "Received by Retailer") %>
+							<%= radio_button_tag("order[post_delivery_status]", "awaiting", order.post_delivery_status == 'awaiting', class: "auto-form" ) %>
+							<%= label_tag("order[post_delivery_status]_awaiting", "Awaiting Payment") %>
+							<%= radio_button_tag("order[post_delivery_status]", "paid", order.post_delivery_status == 'paid', class: "auto-form" ) %>
+							<%= label_tag("order[post_delivery_status]_paid", "Paid by Retailer") %>
+
+								</div>
+							</div><!--/.row-->
+							<%#= f.submit "Update Shipping Address", class: "landing-button" %>
+							<% end %>
+							
+						</div>
+
+						<% end %>
+
+
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->
 

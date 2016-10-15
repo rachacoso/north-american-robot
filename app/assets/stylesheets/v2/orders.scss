@@ -266,6 +266,9 @@ ul.order-flow-header, ul.order-index-filters {
 			}
 		}
 	}
+	&#post-delivery { 
+		li {white-space: nowrap; }
+	}
 }
 
 table#order-index {
@@ -442,4 +445,9 @@ ul.address-display {
 				font-size: 140%;
 			}
 		}
+}
+
+#delivered-status-bar {
+	background-color: $landing-light-gray;
+	padding: rem-calc(20);
 }

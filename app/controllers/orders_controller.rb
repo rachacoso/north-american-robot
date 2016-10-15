@@ -392,6 +392,7 @@ class OrdersController < ApplicationController
 			:estimated_payment_date,
 			:brand_order_reference_id,
 			:orderer_order_reference_id,
+			:post_delivery_status,
 			shipping_address_attributes: [
 			  :address1,
 			  :address2,

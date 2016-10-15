@@ -34,6 +34,30 @@ module OrdersHelper
 			end
 		end
 	end
+
+	def post_delivery_chart(status:, step:)
+		case step
+		when "warehouse"
+			return "done"
+		when "sent"
+			unless status == "warehouse"
+				return "done"
+			end
+		when "received"
+			unless ["warehouse","sent"].include? status
+				return "done"
+			end
+		when "awaiting"
+			unless ["warehouse","sent","received"].include? status
+				return "done"
+			end
+		when "paid"
+			unless ["warehouse","sent","received","awaiting"].include? status
+				return "done"
+			end
+		end
+	end
+
 	def get_company(id)
 		unless id.blank?
 			return Brand.find(id) || Retailer.find(id) || Distributor.find(id)
