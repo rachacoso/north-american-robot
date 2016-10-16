@@ -56,7 +56,6 @@
 
 						<br>
 						<h1><span class="step" <%= order.comments.declined.present? ? "data-step=2" : "data-step=1" %> ></span> Review Order</h1>
-						<a name="order-review"</a>
 						<div class="info">
 							<h3>You can edit order Items by clicking on item name or quantity.</h3>							
 						</div>
@@ -182,9 +181,24 @@
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
 						<br>
+						<h1><span class="step" <%= order.comments.declined.present? ? "data-step=7" : "data-step=6" %> ></span> Review your order payout.</h1>
+						<div class="info">
+							<h3>This is the calculated amount you will receive from <a href="#view-order">this order</a></h3>
+						</div>
+						<div class="panel">
+
+							<span id="order-calculator-display"><%= render partial: "order_calculator", locals: { order: order } %></span>
+
+						</div>
+					</div><!--/.medium-11 medium-centered-->
+				</div><!--/.row-->
+
+				<div class="row">
+					<div class="medium-11 medium-centered columns">
+						<br>
 						<h1><span class="step" <%= order.comments.declined.present? ? "data-step=8" : "data-step=7" %> ></span> Send <%= order.orderer.company_name %> the Updated Order</h1>
 						<div class="info">
-							<h3>After adding your changes, you can <a href="#order-review">review the order</a> and submit it to <%= order.orderer_company_name %> for approval.</h3>
+							<h3>After adding your changes, you can <a href="#view-order">review the order</a> and submit it to <%= order.orderer_company_name %> for approval.</h3>
 						</div>
 						<div class="panel text-center">
 							<%= link_to "Submit Updated Order to #{order.orderer.company_name}", pending_order_url(order,0), class: "landing-button", remote: true %>

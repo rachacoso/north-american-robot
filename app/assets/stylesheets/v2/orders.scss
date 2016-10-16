@@ -451,3 +451,87 @@ ul.address-display {
 	background-color: $landing-light-gray;
 	padding: rem-calc(20);
 }
+
+
+table.order-calculator {
+	margin: auto;
+	border-spacing: 0;
+	border: 1px solid $landing-middle-gray;
+	.subtotal-price {
+		color: $landing-orange;
+		font-weight: 700;
+	}
+	tr {
+		background-color: white;
+		td.value {
+			text-align: right;
+		}
+		&#header-row{
+			td:first-child {
+				background-color: $landing-light-gray;
+			}
+			td {
+				width: 50%;
+				h3{ font-weight: 600; }
+			}
+		}
+		&#start {
+			:first-child, :nth-child(2) {
+				background-color: $landing-light-gray;
+			}
+			.title.payment {
+				font-size: rem-calc(15);
+				font-weight: 600;
+				color: $landing-orange;
+			}
+			.value.payment {
+				font-size: rem-calc(20);
+				font-weight: 800;
+				color: $landing-orange;
+			}
+			.title.payout {
+				font-size: rem-calc(15);
+				font-weight: 600;
+				color: $landing-blue;
+			}
+			.value.payout {
+				font-size: rem-calc(20);
+				font-weight: 800;
+				color: $landing-blue;
+			}
+		}
+		&#finals {
+			td {vertical-align: top;}
+			:first-child, :nth-child(2) {
+				background-color: $landing-light-gray;
+			}
+			.title.payment {
+				font-size: rem-calc(15);
+				font-weight: 600;
+				color: $landing-blue;
+			}
+			.value.payment {
+				font-size: rem-calc(20);
+				font-weight: 800;
+				color: $landing-blue;
+			}
+			.title.payout {
+				font-size: rem-calc(20);
+				font-weight: 600;
+				background-color: $landing-dark-gray;
+				color: white;
+			}
+			.value.payout {
+				font-size: rem-calc(20);
+				font-weight: 800;
+				background-color: $landing-dark-gray;
+				color: white;
+			}
+		}
+		&.discounts {
+			td:first-of-type, td:nth-of-type(2) {
+				background-color: $landing-light-gray;
+			}
+		}
+	}
+}

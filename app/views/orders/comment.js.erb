@@ -6,6 +6,7 @@
 	$('#comment-error').fadeOut(); // hide any error messages
 	<%= render partial: 'shared/ajax_message', locals: { updated_item: "Order" } %>
 	$('#order-display').html("<%= j (render partial: 'shared/orders/show') %>");
+	$('#order-calculator-display').html("<%= j (render partial: 'orders/order_calculator', locals: { order: @order }) %>");
 	$('#add-comments').html("<%= j (render partial: 'add_comments', locals: {order: @order}) %>");
 <% end %>
 

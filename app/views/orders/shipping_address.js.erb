@@ -1,2 +1,3 @@
 $('#order-display').html("<%= j (render partial: 'shared/orders/show') %>");
+$('#order-calculator-display').html("<%= j (render partial: 'orders/order_calculator', locals: { order: @order }) %>");
 <%= render partial: 'shared/ajax_message', locals: { updated_item: "Order" } %>

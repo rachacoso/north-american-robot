@@ -83,7 +83,8 @@ class Order # for V2 ordering
       next if item.quantity.blank?
       price += item.quantity * item.tiered_price
     end
-    return price / 100
+    price = (price*100).round / 100.0
+    return price.to_f / 100
   end
 
   def charges_subtotal_price # price before addtional fees in dollars
@@ -91,10 +92,11 @@ class Order # for V2 ordering
     self.order_additional_charges.each do |item|
       amount += item.amount
     end
+    amount = (amount*100).round / 100.0
     return amount.to_f / 100
   end
 
-  def markeing_co_op_discount
+  def damages_budget_discount
     if self.damages_budget
       return self.subtotal_price * ((self.damages_budget.to_d/100))
     else
@@ -102,7 +104,7 @@ class Order # for V2 ordering
     end
   end
 
-  def damages_budget_discount
+  def markeing_co_op_discount
     if self.marketing_co_op
       return self.subtotal_price * ((self.marketing_co_op.to_d/100))
     else 
@@ -110,12 +112,36 @@ class Order # for V2 ordering
     end
   end
 
-  def subtotal_price_less_discounts
+  def final_subtotal_price
     return self.subtotal_price - self.markeing_co_op_discount - self.damages_budget_discount
   end
 
+  def landing_commission
+    return self.subtotal_price * (self.brand.landing_commission.to_d/100).to_f
+  end
+
+  def landing_fulfillment_charge
+    # if self.brand.landing_fulfillment_services
+      return self.subtotal_price * (0.175)
+    # else
+    #   return 0
+    # end
+  end
+
+  def us_shipping_charge
+    if self.orderer.us_shipping_terms == "Retailer"
+      return self.subtotal_price * (0.05)
+    else
+      return 0
+    end
+  end
+
+  def total_brand_payout
+    return self.final_subtotal_price - landing_commission - landing_fulfillment_charge - us_shipping_charge
+  end
+
   def total_price
-    return self.charges_subtotal_price + self.subtotal_price_less_discounts
+    return self.charges_subtotal_price + self.final_subtotal_price
   end
 
   def meets_minimum?

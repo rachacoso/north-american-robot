@@ -1,0 +1,40 @@
+<table class="order-calculator">
+	<tr id="header-row">
+		<td colspan="2" class="text-center">
+			<h3><%= order.orderer_company_name %>'s Order</h3>
+		</td>
+		<td colspan="2" class="text-center">
+			<h3>Your Payout</h3>
+		</td>
+	</tr>
+	<tr id="start">
+		<td class="title payment">Item Subtotal </td>
+		<td class="value payment"><%= number_to_currency(order.subtotal_price) %></td>
+		<td class="title payout">Order Total</td>
+		<td class="value payout"><%= number_to_currency(order.final_subtotal_price) %></td>
+	</tr>
+	<tr class="discounts">
+		<td class="title">Marketing Co-Op <small>(<%= order.marketing_co_op %> % x <span class="subtotal-price"><%= number_to_currency(order.subtotal_price) %></span>)</small></td>
+		<td class="value">(<%= number_to_currency(order.markeing_co_op_discount) %>)</td>
+		<td class="title">Landing Commission <small>(<%= order.brand.landing_commission %> % x <span class="subtotal-price"><%= number_to_currency(order.subtotal_price) %></span> )</small></td>
+		<td class="value">(<%= number_to_currency(order.landing_commission) %>)</td>
+	</tr>
+	<tr class="discounts">
+		<td class="title">Damages Budget <small>(<%= order.damages_budget %> % x <span class="subtotal-price"><%= number_to_currency(order.subtotal_price) %></span>)</small></td>
+		<td class="value">(<%= number_to_currency(order.damages_budget_discount) %>)</td>
+		<td class="title">Landing Fulfillment Charge <small>(17.5% % x <span class="subtotal-price"><%= number_to_currency(order.subtotal_price) %></span>)</small></td>
+		<td class="value">(<%= number_to_currency(order.landing_fulfillment_charge) %>)</td>
+	</tr>
+	<tr class="discounts">
+		<td class="title">Additional Charges </td>
+		<td class="value">(<%= number_to_currency(order.charges_subtotal_price) %>)</td>
+		<td class="title">U.S. Shipping Charge <small>(5 % x <span class="subtotal-price"><%= number_to_currency(order.subtotal_price) %></span>)</small></td>
+		<td class="value">(<%= number_to_currency(order.us_shipping_charge) %>)</td>
+	</tr>
+	<tr id="finals">
+		<td class="title payment" valign="top">Order Total</td>
+		<td class="value payment" valign="top"><%= number_to_currency(order.final_subtotal_price) %></td>
+		<td class="title payout" valign="top">Your Payout</td>
+		<td class="value payout" valign="top"><%= number_to_currency(order.total_brand_payout) %></td>
+	</tr>
+</table>

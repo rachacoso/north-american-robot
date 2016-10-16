@@ -7,6 +7,8 @@ module LandingCompany
 			# V2 ORDERING
 			has_many :orders
 			field :order_minimum, type: Integer # minimum order as dollar amount / stored as cents
+			field :landing_commission, type: Integer, default: 10 #landing commission percentage
+			field :landing_fulfillment_services, type: Boolean
 		end
 
 	end

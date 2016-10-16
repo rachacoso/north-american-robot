@@ -58,6 +58,21 @@ module OrdersHelper
 		end
 	end
 
+	def post_delivery_header(order:)
+		case order.post_delivery_status
+		when "warehouse"
+			return "Order at U.S. warehouse"
+		when "sent"
+			return "Order sent to #{order.orderer_company_name}"
+		when "received"
+			return "Order received by #{order.orderer_company_name}"
+		when "awaiting"
+			return "Awaiting payment from #{order.orderer_company_name}"
+		when "paid"
+			return "Paid by #{order.orderer_company_name}<br><small>You should be receiving payment shortly</small>".html_safe
+		end
+	end
+
 	def get_company(id)
 		unless id.blank?
 			return Brand.find(id) || Retailer.find(id) || Distributor.find(id)

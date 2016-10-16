@@ -42,7 +42,7 @@
 				<% if order.damages_budget_discount > 0 || order.markeing_co_op_discount > 0 %>
 				<tr class="subtotal">
 					<td colspan="6" class="text-right">Final Item Subtotal</td>
-					<td class="text-right"><%= number_to_currency(order.subtotal_price_less_discounts) %></td>
+					<td class="text-right"><%= number_to_currency(order.final_subtotal_price) %></td>
 				</tr>
 				<% end %>
 
