@@ -1,0 +1,7 @@
+// $('#order-data').html("<%= j (render partial: 'orders/order_calculator', locals: { order: @order }) %>");
+// $('.overlay#order-overlay').fadeIn();
+// $('#order').fadeIn();
+
+$('#order-item-data').html("<div class='text-center'><h2>Estimated Payout Calculator</h2></div><%= j (render partial: 'orders/order_calculator', locals: { order: @order }) %>");
+$('.overlay#order-item-overlay').fadeIn();
+$('#order-item').fadeIn();

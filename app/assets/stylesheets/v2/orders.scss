@@ -457,6 +457,7 @@ table.order-calculator {
 	margin: auto;
 	border-spacing: 0;
 	border: 1px solid $landing-middle-gray;
+	td { vertical-align: top; }
 	.subtotal-price {
 		color: $landing-orange;
 		font-weight: 700;

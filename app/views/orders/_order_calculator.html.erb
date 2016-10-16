@@ -14,21 +14,21 @@
 		<td class="value payout"><%= number_to_currency(order.total_price) %></td>
 	</tr>
 	<tr class="discounts">
-		<td class="title">Marketing Co-Op <small>(<%= order.marketing_co_op %> % x <span class="subtotal-price"><%= number_to_currency(order.subtotal_price) %></span>)</small></td>
+		<td class="title">Marketing Co-Op <br><small>(<%= order.marketing_co_op %> % x <span class="subtotal-price"><%= number_to_currency(order.subtotal_price) %></span>)</small></td>
 		<td class="value">(<%= number_to_currency(order.markeing_co_op_discount) %>)</td>
-		<td class="title">Landing Commission <small>(<%= order.brand.landing_commission %> % x <span class="subtotal-price"><%= number_to_currency(order.subtotal_price) %></span> )</small></td>
+		<td class="title">Landing Commission <br><small>(<%= order.brand.landing_commission %> % x <span class="subtotal-price"><%= number_to_currency(order.subtotal_price) %></span> )</small></td>
 		<td class="value">(<%= number_to_currency(order.landing_commission) %>)</td>
 	</tr>
 	<tr class="discounts">
-		<td class="title">Damages Budget <small>(<%= order.damages_budget %> % x <span class="subtotal-price"><%= number_to_currency(order.subtotal_price) %></span>)</small></td>
+		<td class="title">Damages Budget <br><small>(<%= order.damages_budget %> % x <span class="subtotal-price"><%= number_to_currency(order.subtotal_price) %></span>)</small></td>
 		<td class="value">(<%= number_to_currency(order.damages_budget_discount) %>)</td>
-		<td class="title">Landing Fulfillment Charge <small>(17.5% % x <span class="subtotal-price"><%= number_to_currency(order.subtotal_price) %></span>)</small></td>
+		<td class="title">Landing Fulfillment Charge <br><small>(17.5% % x <span class="subtotal-price"><%= number_to_currency(order.subtotal_price) %></span>)</small></td>
 		<td class="value">(<%= number_to_currency(order.landing_fulfillment_charge) %>)</td>
 	</tr>
 	<tr class="discounts">
 		<td class="title">Additional Charges </td>
 		<td class="value"><%= number_to_currency(order.charges_subtotal_price) %></td>
-		<td class="title">U.S. Shipping Charge <small>(5 % x <span class="subtotal-price"><%= number_to_currency(order.subtotal_price) %></span>)</small></td>
+		<td class="title">U.S. Shipping Charge <br><small>(5 % x <span class="subtotal-price"><%= number_to_currency(order.subtotal_price) %></span>)</small></td>
 		<td class="value">(<%= number_to_currency(order.us_shipping_charge) %>)</td>
 	</tr>
 	<tr id="finals">

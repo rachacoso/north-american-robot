@@ -44,6 +44,8 @@ Rails.application.routes.draw do
   get   '/order/adc/:id/:confirm' => 'orders#armor_disabled_completed', as: 'armor_disabled_completed_order'
   # for order comments
   patch   '/order/comments/:id' => 'comments#update', as: 'order_update_comment'
+  # order-calculator display
+  get   'order/calculator/show/:id' => 'orders#show_calculator', as: 'show_order_calculator'
 
   # ARMOR PAYMENTS TESTING
   get   '/order/paid/:id/:confirm' => 'orders#paid', as: 'paid_order'

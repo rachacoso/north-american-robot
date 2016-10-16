@@ -90,6 +90,11 @@
 					</tr>
 				<% end %>
 
+				<% if @current_user.brand %>
+				<tr>
+					<td colspan="7" class="text-right"><%= link_to "View your estimated payout", show_order_calculator_url(order), class: "landing-button", style: "color: white; text-decoration: none; font-weight: 500;", remote: true %></td>
+				</tr>
+				<% end %>
 			</tbody>
 		</table>
 	</div><!--/.small-12-->

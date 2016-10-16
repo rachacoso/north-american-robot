@@ -108,6 +108,10 @@ class OrdersController < ApplicationController
 	end
 
 
+	def show_calculator
+		@order = @current_user.company.orders.find(params[:id])
+	end
+
 	def show
 		unless @order.viewable_by? @current_user
 			redirect_to root_url
