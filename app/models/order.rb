@@ -137,7 +137,7 @@ class Order # for V2 ordering
   end
 
   def total_brand_payout
-    return self.final_subtotal_price - landing_commission - landing_fulfillment_charge - us_shipping_charge
+    return self.total_price - landing_commission - landing_fulfillment_charge - us_shipping_charge
   end
 
   def total_price

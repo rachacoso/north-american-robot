@@ -11,7 +11,7 @@
 		<td class="title payment">Item Subtotal </td>
 		<td class="value payment"><%= number_to_currency(order.subtotal_price) %></td>
 		<td class="title payout">Order Total</td>
-		<td class="value payout"><%= number_to_currency(order.final_subtotal_price) %></td>
+		<td class="value payout"><%= number_to_currency(order.total_price) %></td>
 	</tr>
 	<tr class="discounts">
 		<td class="title">Marketing Co-Op <small>(<%= order.marketing_co_op %> % x <span class="subtotal-price"><%= number_to_currency(order.subtotal_price) %></span>)</small></td>
@@ -27,13 +27,13 @@
 	</tr>
 	<tr class="discounts">
 		<td class="title">Additional Charges </td>
-		<td class="value">(<%= number_to_currency(order.charges_subtotal_price) %>)</td>
+		<td class="value"><%= number_to_currency(order.charges_subtotal_price) %></td>
 		<td class="title">U.S. Shipping Charge <small>(5 % x <span class="subtotal-price"><%= number_to_currency(order.subtotal_price) %></span>)</small></td>
 		<td class="value">(<%= number_to_currency(order.us_shipping_charge) %>)</td>
 	</tr>
 	<tr id="finals">
 		<td class="title payment" valign="top">Order Total</td>
-		<td class="value payment" valign="top"><%= number_to_currency(order.final_subtotal_price) %></td>
+		<td class="value payment" valign="top"><%= number_to_currency(order.total_price) %></td>
 		<td class="title payout" valign="top">Your Payout</td>
 		<td class="value payout" valign="top"><%= number_to_currency(order.total_brand_payout) %></td>
 	</tr>

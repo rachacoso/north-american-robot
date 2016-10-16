@@ -7,6 +7,7 @@
 	$('#ajax-success-data').html("Additional Charge <%= @message %>");
 	$('#ajax-message').fadeIn().delay( 1500 ).fadeOut();
 	$('#order-display').html("<%= j (render partial: 'shared/orders/show') %>");
+	$('#order-calculator-display').html("<%= j (render partial: 'orders/order_calculator', locals: { order: @order }) %>");
 	$('#additional-charges-display').html("<%= j (render partial: 'orders/additional_charges', locals: { order: @order }) %>");
 <% end %>
 
