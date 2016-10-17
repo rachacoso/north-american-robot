@@ -181,7 +181,7 @@
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
 						<br>
-						<h1><span class="step" <%= order.comments.declined.present? ? "data-step=7" : "data-step=6" %> ></span> Update Landing International commission and fulfillment (Optional)</h1>
+						<h1><span class="step" <%= order.comments.declined.present? ? "data-step=7" : "data-step=6" %> ></span> Update Commission and Fulfillment Options (Optional)</h1>
 						<div class="info">
 							<h3>Update Landing Comission rate and fulfillment participation for this order</h3>
 						</div>
@@ -193,13 +193,17 @@
 									<div class="medium-6 columns">
 										<%= f.label :landing_commission, "Landing Commission" %>
 
-										<div class="row collapse">
-											<div class="small-10 columns">
-												<%= f.select :landing_commission, options_for_select(1..20, order.landing_commission ?  order.landing_commission : 10 ), {label: false}, {class: "auto-form"} %>
-											</div><!--/.small-10-->
-											<div class="small-2 columns">
-												<span class="postfix">%</span>
-											</div><!--/.small-2-->
+										<div class="row">
+											<div class="medium-3 columns">
+												<div class="row collapse">
+													<div class="small-7 columns">
+														<%= f.select :landing_commission, options_for_select(1..20, order.landing_commission ?  order.landing_commission : 10 ), {label: false}, {class: "auto-form"} %>
+													</div><!--/.small-7-->
+													<div class="small-5 columns">
+														<span class="postfix">%</span>
+													</div><!--/.small-5-->
+												</div><!--/.row-->
+											</div><!--/.medium-2-->
 										</div><!--/.row-->
 
 									</div><!--/.medium-6-->
