@@ -7,7 +7,7 @@ $( document ).ready(function() {
 function initializeAutoForm() {
 
     var autoformtimer;
-    $('.auto-form-text').on('input propertychange', function(e){
+    $('.auto-form-text').unbind('input propertychange').on('input propertychange', function(e){
         var thisForm = $(this).parents('form');        
         if (typeof autoformtimer !== 'undefined') {
             clearTimeout(autoformtimer);
@@ -18,7 +18,7 @@ function initializeAutoForm() {
         }, 750);
 
     });
-    $('.auto-form-text-delay').on('input propertychange', function(e){
+    $('.auto-form-text-delay').unbind('input propertychange').on('input propertychange', function(e){
         var thisForm = $(this).parents('form');        
         if (typeof autoformtimer !== 'undefined') {
             clearTimeout(autoformtimer);
@@ -30,9 +30,9 @@ function initializeAutoForm() {
 
     });
 
-    $('.auto-form').on('change', function(e){
+    $('.auto-form').unbind('change').on('change', function(e){
         var thisForm = $(this).parents('form');
-        $(thisForm).submit(); 
+        $(thisForm).submit();
     });
 
 }
