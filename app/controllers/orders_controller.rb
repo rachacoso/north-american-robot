@@ -397,6 +397,8 @@ class OrdersController < ApplicationController
 			:brand_order_reference_id,
 			:orderer_order_reference_id,
 			:post_delivery_status,
+			:landing_commission,
+			:landing_fulfillment_services,
 			shipping_address_attributes: [
 			  :address1,
 			  :address2,

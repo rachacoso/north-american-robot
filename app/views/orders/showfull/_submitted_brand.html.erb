@@ -181,7 +181,50 @@
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
 						<br>
-						<h1><span class="step" <%= order.comments.declined.present? ? "data-step=7" : "data-step=6" %> ></span> Review your order payout.</h1>
+						<h1><span class="step" <%= order.comments.declined.present? ? "data-step=7" : "data-step=6" %> ></span> Update Landing International commission and fulfillment (Optional)</h1>
+						<div class="info">
+							<h3>Update Landing Comission rate and fulfillment participation for this order</h3>
+						</div>
+						<div class="panel editform">
+
+							<%= form_for order, :html => {id: 'order-landing-options-form'}, remote: true do |f| %>
+
+								<div class="row">
+									<div class="medium-6 columns">
+										<%= f.label :landing_commission, "Landing Commission" %>
+
+										<div class="row collapse">
+											<div class="small-10 columns">
+												<%= f.select :landing_commission, options_for_select(1..20, order.landing_commission ?  order.landing_commission : 10 ), {label: false}, {class: "auto-form"} %>
+											</div><!--/.small-10-->
+											<div class="small-2 columns">
+												<span class="postfix">%</span>
+											</div><!--/.small-2-->
+										</div><!--/.row-->
+
+									</div><!--/.medium-6-->
+								</div>
+								
+								<hr>
+								
+								<div class="row">
+									<div class="medium-6 columns">
+										<h3>Landing International Fulfillment Services</h3>
+										<%= f.check_box :landing_fulfillment_services, label: false, class: "auto-form" %>
+										<%= f.label :landing_fulfillment_services, "Use Landing Fulfillment Services" %>
+									</div><!--/.medium-6-->
+								</div><!--/.row-->
+
+							<% end %>
+
+						</div>
+					</div><!--/.medium-11 medium-centered-->
+				</div><!--/.row-->
+
+				<div class="row">
+					<div class="medium-11 medium-centered columns">
+						<br>
+						<h1><span class="step" <%= order.comments.declined.present? ? "data-step=8" : "data-step=7" %> ></span> Review your order payout.</h1>
 						<div class="info">
 							<h3>This is the calculated amount you will receive from <a href="#view-order">this order</a></h3>
 						</div>
@@ -196,7 +239,7 @@
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
 						<br>
-						<h1><span class="step" <%= order.comments.declined.present? ? "data-step=8" : "data-step=7" %> ></span> Send <%= order.orderer.company_name %> the Updated Order</h1>
+						<h1><span class="step" <%= order.comments.declined.present? ? "data-step=9" : "data-step=8" %> ></span> Send <%= order.orderer.company_name %> the Updated Order</h1>
 						<div class="info">
 							<h3>After adding your changes, you can <a href="#view-order">review the order</a> and submit it to <%= order.orderer_company_name %> for approval.</h3>
 						</div>

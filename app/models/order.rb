@@ -116,16 +116,16 @@ class Order # for V2 ordering
     return self.subtotal_price - self.markeing_co_op_discount - self.damages_budget_discount
   end
 
-  def landing_commission
-    return self.subtotal_price * (self.brand.landing_commission.to_d/100).to_f
+  def landing_commission_charge
+    return self.subtotal_price * (self.landing_commission.to_d/100).to_f
   end
 
   def landing_fulfillment_charge
-    # if self.brand.landing_fulfillment_services
+    if self.landing_fulfillment_services
       return self.subtotal_price * (0.175)
-    # else
-    #   return 0
-    # end
+    else
+      return 0
+    end
   end
 
   def us_shipping_charge
@@ -137,7 +137,7 @@ class Order # for V2 ordering
   end
 
   def total_brand_payout
-    return self.total_price - landing_commission - landing_fulfillment_charge - us_shipping_charge
+    return self.total_price - landing_commission_charge - landing_fulfillment_charge - us_shipping_charge
   end
 
   def total_price

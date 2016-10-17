@@ -9,6 +9,7 @@ module LandingCompany
 			field :order_minimum, type: Integer # minimum order as dollar amount / stored as cents
 			field :landing_commission, type: Integer, default: 10 #landing commission percentage
 			field :landing_fulfillment_services, type: Boolean
+			validates :landing_commission, numericality: { less_than_or_equal_to: 20, greater_than_or_equal_to: 1 }
 		end
 
 	end
@@ -216,6 +217,12 @@ module LandingCompany
 		module Orders
 			extend ActiveSupport::Concern
 
+			included do
+				field :landing_commission, type: Integer, default: 10 #landing commission percentage
+				field :landing_fulfillment_services, type: Boolean
+				validates :landing_commission, numericality: { less_than_or_equal_to: 20, greater_than_or_equal_to: 1 }
+			end
+
 			def add_terms_and_requirements
 				self.payment_terms = self.orderer.payment_terms
 				self.us_shipping_terms = self.orderer.us_shipping_terms
@@ -227,6 +234,12 @@ module LandingCompany
 				self.damages_budget = self.orderer.damages_budget unless self.orderer.damages_budget.blank?
 				self.product_ticketing = self.orderer.product_ticketing
 				self.retailer_edi = self.orderer.retailer_edi
+				if self.brand.landing_commission.present?
+					self.landing_commission = self.brand.landing_commission
+				else
+					self.landing_commission = 10
+				end
+				self.landing_fulfillment_services = self.brand.landing_fulfillment_services
 			end
 
 		end

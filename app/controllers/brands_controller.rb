@@ -365,6 +365,8 @@ class BrandsController < ApplicationController
 			:countries_where_exported,
 			:brand_positioning,
 			:order_minimum,
+			:landing_commission,
+			:landing_fulfillment_services,
 			:social_causes,
 			:social_organizations,
 			:social_give_back,

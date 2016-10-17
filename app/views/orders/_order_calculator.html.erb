@@ -16,8 +16,8 @@
 	<tr class="discounts">
 		<td class="title">Marketing Co-Op <br><small>(<%= order.marketing_co_op %> % x <span class="subtotal-price"><%= number_to_currency(order.subtotal_price) %></span>)</small></td>
 		<td class="value">(<%= number_to_currency(order.markeing_co_op_discount) %>)</td>
-		<td class="title">Landing Commission <br><small>(<%= order.brand.landing_commission %> % x <span class="subtotal-price"><%= number_to_currency(order.subtotal_price) %></span> )</small></td>
-		<td class="value">(<%= number_to_currency(order.landing_commission) %>)</td>
+		<td class="title">Landing Commission <br><small>(<%= order.landing_commission %> % x <span class="subtotal-price"><%= number_to_currency(order.subtotal_price) %></span> )</small></td>
+		<td class="value">(<%= number_to_currency(order.landing_commission_charge) %>)</td>
 	</tr>
 	<tr class="discounts">
 		<td class="title">Damages Budget <br><small>(<%= order.damages_budget %> % x <span class="subtotal-price"><%= number_to_currency(order.subtotal_price) %></span>)</small></td>
