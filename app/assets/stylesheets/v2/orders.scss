@@ -457,7 +457,12 @@ table.order-calculator {
 	margin: auto;
 	border-spacing: 0;
 	border: 1px solid $landing-middle-gray;
-	td { vertical-align: top; }
+	td { 
+		vertical-align: top;
+	}
+	.strike {
+		text-decoration: line-through;
+	}
 	.subtotal-price {
 		color: $landing-orange;
 		font-weight: 700;
@@ -470,6 +475,7 @@ table.order-calculator {
 		&#header-row{
 			td:first-child {
 				background-color: $landing-light-gray;
+				border-right: 1px solid $landing-middle-gray;
 			}
 			td {
 				width: 50%;
@@ -479,6 +485,9 @@ table.order-calculator {
 		&#start {
 			:first-child, :nth-child(2) {
 				background-color: $landing-light-gray;
+			}
+			:nth-child(2){
+				border-right: 1px solid $landing-middle-gray;
 			}
 			.title.payment {
 				font-size: rem-calc(15);
@@ -505,6 +514,7 @@ table.order-calculator {
 			td {vertical-align: top;}
 			:first-child, :nth-child(2) {
 				background-color: $landing-light-gray;
+				border-top: 1px solid $landing-middle-gray;
 			}
 			.title.payment {
 				font-size: rem-calc(15);
@@ -532,6 +542,9 @@ table.order-calculator {
 		&.discounts {
 			td:first-of-type, td:nth-of-type(2) {
 				background-color: $landing-light-gray;
+			}
+			td:nth-of-type(2) {
+				border-right: 1px solid $landing-middle-gray;
 			}
 		}
 	}
