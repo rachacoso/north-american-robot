@@ -4,6 +4,14 @@ $( document ).ready(function() {
 	setModalActions();
 	shippingtermsControls ();
 
+	$('#back-control').on('click', function(e){
+		e.preventDefault();
+		$('#back-options').toggle();
+	});
+	$('#back-options').on('mouseleave', function(e) {
+		$('#back-options').fadeOut();
+	});
+
 });
 
 function setModalActions () {

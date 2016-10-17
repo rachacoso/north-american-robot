@@ -1,8 +1,13 @@
 <div class="row">
 	<div class="small-12 columns">
 		<ul class="order-breadcrumb">
-			<li id="back"><%= link_to orders_url do %>&lsaquo;&lsaquo; view all orders<% end %></li>
-			<li id="back"><%= link_to orders_url(company_id: profile) do %>&lsaquo;&lsaquo; view all <%= profile.company_name %> orders<% end %></li>
+			<li id="back-control">&lsaquo;&lsaquo;  back</li>
+			<li class="back" id="back-options">
+				<ul>
+				<li id="all"><%= link_to orders_url do %>view All Orders<% end %></li>
+				<li id="company"><%= link_to orders_url(company_id: profile) do %>view All <%= profile.company_name %> Orders<% end %></li>
+				</ul>
+			</li>
 			<li id="active"><%= order.status == "open" ? "Cart started on" : "Order created on" %><strong><%= order.c_at.strftime(" %b %d %Y") %></strong></li>
 		</ul>
 	</div><!--/.small-12-->
