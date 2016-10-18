@@ -60,22 +60,29 @@
 							</div>
 							<div class="medium-4 medium-pull-8 columns medium-text-right">
 								<div class="profile-edit-form info-panel">
-											<h1>Profile Sections</h1>
+											<h2>Just The Facts</h2>
 											<%= link_to "Company Info", "#a-companyinfo", class: "profile-edit-links required" %><br>
 											<%= link_to "Contact Info", "#a-login-info", class: "profile-edit-links required" %><br>
-											<%= link_to "Ordering Requirements", "#a-ordering-requirements", class: "profile-edit-links" %><br>
-											
+											<%= link_to "Product Portfolio", "#a-product-portfolio", class: "profile-edit-links required" %><br>
+											<hr>
+											<h2>Ordering &amp; Payment</h2>
 											<%= link_to "Ordering &amp; Payments".html_safe, "#a-ordering-and-payments", class: "profile-edit-links required" %><br>
+											<%= link_to "Ordering Requirements", "#a-ordering-requirements", class: "profile-edit-links" %><br>
+											<hr>
+											<h2>Introduce Yourself</h2>
 											<%= link_to "Company Introduction", "#a-company-introduction", class: "profile-edit-links" %><br>
-											<%= link_to "Global Good Tags", "#a-social-tags", class: "profile-edit-links" %><br>
+											<%= link_to "Brand Photos", "#a-brand-photos", class: "profile-edit-links" %><br>
 											<%= link_to "Trends", "#a-trends", class: "profile-edit-links" %><br>
+											<%= link_to "Global Good Tags", "#a-social-tags", class: "profile-edit-links" %><br>
+											<hr>
+											<h2>Boost Your Profile</h2>
 											<%= link_to "Key Retailers", "#a-key-retailers", class: "profile-edit-links" %><br>
 											<%= link_to "Sectors", "#a-sectors", class: "profile-edit-links" %><br>
 											<%= link_to "Channels", "#a-channels", class: "profile-edit-links" %><br>
 											<%= link_to "Channel Capacities", "#a-channelcapacity", class: "profile-edit-links" %><br>
 											<%= link_to "Countries of Distribution", "#a-exportcountries", class: "profile-edit-links" %><br>
-											<%= link_to "Brand Photos", "#a-brand-photos", class: "profile-edit-links" %><br>
-											<%= link_to "Product Portfolio", "#a-product-portfolio", class: "profile-edit-links required" %><br>
+											<hr>
+											<h2>Show Off Your Brand</h2>
 											<%= link_to "Press Hits", "#a-press-hits", class: "profile-edit-links" %><br>
 											<%= link_to "Tradeshows", "#a-tradeshows", class: "profile-edit-links" %><br>
 											<%= link_to "Patents", "#a-patents", class: "profile-edit-links" %><br>
@@ -115,6 +122,20 @@
 							<div class="medium-8 columns">
 								<div class="profile-edit-form">
 									<%= render "account_logins" %>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="medium-4 columns medium-text-right">
+								<div class="profile-edit-form info-panel">
+									<h1>Product Portfolio</h1>
+									<h3>Start selling! Input your product information here!</h3>
+								</div>
+							</div><!--/.medium-4-->
+							<div class="medium-8 columns">
+								<div class="profile-edit-form">
+									<%= render "products" %>
 								</div>
 							</div>
 						</div>
@@ -181,19 +202,19 @@
 							</div>
 						</div>
 
-						<div class="row" data-equalizer>
+						<div class="row">
 							<div class="medium-4 columns medium-text-right">
-								<div class="profile-edit-form info-panel" data-equalizer-watch>
-									<h1>Global Good Tags</h1>
-									<h3>Tag yourself!<br>Show everyone how you help people and planet!<br>Stuff like: 'Biodegradable' or 'All-Natural' or 'No Animal Testing'. Don't limit yourself - feel free to enter anything you want!</h3>
+								<div class="profile-edit-form info-panel">
+									<h1>Brand Photos</h1>
+									<h3>Give 'em a show!  Upload your brand photos here!</h3>
 								</div>
 							</div><!--/.medium-4-->
 							<div class="medium-8 columns">
-								<div class="profile-edit-form" data-equalizer-watch>
-									<%= render "social_tags" %>
+								<div class="profile-edit-form">
+									<%= render "brand_photos" %>
 								</div>
 							</div>
-						</div><!-- /.row -->
+						</div>
 
 						<div class="row">
 							<div class="medium-4 columns medium-text-right">
@@ -208,6 +229,20 @@
 								</div>
 							</div>
 						</div>
+
+						<div class="row" data-equalizer>
+							<div class="medium-4 columns medium-text-right">
+								<div class="profile-edit-form info-panel" data-equalizer-watch>
+									<h1>Global Good Tags</h1>
+									<h3>Tag yourself!<br>Show everyone how you help people and planet!<br>Stuff like: 'Biodegradable' or 'All-Natural' or 'No Animal Testing'. Don't limit yourself - feel free to enter anything you want!</h3>
+								</div>
+							</div><!--/.medium-4-->
+							<div class="medium-8 columns">
+								<div class="profile-edit-form" data-equalizer-watch>
+									<%= render "social_tags" %>
+								</div>
+							</div>
+						</div><!-- /.row -->
 
 						<div class="row">
 							<div class="medium-4 columns medium-text-right">
@@ -280,33 +315,6 @@
 							</div>
 						</div>
 
-						<div class="row">
-							<div class="medium-4 columns medium-text-right">
-								<div class="profile-edit-form info-panel">
-									<h1>Brand Photos</h1>
-									<h3>Give 'em a show!  Upload your brand photos here!</h3>
-								</div>
-							</div><!--/.medium-4-->
-							<div class="medium-8 columns">
-								<div class="profile-edit-form">
-									<%= render "brand_photos" %>
-								</div>
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="medium-4 columns medium-text-right">
-								<div class="profile-edit-form info-panel">
-									<h1>Product Portfolio</h1>
-									<h3>Start selling! Input your product information here!</h3>
-								</div>
-							</div><!--/.medium-4-->
-							<div class="medium-8 columns">
-								<div class="profile-edit-form">
-									<%= render "products" %>
-								</div>
-							</div>
-						</div>
 
 						<div class="row">
 							<div class="medium-4 columns medium-text-right">

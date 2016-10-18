@@ -24,6 +24,7 @@
     border-top: 5px solid $landing-middle-gray;
   }
   &.info-panel {
+    hr { border-top: 1px solid $landing-middle-gray; }
     @media #{$small-only} { 
       margin-bottom: 0;
       border-bottom: none;
