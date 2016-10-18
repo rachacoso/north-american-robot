@@ -6,6 +6,15 @@
 
 // PROFILE DISPLAY
 
+.profile-section-header {
+  h1 {
+    font-weight: 700;
+    border-top: 1px solid $landing-middle-gray;
+    border-bottom: 1px solid $landing-middle-gray;
+    margin-top: rem-calc(30);
+  }
+}
+
 #shopping-cart {
   border-bottom: 2px solid transparent;
   .count {

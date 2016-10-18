@@ -66,7 +66,7 @@
 											<%= link_to "Product Portfolio", "#a-product-portfolio", class: "profile-edit-links required" %><br>
 											<hr>
 											<h2>Ordering &amp; Payment</h2>
-											<%= link_to "Ordering &amp; Payments".html_safe, "#a-ordering-and-payments", class: "profile-edit-links required" %><br>
+											<%= link_to "Payments".html_safe, "#a-ordering-and-payments", class: "profile-edit-links required" %><br>
 											<%= link_to "Ordering Requirements", "#a-ordering-requirements", class: "profile-edit-links" %><br>
 											<hr>
 											<h2>Introduce Yourself</h2>
@@ -93,10 +93,14 @@
 								</div>
 							</div><!--/.medium-4-->
 						</div>
-						<div class="row">
-							<div class="small-12 columns"><hr style="border-top: 1px solid #B3B3B3;"></div><!--/.small-12-->
-						</div><!--/.row-->
 
+
+
+						<div class="row">
+							<div class="small-12 columns profile-section-header">
+								<h1>Just the Facts</h1>
+							</div><!--/.small-12-->
+						</div><!--/.row-->
 
 						<div class="row">
 							<div class="medium-4 columns medium-text-right">
@@ -141,23 +145,15 @@
 						</div>
 
 						<div class="row">
-							<div class="medium-4 columns medium-text-right">
-								<div class="profile-edit-form info-panel">
-								<h1>Ordering Requirements</h1>
-								<h3>What are your ordering requirements?</h3>
-								</div>
-							</div><!--/.medium-4-->
-							<div class="medium-8 columns">
-								<div class="profile-edit-form">
-									<%= render "ordering_requirements" %>
-								</div>
-							</div>
-						</div>
+							<div class="small-12 columns profile-section-header">
+								<h1>Ordering &amp; Payment</h1>
+							</div><!--/.small-12-->
+						</div><!--/.row-->
 
 						<div class="row">
 							<div class="medium-4 columns medium-text-right">
 								<div class="profile-edit-form info-panel">
-									<h1>Ordering &amp; Payments</h1>
+									<h1>Payments</h1>
 									<h3>Landing International has partnered with <%= link_to "Armor Payments, a Payoneer Company", "//armorpayments.com", target: "_blank" %> to provide payment escrow services for B2B eCommerce giving you peace of mind with secure transactions.</h3>
 									<h3>
 										Payment transactions on Landing Interational will take place via Armor Paymets (a Payoneer company) payment escrow service.
@@ -179,6 +175,22 @@
 							</div>
 						</div>
 
+
+						<div class="row">
+							<div class="medium-4 columns medium-text-right">
+								<div class="profile-edit-form info-panel">
+								<h1>Ordering Requirements</h1>
+								<h3>What are your ordering requirements?</h3>
+								</div>
+							</div><!--/.medium-4-->
+							<div class="medium-8 columns">
+								<div class="profile-edit-form">
+									<%= render "ordering_requirements" %>
+								</div>
+							</div>
+						</div>
+
+
 				<%#		HIDING FOR NOW UNTIL DETERMINE HOW USED  %>
 				<%#		<div class="row">  %>
 				<%#			<div class="medium-8 medium-push-4 columns">  %>
@@ -187,6 +199,14 @@
 				<%#				</div>  %>
 				<%#			</div>  %>
 				<%#		</div> %>
+
+
+						<div class="row">
+							<div class="small-12 columns profile-section-header">
+								<h1>Introduce Yourself</h1>
+							</div><!--/.small-12-->
+						</div><!--/.row-->
+
 
 						<div class="row">
 							<div class="medium-4 columns medium-text-right">
@@ -243,6 +263,12 @@
 								</div>
 							</div>
 						</div><!-- /.row -->
+
+						<div class="row">
+							<div class="small-12 columns profile-section-header">
+								<h1>Boost Your Profile</h1>
+							</div><!--/.small-12-->
+						</div><!--/.row-->
 
 						<div class="row">
 							<div class="medium-4 columns medium-text-right">
@@ -315,6 +341,12 @@
 							</div>
 						</div>
 
+
+						<div class="row">
+							<div class="small-12 columns profile-section-header">
+								<h1>Show Off Your Brand</h1>
+							</div><!--/.small-12-->
+						</div><!--/.row-->
 
 						<div class="row">
 							<div class="medium-4 columns medium-text-right">

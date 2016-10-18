@@ -60,19 +60,28 @@
 							</div>
 							<div class="medium-4 medium-pull-8 columns medium-text-right">
 								<div class="profile-edit-form info-panel">
-											<h1>Profile Sections</h1>
+											<h2>Just the Facts</h2>
 											<%= link_to "Company Info", "#a-companyinfo", class: "profile-edit-links required" %><br>
 											<%= link_to "Contact Info", "#a-login-info", class: "profile-edit-links required" %><br>
-											<%= link_to "Payment/Shipping Terms &amp; Requirements".html_safe, "#a-payment-shipping-terms", class: "profile-edit-links required" %><br>
-											<%= link_to "Ordering Requirements", "#a-ordering-requirements", class: "profile-edit-links required" %><br>
-											<%= link_to "Ordering &amp; Payments".html_safe, "#a-ordering-and-payments", class: "profile-edit-links required" %><br>
-											<%= link_to "Company Introduction", "#a-company-introduction", class: "profile-edit-links" %><br>
+											<%= link_to "Brand Portfolio", "#a-brand-portfolio", class: "profile-edit-links required" %><br>
+
+											<hr>
+											<h2>Ordering &amp; Payment</h2>
+											<%= link_to "Terms", "#a-payment-shipping-terms", class: "profile-edit-links required" %><br>
+											<%= link_to "Requirements", "#a-ordering-requirements", class: "profile-edit-links required" %><br>
+											<%= link_to "Payments", "#a-ordering-and-payments", class: "profile-edit-links required" %><br>
+
+											<hr>
+											<h2>Introduce Yourself</h2>
+											<%= link_to "About Your Company", "#a-company-introduction", class: "profile-edit-links" %><br>
 											<%= link_to "Global Good Tags", "#a-social-tags", class: "profile-edit-links" %><br>
 											<%= link_to "Sectors", "#a-sectors", class: "profile-edit-links" %><br>
 											<%= link_to "Channels", "#a-channels", class: "profile-edit-links" %><br>
 											<%= link_to "Channel Capacities", "#a-channelcapacities", class: "profile-edit-links" %><br>
 											<%= link_to "Countries of Distribution", "#a-exportcountries", class: "profile-edit-links" %><br>
-											<%= link_to "Brand Portfolio", "#a-brand-portfolio", class: "profile-edit-links" %><br>
+
+											<hr>
+											<h2>Tell Us More</h2>
 											<%= link_to "Sales &amp; Education".html_safe, "#a-sales", class: "profile-edit-links" %><br>
 											<%= link_to "Marketing / PR Capabilities", "#a-marketing", class: "profile-edit-links" %><br>
 											<%= link_to "Tradeshows", "#a-tradeshows", class: "profile-edit-links" %><br>
@@ -82,8 +91,12 @@
 								</div>
 							</div><!--/.medium-4-->
 						</div>
+
+
 						<div class="row">
-							<div class="small-12 columns"><hr style="border-top: 1px solid #B3B3B3;"></div><!--/.small-12-->
+							<div class="small-12 columns profile-section-header">
+								<h1>Just the Facts</h1>
+							</div><!--/.small-12-->
 						</div><!--/.row-->
 
 						<div class="row">
@@ -114,6 +127,19 @@
 							</div>
 						</div>
 
+						<div class="row">
+							<div class="medium-4 columns medium-text-right">
+								<div class="profile-edit-form info-panel">
+								<h1>Brand Portfolio</h1>
+								<h3>What other brands do you work with?</h3>
+								</div>
+							</div><!--/.medium-4-->
+							<div class="medium-8 columns">
+								<div class="profile-edit-form">
+									<%= render "brand_portfolio" %>
+								</div>
+							</div>
+						</div><!-- /.row -->
 
 
 				<%#		HIDING FOR NOW UNTIL DETERMINE HOW USED  %>
@@ -125,10 +151,17 @@
 				<%#			</div>  %>
 				<%#		</div> %>
 
+
+						<div class="row">
+							<div class="small-12 columns profile-section-header">
+								<h1>Just the Facts</h1>
+							</div><!--/.small-12-->
+						</div><!--/.row-->
+
 						<div class="row">
 							<div class="medium-4 columns medium-text-right">
 								<div class="profile-edit-form info-panel">
-								<h1>Payment/Shipping Terms &amp; Requirements</h1>
+								<h1>Terms</h1>
 								<h3>What are your payment and shipping terms and requirements?</h3>
 								</div>
 							</div><!--/.medium-4-->
@@ -142,7 +175,7 @@
 						<div class="row">
 							<div class="medium-4 columns medium-text-right">
 								<div class="profile-edit-form info-panel">
-								<h1>Ordering Requirements</h1>
+								<h1>Requirements</h1>
 								<h3>What are your ordering requirements?</h3>
 								</div>
 							</div><!--/.medium-4-->
@@ -156,7 +189,7 @@
 						<div class="row">
 							<div class="medium-4 columns medium-text-right">
 								<div class="profile-edit-form info-panel">
-									<h1>Ordering &amp; Payments</h1>
+									<h1>Payments</h1>
 									<h3>Landing International has partnered with <%= link_to "Armor Payments, a Payoneer Company", "//armorpayments.com", target: "_blank" %> to provide payment escrow services for B2B eCommerce giving you peace of mind with secure transactions.</h3>
 									<h3>
 										Payment transactions on Landing Interational will take place via Armor Paymets (a Payoneer company) payment escrow service. 
@@ -197,9 +230,15 @@
 						</div>
 
 						<div class="row">
+							<div class="small-12 columns profile-section-header">
+								<h1>Introduce Yourself</h1>
+							</div><!--/.small-12-->
+						</div><!--/.row-->
+
+						<div class="row">
 							<div class="medium-4 columns medium-text-right">
 								<div class="profile-edit-form info-panel">
-								<h1>Company Introduction</h1>
+								<h1>About Your Company</h1>
 								<h3>Introduce yourself to potential partners with a short (50-100 words) description.</h3>
 								</div>
 							</div><!--/.medium-4-->
@@ -281,19 +320,10 @@
 						</div>
 
 						<div class="row">
-							<div class="medium-4 columns medium-text-right">
-								<div class="profile-edit-form info-panel">
-								<h1>Brand Portfolio</h1>
-								<h3>What other brands do you work with?</h3>
-								</div>
-							</div><!--/.medium-4-->
-							<div class="medium-8 columns">
-								<div class="profile-edit-form">
-									<%= render "brand_portfolio" %>
-								</div>
-							</div>
-						</div><!-- /.row -->
-
+							<div class="small-12 columns profile-section-header">
+								<h1>Tell Us More</h1>
+							</div><!--/.small-12-->
+						</div><!--/.row-->
 
 						<div class="row">
 							<div class="medium-4 columns medium-text-right">
