@@ -131,6 +131,7 @@ ul.onboard-flow-header {
 	zoom:1;
 	text-align: center;
 	overflow: hidden;
+	a { color: $landing-dark-gray; }
 	&[data-steps="4"] li {width: 25%; /* evenly space 4 steps */}
 	&[data-steps="5"] li {width: 20%; /* evenly space 5 steps */}
 	li {
@@ -143,10 +144,10 @@ ul.onboard-flow-header {
 			font-size: rem-calc(12);
 		}
 		display: inline-block;
-		& > span > img {
+		& > span > img, & > a > span > img {
 			height: 60px;
 		}
-		& > span {
+		& > span, & > a > span {
 			display: block;
 			margin-left: rem-calc(15);
 			&:before {
@@ -168,7 +169,7 @@ ul.onboard-flow-header {
 				text-transform: uppercase;
 			}
 		}
-		&.active > span:before {
+		&.active > span:before, &.active > a > span:before {
 			content: "DO";
 			border: 5px solid $landing-blue;
 	    -webkit-transition: color 0.5s, background-color 0.5s, border 0.5s; /* Safari */
@@ -176,14 +177,14 @@ ul.onboard-flow-header {
 		}
 		&.active:hover {
 			cursor: pointer;
-			& > span:before {
+			& > span:before, & > a > span:before {
 				color: white;
 				background-color: $landing-blue;
 				border: 5px solid $landing-blue;
 				cursor: pointer;
 			}
 		}
-		&.done > span:before {
+		&.done > span:before, &.done > a > span:before {
 			content: "DONE";
 			background: $landing-pink;
 			border: 5px solid $landing-pink;
@@ -213,4 +214,38 @@ ul.onboard-flow-header {
 	}
 }
 
+#onboard-modal {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  @media only screen { 
+    width:95%; 
+    margin: 0 0 0 -47.5%;
+  }
+  @media only screen and (min-width: 40.063em) { 
+    margin: 0 0 0 -25%;
+    width:50%;
+  }
+  max-height: 85%;  
+  background: white;
+  z-index: 100021;
+  padding: rem-calc(20) rem-calc(10);
+  overflow-x: scroll;
+  display: none;
+}
+#onboard-modal-data {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: rem-calc(5);
+}
+#close-onboard-modal {
+  position: absolute;
+  top: rem-calc(-40);
+  right: rem-calc(10);
+  font-size: rem-calc(60);
+  font-weight: 900;
+  color: $landing-middle-gray;
+  z-index: 100022;
+}
 
