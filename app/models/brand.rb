@@ -186,25 +186,34 @@ class Brand
 
 	def onboard_stage(user)
 
-		if 
+		stage = {}
+		if
+			self.company_name.blank? ||
+			self.country_of_origin.blank? ||
+			self.year_established.blank? ||
+			self.website.blank? ||
+			self.company_size.blank? ||
 			self.address.address1.blank? ||
 			self.address.city.blank? || 
 			self.address.postcode.blank? || 
-			self.address.country.blank? || 
-			self.company_name.blank? || 
-			self.country_of_origin.blank? || 
-			self.year_established.blank? ||
-			self.company_size.blank? ||
-			self.website.blank? ||
+			self.address.country.blank? 
+			stage[:major] = 1
+			stage[:minor] = 1
+		elsif
 			user.contact.firstname.blank? ||
 			user.contact.lastname.blank? ||
-			user.contact.phone.blank? ||
+			user.contact.phone.blank?
+			stage[:major] = 1
+			stage[:minor] = 2
+		elsif
 			self.products.blank?
-				return 1
+			stage[:major] = 1
+			stage[:minor] = 3
 		else
-			return 2
+			stage[:major] = 2
+			stage[:minor] = 1
 		end
-
+		return stage
 	end
 
 	def set_subscriber_account_number

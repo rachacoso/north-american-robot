@@ -1,16 +1,28 @@
 <h2 class="text-center">Complete your Profile to Reach More Brands</h2>
 <% stage = get_onboard_stage(company:@current_user.company, user: @current_user)  %>
 <ul class="onboard-flow-header" data-steps="4">
-	<%= link_to_if(stage == 1, onboard_url) do %>
-	<li <%= get_onboard_stage_class(current_stage: stage, stage: 1)%>><span><%= image_tag "/images/create_profile.png" %></span></li>
-	<% end %>
-	<%= link_to_if(stage == 2, onboard_url) do %>
-	<li <%= get_onboard_stage_class(current_stage: stage, stage: 2)%>><span><%= image_tag "/images/enable_payment.png" %><br>(BASIC)</span></li>
-	<% end %>
-	<%= link_to_if(stage == 3, onboard_url) do %>
-	<li <%= get_onboard_stage_class(current_stage: stage, stage: 3)%>><span><%= image_tag "/images/introduce_yourself.png" %><br>(INTERMEDIATE)</span></li>
-	<% end %>
-	<%= link_to_if(stage == 4, onboard_url) do %>
-	<li <%= get_onboard_stage_class(current_stage: stage, stage: 4)%>><span><%= image_tag "/images/tell_us_more.png" %><br>(ADVANCED)</span></li>
-	<% end %>
+	
+	<li <%= get_onboard_stage_class(current_stage: stage[:major], stage: 1)%>>
+		<%= link_to_if_with_block stage[:major] == 1, onboard_url, {remote: true} do %>
+			<span><%= image_tag "/images/create_profile.png" %></span>
+		<% end %>
+	</li>
+	
+	<li <%= get_onboard_stage_class(current_stage: stage[:major], stage: 2)%>>
+		<%= link_to_if_with_block stage[:major] == 2, onboard_url, {remote: true} do %>
+			<span><%= image_tag "/images/enable_payment.png" %><br>(BASIC)</span>
+		<% end %>
+	</li>
+	
+	<li <%= get_onboard_stage_class(current_stage: stage[:major], stage: 3)%>>
+		<%= link_to_if_with_block stage[:major] == 3, onboard_url, {remote: true} do %>
+			<span><%= image_tag "/images/introduce_yourself.png" %><br>(INTERMEDIATE)</span>
+		<% end %>
+	</li>		
+	
+	<li <%= get_onboard_stage_class(current_stage: stage[:major], stage: 4)%>>
+		<%= link_to_if_with_block stage[:major] == 4, onboard_url, {remote: true} do %>
+			<span><%= image_tag "/images/tell_us_more.png" %><br>(ADVANCED)</span>
+		<% end %>
+	</li>
 </ul>

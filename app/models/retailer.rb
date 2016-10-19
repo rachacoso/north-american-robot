@@ -45,7 +45,7 @@ class Retailer
 
 		
 	def onboard_stage(user)
-
+		stage = {}
 		if 
 			self.address.address1.blank? ||
 			self.address.city.blank? || 
@@ -59,11 +59,11 @@ class Retailer
 			user.contact.firstname.blank? ||
 			user.contact.lastname.blank? ||
 			user.contact.phone.blank?
-				return 1
+			stage[:major] = 1
 		else
-			return 2
+			stage[:major] = 2
 		end
-
+		return stage
 	end
 
 end

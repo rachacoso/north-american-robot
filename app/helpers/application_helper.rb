@@ -1,5 +1,13 @@
 module ApplicationHelper
 
+   def link_to_if_with_block condition, options, html_options={}, &block
+     if condition
+       link_to options, html_options, &block
+     else
+       capture &block
+     end
+   end
+
 	def get_collection_variables(newitem, iscurrent)
 
 		collection_name = newitem.class.name.tableize
