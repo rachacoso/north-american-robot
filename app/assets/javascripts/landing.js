@@ -421,7 +421,8 @@ function initialize () {
     triggerSelectOnValidInput: false,
     showNoSuggestionNotice: true,
     noSuggestionNotice: 'Sorry, no matching results',
-    tabDisabled: true
+    tabDisabled: true,
+    maxHeight: 200
   });
 
   $('.country-autocomplete').autocomplete({
