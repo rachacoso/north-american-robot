@@ -20,6 +20,10 @@ $('#armor-ordering-and-payments').fadeIn();
 
 <% end %>
 
+<% if @logo_uploaded %>
+	$('#logo-display').html("<%= j (render partial: 'retailers/company_info_logo_display') %>")
+<% end %>
+
 <% if flash[:error] %>
 	<% flash[:error].each do |k,v| %>
 		<% if k == :margin %>
@@ -37,3 +41,5 @@ $('#armor-ordering-and-payments').fadeIn();
 	$('.inline-error').fadeOut();
 	<%= render partial: 'shared/ajax_message', locals: { updated_item: "Profile" } %>
 <% end %>
+
+imageUploadListeners();

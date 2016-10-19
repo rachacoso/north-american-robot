@@ -57,6 +57,10 @@ class RetailersController < ApplicationController
 
     # set other fields
 
+    if params[:retailer][:logo]
+      @logo_uploaded = true
+    end
+
     # set year established
     if params[:year_established]
       @retailer.update(year_established: Date.new(params[:year_established].to_i))
