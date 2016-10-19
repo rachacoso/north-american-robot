@@ -1,3 +1,4 @@
-$('#onboard-modal-data').html('Test');
+$('#onboard-modal-data').html('<%= j (render partial: "show") %>');
 $('.overlay#onboard-modal-overlay').fadeIn();
 $('#onboard-modal').fadeIn();
+imageUploadListeners();

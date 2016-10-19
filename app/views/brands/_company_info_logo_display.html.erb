@@ -1,0 +1,9 @@
+<% if @brand.logo.exists? %>
+	<br>
+	<%= image_tag @brand.logo.url(:medium), width: "200", height: "200", alt: "Logo", id: "logo-preview"%>
+	<br>
+<% else %>
+	<br>
+	<%= image_tag '/images/image_add.svg' %><br>
+	<small>Upload a Logo</small>
+<% end %>

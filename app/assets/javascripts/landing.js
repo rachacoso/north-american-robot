@@ -12,6 +12,9 @@ function doBackstretch (location, photos, durationTime, fadeTime) {
 
 $( document ).ready(function() {
 
+// LOAD IMAGE UPLOAD LISTENERS
+imageUploadListeners();
+
 // DROPDOWN MENU
 $('.dropmenu').dropit();
 
@@ -485,57 +488,6 @@ function initialize () {
 
 
 
-  // FILE UPLOAD
-
-  // FOR VERIFICATION IMAGES UPLOAD
-  $('#distributor_verification_business_certificate, #retailer_verification_business_certificate').change(function() { 
-      // select the form and submit
-      $('#business-registration-form').submit(); 
-  });
-  // FOR VERIFICATION IMAGES UPLOAD
-  $('#distributor_verification_location_photo, #retailer_verification_location_photo').change(function() { 
-      // select the form and submit
-      $('#location-form').submit(); 
-  });
-  // FOR VERIFICATION IMAGES UPLOAD
-  $('#distributor_verification_brand_display_photo, #retailer_verification_brand_display_photo').change(function() { 
-      // select the form and submit
-      $('#brand-display-form').submit(); 
-  });
-  $('#distributor_logo, #brand_logo, #retailer_logo').change(function() { 
-      // select the form and submit
-      $('#company-info-form').submit(); 
-  });     
-  $('#distributor_logo, #brand_logo, #retailer_logo').change(function() { 
-      // select the form and submit
-      $('#b-or-d-admin-update-logo-upload').submit(); 
-  });
-  // FOR BRAND PHOTO UPLOAD
-  $('#brand_photo_photo').change(function() { 
-      // select the form and submit
-      $('#brand-photo-upload').submit(); 
-  });
-  // FOR ARTICLE PHOTO UPLOAD
-  $('#article_photo_photo').change(function() { 
-      // select the form and submit
-      $('#article-photo-upload').submit(); 
-  });
-  $('#article_carousel_photo').change(function() { 
-      // select the form and submit
-      var thisForm = $(this).parents('form');
-      $(thisForm).submit(); 
-  });
-  $('#article_tile_photo').change(function() { 
-      // select the form and submit
-      var thisForm = $(this).parents('form');
-      $(thisForm).submit(); 
-  });
-  // FOR PRODUCT PHOTO UPLOAD
-  $('.product-photo-photo').change(function() { 
-      // select the form and submit
-      var thisForm = $(this).parents('form');
-      $(thisForm).submit(); 
-  });
 
 jQuery(function() {
   jQuery('.ss_button').on('click',function() {
@@ -594,4 +546,61 @@ jQuery.fn.visibilityToggle = function() {
         return (visibility == 'visible') ? 'hidden' : 'visible';
     });
 };
+
+function imageUploadListeners() {
+
+  // FILE UPLOAD
+
+  // FOR VERIFICATION IMAGES UPLOAD
+  $('#distributor_verification_business_certificate, #retailer_verification_business_certificate').change(function() { 
+      // select the form and submit
+      $('#business-registration-form').submit(); 
+  });
+  // FOR VERIFICATION IMAGES UPLOAD
+  $('#distributor_verification_location_photo, #retailer_verification_location_photo').change(function() { 
+      // select the form and submit
+      $('#location-form').submit(); 
+  });
+  // FOR VERIFICATION IMAGES UPLOAD
+  $('#distributor_verification_brand_display_photo, #retailer_verification_brand_display_photo').change(function() { 
+      // select the form and submit
+      $('#brand-display-form').submit(); 
+  });
+  $('#distributor_logo, #brand_logo, #retailer_logo').change(function() { 
+      // select the form and submit
+      $('#company-info-form').submit(); 
+  });     
+  $('#distributor_logo, #brand_logo, #retailer_logo').change(function() { 
+      // select the form and submit
+      $('#b-or-d-admin-update-logo-upload').submit(); 
+  });
+  // FOR BRAND PHOTO UPLOAD
+  $('#brand_photo_photo').change(function() { 
+      // select the form and submit
+      $('#brand-photo-upload').submit(); 
+  });
+  // FOR ARTICLE PHOTO UPLOAD
+  $('#article_photo_photo').change(function() { 
+      // select the form and submit
+      $('#article-photo-upload').submit(); 
+  });
+  $('#article_carousel_photo').change(function() { 
+      // select the form and submit
+      var thisForm = $(this).parents('form');
+      $(thisForm).submit(); 
+  });
+  $('#article_tile_photo').change(function() { 
+      // select the form and submit
+      var thisForm = $(this).parents('form');
+      $(thisForm).submit(); 
+  });
+  // FOR PRODUCT PHOTO UPLOAD
+  $('.product-photo-photo').change(function() { 
+      // select the form and submit
+      var thisForm = $(this).parents('form');
+      $(thisForm).submit(); 
+  });
+
+
+}
 

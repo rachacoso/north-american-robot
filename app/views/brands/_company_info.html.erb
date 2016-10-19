@@ -7,20 +7,12 @@
 
 			<div class="row">
 				<div class="small-12 columns">
-				<%= form_for @brand, :html => {id: 'company-info-form'}, url: brand_url do |f| %>
+				<%= form_for @brand, :html => {id: 'company-info-form'}, url: brand_url, remote: true do |f| %>
 					<%= hidden_field_tag "redirect_anchor", "a-companyinfo" %>
 					<%= f.label :logo do %>
 						Brand logo <br>
-						<div class="text-center">
-							<% if @brand.logo.exists? %>
-								<br>
-								<%= image_tag @brand.logo.url(:medium), width: "200", height: "200", alt: "Logo", id: "logo-preview"%>
-								<br>
-							<% else %>
-								<br>
-								<%= image_tag '/images/image_add.svg' %><br>
-								<small>Upload a Logo</small>
-							<% end %>
+						<div class="text-center" id="logo-display">
+							<%= render partial: 'brands/company_info_logo_display' %>
 						</div>
 					<% end %>
 					<br>

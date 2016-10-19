@@ -212,6 +212,10 @@ class BrandsController < ApplicationController
 
 		# set other fields
 
+		if params[:brand][:logo]
+			@logo_uploaded = true
+		end
+
 		# set year established
 		if params[:year_established]
 			brand.update(year_established: Date.new(params[:year_established].to_i))
