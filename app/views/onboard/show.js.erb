@@ -1,4 +1,8 @@
 $('#onboard-modal-data').html('<%= j (render partial: "show") %>');
 $('.overlay#onboard-modal-overlay').fadeIn();
 $('#onboard-modal').fadeIn();
+$('body').addClass('noscroll');
+initialize();
 imageUploadListeners();
+initializeAutoForm();
+$(document).foundation();

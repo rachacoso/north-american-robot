@@ -10,6 +10,7 @@ function setOnboardModals () {
 		e.preventDefault();
 		$('#onboard-modal').fadeOut();
 		$('.overlay').fadeOut();
+		$('body').removeClass('noscroll');
 	});	
 
 	// $('.overlay#order-item-overlay, a#close-order-item, a#submit-close').on('click', function(e){

@@ -6,6 +6,9 @@
 body {
   min-height: 100%;
   background-color: $landing-light-gray;
+  &.noscroll {
+    overflow-y: hidden;
+  }
 }
 
 h1, h2, h3 {
