@@ -493,7 +493,7 @@ function initialize () {
 jQuery(function() {
   jQuery('.ss_button').on('click',function() {
     jQuery('.ss_content').not($(this).next()).slideUp(500);
-    jQuery(this).next('.ss_content').slideDown(500);
+    jQuery(this).next('.ss_content').slideToggle(500);
   });
 });
 
