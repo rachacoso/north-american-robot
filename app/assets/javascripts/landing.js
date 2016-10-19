@@ -78,7 +78,7 @@ $(function() {
 
 
 // for autocomplete
-  var countriesArray = $.map(countries, function (value, key) { return { value: value, data: key }; });
+  // var countriesArray = $.map(countries, function (value, key) { return { value: value, data: key }; });
 
 // Background Img
 	if (hasBG) {
