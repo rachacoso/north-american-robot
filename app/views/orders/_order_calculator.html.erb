@@ -22,13 +22,13 @@
 	<tr class="discounts">
 		<td class="title">Damages Budget <br><small>(<%= order.damages_budget %> % x <span class="subtotal-price"><%= number_to_currency(order.subtotal_price) %></span>)</small></td>
 		<td class="value">(<%= number_to_currency(order.damages_budget_discount) %>)</td>
-		<td class="title <%= order.landing_fulfillment_services ? '' : 'strike' %>">Landing Fulfillment Charge <br><small>(17.5% % x <span class="subtotal-price"><%= number_to_currency(order.subtotal_price) %></span>)</small></td>
+		<td class="title <%= order.landing_fulfillment_charge > 0 ? '' : 'strike' %>">Landing Fulfillment Charge <br><small>(12.5% % x <span class="subtotal-price"><%= number_to_currency(order.subtotal_price) %></span>)</small></td>
 		<td class="value">(<%= number_to_currency(order.landing_fulfillment_charge) %>)</td>
 	</tr>
 	<tr class="discounts">
 		<td class="title">Additional Charges </td>
 		<td class="value"><%= number_to_currency(order.charges_subtotal_price) %></td>
-		<td class="title <%= order.us_shipping_terms == 'Retailer' ? '' : 'strike' %>">U.S. Shipping Charge <br><small>(5 % x <span class="subtotal-price"><%= number_to_currency(order.subtotal_price) %></span>)</small></td>
+		<td class="title <%= order.us_shipping_charge > 0 ? '' : 'strike' %>">U.S. Shipping Charge <br><small>(5 % x <span class="subtotal-price"><%= number_to_currency(order.subtotal_price) %></span>)</small></td>
 		<td class="value">(<%= number_to_currency(order.us_shipping_charge) %>)</td>
 	</tr>
 	<tr id="finals">
