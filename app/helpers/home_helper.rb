@@ -126,4 +126,5 @@ module HomeHelper
 			return true
 		end
 	end
+
 end

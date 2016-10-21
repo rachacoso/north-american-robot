@@ -6,17 +6,11 @@ $( document ).ready(function() {
 
 
 function setOnboardModals () {
-	$('a#close-onboard-modal').on('click', function(e){
+	$('a#close-onboard-modal,a#close-onboard-modal-button').on('click', function(e){
 		e.preventDefault();
 		$('#onboard-modal').fadeOut();
 		$('.overlay').fadeOut();
+		$('#onboard-modal-next').removeClass('show');
 		$('body').removeClass('noscroll');
 	});	
-
-	// $('.overlay#order-item-overlay, a#close-order-item, a#submit-close').on('click', function(e){
-	// 	e.preventDefault();
-	// 	$('#order-item').fadeOut();
-	// 	$('.overlay').fadeOut();
-	// });
-
 }

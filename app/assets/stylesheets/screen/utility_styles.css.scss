@@ -220,13 +220,16 @@ ul.tablist {
   left: 0;
   height: 100%;
   width: 100%;
-  z-index: 100000;
+  z-index: 1000;
   // background-color: rgba(0,0,0,0.5);
   background-color: rgba(0,0,0,0.8);
   display: none;
   &#ajax-wait-overlay {
     z-index: 1000000;
     background-color: rgba(0,0,0,0.1);
+  }
+  &#onboard-modal-overlay {
+  	z-index: 95;
   }
 }
 

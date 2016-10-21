@@ -1,0 +1,18 @@
+<% partial_info = onboard_brand_partial(major: stage[:major], minor: stage[:minor] ) %>
+<div class="row">
+	<div class="small-12 columns text-center">
+		<%= image_tag partial_info[:image_path] %>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<div class="row">
+	<div class="small-12 columns">
+		<%= render partial: "progress_brand" %>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
+<hr>
+<% if partial_info[:locals] %>
+	<%= render partial: partial_info[:file], locals: partial_info[:locals] %>
+<% else %>
+	<%= render partial: partial_info[:file] %>
+<% end %>

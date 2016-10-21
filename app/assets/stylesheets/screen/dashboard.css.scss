@@ -163,7 +163,7 @@ ul.onboard-flow-header {
 				line-height: rem-calc(65);
 				border-radius: 100%;
 				position: relative;
-				z-index: 1000;
+				z-index: 50;
 				color: $landing-dark-gray;
 				font-weight: 900;
 				text-transform: uppercase;
@@ -214,6 +214,105 @@ ul.onboard-flow-header {
 	}
 }
 
+ul.onboard-modal-header {
+	list-style-type: none; /*to remove bullets*/
+	display: table;
+	width: 100%;
+	margin: auto;
+	padding: 0 rem-calc(10) 0 rem-calc(10);
+	zoom:1;
+	text-align: center;
+	overflow: hidden;
+	a { color: $landing-dark-gray; }
+	&[data-steps="2"] li {width: 50%; /* evenly space 2 steps */}
+	&[data-steps="3"] li {width: 33%; /* evenly space 3 steps */}
+	&[data-steps="4"] li {width: 25%; /* evenly space 4 steps */}
+	&[data-steps="5"] li {width: 20%; /* evenly space 5 steps */}
+	&[data-steps="7"] li {width: 14%; /* evenly space 7 steps */}
+	li {
+		display: inline-block;
+		position: relative;
+		vertical-align: top;
+		font-weight:100;
+		font-size: rem-calc(18);
+		@media #{$small-only} {
+			font-size: rem-calc(12);
+		}
+		display: inline-block;
+		// & > span > img, & > a > span > img {
+		// 	height: 60px;
+		// }
+		& > span, & > a > span {
+			display: block;
+			margin-left: rem-calc(15);
+			&:before {
+				content: attr(data-step);
+				display: block;
+				position: absolute;
+				margin: 0 auto;
+				background: $landing-lighter-blue;
+				width: rem-calc(40);
+				height: rem-calc(40);
+				text-align: center; //IE8 doesn't inherit this style
+				margin-bottom: 0.25em;
+				line-height: rem-calc(40);
+				border-radius: 100%;
+				position: relative;
+				z-index: 50;
+				color: $landing-dark-gray;
+				font-weight: 300;
+				text-transform: uppercase;
+			}
+		}
+		&.active > span:before, &.active > a > span:before {
+			// content: "DO";
+			background-color: $landing-blue;
+			// border: 5px solid $landing-blue;
+	    -webkit-transition: color 0.5s, background-color 0.5s, border 0.5s; /* Safari */
+	    transition: color 0.5s, background-color 0.5s, border 0.5s;
+		}
+		&.active > span {
+			font-weight: 500;
+		}
+		// &.active:hover {
+		// 	cursor: pointer;
+		// 	& > span:before, & > a > span:before {
+		// 		color: white;
+		// 		background-color: $landing-blue;
+		// 		border: 5px solid $landing-blue;
+		// 		cursor: pointer;
+		// 	}
+		// }
+		&.done > span:before, &.done > a > span:before {
+			content: "";
+			background: $landing-blue;
+			// border: 5px solid $landing-pink;
+			color: white;
+			font-size: 85%;
+		}
+		&:before {
+			content: "";
+			display: block;
+			width: 100%;
+			height: rem-calc(5);
+			position: absolute;
+			top: rem-calc(20);
+			right: 50%;
+			background: $landing-lighter-blue;
+			z-index: 4;
+		}
+		&.done:before {
+			background: $landing-blue;
+		}
+		&.active:before {
+			background: $landing-blue;
+		}
+		&:first-child:before {
+			display: none;
+		}
+	}
+}
+
 #onboard-modal {
   position: fixed;
   top: 10%;
@@ -223,29 +322,95 @@ ul.onboard-flow-header {
     margin: 0 0 0 -47.5%;
   }
   @media only screen and (min-width: 40.063em) { 
-    margin: 0 0 0 -25%;
-    width:50%;
+    margin: 0 0 0 -40%;
+    width:80%;
   }
-  max-height: 85%;  
+  height: 80%;  
   background: white;
-  z-index: 100021;
+  z-index: 96;
   padding: rem-calc(20) rem-calc(10);
   overflow-x: scroll;
   display: none;
 }
 #onboard-modal-data {
+	// position: absolute;
+	// top: 0;
+	// left: 0;
   height: 100%;
-  overflow-x: hidden;
-  overflow-y: scroll;
   padding: rem-calc(5);
+  width: 90%;
+  margin: auto;
+}
+#onboard-modal-next {
+	z-index: 96;
+	height: 3.5em;
+	width: 3.5em;
+	@media only screen { 
+		position: fixed;
+		right: 50%;
+		bottom: -3.5em;
+		-ms-transform: translate(1.75em, 0); /* IE 9 */
+		-webkit-transform: translate(1.75em, 0); /* Safari */
+		transform: translate(1.75em, 0);		
+		transition: bottom 0.5s;
+	}
+	@media only screen and (min-width: 40.063em) { 
+		position: fixed;
+		right: -3.5em;
+		top: 50%;
+		-ms-transform: translate(0, rem-calc(-50)); /* IE 9 */
+		-webkit-transform: translate(0, rem-calc(-50)); /* Safari */
+		transform: translate(0, rem-calc(-50));
+		transition: right 0.5s;
+	}
+
+	& > a:before {
+		content: 'next';
+		display: inline-block;
+		margin: 0 auto;
+		background: $landing-blue;
+		width: 3.5em;
+		height: 3.5em;
+		text-align: center; //IE8 doesn't inherit this style
+		margin-bottom: 0.25em;
+		line-height: 3.5em;
+		border-radius: 100%;
+		position: relative;
+		z-index: 1000;
+		color: $landing-dark-gray;
+		font-weight: 500;
+		transition: color 0.5s;
+  }
+
+  &:hover > a:before {
+  	color: white;
+  }
+
+	&.show {
+
+		@media only screen { 
+			bottom: rem-calc(5);
+		}
+		@media only screen and (min-width: 40.063em) { 
+			right: rem-calc(25);
+		}
+
+	}
 }
 #close-onboard-modal {
-  position: absolute;
-  top: rem-calc(-40);
-  right: rem-calc(10);
+  position: fixed;
+  // top: rem-calc(-40);
+  // right: rem-calc(10);
+  top: 5%;
+  @media only screen { 
+  	right: 4%;
+  }
+  @media only screen and (min-width: 40.063em) { 
+		right: 11%;
+  }
   font-size: rem-calc(60);
   font-weight: 900;
   color: $landing-middle-gray;
-  z-index: 100022;
+  z-index: 97;
 }
 

@@ -1,0 +1,80 @@
+<% stage = get_onboard_stage(company:@current_user.company, user: @current_user) %>
+<% if stage[:major] == 1 %>
+<ul class="onboard-modal-header" data-steps="3">
+	<li <%= get_onboard_stage_class(current_stage: stage[:minor], stage: 1)%>>
+		<span data-step="1">Enter Company Info</span>
+	</li>
+	<li <%= get_onboard_stage_class(current_stage: stage[:minor], stage: 2)%>>
+			<span data-step="2">Enter Contact Info</span>
+	</li>
+	<li <%= get_onboard_stage_class(current_stage: stage[:minor], stage: 3)%>>
+		<span data-step="3">Enter Products</span>
+	</li>
+</ul>
+<% elsif stage[:major] == 2 %>
+<ul class="onboard-modal-header" data-steps="2">
+	<li <%= get_onboard_stage_class(current_stage: stage[:minor], stage: 1)%>>
+		<span data-step="1">Setup Payments</span>
+	</li>
+	<li <%= get_onboard_stage_class(current_stage: stage[:minor], stage: 2)%>>
+			<span data-step="2">Ordering Requirements</span>
+	</li>
+</ul>
+<% elsif stage[:major] == 3 %>
+<ul class="onboard-modal-header" data-steps="4">
+	<li <%= get_onboard_stage_class(current_stage: stage[:minor], stage: 1)%>>
+		<span data-step="1">Company Introduction</span>
+	</li>
+	<li <%= get_onboard_stage_class(current_stage: stage[:minor], stage: 2)%>>
+			<span data-step="2">Add Brand Photos</span>
+	</li>
+	<li <%= get_onboard_stage_class(current_stage: stage[:minor], stage: 3)%>>
+		<span data-step="3">Trends</span>
+	</li>
+	<li <%= get_onboard_stage_class(current_stage: stage[:minor], stage: 4)%>>
+			<span data-step="4">Global Good Tags</span>
+	</li>
+</ul>
+<% elsif stage[:major] == 4 %>
+<ul class="onboard-modal-header" data-steps="5">
+	<li <%= get_onboard_stage_class(current_stage: stage[:minor], stage: 1)%>>
+		<span data-step="1">Key Retailers</span>
+	</li>
+	<li <%= get_onboard_stage_class(current_stage: stage[:minor], stage: 2)%>>
+			<span data-step="2">Add Sectors</span>
+	</li>
+	<li <%= get_onboard_stage_class(current_stage: stage[:minor], stage: 3)%>>
+			<span data-step="3">Add Channels</span>
+	</li>
+	<li <%= get_onboard_stage_class(current_stage: stage[:minor], stage: 4)%>>
+			<span data-step="4">Add Channel Capacities</span>
+	</li>
+	<li <%= get_onboard_stage_class(current_stage: stage[:minor], stage: 5)%>>
+			<span data-step="5">Add Countries of Distribution</span>
+	</li>
+</ul>
+<% elsif stage[:major] == 5 %>
+<ul class="onboard-modal-header" data-steps="7">
+	<li <%= get_onboard_stage_class(current_stage: stage[:minor], stage: 1)%>>
+		<span data-step="1">Press Hits</span>
+	</li>
+	<li <%= get_onboard_stage_class(current_stage: stage[:minor], stage: 2)%>>
+			<span data-step="2">Trade Shows</span>
+	</li>
+	<li <%= get_onboard_stage_class(current_stage: stage[:minor], stage: 3)%>>
+		<span data-step="3">Patents</span>
+	</li>
+	<li <%= get_onboard_stage_class(current_stage: stage[:minor], stage: 4)%>>
+			<span data-step="4">Trademarks</span>
+	</li>
+	<li <%= get_onboard_stage_class(current_stage: stage[:minor], stage: 5)%>>
+		<span data-step="5">Certifications / Regulatory</span>
+	</li>
+	<li <%= get_onboard_stage_class(current_stage: stage[:minor], stage: 6)%>>
+			<span data-step="6">Compliance</span>
+	</li>
+	<li <%= get_onboard_stage_class(current_stage: stage[:minor], stage: 7)%>>
+		<span data-step="7">Social Ethos &amp; Impact</span>
+	</li>
+</ul>
+<% end %>

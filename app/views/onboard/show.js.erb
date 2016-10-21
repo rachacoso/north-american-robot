@@ -1,8 +1,17 @@
-$('#onboard-modal-data').html('<%= j (render partial: "show") %>');
-$('.overlay#onboard-modal-overlay').fadeIn();
-$('#onboard-modal').fadeIn();
-$('body').addClass('noscroll');
+<% if @next %>
+	$('#onboard-modal-data').html('<%= j (render partial: "show") %>');
+	$('#onboard-modal-next').html('<%= j (render partial: "next") %>');
+<% else %>
+	$('#onboard-modal-data').html('<%= j (render partial: "show") %>');
+	$('#onboard-modal-next').html('<%= j (render partial: "next") %>');
+	$('#onboard-modal-next').addClass('show');
+	$('.overlay#onboard-modal-overlay').fadeIn();
+	$('#onboard-modal').fadeIn();
+	$('body').addClass('noscroll');
+<% end %>
+
 initialize();
+setOnboardModals();
 imageUploadListeners();
 initializeAutoForm();
 $(document).foundation();
