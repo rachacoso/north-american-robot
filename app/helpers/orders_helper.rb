@@ -224,9 +224,11 @@ module OrdersHelper
 
 		payment_terms = order.payment_terms if order.payment_terms.present?
 
-		case terms = order.us_shipping_terms
-		when "Brand", "Retailer"
-			us_shipping_terms = terms
+		case order.us_shipping_terms
+		when "Brand"
+			us_shipping_terms = "Brand Pays"
+		when "Retailer"
+			us_shipping_terms = "Retailer Pays"
 		when nil
 			us_shipping_terms = nil
 		end
