@@ -191,7 +191,7 @@ module LandingCompany
 
 		included do
 			# PAYMENTS & SHIPPING
-			field :payment_terms, type: String, default: "Prepayment" # Prepayment, Net 30, Net 45, Net 60
+			field :payment_terms, type: String, default: "Prepay" # Prepay, Net 30, Net 45, Net 60
 			field :us_shipping_terms, type: String # "Brand", "Retailer", or "Other - [Manual Input...]"
 			field :accepts_overseas_shipment, type: Boolean
 			# field :multiple_distribution_centers, type: Boolean
@@ -271,7 +271,7 @@ module LandingCompany
 					case terms
 					when "Net 30", "Net 45", "Net 60"
 						self.disable_armor_payments = true
-					when "Prepayment"
+					when "Prepay"
 						self.disable_armor_payments = false
 					end
 					return true
@@ -296,7 +296,7 @@ module LandingCompany
 					else
 						return false
 					end
-				when "Prepayment"
+				when "Prepay"
 					return true
 				end
 			end

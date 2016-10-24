@@ -8,8 +8,8 @@
 <div class="row">
 	<div class="small-12 columns">
 		<h3>Payment Terms</h3>
-<%= radio_button_tag("distributor[payment_terms]", "Prepayment", @distributor.payment_terms == 'Prepayment' || !@distributor.payment_terms, class: "auto-form") %>
-<%= label_tag("distributor[payment_terms]_Prepayment", "Prepayment") %>
+<%= radio_button_tag("distributor[payment_terms]", "Prepay", @distributor.payment_terms == 'Prepay' || !@distributor.payment_terms, class: "auto-form") %>
+<%= label_tag("distributor[payment_terms]_Prepay", "Prepay") %>
 <%= radio_button_tag("distributor[payment_terms]", "Net 30", @distributor.payment_terms == 'Net 30', class: "auto-form") %>
 <%= label_tag("distributor[payment_terms]_Net_30", "Net 30") %>
 <%= radio_button_tag("distributor[payment_terms]", "Net 45", @distributor.payment_terms == 'Net 45', class: "auto-form") %>

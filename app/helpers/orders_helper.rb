@@ -268,7 +268,7 @@ module OrdersHelper
 	end
 
 	def estimated_payment_date(order:)
-		if order.payment_terms.blank? || order.payment_terms == "Prepayment"
+		if order.payment_terms.blank? || order.payment_terms == "Prepay"
 			ship_date = "5 days after receipt of products"
 		else
 			if order.cancel_date.present?
