@@ -194,6 +194,7 @@ module LandingCompany
 			field :payment_terms, type: String, default: "Prepay" # Prepay, Net 30, Net 45, Net 60
 			field :us_shipping_terms, type: String # "Brand", "Retailer", or "Other - [Manual Input...]"
 			field :accepts_overseas_shipment, type: Boolean
+			field :other_terms, type: String
 			# field :multiple_distribution_centers, type: Boolean
 			# field :pays_for_international_shipping, type: Boolean
 			# field :pays_for_domestic_shipping, type: Boolean
@@ -217,7 +218,7 @@ module LandingCompany
 		module Orders
 			extend ActiveSupport::Concern
 
-			included do
+			included do #Brand specific attributes needed on order
 				field :landing_commission, type: Integer, default: 10 #landing commission percentage
 				field :landing_fulfillment_services, type: Boolean
 				validates :landing_commission, numericality: { less_than_or_equal_to: 20, greater_than_or_equal_to: 1 }
@@ -227,6 +228,7 @@ module LandingCompany
 				self.payment_terms = self.orderer.payment_terms
 				self.us_shipping_terms = self.orderer.us_shipping_terms
 				self.accepts_overseas_shipment = self.orderer.accepts_overseas_shipment
+				self.other_terms = self.orderer.other_terms
 
 				self.margin = self.orderer.margin unless self.orderer.margin.blank? 
 				self.discount = self.orderer.margin unless self.orderer.margin.blank? 

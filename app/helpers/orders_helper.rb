@@ -229,9 +229,6 @@ module OrdersHelper
 			us_shipping_terms = terms
 		when nil
 			us_shipping_terms = nil
-		else #when 'Other'
-			matched_terms = terms.match(/^Other - (.+)/m).captures.first rescue nil
-			us_shipping_terms = "(Other Shipping Terms) <br>".html_safe + matched_terms
 		end
 
 		#check accepts_overseas_shipment
@@ -258,8 +255,9 @@ module OrdersHelper
 		order_requirements << "Product Ticketing" if order.product_ticketing
 		order_requirements << "Retailer EDI" if order.retailer_edi
 
+		other_terms = order.other_terms if order.other_terms.present?
 
-		return payment_terms, us_shipping_terms, shipping_payment_terms, order_requirements
+		return payment_terms, us_shipping_terms, shipping_payment_terms, order_requirements, other_terms
 
 	end
 

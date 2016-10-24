@@ -48,9 +48,8 @@ class RetailersController < ApplicationController
 
     @retailer = @current_user.retailer
 
-    if params[:retailer][:us_shipping_terms] == "Other"
-      other_terms = params[:retailer][:us_shipping_terms_other_comments]
-      params[:retailer][:us_shipping_terms] = "Other - " + other_terms
+    if params[:retailer][:other_terms_switch].to_i == 0
+      params[:retailer][:other_terms] = ""
     end
 
     # set general fields
@@ -197,7 +196,8 @@ class RetailersController < ApplicationController
       :disable_armor_payments,
       # :payment_terms,
       :us_shipping_terms,
-      :accepts_overseas_shipment, 
+      :accepts_overseas_shipment,
+      :other_terms,
       # :margin,
       :marketing_co_op,
       :damages_budget,

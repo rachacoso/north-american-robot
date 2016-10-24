@@ -2,7 +2,7 @@
 $( document ).ready(function() {
 
 	setModalActions();
-	shippingtermsControls ();
+	shippingtermsControls();
 
 	$('#back-control').on('click', function(e){
 		e.preventDefault();
@@ -41,20 +41,13 @@ function setModalActions () {
 }
 
 function shippingtermsControls () {
-	$('#retailer_us_shipping_terms, #retailer_us_shipping_terms_Other, #retailer_us_shipping_terms_Brand, #retailer_us_shipping_terms_Retailer').on('change', function(e){
-		var terms = $(this).val();
-		if (terms == "Other") {
+	$('#retailer_other_terms_switch, #distributor_other_terms_switch').on('click', function(e){
+		if (this.checked) {
 			$('#other-terms-comments').fadeIn();
+			console.log("1");
 		} else {
 			$('#other-terms-comments').fadeOut();
-		}
-	});
-	$('#distributor_us_shipping_terms, #distributor_us_shipping_terms_Other, #distributor_us_shipping_terms_Brand, #distributor_us_shipping_terms_Retailer').on('change', function(e){
-		var terms = $(this).val();
-		if (terms == "Other") {
-			$('#other-terms-comments').fadeIn();
-		} else {
-			$('#other-terms-comments').fadeOut();
+			console.log("2");
 		}
 	});
 }

@@ -32,47 +32,45 @@
 		<%= label_tag("retailer[us_shipping_terms]_Brand", "Brand") %>
 		<%= radio_button_tag("retailer[us_shipping_terms]", "Retailer", get_shipping_terms(@retailer) == 'Retailer', class: "auto-form") %>
 		<%= label_tag("retailer[us_shipping_terms]_Retailer", "Retailer") %>
-		<%= radio_button_tag("retailer[us_shipping_terms]", "Other", get_shipping_terms(@retailer) == 'Other', class: "auto-form") %>
-		<%= label_tag("retailer[us_shipping_terms]_Other", "Other") %>
-		<%#= f.select(:us_shipping_terms, options_for_select([['Brand', 'Brand'], ['Retailer', 'Retailer'], ['Other', 'Other']], get_shipping_terms(@retailer)), {:label => false}, { :class => 'auto-form' }) %>
 	</div><!--/.small-6-->
 	<div class="small-6 columns">
 
 	</div><!--/.small-6-->
 </div><!--/.row-->
-<div class="row">
-	<div class="small-12 columns">
-			<br>
-			<% is_other, terms = get_other_shipping_terms(@retailer) %>
-			<% if is_other %>
-				<div id="other-terms-comments">
-					<%= label_tag "retailer[us_shipping_terms_other_comments]", "<strong>Please add details for 'Other' terms</strong>".html_safe %>
-					<%= text_area_tag "retailer[us_shipping_terms_other_comments]", terms, rows: 10, placeholder: "ADD DETAILS",  class: "auto-form-text" %>
-				</div>
-			<% else %>
-				<div id="other-terms-comments" style="display: none;">
-					<%= label_tag "retailer[us_shipping_terms_other_comments]", "<strong>Please add details for 'Other' terms</strong>".html_safe %>
-					<%= text_area_tag "retailer[us_shipping_terms_other_comments]", "", rows: 10, placeholder: "ADD DETAILS", class: "auto-form-text" %>
-				</div>
-			<% end %>
 
-	</div><!--/.small-12-->
-</div><!--/.row-->
 <hr>
 <div class="row">
 	<div class="small-12 columns">
 		<h3>Additional Terms</h3>
 	</div><!--/.small-12-->
-	<div class="small-6 columns">
+	<div class="medium-6 columns">
 		<%= f.check_box :accepts_overseas_shipment, label: false, class: "auto-form" %>
 		<%= f.label :accepts_overseas_shipment, 'Accepts Overseas Shipment' %>
-	</div><!--/.small-6-->
-	<div class="small-6 columns">
-		
-	</div><!--/.small-6-->
+	</div><!--/.medium-6-->
+	<div class="medium-6 columns">
+		<input type="hidden" value="0" name="retailer[other_terms_switch]">
+		<%= check_box_tag "retailer[other_terms_switch]", 1, (@retailer.other_terms.present? ? true : false), label: false, class: "auto-form" %>
+		<%= label_tag "retailer[other_terms_switch]", 'Other' %>
+	</div><!--/.medium-6-->
 </div><!--/.row-->
 
-
+<div class="row">
+	<div class="medium-6 columns">
+	</div><!--/.medium-6-->
+	<div class="medium-6 columns">
+		<% if @retailer.other_terms.present? %>
+			<div id="other-terms-comments">
+				<%= label_tag "retailer[other_terms]", "Please add details for 'Other' terms".html_safe %>
+				<%= text_area_tag "retailer[other_terms]", @retailer.other_terms, rows: 10, placeholder: "ADD DETAILS",  class: "auto-form-text" %>
+			</div>
+		<% else %>
+			<div id="other-terms-comments" style="display: none;">
+				<%= label_tag "retailer[other_terms]", "Please add details for 'Other' terms".html_safe %>
+				<%= text_area_tag "retailer[other_terms]", "", rows: 10, placeholder: "ADD DETAILS", class: "auto-form-text" %>
+			</div>
+		<% end %>
+	</div><!--/.medium-6-->
+</div><!--/.row-->
 
 
 

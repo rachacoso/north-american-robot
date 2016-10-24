@@ -32,32 +32,12 @@
 		<%= label_tag("distributor[us_shipping_terms]_Brand", "Brand") %>
 		<%= radio_button_tag("distributor[us_shipping_terms]", "Retailer", get_shipping_terms(@distributor) == 'Retailer', class: "auto-form") %>
 		<%= label_tag("distributor[us_shipping_terms]_Retailer", "Retailer") %>
-		<%= radio_button_tag("distributor[us_shipping_terms]", "Other", get_shipping_terms(@distributor) == 'Other', class: "auto-form") %>
-		<%= label_tag("distributor[us_shipping_terms]_Other", "Other") %>
-		<%#= f.select(:us_shipping_terms, options_for_select([['Brand', 'Brand'], ['Retailer', 'Retailer'], ['Other', 'Other']], get_shipping_terms(@distributor)), {:label => false}, { :class => 'auto-form' }) %>
 	</div><!--/.small-6-->
 	<div class="small-6 columns">
 
 	</div><!--/.small-6-->
 </div><!--/.row-->
-<div class="row">
-	<div class="small-12 columns">
-			<br>
-			<% is_other, terms = get_other_shipping_terms(@distributor) %>
-			<% if is_other %>
-				<div id="other-terms-comments">
-					<%= label_tag "distributor[us_shipping_terms_other_comments]", "<strong>Please add details for 'Other' terms</strong>".html_safe %>
-					<%= text_area_tag "distributor[us_shipping_terms_other_comments]", terms, rows: 10, placeholder: "ADD DETAILS",  class: "auto-form-text" %>
-				</div>
-			<% else %>
-				<div id="other-terms-comments" style="display: none;">
-					<%= label_tag "distributor[us_shipping_terms_other_comments]", "<strong>Please add details for 'Other' terms</strong>".html_safe %>
-					<%= text_area_tag "distributor[us_shipping_terms_other_comments]", "", rows: 10, placeholder: "ADD DETAILS", class: "auto-form-text" %>
-				</div>
-			<% end %>
 
-	</div><!--/.small-12-->
-</div><!--/.row-->
 
 <hr>
 <div class="row">
@@ -69,10 +49,30 @@
 		<%= f.label :accepts_overseas_shipment, 'Accepts Overseas Shipment' %>
 	</div><!--/.small-6-->
 	<div class="small-6 columns">
-		
+		<input type="hidden" value="0" name="distributor[other_terms_switch]">
+		<%= check_box_tag "distributor[other_terms_switch]", 1, (@distributor.other_terms.present? ? true : false), label: false, class: "auto-form" %>
+		<%= label_tag "distributor[other_terms_switch]", 'Other' %>		
 	</div><!--/.small-6-->
 </div><!--/.row-->
 
+<div class="row">
+	<div class="medium-6 columns">
+
+	</div><!--/.medium-6-->
+	<div class="medium-6 columns">
+			<% if @distributor.other_terms.present? %>
+				<div id="other-terms-comments">
+					<%= label_tag "distributor[other_terms]", "Please add details for 'Other' terms".html_safe %>
+					<%= text_area_tag "distributor[other_terms]", @distributor.other_terms, rows: 10, placeholder: "ADD DETAILS",  class: "auto-form-text" %>
+				</div>
+			<% else %>
+				<div id="other-terms-comments" style="display: none;">
+					<%= label_tag "distributor[other_terms]", "<strong>Please add details for 'Other' terms</strong>".html_safe %>
+					<%= text_area_tag "distributor[other_terms]", "", rows: 10, placeholder: "ADD DETAILS", class: "auto-form-text" %>
+				</div>
+			<% end %>
+	</div><!--/.medium-6-->
+</div><!--/.row-->
 			<%#= f.submit 'Update Terms', class: "landing-button right" %>
 		</div>
 	<% end %>
