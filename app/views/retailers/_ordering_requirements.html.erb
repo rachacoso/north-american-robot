@@ -80,14 +80,18 @@
 				</div><!--/.small-12-->
 			</div><!--/.row-->
 			<div class="row">
-				<div class="small-6 columns">
+				<div class="small-4 columns">
 					<%= f.check_box :product_ticketing, label: false, class: "auto-form" %>
 					<%= f.label :product_ticketing, "Product Ticketing" %>
-				</div><!--/.small-6-->
-				<div class="small-6 columns">
+				</div><!--/.small-4-->
+				<div class="small-4 columns">
 					<%= f.check_box :retailer_edi, label: false, class: "auto-form" %>
 					<%= f.label :retailer_edi, "Retailer EDI" %>
-				</div><!--/.small-6-->
+				</div><!--/.small-4-->
+				<div class="small-4 columns">
+					<%= f.check_box :routing_guide, label: false, class: "auto-form" %>
+					<%= f.label :routing_guide, "Routing Guide" %>
+				</div><!--/.small-4-->
 			</div><!--/.row-->
 			<%#= f.submit 'Update Requirements', class: "landing-button right" %>
 		</div>

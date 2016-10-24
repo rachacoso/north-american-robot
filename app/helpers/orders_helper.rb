@@ -254,6 +254,7 @@ module OrdersHelper
 
 		order_requirements << "Product Ticketing" if order.product_ticketing
 		order_requirements << "Retailer EDI" if order.retailer_edi
+		order_requirements << "Routing Guide" if order.routing_guide
 
 		other_terms = order.other_terms if order.other_terms.present?
 

@@ -203,6 +203,7 @@ class RetailersController < ApplicationController
       :damages_budget,
       :product_ticketing,
       :retailer_edi,
+      :routing_guide,
       address_attributes: [ 
         :address1,
         :address2,

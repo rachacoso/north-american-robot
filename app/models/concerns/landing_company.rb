@@ -208,6 +208,7 @@ module LandingCompany
 			validates :damages_budget, numericality: { less_than_or_equal_to: 100, greater_than_or_equal_to: 0 }
 			field :product_ticketing, type: Boolean
 			field :retailer_edi, type: Boolean
+			field :routing_guide, type: Boolean
 			# field :testers, type: Boolean
 			# field :gratis, type: Boolean
 			# field :comissions, type: Boolean
@@ -236,6 +237,7 @@ module LandingCompany
 				self.damages_budget = self.orderer.damages_budget unless self.orderer.damages_budget.blank?
 				self.product_ticketing = self.orderer.product_ticketing
 				self.retailer_edi = self.orderer.retailer_edi
+				self.routing_guide = self.orderer.routing_guide
 				if self.brand.landing_commission.present?
 					self.landing_commission = self.brand.landing_commission
 				else
