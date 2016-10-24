@@ -129,7 +129,7 @@ class Order # for V2 ordering
   end
 
   def us_shipping_charge
-    if self.orderer.us_shipping_terms == "Brand" && self.landing_fulfillment_services
+    if self.us_shipping_terms == "Brand" && self.landing_fulfillment_services
       return self.subtotal_price * (0.05)
     else
       return 0
