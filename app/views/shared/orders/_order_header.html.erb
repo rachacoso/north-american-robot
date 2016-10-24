@@ -127,27 +127,23 @@
 			<div id="body">
 				<div class="row">
 					<div class="medium-6 columns">
-						<% payment_terms, us_shipping_terms, shipping_payment_terms, order_requirements, other_terms = get_order_terms(order:order) %>
+						<% payment_terms, shipping_terms, additional_terms, order_requirements = get_order_terms(order:order) %>
 						<ul>
 							<% unless payment_terms.blank? %>
 							<li class="title">Payment Terms</li>
 							<li class="term"><%= payment_terms %></li>
 							<% end %>
-							<% unless us_shipping_terms.blank? %>
+							<% unless shipping_terms.blank? %>
 							<li class="title">U.S. Shipping Terms</li>
-							<li class="term"><%= simple_format(us_shipping_terms, {}, wrapper_tag: "div") %></li>
+							<li class="term"><%= simple_format(shipping_terms, {}, wrapper_tag: "div") %></li>
 							<% end %>
 						</ul>
 						<ul>
-							<% unless shipping_payment_terms.blank? %>
-								<li class="title">Additional Shipping Terms</li> 
-								<% shipping_payment_terms.each do |term| %>
-									<li class="term"><%= term %></li>
+							<% unless additional_terms.blank? %>
+								<li class="title">Additional Terms</li> 
+								<% additional_terms.each do |term| %>
+									<li class="term"><%= simple_format(term, {}, wrapper_tag: "div") %></li>
 								<% end %>
-							<% end %>
-							<% unless other_terms.blank? %>
-							<li class="title">Other Terms</li>
-							<li class="term"><%= simple_format(other_terms, {}, wrapper_tag: "div") %></li>
 							<% end %>
 						</ul>
 					</div><!--/.medium-6-->

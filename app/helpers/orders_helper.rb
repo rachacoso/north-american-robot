@@ -219,26 +219,28 @@ module OrdersHelper
 
 	def get_order_terms(order:)
 	
-		shipping_payment_terms = []
+		additional_terms = []
 		order_requirements = []
 
 		payment_terms = order.payment_terms if order.payment_terms.present?
 
 		case order.us_shipping_terms
 		when "Brand"
-			us_shipping_terms = "Brand Pays"
+			shipping_terms = "Brand Pays"
 		when "Retailer"
-			us_shipping_terms = "Retailer Pays"
+			shipping_terms = "Retailer Pays"
 		when nil
-			us_shipping_terms = nil
+			shipping_terms = nil
 		end
 
 		#check accepts_overseas_shipment
 		if order.accepts_overseas_shipment
-			shipping_payment_terms << "Accepts Overseas Shipment"
+			additional_terms << "Accepts Overseas Shipment"
 		else
-			shipping_payment_terms << "Requires U.S. Fulfillment"
+			additional_terms << "Requires U.S. Fulfillment"
 		end
+
+		additional_terms << order.other_terms if order.other_terms.present?
 
 		# ORDER REQUIREMENTS
 
@@ -258,9 +260,7 @@ module OrdersHelper
 		order_requirements << "Retailer EDI" if order.retailer_edi
 		order_requirements << "Routing Guide" if order.routing_guide
 
-		other_terms = order.other_terms if order.other_terms.present?
-
-		return payment_terms, us_shipping_terms, shipping_payment_terms, order_requirements, other_terms
+		return payment_terms, shipping_terms, additional_terms, order_requirements
 
 	end
 

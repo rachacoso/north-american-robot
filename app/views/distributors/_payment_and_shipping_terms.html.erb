@@ -62,13 +62,13 @@
 	<div class="medium-6 columns">
 			<% if @distributor.other_terms.present? %>
 				<div id="other-terms-comments">
-					<%= label_tag "distributor[other_terms]", "Please add details for 'Other' terms".html_safe %>
+					<%= label_tag "distributor[other_terms]", "Please list 'Other' terms below".html_safe %>
 					<%= text_area_tag "distributor[other_terms]", @distributor.other_terms, rows: 10, placeholder: "ADD DETAILS",  class: "auto-form-text" %>
 				</div>
 			<% else %>
 				<div id="other-terms-comments" style="display: none;">
-					<%= label_tag "distributor[other_terms]", "<strong>Please add details for 'Other' terms</strong>".html_safe %>
-					<%= text_area_tag "distributor[other_terms]", "", rows: 10, placeholder: "ADD DETAILS", class: "auto-form-text" %>
+					<%= label_tag "distributor[other_terms]", "Please list 'Other' terms below".html_safe %>
+					<%= text_area_tag "distributor[other_terms]", "", rows: 10, placeholder: "ADD OTHER TERMS", class: "auto-form-text" %>
 				</div>
 			<% end %>
 	</div><!--/.medium-6-->
