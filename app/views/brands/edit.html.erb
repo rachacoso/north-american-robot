@@ -66,7 +66,7 @@
 											<%= link_to "Product Portfolio", "#a-product-portfolio", class: "profile-edit-links required" %><br>
 											<hr>
 											<h2>Ordering &amp; Payment</h2>
-											<%= link_to "Payments".html_safe, "#a-ordering-and-payments", class: "profile-edit-links required" %><br>
+											<%#= link_to "Payments", "#a-ordering-and-payments", class: "profile-edit-links required" <br>%>
 											<%= link_to "Ordering Requirements", "#a-ordering-requirements", class: "profile-edit-links" %><br>
 											<hr>
 											<h2>Introduce Yourself</h2>
@@ -149,31 +149,31 @@
 								<h1>Ordering &amp; Payment</h1>
 							</div><!--/.small-12-->
 						</div><!--/.row-->
-
-						<div class="row">
-							<div class="medium-4 columns medium-text-right">
-								<div class="profile-edit-form info-panel">
-									<h1>Payments</h1>
-									<h3>Landing International has partnered with <%= link_to "Armor Payments, a Payoneer Company", "//armorpayments.com", target: "_blank" %> to provide payment escrow services for B2B eCommerce giving you peace of mind with secure transactions.</h3>
-									<h3>
-										Payment transactions on Landing Interational will take place via Armor Paymets (a Payoneer company) payment escrow service.
-									</h3>
-									<% unless @current_user.company.armor_account_id.present? %>
-									<h3>
-										<strong>You must accept the terms and conditions of our payment system in order to receive orders. <span style="text-decoration: underline;">Until you accept the terms and conditions, you will not be able to receive any orders.</span></strong>
-									</h3>
-									<h3>
-										<strong>In order to participate, you'll need to follow the instructions to enable Armor Payments (a Payoneer company) for your account.</strong>
-									</h3>
-									<% end %>
-								</div>
-							</div><!--/.medium-4-->
-							<div class="medium-8 columns">
-								<div class="profile-edit-form">
-									<%= render partial: "shared/profileform/armor/armor_ordering_and_payments", locals: { company: @brand } %>
-								</div>
-							</div>
-						</div>
+ 
+<%#						<div class="row">  %>
+<%#							<div class="medium-4 columns medium-text-right">  %>
+<%#								<div class="profile-edit-form info-panel">  %>
+<%#									<h1>Payments</h1>  %>
+<%#									<h3>Landing International has partnered with <%= link_to "Armor Payments, a Payoneer Company", "//armorpayments.com", target: "_blank"  to provide payment escrow services for B2B eCommerce giving you peace of mind with secure transactions.</h3> %>
+<%#									<h3> %>
+<%#										Payment transactions on Landing Interational will take place via Armor Paymets (a Payoneer company) payment escrow service. %>
+<%#									</h3> %>
+<%#									<% unless @current_user.company.armor_account_id.present? %>
+<%#									<h3> %>
+<%#										<strong>You must accept the terms and conditions of our payment system in order to receive orders. <span style="text-decoration: underline;">Until you accept the terms and conditions, you will not be able to receive any orders.</span></strong> %>
+<%#									</h3> %>
+<%#									<h3> %>
+<%#										<strong>In order to participate, you'll need to follow the instructions to enable Armor Payments (a Payoneer company) for your account.</strong> %>
+<%#									</h3> %>
+<%#									<% end %>
+<%#								</div> %>
+<%#							</div><!--/.medium-4--> %>
+<%#							<div class="medium-8 columns"> %>
+<%#								<div class="profile-edit-form"> %>
+<%#									<%= render partial: "shared/profileform/armor/armor_ordering_and_payments", locals: { company: @brand } %>
+<%#								</div> %>
+<%#							</div> %>
+<%#						</div> %>
 
 
 						<div class="row">

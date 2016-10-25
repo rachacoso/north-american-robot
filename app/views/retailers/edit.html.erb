@@ -57,7 +57,7 @@
 							<h2>Ordering &amp; Payment</h2>
 							<%= link_to "Terms", "#a-payment-shipping-terms", class: "profile-edit-links required" %><br>
 							<%= link_to "Requirements", "#a-ordering-requirements", class: "profile-edit-links required" %><br>
-							<%= link_to "Payments", "#a-ordering-and-payments", class: "profile-edit-links required" %><br>
+							<%#= link_to "Payments", "#a-ordering-and-payments", class: "profile-edit-links required" <br>%>
 
 							<hr>
 							<h2>Introduce Yourself</h2>
@@ -158,48 +158,48 @@
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="medium-4 columns medium-text-right">
-				<div class="profile-edit-form info-panel">
-					<h1>Payments</h1>
-					<h3>Landing International has partnered with <%= link_to "Armor Payments, a Payoneer Company", "//armorpayments.com", target: "_blank" %> to provide payment escrow services for B2B eCommerce giving you peace of mind with secure transactions.</h3>
-					<h3>
-						Payment transactions on Landing Interational will take place via Armor Paymets (a Payoneer company) payment escrow service. 
-					</h3>
-					<% unless @retailer.armor_account_id || @retailer.disable_armor_payments %>
-						<h3><strong>In order to participate please follow the instructions to enable your account with Armor Payments (Payoneer).</strong></h3>
-					<% end %>
-
-					<%# unless @current_user.company.class.to_s == "Brand" || @current_user.company.armor_account_id.present? %>
-					<%# unless @current_user.company.class.to_s == "Brand" %>
-					<% if false %>
-						<h4 style="border-top: 1px solid #B3B3B3; border-bottom: 1px solid #B3B3B3;padding-bottom: 0;margin-top: 1em; margin-bottom: 1em;" class="text-center">OR</h4>
-							<h3>To Use Other Payment Methods:</h3>
-							<h3>
-								<strong>If you'd like to use other methods of payment (e.g. Net Terms), you can turn the system off.</strong>
-							</h3>
-							<div class="panel text-center" style="background-color: #f2f2f2;">
-									<h3 >ARMOR PAYMENTS is:</h3>
-									<%= form_for @current_user.company, :html => {id: 'disableArmorForm'}, remote: true do |f| %>
-										<div class="switch" style="margin-bottom:0;">
-											<%= f.check_box('disable_armor_payments', id: 'disableArmor', label: false) %>
-											<label for="disableArmor">
-												<span class="switch-on" style="color: red">OFF</span>
-												<span class="switch-off" style="color: green">ON</span>
-											</label>
-										</div> 
-									<% end %>
-							</div>
-					<% end %>
-
-				</div>
-			</div><!--/.medium-4-->
-			<div class="medium-8 columns">
-				<div class="profile-edit-form" id="armor-ordering-and-payments">
-					<%= render partial: "shared/profileform/armor/armor_ordering_and_payments", locals: { company: @retailer } %>
-				</div>
-			</div>
-		</div>
+<%#		<div class="row">  %>
+<%#			<div class="medium-4 columns medium-text-right">  %>
+<%#				<div class="profile-edit-form info-panel">  %>
+<%#					<h1>Payments</h1>  %>
+					<%#<h3>Landing International has partnered with <%= link_to "Armor Payments, a Payoneer Company", "//armorpayments.com", target: "_blank" to provide payment escrow services for B2B eCommerce giving you peace of mind with secure transactions.</h3>  %>
+<%#					<h3>  %>
+						<%#Payment transactions on Landing Interational will take place via Armor Paymets (a Payoneer company) payment escrow service.   %>
+<%#					</h3>  %>
+<%#					<% unless @retailer.armor_account_id || @retailer.disable_armor_payments %>
+						<%#<h3><strong>In order to participate please follow the instructions to enable your account with Armor Payments (Payoneer).</strong></h3>  %>
+<%#					<% end %> 
+<%#  %>
+<%#					<%# unless @current_user.company.class.to_s == "Brand" || @current_user.company.armor_account_id.present? %>
+<%#					<%# unless @current_user.company.class.to_s == "Brand" %>
+<%#					<% if false %> 
+						<%#<h4 style="border-top: 1px solid #B3B3B3; border-bottom: 1px solid #B3B3B3;padding-bottom: 0;margin-top: 1em; margin-bottom: 1em;" class="text-center">OR</h4>  %>
+<%#							<h3>To Use Other Payment Methods:</h3>  %>
+<%#							<h3>  %>
+								<%#<strong>If you'd like to use other methods of payment (e.g. Net Terms), you can turn the system off.</strong>  %>
+<%#							</h3>  %>
+<%#							<div class="panel text-center" style="background-color: #f2f2f2;">  %>
+<%#									<h3 >ARMOR PAYMENTS is:</h3>  %>
+<%#									<%= form_for @current_user.company, :html => {id: 'disableArmorForm'}, remote: true do |f| %>
+<%#										<div class="switch" style="margin-bottom:0;">  %>
+<%#											<%= f.check_box('disable_armor_payments', id: 'disableArmor', label: false) %>
+<%#											<label for="disableArmor">  %>
+<%#												<span class="switch-on" style="color: red">OFF</span>  %>
+<%#												<span class="switch-off" style="color: green">ON</span>  %>
+<%#											</label>  %>
+<%#										</div>   %>
+<%#									<% end %>
+<%#							</div>  %>
+<%#					<% end %>
+<%#  %>
+<%#				</div>  %>
+<%#			</div><!--/.medium-4-->  %>
+<%#			<div class="medium-8 columns">  %>
+<%#				<div class="profile-edit-form" id="armor-ordering-and-payments">  %>
+<%#					<%= render partial: "shared/profileform/armor/armor_ordering_and_payments", locals: { company: @retailer } %>
+<%#				</div>  %>
+<%#			</div>  %>
+<%#		</div>  %>
 
 
 		<div class="row">
