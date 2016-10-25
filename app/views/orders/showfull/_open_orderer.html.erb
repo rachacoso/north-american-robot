@@ -6,7 +6,7 @@
 				<div class="small-12 columns">
 					<div id="order-panel-top">
 						<h1> Your Cart </h1>
-						<%= render partial: "orders/showfull/order_flow_header", locals: { status: order.status , armor: (order.armor_enabled? ? true : false ) } %>
+						<%= render partial: "orders/showfull/order_flow_header", locals: { status: order.status , armor: order.armor_enabled? } %>
 						<h3>This order is open and can be updated</h3>
 					</div>
 				</div><!--/.small-12-->

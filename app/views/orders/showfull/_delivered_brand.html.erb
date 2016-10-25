@@ -6,7 +6,7 @@
 				<div class="small-12 columns">
 					<div id="order-panel-top">
 						<h1>Order Delivered</h1>
-						<%= render partial: "orders/showfull/order_flow_header", locals: { status: order.status , armor: (order.armor_enabled? ? true : false ) } %>
+						<%= render partial: "orders/showfull/order_flow_header", locals: { status: order.status , armor: order.armor_enabled? } %>
 						<h3>This order has been delivered.</h3>
 					</div>
 				</div><!--/.small-12-->
