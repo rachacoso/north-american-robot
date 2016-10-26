@@ -12,8 +12,10 @@
 <% else %>
 	<div class="row">
 		<div class="small-12 columns text-center">
-			<h2>FOR TESTING ONLY</h2>
-			<hr>
+			<% if @order.armor_enabled? %>
+				<h2>FOR TESTING ONLY</h2>
+				<hr>
+			<% end %>
 			<h2>Would you like to set this order to PAID?</h2>
 		</div><!--/.small-12-->
 	</div><!--/.row-->

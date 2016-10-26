@@ -229,6 +229,14 @@ module LandingCompany
 				validates :landing_commission, numericality: { less_than_or_equal_to: 20, greater_than_or_equal_to: 1 }
 			end
 
+			def prepay_mark_as_paid # used for prepay orders
+				if self.is_prepay?
+					self.paid
+				else 
+					return false
+				end
+			end
+
 			def add_terms_and_requirements
 				self.payment_terms = self.orderer.payment_terms
 				self.us_shipping_terms = self.orderer.us_shipping_terms

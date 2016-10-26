@@ -35,33 +35,47 @@
 		<h3><%= @order.status.upcase %></h3>
 		<%= "<h3>ORDER NOT ARMOR ENABLED</h3>".html_safe if !@order.armor_enabled? %>
 
-		<% if !@order.armor_enabled? && @order.status == "submitted" %>
+		<% if !@order.armor_enabled? %>
+			<% if @order.status == "submitted" %>
 			<%= link_to "Mark Order Complete", complete_order_url(@order,0), class: "landing-button", remote: true %>
+			<% end %>
 		<% end %>
 		<%= (link_to "Delete Order", admin_order_destroy_url(@order,0), class: "landing-button alert", remote: true) if @order.can_be_deleted?  %>
 		</div>
 	</div>
 </div>
 
-<% if @order.status == "approved" %>
-<div class="row">
-	<div class="medium-11 medium-centered columns">
-		<div class="panel">
-			<%= link_to "TESTING ONLY: Update to Paid", paid_order_url(@order,0), class: "landing-button", remote: true %>
-		</div>
-	</div>
-</div>
-<% end %>
 
-<% if @order.status == "shipped" %>
-<div class="row">
-	<div class="medium-11 medium-centered columns">
-		<div class="panel">
-			<%= link_to "TESTING ONLY: Update to Delivered", delivered_order_url(@order,0), class: "landing-button", remote: true %>
+	<% if @order.status == "approved" %>
+		<% if @order.armor_enabled? %>
+			<div class="row">
+				<div class="medium-11 medium-centered columns">
+					<div class="panel">
+						<%= link_to "TESTING ONLY: Update to Paid", paid_order_url(@order,0), class: "landing-button", remote: true %>
+					</div>
+				</div>
+			</div>
+		<% else %>
+			<div class="row">
+				<div class="medium-11 medium-centered columns">
+					<div class="panel">
+						<%= link_to "Update to Paid", paid_order_url(@order,0), class: "landing-button", remote: true %>
+					</div>
+				</div>
+			</div>
+		<% end %>
+	<% end %>
+
+	<% if @order.status == "shipped" %>
+	<div class="row">
+		<div class="medium-11 medium-centered columns">
+			<div class="panel">
+				<%= link_to "TESTING ONLY: Update to Delivered", delivered_order_url(@order,0), class: "landing-button", remote: true %>
+			</div>
 		</div>
 	</div>
-</div>
-<% end %>
+	<% end %>
+
 
 <div class="row">
 	<div class="medium-11 medium-centered columns">

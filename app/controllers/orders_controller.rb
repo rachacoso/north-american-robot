@@ -262,12 +262,16 @@ class OrdersController < ApplicationController
 	# FOR TESTING ARMOR ONLY
 	def paid
 		if params[:confirm].to_i == 1
-			@order.api_testing_set_to_paid
+			if @order.armor_enabled?
+				@order.api_testing_set_to_paid
+			else #is a prepay order
+				@order.prepay_mark_as_paid
+			end
 			if @order.errors.any?
 				flash.now[:notice] = @order.errors.full_messages
 			else
 				@success = true
-				sleep(5) #pause to allow update of status from webhook
+				sleep(5) if @order.armor_enabled? #pause to allow update of status from webhook if armor
 			end
 		end
 		respond_to do |format|
