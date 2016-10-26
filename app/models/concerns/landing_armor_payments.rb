@@ -170,17 +170,19 @@ module LandingArmorPayments
     end
 
     def armor_enabled?
-      return true if self.armor_buyer_account_id.present?
+      # return true if self.armor_buyer_account_id.present?
+      return false
     end
     def armor_complete?
-      if  self.armor_seller_user_id.present? &&
-          self.armor_seller_email.present? &&
-          self.armor_seller_account_id.present? &&
-          self.armor_buyer_user_id.present? &&
-          self.armor_buyer_email.present? &&
-          self.armor_buyer_account_id.present? 
-        return true 
-      end
+      # if  self.armor_seller_user_id.present? &&
+      #     self.armor_seller_email.present? &&
+      #     self.armor_seller_account_id.present? &&
+      #     self.armor_buyer_user_id.present? &&
+      #     self.armor_buyer_email.present? &&
+      #     self.armor_buyer_account_id.present?
+      #   return true
+      # end
+      return true
     end
 
     def seller_armor_complete?
