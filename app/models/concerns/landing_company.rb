@@ -216,6 +216,10 @@ module LandingCompany
 			# field :education_materials, type: Boolean
 		end
 
+		def is_prepay?
+			return true if self.payment_terms == "Prepay"
+		end
+
 		module Orders
 			extend ActiveSupport::Concern
 
