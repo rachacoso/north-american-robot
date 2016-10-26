@@ -28,24 +28,24 @@
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
 						<br>
-						<h1>What's next? <br>Wait for <%= order.brand.company_name %> to calculate final fees and costs</h1>
-						<div class="info">
-							<h3>
-						<% if order.comments.declined.present? %>
-							<%= order.brand.company_name %> will review your request.<br> You will receive an email when an updated order is available for review and payment.
-						<% else %>
-							<%= order.brand.company_name %> will add all final fees and shipping costs.<br> You will receive an email when the final order is available for review and payment.
-						<% end %>
-						</h3>
-						</div>
-						<h3>Have questions? <%= link_to "Contact #{order.brand.company_name}", new_simple_message_url(order.brand), remote:true %></h3>
+						<h1 class="top-level">What's next?<h1>
+						<h1 class="top-level">Wait for <%= order.brand.company_name %> to calculate final fees and costs</h1>
+							<div class="info">
+								<h3>
+							<% if order.comments.declined.present? %>
+								<%= order.brand.company_name %> will review your request.<br> You will receive an email when an updated order is available for review and payment.
+							<% else %>
+								<%= order.brand.company_name %> will add all final fees and shipping costs.<br> You will receive an email when the final order is available for review and payment.
+							<% end %>
+							</h3>
+							</div>
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->
 
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
 						<br>
-						<h1>Order</h1>
+						<h1 class="top-level">Order</h1>
 						<div class="panel">
 							<%= render "shared/orders/show" %>		
 						</div>

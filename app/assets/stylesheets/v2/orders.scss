@@ -114,6 +114,10 @@ table.order {
 		font-weight: 400;
 		color: $landing-pink;
 	}
+	h1.top-level {
+		color: $landing-dark-gray;
+		font-weight: 700;
+	}
 	h2 {
 		font-weight: 400;
 		color: $landing-dark-gray;
@@ -124,6 +128,7 @@ table.order {
 		.panel {
 			border: 1px solid $landing-middle-gray;
 		}
+
 	}
 	.panel > h3 {
 		font-weight: 600;

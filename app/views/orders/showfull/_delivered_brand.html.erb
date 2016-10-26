@@ -19,7 +19,7 @@
 					<div class="medium-11 medium-centered columns">
 						<a name="form"></a>
 						<br>
-						<h1>Order delivered on <%= (order.delivered_date ).strftime("%d %b %Y") %></h1>
+						<h1 class="top-level">Hooray! The order was delivered on <%= (order.delivered_date ).strftime("%d %b %Y") %>.</h1>
 						<br>
 						<% if order.armor_enabled? %>
 							<%= render partial: "orders/showfull/delivered_brand_payoneer", locals: { order: order } %>
@@ -37,7 +37,7 @@
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
 						<br>
-						<h1>Order</h1>
+						<h1 class="top-level">Order</h1>
 						<div class="panel">
 							<%= render "shared/orders/show" %>		
 						</div>

@@ -1,4 +1,11 @@
-<h1>Next Step: Wait for payment from <%= order.orderer.company_name %></h1>
+<h1 class="top-level">Next Step: Wait for payment from <%= order.orderer.company_name %></h1>
 <div class="info">
 	<h3><%= order.orderer.company_name %> has approved the final order costs and will be sending payment shortly.</h3>
+</div>
+
+<div class="panel">
+	<div class="payment-display">
+	<h2><small>Your payout is</small></h2>
+	<h2><%= link_to number_to_currency(order.total_brand_payout), show_order_calculator_url, remote: true %></h2>
+	</div>
 </div>

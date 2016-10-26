@@ -22,7 +22,7 @@
 					<div class="medium-11 medium-centered columns">
 						<a name="form"></a>
 						<br>
-						<h1>Next Step: Ship the Order and Enter Shipment Tracking Information</h1>
+						<h1 class="top-level">Next Step: Ship the Order and Enter Shipment Tracking Information</h1>
 						<br>
 						
 						<% if order.armor_enabled? %>
@@ -39,8 +39,7 @@
 				<div class="row">
 					<div class="medium-11 medium-centered columns">
 						<br>
-						<h1>Order</h1>
-						<h3>Have questions? <%= link_to "Contact #{order.orderer.company_name}", new_simple_message_url(order.orderer), remote:true %></h3>
+						<h1 class="top-level">Order</h1>
 						<div class="panel">
 							<%= render "shared/orders/show" %>		
 						</div>
