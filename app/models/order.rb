@@ -162,14 +162,14 @@ class Order # for V2 ordering
     order.brand_company_name = brand.company_name
     order.add_terms_and_requirements
     order.comments.build(text: nil, author: user.type?, order_status: "open") #auto-create comment
-    unless user.company.disable_armor_payments
-      order.armor_seller_account_id = brand.armor_account_id
-      order.armor_seller_user_id = brand.users.with_armor_user_id.first.armor_user_id if brand.users.with_armor_user_id.present? 
-      order.armor_seller_email = brand.users.with_armor_user_id.first.email if brand.users.with_armor_user_id.present?
-      order.armor_buyer_account_id = order.orderer.armor_account_id
-      order.armor_buyer_user_id = order.orderer.users.with_armor_user_id.first.armor_user_id if order.orderer.users.with_armor_user_id.present?
-      order.armor_buyer_email = order.orderer.users.with_armor_user_id.first.email if order.orderer.users.with_armor_user_id.present?
-    end
+    # unless user.company.disable_armor_payments
+    #   order.armor_seller_account_id = brand.armor_account_id
+    #   order.armor_seller_user_id = brand.users.with_armor_user_id.first.armor_user_id if brand.users.with_armor_user_id.present? 
+    #   order.armor_seller_email = brand.users.with_armor_user_id.first.email if brand.users.with_armor_user_id.present?
+    #   order.armor_buyer_account_id = order.orderer.armor_account_id
+    #   order.armor_buyer_user_id = order.orderer.users.with_armor_user_id.first.armor_user_id if order.orderer.users.with_armor_user_id.present?
+    #   order.armor_buyer_email = order.orderer.users.with_armor_user_id.first.email if order.orderer.users.with_armor_user_id.present?
+    # end
     order.build_shipping_address(
       address1: user.company.address.address1,
       address2: user.company.address.address2,
@@ -269,16 +269,16 @@ class Order # for V2 ordering
   end
 
   def approval
-    if self.orderer.disable_armor_payments # remove all armor ids if buyer turns off armor
-      self.armor_buyer_account_id = nil if self.armor_buyer_account_id.present?
-      self.armor_buyer_user_id = nil if self.armor_buyer_user_id.present?
-      self.armor_buyer_email = nil if self.armor_buyer_email.present?
-      self.armor_seller_account_id = nil if self.armor_seller_account_id.present?
-      self.armor_seller_user_id = nil if self.armor_seller_user_id.present?
-      self.armor_seller_email = nil if self.armor_seller_email.present?
-    elsif self.armor_enabled?
-      self.api_create_order
-    end
+    # if self.orderer.disable_armor_payments # remove all armor ids if buyer turns off armor
+    #   self.armor_buyer_account_id = nil if self.armor_buyer_account_id.present?
+    #   self.armor_buyer_user_id = nil if self.armor_buyer_user_id.present?
+    #   self.armor_buyer_email = nil if self.armor_buyer_email.present?
+    #   self.armor_seller_account_id = nil if self.armor_seller_account_id.present?
+    #   self.armor_seller_user_id = nil if self.armor_seller_user_id.present?
+    #   self.armor_seller_email = nil if self.armor_seller_email.present?
+    # elsif self.armor_enabled?
+    #   self.api_create_order
+    # end
     unless self.errors.any?
       self.status = "approved"
       self.approved_date = DateTime.now
