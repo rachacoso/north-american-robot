@@ -133,12 +133,12 @@ class OrdersController < ApplicationController
 				end
 			end
 		elsif @order.status == "paid"
-			if @order.armor_enabled?
+			# if @order.armor_enabled?
 				list = @order.api_get_shippers
 				unless @order.errors.any?
 					@armor_shippers_list = list
 				end
-			end
+			# end
 		elsif @order.status == "delivered"
 			if @order.armor_enabled?
 				url = @order.api_get_release_payment_url

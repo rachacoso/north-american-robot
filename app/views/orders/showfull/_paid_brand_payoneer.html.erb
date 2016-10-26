@@ -1,0 +1,72 @@
+	<div class="row">
+		<div class="medium-8 columns medium-centered text-center">
+			<h2>Please ship the order and then enter shipment tracking info below.</h2>
+		</div>
+	</div>
+	<div class="row">
+		<div class="medium-6 columns medium-centered">
+			<%= "<span class='error'>#{flash[:error]}</span>".html_safe if flash[:error] %>
+		</div><!--/.medium-6 -->
+	</div><!--/.row -->
+<% if @armor_shippers_list.present? %>
+	<%= content_for :javascript_foot do %>
+		<%= javascript_tag do %>
+			var shippersArray = <%= raw shippers_list(@armor_shippers_list).to_json.html_safe %>;
+		<% end %>
+	<% end %>
+	<%= form_tag order_shipment_info_url(order) + "#form" , method: "post" do %>
+	<div class="row">
+		<div class="medium-6 columns medium-centered">
+			<h2>1 ) Enter Shipping Company</h2><h3>For your convenience, we can track delivery of  numerous international shippers and notify you of delivery status. <br><br>Type in the shipping company name to search for it below.</h3>
+		</div><!--/.medium-6-->
+	</div><!--/.row-->
+	<div class="row">
+		<div class="medium-6 columns medium-centered">
+		<label for="shipper_name">Shipping Company:</label>
+		<input type="text" name="shipper_name" id="shipper_name" class="shippers-autocomplete" required>
+		<input type="hidden" name="shipper_id" id="shipper_id" required>
+		<h3>If your shipper is not listed, please type in 'Other' and select an appropriate 'Other' category.</h3>
+		<label for="armor_other_shipper" class="other-shippers" style="display: none;">Enter Other Shipping Company Name</label>
+		<input type="text" name="armor_other_shipper" id="armor_other_shipper" class="other-shippers" style="display: none;">	
+		</div><!--/.medium-6-->
+	</div><!--/.row-->
+	<div class="row">
+		<div class="medium-6 columns medium-centered">
+			<h2>2 ) Enter Tracking Information</h2>
+		</div><!--/.medium-6-->
+	</div><!--/.row-->
+	<div class="row">
+		<div class="medium-6 columns medium-centered">
+			<label for="armor_shipment_tracking_number">Tracking Number</label>
+			<input type="text" name="armor_shipment_tracking_number" id="armor_shipment_tracking_number" required>
+		</div><!--/.medium-6-->
+	</div><!--/.row-->
+	<div class="row">
+		<div class="medium-6 columns medium-centered">
+			<label for="armor_shipment_description">Shipment Description<br> (e.g. Shipped via UPS ground in a protective box.)</label>
+			<input type="text" name="armor_shipment_description" id="armor_shipment_description" required>
+		</div><!--/.medium-6-->
+	</div><!--/.row-->
+	<div class="row">
+		<div class="medium-6 columns medium-centered text-center">
+		<%= submit_tag "Submit Order Shipment Tracking Information", class: "landing-button" %>
+		</div><!--/.medium-6-->
+	</div><!--/.row-->
+	<% end %>							
+	<% content_for :javascript_foot do %>
+		<%= javascript_tag do %>
+			$( document ).ready(function() {
+				$("#edit_order_<%= order.id %>").validate({
+					ignore: ":hidden"
+				});
+			});
+		<% end %>
+	<% end %>
+<% else %>
+	<h4>Sorry, there was an error. Please reload the page</h4>
+	<% if order.errors.any? %>
+		<% order.errors.full_messages.each do |m| %>
+			<%= m %><br>
+		<% end %>
+	<% end %>
+<% end %>
