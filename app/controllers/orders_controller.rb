@@ -166,7 +166,7 @@ class OrdersController < ApplicationController
 
 	def submit
 		if @order.meets_minimum?
-			@order.armor_update # update any missing armor info
+			# @order.armor_update # update any missing armor info
 			if params[:confirm].to_i == 1
 				@order.submission(user: @current_user)
 			end
@@ -180,7 +180,7 @@ class OrdersController < ApplicationController
 	end
 
 	def pending
-		@order.armor_update # update any missing armor info
+		# @order.armor_update # update any missing armor info
 		if params[:confirm].to_i == 1
 			@order.pending(user: @current_user)
 			if @order.errors.any?
