@@ -12,7 +12,11 @@
 <% else %>
 	<div class="row">
 		<div class="small-12 columns text-center">
-			<h2>Have you received payment and are you ready to close this order?</h2>
+			<% if @order.is_prepay? %>
+				<h2>Have you received delivery and are you ready to close this order?</h2>
+			<% else %>
+				<h2>Have you received payment and are you ready to close this order?</h2>
+			<% end %>
 		</div><!--/.small-12-->
 	</div><!--/.row-->
 	<div class="row">

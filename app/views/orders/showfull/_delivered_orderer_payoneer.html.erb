@@ -1,0 +1,17 @@
+<br>
+<h1>Next Step: Review Shipment and Release Payment or Initiate Dispute</h1>
+
+
+<div class="panel">
+	<% if order.errors.any? %>
+		<h4>Sorry, there was an error. Please reload the page</h4>
+		<% order.errors.full_messages.each do |m| %>
+			<%= m %><br>
+		<% end %>
+	<% else %>
+		<% if @armor_payment_release_payment_url.present? %>
+			<%= render partial: "orders/showfull/delivered_orderer_payment_release", locals: { url: @armor_payment_release_payment_url, disputeurl: @armor_payment_dispute_url, order: order } %>
+		<% end %>
+	<% end %>
+	<div class="landing-notice"><h3>The order status on this page may take time to update after you've approved the release of funds. <br>Please <%= link_to "reload this page", order_url(order) %> after you have released funds to see the most current status.</h3></div>
+</div>
