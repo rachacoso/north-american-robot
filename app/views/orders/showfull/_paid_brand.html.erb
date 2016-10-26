@@ -6,7 +6,7 @@
 				<div class="small-12 columns">
 					<div id="order-panel-top">
 						<h1>Order Paid</h1>
-						<%= render partial: "orders/showfull/order_flow_header", locals: { status: order.status , armor: order.armor_enabled? } %>
+						<%= render partial: "orders/showfull/order_flow_header", locals: { status: order.status , armor: order.armor_enabled? , order: order} %>
 						<h3>Payment for this order has been received and placed into escrow. Order can now be shipped to <%= order.orderer.company_name %>.</h3>
 					</div>
 				</div><!--/.small-12-->

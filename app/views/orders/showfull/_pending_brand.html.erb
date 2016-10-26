@@ -7,7 +7,7 @@
 					<div id="order-panel-top">
 						<h1>Order Pending Approval</h1>
 
-						<%= render partial: "orders/showfull/order_flow_header", locals: { status: order.status , armor: order.armor_enabled? } %>
+						<%= render partial: "orders/showfull/order_flow_header", locals: { status: order.status , armor: order.armor_enabled? , order: order} %>
 						<h3>This order has been updated with final fees and additional costs and is ready for review and approval by <%= order.orderer.company_name %>.</h3>
 					</div>
 				</div><!--/.small-12-->
