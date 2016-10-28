@@ -10,9 +10,9 @@
 	<div class="panel">
 		
 		<div class="payment-display">
-		<h2><%= number_to_currency(order.total_price) %></h2>
+		<h2 id="amount"><%= number_to_currency(order.total_price) %></h2>
 		<h2><small>by</small></h2>
-		<h2>
+		<h2 id="date">
 			<%= (order.delivered_date + net_terms_payment_estimate(order: order)[:payment].to_i ).strftime("%d %b %Y") %> <br><small><%= net_terms_payment_estimate(order: order)[:payment] %> days after delivery on <%= (order.delivered_date ).strftime("%d %b %Y") %></small>
 		</h2>
 		</div>
@@ -59,9 +59,9 @@
 	<div class="panel">
 		
 		<div class="payment-display">
-		<h2><%= number_to_currency(order.total_price) %></h2>
+		<h2 id="amount"><%= number_to_currency(order.total_price) %></h2>
 		<h2><small>by</small></h2>
-		<h2>
+		<h2 id="date">
 			<% if order.cancel_date.present? %>
 			<%= estimated_payment_date(order: order) %>
 			<br><small><%= net_terms_payment_estimate(order: order)[:payment] %> days after Cancel Date of <%= (order.cancel_date ).strftime("%d %b %Y") %></small>

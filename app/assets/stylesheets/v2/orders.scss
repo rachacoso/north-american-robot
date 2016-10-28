@@ -169,12 +169,21 @@ table.order {
 			display:inline-block;
 			vertical-align: top; 
 		}
-		h2:first-of-type {
-			margin-right: 5px;
+		h2#amount {
+			font-weight: 800;
+			margin-right: rem-calc(5);
 		}
-		h2:nth-of-type(3) {
-			margin-left: 5px
+		h2#date {
+			font-weight: 600;
+			margin-left: rem-calc(5);
 		}
+		// h2:first-of-type {
+		// 	margin-right: 5px;
+		// 	font-weight: 800;
+		// }
+		// h2:nth-of-type(3) {
+		// 	margin-left: 5px
+		// }
 	}
 	#order-panel-top {
 		background-color: $landing-light-gray;

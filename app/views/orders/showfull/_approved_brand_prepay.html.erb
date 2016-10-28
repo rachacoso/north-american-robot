@@ -3,9 +3,11 @@
 	<h3><%= order.orderer.company_name %> has approved the final order costs and will be sending payment shortly.</h3>
 </div>
 
-<div class="panel">
+<div class="panel text-center">
 	<div class="payment-display">
 	<h2><small>Your payout is</small></h2>
-	<h2><%= link_to number_to_currency(order.total_brand_payout), show_order_calculator_url, remote: true %></h2>
+	<h2 id="amount"><%= number_to_currency(order.total_brand_payout) %></h2>
+	<%= render partial: 'orders/order_calculator', locals: { order: order } %>
 	</div>
+	<br>
 </div>
