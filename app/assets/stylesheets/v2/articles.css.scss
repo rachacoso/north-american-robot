@@ -58,7 +58,27 @@
 		font-size: rem-calc(14);	
 		margin: rem-calc(25) 0;	
 	}
-	ul.featuringlist {
+
+	ul.featuringlist-brands {
+		list-style-type: none; /*to remove bullets*/
+		text-align: left;
+		margin-left:0;
+		padding: 0px;
+		zoom:1;
+		overflow: hidden;
+		li {
+			margin-bottom: rem-calc(5);
+			.tiled-item { /* Modify tiled-item (full style in utility_styles) */
+				border: 1px solid $landing-light-gray;
+				width: rem-calc(140);
+				height: rem-calc(140);
+				.image-inner {
+					margin: -61px 0 0 -54px;
+				}
+			}
+		}
+	}	
+	ul.featuringlist-products {
 		list-style-type: none; /*to remove bullets*/
 		text-align: left;
 		margin-left:0;
@@ -85,8 +105,8 @@
 				}
 			}
 			.outer {
-				width: rem-calc(125);
-				height: rem-calc(125);
+				width: rem-calc(140);
+				height: rem-calc(140);
 				margin: auto;
 				overflow: hidden;
 				border: 1px solid $landing-light-gray;
@@ -108,9 +128,12 @@
 				}
 			}
 			.name {
-				width: 80%;
+				width: rem-calc(140);
 				text-align: center;
 				margin:auto;
+				a {
+					color: $landing-middle-gray;
+				}
 			}
 		}
 	}

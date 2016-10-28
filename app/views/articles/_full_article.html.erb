@@ -47,16 +47,17 @@
 					<div class="show-for-small-only"><br></div>
 					<% unless @article.brands.blank? %>
 					<h3 id="featured-brands">FEATURED BRANDS</h3>
-					<ul class="featuringlist">
+					<ul class="featuringlist-brands">
 						<% @article.brands.each do |b| %>
-							<%= render partial: "featured_brand", locals: { brand: b } %>
+							<li><%= render partial: "shared/tiles/company_tile", locals: {brand: b} %></li>
+							<%#= render partial: "featured_brand", locals: { brand: b } %>
 							<%#= b.company_name %>
 						<% end %>
 					</ul>
 					<% end %>
 					<% unless @article.products.blank? %>
 					<h3 id="featured-products">FEATURED PRODUCTS</h3>
-					<ul class="featuringlist">
+					<ul class="featuringlist-products">
 						<% @article.products.each do |p| %>
 							<%= render partial: "featured_product", locals: { product: p } %>
 							<%#= b.company_name %>
