@@ -209,6 +209,7 @@ class Order # for V2 ordering
     self.submission_date = DateTime.now
     self.comments.build(text: nil, author: "brand", order_status: "submitted") # auto-create first comment
     self.save!
+    begin
     OrderMailer.send_order(
       order: self, 
       status: "submitted_brand", 
@@ -230,12 +231,16 @@ class Order # for V2 ordering
       subject: "Congratulations! You submitted an order on Landing!",
       title: "Order Submitted"
       ).deliver
+    rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
+      self.errors.add(:base, e.message)
+    end
   end
 
   def pending(user:)
     self.status = "pending"
     self.push(pending_date_array: DateTime.now)
     self.save!
+    begin
     OrderMailer.send_order(
       order: self, 
       status: "pending", 
@@ -243,6 +248,9 @@ class Order # for V2 ordering
       subject: "Yippee! Your order has been approved.",
       title: "Order Pending Approval and Payment"
       ).deliver
+    rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
+      self.errors.add(:base, e.message)
+    end
   end
 
   def decline_approval(requests:, user:)
@@ -252,6 +260,7 @@ class Order # for V2 ordering
     self.comments.create(text: nil, author: "brand", order_status: "submitted") #auto-create next comment
     self.save!
     # NEED TO ADD MAILER FOR DECLINING APPROVAL
+    begin
     OrderMailer.send_order(
       order: self, 
       status: "resubmitted_brand", 
@@ -266,6 +275,9 @@ class Order # for V2 ordering
       subject: "#{self.orderer_company_name} has requested changes to an order on Landing!",
       title: "Order Changes Requested"
       ).deliver
+    rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
+      self.errors.add(:base, e.message)
+    end
   end
 
   def approval
@@ -291,6 +303,7 @@ class Order # for V2 ordering
     self.status = "paid"
     self.paid_date = DateTime.now
     self.save!
+    begin
     OrderMailer.send_order(
       order: self,
       status: "paid",
@@ -305,6 +318,9 @@ class Order # for V2 ordering
       subject: "Yay! Get ready to ship!",
       title: "Order Paid"
       ).deliver
+    rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
+      self.errors.add(:base, e.message)
+    end
   end
 
   def shipped
@@ -312,6 +328,7 @@ class Order # for V2 ordering
     self.status = "shipped"
     self.shipped_date = DateTime.now
     self.save!
+    begin
     OrderMailer.send_order(
       order: self,
       status: "shipped",
@@ -319,6 +336,9 @@ class Order # for V2 ordering
       subject: "Hooray! Your beauty products are on their way!",
       title: "Order Shipped"
       ).deliver
+    rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
+      self.errors.add(:base, e.message)
+    end
   end
 
   def delivered
@@ -326,6 +346,7 @@ class Order # for V2 ordering
     self.status = "delivered"
     self.delivered_date = DateTime.now
     self.save!
+    begin
     if self.armor_enabled?
       OrderMailer.send_order(
         order: self,
@@ -349,6 +370,9 @@ class Order # for V2 ordering
       subject: "Nice Job! Your order was delivered.",
       title: "Order Delivered"
       ).deliver
+    rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
+      self.errors.add(:base, e.message)
+    end
   end
 
   def disputed(dispute_id:)
@@ -357,6 +381,7 @@ class Order # for V2 ordering
     self.armor_dispute_id = dispute_id
     self.disputed_date = DateTime.now
     self.save!
+    begin
     OrderMailer.send_order(
       order: self,
       status: "dispute_initiated",
@@ -371,9 +396,13 @@ class Order # for V2 ordering
       subject: "Order in Dispute",
       title: "Order in Dispute"
       ).deliver
+    rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
+      self.errors.add(:base, e.message)
+    end
   end
 
   def dispute_update
+    begin
     OrderMailer.send_order(
       order: self,
       status: "dispute_updated",
@@ -395,6 +424,9 @@ class Order # for V2 ordering
       subject: "Order Dispute Updated",
       title: "Order Dispute Updated"
       ).deliver
+    rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
+      self.errors.add(:base, e.message)
+    end
   end
 
   def completed
@@ -402,6 +434,7 @@ class Order # for V2 ordering
     self.status = "completed"
     self.completed_date = DateTime.now
     self.save!
+    begin
     OrderMailer.send_order(
       order: self,
       status: "completed",
@@ -416,6 +449,9 @@ class Order # for V2 ordering
       subject: "Woohoo! Your payment has been released!",
       title: "Order Payment Released"
       ).deliver
+    rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
+      self.errors.add(:base, e.message)
+    end
   end
 
   def completed_no_armor
@@ -430,6 +466,7 @@ class Order # for V2 ordering
     self.status_error_message = "Status #{status}: #{message}"
     self.error_date = DateTime.now
     self.save!
+    begin
     OrderMailer.send_order(
       order: self,
       status: "error",
@@ -451,6 +488,9 @@ class Order # for V2 ordering
       subject: "Landing International: Order Errors",
       title: "Order Errors"
       ).deliver
+    rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
+      self.errors.add(:base, e.message)
+    end
   end
 
   def viewable_by?(user)
