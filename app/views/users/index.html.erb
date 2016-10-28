@@ -1,14 +1,6 @@
 <%= render partial: "shared/topbar_admin" %>
-
-<% content_for :subnav do %>
-<div class="row">
-	<div class="small-12 columns">
-		<ul class="breadcrumbs">
-		  <li class="current"><%= link_to "ALL USERS", "#" %></li>
-		</ul>					
-	</div>
-</div>
-<% end %>
+<div class="admin-container">
+<br>
 
 <% if flash[:notice] %>
 <div class="row">
@@ -119,3 +111,4 @@
 
 </div>
 
+</div>

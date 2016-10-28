@@ -1,5 +1,5 @@
 <%= render partial: "shared/topbar_admin" %>
-
+<div class="admin-container">
 <br>
 <div class="row">
 	<div class="small-12 columns">
@@ -12,17 +12,6 @@
 		<h1>ARTICLE: <strong><%= @article.headline %></strong></h1>
 	</div><!--/.small-12-->
 </div><!--/.row-->
-
-
-
-
-<div class="row">
-	<div class="small-9 small-centered columns">
-		<span class="notice"><%= notice %></span>
-		<%= render "form" %>
-	</div><!--/.small-9-->
-</div><!--/.row-->
-
 
 <div class="row">
 	<div class="small-12 columns">
@@ -41,3 +30,4 @@
 	</div><!--/.medium-11 medium-centered-->
 </div><!--/.row-->
 
+</div>

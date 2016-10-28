@@ -1,4 +1,5 @@
 <%= render partial: "shared/topbar_admin" %>
+<div class="admin-container">
 <div class="row collapse">
 	<div class="small-12 columns">
 		<div class="panel">
@@ -15,6 +16,9 @@
 <div class="row">
 	<div class="small-12 columns">
 		<% if type == "retailers" %>
+			<% unless @retailers_margin.blank? && @retailers_payment_terms.blank? %>
+			<h1>To Do</h1>
+			<% end %>
 			<% unless @retailers_margin.blank? %>
 				<h3>Retailers Awaiting Margin Approval</h3>
 				<%= render partial: 'b_or_d', collection: @retailers_margin, as: :b_or_d, spacer_template: "shared/indexspacer"  %>
@@ -23,9 +27,15 @@
 				<h3>Retailers Awaiting Net Payment Terms Approval</h3>
 				<%= render partial: 'b_or_d', collection: @retailers_payment_terms, as: :b_or_d, spacer_template: "shared/indexspacer"  %>
 			<% end %>
+			<% unless @retailers_margin.blank? && @retailers_payment_terms.blank? %>
+			<br><br>
+			<% end %>
 		<% end %>
 
 		<% if type == "distributors" %>
+			<% unless @distributors_margin.blank? && @distributors_payment_terms.blank? %>
+			<h1>To Do</h1>
+			<% end %>
 			<% unless @distributors_margin.blank? %>
 				<h3>Distributors Awaiting Margin Approval</h3>
 				<%= render partial: 'b_or_d', collection: @distributors_margin, as: :b_or_d, spacer_template: "shared/indexspacer"  %>
@@ -33,6 +43,9 @@
 			<% unless @distributors_payment_terms.blank? %>
 				<h3>Distributors Awaiting Net Payment Terms Approval</h3>
 				<%= render partial: 'b_or_d', collection: @distributors_payment_terms, as: :b_or_d, spacer_template: "shared/indexspacer"  %>
+			<% end %>
+			<% unless @distributors_margin.blank? && @distributors_payment_terms.blank? %>
+			<br><br>
 			<% end %>
 		<% end %>
 	</div><!--/.small-12-->
@@ -67,3 +80,4 @@
 		</div>	
 	</div><!--/.small-12-->
 </div><!--/.row-->
+</div>
