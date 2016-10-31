@@ -1,0 +1,75 @@
+<%= render partial: "shared/topbar_admin" %>
+<div class="admin-container">
+
+<div class="row">
+	<div class="small-12 columns">
+		<h1>Administrators</h1>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
+
+<% if flash[:notice] %>
+<div class="row">
+	<div class="small-12 columns">
+		<div data-alert class="alert-box success round">
+	  	<%= flash[:notice] %>
+		  <a href="#" class="close">&times;</a>
+		</div>		
+	</div>
+</div>
+<% end %>
+
+<div class="row">
+	<div class="small-11 small-centered columns">
+		
+		<div class="row">
+			<div class="small-6 columns panel">
+				<h3><strong>Administrators</strong></h3><hr>
+				<%= paginate @admins, :param_name => :page_admins %>
+				<%= render partial: @admins, spacer_template: "shared/indexspacer" %>
+			</div>
+
+			<div class="small-6 columns panel">
+				<h3>Add Administrator</h3>
+				<div class="errornotice <%= flash[:error] ? "error-on" : "" %>"><%= flash[:error] ? flash[:error].upcase.html_safe : "&nbsp;".html_safe %></div>
+				<%= parse_errors(@newuser.errors) %>
+				<%= form_for @newuser do |f| %>
+					<%= hidden_field_tag :administrator, 'true' %>
+					<%= f.fields_for :contact do |ff| %>
+					<div class="row collapse">
+					<div class="medium-6 columns">
+						<%= ff.text_field :firstname, :placeholder => 'First Name', :label => false  %>
+					</div>
+					<div class="medium-6 columns">
+						<%= ff.text_field :lastname, :placeholder => 'Last Name', :label => false  %>
+					</div>
+					</div>
+					<% end %>
+					<div class="row">
+					<div class="medium-12 columns">
+					<%= f.text_field :email, :placeholder => 'Email (will be used as your login)', :label => false %>
+					</div>
+					<div class="medium-12 columns">
+					<%= f.password_field :password, :placeholder => 'Password', :label => false %>
+					</div>
+					<div class="medium-12 columns">
+					<%= f.password_field :password_confirmation, :placeholder => 'Password (repeat)', :label => false %>
+					</div>
+					<div class="medium-12 columns text-right">
+					<br>
+					<p>Hack Note: Error handling incomplete... if you don't fill out correctly, will return page error... need to fix</p>
+					<%= recaptcha_tags %>
+					<br>
+					<%= f.submit 'Add Administrator', class: "tiny button alert" %>
+					</div>				
+					</div>
+				<% end %>
+			</div>
+		</div>
+
+	</div><!--/.small-11-->
+</div><!--/.row-->
+
+
+
+</div>

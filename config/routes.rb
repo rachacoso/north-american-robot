@@ -122,6 +122,7 @@ Rails.application.routes.draw do
   # resources :marketing_spends, only: [:create, :update, :destroy]
   
   resources :users, only: [:new, :create, :edit, :update, :destroy, :index]
+  get    '/users/admin' => 'users#admin_index', as: 'users_admin'
   get    '/user/confirm/:token' => 'users#confirm_email', as: 'user_email_confirmation'
   patch    '/user/lu/:id' => 'users#limited_update', as: 'user_limited_update'
 

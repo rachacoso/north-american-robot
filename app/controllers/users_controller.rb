@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   skip_before_action :require_login, only: [:new, :create, :confirm_email]
 
   #restrict to administrators only
-  before_action :administrators_only, only: [:index, :edit, :update, :destroy]
+  before_action :administrators_only, only: [:index, :edit, :update, :destroy, :admin_index]
 
   # persist the parameters on failed validation during new user signup
   before_action :persist_params, only: [:create]
@@ -149,27 +149,42 @@ class UsersController < ApplicationController
       @admins = @admins.page(1).per(20)
     end   
 
-    # if params[:page_distributors]
-    #   @distributors = do_kaminari_array(@distributors,params[:page_distributors])
-    #   @active_section = 'distributors'
-    # elsif params[:search_distributors]
-    #   @distributors = User.where(email: /#{params[:search_distributors]}/i ).reject{ |r| r.distributor.nil?}.reject{ |r| r.distributor.company_name.nil? }.sort_by{|i| i.distributor.company_name}
-    #   @distributors = do_kaminari_array(@distributors, 1)
-    #   @active_section = 'distributors'
-    # else
-    #   @distributors = do_kaminari_array(@distributors, 1)
-    # end
+    if params[:page_users]
+      @active_section = 'users'
+      if params[:search_users]
+        @users = User.where(email: /#{params[:search_users]}/i ).reject{ |r| r.administrator }
+        @active_search = 'true'
+      end  
+      @users = do_kaminari_array(@users, params[:page_users])
+      # @users = do_kaminari_array(@users, 1)
+    else
+      if params[:search_users]
+        @users = User.where(email: /#{params[:search_users]}/i ).reject{ |r| r.administrator }
+      end
+      @users = do_kaminari_array(@users, 1)
+    end  
 
-    # if params[:page_brands]
-    #   @brands = do_kaminari_array(@brands, params[:page_brands])
-    #   @active_section = 'brands'
-    # elsif params[:search_brands]
-    #   @brands = User.where(email: /#{params[:search_brands]}/i ).reject{ |r| r.brand.nil? }.reject{ |r| r.brand.company_name.nil? }.sort_by{|i| i.brand.company_name}
-    #   @brands = do_kaminari_array(@brands, 1)
-    #   @active_section = 'brands'      
-    # else
-    #   @brands = do_kaminari_array(@brands, 1)
-    # end   
+  end
+
+  def admin_index
+    # @users = User.all
+    @distributors = User.all.reject{ |r| r.distributor.nil?}.reject{ |r| r.distributor.company_name.nil? }.sort_by{|i| i.distributor.company_name}
+    @brands = User.all.reject{ |r| r.brand.nil? }.reject{ |r| r.brand.company_name.nil? }.sort_by{|i| i.brand.company_name}
+
+    @admins = User.where(administrator: true)
+    @users = User.where(:administrator.exists => false).order_by(:email.asc)
+
+    @newuser = User.new
+    @newuser.build_contact
+
+    if params[:page_admins]
+      @admins = @admins.page(params[:page_admins]).per(20)
+      @active_section = 'admins'
+    elsif params[:search_admins]
+      @admins = @admins.any_of({firstname: /#{params[:search_admins]}/i}, {lastname: /#{params[:search_admins]}/i}, {lastname: /#{params[:email]}/i} )
+    else
+      @admins = @admins.page(1).per(20)
+    end   
 
     if params[:page_users]
       @active_section = 'users'
@@ -187,6 +202,7 @@ class UsersController < ApplicationController
     end  
 
   end
+
 
   def edit
     @user = User.find(params[:id])

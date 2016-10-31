@@ -1,19 +1,18 @@
 <%= render partial: "shared/topbar_admin" %>
-
-
-<% content_for :subnav do %>
+<div class="admin-container">
 
 <div class="row">
 	<div class="small-12 columns">
 		<ul class="breadcrumbs">
+			<% if @user.administrator %>
+			<li><%= link_to "Administrators", users_admin_url %></li>
+			<% else %>
 		  <li><%= link_to "All Users", users_url %></li>
+		  <% end %>
 		  <li class="current"><%= link_to "#" do %> Edit User - <strong><%=@user.email%></strong> <% end %></li>
 		</ul>					
 	</div>
 </div>
-
-<% end %>
-
 
 <div class="row">
 	<div class="medium-6 columns">
@@ -128,3 +127,4 @@
 
 <br>
 <br>
+</div>

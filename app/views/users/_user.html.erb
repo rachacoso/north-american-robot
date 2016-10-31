@@ -2,17 +2,11 @@
 <div class="row">
 	<div class="small-8 columns">
 		<div class="row">
-
+			<% unless user.administrator %>
 			<div class="small-2 columns">
-
-		<% unless user.administrator %>
-			
 				<%= image_tag profile.logo.url(:medium)%>
-			
-		<% end %>
-
 			</div><!--/.small-1-->
-
+			<% end %>
 			<div class="small-10 columns">
 				<%= link_to user.email, edit_user_url(user) %>
 

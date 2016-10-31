@@ -1,6 +1,11 @@
 <%= render partial: "shared/topbar_admin" %>
 <div class="admin-container">
-<br>
+
+<div class="row">
+	<div class="small-12 columns">
+		<h1>Users</h1>
+	</div><!--/.small-12-->
+</div><!--/.row-->
 
 <% if flash[:notice] %>
 <div class="row">
@@ -14,101 +19,37 @@
 <% end %>
 
 <div class="row">
-	<div class="small-12 columns">
-		<ul class="tabs right" data-tab>
-		  <li class="tab-title <%= !@active_section || @active_section == 'users' ? "active" : "" %>"><a href="#panel2">Users</a></li>
-		  <li class="tab-title <%= @active_section == 'admin' ? 'active' : '' %>"><a href="#panel1">Administrators</a></li>
-		</ul>
-	</div>
-</div>
+	<div class="small-10 small-centered columns panel">
+		<%= form_tag(users_url, method: 'get') do %>
+			<div class="row">
+				<div class="medium-6 columns">
+					<h3><strong>Users</strong></h3>		
+				</div><!--/.medium-6-->
+				<div class="medium-6 columns">
 
-<div class="tabs-content">
-
-  <div class="content <%= @active_section == 'admin' ? 'active' : '' %>" id="panel1">
-		<div class="row">
-			<div class="small-10 small-centered columns panel">
-				<h3><strong>Administrators</strong></h3><hr>
-				<%= paginate @admins, :param_name => :page_admins %>
-				<%= render partial: @admins, spacer_template: "shared/indexspacer" %>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="small-7 small-centered columns panel">
-				<h3>Add Administrator</h3>
-				<div class="errornotice <%= flash[:error] ? "error-on" : "" %>"><%= flash[:error] ? flash[:error].upcase.html_safe : "&nbsp;".html_safe %></div>
-				<%= parse_errors(@newuser.errors) %>
-				<%= form_for @newuser do |f| %>
-					<%= hidden_field_tag :administrator, 'true' %>
-					<%= f.fields_for :contact do |ff| %>
 					<div class="row collapse">
-					<div class="medium-6 columns">
-						<%= ff.text_field :firstname, :placeholder => 'First Name', :label => false  %>
+						<div class="small-2 columns">
+							<span class="prefix"><i class="fi-magnifying-glass"></i></span>
+						</div><!--/.small-2-->
+						<div class="small-10 columns">
+							<%= text_field_tag('search_users', "", {:placeholder => 'SEARCH', style: 'margin-bottom: 0;'}) %>
+							<h3><small><%= @active_search == 'true' ? (link_to 'Back to All Users', users_path) : ''%></small></h3>
+						</div><!--/.small-10-->
 					</div>
-					<div class="medium-6 columns">
-						<%= ff.text_field :lastname, :placeholder => 'Last Name', :label => false  %>
-					</div>
-					</div>
-					<% end %>
-					<div class="row">
-					<div class="medium-12 columns">
-					<%= f.text_field :email, :placeholder => 'Email (will be used as your login)', :label => false %>
-					</div>
-					<div class="medium-12 columns">
-					<%= f.password_field :password, :placeholder => 'Password', :label => false %>
-					</div>
-					<div class="medium-12 columns">
-					<%= f.password_field :password_confirmation, :placeholder => 'Password (repeat)', :label => false %>
-					</div>
-					<div class="medium-12 columns text-right">
-					<br>
-					<p>Hack Note: Error handling incomplete... if you don't fill out correctly, will return page error... need to fix</p>
-					<%= recaptcha_tags %>
-					<br>
-					<%= f.submit 'Add Administrator', class: "tiny button alert" %>
-					</div>				
-					</div>
-				<% end %>
-			</div>
-		</div>
 
+				</div><!--/.medium-6-->
+			</div><!--/.row-->
+		<% end %>
+		<% if !@users.empty? %>
+		<%= paginate @users, :param_name => :page_users %>
+		<hr>
+		<%= render partial: @users.sort_by { |b| b.email }, spacer_template: "shared/indexspacer" %>
+		<% else %>
+		<hr>
+		<h3><em>No Users</em></h3>
+		<% end %>				
 	</div>
-
-	<div class="content <%= !@active_section || @active_section == 'users' ? 'active' : '' %>" id="panel2">
-		<div class="row">
-			<div class="small-10 small-centered columns panel">
-				<%= form_tag(users_url, method: 'get') do %>
-					<div class="row">
-						<div class="medium-6 columns">
-							<h3><strong>Users</strong></h3>		
-						</div><!--/.medium-6-->
-						<div class="medium-6 columns">
-
-							<div class="row collapse">
-								<div class="small-2 columns">
-									<span class="prefix"><i class="fi-magnifying-glass"></i></span>
-								</div><!--/.small-2-->
-								<div class="small-10 columns">
-									<%= text_field_tag('search_users', "", {:placeholder => 'SEARCH', style: 'margin-bottom: 0;'}) %>
-									<h3><small><%= @active_search == 'true' ? (link_to 'Back to All Users', users_path) : ''%></small></h3>
-								</div><!--/.small-10-->
-							</div>
-
-						</div><!--/.medium-6-->
-					</div><!--/.row-->
-				<% end %>
-				<% if !@users.empty? %>
-				<%= paginate @users, :param_name => :page_users %>
-				<hr>
-				<%= render partial: @users.sort_by { |b| b.email }, spacer_template: "shared/indexspacer" %>
-				<% else %>
-				<hr>
-				<h3><em>No Users</em></h3>
-				<% end %>				
-			</div>
-		</div>
-	</div>
-
 </div>
+
 
 </div>
