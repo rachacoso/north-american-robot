@@ -13,7 +13,7 @@ class HomeController < ApplicationController
 
 		if @current_user
 			if @current_user.administrator
-				redirect_to admin_url
+				redirect_to admin_brands_index_url
 			# else
 			# 	redirect_to dashboard_url
 			end
