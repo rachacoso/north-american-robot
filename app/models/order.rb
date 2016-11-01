@@ -303,24 +303,24 @@ class Order # for V2 ordering
     self.status = "paid"
     self.paid_date = DateTime.now
     self.save!
-    begin
-    OrderMailer.send_order(
-      order: self,
-      status: "paid",
-      email: self.brand.users.pluck(:email), # send to brand/landing (currently just sending to Landing)
-      subject: "Yay! Get ready to ship!",
-      title: "Order Paid"
-      ).deliver
-    OrderMailer.send_order(
-      order: self,
-      status: "paid",
-      email: "orders@landingintl.com", # send to brand/landing (currently just sending to Landing)
-      subject: "Yay! Get ready to ship!",
-      title: "Order Paid"
-      ).deliver
-    rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
-      self.errors.add(:base, e.message)
-    end
+    # begin
+    # OrderMailer.send_order(
+    #   order: self,
+    #   status: "paid",
+    #   email: self.brand.users.pluck(:email), # send to brand/landing (currently just sending to Landing)
+    #   subject: "Yay! Get ready to ship!",
+    #   title: "Order Paid"
+    #   ).deliver
+    # OrderMailer.send_order(
+    #   order: self,
+    #   status: "paid",
+    #   email: "orders@landingintl.com", # send to brand/landing (currently just sending to Landing)
+    #   subject: "Yay! Get ready to ship!",
+    #   title: "Order Paid"
+    #   ).deliver
+    # rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
+    #   self.errors.add(:base, e.message)
+    # end
   end
 
   def shipped
