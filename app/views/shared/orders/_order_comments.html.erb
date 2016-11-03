@@ -94,7 +94,7 @@
 
 					<% if order.completed_date.present? %>
 					<li>
-						<span id='title'>PAYMENT RELEASED by <%= order.brand_company_name %></span> <%= order.completed_date.in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M %Z") %>
+						<span id='title'>ORDER COMPLETE</span> <%= order.completed_date.in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M %Z") %>
 					</li>
 					<% end %>
 
