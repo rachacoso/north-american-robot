@@ -14,10 +14,7 @@
 <% elsif stage[:major] == 2 %>
 <ul class="onboard-modal-header" data-steps="2">
 	<li <%= get_onboard_stage_class(current_stage: stage[:minor], stage: 1)%>>
-		<span data-step="1">Setup Payments</span>
-	</li>
-	<li <%= get_onboard_stage_class(current_stage: stage[:minor], stage: 2)%>>
-			<span data-step="2">Ordering Requirements</span>
+			<span data-step="1">Add Ordering Requirements</span>
 	</li>
 </ul>
 <% elsif stage[:major] == 3 %>

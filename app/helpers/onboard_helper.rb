@@ -77,7 +77,14 @@ module OnboardHelper
 				subheader = "Enter Products"
 			end
 		when 2
-
+			header = "Ordering Requirements"
+			image_path = "/images/ordering_requirements.png"
+			case minor
+			when 1
+				partial_file = "brands/ordering_requirements"
+				step = 1
+				subheader = "Add Ordering Requirements"
+			end
 
 		when 3
 

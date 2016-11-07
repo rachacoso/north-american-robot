@@ -11,7 +11,7 @@
 	
 	<li <%= get_onboard_stage_class(current_stage: stage[:major], stage: 2)%>>
 		<%= link_to_if_with_block stage[:major] == 2, onboard_url, {remote: true} do %>
-			<span><%= image_tag "/images/enable_payment.png" %><br>(BASIC)</span>
+			<span><%= image_tag "/images/ordering_requirements.png" %><br>(BASIC)</span>
 		<% end %>
 	</li>
 	
