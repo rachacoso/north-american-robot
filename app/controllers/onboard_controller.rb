@@ -12,12 +12,12 @@ class OnboardController < ApplicationController
 		when 'brand'
 			@brand = @company
 
-			if @brand.armor_account_id && @brand.users.with_armor_user_id.present?
-				url = @brand.api_get_bank_account_setup_url(armor_account_id: @brand.armor_account_id, armor_user_id: @brand.users.with_armor_user_id.first.armor_user_id)
-				unless @brand.errors.any?
-					@armor_bank_url = url
-				end
-			end
+			# if @brand.armor_account_id && @brand.users.with_armor_user_id.present?
+			# 	url = @brand.api_get_bank_account_setup_url(armor_account_id: @brand.armor_account_id, armor_user_id: @brand.users.with_armor_user_id.first.armor_user_id)
+			# 	unless @brand.errors.any?
+			# 		@armor_bank_url = url
+			# 	end
+			# end
 
 			@current_products = @brand.products.where(current: true) rescue nil
 			@past_products = @brand.products.where(current: false) rescue nil
