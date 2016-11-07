@@ -244,7 +244,7 @@ ul.onboard-modal-header {
 		// }
 		& > span, & > a > span {
 			display: block;
-			margin-left: rem-calc(15);
+			// margin-left: rem-calc(15);
 			&:before {
 				content: attr(data-step);
 				display: block;
