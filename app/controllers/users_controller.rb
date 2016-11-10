@@ -252,7 +252,10 @@ class UsersController < ApplicationController
       user = User.find(params[:id])
       user.update(user_parameters)
       user.save!
-      redirect_to :back
+      respond_to do |format|
+        format.html {redirect_to :back}
+        format.js
+      end
     end
 
 
@@ -282,6 +285,7 @@ class UsersController < ApplicationController
 
   def user_parameters
     params.require(:user).permit(
+      :can_submit_under_minimum,
       contact_attributes: [
         :firstname,
         :lastname,

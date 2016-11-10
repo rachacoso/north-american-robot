@@ -1,5 +1,5 @@
 <%= render partial: "shared/topbar_admin" %>
-<div class="admin-container">
+<div class="admin-container editform">
 
 <div class="row">
 	<div class="small-12 columns">
@@ -38,6 +38,21 @@
 					</div>
 				</div>
 			</div>
+		<% end %>
+
+		<% unless @user.brand %>
+		<div class="row">
+			<div class="small-12 columns">
+				<div class="panel">
+					<h2>Options</h2>
+					<%= form_for @user, url: user_path(@user), remote: true do |f| %>
+					<%= hidden_field_tag 'update_type', 'admin' %>
+					<%= f.check_box :can_submit_under_minimum, label: false, class: "auto-form" %>
+					<%= f.label :can_submit_under_minimum, "User Can Submit Orders Under Minimum" %>
+					<% end %>
+				</div>
+			</div><!--/.small-12-->
+		</div><!--/.row-->
 		<% end %>
 
 		<div class="row">

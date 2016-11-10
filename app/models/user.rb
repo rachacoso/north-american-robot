@@ -19,6 +19,8 @@ class User
 	# for email confirmation
 	field :email_confirmed, type: Mongoid::Boolean, default: false
 	field :email_confirmation_token, type: String
+	# for ordering under minimum
+	field :can_submit_under_minimum, type: Mongoid::Boolean
 
 
 	validates :email, presence: true, uniqueness: true
