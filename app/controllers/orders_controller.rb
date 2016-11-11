@@ -165,7 +165,7 @@ class OrdersController < ApplicationController
 	end
 
 	def submit
-		if @order.meets_minimum?
+		if @order.meets_minimum(user: @current_user)
 			# @order.armor_update # update any missing armor info
 			if params[:confirm].to_i == 1
 				@order.submission(user: @current_user)

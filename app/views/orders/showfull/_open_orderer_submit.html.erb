@@ -1,10 +1,10 @@
-<h1 <%= !order.meets_minimum? ? "style=text-decoration:line-through;" : "" %>><span class="step" data-step="6"></span> Submit Order to <%= order.brand.company_name %></h1>
+<h1 <%= !order.meets_minimum(user: @current_user) ? "style=text-decoration:line-through;" : "" %>><span class="step" data-step="6"></span> Submit Order to <%= order.brand.company_name %></h1>
 <div class="panel text-center">
-	<% unless order.meets_minimum? %>
+	<% unless order.meets_minimum(user: @current_user) %>
 	<h3 style="color: red;">Your cart is currently under the minimum order threshold. <br>Please add more items to your order!</h3>
 	<% end %>
 	<div>
-		<% if order.meets_minimum? %>
+		<% if order.meets_minimum(user: @current_user) %>
 			<%= link_to "Submit Order to #{order.brand.company_name}", submit_order_url(order,0), class: "landing-button", remote: true %> 
 			<span style="font-weight: 100;">or</span>
 		<% end %>

@@ -74,7 +74,7 @@
 					</tr>
 				<% end %>
 
-				<% if order.meets_minimum? %>
+				<% if order.meets_minimum(user: @current_user) %>
 					<tr class="total">
 						<td colspan="6" class="text-right">Order Total <small></small></td>
 						<td class="text-right"><%= number_to_currency(order.total_price) %></td>
