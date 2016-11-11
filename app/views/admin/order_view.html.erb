@@ -75,7 +75,7 @@
 								<tr><th colspan="2">Beneficiary Information</th></tr>
 								<tr><td>Business Name:</td> <td><%= @order.brand.beneficiary_business_name %></td></tr>
 								<tr><td>Name:</td> <td><%= @order.brand.beneficiary_name %></td></tr>
-								<tr><td>Address:</td> <td><%= @order.brand.beneficiary_address %></td></tr>
+								<tr><td>Address:</td> <td><%= simple_format(@order.brand.beneficiary_address, {}, wrapper_tag: "div") %></td></tr>
 							</table>
 						</div>
 					</div>
