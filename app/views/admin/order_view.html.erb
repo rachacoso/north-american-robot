@@ -46,7 +46,7 @@
 </div>
 
 
-	<% if @order.status == "approved" %>
+	<% if @order.status == "approved" %>		
 		<% if @order.armor_enabled? %>
 			<div class="row">
 				<div class="medium-11 medium-centered columns">
@@ -60,6 +60,24 @@
 				<div class="medium-11 medium-centered columns">
 					<div class="panel">
 						<%= link_to "Update to Paid", paid_order_url(@order,0), class: "landing-button", remote: true %>
+						<br>
+						<h3><strong><%= @order.brand.company_name %> Payment Info</strong></h3>
+						<div class="panel">
+							<table class="brand-payment-information">
+								<tr><th colspan="2">Bank Information</th></tr>
+								<tr><td>Name:</td> <td><%= @order.brand.bank_name %></td></tr>
+								<tr><td>Swift Code:</td> <td><%= @order.brand.bank_swift_code %></td></tr>
+								<tr><td>City:</td> <td><%= @order.brand.bank_city %></td></tr>
+								<tr><td>Country:</td> <td><%= @order.brand.bank_country %></td></tr>
+								<tr><td>Account Number:</td> <td><%= @order.brand.bank_account_number %></td></tr>
+							</table>
+							<table class="brand-payment-information">
+								<tr><th colspan="2">Beneficiary Information</th></tr>
+								<tr><td>Business Name:</td> <td><%= @order.brand.beneficiary_business_name %></td></tr>
+								<tr><td>Name:</td> <td><%= @order.brand.beneficiary_name %></td></tr>
+								<tr><td>Address:</td> <td><%= @order.brand.beneficiary_address %></td></tr>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>

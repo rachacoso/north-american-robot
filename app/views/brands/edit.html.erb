@@ -68,6 +68,7 @@
 											<h2>Ordering &amp; Payment</h2>
 											<%#= link_to "Payments", "#a-ordering-and-payments", class: "profile-edit-links required" <br>%>
 											<%= link_to "Ordering Requirements", "#a-ordering-requirements", class: "profile-edit-links" %><br>
+											<%= link_to "Payment Information", "#a-payment-information", class: "profile-edit-links" %><br>
 											<hr>
 											<h2>Introduce Yourself</h2>
 											<%= link_to "Company Introduction", "#a-company-introduction", class: "profile-edit-links" %><br>
@@ -190,6 +191,18 @@
 							</div>
 						</div>
 
+						<div class="row">
+							<div class="medium-4 columns medium-text-right">
+								<div class="profile-edit-form info-panel">
+								<h1>Payment Information</h1>
+								</div>
+							</div><!--/.medium-4-->
+							<div class="medium-8 columns">
+								<div class="profile-edit-form">
+									<%= render "payment_information" %>
+								</div>
+							</div>
+						</div>
 
 				<%#		HIDING FOR NOW UNTIL DETERMINE HOW USED  %>
 				<%#		<div class="row">  %>

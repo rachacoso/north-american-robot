@@ -10,6 +10,15 @@ module LandingCompany
 			field :landing_commission, type: Integer, default: 10 #landing commission percentage
 			field :landing_fulfillment_services, type: Boolean
 			validates :landing_commission, numericality: { less_than_or_equal_to: 20, greater_than_or_equal_to: 1 }
+			# Payment Information
+			field :bank_name, type: String
+			field :bank_swift_code, type: String
+			field :bank_city, type: String
+			field :bank_country, type: String
+			field :bank_account_number, type: String
+			field :beneficiary_business_name, type: String
+			field :beneficiary_name, type: String
+			field :beneficiary_address, type: String
 		end
 
 	end

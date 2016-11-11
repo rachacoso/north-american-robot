@@ -1,0 +1,46 @@
+<br>
+<a class="anchor" id="a-payment-information"></a>
+<div class="row clearfix">
+	<%= form_for @brand, url: brand_url, remote: true do |f| %>
+	<%= hidden_field_tag "redirect_anchor", "a-ordering-requirements" %>
+		<div class="small-12 columns editform">
+
+
+			<div class="row">
+				<div class="medium-12 columns">
+					<%= f.label :bank_name, "Bank Name" %>
+					<%= f.text_field :bank_name, label: false, class: "auto-form-text"  %>
+					<%= f.label :bank_swift_code, "Bank Swift Code" %>
+					<%= f.text_field :bank_swift_code, label: false, class: "auto-form-text"  %>					
+				</div><!--/.medium-12-->
+				<div class="medium-6 columns">
+					<%= f.label :bank_city, "Bank City" %>
+					<%= f.text_field :bank_city, label: false, class: "auto-form-text"  %>
+				</div><!--/.medium-6-->
+				<div class="medium-6 columns">
+					<%= f.label :bank_country, "Bank Country" %>
+					<%= f.text_field :bank_country, label: false, class: "auto-form-text"  %>					
+				</div><!--/.medium-6-->
+				<div class="medium-12 columns">
+					<%= f.label :bank_account_number, "Bank Account Number" %>
+					<%= f.text_field :bank_account_number, label: false, class: "auto-form-text"  %>
+				</div><!--/.medium-12-->
+			</div>
+			
+			<hr>
+
+			<div class="row">
+				<div class="medium-12 columns">
+					<%= f.label :beneficiary_business_name, "Beneficiary Business Name" %>
+					<%= f.text_field :beneficiary_business_name, label: false, class: "auto-form-text"  %>
+					<%= f.label :beneficiary_name, "Beneficiary Name" %>
+					<%= f.text_field :beneficiary_name, label: false, class: "auto-form-text"  %>
+					<%= f.label :beneficiary_address, "Beneficiary Address" %>
+					<%= f.text_area :beneficiary_address, label: false, rows: "5", class: "auto-form-text"  %>
+				</div><!--/.medium-6-->
+			</div>
+
+
+		</div>
+	<% end %>
+</div>
