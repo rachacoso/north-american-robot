@@ -145,7 +145,7 @@ class Order # for V2 ordering
   end
 
   def meets_minimum(user:)
-    if user.can_submit_under_minimum
+    if user.brand || user.can_submit_under_minimum
       return true
     elsif self.brand.order_minimum.present?
       return self.subtotal_price * 100 >= self.brand.order_minimum ?  true : false
