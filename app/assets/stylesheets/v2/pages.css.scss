@@ -3,3 +3,9 @@
 @import "global_variables";
 @import "mixins";
 
+.pages-wrapper {
+	background-color: white;
+	min-height: 85vh;
+	padding-top: rem-calc(30);
+	border-top: 1px solid $landing-middle-gray;
+}
