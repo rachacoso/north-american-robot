@@ -5,10 +5,3 @@
 <% elsif @distributor %>
 <%= render partial: 'distributor', locals: {stage: get_onboard_stage(company:@distributor, user:@current_user) } %>
 <% end %>
-
-<div class="row">
-	<div class="small-12 columns text-center">
-		<hr>
-		<a id="close-onboard-modal-button" class="landing-button alert" aria-label="Close">I'll Finish This Later!</a>		
-	</div><!--/.small-12-->
-</div><!--/.row-->

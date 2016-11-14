@@ -344,27 +344,8 @@ ul.onboard-modal-header {
 #onboard-modal-next {
 	z-index: 96;
 	height: 3.5em;
-	width: 3.5em;
-	@media only screen { 
-		position: fixed;
-		right: 50%;
-		bottom: -3.5em;
-		-ms-transform: translate(1.75em, 0); /* IE 9 */
-		-webkit-transform: translate(1.75em, 0); /* Safari */
-		transform: translate(1.75em, 0);		
-		transition: bottom 0.5s;
-	}
-	@media only screen and (min-width: 40.063em) { 
-		position: fixed;
-		right: -3.5em;
-		top: 50%;
-		-ms-transform: translate(0, rem-calc(-50)); /* IE 9 */
-		-webkit-transform: translate(0, rem-calc(-50)); /* Safari */
-		transform: translate(0, rem-calc(-50));
-		transition: right 0.5s;
-	}
 
-	& > a:before {
+	& > a#next:before {
 		content: 'next';
 		display: inline-block;
 		margin: 0 auto;
@@ -381,10 +362,55 @@ ul.onboard-modal-header {
 		font-weight: 500;
 		transition: color 0.5s;
   }
-
-  &:hover > a:before {
+  
+  & > a#next:hover:before {
   	color: white;
   }
+
+	& > a#close-onboard-modal-button:before {
+		content: 'finish later';
+		display: inline-block;
+		margin: 0 auto;
+		text-align: center; //IE8 doesn't inherit this style
+		margin-bottom: 0.25em;
+		line-height: 1em;
+		position: relative;
+		z-index: 1000;
+		color: #ff3c6e;
+		font-weight: 500;
+		transition: color 0.5s;
+  }
+
+  & > a#close-onboard-modal-button:hover:before {
+  	color: white;
+  }
+
+	@media only screen {
+		position: fixed;
+		right: 40%;
+		bottom: -3.5em;
+		-ms-transform: translate(1.75em, 0); /* IE 9 */
+		-webkit-transform: translate(1.75em, 0); /* Safari */
+		transform: translate(1.75em, 0);		
+		transition: bottom 0.5s;
+		& > a#close-onboard-modal-button:before {
+			margin-left: rem-calc(10);
+		}
+	}
+	@media only screen and (min-width: 40.063em) { 
+		width: 3.5em;
+		position: fixed;
+		right: -3.5em;
+		top: 50%;
+		-ms-transform: translate(0, rem-calc(-50)); /* IE 9 */
+		-webkit-transform: translate(0, rem-calc(-50)); /* Safari */
+		transform: translate(0, rem-calc(-50));
+		transition: right 0.5s;
+		& > a#close-onboard-modal-button:before {
+			margin-top: rem-calc(10);
+			margin-left: 0;
+		}
+	}
 
 	&.show {
 
