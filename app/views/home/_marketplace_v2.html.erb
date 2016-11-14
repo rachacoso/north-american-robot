@@ -23,6 +23,14 @@
 						<%= render partial: "shared/orders/orders_chart", locals: { filter: @filter } %>
 					</div><!--/.medium-2-->
 					<div class="medium-10 columns">
+
+					<% if @recently_updated_orders %>
+						<h3>Recently Updated Orders</h3>
+							<%= render partial: 'orders/order_index', locals: { orders: @recently_updated_orders } %>
+							<%= link_to "view all orders", orders_url, class: 'more-link' %>
+
+					<% else %>
+
 						<h3>New Brands</h3>
 						
 							<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
@@ -46,7 +54,7 @@
 								<li><%= render partial: "shared/tiles/product_tile", locals: {product: p, brand: p.brand} %></li>
 							<% end %>
 							</ul>
-						
+						<% end %>
 					</div><!--/.medium-10-->
 				</div><!--/.row-->
 				</div>

@@ -359,3 +359,21 @@ ul.tablist {
 		margin-bottom: rem-calc(60);
 	}	
 }
+
+.more-link {
+	display: block;
+	color: $landing-blue;
+	font-weight: 500;
+	width: 100%;
+	border: 1px solid $landing-blue;
+	background-color: white;
+	padding: rem-calc(10);
+	text-align: center;
+	margin-top: rem-calc(5);
+	transition: background-color .5s;
+	// transition: color .5s;
+	&:hover {
+		color: white;
+		background-color: $landing-blue;
+	}
+}

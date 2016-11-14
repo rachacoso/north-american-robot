@@ -50,6 +50,7 @@ class HomeController < ApplicationController
 			@new_brands = Brand.activated.international.desc('c_at').limit(10)
 			@updated_brands = Brand.activated.international.desc('u_at').limit(5)
 
+			@recently_updated_orders = @profile.orders.active.desc('u_at').limit(10) if @current_user.brand
 
 			products_with_photos = ProductPhoto.pluck(:photographable_id).uniq
 			active_brands = Brand.activated.international.pluck(:id)

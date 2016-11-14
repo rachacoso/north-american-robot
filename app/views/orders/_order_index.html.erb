@@ -4,6 +4,7 @@
 			<th><%= @current_user.type? == "brand" ? "Retailer/Distributor" : "Brand" %></th>
 			<th>Total</th>
 			<th>Order Created</th>
+			<th>Order Updated</th>
 			<th>Status</th>
 		</tr>
 	</thead>
@@ -14,6 +15,7 @@
 				<td><%= link_to order_url(o) do %><%= @current_user.type? == "brand" ? o.orderer.company_name : o.brand.company_name %><% end %></td>
 				<td><%= link_to order_url(o) do %><%= number_to_currency(o.total_price) %><% end %></td>
 				<td><%= link_to order_url(o) do %><%= o.c_at.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%Y at %R %Z") %><% end %></td>
+				<td><%= link_to order_url(o) do %><%= o.u_at.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%Y at %R %Z") %><% end %></td>
 				<td><%= link_to order_url(o) do %><%= o.status.capitalize unless o.status == "open" %><%= o.status == "open" ? "In Cart" : "" %><% end %></td>
 			</tr>
 			<% end %>
