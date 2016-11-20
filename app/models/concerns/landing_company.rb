@@ -34,7 +34,8 @@ module LandingCompany
 			field :date, type: Date
 			field :active, type: Mongoid::Boolean, default: proc { self.class.to_s == "Brand" ?  false : true }
 			field :emails_sent, type: Hash, default: {}
-
+			field :last_onboard_stage, type: Integer
+			
 			# LOGINS/USERS WHO CAN ACT ON BEHALF OF BRAND
 			has_many :users, dependent: :destroy
 

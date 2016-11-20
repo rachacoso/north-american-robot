@@ -2,34 +2,33 @@
 <% stage = get_onboard_stage(company:@current_user.company, user: @current_user) %>
 <ul class="onboard-flow-header" data-steps="5">
 	
-	<li <%= get_onboard_stage_class(current_stage: stage[:major], stage: 1)%>>
-		<%= link_to_if_with_block stage[:major] == 1, onboard_url, {remote: true} do %>
+	<li <%= get_onboard_stage_class(current_stage: stage, stage_group: (1..3).to_a)%>>
+		<%= link_to_if_with_block ((1..3).to_a.include? stage) , onboard_url, {remote: true} do %>
 		<span><%= image_tag "/images/create_profile.png" %></span>
 		<% end %>
 	</li>
 	
 	
-	<li <%= get_onboard_stage_class(current_stage: stage[:major], stage: 2)%>>
-		<%= link_to_if_with_block stage[:major] == 2, onboard_url, {remote: true} do %>
+	<li <%= get_onboard_stage_class(current_stage: stage, stage_group: [4])%>>
+		<%= link_to_if_with_block ([4].include? stage), onboard_url, {remote: true} do %>
 			<span><%= image_tag "/images/ordering_requirements.png" %><br>(BASIC)</span>
 		<% end %>
 	</li>
 	
-	<li <%= get_onboard_stage_class(current_stage: stage[:major], stage: 3)%>>
-		<%= link_to_if_with_block stage[:major] == 3, onboard_url, {remote: true} do %>
+	<li <%= get_onboard_stage_class(current_stage: stage, stage_group: (5..8).to_a)%>>
+		<%= link_to_if_with_block ((5..8).to_a.include? stage), onboard_url, {remote: true} do %>
 		<span><%= image_tag "/images/talk_details.png" %><br>(INTERMEDIATE)</span>
 		<% end %>
 	</li>
 	
-	<li <%= get_onboard_stage_class(current_stage: stage[:major], stage: 4)%>>
-		<%= link_to_if_with_block stage[:major] == 4, onboard_url, {remote: true} do %>
+	<li <%= get_onboard_stage_class(current_stage: stage, stage_group: (9..13).to_a)%>>
+		<%= link_to_if_with_block ((9..13).to_a.include? stage), onboard_url, {remote: true} do %>
 			<span><%= image_tag "/images/boost_profile.png" %><br>(ADVANCED)</span>
 		<% end %>
 	</li>
-
 	
-	<li <%= get_onboard_stage_class(current_stage: stage[:major], stage: 5)%>>
-		<%= link_to_if_with_block stage[:major] == 5, onboard_url, {remote: true} do %>
+	<li <%= get_onboard_stage_class(current_stage: stage, stage_group: (14..20).to_a)%>>
+		<%= link_to_if_with_block ((14..20).to_a.include? stage), onboard_url, {remote: true} do %>
 			<span><%= image_tag "/images/show_off.png" %><br>(EXPERT)</span>
 		<% end %>
 	</li>

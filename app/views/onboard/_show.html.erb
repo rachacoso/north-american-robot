@@ -1,5 +1,5 @@
 <% if @brand %>
-<%= render partial: 'brand', locals: {stage: get_onboard_stage(company:@brand, user:@current_user) } %>
+<%= render partial: 'brand', locals: {stage: get_onboard_stage(company:@brand, user:@current_user, stage: @stage) } %>
 <% elsif @retailer %>
 <%= render partial: 'retailer', locals: {stage: get_onboard_stage(company:@retailer, user:@current_user) } %>
 <% elsif @distributor %>

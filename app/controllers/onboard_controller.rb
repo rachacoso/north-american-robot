@@ -4,8 +4,8 @@ class OnboardController < ApplicationController
 
 	def show
 
-		if params[:next]
-			@next = true
+		if params[:stage]
+			@stage = params[:stage]
 		end
 		
 		case @type

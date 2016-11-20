@@ -186,7 +186,6 @@ class Brand
 
 	def onboard_stage(user)
 
-		stage = {}
 		if
 			self.company_name.blank? ||
 			self.country_of_origin.blank? ||
@@ -197,22 +196,24 @@ class Brand
 			self.address.city.blank? || 
 			self.address.postcode.blank? || 
 			self.address.country.blank? 
-			stage[:major] = 1
-			stage[:minor] = 1
+			stage = 1
 		elsif
 			user.contact.firstname.blank? ||
 			user.contact.lastname.blank? ||
 			user.contact.phone.blank?
-			stage[:major] = 1
-			stage[:minor] = 2
+			stage = 2
 		elsif
 			self.products.blank?
-			stage[:major] = 1
-			stage[:minor] = 3
-		else
-			stage[:major] = 2
-			stage[:minor] = 1
+			stage = 3
+		elsif
+			self.last_onboard_stage = 3
+			stage = 4
+		elsif
+			self.last_onboard_stage = 4
+			stage = 5
 		end
+		self.last_onboard_stage = stage
+		self.save!
 		return stage
 	end
 
