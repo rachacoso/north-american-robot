@@ -1,5 +1,6 @@
-<h2 class="text-center">Complete your Profile to Reach More Retailers</h2>
 <% stage = get_onboard_stage(company:@current_user.company, user: @current_user) %>
+<% unless stage == 0 %>
+<h2 class="text-center">Complete your Profile to Reach More Retailers</h2>
 <ul class="onboard-flow-header" data-steps="5">
 	
 	<li <%= get_onboard_stage_class(current_stage: stage, stage_group: (1..3).to_a)%>>
@@ -33,3 +34,4 @@
 		<% end %>
 	</li>
 </ul>
+<% end %>

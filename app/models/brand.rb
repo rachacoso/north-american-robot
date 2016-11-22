@@ -256,7 +256,7 @@ class Brand
 			self.social_give_back.blank? && 
 			stage = 19
 		else
-			stage = 19
+			stage = 0
 		end
 		self.last_onboard_stage = stage
 		self.save!
