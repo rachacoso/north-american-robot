@@ -28,7 +28,7 @@
 	</li>
 	
 	<li <%= get_onboard_stage_class(current_stage: stage, stage_group: (14..20).to_a)%>>
-		<%= link_to_if_with_block ((14..20).to_a.include? stage), onboard_url, {remote: true} do %>
+		<%= link_to_if_with_block ((14..19).to_a.include? stage), onboard_url, {remote: true} do %>
 			<span><%= image_tag "/images/show_off.png" %><br>(EXPERT)</span>
 		<% end %>
 	</li>

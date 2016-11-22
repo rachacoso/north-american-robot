@@ -9,10 +9,13 @@
 		<%= render partial: "progress_brand", locals: {stage: stage} %>
 	</div><!--/.small-12-->
 </div><!--/.row-->
-
 <hr>
-<% if partial_info[:locals] %>
-	<%= render partial: partial_info[:file], locals: partial_info[:locals] %>
-<% else %>
-	<%= render partial: partial_info[:file] %>
+<% partial_info[:file].each_with_index do |file,index| %>
+	<% if partial_info[:locals] && partial_info[:locals][index.to_i].present? %>
+		<%= render partial: partial_info[:file][index.to_i], locals: partial_info[:locals][index.to_i] %>
+	<% else %>
+		<%= render partial: partial_info[:file][index.to_i] %>
+	<% end %>
+	<br>
 <% end %>
+<br>

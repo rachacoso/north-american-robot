@@ -206,11 +206,57 @@ class Brand
 			self.products.blank?
 			stage = 3
 		elsif
-			self.last_onboard_stage = 3
+			self.last_onboard_stage == 3
 			stage = 4
 		elsif
-			self.last_onboard_stage = 4
+			self.brand_positioning.blank?
 			stage = 5
+		# elsif
+		# 	self.brand_photos.blank?
+		# 	stage = 6
+		elsif
+			self.trend_ids.blank?
+			stage = 7
+		elsif
+			self.tags.blank?
+			stage = 8
+		elsif
+			self.key_retailer_ids.blank?
+			stage = 9
+		elsif
+			self.sector_ids.blank?
+			stage = 10
+		elsif
+			self.channel_ids.blank?
+			stage = 11
+		elsif
+			self.channel_capacities.blank?
+			stage = 12
+		elsif
+			self.export_countries.blank?
+			stage = 13
+		elsif
+			self.press_hits.blank?
+			stage = 14
+		elsif
+			self.trade_shows.blank?
+			stage = 15
+		elsif
+			self.patents.blank?
+			stage = 16
+		elsif
+			self.trademarks.blank?
+			stage = 17
+		elsif
+			self.compliances.blank?
+			stage = 18
+		elsif
+			self.social_organizations.blank? && 
+			self.social_causes.blank? && 
+			self.social_give_back.blank? && 
+			stage = 19
+		else
+			stage = 19
 		end
 		self.last_onboard_stage = stage
 		self.save!

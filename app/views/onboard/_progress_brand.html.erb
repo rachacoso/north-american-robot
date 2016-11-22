@@ -2,76 +2,73 @@
 <% if (1..3).to_a.include? stage %>
 <ul class="onboard-modal-header" data-steps="3">
 	<li <%= get_onboard_stage_class(current_stage: stage, stage: 1)%>>
-		<span data-step="1">Enter Company Info</span>
+		<span data-step="1">Company Info</span>
 	</li>
 	<li <%= get_onboard_stage_class(current_stage: stage, stage: 2)%>>
-			<span data-step="2">Enter Contact Info</span>
+			<span data-step="2">Contact Info</span>
 	</li>
 	<li <%= get_onboard_stage_class(current_stage: stage, stage: 3)%>>
-		<span data-step="3">Enter Products</span>
+		<span data-step="3">Products</span>
 	</li>
 </ul>
 <% elsif [4].include? stage %>
 <ul class="onboard-modal-header" data-steps="2">
 	<li <%= get_onboard_stage_class(current_stage: stage, stage: 4)%>>
-			<span data-step="1">Add Ordering Requirements</span>
+			<span data-step="4">Add Ordering Requirements</span>
 	</li>
 </ul>
 <% elsif (5..8).to_a.include? stage %>
 <ul class="onboard-modal-header" data-steps="4">
 	<li <%= get_onboard_stage_class(current_stage: stage, stage: 5)%>>
-		<span data-step="1">Company Introduction</span>
+		<span data-step="5">Company Introduction</span>
 	</li>
 	<li <%= get_onboard_stage_class(current_stage: stage, stage: 6)%>>
-			<span data-step="2">Add Brand Photos</span>
+			<span data-step="6">Brand Photos</span>
 	</li>
 	<li <%= get_onboard_stage_class(current_stage: stage, stage: 7)%>>
-		<span data-step="3">Trends</span>
+		<span data-step="7">Trends</span>
 	</li>
 	<li <%= get_onboard_stage_class(current_stage: stage, stage: 8)%>>
-			<span data-step="4">Global Good Tags</span>
+			<span data-step="8">Global Good Tags</span>
 	</li>
 </ul>
 <% elsif (9..13).to_a.include? stage %>
 <ul class="onboard-modal-header" data-steps="5">
 	<li <%= get_onboard_stage_class(current_stage: stage, stage: 9)%>>
-		<span data-step="1">Key Retailers</span>
+		<span data-step="9">Key Retailers</span>
 	</li>
 	<li <%= get_onboard_stage_class(current_stage: stage, stage: 10)%>>
-			<span data-step="2">Add Sectors</span>
+			<span data-step="10">Sectors</span>
 	</li>
 	<li <%= get_onboard_stage_class(current_stage: stage, stage: 11)%>>
-			<span data-step="3">Add Channels</span>
+			<span data-step="11">Channels</span>
 	</li>
 	<li <%= get_onboard_stage_class(current_stage: stage, stage: 12)%>>
-			<span data-step="4">Add Channel Capacities</span>
+			<span data-step="12">Channel Capacities</span>
 	</li>
 	<li <%= get_onboard_stage_class(current_stage: stage, stage: 13)%>>
-			<span data-step="5">Add Countries of Distribution</span>
+			<span data-step="13">Countries of Distribution</span>
 	</li>
 </ul>
-<% elsif (14.20).to_a.include? stage %>
-<ul class="onboard-modal-header" data-steps="7">
+<% elsif (14..20).to_a.include? stage %>
+<ul class="onboard-modal-header" data-steps="6">
 	<li <%= get_onboard_stage_class(current_stage: stage, stage: 14)%>>
-		<span data-step="1">Press Hits</span>
+		<span data-step="14">Press Hits</span>
 	</li>
 	<li <%= get_onboard_stage_class(current_stage: stage, stage: 15)%>>
-			<span data-step="2">Trade Shows</span>
+			<span data-step="15">Trade Shows</span>
 	</li>
 	<li <%= get_onboard_stage_class(current_stage: stage, stage: 16)%>>
-		<span data-step="3">Patents</span>
+		<span data-step="16">Patents</span>
 	</li>
 	<li <%= get_onboard_stage_class(current_stage: stage, stage: 17)%>>
-			<span data-step="4">Trademarks</span>
+			<span data-step="17">Trademarks</span>
 	</li>
 	<li <%= get_onboard_stage_class(current_stage: stage, stage: 18)%>>
-		<span data-step="5">Certifications / Regulatory</span>
+		<span data-step="18">Certifications / Regulatory Compliance</span>
 	</li>
 	<li <%= get_onboard_stage_class(current_stage: stage, stage: 19)%>>
-			<span data-step="6">Compliance</span>
-	</li>
-	<li <%= get_onboard_stage_class(current_stage: stage, stage: 20)%>>
-		<span data-step="7">Social Ethos &amp; Impact</span>
+		<span data-step="20">Social Ethos &amp; Impact</span>
 	</li>
 </ul>
 <% end %>

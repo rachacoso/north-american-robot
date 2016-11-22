@@ -228,6 +228,7 @@ ul.onboard-modal-header {
 	&[data-steps="3"] li {width: 33%; /* evenly space 3 steps */}
 	&[data-steps="4"] li {width: 25%; /* evenly space 4 steps */}
 	&[data-steps="5"] li {width: 20%; /* evenly space 5 steps */}
+	&[data-steps="6"] li {width: 16.5%; /* evenly space 7 steps */}
 	&[data-steps="7"] li {width: 14%; /* evenly space 7 steps */}
 	li {
 		display: inline-block;
@@ -267,6 +268,7 @@ ul.onboard-modal-header {
 		&.active > span:before, &.active > a > span:before {
 			// content: "DO";
 			background-color: $landing-blue;
+			font-weight: 500;
 			// border: 5px solid $landing-blue;
 	    -webkit-transition: color 0.5s, background-color 0.5s, border 0.5s; /* Safari */
 	    transition: color 0.5s, background-color 0.5s, border 0.5s;
