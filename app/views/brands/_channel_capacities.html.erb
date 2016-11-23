@@ -10,7 +10,7 @@
 				<h4><strong>Capacity</strong></h4>
 			</div>
 		</div>
-		<%= form_tag(channel_capacity_bulkupdate_url, method: "post") do  %>
+		<%= form_tag(channel_capacity_bulkupdate_url, method: "post", remote:true) do  %>
 			<%= hidden_field_tag "redirect_anchor", "a-channelcapacity" %>
 			<% if @brand.channels.empty? %>
 				<div class="row">
@@ -28,7 +28,7 @@
 						<%= label_tag "channel_capacity[bulk_ids][#{chan.id}]", chan.name, class: "right" %>
 					</div>
 					<div class="medium-3 columns end">
-						<%= number_field_tag("channel_capacity[bulk_ids][#{chan.id}]", @brand.channel_capacities.where(channel_id: chan.id).first.capacity) %>
+						<%= number_field_tag("channel_capacity[bulk_ids][#{chan.id}]", @brand.channel_capacities.where(channel_id: chan.id).first.capacity, class: "auto-form-text") %>
 					</div>
 				</div>
 
@@ -43,7 +43,7 @@
 					<div class="small-12 columns">
 						<% unless @brand.channels.empty? %>
 						<hr>
-						<%= submit_tag('Update Channel Capacities', class: "landing-button right") %>
+						<%#= submit_tag('Update Channel Capacities', class: "landing-button right") %>
 						<% end %>
 					</div>
 				</div>

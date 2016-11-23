@@ -85,24 +85,28 @@ class ChannelCapacitiesController < ApplicationController
 			u.update_completeness
 		end
 
-
 		if @current_user.distributor
 			if params[:ob]
-				redirect_to onboard_distributor_five_url
+				redir = onboard_distributor_five_url
 			elsif params[:redirect_anchor]
-				redirect_to distributor_url + "#" + params[:redirect_anchor] 
+				redir = distributor_url + "#" + params[:redirect_anchor] 
 			else
-				redirect_to distributor_url
+				redir = distributor_url
 			end		
 		else
 			if params[:ob]
-				redirect_to onboard_brand_seven_url
+				redir = onboard_brand_seven_url
 			elsif params[:redirect_anchor]
-				redirect_to brand_url + "#" + params[:redirect_anchor] 
+				redir = brand_url + "#" + params[:redirect_anchor] 
 			else
-				redirect_to brand_url
+				redir = brand_url
 			end
 		end		
+
+		respond_to do |format|
+			format.html { redirect_to redir }
+			format.js
+		end
 
 	end
 

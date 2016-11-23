@@ -13,7 +13,7 @@
 				<%= label_tag "channel_capacity[bulk_ids][#{cc.id}]", cc.custom_channel_name, class: "right" %>&nbsp;
 			</div>
 			<div class="medium-3 columns end">
-				<%= number_field_tag("channel_capacity[bulk_ids][#{cc.id}]", cc.capacity) %>
+				<%= number_field_tag("channel_capacity[bulk_ids][#{cc.id}]", cc.capacity, class: "auto-form-text") %>
 			</div>
 		</div>
 	<% end %>									
