@@ -286,11 +286,11 @@ ul.onboard-modal-header {
 		// 	}
 		// }
 		&.done > span:before, &.done > a > span:before {
-			content: "";
+			content: "done";
 			background: $landing-blue;
 			// border: 5px solid $landing-pink;
 			color: white;
-			font-size: 85%;
+			font-size: 65%;
 		}
 		&:before {
 			content: "";
