@@ -1,7 +1,8 @@
 <% stage = get_onboard_stage(company:@brand, user:@current_user, stage: @stage) %>
-<% unless stage == 1 %>
+<% unless stage == 1 || stage == 0 %>
 <%= link_to "", onboard_url(:stage => (stage-1)), id: "onboard-back", remote: true %>
 <% end %>
 <%= link_to "", onboard_url(:stage => (stage+1)), id: "next", remote: true %>
-
+<% unless stage == 0 %>
 <a id="close-onboard-modal-button" aria-label="Close"></a>
+<% end %>

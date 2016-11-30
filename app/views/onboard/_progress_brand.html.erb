@@ -14,7 +14,7 @@
 <% elsif [4].include? stage %>
 <ul class="onboard-modal-header" data-steps="2">
 	<li <%= get_onboard_stage_class(current_stage: stage, stage: 4)%>>
-			<span data-step="4">Add Ordering Requirements</span>
+			<span data-step="4">Ordering Requirements</span>
 	</li>
 </ul>
 <% elsif (5..8).to_a.include? stage %>
@@ -65,7 +65,7 @@
 			<span data-step="17">Trademarks</span>
 	</li>
 	<li <%= get_onboard_stage_class(current_stage: stage, stage: 18)%>>
-		<span data-step="18">Certifications / Regulatory Compliance</span>
+		<span data-step="18">Certifications / Compliance</span>
 	</li>
 	<li <%= get_onboard_stage_class(current_stage: stage, stage: 19)%>>
 		<span data-step="20">Social Ethos &amp; Impact</span>

@@ -287,8 +287,7 @@ ul.onboard-modal-header {
 		// }
 		&.done > span:before, &.done > a > span:before {
 			content: "done";
-			background: $landing-blue;
-			// border: 5px solid $landing-pink;
+			background: $landing-pink;
 			color: white;
 			font-size: 65%;
 		}
@@ -304,7 +303,7 @@ ul.onboard-modal-header {
 			z-index: 4;
 		}
 		&.done:before {
-			background: $landing-blue;
+			background: $landing-pink;
 		}
 		&.active:before {
 			background: $landing-blue;
@@ -314,6 +313,15 @@ ul.onboard-modal-header {
 		}
 	}
 }
+
+#onboard-instructions {
+	margin-top: rem-calc(20);
+	padding: rem-calc(10) 0;
+	background-color: $landing-lighter-blue;
+	width: 100%;
+	font-weight: 200;
+}
+
 
 #onboard-modal {
   position: fixed;
@@ -345,7 +353,7 @@ ul.onboard-modal-header {
 }
 #onboard-modal-next {
 	z-index: 96;
-	height: 3.5em;
+	height: 6.5em;
 
 	& > a#next:before {
 		content: 'next';
@@ -448,6 +456,7 @@ ul.onboard-modal-header {
 
 	}
 }
+
 #close-onboard-modal {
   position: fixed;
   // top: rem-calc(-40);
@@ -464,4 +473,3 @@ ul.onboard-modal-header {
   color: $landing-middle-gray;
   z-index: 97;
 }
-

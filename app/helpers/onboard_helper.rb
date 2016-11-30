@@ -41,98 +41,101 @@ module OnboardHelper
 			header = "Create A Profile"
 			image_path = "/images/create_profile.png"
 			partial_file = ["brands/company_info"]
-			subheader = "Enter Company Info"
+			instructions = "Enter Company Info"
 		when 2
 			header = "Create A Profile"
 			image_path = "/images/create_profile.png"
 			partial_file = ["users/limited_update_form"]
 			locals = [{ user: @current_user }]
-			subheader = "Enter Contact Info"
+			instructions = "Enter Contact Info"
 		when 3
 			header = "Create A Profile"
 			image_path = "/images/create_profile.png"
 			partial_file = ["brands/products"]
-			subheader = "Enter Products"
+			instructions = "Enter Products"
 		when 4
 			header = "Ordering Requirements"
 			image_path = "/images/ordering_requirements.png"
 			partial_file = ["brands/ordering_requirements"]
-			subheader = "Add Ordering Requirements"
+			instructions = "What are your ordering requirements?"
 		when 5
 			header = "Brand Story"
 			image_path = "/images/talk_details.png"
 			partial_file = ["brands/company_introduction"]
-			subheader = "Tell Your Story"
+			instructions = "Tell Your Story"
 		when 6
 			header = "Brand Photos"
 			image_path = "/images/talk_details.png"
 			partial_file = ["brands/brand_photos"]
-			subheader = "Show Us Your Stuff"
+			instructions = "Show Us Your Stuff! Add brand/marketing photos to help show off your brand."
 		when 7
 			header = "Trends"
 			image_path = "/images/talk_details.png"
 			partial_file = ["brands/trends"]
-			subheader = ""
+			instructions = "Add trends"
 		when 8
 			header = "Global Good"
 			image_path = "/images/talk_details.png"
 			partial_file = ["brands/social_tags"]
-			subheader = ""
+			instructions = "How do you help people and planet?"
 		when 9
 			header = "Key Retailers"
 			image_path = "/images/boost_profile.png"
 			partial_file = ["brands/key_retailers"]
-			subheader = ""
+			instructions = "Who are your current retail partners?"
 		when 10
 			header = "Sectors"
 			image_path = "/images/boost_profile.png"
 			partial_file = ["brands/sectors"]
-			subheader = ""
+			instructions = "What sector(s) are you in?"
 		when 11
 			header = "Channels"
 			image_path = "/images/boost_profile.png"
 			partial_file = ["brands/channels"]
-			subheader = ""
+			instructions = "What channels do you sell in?"
 		when 12
 			header = "Channel Capacities"
 			image_path = "/images/boost_profile.png"
 			partial_file = ["brands/channel_capacities"]
-			subheader = ""
+			instructions = "What are the capacities of those channels"
 		when 13
 			header = "Countries of Distribution"
 			image_path = "/images/boost_profile.png"
 			partial_file = ["brands/countries_of_distribution"]
-			subheader = ""
+			instructions = "What countries are you currently in?"
 		when 14
 			header = "Press Hits"
 			image_path = "/images/show_off.png"
 			partial_file = ["brands/press_hits"]
-			subheader = ""
+			instructions = "Let everyone know what "
 		when 15
 			header = "Trade Shows"
 			image_path = "/images/show_off.png"
 			partial_file = ["brands/trade_shows"]
-			subheader = ""
+			instructions = "What trade shows do you participate in?"
 		when 16
 			header = "Patents"
 			image_path = "/images/show_off.png"
 			partial_file = ["brands/patents"]
-			subheader = ""
+			instructions = "What patents do you hold?"
 		when 17
 			header = "Trademarks"
 			image_path = "/images/show_off.png"
 			partial_file = ["brands/trademarks"]
-			subheader = ""
+			instructions = "What trademarks do you hold?"
 		when 18
 			header = "Certifications / Regulatory Compliance"
 			image_path = "/images/show_off.png"
 			partial_file = ["brands/business_certifications"]
-			subheader = ""
+			instructions = "What certifications / regulatory compliances do you hold?"
 		when 19
 			header = "Social Ethos and Impact"
 			image_path = "/images/show_off.png"
 			partial_file = ["brands/social_fields"]
-			subheader = ""
+			instructions = "Let everyone know how you help people and planet?"
+		when 0
+			image_path = "/images/profile_complete.png"
+			message = "You did it!"
 		end
 
 		partial = Hash.new
@@ -141,7 +144,8 @@ module OnboardHelper
 		# partial[:step] = step
 		partial[:image_path] = image_path
 		partial[:header] = header
-		partial[:subheader] = subheader
+		partial[:instructions] = instructions
+		partial[:message] = message
 		return partial
 
 	end

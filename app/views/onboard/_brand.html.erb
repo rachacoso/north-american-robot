@@ -9,7 +9,25 @@
 		<%= render partial: "progress_brand", locals: {stage: stage} %>
 	</div><!--/.small-12-->
 </div><!--/.row-->
-<hr>
+
+<% if partial_info[:message].present? %>
+<div class="row">
+	<div class="small-12 columns text-center">
+		<h2><%= partial_info[:message] %></h2>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<% end %>
+
+<% if partial_info[:instructions].present? %>
+<div class="row">
+	<div class="small-12 columns text-center">
+		<div id="onboard-instructions"><%= partial_info[:instructions] %></div>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<% end %>
+
+
+<% if partial_info[:file].present? %>
 <% partial_info[:file].each_with_index do |file,index| %>
 	<% if partial_info[:locals] && partial_info[:locals][index.to_i].present? %>
 		<%= render partial: partial_info[:file][index.to_i], locals: partial_info[:locals][index.to_i] %>
@@ -17,5 +35,6 @@
 		<%= render partial: partial_info[:file][index.to_i] %>
 	<% end %>
 	<br>
+<% end %>
 <% end %>
 <br>
