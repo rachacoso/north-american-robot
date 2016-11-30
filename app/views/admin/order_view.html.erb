@@ -36,7 +36,7 @@
 		<%= "<h3>ORDER NOT ARMOR ENABLED</h3>".html_safe if !@order.armor_enabled? %>
 
 		<% if !@order.armor_enabled? %>
-			<% if @order.status == "submitted" %>
+			<% if @order.status != "completed" %>
 			<%= link_to "Mark Order Complete", complete_order_url(@order,0), class: "landing-button", remote: true %>
 			<% end %>
 		<% end %>
