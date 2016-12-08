@@ -87,7 +87,9 @@ class OrderMailerPreview < ActionMailer::Preview
 
 # Preview this email at http://landing.dev/rails/mailers/order_mailer/send_completed_order
   def send_completed_order
-    order = Order.where(status: "completed").first
+    # order = Order.where(status: "submitted").first
+    order = Order.find("583f69b7c549cb9d344aa2c5")
+    
     OrderMailer.send_order(
       order: order,
       status: "completed",

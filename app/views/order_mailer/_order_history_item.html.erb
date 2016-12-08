@@ -1,0 +1,33 @@
+<% comment ||= nil %>
+<% company_name ||= nil %>
+<% delivery_info ||= nil %>
+<tr style="padding:0;text-align:left;vertical-align:top">
+<th class="small-12 large-12 columns first last" style="Margin:0 auto;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:lighter;line-height:19px;margin:0 auto;padding:0;padding-bottom:16px;padding-left:16px;padding-right:16px;text-align:left;width:100%">
+	<table class="row" style="border-collapse:collapse;border-spacing:0;display:table;padding:0;position:relative;text-align:left;vertical-align:top;width:100%">
+	<tbody>
+	<tr style="padding:0;text-align:left;vertical-align:top;text-align:center;">
+	<td colspan="4" style="font-weight:bold;font-size:12px;"><%= status_action %> <% company_name ? "by #{company_name}" : "" %></span> <%= date.in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M %Z") %></td>
+	</tr>
+	<% if comment && comment.text.present? %>
+	<tr style="padding:0;text-align:left;vertical-align:top;text-align:center;">
+	<td colspan="4" style="font-weight:lighter;font-size:12px;">
+		<%= simple_format(comment.text, {}, wrapper_tag: "div") %>
+	</td>
+	</tr>
+	<% elsif delivery_info %>
+	<tr style="padding:0;text-align:left;vertical-align:top;text-align:center;">
+	<td colspan="4" style="font-weight:lighter;font-size:12px;">
+		<%= delivery_info %>
+	</td>
+	</tr>
+	<% else %>
+	<tr style="padding:0;text-align:left;vertical-align:top;text-align:center;">
+	<td colspan="4" style="font-weight:lighter;font-size:12px;">
+		
+	</td>
+	</tr>
+	<% end %>
+	</tbody>
+	</table>
+</th>
+</tr>
