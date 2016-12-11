@@ -3,7 +3,6 @@
 @import "global_variables";
 @import "mixins";
 
-
 .container {
 	margin-top: rem-calc(15);
 	margin-bottom: rem-calc(15);
@@ -50,6 +49,28 @@
 	}
 	& > #main-body {
 		padding: 0 rem-calc(30) rem-calc(30) rem-calc(30);
+		&.restricted::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			@include transparent($landing-light-gray, 0.9);
+			z-index: 999;
+		}
+		&.restricted > #restricted-message {
+			z-index: 1001;
+			position: fixed;
+			width: rem-calc(400);
+			border: 1px solid $landing-dark-gray;
+			top: 30%;
+			left: 50%;
+			text-align: center;
+			background-color: white;
+			padding: rem-calc(20);
+			margin-left: rem-calc(-200);
+		}
 	}
 	&#article {
 		max-width: rem-calc(1000);

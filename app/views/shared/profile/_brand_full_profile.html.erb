@@ -1,9 +1,15 @@
 <div class="container marketplace">
 	<%= render partial: "shared/v2/container/marketplace_lead", locals: {close_link: dashboard_url , subhead: "brand view"} %>
-	<div id="main-body">
-
+	<div id="main-body" <%= profile.subscriber ? '' : 'class=restricted'%>>
 		<%= render partial: "/shared/profile/components/profile_nav", locals: { profile: profile, section: "profile" } %>
 
+
+	<% if !profile.subscriber %>
+		<div id="restricted-message">
+			<h1>Sorry!</h1>
+			<h2><%= profile.company_name %>'s profile has been temporarily disabled</h2>
+		</div>
+	<% end %>
 
 		<div class="row">
 			<div class="small-12 columns">
