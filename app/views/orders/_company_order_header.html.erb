@@ -8,7 +8,7 @@
 				<li id="company"><%= link_to orders_url(company_id: profile) do %>view All <%= profile.company_name %> Orders<% end %></li>
 				</ul>
 			</li>
-			<li id="active"><%= order.status == "open" ? "Cart started on" : "Order created on" %><strong><%= order.c_at.strftime(" %b %d %Y") %></strong></li>
+			<li id="active"><%= order.status == "open" ? "Cart started on" : "Order created on" %><strong><%= order.c_at.in_time_zone("Pacific Time (US & Canada)").strftime(" %B %d, %Y") %> <small style="font-weight: 200;"><%= order.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("at %H:%M %Z") %></small></strong></li>
 		</ul>
 	</div><!--/.small-12-->
 </div><!--/.row-->
