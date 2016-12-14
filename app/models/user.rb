@@ -90,7 +90,7 @@ class User
 
 	def subscriber?
 		u = self.distributor || self.brand || self.retailer
-		if u.subscriber
+		if u.subscription_expiration > Date.today
 			return true
 		else
 			return false

@@ -194,10 +194,13 @@ class DistributorsController < ApplicationController
   end
 
   def adminupdate
-    distributor = Distributor.find(params[:id])
+    @distributor = Distributor.find(params[:id])
 
+    if params[:distributor][:subscription_expiration].present?
+      params[:distributor][:subscription_expiration] = Date.strptime(params[:distributor][:subscription_expiration], '%m-%d-%Y') 
+    end
 
-    distributor.update!(admin_distributor_parameters)
+    @distributor.update(admin_distributor_parameters)
 
     # update rating
 
@@ -213,16 +216,16 @@ class DistributorsController < ApplicationController
 
     new_rating = 0
     rating_items.each do |item|
-      if distributor.send(item)
+      if @distributor.send(item)
         new_rating += 1
       end
     end
-    distributor.rating = new_rating
-    distributor.save!   
+    @distributor.rating = new_rating
+    @distributor.save!   
 
     respond_to do |format|
       format.html { 
-        redirect_to admin_distributor_view_url(distributor)
+        redirect_to admin_distributor_view_url(@distributor)
       }
       format.js 
     end
@@ -378,8 +381,8 @@ class DistributorsController < ApplicationController
       :verified_location,
       :verified_brand_display,
       :verification_notes,
-      :subscriber,
       :active,
+      :subscription_expiration,
       :payment_terms_approved,
       :margin_approved,
       address_attributes: [ 

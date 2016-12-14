@@ -124,8 +124,25 @@
 			<div class="small-12 columns">
 				<div class="panel">
 					<h2>Subscriber Status</h2>
-					<small><span data-tooltip aria-haspopup="true" class="has-tip" title="This controls whether this profile has access to the subscriber functionality.">What is this?</span></small><br>
-					<%= f.check_box :subscriber, class: "auto-form" %>
+					<div class="row">
+						<div class="small-12 columns">
+							<h4 id="subscription-status" style="font-weight: 500;color: <%= @brand.subscriber? ? 'green' : 'red' %>"><%= @brand.subscriber? ? "Subscriber" : "Inactive" %></h4>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="small-12 columns">
+							<%= f.label :subscription_expiration, "Subscription Expiration Date" %>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+					<div class="row">
+						<div class="medium-3 columns">
+							<% if @brand.subscription_expiration %>
+								<%= f.text_field :subscription_expiration, label: false, value: @brand.subscription_expiration.strftime("%m-%d-%Y"), placeholder: 'Subscription Expiration' , class: "datepick auto-form" %>
+							<% else %>
+								<%= f.text_field :subscription_expiration, label: false, value: '', placeholder: 'Subscription Expiration' , class: "datepick auto-form" %>
+							<% end %>
+						</div><!--/.medium-3-->
+					</div><!--/.row-->
 				</div>
 				<div class="panel">
 					<h2>Active/Visibility Status</h2>

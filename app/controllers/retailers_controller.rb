@@ -146,12 +146,17 @@ class RetailersController < ApplicationController
   end
 
   def adminupdate
-    retailer = Retailer.find(params[:id])
-    retailer.update!(admin_retailer_parameters)
-    
+    @retailer = Retailer.find(params[:id])
+
+    if params[:retailer][:subscription_expiration].present?
+      params[:retailer][:subscription_expiration] = Date.strptime(params[:retailer][:subscription_expiration], '%m-%d-%Y') 
+    end
+
+    @retailer.update(admin_retailer_parameters)
+
     respond_to do |format|
       format.html { 
-        redirect_to admin_retailer_view_url(retailer)
+        redirect_to admin_retailer_view_url(@retailer)
       }
       format.js 
     end
@@ -225,8 +230,8 @@ class RetailersController < ApplicationController
       :verified_business_certificate,
       :verified_location,
       :verified_brand_display,
-			:subscriber,
 			:active,
+      :subscription_expiration,
       :payment_terms_approved,
       :margin_approved
 		)

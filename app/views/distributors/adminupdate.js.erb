@@ -1,1 +1,10 @@
-<%= render partial: 'shared/ajax_message', locals: { updated_item: "Distributor Admin Settings" } %>
+<% if @distributor.errors.any? %>
+	<%= render partial: 'shared/ajax_message_error', locals: { updated_item: "Sorry please try again" } %>
+<% else %>
+	<%= render partial: 'shared/ajax_message', locals: { updated_item: "Distributor Admin Settings" } %>
+<% end %>
+<% if @distributor.subscriber? %>
+	$('h4#subscription-status').text("Subscriber").css("color", "green");
+<% else %>
+	$('h4#subscription-status').text("Inactive").css("color", "red");
+<% end %>
