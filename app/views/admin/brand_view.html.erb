@@ -24,7 +24,7 @@
 
 
 <div class="row">
-	<div class="medium-5 columns">
+	<div class="medium-3 columns">
 
 		<div class="panel">
 			<h2>Upload Logo</h2>
@@ -61,9 +61,9 @@
 			<h3><%= !@brand.website.blank? ? (link_to "Website", "//#{clean_url(@brand.website)}", target: 'blank') : "NO Website" %></h3>
 
 		</div><!--/.panel -->
-	</div><!--/.medium-5-->
+	</div><!--/.medium-3-->
 
-	<div class="medium-7 columns">
+	<div class="medium-9 columns">
 
 		<div class="row">
 			<div class="small-12 columns">
@@ -135,17 +135,22 @@
 			</div><!--/.small-12-->	
 		</div><!--/.row-->	
 
+<% end %>
 
-	</div><!--/.medium-7-->
-</div><!--/.row-->
 
 <div class="row">
-	<div class="small-12 columns text-right">
+	<div class="small-12 columns">
 		<div class="panel">
-		<%#= f.submit 'Update Brand', class: 'button tiny alert' %>
+			<h2>Inventory Management</h2>
+			<div id="inventory-management">
+			<%= render partial: "inventory_adjustments/inventory_adjustments" %>
+			</div>
 		</div>
-	</div><!--/.small-12-->
+	</div>
+</div>
+
+	</div><!--/.medium-9-->
 </div><!--/.row-->
 
-<% end %>
+
 </div>

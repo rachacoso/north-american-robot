@@ -26,3 +26,71 @@ table.brand-payment-information {
 	display: inline-block;
 	vertical-align: top;
 }
+
+table.inventory {
+	margin-bottom: rem-calc(20);
+	width: 100%;
+	th {
+		font-weight: 200;
+		font-size: rem-calc(12);
+		text-align: right;
+		width: 25%;
+	}
+	tr {
+		background-color: white;
+		&.adjustments-header {
+			th { 
+				border:1px solid $landing-middle-gray;
+				line-height: 5px;
+			}
+		}
+		&.product-header {
+			background-color: darken($landing-light-gray, 10%);
+			td { font-size: rem-calc(20); }
+		}
+		&.item {
+			&:nth-child(even) {background: $landing-light-gray;}
+			td { 
+				text-align: right;
+				padding: rem-calc(2) rem-calc(10);
+			}
+			small { 
+				color: $landing-middle-gray; 
+			}
+		}
+		&.total {
+			td {
+				text-align: right;
+			}
+			td:first-child {
+				background-color: darken($landing-light-gray, 10%);
+			}
+			td:nth-child(2) {
+				// border: 1px solid $landing-middle-gray;
+				font-weight: 500;
+				font-size: rem-calc(20);
+			}
+		}
+		&.controls {
+			td {
+				line-height: 5px;
+				// background-color: darken($landing-light-gray, 10%);
+			}
+			td.addnew {
+				font-weight: 200;
+				background-color: lighten($landing-blue, 30%);
+				text-align: center;
+				a { 
+					display: block;
+					color: $landing-dark-gray;
+				}
+				&:hover {
+					background-color: lighten($landing-blue, 3%);
+					a {
+						color: white;
+					}
+				}
+			}
+		}
+	}
+}

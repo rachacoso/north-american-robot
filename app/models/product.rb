@@ -13,12 +13,18 @@ class Product
  	field :country_of_manufacture, type: String, default: ""
  	field :current, type: Mongoid::Boolean
 
+ 	has_many :inventory_adjustments
+
  	has_many :product_photos, as: :photographable, dependent: :destroy
 	has_many :tags, as: :taggable, dependent: :destroy
 
  	belongs_to :brand
 
  	scope :featureable, ->{where(current: true)}
+  
+  def inventory
+  	return self.inventory_adjustments.received.sum(:amount) - self.inventory_adjustments.deducted.sum(:amount)
+  end
   
 	def save_price(p)
 		unless p.blank?

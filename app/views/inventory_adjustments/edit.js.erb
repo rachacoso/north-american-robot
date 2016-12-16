@@ -1,0 +1,9 @@
+// close any open order-items
+$('#order-item').fadeOut();
+$('.overlay').fadeOut();
+
+$('#order-item-data').html("<%= j (render partial: 'edit') %>");
+$('.overlay#order-item-overlay').fadeIn();
+$('#order-item').fadeIn();
+
+setModalActions();

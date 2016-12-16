@@ -207,4 +207,10 @@ Rails.application.routes.draw do
   resources :password_resets
   # get 'messages/all/:match_id' => 'messages#all_messages', as: 'all_messages'
 
+  get '/inventory_adjustments/new/:type/:product_id' => 'inventory_adjustments#new', as: 'new_inventory_adjustment'
+  get '/inventory_adjustments/edit/:id' => 'inventory_adjustments#edit', as: 'edit_inventory_adjustment'
+  post '/inventory_adjustments/c' => 'inventory_adjustments#create', as: 'inventory_adjustments'
+  put '/inventory_adjustments/:id' => 'inventory_adjustments#update', as: 'inventory_adjustment'
+  patch '/inventory_adjustments/:id' => 'inventory_adjustments#update'
+
 end

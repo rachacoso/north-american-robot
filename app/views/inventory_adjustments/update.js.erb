@@ -1,0 +1,4 @@
+$('#order-item').fadeOut();
+$('.overlay').fadeOut();
+$('#inventory-management').html("<%= j (render partial: 'inventory_adjustments/inventory_adjustments') %>");
+<%= render partial: 'shared/ajax_message', locals: { updated_item: "Inventory" } %>

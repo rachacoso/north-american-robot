@@ -1,0 +1,17 @@
+<%= form_for @adjustment, remote: true do |f| %>
+<%= f.hidden_field :type, value: @type %>
+<%= hidden_field_tag "product_id", @adjustment.product.id %>
+<div class="row">
+	<div class="medium-2 columns">
+		<%= f.number_field :amount %>
+	</div><!--/.medium-2-->
+	<div class="medium-10 columns">
+		<%= f.text_area :comment %>
+	</div><!--/.medium-10-->
+</div><!--/.row-->
+<div class="row">
+	<div class="small-12 columns text-center">
+		<%= f.submit "Add" %>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<% end %>
