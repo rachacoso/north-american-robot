@@ -365,6 +365,10 @@ class OrdersController < ApplicationController
 			@render_this = "shipping_address"
 		end
 
+		if params[:order][:post_delivery_status] == "sent"
+			@order.update_inventory
+		end
+
 		@order.update(order_params)
 		if !@order.save
 			# flash.now[:error] = "Sorry, Discount must be a number between 0 and 100"

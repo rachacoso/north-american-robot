@@ -71,7 +71,7 @@ class Brand
 # MODEL METHODS
 ################
 
-	def has_inventory
+	def has_inventory?
 		return true if InventoryAdjustment.any_in(:product_id => self.products.pluck(:id)).present?
 	end
 

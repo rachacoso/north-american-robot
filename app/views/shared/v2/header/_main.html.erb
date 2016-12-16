@@ -32,7 +32,7 @@
 					        	<li class="section-title">Welcome to Landing International<br> <%= @current_user.email %></li>
 				            <li><%= link_to 'DASHBOARD', dashboard_url, id: "menu-dashboard", class: 'text-right' %></li>
 				            <li><%= link_to 'ORDERS', orders_url, id: "menu-dashboard", class: 'text-right' %></li>
-				            <% if @current_user.brand && @current_user.brand.has_inventory %>
+				            <% if @current_user.brand && @current_user.brand.has_inventory? %>
 										<li><%= link_to 'INVENTORY MANAGEMENT', inventory_adjustments_url, id: "menu-dashboard", class: 'text-right' %></li>
 				            <% end %>
 				            <li><%= link_to 'PREVIEW YOUR PROFILE', eval("#{@current_user.type?}_full_profile_path"), class: 'text-right' %></li>

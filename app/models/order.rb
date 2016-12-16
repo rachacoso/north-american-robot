@@ -21,6 +21,7 @@ class Order # for V2 ordering
 
   field :status, type: String, default: "open" # Values: OPEN, SUBMITTED, PENDING, APPROVED, PAID, SHIPPED, DELIVERED, COMPLETED, DISPUTED, ERROR
   field :post_delivery_status, type: String, default: "" # Values: WAREHOUSE, SENT, RECEIVED, AWAITING, PAID
+  field :inventory_deducted, type: Mongoid::Boolean, default: false
   field :status_error_message, type: String
   field :landing_order_reference_id, type: String
   field :orderer_company_name, type: String
@@ -505,6 +506,28 @@ class Order # for V2 ordering
       numberstring += 1
       self[column] = "LAN" + numberstring.to_s
     end while Order.where(column => self[column]).exists?
+  end
+
+  def update_inventory
+    if self.brand.has_inventory? && !self.inventory_deducted
+      self.order_items.each do |item|
+        units_to_deduct = item.quantity.to_i + item.quantity_testers.to_i
+        product = Product.find(item.product_id)
+        comment = ""
+        comment += "Landing Order ID: #{self.landing_order_reference_id}" if self.landing_order_reference_id.present?
+        comment += "\n#{self.brand.company_name} Order ID: #{self.brand_order_reference_id}" if self.brand_order_reference_id.present?
+        comment += "\n#{self.orderer.company_name} Order ID: #{self.orderer_order_reference_id}" if self.orderer_order_reference_id.present?
+
+        product.inventory_adjustments.create(
+          units: units_to_deduct, 
+          type: "deducted", 
+          comment: comment,
+          order_id: self.id
+          )
+      end
+      self.inventory_deducted = true
+      self.save!
+    end
   end
 
 end
