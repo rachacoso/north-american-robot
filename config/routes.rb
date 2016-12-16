@@ -209,7 +209,8 @@ Rails.application.routes.draw do
 
   get '/inventory_adjustments/new/:type/:product_id' => 'inventory_adjustments#new', as: 'new_inventory_adjustment'
   get '/inventory_adjustments/edit/:id' => 'inventory_adjustments#edit', as: 'edit_inventory_adjustment'
-  post '/inventory_adjustments/c' => 'inventory_adjustments#create', as: 'inventory_adjustments'
+  get '/inventory_adjustments/' => 'inventory_adjustments#index', as: 'inventory_adjustments'
+  post '/inventory_adjustments/' => 'inventory_adjustments#create'
   put '/inventory_adjustments/:id' => 'inventory_adjustments#update', as: 'inventory_adjustment'
   patch '/inventory_adjustments/:id' => 'inventory_adjustments#update'
 

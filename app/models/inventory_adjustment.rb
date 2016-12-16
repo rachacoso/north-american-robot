@@ -4,7 +4,7 @@ class InventoryAdjustment
   
   belongs_to :product
   
-  field :amount, type: Integer
+  field :units, type: Integer
   field :type, type: String # requested, sent, received, deducted
   field :comment, type: String
 

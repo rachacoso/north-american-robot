@@ -4,6 +4,10 @@ class InventoryAdjustmentsController < ApplicationController
 	before_action :set_adjustment, only: [:edit,:update]
 	before_action :administrators_only, only: [:edit,:update]
 
+	def index
+		@brand = @current_user.brand
+	end
+
 	def new
 		@adjustment = @product.inventory_adjustments.build
 		@type = params[:type]
@@ -33,7 +37,7 @@ class InventoryAdjustmentsController < ApplicationController
 
   def inventory_adjustment_parameters
     params.require(:inventory_adjustment).permit(
-			:amount,
+			:units,
 			:type,
 			:comment
 		)

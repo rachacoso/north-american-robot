@@ -23,9 +23,9 @@ class Product
  	scope :featureable, ->{where(current: true)}
   
   def inventory
-  	return self.inventory_adjustments.received.sum(:amount) - self.inventory_adjustments.deducted.sum(:amount)
+  	return self.inventory_adjustments.received.sum(:units) - self.inventory_adjustments.deducted.sum(:units)
   end
-  
+
 	def save_price(p)
 		unless p.blank?
 			pc = (p.to_f * 100).round

@@ -1,9 +1,7 @@
-// close any open order-items
-$('#order-item').fadeOut();
+// close any open inventory-items
+$('#inventory-item').fadeOut();
 $('.overlay').fadeOut();
 
-$('#order-item-data').html("<%= j (render partial: 'edit') %>");
-$('.overlay#order-item-overlay').fadeIn();
-$('#order-item').fadeIn();
-
-setModalActions();
+$('#inventory-item-data').html("<%= j (render partial: 'edit') %>");
+$('.overlay#inventory-item-overlay').fadeIn();
+$('#inventory-item').fadeIn();

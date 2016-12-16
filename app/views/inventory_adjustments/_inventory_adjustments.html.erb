@@ -5,9 +5,9 @@
 	</tr>
 	<tr class="adjustments-header">
 		<th>DATE</th>
-		<th>REQUESTED BY LANDING</th>
-		<th>SENT BY <%=@brand.company_name %></th>
-		<th>AMOUNT RECEIVED (DEDUCTED)</th>
+		<th>UNITS REQUESTED BY LANDING</th>
+		<th>UNITS SENT BY <%=@brand.company_name %></th>
+		<th>UNITS RECEIVED (DEDUCTED)</th>
 	</tr>
 	<% if product.inventory_adjustments.blank? %>
 	<tr>
@@ -20,27 +20,31 @@
 			<%= adjustment.c_at.strftime("%B %d, %Y") %><br>
 			<small><%= adjustment.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%H:%M:%S %Z") %></small>
 		</td>
-		<td><%= adjustment.type == "request" ? "#{adjustment.amount}<br><small>#{adjustment.comment}</small>".html_safe : "&nbsp;".html_safe %></td>
-		<td><%= adjustment.type == "sent" ? "#{adjustment.amount}<br><small>#{adjustment.comment}</small>".html_safe : "&nbsp;".html_safe %></td>
+		<td><%= adjustment.type == "request" ? "#{adjustment.units}<br><small>#{adjustment.comment}</small>".html_safe : "&nbsp;".html_safe %></td>
+		<td><%= adjustment.type == "sent" ? "#{adjustment.units}<br><small>#{adjustment.comment}</small>".html_safe : "&nbsp;".html_safe %></td>
 		<td>
 			<% if adjustment.type == "received" %>
-				<%= link_to_if @current_user.administrator?, "#{adjustment.amount}<br><small>#{adjustment.comment}</small>".html_safe, edit_inventory_adjustment_url(adjustment.id), remote: true %>
+				<%= link_to_if @current_user.administrator?, "#{adjustment.units}<br><small>#{adjustment.comment}</small>".html_safe, edit_inventory_adjustment_url(adjustment.id), remote: true %>
 			<% elsif adjustment.type == "deducted" %>
-				<%= adjustment.amount %><br>
+				<%= adjustment.units %><br>
 				<small><%= adjustment.comment %></small>
 			<% end %>
 		</td>
 	</tr>
 	<% end %>
-	<tr class="controls">
-		<td>&nbsp;</td>
-		<td class="addnew"><%= link_to "+ request", new_inventory_adjustment_url("request",product.id), remote: true %></td>
-		<td>&nbsp;</td>
-		<td class="addnew"><%= link_to "+ received", new_inventory_adjustment_url("received",product.id), remote: true %></td>
-	</tr>
 	<tr class="total">
 		<td colspan="3">Total Inventory: </td>
 		<td><%= product.inventory ||= 0 %></td>
+	</tr>
+	<tr class="controls">
+		<% if @current_user.administrator? %>
+		<td colspan="2">&nbsp;</td>
+		<td class="addnew"><%= link_to "add request", new_inventory_adjustment_url("request",product.id), remote: true %></td>
+		<td class="addnew"><%= link_to "add received", new_inventory_adjustment_url("received",product.id), remote: true %></td>
+		<% else %>
+		<td colspan="3">&nbsp;</td>
+		<td class="addnew"><%= link_to "add sent", new_inventory_adjustment_url("sent",product.id), remote: true %></td>
+		<% end %>
 	</tr>
 </table>
 <% end %>
