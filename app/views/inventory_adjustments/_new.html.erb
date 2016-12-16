@@ -1,12 +1,14 @@
 <div class="row">
 	<div class="small-12 columns text-center">
+		<h2><strong><%= @adjustment.product.name %></strong>
 		<% if @type == "request" %>
-			<h2>Inventory Request</h2>
+			<br>Inventory Request
 		<% elsif @type == "received" %>
-			<h2>Inventory Received</h2>
+			<br>Inventory Received
 		<% elsif @type == "sent" %>
-			<h2>Inventory Sent</h2>
+			<br>Inventory Shipped
 		<% end %>
+		</h2>
 	</div><!--/.small-12-->
 </div><!--/.row-->
 <%= form_for @adjustment, remote: true do |f| %>

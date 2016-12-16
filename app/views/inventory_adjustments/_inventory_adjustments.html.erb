@@ -6,12 +6,13 @@
 	<tr class="adjustments-header">
 		<th>DATE</th>
 		<th>UNITS REQUESTED BY LANDING</th>
-		<th>UNITS SENT BY <%=@brand.company_name %></th>
+		<th>UNITS SHIPPED BY <%=@brand.company_name %></th>
 		<th>UNITS RECEIVED (DEDUCTED)</th>
 	</tr>
 	<% if product.inventory_adjustments.blank? %>
-	<tr>
-		<td colspan="4">&nbsp;</td>
+	<tr class="item">
+		<td colspan="2">&nbsp;</td>
+		<td colspan="2">&nbsp;</td>
 	</tr>
 	<% end %>
 	<% product.inventory_adjustments.each do |adjustment| %>
@@ -33,17 +34,17 @@
 	</tr>
 	<% end %>
 	<tr class="total">
-		<td colspan="3">Total Inventory: </td>
+		<td colspan="3">TOTAL INVENTORY: </td>
 		<td><%= product.inventory ||= 0 %></td>
 	</tr>
 	<tr class="controls">
 		<% if @current_user.administrator? %>
 		<td colspan="2">&nbsp;</td>
-		<td class="addnew"><%= link_to "add request", new_inventory_adjustment_url("request",product.id), remote: true %></td>
-		<td class="addnew"><%= link_to "add received", new_inventory_adjustment_url("received",product.id), remote: true %></td>
+		<td class="addnew"><%= link_to "add inventory request", new_inventory_adjustment_url("request",product.id), remote: true %></td>
+		<td class="addnew"><%= link_to "add received inventory", new_inventory_adjustment_url("received",product.id), remote: true %></td>
 		<% else %>
 		<td colspan="3">&nbsp;</td>
-		<td class="addnew"><%= link_to "add sent", new_inventory_adjustment_url("sent",product.id), remote: true %></td>
+		<td class="addnew"><%= link_to "add shipped inventory", new_inventory_adjustment_url("sent",product.id), remote: true %></td>
 		<% end %>
 	</tr>
 </table>

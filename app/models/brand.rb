@@ -71,6 +71,10 @@ class Brand
 # MODEL METHODS
 ################
 
+	def has_inventory
+		return true if InventoryAdjustment.any_in(:product_id => self.products.pluck(:id)).present?
+	end
+
 	def all_product_photos
 		# First, finding ids of products
 		ids = Product.where(brand_id: self.id).only(:_id).map(&:id)
