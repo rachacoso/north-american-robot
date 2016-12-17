@@ -7,7 +7,7 @@
 		<th>DATE</th>
 		<th>UNITS REQUESTED BY LANDING</th>
 		<th>UNITS SHIPPED BY <%=@brand.company_name %></th>
-		<th>UNITS RECEIVED (DEDUCTED)</th>
+		<th>UNITS RECEIVED (UNITS DEDUCTED)</th>
 	</tr>
 	<% if product.inventory_adjustments.blank? %>
 	<tr class="item">
@@ -28,14 +28,15 @@
 				<%= link_to_if @current_user.administrator?, "#{adjustment.units}<br>#{simple_format(adjustment.comment,{}, wrapper_tag: "small")}".html_safe, edit_inventory_adjustment_url(adjustment.id), remote: true %>
 			<% elsif adjustment.type == "deducted" %>
 				<span style="color:red;">(<%= adjustment.units %>)</span><br>
-				<small>Deduction from 
+				<small>Units Deducted</small><br>
+				<small>
 					<% if @current_user.administrator? %>
-					<%= link_to "order from #{adjustment.order.orderer.company_name}",admin_order_view_url(adjustment.order), target: "_blank" %>
+					<%= link_to "#{adjustment.order.orderer.company_name} Order",admin_order_view_url(adjustment.order), target: "_blank" %>
 					<% else %>
 					<%= link_to "order from #{adjustment.order.orderer.company_name}",order_url(adjustment.order), target: "_blank" %>
 					<% end %>
 				</small><br>
-				<%= simple_format(adjustment.comment,{}, wrapper_tag: "small") %>
+				<%= simple_format(adjustment.comment,{ }, wrapper_tag: "small") %>
 			<% end %>
 		</td>
 	</tr>

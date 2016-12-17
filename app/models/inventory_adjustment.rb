@@ -15,6 +15,7 @@ class InventoryAdjustment
 
   scope :received, ->{where(type: "received")}
   scope :deducted, ->{where(type: "deducted")}
+  scope :from_order, ->(order_id) {where(order_id: order_id)}
 
   def order
     return Order.find(self.order_id) if self.order_id.present?

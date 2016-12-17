@@ -55,7 +55,7 @@ table.inventory {
     &.adjustments-header {
       th { 
         background-color: $landing-light-gray;
-        line-height: 5px;
+        padding: rem-calc(2) rem-calc(10);
         &:first-child { border-left: 1px dotted $landing-middle-gray; }
         &:last-child { border-right: 1px dotted $landing-middle-gray; }
       }
@@ -99,7 +99,7 @@ table.inventory {
     }
     &.controls {
       td {
-        line-height: 5px;
+        padding: rem-calc(2) rem-calc(10);
       }
       td.addnew {
         font-weight: 200;
