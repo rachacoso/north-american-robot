@@ -25,7 +25,9 @@
 		<td><%= adjustment.type == "sent" ? "#{adjustment.units}<br>#{simple_format(adjustment.comment,{}, wrapper_tag: "small")}".html_safe : "&nbsp;".html_safe %></td>
 		<td>
 			<% if adjustment.type == "received" %>
-				<%= link_to_if @current_user.administrator?, "#{adjustment.units}<br>#{simple_format(adjustment.comment,{}, wrapper_tag: "small")}".html_safe, edit_inventory_adjustment_url(adjustment.id), remote: true %>
+				<%= link_to_if @current_user.administrator?, adjustment.units, edit_inventory_adjustment_url(adjustment.id), remote: true %><br>
+				<small>Units Received</small><br>
+				<%= simple_format(adjustment.comment,{ }, wrapper_tag: "small") %>
 			<% elsif adjustment.type == "deducted" %>
 				<span style="color:red;">(<%= adjustment.units %>)</span><br>
 				<small>Units Deducted</small><br>
@@ -33,7 +35,7 @@
 					<% if @current_user.administrator? %>
 					<%= link_to "#{adjustment.order.orderer.company_name} Order",admin_order_view_url(adjustment.order), target: "_blank" %>
 					<% else %>
-					<%= link_to "order from #{adjustment.order.orderer.company_name}",order_url(adjustment.order), target: "_blank" %>
+					<%= link_to "#{adjustment.order.orderer.company_name} Order",order_url(adjustment.order), target: "_blank" %>
 					<% end %>
 				</small><br>
 				<%= simple_format(adjustment.comment,{ }, wrapper_tag: "small") %>
@@ -41,10 +43,6 @@
 		</td>
 	</tr>
 	<% end %>
-	<tr class="total">
-		<td colspan="3">TOTAL INVENTORY: </td>
-		<td><%= product.inventory ||= 0 %></td>
-	</tr>
 	<tr class="controls">
 		<% if @current_user.administrator? %>
 		<td>&nbsp;</td>
@@ -57,5 +55,10 @@
 		<td>&nbsp;</td>
 		<% end %>
 	</tr>
+	<tr class="total">
+		<td colspan="3">TOTAL INVENTORY: </td>
+		<td><%= product.inventory ||= 0 %></td>
+	</tr>
+
 </table>
 <% end %>

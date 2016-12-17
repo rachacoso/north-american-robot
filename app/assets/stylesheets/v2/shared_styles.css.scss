@@ -100,6 +100,13 @@ table.inventory {
     &.controls {
       td {
         padding: rem-calc(2) rem-calc(10);
+        background-color: lighten($landing-blue, 35%);
+        &:first-child {
+          border-left: 1px dotted $landing-middle-gray;
+        }
+        &:last-child {
+          border-right: 1px dotted $landing-middle-gray;
+        }
       }
       td.addnew {
         font-weight: 200;
