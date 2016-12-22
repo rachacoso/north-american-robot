@@ -1,0 +1,23 @@
+<% if adjustment.type == "shipment" %>
+<div <%= adjustment.complete? ? "class=complete" : "" %>>
+<% if adjustment.complete? %>
+<div class="complete-indicator"><i class="fa fa-check" style="color: green" aria-hidden="true"></i> received</div>
+<% end %>
+<%= adjustment.units %><br>
+<small>Units Shipped</small><br>
+<%= simple_format(adjustment.comment,{ class: 'comments' }, wrapper_tag: 'div') %>
+</div>
+<% adjustment.associated_requests.each do |a| %>
+<div class="comments-complete">Fulfills request of <%= a.units %> Units from <%= a.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M %Z") %></div>
+<% end %>
+
+<% adjustment.associated_received_shipments.each do |a| %>
+<div class="comments-complete">Received in shipment of <%= a.units %> Units on <%= a.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M %Z") %></div>
+<% end %>
+
+<% if @current_user.brand %>
+	<%= link_to edit_inventory_adjustment_url(adjustment.id), remote: true do %>
+	<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+	<% end %>
+<% end %>
+<% end %>

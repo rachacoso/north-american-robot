@@ -1,3 +1,4 @@
+<div class="editform">
 <div class="row">
 	<div class="small-12 columns text-center">
 		<h2><strong><%= @adjustment.product.name %></strong>
@@ -22,9 +23,34 @@
 		<%= f.text_area :comment, rows: "5" %>
 	</div><!--/.small-12-->
 </div><!--/.row-->
+<% if @adjustment.type == "shipment" %>
+<div class="row">
+	<div class="small-12 columns text-center">
+		<h4>Select any Inventory Requests this shipment is fulfilling:</h4>
+		<% @associated_requests.sort_by { |p| p.c_at }.each do |ur| %>
+			<%= hidden_field_tag "associated_requests[#{ur.id}]", false, id: '' %>
+			<%= check_box_tag "associated_requests[#{ur.id}]", true, (@adjustment.associated_requests.pluck(:id).include?(ur.id) ? true : false) %>
+			<%= label_tag("associated_requests[#{ur.id}]", label_text(ur).html_safe) %>
+		<% end %>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<% end %>
+<% if @adjustment.type == "received" %>
+<div class="row">
+	<div class="small-12 columns text-center">
+		<h4>Select an associated shipment (if applicable):</h4>
+		<% @associated_shipments.sort_by { |p| p.c_at }.each do |ur| %>
+			<%= hidden_field_tag "associated_shipments[#{ur.id}]", false, id: '' %>
+			<%= check_box_tag "associated_shipments[#{ur.id}]", true, (@adjustment.associated_shipments.pluck(:id).include?(ur.id) ? true : false) %>
+			<%= label_tag("associated_shipments[#{ur.id}]", label_text(ur).html_safe) %>
+		<% end %>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<% end %>
 <div class="row">
 	<div class="small-12 columns text-center">
 		<%= f.submit "Update", class: "landing-button tiny" %>
 	</div><!--/.small-12-->
 </div><!--/.row-->
 <% end %>
+</div>

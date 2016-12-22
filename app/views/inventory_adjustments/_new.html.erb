@@ -1,11 +1,12 @@
+<div class="editform">
 <div class="row">
 	<div class="small-12 columns text-center">
 		<h2><strong><%= @adjustment.product.name %></strong>
-		<% if @type == "request" %>
+		<% if @type == "requested" %>
 			<br>Inventory Request
 		<% elsif @type == "received" %>
 			<br>Inventory Received
-		<% elsif @type == "sent" %>
+		<% elsif @type == "shipment" %>
 			<br>Inventory Shipped
 		<% end %>
 		</h2>
@@ -21,12 +22,42 @@
 </div><!--/.row-->
 <div class="row">
 	<div class="small-12 columns text-center">
-		<%= f.text_area :comment, rows: "5" %>
+		<% if @type == "requested" %>
+			<%= f.label :comment, "Comments" %>
+		<% elsif @type == "received" %>
+			<%= f.label :comment, "Comments" %>
+		<% elsif @type == "shipment" %>
+			<%= f.label :comment, "Shipment Info & Comments" %>
+		<% end %>
+		<%= f.text_area :comment, rows: "5", label: false%>
 	</div><!--/.small-12-->
 </div><!--/.row-->
+<% unless @unfulfilled_requests.blank? %>
+<div class="row">
+	<div class="small-12 columns text-center">
+		<h4>Select any inventory requests included in this shipment:</h4>
+		<% @unfulfilled_requests.sort_by { |p| p.c_at }.each do |ur| %>
+			<%= check_box_tag "associated_requests[#{ur.id}]", true %>
+			<%= label_tag("associated_requests[#{ur.id}]", label_text(ur).html_safe) %>
+		<% end %>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<% end %>
+<% unless @unfulfilled_shipments.blank? %>
+<div class="row">
+	<div class="small-12 columns text-center">
+		<h4>Select an associated shipment (if applicable):</h4>
+		<% @unfulfilled_shipments.sort_by { |p| p.c_at }.each do |ur| %>
+			<%= check_box_tag "associated_shipments[#{ur.id}]", true %>
+			<%= label_tag("associated_shipments[#{ur.id}]", label_text(ur).html_safe) %>
+		<% end %>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<% end %>
 <div class="row">
 	<div class="small-12 columns text-center">
 		<%= f.submit "Submit", class: "landing-button tiny" %>
 	</div><!--/.small-12-->
 </div><!--/.row-->
 <% end %>
+</div>

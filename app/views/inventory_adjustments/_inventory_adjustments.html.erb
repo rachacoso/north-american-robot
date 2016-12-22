@@ -15,43 +15,32 @@
 		<td colspan="2">&nbsp;</td>
 	</tr>
 	<% end %>
-	<% product.inventory_adjustments.each do |adjustment| %>
+	<% product.inventory_adjustments.order_by(c_at: :asc).each do |adjustment| %>
 	<tr class="item">
 		<td>
-			<%= adjustment.c_at.strftime("%B %d, %Y") %><br>
+			<%= adjustment.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y") %><br>
 			<small><%= adjustment.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%H:%M:%S %Z") %></small>
 		</td>
-		<td><%= adjustment.type == "request" ? "#{adjustment.units}<br>#{simple_format(adjustment.comment,{}, wrapper_tag: "small")}".html_safe : "&nbsp;".html_safe %></td>
-		<td><%= adjustment.type == "sent" ? "#{adjustment.units}<br>#{simple_format(adjustment.comment,{}, wrapper_tag: "small")}".html_safe : "&nbsp;".html_safe %></td>
 		<td>
-			<% if adjustment.type == "received" %>
-				<%= link_to_if @current_user.administrator?, adjustment.units, edit_inventory_adjustment_url(adjustment.id), remote: true %><br>
-				<small>Units Received</small><br>
-				<%= simple_format(adjustment.comment,{ }, wrapper_tag: "small") %>
-			<% elsif adjustment.type == "deducted" %>
-				<span style="color:red;">(<%= adjustment.units %>)</span><br>
-				<small>Units Deducted</small><br>
-				<small>
-					<% if @current_user.administrator? %>
-					<%= link_to "#{adjustment.order.orderer.company_name} Order",admin_order_view_url(adjustment.order), target: "_blank" %>
-					<% else %>
-					<%= link_to "#{adjustment.order.orderer.company_name} Order",order_url(adjustment.order), target: "_blank" %>
-					<% end %>
-				</small><br>
-				<%= simple_format(adjustment.comment,{ }, wrapper_tag: "small") %>
-			<% end %>
+			<%= render partial: "inventory_adjustments/item_requested", locals: { adjustment: adjustment } %>
+		</td>
+		<td>
+			<%= render partial: "inventory_adjustments/item_shipment", locals: { adjustment: adjustment } %>
+		</td>
+		<td>
+			<%= render partial: "inventory_adjustments/item_received_deducted", locals: { adjustment: adjustment } %>
 		</td>
 	</tr>
 	<% end %>
 	<tr class="controls">
 		<% if @current_user.administrator? %>
 		<td>&nbsp;</td>
-		<td class="addnew"><%= link_to "add inventory request", new_inventory_adjustment_url("request",product.id), remote: true %></td>
+		<td class="addnew"><%= link_to "add inventory request", new_inventory_adjustment_url("requested",product.id), remote: true %></td>
 		<td>&nbsp;</td>
 		<td class="addnew"><%= link_to "add received inventory", new_inventory_adjustment_url("received",product.id), remote: true %></td>
 		<% else %>
 		<td colspan="2">&nbsp;</td>
-		<td class="addnew"><%= link_to "add shipped inventory", new_inventory_adjustment_url("sent",product.id), remote: true %></td>
+		<td class="addnew"><%= link_to "add shipped inventory", new_inventory_adjustment_url("shipment",product.id), remote: true %></td>
 		<td>&nbsp;</td>
 		<% end %>
 	</tr>
