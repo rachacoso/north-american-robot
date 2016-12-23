@@ -26,12 +26,12 @@ class InventoryAdjustmentsController < ApplicationController
 		if @adjustment.type == "shipment"
 			unfulfilled = @adjustment.product.inventory_adjustments.unfulfilled_requests
 			current = @adjustment.associated_requests
-			@associated_requests = unfulfilled + current
+			@associated_requests = (unfulfilled + current).uniq
 		end
 		if @adjustment.type == "received"
 			unfulfilled = @adjustment.product.inventory_adjustments.unfulfilled_shipments
 			current = @adjustment.associated_shipments
-			@associated_shipments = unfulfilled + current
+			@associated_shipments = (unfulfilled + current).uniq
 		end
 	end
 
