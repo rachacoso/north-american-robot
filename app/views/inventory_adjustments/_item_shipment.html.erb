@@ -8,7 +8,7 @@
 <%= simple_format(adjustment.comment,{ class: 'comments' }, wrapper_tag: 'div') %>
 </div>
 <% adjustment.associated_requests.each do |a| %>
-<div class="comments-complete shipped">Fulfills request of <%= a.units %> Units from <%= a.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M %Z") %></div>
+<div class="comments-complete shipped">Includes units for request of <%= a.units %> Units from <%= a.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M %Z") %></div>
 <% end %>
 
 <% adjustment.associated_received_shipments.each do |a| %>

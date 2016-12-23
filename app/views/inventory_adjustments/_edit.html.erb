@@ -23,7 +23,7 @@
 		<%= f.text_area :comment, rows: "5" %>
 	</div><!--/.small-12-->
 </div><!--/.row-->
-<% if @adjustment.type == "shipment" %>
+<% if @adjustment.type == "shipment" && @associated_requests.present? %>
 <div class="row">
 	<div class="small-12 columns text-center">
 		<h4>Select any Inventory Requests this shipment is fulfilling:</h4>
@@ -35,7 +35,7 @@
 	</div><!--/.small-12-->
 </div><!--/.row-->
 <% end %>
-<% if @adjustment.type == "received" %>
+<% if @adjustment.type == "received" && @associated_shipments.present? %>
 <div class="row">
 	<div class="small-12 columns text-center">
 		<h4>Select an associated shipment (if applicable):</h4>

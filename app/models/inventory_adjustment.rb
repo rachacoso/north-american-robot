@@ -8,6 +8,7 @@ class InventoryAdjustment
   field :type, type: String # requested, shipment, received, deducted
   field :comment, type: String
   field :order_id, type: BSON::ObjectId # for deducted, indicate which order
+  field :complete, type: Mongoid::Boolean, default: false # for REQUESTED keep record of shipped units
   
   # for shipment, indicate which InventoryAdjustment 'request' it is for,
   # for requested or received, indicate which InventoryAdjustment 'shipment' it is for
@@ -23,14 +24,14 @@ class InventoryAdjustment
   scope :deducted, ->{where(type: "deducted")}
   scope :of_type, ->(type) {where(type: type)}
   scope :from_order, ->(order_id) {where(order_id: order_id)}
-  scope :unfulfilled_requests, ->{where(type: "requested",:associated_shipment_ids.in => ["", nil, []])}
+  scope :unfulfilled_requests, ->{where(type: "requested",complete: false)}
   scope :unfulfilled_shipments, ->{where(type: "shipment",:associated_received_shipment_ids.in => ["", nil, []])}
 
   def order
     return Order.find(self.order_id) if self.order_id.present?
   end
   def complete?
-    if self.type == "requested" && self.associated_shipments.present?
+    if self.type == "requested" && self.complete
       return true 
     elsif self.type == "shipment" && self.associated_received_shipments.present?
       return true
@@ -42,11 +43,13 @@ class InventoryAdjustment
         if a = InventoryAdjustment.find(id)
           self.associated_requests << a
           a.associated_shipments << self
+          a.update_completeness
         end
       elsif v == "false"
         if a = InventoryAdjustment.find(id)
           self.associated_requests.delete(a)
           a.associated_shipments.delete(self)
+          a.update_completeness
         end
       end
     end
@@ -64,6 +67,16 @@ class InventoryAdjustment
           a.associated_received_shipments.delete(self)
         end
       end
+    end
+  end
+  def update_completeness
+    if self.type == "requested"
+      if self.units <= self.associated_shipments.sum(:units)
+        self.complete = true 
+      else
+        self.complete = false
+      end
+      self.save!
     end
   end
 end

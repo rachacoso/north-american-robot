@@ -1,13 +1,14 @@
 <% if adjustment.type == "requested" %>
 <div <%= adjustment.complete? ? "class=complete" : "" %>>
 <% if adjustment.complete? %>
-<div class="complete-indicator shipped"><i class="fa fa-check" aria-hidden="true"></i> shipped</div>
+<div class="complete-indicator shipped"><i class="fa fa-check" aria-hidden="true"></i> complete</div>
 <% end %>
 <%= adjustment.units %><br>
 <small>Units Requested</small><br>
 <%= simple_format(adjustment.comment,{ class: 'comments' }, wrapper_tag: 'div').html_safe %>
 </div>
-<% if adjustment.complete? %>
-<div class="comments-complete shipped">Included in shipment of <%= adjustment.associated_shipments.first.units %> Units on <%= adjustment.associated_shipments.first.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M %Z") %></div>
+<% adjustment.associated_shipments.each do |a| %>
+<div class="comments-complete shipped">Included in shipment of <%= a.units %> Units on <%= a.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M %Z") %></div>
 <% end %>
+Units remaining to be shipped: <%= adjustment.units - adjustment.associated_shipments.sum(:units) %>
 <% end %>
