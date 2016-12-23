@@ -10,5 +10,7 @@
 <% adjustment.associated_shipments.each do |a| %>
 <div class="comments-complete shipped">Included in shipment of <%= a.units %> Units on <%= a.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M %Z") %></div>
 <% end %>
-Units remaining to be shipped: <%= adjustment.units - adjustment.associated_shipments.sum(:units) %>
+<% unless adjustment.complete? %>
+<div class="request-remainder">Units remaining to be shipped<br><span><%= adjustment.units - adjustment.associated_shipments.sum(:units) %></span></div>
+<% end %>
 <% end %>

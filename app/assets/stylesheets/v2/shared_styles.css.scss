@@ -81,6 +81,17 @@ table.inventory {
       color: green;
     }
   }
+  div.request-remainder {
+    font-weight: 200;
+    font-size: rem-calc(15);
+    line-height: rem-calc(17);
+    margin: rem-calc(5) 0;
+    background-color: $landing-light-gray;
+    padding: rem-calc(5);
+    span {
+      font-weight: 500;
+    }
+  }
   div.complete { 
     color: $landing-middle-gray;
   }

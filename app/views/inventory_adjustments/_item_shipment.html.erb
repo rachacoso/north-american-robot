@@ -12,7 +12,7 @@
 <% end %>
 
 <% adjustment.associated_received_shipments.each do |a| %>
-<div class="comments-complete received">Received in shipment of <%= a.units %> Units on <%= a.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M %Z") %></div>
+<div class="comments-complete received">Received on <%= a.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M %Z") %></div>
 <% end %>
 
 <% if @current_user.brand %>
