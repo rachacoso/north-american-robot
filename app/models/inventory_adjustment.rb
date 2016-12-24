@@ -1,6 +1,6 @@
 class InventoryAdjustment
   include Mongoid::Document
-	include Mongoid::Timestamps::Created::Short
+	include Mongoid::Timestamps::Short
   
   belongs_to :product
   
