@@ -6,6 +6,12 @@
 <%= adjustment.units %><br>
 <small>Units Requested</small><br>
 <%= simple_format(adjustment.comment,{ class: 'comments' }, wrapper_tag: 'div').html_safe %>
+<% if @current_user.administrator? %>
+	<%= link_to edit_inventory_adjustment_url(adjustment.id), remote: true do %>
+	edit
+	<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+	<% end %>
+<% end %>
 </div>
 <% adjustment.associated_shipments.each do |a| %>
 <div class="comments-complete shipped">Included in shipment of <%= a.units %> Units on <%= a.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M %Z") %></div>

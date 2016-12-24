@@ -1,0 +1,37 @@
+ 
+Hello!
+Landing International has requested an inventory shipment
+ 
+Next Steps:
+
+1) Review request
+
+------------------------------------
+Requested on <%= adjustment.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M:%S %Z") %>
+
+<%= adjustment.product.name %> <%= adjustment.product.item_id.present? ? "(#{adjustment.product.item_id})" : "" %>
+<%= adjustment.units %> units
+
+<%= adjustment.comment %>
+------------------------------------
+
+-->View Request at <%= link %>
+
+
+2) Ship inventory
+
+
+3) Submit Shipment Notification with shipment tracking details
+
+-->Submit Shipment Notification at <%= link %>
+
+
+Check your inventory status at any time on your dashboard at landinginternational.com.
+
+Thanks and have a great day!
+
+ 
+-Team Landing
+
+ 
+If you have any questions, please email us at orders@landinginternational.com.

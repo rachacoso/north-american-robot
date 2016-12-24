@@ -1,0 +1,42 @@
+Hello!
+<%= adjustment.product.brand.company_name %> has submitted an inventory shipment notification
+ 
+Next Steps:
+
+Review updated shipment information & tracking details
+
+PREVIOUS SHIPMENT NOTIFICATION
+------------------------------------
+Notice sent on <%= adjustment.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M:%S %Z") %>
+
+<%= adjustment.product.name %> <%= adjustment.product.item_id.present? ? "(#{adjustment.product.item_id})" : "" %>
+<%= previous_data[:units] %> units
+Shipped on <%= previous_data[:ship_date] %>
+
+<%= previous_data[:comment] %>
+------------------------------------
+
+UPDATED SHIPMENT NOTIFICATION
+------------------------------------
+Notice sent on <%= adjustment.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M:%S %Z") %>
+Notice updated on <%= adjustment.u_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M:%S %Z") %>
+
+<%= adjustment.product.name %> <%= adjustment.product.item_id.present? ? "(#{adjustment.product.item_id})" : "" %>
+<%= adjustment.units %> units
+Shipped on <%= adjustment.ship_date.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M:%S %Z") %>
+
+<%= adjustment.comment %>
+------------------------------------
+
+-->View Shipment Notification at <%= link %>
+
+ 
+Review inventory status at any time at landinginternational.com.
+
+Thanks and have a great day!
+
+ 
+-Team Landing
+
+ 
+If you have any questions, please email us at orders@landinginternational.com.

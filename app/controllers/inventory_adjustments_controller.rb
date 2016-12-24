@@ -16,6 +16,9 @@ class InventoryAdjustmentsController < ApplicationController
 	end
 
 	def create
+		if params[:inventory_adjustment][:ship_date].present?
+			params[:inventory_adjustment][:ship_date] = Date.strptime(params[:inventory_adjustment][:ship_date], '%m-%d-%Y') 
+		end
 		adjustment = @product.inventory_adjustments.create(inventory_adjustment_parameters)
 		@brand = @product.brand
 		adjustment.shipment_add_associated(params[:associated_requests]) if params[:associated_requests]
@@ -36,6 +39,9 @@ class InventoryAdjustmentsController < ApplicationController
 	end
 
 	def update
+		if params[:inventory_adjustment][:ship_date].present?
+			params[:inventory_adjustment][:ship_date] = Date.strptime(params[:inventory_adjustment][:ship_date], '%m-%d-%Y') 
+		end
 		@adjustment.update(inventory_adjustment_parameters)
 		@brand = @adjustment.product.brand
 		@adjustment.shipment_add_associated(params[:associated_requests]) if params[:associated_requests]
@@ -55,7 +61,8 @@ class InventoryAdjustmentsController < ApplicationController
     params.require(:inventory_adjustment).permit(
 			:units,
 			:type,
-			:comment
+			:comment,
+			:ship_date
 		)
 	end
 end
