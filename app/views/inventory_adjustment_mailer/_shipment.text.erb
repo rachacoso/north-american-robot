@@ -10,7 +10,7 @@ Notice sent on <%= adjustment.c_at.in_time_zone("Pacific Time (US & Canada)").st
 
 <%= adjustment.product.name %> <%= adjustment.product.item_id.present? ? "(#{adjustment.product.item_id})" : "" %>
 <%= adjustment.units %> units
-Shipped on <%= adjustment.ship_date.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M:%S %Z") %>
+Shipped on <%= adjustment.ship_date.strftime("%B %d, %Y") %>
 
 <%= adjustment.comment %>
 ------------------------------------
