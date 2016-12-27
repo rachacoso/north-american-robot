@@ -80,4 +80,65 @@ class InventoryAdjustment
       self.save!
     end
   end
+  def cache_previous_data
+    @previous_data = Hash.new
+    @previous_data[:units] = self.units
+    @previous_data[:comment] = self.comment
+    if self.type == "requested"
+      @previous_data[:associated_shipments] = self.associated_shipments
+    elsif self.type == "shipment"
+      @previous_data[:ship_date] = self.ship_date
+      @previous_data[:associated_requests] = self.associated_shipments
+      @previous_data[:associated_received_shipments] = self.associated_received_shipments
+    end
+  end
+  def mailer_send_notice
+    if self.type == "requested"
+      type = "request"
+      subject = "Landing International has requested an inventory shipment"
+      title = "Inventory Request"
+      email = self.product.brand.users.pluck(:email)
+    elsif self.type == "shipment"
+      type = "shipment"
+      subject = "Fantastic Brands has sent an inventory shipment"
+      title = "Inventory Shipment"
+      email = "info@landingintl.com"
+    end
+    begin
+    InventoryAdjustmentMailer.send_notice(
+      type: type,
+      adjustment: self,
+      subject: subject,
+      title: title,
+      email: email
+    ).deliver
+    rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
+      self.errors.add(:base, e.message)
+    end
+  end
+  def mailer_send_update_notice
+    if self.type == "requested"
+      type = "request_updated"
+      subject = "Landing International has requested an inventory shipment"
+      title = "Inventory Request Updated"
+      email = self.product.brand.users.pluck(:email)
+    elsif self.type == "shipment"
+      type = "shipment_updated"
+      subject = "Fantastic Brands has sent an inventory shipment"
+      title = "Inventory Shipment Updated"
+      email = "info@landingintl.com"
+    end
+    begin
+    InventoryAdjustmentMailer.send_notice(
+      type: type,
+      adjustment: self,
+      previous_data: @previous_data, 
+      subject: subject,
+      title: title,
+      email: email
+    ).deliver
+    rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
+      self.errors.add(:base, e.message)
+    end
+  end
 end

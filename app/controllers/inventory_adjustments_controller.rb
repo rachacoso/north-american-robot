@@ -23,6 +23,7 @@ class InventoryAdjustmentsController < ApplicationController
 		@brand = @product.brand
 		adjustment.shipment_add_associated(params[:associated_requests]) if params[:associated_requests]
 		adjustment.received_shipment_add_associated(params[:associated_shipments]) if params[:associated_shipments]
+		adjustment.mailer_send_notice
 	end
 
 	def edit
@@ -42,10 +43,12 @@ class InventoryAdjustmentsController < ApplicationController
 		if params[:inventory_adjustment][:ship_date].present?
 			params[:inventory_adjustment][:ship_date] = Date.strptime(params[:inventory_adjustment][:ship_date], '%m-%d-%Y') 
 		end
+		@adjustment.cache_previous_data
 		@adjustment.update(inventory_adjustment_parameters)
 		@brand = @adjustment.product.brand
 		@adjustment.shipment_add_associated(params[:associated_requests]) if params[:associated_requests]
 		@adjustment.received_shipment_add_associated(params[:associated_shipments]) if params[:associated_shipments]
+		@adjustment.mailer_send_update_notice
 	end
 
 	private
