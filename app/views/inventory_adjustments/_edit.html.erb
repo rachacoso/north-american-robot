@@ -23,7 +23,7 @@
 		<% if @adjustment.ship_date %>
 			<%= f.text_field :ship_date, label: "Ship Date", value: @adjustment.ship_date.strftime("%m-%d-%Y"), placeholder: "(none)" , class: "datepick" %>
 		<% else %>
-			<%= f.text_field :ship_date, label: "Ship Date", value: "(ship date)", placeholder: "(none)", class: "datepick" %>
+			<%= f.text_field :ship_date, label: "Ship Date", class: "datepick" %>
 		<% end %>
 	</div><!--/.medium-4-->
 </div><!--/.row-->
