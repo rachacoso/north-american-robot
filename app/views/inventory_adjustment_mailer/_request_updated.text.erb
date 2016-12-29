@@ -18,9 +18,6 @@ Requested on <%= adjustment.c_at.in_time_zone("Pacific Time (US & Canada)").strf
 <% previous_data[:associated_shipments].each do |a| %>
 Included in shipment of <%= a.units %> Units on <%= a.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M %Z") %>
 <% end %>
-<% unless previous_data[:complete] == true %>
-Units remaining to be shipped: <%= adjustment.units - adjustment.associated_shipments.sum(:units) %>
-<% end %>
 ------------------------------------
    
 UPDATED REQUEST
@@ -35,9 +32,6 @@ Updated on <%= adjustment.u_at.in_time_zone("Pacific Time (US & Canada)").strfti
 
 <% adjustment.associated_shipments.each do |a| %>
 Included in shipment of <%= a.units %> Units on <%= a.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M %Z") %>
-<% end %>
-<% unless adjustment.complete? %>
-Units remaining to be shipped: <%= adjustment.units - adjustment.associated_shipments.sum(:units) %>
 <% end %>
 ------------------------------------
 
