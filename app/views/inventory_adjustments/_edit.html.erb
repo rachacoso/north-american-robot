@@ -18,6 +18,7 @@
 		<%= f.number_field :units %>
 	</div><!--/.medium-4-->
 </div><!--/.row-->
+<% if @adjustment.type == "shipment" %>
 <div class="row">
 	<div class="medium-4 medium-centered columns text-center">
 		<% if @adjustment.ship_date %>
@@ -27,6 +28,7 @@
 		<% end %>
 	</div><!--/.medium-4-->
 </div><!--/.row-->
+<% end %>
 <div class="row">
 	<div class="small-12 columns text-center">
 		<%= f.text_area :comment, rows: "5" %>
