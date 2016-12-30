@@ -85,7 +85,7 @@ module LandingCompany
 			field :last_login, type: DateTime
 
 			scope :subscribed, ->{where(subscriber: true)}
-			scope :activated, ->{where(active: true)}
+			scope :activated, ->{where(active: true, :company_name.nin => ["",nil])}
 
 		end
 
