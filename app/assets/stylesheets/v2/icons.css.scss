@@ -1,0 +1,14 @@
+@import "foundation/functions";
+@import "foundation/components/labels";
+@import "global_variables";
+@import "mixins";
+
+.icon-edit {
+	width: 22px;
+	height: 20px;
+}
+
+a svg #icon-edit #pencil-tip,
+a svg #icon-edit #pencil { 
+  fill: green;
+}
