@@ -12,11 +12,11 @@ module BrandsHelper
 
 	def get_brands(chunk,type)
 		if type == "c"
-			brands = Brand.activated.international.where(subsector_ids: chunk.id )
+			brands = Brand.activated.where(subsector_ids: chunk.id )
 		elsif type == "t"
-			brands = Brand.activated.international.where(trend_ids: chunk.id )
+			brands = Brand.activated.where(trend_ids: chunk.id )
 		elsif type == "kr"
-			brands = Brand.activated.international.where(key_retailer_ids: chunk.id )
+			brands = Brand.activated.where(key_retailer_ids: chunk.id )
 		end
 		return brands
 	end

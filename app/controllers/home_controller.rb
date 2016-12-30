@@ -47,13 +47,13 @@ class HomeController < ApplicationController
 			# @active_orders = @profile.orders.active.count
 			@active_orders = @current_user.brand ? @profile.orders.active_brand.count : @profile.orders.active.count
 
-			@new_brands = Brand.activated.international.desc('c_at').limit(10)
-			@updated_brands = Brand.activated.international.desc('u_at').limit(5)
+			@new_brands = Brand.activated.desc('c_at').limit(10)
+			@updated_brands = Brand.activated.desc('u_at').limit(5)
 
 			@recently_updated_orders = @profile.orders.active.desc('u_at').limit(10) if @current_user.brand
 
 			products_with_photos = ProductPhoto.pluck(:photographable_id).uniq
-			active_brands = Brand.activated.international.pluck(:id)
+			active_brands = Brand.activated.pluck(:id)
 			@updated_products = Product.where(:brand_id.in => active_brands, :_id.in => products_with_photos).desc('u_at').desc('_id').limit(5)
 
 

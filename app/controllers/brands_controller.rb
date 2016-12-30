@@ -15,17 +15,17 @@ class BrandsController < ApplicationController
 			if params[:type] == "t"
 				@type = "t"
 				@filtered = Trend.find(params[:filter])
-				@filtered_brands = Brand.activated.international.where(trend_ids: @filtered.id)
+				@filtered_brands = Brand.activated.where(trend_ids: @filtered.id)
 				@brand_chunk = Trend.all.sort_by { |p| p.name }
 			elsif params[:type] == "kr"
 				@type = "kr"
 				@filtered = KeyRetailer.find(params[:filter])
-				@filtered_brands = Brand.activated.international.where(key_retailer_ids: @filtered.id)
+				@filtered_brands = Brand.activated.where(key_retailer_ids: @filtered.id)
 				@brand_chunk = KeyRetailer.all.sort_by { |p| p.name }
 			elsif params[:type] == "c"
 				@type = "c"
 				@filtered = Subsector.find(params[:filter])
-				@filtered_brands = Brand.activated.international.where(subsector_ids: @filtered.id)
+				@filtered_brands = Brand.activated.where(subsector_ids: @filtered.id)
 				@brand_chunk = Subsector.where(sector_id: beauty_sector.id).uniq { |p| p.name }.sort_by { |p| p.name }
 			end
 		else
@@ -47,7 +47,7 @@ class BrandsController < ApplicationController
 	def search
 		if params[:q].present?
 			@query = params[:q]
-			@searchresults = Brand.activated.international.where(company_name: /#{@query}/i)
+			@searchresults = Brand.activated.where(company_name: /#{@query}/i)
 		else
 			redirect_to brands_url
 		end
