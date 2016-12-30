@@ -88,7 +88,7 @@ class InventoryAdjustment
       @previous_data[:associated_shipments] = self.associated_shipments
     elsif self.type == "shipment"
       @previous_data[:ship_date] = self.ship_date
-      @previous_data[:associated_requests] = self.associated_shipments
+      @previous_data[:associated_requests] = self.associated_requests
       @previous_data[:associated_received_shipments] = self.associated_received_shipments
     end
   end
