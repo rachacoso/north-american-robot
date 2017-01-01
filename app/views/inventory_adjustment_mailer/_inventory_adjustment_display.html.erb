@@ -1,0 +1,25 @@
+	<div class="inventory-display <%= previous_data.present? ? 'old' : ''%>" style="background:#efefef;margin:5px 0 15px 0;padding:10px 10px 20px 10px;width:90%; <%= previous_data.present? ? 'color:#b1b1b1;' : ''%>">
+		<div id="date" style="font-size:10px;font-style:italic;line-height:14px;margin-bottom:10px">
+			<%= ship_date.present? ? 'Notice sent' : 'Requested' %> on <%= adjustment_date.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M:%S %Z") %>
+			<% if update_date.present? %>
+			<br><%= ship_date.present? ? 'Notice updated' : 'Updated' %> on <%= update_date.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M:%S %Z") %>
+			<% end %>
+		</div>
+		<div id="product" style="font-weight:800;margin-bottom:10px"><%= product.name %> <%= product.item_id.present? ? "(#{product.item_id})" : "" %></div>
+		<div id="units"><span style="font-size:30px"><%= units %></span> <span style="font-size:15px">units</span></div>
+		<%= simple_format(comment,{ id: 'comments', style: 'margin-top:10px' }, wrapper_tag: 'div').html_safe %>
+		<% if associated_shipments.present? %>
+		<ul style="margin-top:10px;padding-left:10px;margin-left: 5px;">
+		<% associated_shipments.each do |a| %>
+		<li>Included in shipment of <%= a.units %> Units on <%= a.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M %Z") %></li>
+		<% end %>
+		</ul>
+		<% end %>
+		<% if associated_requests.present? %>
+		<ul style="margin-top:10px;padding-left:10px;margin-left: 5px;">
+		<% associated_requests.each do |a| %>
+		<li>Includes units for request of <%= a.units %> Units from <%= a.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M %Z") %></li>
+		<% end %>
+		</ul>
+		<% end %>
+	</div>

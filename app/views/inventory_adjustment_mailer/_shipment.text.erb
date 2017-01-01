@@ -5,23 +5,8 @@ Next Steps:
 
 Review shipment information & tracking details
 
-------------------------------------
-Notice sent on <%= adjustment.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M:%S %Z") %>
+<%= inventory_adjustment_mailer_display(adjustment:adjustment) %>
 
-<%= adjustment.product.name %> <%= adjustment.product.item_id.present? ? "(#{adjustment.product.item_id})" : "" %>
-<%= adjustment.units %> units
-Shipped on <%= adjustment.ship_date.strftime("%B %d, %Y") %>
-
-<%= adjustment.comment %>
-
-<% adjustment.associated_requests.each do |a| %>
-- Includes units for request of <%= a.units %> Units from <%= a.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M %Z") %>
-<% end %>
-
-<% adjustment.associated_received_shipments.each do |a| %>
-- Received on <%= a.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M %Z") %>
-<% end %>
-------------------------------------
 
 -->View Shipment Notification at <%= link %>
 

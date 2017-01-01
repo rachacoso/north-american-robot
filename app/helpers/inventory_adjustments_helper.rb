@@ -7,4 +7,31 @@ module InventoryAdjustmentsHelper
 		text += "</div>"
 		return text
 	end
+	def inventory_adjustment_mailer_display(adjustment:, update_date: nil, previous_data: nil)
+		if previous_data.present?
+			comment = previous_data[:comment]
+			associated_shipments = previous_data[:associated_shipments]
+			associated_requests = previous_data[:associated_requests]
+			units = previous_data[:units]
+			update_date = nil
+		else
+			comment = adjustment.comment
+			associated_shipments = adjustment.associated_shipments
+			associated_requests = adjustment.associated_requests
+			units = adjustment.units
+			update_date = adjustment.u_at
+		end
+		locals = {
+			previous_data: previous_data,
+			update_date: update_date,
+			adjustment_date: adjustment.c_at,
+			ship_date: adjustment.ship_date,
+			product: adjustment.product, 
+			units: units, 
+			associated_shipments: associated_shipments,
+			associated_requests: associated_requests,
+			comment: comment
+		} 
+		return render partial: "inventory_adjustment_display", locals: locals
+	end
 end

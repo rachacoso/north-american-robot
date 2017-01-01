@@ -16,8 +16,8 @@
 <% end %>
 
 <% if @current_user.brand %>
-	<%= link_to edit_inventory_adjustment_url(adjustment.id), remote: true do %>
-	edit
+	<%= link_to edit_inventory_adjustment_url(adjustment.id), remote: true, 'aria-label': 'edit' do %>
+  <svg aria-hidden="true" class="icon-edit"><use xlink:href="#icon-edit"/></svg>
 	<% end %>
 <% end %>
 <% end %>

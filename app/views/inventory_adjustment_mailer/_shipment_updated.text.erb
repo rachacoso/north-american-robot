@@ -6,43 +6,10 @@ Next Steps:
 Review updated shipment information & tracking details
 
 PREVIOUS SHIPMENT NOTIFICATION
-------------------------------------
-Notice sent on <%= adjustment.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M:%S %Z") %>
-
-<%= adjustment.product.name %> <%= adjustment.product.item_id.present? ? "(#{adjustment.product.item_id})" : "" %>
-<%= previous_data[:units] %> units
-Shipped on <%= previous_data[:ship_date] %>
-
-<%= previous_data[:comment] %>
-
-<% previous_data[:associated_requests].each do |a| %>
-- Includes units for request of <%= a.units %> Units from <%= a.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M %Z") %>
-<% end %>
-
-<% previous_data[:associated_received_shipments].each do |a| %>
-- Received on <%= a.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M %Z") %>
-<% end %>
-------------------------------------
+<%= inventory_adjustment_mailer_display(adjustment:adjustment, previous_data: previous_data) %>
 
 UPDATED SHIPMENT NOTIFICATION
-------------------------------------
-Notice sent on <%= adjustment.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M:%S %Z") %>
-Notice updated on <%= adjustment.u_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M:%S %Z") %>
-
-<%= adjustment.product.name %> <%= adjustment.product.item_id.present? ? "(#{adjustment.product.item_id})" : "" %>
-<%= adjustment.units %> units
-Shipped on <%= adjustment.ship_date.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M:%S %Z") %>
-
-<%= adjustment.comment %>
-
-<% adjustment.associated_requests.each do |a| %>
-- Includes units for request of <%= a.units %> Units from <%= a.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M %Z") %>
-<% end %>
-
-<% adjustment.associated_received_shipments.each do |a| %>
-- Received on <%= a.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M %Z") %>
-<% end %>
-------------------------------------
+<%= inventory_adjustment_mailer_display(adjustment:adjustment) %>
 
 -->View Shipment Notification at <%= link %>
 

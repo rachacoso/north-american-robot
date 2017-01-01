@@ -20,7 +20,8 @@ class InventoryAdjustmentMailerPreview < ActionMailer::Preview
       units: 250, 
       comment: "here are the old comments", 
       associated_shipments: adjustment.associated_shipments, 
-      complete: adjustment.complete? 
+      update_date: DateTime.now,
+      complete: adjustment.complete?
     }
     InventoryAdjustmentMailer.send_notice(
       adjustment: adjustment, 
@@ -51,6 +52,7 @@ class InventoryAdjustmentMailerPreview < ActionMailer::Preview
       units: 250, 
       comment: "here are the old comments", 
       ship_date: DateTime.now - 3.days,
+      update_date: DateTime.now,
       associated_requests: adjustment.associated_requests,
       associated_received_shipments: adjustment.associated_received_shipments
     }

@@ -82,6 +82,7 @@ class InventoryAdjustment
   end
   def cache_previous_data
     @previous_data = Hash.new
+    @previous_data[:update_date] = self.u_at
     @previous_data[:units] = self.units
     @previous_data[:comment] = self.comment
     if self.type == "requested"

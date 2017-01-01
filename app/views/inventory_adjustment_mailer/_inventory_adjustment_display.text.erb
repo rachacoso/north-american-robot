@@ -1,0 +1,27 @@
+------------------------------------
+<%= ship_date.present? ? 'Notice sent' : 'Requested' %> on <%= adjustment_date.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M:%S %Z") %>
+<% if update_date.present? %>
+<%= ship_date.present? ? 'Notice updated' : 'Updated' %> on <%= update_date.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M:%S %Z") %>
+<% end %>
+
+<%= product.name %> <%= product.item_id.present? ? "(#{product.item_id})" : "" %>
+<%= units %> units
+<% if ship_date.present? %>
+Shipped on <%= ship_date.strftime("%B %d, %Y") %>
+<% end %>
+
+<%= comment %>
+
+<% if associated_shipments.present? %>
+<% associated_shipments.each do |a| %>
+- Included in shipment of <%= a.units %> Units on <%= a.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M %Z") %>
+<% end %>
+<% end %>
+
+<% if associated_requests.present? %>
+<% associated_requests.each do |a| %>
+- Includes units for request of <%= a.units %> Units from <%= a.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M %Z") %>
+<% end %>
+<% end %>
+
+------------------------------------
