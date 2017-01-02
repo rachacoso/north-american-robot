@@ -7,7 +7,7 @@ module InventoryAdjustmentsHelper
 		text += "</div>"
 		return text
 	end
-	def inventory_adjustment_mailer_display(adjustment:, update_date: nil, previous_data: nil)
+	def inventory_adjustment_mailer_display(adjustment:, update_date: nil, updated: nil, previous_data: nil)
 		if previous_data.present?
 			comment = previous_data[:comment]
 			associated_shipments = previous_data[:associated_shipments]
@@ -19,7 +19,11 @@ module InventoryAdjustmentsHelper
 			associated_shipments = adjustment.associated_shipments
 			associated_requests = adjustment.associated_requests
 			units = adjustment.units
-			update_date = adjustment.u_at
+			if updated
+				update_date = adjustment.u_at
+			else
+				update_date = nil
+			end
 		end
 		locals = {
 			previous_data: previous_data,
