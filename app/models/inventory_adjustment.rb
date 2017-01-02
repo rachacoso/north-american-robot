@@ -120,12 +120,12 @@ class InventoryAdjustment
   def mailer_send_update_notice
     if self.type == "requested"
       type = "request_updated"
-      subject = "Landing International has requested an inventory shipment"
+      subject = "Landing International has updated an inventory shipment"
       title = "Inventory Request Updated"
       email = self.product.brand.users.pluck(:email)
     elsif self.type == "shipment"
       type = "shipment_updated"
-      subject = "Fantastic Brands has sent an inventory shipment"
+      subject = "Fantastic Brands has updated an inventory shipment"
       title = "Inventory Shipment Updated"
       email = "info@landingintl.com"
     end
