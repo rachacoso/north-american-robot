@@ -101,7 +101,7 @@ class InventoryAdjustment
       email = self.product.brand.users.pluck(:email)
     elsif self.type == "shipment"
       type = "shipment"
-      subject = "Fantastic Brands has sent an inventory shipment"
+      subject = "#{self.product.brand.company_name} has sent an inventory shipment"
       title = "Inventory Shipment"
       email = "info@landingintl.com"
     end
@@ -125,7 +125,7 @@ class InventoryAdjustment
       email = self.product.brand.users.pluck(:email)
     elsif self.type == "shipment"
       type = "shipment_updated"
-      subject = "Fantastic Brands has updated an inventory shipment"
+      subject = "#{self.product.brand.company_name} has updated an inventory shipment"
       title = "Inventory Shipment Updated"
       email = "info@landingintl.com"
     end
