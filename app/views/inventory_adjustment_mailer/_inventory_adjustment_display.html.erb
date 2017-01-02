@@ -7,6 +7,9 @@
 		</div>
 		<div id="product" style="font-weight:800;margin-bottom:10px"><%= product.name %> <%= product.item_id.present? ? "(#{product.item_id})" : "" %></div>
 		<div id="units"><span style="font-size:30px"><%= units %></span> <span style="font-size:15px">units</span></div>
+		<% if ship_date.present? %>
+		Shipped on <%= ship_date.strftime("%B %d, %Y") %>
+		<% end %>
 		<%= simple_format(comment,{ id: 'comments', style: 'margin-top:10px' }, wrapper_tag: 'div').html_safe %>
 		<% if associated_shipments.present? %>
 		<ul style="margin-top:10px;padding-left:10px;margin-left: 5px;">
