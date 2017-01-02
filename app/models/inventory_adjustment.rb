@@ -94,6 +94,7 @@ class InventoryAdjustment
     end
   end
   def mailer_send_notice
+    return if self.type == "received"
     if self.type == "requested"
       type = "request"
       subject = "Landing International has requested an inventory shipment"
@@ -118,6 +119,7 @@ class InventoryAdjustment
     end
   end
   def mailer_send_update_notice
+    return if self.type == "received"
     if self.type == "requested"
       type = "request_updated"
       subject = "Landing International has updated an inventory shipment request"
