@@ -1,0 +1,9 @@
+<%= link_to inventory_adjustments_path(anchor: "p_#{adjustment.product.id}") do %>
+<div class="inventory-request">
+<div id="title">Inventory Request</div>
+<div id="name"><%= adjustment.product.name %></div>
+<div id="units"><%= adjustment.units %> <span>units requested</span></div>
+<%= simple_format(truncate(adjustment.comment, :length => 40, :separator => ' '),{ id: 'comments' }, wrapper_tag: 'div').html_safe %>
+<div id="request-remainder">Units remaining to be shipped<br><span><%= adjustment.units - adjustment.associated_shipments.sum(:units) %></span></div>
+</div>
+<% end %>

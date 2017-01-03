@@ -1,5 +1,5 @@
 <% @brand.products.each do |product| %>
-<table class="inventory" >	
+<table class="inventory" id="p_<%= product.id %>">	
 	<tr class="product-header">
 		<td colspan="4"><%= product.name %></td>
 	</tr>

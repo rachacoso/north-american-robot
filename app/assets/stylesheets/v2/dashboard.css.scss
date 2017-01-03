@@ -50,7 +50,45 @@
 				font-weight: 900;
 				margin-bottom: rem-calc(40);
 			}
-		}	
+		}
+		.inventory-request {
+			position: relative;
+			background-color: $landing-light-gray;
+			border: 1px solid $landing-middle-gray;
+			width: rem-calc(220);
+			height: rem-calc(220);
+			padding: rem-calc(10);
+			margin: 0 auto;
+			font-weight: 200;
+			color: black;
+			#title {
+				// text-align: right;
+			}
+			#name {
+				font-weight: 800;
+				margin-bottom: rem-calc(5);
+			}
+			#units {
+				font-weight: 200;
+				font-size: rem-calc(30);
+				span {
+					font-size: rem-calc(15);
+				}
+			}
+			#comments {
+
+			}
+			#request-remainder {
+				position: absolute;
+				bottom: 0px;
+				span { font-weight: 500;}
+				margin-bottom: rem-calc(10);
+			}
+			&:hover {
+				-webkit-filter: drop-shadow( 0px 0px 2px $landing-dark-gray );
+				filter: drop-shadow( 0px 0px 2px $landing-dark-gray ); 
+			}
+		}
 	}
 }
 

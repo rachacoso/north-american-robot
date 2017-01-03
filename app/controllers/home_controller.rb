@@ -56,7 +56,7 @@ class HomeController < ApplicationController
 			active_brands = Brand.activated.pluck(:id)
 			@updated_products = Product.where(:brand_id.in => active_brands, :_id.in => products_with_photos).desc('u_at').desc('_id').limit(5)
 
-
+			@adjustments = InventoryAdjustment.of_products(@profile.products.pluck(:id)).unfulfilled_requests
 			# matches = @profile.matches
 			# @unread_list = Array.new
 			# matches.each do |m|

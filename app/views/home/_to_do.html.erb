@@ -1,14 +1,26 @@
+
+<% if @adjustments.present? %>
 <div class="row">
 	<div class="small-12 columns">
 		<h3 style="color: #EA84C7;">To Do</h3>
 		<div id="dashboard-alerts">
-			<div id="onboard">
-				<% if @current_user.brand %>
-					<%= render partial: "onboard_brand" %>
-				<% else %>
-					<%= render partial: "onboard_buyer" %>
+			<div class="small-centered">
+			<% if @adjustments.present? %>
+			<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
+				<% @adjustments.each do |a| %>
+					<li><%= render partial: "inventory_adjustments/item_requested_dashboard_display", locals: { adjustment: a } %></li>
 				<% end %>
+			</ul>
+			<% end %>
+			</div>
+			<div id="onboard">
+				<%# if @current_user.brand %>
+					<%#= render partial: "onboard_brand" %>
+				<%# else %>
+					<%#= render partial: "onboard_buyer" %>
+				<%# end %>
 			</div>
 		</div>
 	</div><!--/.small-12-->
 </div><!--/.row-->
+<% end %>

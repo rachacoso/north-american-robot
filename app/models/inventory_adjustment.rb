@@ -25,6 +25,7 @@ class InventoryAdjustment
   scope :deducted, ->{where(type: "deducted")}
   scope :of_type, ->(type) {where(type: type)}
   scope :from_order, ->(order_id) {where(order_id: order_id)}
+  scope :of_products, ->(product_ids) {where(:product_id.in => product_ids)}
   scope :unfulfilled_requests, ->{where(type: "requested",complete: false)}
   scope :unfulfilled_shipments, ->{where(type: "shipment",:associated_received_shipment_ids.in => ["", nil, []])}
 
