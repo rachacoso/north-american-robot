@@ -6,6 +6,9 @@
 	<div class="comments-complete received">Includes shipment of <%= a.units %> Units from <%= a.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M %Z") %></div>
 	<% end %>
 	<% if @current_user.administrator? %>
+		<%= link_to inventory_adjustment_delete_url(adjustment.id), remote: true, :method => 'delete', data: { :confirm => 'Are you sure you want to delete this Received Inventory Shipment?'}, 'aria-label': 'edit' do %>
+		<svg aria-hidden="true" class="icon-delete"><use xlink:href="#icon-delete"/></svg>
+		<% end %>
 		<%= link_to edit_inventory_adjustment_url(adjustment.id), remote: true, 'aria-label': 'edit' do %>
 	  <svg aria-hidden="true" class="icon-edit"><use xlink:href="#icon-edit"/></svg>
 		<% end %>

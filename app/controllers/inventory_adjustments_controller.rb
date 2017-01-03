@@ -1,7 +1,7 @@
 class InventoryAdjustmentsController < ApplicationController
 
 	before_action :set_product, only: [:new,:create]
-	before_action :set_adjustment, only: [:edit,:update]
+	before_action :set_adjustment, only: [:edit,:update, :destroy]
 	# before_action :administrators_only, only: [:edit,:update]
 
 	def index
@@ -20,10 +20,12 @@ class InventoryAdjustmentsController < ApplicationController
 			params[:inventory_adjustment][:ship_date] = Date.strptime(params[:inventory_adjustment][:ship_date], '%m-%d-%Y') 
 		end
 		adjustment = @product.inventory_adjustments.create(inventory_adjustment_parameters)
+		if adjustment.valid?
+			adjustment.shipment_add_associated(params[:associated_requests]) if params[:associated_requests]
+			adjustment.received_shipment_add_associated(params[:associated_shipments]) if params[:associated_shipments]
+			adjustment.mailer_send_notice
+		end
 		@brand = @product.brand
-		adjustment.shipment_add_associated(params[:associated_requests]) if params[:associated_requests]
-		adjustment.received_shipment_add_associated(params[:associated_shipments]) if params[:associated_shipments]
-		adjustment.mailer_send_notice
 	end
 
 	def edit
@@ -49,6 +51,16 @@ class InventoryAdjustmentsController < ApplicationController
 		@adjustment.shipment_add_associated(params[:associated_requests]) if params[:associated_requests]
 		@adjustment.received_shipment_add_associated(params[:associated_shipments]) if params[:associated_shipments]
 		@adjustment.mailer_send_update_notice
+	end
+
+	def destroy
+		@brand = @adjustment.product.brand
+		if @adjustment.type == "received" #can only delete 'received' inventory adjustments
+			@adjustment.associated_shipments.each do |shipment|
+				shipment.associated_received_shipments.delete(@adjustment)
+			end
+			@adjustment.destroy
+		end
 	end
 
 	private

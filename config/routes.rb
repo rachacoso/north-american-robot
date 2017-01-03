@@ -213,5 +213,6 @@ Rails.application.routes.draw do
   post '/inventory_adjustments/' => 'inventory_adjustments#create'
   put '/inventory_adjustments/:id' => 'inventory_adjustments#update', as: 'inventory_adjustment'
   patch '/inventory_adjustments/:id' => 'inventory_adjustments#update'
+  delete '/inventory_adjustments/:id' => 'inventory_adjustments#destroy', as: 'inventory_adjustment_delete'
 
 end
