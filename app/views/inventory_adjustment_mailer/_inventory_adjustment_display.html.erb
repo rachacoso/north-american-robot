@@ -11,18 +11,4 @@
 		Shipped on <%= ship_date.strftime("%B %d, %Y") %>
 		<% end %>
 		<%= simple_format(comment,{ id: 'comments', style: 'margin-top:10px' }, wrapper_tag: 'div').html_safe %>
-		<% if associated_shipments.present? %>
-		<ul style="margin-top:10px;padding-left:10px;margin-left: 5px;">
-		<% associated_shipments.each do |a| %>
-		<li>Included in shipment of <%= a.units %> Units on <%= a.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M %Z") %></li>
-		<% end %>
-		</ul>
-		<% end %>
-		<% if associated_requests.present? %>
-		<ul style="margin-top:10px;padding-left:10px;margin-left: 5px;">
-		<% associated_requests.each do |a| %>
-		<li>Includes units for request of <%= a.units %> Units from <%= a.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M %Z") %></li>
-		<% end %>
-		</ul>
-		<% end %>
 	</div>

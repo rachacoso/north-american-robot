@@ -12,16 +12,4 @@ Shipped on <%= ship_date.strftime("%B %d, %Y") %>
 
 <%= comment %>
 
-<% if associated_shipments.present? %>
-<% associated_shipments.each do |a| %>
-- Included in shipment of <%= a.units %> Units on <%= a.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M %Z") %>
-<% end %>
-<% end %>
-
-<% if associated_requests.present? %>
-<% associated_requests.each do |a| %>
-- Includes units for request of <%= a.units %> Units from <%= a.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M %Z") %>
-<% end %>
-<% end %>
-
 ------------------------------------
