@@ -1,10 +1,10 @@
 <% if adjustment.type == "shipment" %>
 <div <%= adjustment.complete? ? "class=complete" : "" %>>
 <% if adjustment.complete? %>
-<div class="complete-indicator received"><i class="fa fa-check" aria-hidden="true"></i> received</div>
+<div class="complete-indicator received">received</div>
 <% end %>
 <%= adjustment.units %><br>
-<small>Units <br>Shipped on <%= adjustment.ship_date.strftime("%B %d, %Y") %></small><br>
+<small>Units Shipped<br> Ship Date: <%= adjustment.ship_date.strftime("%B %d, %Y") %></small><br>
 
 <%= simple_format(adjustment.comment,{ class: 'comments' }, wrapper_tag: 'div') %>
 </div>

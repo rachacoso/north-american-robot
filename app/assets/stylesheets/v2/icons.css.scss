@@ -3,11 +3,7 @@
 @import "global_variables";
 @import "mixins";
 
-.icon-edit {
-	width: 22px;
-	height: 22px;
-}
-.icon-delete {
+.icon-edit, .icon-delete, .icon-checkmark {
 	width: 22px;
 	height: 22px;
 }

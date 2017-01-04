@@ -47,8 +47,9 @@ table.inventory {
   div.complete-indicator {
     font-size: rem-calc(12);
     font-weight: 500;
-    margin: rem-calc(5) 0;
-    padding: rem-calc(2) rem-calc(5);
+    margin: rem-calc(2) 0;
+    padding: rem-calc(2) 0;
+    line-height: rem-calc(12);
     &.shipped {
       color: red;
       i {color: red;}
@@ -70,7 +71,7 @@ table.inventory {
     line-height: rem-calc(14);
     margin: rem-calc(5) 0;
     font-style: italic;
-    border: 1px solid $landing-middle-gray;
+    border-right: 1px solid $landing-middle-gray;
     padding: rem-calc(5);
     &.shipped {
       border-color: red;
@@ -85,9 +86,10 @@ table.inventory {
     font-weight: 200;
     font-size: rem-calc(12);
     line-height: rem-calc(17);
-    margin: rem-calc(5) 0;
+    margin: rem-calc(15) 0 rem-calc(5) 0;
     // background-color: $landing-light-gray;
-    border: 1px solid $landing-middle-gray;
+    border-top: 1px solid $landing-middle-gray;
+    border-bottom: 1px solid $landing-middle-gray;
     padding: rem-calc(5);
     span {
       font-weight: 500;
@@ -123,7 +125,7 @@ table.inventory {
       &:nth-child(even) {background: $landing-light-gray;}
       td {
         text-align: right;
-        padding: rem-calc(2) rem-calc(10);
+        padding: rem-calc(15) rem-calc(10) rem-calc(5) rem-calc(10);
         &:nth-child(2),&:nth-child(3),&:nth-child(4) {
           font-weight: 200;
           font-size: rem-calc(20);

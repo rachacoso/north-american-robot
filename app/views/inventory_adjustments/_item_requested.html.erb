@@ -1,7 +1,7 @@
 <% if adjustment.type == "requested" %>
 <div <%= adjustment.complete? ? "class=complete" : "" %>>
 <% if adjustment.complete? %>
-<div class="complete-indicator shipped"><i class="fa fa-check" aria-hidden="true"></i> complete</div>
+<div class="complete-indicator shipped">complete</div>
 <% end %>
 <%= adjustment.units %><br>
 <small>Units Requested</small><br>
