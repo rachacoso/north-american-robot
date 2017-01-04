@@ -1,4 +1,12 @@
+<% if @adjustment.errors.any? %>
+$(':input').css({'background-color' : '#ccd0d1'});
+<% @adjustment.errors.each do |e| %>
+$('#inventory_adjustment_<%= e %>').css({'background-color' : '#ff8772'});
+<% end %>
+<%= render partial: 'shared/ajax_message_error', locals: { updated_item: "Error" } %>
+<% else %>
 $('#inventory-item').fadeOut();
 $('.overlay').fadeOut();
 $('#inventory-management').html("<%= j (render partial: 'inventory_adjustments/inventory_adjustments') %>");
 <%= render partial: 'shared/ajax_message', locals: { updated_item: "Inventory" } %>
+<% end %>

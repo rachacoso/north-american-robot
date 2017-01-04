@@ -19,13 +19,14 @@ class InventoryAdjustmentsController < ApplicationController
 		if params[:inventory_adjustment][:ship_date].present?
 			params[:inventory_adjustment][:ship_date] = Date.strptime(params[:inventory_adjustment][:ship_date], '%m-%d-%Y') 
 		end
-		adjustment = @product.inventory_adjustments.create(inventory_adjustment_parameters)
-		if adjustment.valid?
-			adjustment.shipment_add_associated(params[:associated_requests]) if params[:associated_requests]
-			adjustment.received_shipment_add_associated(params[:associated_shipments]) if params[:associated_shipments]
-			adjustment.mailer_send_notice
+		@adjustment = @product.inventory_adjustments.create(inventory_adjustment_parameters)
+		if @adjustment.valid?
+			@adjustment.shipment_add_associated(params[:associated_requests]) if params[:associated_requests]
+			@adjustment.received_shipment_add_associated(params[:associated_shipments]) if params[:associated_shipments]
+			@adjustment.mailer_send_notice
 		end
 		@brand = @product.brand
+
 	end
 
 	def edit
@@ -47,10 +48,13 @@ class InventoryAdjustmentsController < ApplicationController
 		end
 		@adjustment.cache_previous_data
 		@adjustment.update(inventory_adjustment_parameters)
+		if @adjustment.valid?
+			@adjustment.shipment_add_associated(params[:associated_requests]) if params[:associated_requests]
+			@adjustment.received_shipment_add_associated(params[:associated_shipments]) if params[:associated_shipments]
+			@adjustment.mailer_send_update_notice
+		end
 		@brand = @adjustment.product.brand
-		@adjustment.shipment_add_associated(params[:associated_requests]) if params[:associated_requests]
-		@adjustment.received_shipment_add_associated(params[:associated_shipments]) if params[:associated_shipments]
-		@adjustment.mailer_send_update_notice
+
 	end
 
 	def destroy
