@@ -61,6 +61,22 @@
 	</div><!--/.small-12-->
 </div><!--/.row-->
 <% end %>
+<% if @type == "requested" || @type == "shipment" %>
+<div class="row">
+	<div class="small-12 columns text-center">
+		<br>
+		<h3 style="color: orange;">
+			Note: Email notification will be sent to
+			<% if @type == "requested" %>
+				<%= @adjustment.product.brand.company_name %> at 
+				<%= @adjustment.product.brand.contacts.pluck(:email).to_sentence %>
+			<% elsif @type == "shipment" %>
+				Landing International
+			<% end %>
+		</h3>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+<% end %>
 <div class="row">
 	<div class="small-12 columns text-center">
 		<%= f.submit "Submit", class: "landing-button tiny" %>
