@@ -333,7 +333,7 @@ function initializeGallery (className,galleryHeight) {
       showInfo: false,
       height: galleryHeight,
       wait: true,
-      dummy: '/images/image_not_found.png'
+      dummy: 'https://s3.amazonaws.com/landingintl-us/defaults/image_not_found.png'
   })  
 }
 
