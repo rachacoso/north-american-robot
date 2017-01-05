@@ -329,13 +329,11 @@ function profileGalleryHeight () {
 // INITIALIZE GALLERIA SLIDESHOW
 function initializeGallery (className,galleryHeight) {
   galleryHeight = (typeof galleryHeight === 'undefined') ? 400 : galleryHeight;
-  Galleria.configure({
-      dummy: '/images/image_not_found.png'
-  });
   Galleria.run(className, {
       showInfo: false,
       height: galleryHeight,
-      wait: true
+      wait: true,
+      dummy: '/images/image_not_found.png'
   })  
 }
 
