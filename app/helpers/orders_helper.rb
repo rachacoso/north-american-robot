@@ -335,4 +335,14 @@ module OrdersHelper
 
 	end
 
+	def get_additional_comments(order:, section:)
+		case section
+		when "submitted"
+			if order.status != "submitted"
+			else
+				return order.comments.in_between(order.submission_date, DateTime.now)
+			end
+		end
+	end
+
 end

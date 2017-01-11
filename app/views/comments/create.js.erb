@@ -1,0 +1,13 @@
+<% if flash[:error] %>
+	$('#comment-error').html("<%= flash[:error] %>");
+	// $('.overlay#error-overlay').fadeIn();
+	$('#comment-error').fadeIn();
+<% else %>
+	$('#comment-error').fadeOut(); // hide any error messages
+	$('#comment_text').val("");
+	<%= render partial: 'shared/ajax_message', locals: { updated_item: "Order" } %>
+	$('#order-display').html("<%= j (render partial: 'shared/orders/show') %>");
+<% end %>
+
+initializeOrderControls();
+initializeAutoForm();

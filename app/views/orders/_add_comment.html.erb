@@ -1,0 +1,20 @@
+<div class="row">
+	<div class="medium-11 medium-centered columns">
+		<br>
+		<h1>Add Comment</h1>
+		<h3>Feel free to add more comments</h3>
+		<div class="panel text-center">
+			<div class="row">
+				<div class="medium-11 medium-centered columns">
+					<br>
+					<%= form_for Comment.new, remote: true do |f| %>
+						<%= hidden_field_tag "order_id", order.id %>
+						<%= f.text_area :text, label: false, rows: 10 %>
+						<div class="inline-error" id="comment-error"></div>
+						<%= f.submit "Add Comment", class: "landing-button" %>
+					<% end %>
+				</div><!--/.small-12-->
+			</div><!--/.row-->
+		</div>
+	</div><!--/.medium-11 medium-centered-->
+</div><!--/.row-->

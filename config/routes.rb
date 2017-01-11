@@ -47,6 +47,9 @@ Rails.application.routes.draw do
   # order-calculator display
   get   'order/calculator/show/:id' => 'orders#show_calculator', as: 'show_order_calculator'
 
+# comments
+  resources :comments, only: [:create]
+
   # ARMOR PAYMENTS TESTING
   get   '/order/paid/:id/:confirm' => 'orders#paid', as: 'paid_order'
   get   '/order/delivered/:id/:confirm' => 'orders#delivered', as: 'delivered_order'

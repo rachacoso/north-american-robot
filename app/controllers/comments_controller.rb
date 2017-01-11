@@ -1,5 +1,17 @@
 class CommentsController < ApplicationController
 
+	def create
+		if params[:comment][:text].present?
+			@order = Order.find(params[:order_id])
+			comment = @order.comments.create(text: params[:comment][:text], author: @current_user.type?)
+			if comment.errors.any?
+				flash.now[:error] = comment.errors.full_messages
+			end
+		else
+			flash.now[:error] = "Sorry! Please enter a comment."
+		end
+	end
+
 	def update
 		@order = @current_user.company.orders.find(params[:id])
 		@comment = @order.comments.find(params[:comment_id])

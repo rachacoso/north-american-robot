@@ -327,9 +327,13 @@ ul.tablist {
 
 // Inline error styling
 .inline-error {
+	display: none;
 	font-size: rem-calc(12);
 	font-weight: 300;
 	color: red;
+	width: 100%;
+	/*border: 1px solid red;*/
+	margin: 0 0 rem-calc(10) 0;
 }
 
 

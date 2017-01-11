@@ -18,7 +18,7 @@
 						<li>
 							<span id='title'>SUBMITTED by <%= order.orderer_company_name %></span> <%= order.submission_date.in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M %Z") %>
 							<% if (comment = order.comments.open.first) && order.comments.open.first.text.present? %>
-								<%= render partial: "shared/orders/order_comment_display", locals: { comment: comment } %>
+								<%= render partial: "shared/orders/order_comment_display", locals: { comment: comment, additional_comments: get_additional_comments(order: order, section: "submitted")} %>
 							<% end %>
 						</li>
 					<% end %>

@@ -14,6 +14,7 @@ class Comment
 	scope :open, ->{where(order_status: "open")}
   scope :submitted, ->{where(order_status: "submitted")}
   scope :declined, ->{where(order_status: "declined")}
+  scope :in_between, ->(from_time, until_time) {where(:c_at.gt => from_time, :c_at.lt => until_time)}
   # scope :submitted_comment_from_brand, ->{where(order_status: "submitted", author: "brand")}
   # scope :submitted_comment_from_orderer, ->{where(order_status: "submitted", :author.in => ["retailer", "distributor"])}
   # scope :pending_comment_from_brand, ->{where(order_status: "pending", author: "brand")}
