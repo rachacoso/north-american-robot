@@ -5,15 +5,13 @@
 	</div>
 	<div id="comment-body">
 		<%= simple_format(comment.text, {}, wrapper_tag: "div") %>
-		[ from <%= comment.author == "brand" ? comment.commentable.brand.company_name : comment.commentable.orderer.company_name %>
-		<%= comment.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("on %B %d, %Y at %H:%M %Z") if comment.c_at.present? %> ]
 	</div>
 
 	<% additional_comments.each do |comment| %>
 	<div id="comment-body">
 		<%= simple_format(comment.text, {}, wrapper_tag: "div") %>
-		[ from <%= comment.author == "brand" ? comment.commentable.brand.company_name : comment.commentable.orderer.company_name %>
-		<%= comment.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("on %B %d, %Y at %H:%M %Z") if comment.c_at.present? %> ]
+		[ comment added by <%= comment.author == "brand" ? comment.commentable.brand.company_name : comment.commentable.orderer.company_name %>
+		<%= comment.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("on %B %d, %Y at %H:%M:%S %Z") if comment.c_at.present? %> ]
 	</div>
 	<% end %>
 </div>

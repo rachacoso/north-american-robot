@@ -335,12 +335,41 @@ module OrdersHelper
 
 	end
 
-	def get_additional_comments(order:, section:)
+	def get_additional_comments(comment: nil, order:, section:, section_index: nil)
 		case section
 		when "submitted"
-			if order.status != "submitted"
+			if order.pending_date_array.present?
+				return order.comments.in_between(order.submission_date, order.pending_date_array[0])
 			else
 				return order.comments.in_between(order.submission_date, DateTime.now)
+			end
+		when "pending"
+			if order.comments.declined.present?
+				return order.comments.in_between(order.pending_date_array[0], order.comments.declined[0].c_at)
+			elsif order.approved_date.present?
+				return order.comments.in_between(order.pending_date_array[0], order.approved_date)
+			else
+				return order.comments.in_between(order.pending_date_array[0], DateTime.now)
+			end
+		when "changes_requested"
+			if order.pending_date_array[section_index + 1]
+				return order.comments.in_between(comment.c_at, order.pending_date_array[section_index + 1])
+			else
+				if order.approved_date.present?
+					return order.comments.in_between(comment.c_at, order.approved_date)
+				else
+					order.comments.in_between(comment.c_at, DateTime.now)
+				end
+			end
+		when "resent_for_approval"
+			if order.comments.declined[section_index] #if has been declied again
+				return order.comments.in_between(order.pending_date_array[section_index], order.comments.declined[section_index].c_at)
+			else
+				if order.approved_date.present?
+					return order.comments.in_between(order.pending_date_array[section_index], order.approved_date)
+				else
+					order.comments.in_between(order.pending_date_array[section_index], DateTime.now)
+				end
 			end
 		end
 	end
