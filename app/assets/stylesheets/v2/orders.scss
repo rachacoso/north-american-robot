@@ -482,6 +482,12 @@ table.date-control {
 		#comment-body {
 			padding: rem-calc(10);
 			background-color: white;
+			#attribution {
+				color: $landing-middle-gray;
+				#author, #date {
+					font-weight: 400;
+				}
+			}
 		}
 	}
 
