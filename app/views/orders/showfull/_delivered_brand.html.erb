@@ -19,8 +19,10 @@
 					<div class="medium-11 medium-centered columns">
 						<a name="form"></a>
 						<br>
+
 						<h1 class="top-level">Hooray! The order was delivered on <%= (order.delivered_date ).strftime("%d %b %Y") %>.</h1>
 						<br>
+						
 						<% if order.armor_enabled? %>
 							<%= render partial: "orders/showfull/delivered_brand_payoneer", locals: { order: order } %>
 						<% else %>
@@ -30,6 +32,7 @@
 								<%= render partial: "orders/showfull/delivered_brand_net", locals: { order: order } %>
 							<% end %>
 						<% end %>
+
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->
 				
@@ -38,7 +41,7 @@
 					<div class="medium-11 medium-centered columns">
 						<br>
 						<h1 class="top-level">Order</h1>
-						<div class="panel">
+						<div class="panel" id="order-display">
 							<%= render "shared/orders/show" %>		
 						</div>
 					</div><!--/.medium-11 medium-centered-->

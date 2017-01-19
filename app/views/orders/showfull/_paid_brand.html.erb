@@ -23,8 +23,8 @@
 						<a name="form"></a>
 						<br>
 						<h1 class="top-level">Next Step: Ship the Order and Enter Shipment Tracking Information</h1>
+						<%= render partial: "add_additional_comment_link" %>
 						<br>
-						
 						<% if order.armor_enabled? %>
 							<div class="panel">
 								<%= render partial: "orders/showfull/paid_brand_payoneer", locals: { order: order } %>
@@ -40,7 +40,7 @@
 					<div class="medium-11 medium-centered columns">
 						<br>
 						<h1 class="top-level">Order</h1>
-						<div class="panel">
+						<div class="panel" id="order-display">
 							<%= render "shared/orders/show" %>		
 						</div>
 					</div><!--/.medium-11 medium-centered-->

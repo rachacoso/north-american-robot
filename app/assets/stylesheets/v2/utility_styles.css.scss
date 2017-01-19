@@ -3,6 +3,17 @@
 @import "global_variables";
 @import "mixins";
 
+a.full-width-button-link {
+	display: block;
+	width: 100%;
+	border: 1px solid $landing-blue;
+	background-color: $landing-blue;
+	text-align: center;
+	padding: rem-calc(10);
+	font-weight: 500;
+	color: $landing-dark-gray;
+}
+
 .container {
 	margin-top: rem-calc(15);
 	margin-bottom: rem-calc(15);

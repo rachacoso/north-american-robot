@@ -315,20 +315,22 @@ module OrdersHelper
 		case order.status
 		when "submitted"
 			unless order.comments.declined.present?
-				text = order.comments.open.first.text
-				preface = "#{order.brand_company_name} sent a comment with the order:"
+				comment = order.comments.open.first
+				additional_comments = order.comments.in_between(order.submission_date, DateTime.now)
+				preface = "#{order.brand_company_name} sent comment(s) with the order:"
 			end
 		when "pending"
-			text = order.comments.submitted.last.text
+			comment = order.comments.submitted.last
+			additional_comments = order.comments.in_between(order.submission_date, DateTime.now)
 			if order.comments.declined.present?
 				preface = "#{order.orderer_company_name} has responded to your request:"
 			else
-				preface = "#{order.orderer_company_name} sent a comment with the order:"
+				preface = "#{order.orderer_company_name} sent comment(s) with the order:"
 			end
 		end
 
-		if text.present?
-			return { preface: preface, text: text }
+		if comment.text.present?
+			return { preface: preface, comment: comment, additional_comments: additional_comments }
 		else
 			return false
 		end
@@ -370,6 +372,34 @@ module OrdersHelper
 				else
 					order.comments.in_between(order.pending_date_array[section_index], DateTime.now)
 				end
+			end
+		when "approved"
+			if order.shipped_date.present?
+				return order.comments.in_between(order.approved_date, order.shipped_date)
+			elsif order.paid_date.present?
+				return order.comments.in_between(order.approved_date, order.paid_date)
+			else
+				order.comments.in_between(order.approved_date, DateTime.now)
+			end
+		when "paid"
+			if order.shipped_date.present?
+				return order.comments.in_between(order.paid_date, order.shipped_date)
+			elsif order.paid_date.present?
+				return order.comments.in_between(order.paid_date, order.paid_date)
+			else
+				order.comments.in_between(order.paid_date, DateTime.now)
+			end
+		when "shipped"
+			if order.delivered_date.present?
+				return order.comments.in_between(order.shipped_date, order.delivered_date)
+			else
+				order.comments.in_between(order.shipped_date, DateTime.now)
+			end
+		when "delivered"
+			if order.completed_date.present?
+				return order.comments.in_between(order.delivered_date, order.completed_date)
+			else
+				order.comments.in_between(order.delivered_date, DateTime.now)
 			end
 		end
 	end

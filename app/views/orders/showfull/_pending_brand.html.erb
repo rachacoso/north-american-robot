@@ -23,6 +23,7 @@
 						<div class="info">
 							<h3>You will receive an email when <%= order.orderer.company_name %> has approved the final order costs.</h3>
 						</div>
+						<%= render partial: "add_additional_comment_link" %>
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->
 
@@ -35,8 +36,6 @@
 						</div>
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->
-
-				<%= render partial: 'add_comment', locals: {order: order} %>
 
 			</div><!--/.panel outer-->
 		</div><!--/.small-12-->

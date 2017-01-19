@@ -39,6 +39,7 @@
 							<% end %>
 							</h3>
 							</div>
+						<%= render partial: "add_additional_comment_link" %>
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->
 
@@ -52,7 +53,11 @@
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->
 
-				<%= render partial: 'add_comment', locals: {order: order} %>
+				<div class="row">
+					<div class="medium-11 medium-centered columns">
+						<%#= render partial: 'add_additional_comment', locals: {order: order} %>
+					</div><!--/.medium-11 medium-centered-->
+				</div><!--/.row-->
 
 			</div><!--/.panel outer-->
 		</div><!--/.small-12-->

@@ -60,9 +60,10 @@
 							<h3>You can edit order Items by clicking on item name or quantity.</h3>							
 						</div>
 						<% if comment = display_order_response(order: order) %>
+
 						<div class="panel message">
 							<h3><%= comment[:preface] %></h3>
-							<h3><%= simple_format(comment[:text], {}, wrapper_tag: "div") %></h3>
+							<div id="order-comments"><%= render partial: "shared/orders/order_comment_display", locals: { comment: comment[:comment], additional_comments: comment[:additional_comments]} %></div>
 						</div>
 						<% end %>
 						<div class="panel" id="order-display">

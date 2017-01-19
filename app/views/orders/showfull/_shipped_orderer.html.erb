@@ -18,6 +18,7 @@
 					<div class="medium-11 medium-centered columns">
 						<br>
 						<h1 class="top-level">The order has been shipped!<br>Next Step: Await Delivery</h1>
+						<%= render partial: "add_additional_comment_link" %>
 					</div><!--/.medium-11 medium-centered-->
 				</div><!--/.row-->
 
@@ -65,7 +66,7 @@
 						<br>
 						<h1 class="top-level">Order</h1>
 
-						<div class="panel">
+						<div class="panel" id="order-display">
 							<%= render "shared/orders/show" %>		
 						</div>
 					</div><!--/.medium-11 medium-centered-->

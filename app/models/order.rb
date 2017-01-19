@@ -69,6 +69,18 @@ class Order # for V2 ordering
     end
   end
 
+  def can_add_additional_comments?(user:)
+    if user.administrator?
+      return false
+    elsif self.status == "submitted" && !user.brand
+      return true
+    elsif ["pending","approved","shipped", "paid", "delivered"].include? self.status
+      return true
+    else
+      return false
+    end
+  end
+
   def can_be_deleted?
     if ["open","submitted","pending"].include? self.status
       return true
@@ -210,6 +222,7 @@ class Order # for V2 ordering
     self.status = "submitted"
     self.submission_date = DateTime.now
     self.comments.build(text: nil, author: "brand", order_status: "submitted") # auto-create first comment
+    self.comments.open.first.touch
     self.save!
     begin
     OrderMailer.send_order(

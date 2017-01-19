@@ -28,6 +28,7 @@
 							<h3><%= order.orderer.company_name %> will review the shipment and you should receive payment approximately <%= net_terms_payment_estimate(order: order)[:receipt] %> days after delivery.</h3>
 							<% end %>
 						</div>
+						<%= render partial: "add_additional_comment_link" %>
 						<br>
 						<div class="panel">
 							<h3>Shipment Info</h3>
@@ -42,7 +43,7 @@
 					<div class="medium-11 medium-centered columns">
 						<br>
 						<h1 class="top-level">Order</h1>
-						<div class="panel">
+						<div class="panel" id="order-display">
 							<%= render "shared/orders/show" %>		
 						</div>
 					</div><!--/.medium-11 medium-centered-->
