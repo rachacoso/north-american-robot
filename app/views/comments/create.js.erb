@@ -1,9 +1,9 @@
-<% if flash[:error] %>
+<% if flash[:comment_error] %>
 	<% if @reload %>
 	$('#full-order').html('<%= j (render partial: "orders/show_order_full", locals: { order: @order }) %>');
 	$('#comment_text').val("<%= @comment %>");
 	<% end %>
-	$('#comment-error').html("<%= j (flash[:error]) %>");
+	$('#comment-error').html("<%= j (flash[:comment_error]) %>");
 	// $('.overlay#error-overlay').fadeIn();
 	$('#comment-error').fadeIn();
 <% else %>

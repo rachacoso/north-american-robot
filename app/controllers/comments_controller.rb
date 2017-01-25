@@ -7,15 +7,15 @@ class CommentsController < ApplicationController
 				comment = @order.comments.create(text: params[:comment][:text], author: @current_user.type?)
 				@order.touch
 				if comment.errors.any?
-					flash.now[:error] = comment.errors.full_messages
+					flash.now[:comment_error] = comment.errors.full_messages
 				end
 			else
-				flash.now[:error] = "Hold On! #{ @current_user.type? == "brand" ? @order.orderer.company_name : @order.brand.company_name } has updated the order. <br>Please review the updated order before adding a comment.".html_safe
+				flash.now[:comment_error] = "Hold On! #{ @current_user.type? == "brand" ? @order.orderer.company_name : @order.brand.company_name } has updated the order. <br>Please review the updated order before adding a comment.".html_safe
 				@reload = true
 				@comment = params[:comment][:text]
 			end
 		else
-			flash.now[:error] = "Sorry! Please enter a comment."
+			flash.now[:comment_error] = "Sorry! Please enter a comment."
 		end
 	end
 
@@ -24,8 +24,7 @@ class CommentsController < ApplicationController
 		@comment = @order.comments.find(params[:comment_id])
 		@comment.update(comment_params)
 		if !@comment.save
-			# flash.now[:error] = "Sorry, Discount must be a number between 0 and 100"
-			flash.now[:error] = @comment.errors.full_messages
+			flash.now[:comment_error] = @comment.errors.full_messages
 		end
 	end
 
