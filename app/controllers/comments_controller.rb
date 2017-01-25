@@ -3,9 +3,16 @@ class CommentsController < ApplicationController
 	def create
 		if params[:comment][:text].present?
 			@order = Order.find(params[:order_id])
-			comment = @order.comments.create(text: params[:comment][:text], author: @current_user.type?)
-			if comment.errors.any?
-				flash.now[:error] = comment.errors.full_messages
+			if params[:order_updated].to_datetime.utc.to_i == @order.u_at.to_datetime.utc.to_i
+				comment = @order.comments.create(text: params[:comment][:text], author: @current_user.type?)
+				@order.touch
+				if comment.errors.any?
+					flash.now[:error] = comment.errors.full_messages
+				end
+			else
+				flash.now[:error] = "Hold On! #{ @current_user.type? == "brand" ? @order.orderer.company_name : @order.brand.company_name } has updated the order. <br>Please review the updated order before adding a comment.".html_safe
+				@reload = true
+				@comment = params[:comment][:text]
 			end
 		else
 			flash.now[:error] = "Sorry! Please enter a comment."

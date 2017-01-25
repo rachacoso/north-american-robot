@@ -9,6 +9,7 @@
 					<br>
 					<%= form_for Comment.new, remote: true do |f| %>
 						<%= hidden_field_tag "order_id", order.id %>
+						<%= hidden_field_tag "order_updated", order.u_at %>
 						<%= f.text_area :text, label: false, rows: 10 %>
 						<div class="inline-error" id="comment-error"></div>
 						<%= f.submit "Add Comment", class: "landing-button" %>
