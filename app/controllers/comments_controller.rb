@@ -10,12 +10,12 @@ class CommentsController < ApplicationController
 					flash.now[:comment_error] = comment.errors.full_messages
 				end
 			else
-				flash.now[:comment_error] = "Hold On! #{ @current_user.type? == "brand" ? @order.orderer.company_name : @order.brand.company_name } has updated the order. <br>Please review the updated order before adding a comment.".html_safe
+				flash.now[:comment_error] = "#{ @current_user.type? == "brand" ? @order.orderer.company_name : @order.brand.company_name } has updated the order. <br>Please review the updated order before adding a comment.".html_safe
 				@reload = true
 				@comment = params[:comment][:text]
 			end
 		else
-			flash.now[:comment_error] = "Sorry! Please enter a comment."
+			flash.now[:comment_error] = "Comment field is blank.<br> Please enter a comment.".html_safe
 		end
 	end
 
