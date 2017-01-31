@@ -1,6 +1,11 @@
 <% if adjustment.type == "received" %>
-	<%= adjustment.units %><br>
-	<small>Units Received</small><br>
+	<% if adjustment.units > 0 %>
+		<%= adjustment.units %><br>
+		<small>Units Received</small><br>
+	<% else %>
+		<span style='color:red;'>(<%= adjustment.units.abs %>)</span><br>
+		<small>Units Deducted</small><br>
+	<% end %>
 	<%= simple_format(adjustment.comment,{ class: 'comments' }, wrapper_tag: "div") %>
 	<% adjustment.associated_shipments.each do |a| %>
 	<div class="comments-complete received">Includes shipment of <%= a.units %> Units from <%= a.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M %Z") %></div>
@@ -15,7 +20,7 @@
 	<% end %>
 <% elsif adjustment.type == "deducted" %>
 	<span style="color:red;">(<%= adjustment.units %>)</span><br>
-	<small>Units Deducted</small><br>
+	<small>Units Deducted (Order Fulfillment)</small><br>
 	<small>
 		<% if @current_user.administrator? %>
 		<%= link_to "#{adjustment.order.orderer.company_name} Order",admin_order_view_url(adjustment.order), target: "_blank" %>

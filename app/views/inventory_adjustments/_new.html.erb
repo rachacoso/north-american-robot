@@ -1,13 +1,14 @@
 <div class="editform">
 <div class="row">
 	<div class="small-12 columns text-center">
-		<h2><strong><%= @adjustment.product.name %></strong>
+		<h2><strong><%= @adjustment.product.name %></strong></h2>
 		<% if @type == "requested" %>
-			<br>Inventory Request
+			<h2>Inventory Request</h2>
 		<% elsif @type == "received" %>
-			<br>Inventory Received
+			<h2 style="line-height: 1em;">Inventory Received/Deducted<br>
+			<small>(for deductions, input negative number)</small></h2>
 		<% elsif @type == "shipment" %>
-			<br>Inventory Shipped
+			<h2>Inventory Shipped</h2>
 		<% end %>
 		</h2>
 	</div><!--/.small-12-->

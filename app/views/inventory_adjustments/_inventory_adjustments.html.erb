@@ -37,7 +37,7 @@
 		<td>&nbsp;</td>
 		<td class="addnew"><%= link_to "add inventory request", new_inventory_adjustment_url("requested",product.id), remote: true %></td>
 		<td>&nbsp;</td>
-		<td class="addnew"><%= link_to "add received inventory", new_inventory_adjustment_url("received",product.id), remote: true %></td>
+		<td class="addnew"><%= link_to "add received/deducted inventory", new_inventory_adjustment_url("received",product.id), remote: true %></td>
 		<% else %>
 		<td colspan="2">&nbsp;</td>
 		<td class="addnew"><%= link_to "add shipment notification", new_inventory_adjustment_url("shipment",product.id), remote: true %></td>

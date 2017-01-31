@@ -1,13 +1,14 @@
 <div class="editform">
 <div class="row">
 	<div class="small-12 columns text-center">
-		<h2><strong><%= @adjustment.product.name %></strong>
-		<% if @adjustment.type == "request" %>
-			<br>Edit Inventory Request
+		<h2><strong><%= @adjustment.product.name %></strong></h2>
+		<% if @adjustment.type == "requested" %>
+			<h2>Edit Inventory Request</h2>
 		<% elsif @adjustment.type == "received" %>
-			<br>Edit Received Inventory
-		<% elsif @adjustment.type == "sent" %>
-			<br>Edit Inventory Shipped
+			<h2 style="line-height: 1em;">Edit Inventory Received/Deducted<br>
+			<small>(for deductions, input negative number)</small></h2>
+		<% elsif @adjustment.type == "shipment" %>
+			<h2>Edit Inventory Shipped</h2>
 		<% end %>
 		</h2>
 	</div><!--/.small-12-->
