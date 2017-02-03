@@ -27,7 +27,7 @@
 					<% if @recently_updated_orders %>
 						<h3>Recently Updated Orders</h3>
 							<%= render partial: 'orders/order_index', locals: { orders: @recently_updated_orders } %>
-							<%= link_to "view all orders", orders_url, class: 'more-link' %>
+							<%= link_to "view all orders", orders_url, class: 'more-link' unless @recently_updated_orders.blank? %>
 
 					<% else %>
 
