@@ -31,8 +31,13 @@ function setModalActions () {
 
 	$('.overlay#error-modal-overlay, a#close-error-modal, a#close-error-button').on('click', function(e){
 		e.preventDefault();
-		$('#error-modal').fadeOut();
-		$('.overlay').fadeOut();
+		if (typeof reloadLink !== 'undefined') {
+			window.location.href = reloadLink;
+			window.location.reload(true);
+		} else {
+			$('#error-modal').fadeOut();
+			$('.overlay').fadeOut();
+		}
 	});
 
 	$('a#submit-go-and-close').on('click', function(e){

@@ -1,7 +1,6 @@
 <% if flash[:comment_error] %>
 	<% if @reload %>
-	$('#full-order').html('<%= j (render partial: "orders/show_order_full", locals: { order: @order }) %>');
-	$('#comment_text').val("<%= @comment %>");
+		var reloadLink = "//" + window.location.hostname + window.location.pathname  + "#top" ;
 	<% end %>
 	<%= render partial: 'shared/error_modal', locals: { error_html: ( render partial: 'comment_error', locals: { error_message: flash[:comment_error] } ) } %>
 <% else %>
@@ -9,7 +8,6 @@
 	$('#comment_text').val("");
 	<%= render partial: 'shared/ajax_message', locals: { updated_item: "Order" } %>
 	$('#order-display').html("<%= j (render partial: 'shared/orders/show') %>");
+	initializeAutoForm();
+	setComments();
 <% end %>
-
-initializeAutoForm();
-setComments();
