@@ -469,9 +469,13 @@ table.date-control {
 		margin-left: 0;
 		margin-top: rem-calc(20);
 		li {
-			margin: rem-calc(20) 0;
+			margin: rem-calc(20) 0 0 0;
 			padding: rem-calc(10);
 			background-color: $landing-light-gray;
+			&:last-child { 
+				margin-top: 0;
+				padding-top: 0;
+			}
 		}
 	}
 	.order-comment-display {
@@ -490,6 +494,27 @@ table.date-control {
 			}
 		}
 	}
+
+	#add-comment-container {
+		margin: 0 rem-calc(10) rem-calc(10) rem-calc(10);
+		a#show-add-comment {
+			display: block;
+			width: 100%;
+			border: 1px solid $landing-middle-gray;
+			text-align: center;
+			background: white;
+			color: $landing-dark-gray;
+			&:hover {
+				background: $landing-middle-gray;
+				color: white;
+			}
+		}
+		#add-comment-display {
+			padding-top: rem-calc(15);
+			display: none;
+		}
+	}
+	
 
 	#data {
 		margin-left: rem-calc(5);

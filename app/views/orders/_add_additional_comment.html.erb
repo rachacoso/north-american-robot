@@ -1,12 +1,10 @@
-<div class="row">
-	<div class="small-12 columns">
+	
+
+	<div id="add-comment-container">
 		<a name="add_comment"></a>
-		<h1>Add Comment</h1>
-		<h3>Feel free to add more comments</h3>
-		<div class="panel text-center">
-			<div class="row">
-				<div class="medium-11 medium-centered columns">
-					<br>
+		<a href="#" id="show-add-comment">add comment</a>
+		<div class="text-center" id="add-comment-display">
+
 					<%= form_for Comment.new, remote: true do |f| %>
 						<%= hidden_field_tag "order_id", order.id %>
 						<%= hidden_field_tag "order_updated", order.u_at %>
@@ -14,8 +12,6 @@
 						<div class="inline-error" id="comment-error"></div>
 						<%= f.submit "Add Comment", class: "landing-button" %>
 					<% end %>
-				</div><!--/.small-12-->
-			</div><!--/.row-->
+
 		</div>
-	</div><!--/.small-12-->
-</div><!--/.row-->
+	</div><!--/.order-comment-display-->

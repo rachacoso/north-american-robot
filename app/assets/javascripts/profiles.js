@@ -3,7 +3,11 @@ $( document ).ready(function() {
 
 	setModalActions();
 	shippingtermsControls();
+	setProfileActions();
 
+});
+
+function setProfileActions() {
 	$('#back-control').on('click', function(e){
 		e.preventDefault();
 		$('#back-options').toggle();
@@ -11,9 +15,7 @@ $( document ).ready(function() {
 	$('#back-options').on('mouseleave', function(e) {
 		$('#back-options').fadeOut();
 	});
-
-});
-
+}
 function setModalActions () {
 	$('.overlay#profile-preview-overlay, a#close-profile-preview, a#close-new-info').on('click', function(e){
 		e.preventDefault();

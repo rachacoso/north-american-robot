@@ -11,5 +11,6 @@
 	$('#order-display').html("<%= j (render partial: 'shared/orders/show') %>");
 <% end %>
 
-initializeOrderControls();
 initializeAutoForm();
+setComments();
+setProfileActions();
