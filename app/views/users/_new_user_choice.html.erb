@@ -1,0 +1,16 @@
+<%= render layout: "shared/modal", locals: { size: "x-large" } do  %>
+
+<div class="row">
+	<div class="small-12 columns text-center">
+	<div id="new-user-choice">
+		<%= image_tag 'https://s3.amazonaws.com/landingintl-us/general/landing-logo.png', width: "100", alt: "Landing International" %>
+		<h2>Join as a</h2>
+		<%= link_to "BRAND", "#", class: "landing-button" %>
+		<%= link_to "RETAILER", "#", class: "landing-button" %>
+		<%= link_to "DISTRIBUTOR", "#", class: "landing-button" %>
+		<a class="modal-close" aria-label="Cancel">cancel</a>
+	</div><!--/.new-user-choice-->
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
+<% end %>

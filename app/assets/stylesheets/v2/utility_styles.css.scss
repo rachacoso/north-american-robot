@@ -202,6 +202,70 @@ ul.tablist {
   }
 }
 
+//updated modals
+#modal {
+	display:none;
+	#modal-overlay {
+	  position: fixed;
+	  top: 0;
+	  left: 0;
+	  height: 100%;
+	  width: 100%;
+	  z-index: 100000;
+	  // background-color: rgba(0,0,0,0.5);
+	  background-color: rgba(0,0,0,0.8);
+	}
+	#modal-container {
+		position: fixed;
+		top: -50%;
+		left: 50%;
+		&.x-large {
+			@media only screen and (min-width: 40.063em) { 
+				margin: 0 0 0 -40%;
+				width:80%;
+			}
+		}
+		&.large {
+			@media only screen and (min-width: 40.063em) { 
+				margin: 0 0 0 -25%;
+				width:50%;
+			}
+		}
+		&.small {
+			@media only screen and (min-width: 40.063em) { 
+				margin: 0 0 0 -15%;
+				width:30%;
+			}	  	
+		}
+			@media only screen { 
+				width:95%; 
+				margin: 0 0 0 -47.5%;
+			}
+			max-height: 85%;  
+			background: white;
+			z-index: 100021;
+			padding: rem-calc(20) rem-calc(10);
+			overflow-x: scroll;
+		}
+		#modal-data {
+			height: 100%;
+			overflow-x: hidden;
+			overflow-y: scroll;
+			padding: rem-calc(5);
+		}
+		#modal-close-x {
+			position: absolute;
+			top: rem-calc(-40);
+			right: rem-calc(10);
+			font-size: rem-calc(60);
+			font-weight: 900;
+			color: $landing-middle-gray;
+			z-index: 100022;
+		}
+
+}
+
+
 .ajax-wait {
 	position: fixed;
 	top: 0;
