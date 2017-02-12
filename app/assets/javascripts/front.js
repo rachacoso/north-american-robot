@@ -9,10 +9,6 @@ $(document).ready(function() {
 		paginationSpeed : 400,
 		singleItem:true
   });
- 
-	if ($("input[type='radio']#user_type_brand").is(":checked")) {
-		$('#brand-subscription-info').css("visibility", "visible").hide().fadeIn('slow');
-	}
 
   $("input[type='radio']#user_type_brand, input[type='radio']#user_type_retailer, input[type='radio']#user_type_distributor").on('change', function (e) {
   	if ($(this).val()=="brand")

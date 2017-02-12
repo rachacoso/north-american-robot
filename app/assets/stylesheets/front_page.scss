@@ -9,7 +9,7 @@
   padding-top:2em;
   background-color: white;
   position: relative;
-  height: 100%;
+  min-height: 100%;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -19,6 +19,44 @@
   &#prospect-share {
   	padding-top: rem-calc(50);
   }
+  &#retail-partners-panel {
+  	@include transparent($landing-blue, 0.3);
+  }
+}
+
+#new-user-intro {
+	a {
+		color: $landing-dark-gray;
+		font-weight: 800;
+		text-decoration: underline;
+	}
+	h1 {
+		color: $landing-pink;
+		font-weight: 900;
+		font-size: rem-calc(50);
+	}
+	h2 {
+		font-weight: 700;
+		font-color: $landing-middle-gray;
+	}
+	ul {
+		list-style-type: none;
+		font-weight: 300;
+		font-size: rem-calc(20);
+		margin-left: 0;
+		margin-top: rem-calc(30);
+		color: $landing-dark-gray;
+		li { 
+			line-height: 1.1em; 
+			margin-bottom: rem-calc(15); 
+		}
+
+	}
+	.landing-button {
+		font-weight: 600;
+		font-size: rem-calc(20);
+		padding: rem-calc(20) rem-calc(30);
+	}
 }
 
 #login-container {

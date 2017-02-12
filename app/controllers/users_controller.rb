@@ -12,7 +12,20 @@ class UsersController < ApplicationController
 
   def new
     @newuser = User.new
-    @newuser.build_contact    
+    @newuser.build_contact
+    if ["brand", "retailer", "distributor"].include? params[:t]
+      type = params[:t]
+    end
+    respond_to do |format|
+      format.html {
+        if type
+          render "new_#{type}"
+        else
+          redirect_to root_url
+        end
+      }
+      format.js
+    end
   end
 
   def create

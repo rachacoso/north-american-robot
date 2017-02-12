@@ -1,0 +1,63 @@
+<%= render partial: 'shared/v2/header/main' %>
+
+<div class="front-top-panel">
+	<div class="row">
+		<div class="medium-11 medium-centered columns">
+			<div id="new-user-intro">
+				<div class="row">
+					<div class="medium-6 columns">
+						<h1>Hello, Distributors!</h1>
+						<h2>Discover new beauty brands from across the world.<br> Join our online marketplace!</h2>
+						<h3>Contact us for assistance any time at <a mailto="info@landingintl.com" style="color:black;">info@landingintl.com</a></h3>
+					</div><!--/.medium-8-->
+					<div class="medium-6 columns">
+						<div class="ldpanel" id="sign-up">
+							<h2>Join Us</h2>
+							<div class="row">
+								<div class="medium-12 columns text-right">
+									
+									<%= form_for @newuser, url: users_path do |f| %>
+									<%= hidden_field_tag "user_type", "brand" %>
+									<%= parse_errors(@newuser.errors) %>
+									<div class="row collapse">
+										<%= f.fields_for :contact do |ff| %>
+										<div class="medium-6 columns">
+											<%= ff.text_field :firstname, :placeholder => 'FIRST NAME', :value => @user_firstname, :label => false  %>
+										</div>
+										<div class="medium-6 columns">
+											<%= ff.text_field :lastname, :placeholder => 'LAST NAME', :value => @user_lastname, :label => false  %>
+										</div>
+										<% end %>
+									
+										<div class="medium-12 columns">
+										<%= f.text_field :email, :placeholder => 'EMAIL (will be used as your login)', :value => @user_email, :label => false %>
+										</div>
+										<div class="medium-12 columns">
+										<%= f.password_field :password, :placeholder => 'PASSWORD', :label => false %>
+										</div>
+										<div class="medium-12 columns">
+										<%= f.password_field :password_confirmation, :placeholder => 'PASSWORD (repeat)', :label => false %>
+										</div>
+										<div class="medium-12 columns">
+											<br>
+											<%= recaptcha_tags %>
+											<br>
+											<%= f.submit "JOIN!", class: "landing-button" %>
+										</div>
+									</div>
+									<% end %>
+
+
+								</div>
+							</div>
+						</div>
+					</div><!--/.medium-6-->
+				</div><!--/.row-->
+			</div><!--/ .new-user-intro -->
+		</div><!--/.medium-10-->
+	</div><!--/.row-->
+</div><!--/.front-top-panel-->
+
+
+
+<%= render partial: 'shared/v2/footer/main' %>
