@@ -14,13 +14,8 @@
   margin-left: auto;
   margin-right: auto;
   max-width: initial;
-	border-top: 1px solid $landing-middle-gray;
-	border-bottom: 1px solid $landing-middle-gray;
   &#prospect-share {
   	padding-top: rem-calc(50);
-  }
-  &#retail-partners-panel {
-  	@include transparent($landing-blue, 0.3);
   }
 }
 
@@ -36,10 +31,22 @@
 		font-size: rem-calc(50);
 	}
 	h2 {
-		font-weight: 700;
+		font-size: rem-calc(50);
+		@media #{$small-only} {
+			font-size: rem-calc(30);
+		}
+		color: $landing-blue;
+		-webkit-filter: drop-shadow( 1px 1px 1px $landing-light-gray );
+		filter: drop-shadow( 1px 1px 1px $landing-light-gray ); /* Same syntax as box-shadow */  
+		font-weight: 800;
 		font-color: $landing-middle-gray;
+		line-height: rem-calc(55);
+		strong { 
+			font-weight: 700; 
+			color: black;
+		}
 	}
-	ul {
+	ul#benefits {
 		list-style-type: none;
 		font-weight: 300;
 		font-size: rem-calc(20);
@@ -48,7 +55,10 @@
 		color: $landing-dark-gray;
 		li { 
 			line-height: 1.1em; 
-			margin-bottom: rem-calc(15); 
+			margin-bottom: rem-calc(15);
+			background-color: $landing-lighter-blue;
+			padding: rem-calc(10) rem-calc(10);
+			border-radius: rem-calc(5);
 		}
 
 	}
