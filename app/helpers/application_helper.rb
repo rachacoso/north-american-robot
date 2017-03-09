@@ -246,4 +246,40 @@ module ApplicationHelper
 		return amount / 100
 	end
 
+	def error_check(errors:, field:)
+		no_errors = true
+		errors.each do |e, message|
+			if e.to_s == field
+				return "error"
+				no_errors = false
+			end
+		end
+		return nil if no_errors
+	end
+
+	def error_check_message(errors:, field:)
+		no_errors = true
+		errors.each do |e, message|
+			if e.to_s == field
+				return "<small class='error'>#{message}</small>".html_safe 
+				no_errors = false
+			end
+		end
+		return nil if no_errors
+	end
+
+	def parse_errors(errors)
+		if errors.any? # If there are errors, do something
+			errstring = ""
+			errors.each do |attribute, message|
+				if message.include? "reCAPTCHA"
+					errstring.concat("Please let us know you're not a robot!<br>")
+				else
+					errstring.concat("#{attribute.to_s.humanize.split.map(&:capitalize)*' '} #{message}<br>")
+				end
+			end
+		  return "<div class='errornotice error-on'>#{errstring}</div>".html_safe
+		end
+	end
+
 end
