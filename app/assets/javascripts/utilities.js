@@ -6,13 +6,13 @@ $( document ).ready(function() {
 
 function showModal(data) {
     $('#modal').html(data);
-    $('#modal').fadeIn( 500, function () {
-        $('#modal-container').animate( {top: "10%"}, 500 );
+    $('#modal').fadeIn( 200, function () {
+        $('#modal-container').animate( {top: "10%"}, 200 );
     });
     $('#modal-overlay, a.modal-close').on('click', function(e){
         e.preventDefault();
-        $('#modal-container').animate( {top: "-50%"}, 500, function() { 
-            $('#modal').fadeOut( 500, function() {
+        $('#modal-container').animate( {top: "-50%"}, 200, function() { 
+            $('#modal').fadeOut( 200, function() {
                 $( this ).empty();
               });
         });

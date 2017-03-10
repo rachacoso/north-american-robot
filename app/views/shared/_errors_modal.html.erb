@@ -1,0 +1,14 @@
+<%= render layout: "shared/modal", locals: { size: "small" } do  %>
+
+<div class="row">
+	<div class="small-12 columns text-center">
+		<%#= image_tag 'https://s3.amazonaws.com/landingintl-us/general/landing-logo.png', width: "100", alt: "Landing International" %>
+		<h3><strong>Sorry!<br> Looks like there were some errors...</strong></h3>
+		<hr style="border-top: 1px solid gray;">
+		<%= parse_errors(errors) %>
+		<hr style="border-top: 1px solid gray;">
+		<a class="modal-close" aria-label="OK">OK</a>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
+<% end %>

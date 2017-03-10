@@ -1,4 +1,5 @@
 <% if @newuser.errors.any? %>
+	showModal("<%= j (render partial: '/shared/errors_modal', locals: { errors: @newuser.errors }) %>");
 	$('#user-form').html('<%= j (render partial: "new_#{@user_type}_form") %>');
 <% else %>
 	window.location.replace("<%= @redirect_url %>");

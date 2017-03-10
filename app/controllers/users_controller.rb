@@ -43,10 +43,10 @@ class UsersController < ApplicationController
       @newuser.contact.firstname = @user_firstname
       @newuser.contact.lastname = @user_lastname
 
-      # if verify_recaptcha(model: @newuser) && @newuser.save # if validates
-      if @newuser.save # if validates
+      if verify_recaptcha(model: @newuser) && @newuser.save # if validates
+      # if @newuser.save # if validates
         #create profile for the selected user type
-        @newuser.initial_setup(type: @user_type)
+        @newuser.initial_setup(type: @user_type, company_name: @company_name, website: @website)
 
         # no longer log in automatically, need to confirm email (except if administrator)
         if params[:administrator]
@@ -79,21 +79,17 @@ class UsersController < ApplicationController
           </div><!--/.row-->
         "
         if params[:administrator]
-          response_action = "redirect_to users_url"
+          @redirect_url = users_url
         else
-          response_action = "redirect_to login_url"
+          @redirect_url = login_url
         end
 
       end
     
-    else
-
-
-
     end
 
     respond_to do |format|
-      format.html { eval(response_action) }
+      format.html { redirect_to @redirect_url }
       format.js
     end
 
@@ -370,7 +366,9 @@ class UsersController < ApplicationController
       @newuser.errors.add("website","can't be blank") if params[:user][:brand][:website].blank?
     end
     @newuser.errors.add("email","can't be blank") if params[:user][:email].blank?
+    @newuser.errors.add("email","should be a proper email address") unless params[:user][:email].match(/.+@.+/)
     @newuser.errors.add("password","can't be blank") if params[:user][:password].blank?
+    @newuser.errors.add("password_confirmation","must match password") if params[:user][:password] != params[:user][:password_confirmation]
     if @newuser.errors.any?
       return false
     else

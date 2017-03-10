@@ -40,7 +40,7 @@ $body-font-family: "proxima-nova", "Helvetica Neue", Helvetica, Roboto, Arial, s
 // We use these as default colors throughout
 $primary-color: $landing-middle-gray;
 $secondary-color: $landing-dark-gray;
-$alert-color: $landing-orange;
+$alert-color: scale-color($landing-orange, $lightness: -30%);
 $success-color: $landing-middle-gray;
 $warning-color: #f08a24;
 $info-color: #FF6D11;

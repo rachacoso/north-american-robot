@@ -118,7 +118,7 @@ class User
 		end
 	end
 
-	def initial_setup(type:)
+	def initial_setup(type:, company_name: nil, website: nil)
 		# if ['distributor','brand','retailer'].include? type # restrict to only allowed values
 			# createusertype = "create_" + type
 			# self.send(createusertype) # create relation
@@ -127,8 +127,8 @@ class User
 		case type
 		when "brand"
 			new_company = self.build_brand
-			new_company.company_name = params[:user][:brand][:company_name]
-			new_company.website = params[:user][:brand][:website]
+			new_company.company_name = company_name
+			new_company.website = website
 		when "retailer"
 			new_company = self.build_retailer
 		when "distributor"

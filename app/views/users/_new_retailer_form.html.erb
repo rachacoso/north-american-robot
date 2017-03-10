@@ -1,6 +1,6 @@
 <%= form_for @newuser, url: users_path, remote: true do |f| %>
 <%= hidden_field_tag "user_type", "retailer" %>
-<%= parse_errors(@newuser.errors) %>
+<%#= parse_errors(@newuser.errors) %>
 <div class="row collapse">
 	<%= f.fields_for :contact do |ff| %>
 	<div class="medium-6 columns">
