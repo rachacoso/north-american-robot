@@ -1,0 +1,8 @@
+<%# SIZES: small, large or x-large %>
+<div id="modal-container" class="<%= size %>">
+  <a class="modal-close" id="modal-close-x" aria-label="Close"><i class="fi-x"></i></a>
+  <div id="modal-data">
+  	<%= yield  %>
+  </div>
+</div>
+<div id="modal-overlay"></div>

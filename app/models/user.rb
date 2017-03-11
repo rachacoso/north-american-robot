@@ -5,15 +5,15 @@ class User
 																				# enables all the pwd hashing  
 	include LandingArmorPayments::User
 
-  before_create { generate_token(:auth_token) }
-  before_create { generate_token(:email_confirmation_token) }
+	before_create { generate_token(:auth_token) }
+	before_create { generate_token(:email_confirmation_token) }
 
-  field :email, type: String
-  field :auth_token, type: String
-  field :password_digest, type: String
-  field :administrator, type: Mongoid::Boolean
-  field :last_login, type: DateTime
-  # for password reset
+	field :email, type: String
+	field :auth_token, type: String
+	field :password_digest, type: String
+	field :administrator, type: Mongoid::Boolean
+	field :last_login, type: DateTime
+	# for password reset
 	field :password_reset_token, type: String 
 	field :password_reset_sent_at, type: DateTime
 	# for email confirmation
@@ -30,17 +30,17 @@ class User
 	has_one :contact, as: :contactable, dependent: :destroy
 	accepts_nested_attributes_for :contact
 
+	# child of a DISTRIBUTOR or BRAND
+	belongs_to :distributor
+	belongs_to :brand
+	belongs_to :retailer
+
 	# add errors from contact validation (NOTE: currently the only contact validation is for phone number)
 	validate do |user|
 		user.contact.errors.full_messages.each do |msg|
 			errors[:phone] = "#{msg}"
 		end
 	end
-
-	# child of a DISTRIBUTOR or BRAND
-	belongs_to :distributor
-	belongs_to :brand
-	belongs_to :retailer
 
 	# v2 brand/retailer/distributor relation
 	belongs_to :company, polymorphic: true
@@ -58,11 +58,11 @@ class User
 
 	scope :is_subscriber, ->{where(subscriber: true)}
 
-  def generate_token(column)
-    begin
-      self[column] = SecureRandom.urlsafe_base64
-    end while User.where(column => self[column]).exists?
-  end
+	def generate_token(column)
+		begin
+			self[column] = SecureRandom.urlsafe_base64
+		end while User.where(column => self[column]).exists?
+	end
 
 	def type?
 		if self.brand
@@ -90,7 +90,7 @@ class User
 
 	def subscriber?
 		u = self.distributor || self.brand || self.retailer
-		if u.subscriber
+		if u.subscription_expiration > Date.today
 			return true
 		else
 			return false
@@ -102,40 +102,51 @@ class User
 	end
   
 	def send_password_reset(share_id)
-	  generate_token(:password_reset_token)
-	  self.password_reset_sent_at = Time.zone.now
-	  save!
-	  UserMailer.password_reset(self, share_id).deliver
+		generate_token(:password_reset_token)
+		self.password_reset_sent_at = Time.zone.now
+		save!
+		UserMailer.password_reset(self, share_id).deliver
 	end
   
-  def can_order?
-    # return true if self.armor_user_id  && self.company_type != "Brand"
-    if  self.company_type != "Brand" && # is not a brand
-        self.company.company_name.present? && # has company name entered
-        self.company.payment_terms_valid? && # is 'prepay' or has approved net terms
-        self.company.margin_valid? # has a margin at 50% or below or has approved other margin
-      return true 
-    end
-  end
+	def can_order?
+	# return true if self.armor_user_id  && self.company_type != "Brand"
+		if  self.company_type != "Brand" && # is not a brand
+			self.company.company_name.present? && # has company name entered
+			self.company.payment_terms_valid? && # is 'prepay' or has approved net terms
+			self.company.margin_valid? # has a margin at 50% or below or has approved other margin
+			return true 
+		end
+	end
 
-	def initial_setup(type)
-		if ['distributor','brand','retailer'].include? type # restrict to only allowed values
+	def initial_setup(type:, company_name: nil, website: nil)
+		# if ['distributor','brand','retailer'].include? type # restrict to only allowed values
 			# createusertype = "create_" + type
 			# self.send(createusertype) # create relation
-			eval("self.#{type} = #{type.capitalize}.new")
+			# eval("self.#{type} = #{type.capitalize}.new")
 			# prepopulate contact info with user info (user can change later)
-			new_company = self.send(type)
-			new_company.create_address
-			new_company.contacts << Contact.new(
-				firstname: self.contact.firstname,
-				lastname: self.contact.lastname,
-				email: self.email
-			)
-			# v2 brand/retailer/distributor relation
-			self.company = new_company
-			self.save!
+		case type
+		when "brand"
+			new_company = self.build_brand
+			new_company.company_name = company_name
+			new_company.website = website
+		when "retailer"
+			new_company = self.build_retailer
+		when "distributor"
+			new_company = self.build_distributor
+		end
+		# new_company = self.send(type)
+		new_company.create_address
+		new_company.contacts << Contact.new(
+			firstname: self.contact.firstname,
+			lastname: self.contact.lastname,
+			email: self.email
+		)
+		# v2 brand/retailer/distributor relation
+		self.company = new_company
+		if self.save!
 			UserMailer.registration_confirmation(self).deliver unless self.administrator
 		end
+		# end
 	end
 
 	def resend_confirmation

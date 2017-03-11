@@ -3,6 +3,29 @@
 @import "global_variables";
 @import "mixins";
 
+#new-user-choice {
+	a.landing-button {
+		display: block;
+		width: 80%;
+		left: 50%;
+		margin: 5% 10%;
+		border: 1px solid $landing-dark-gray;
+	}
+	h2 {
+		font-weight: 700;
+		color: #4A90E2;
+	}
+}
+
+#new-user-welcome-message {
+	h1 {
+		font-size: rem-calc(60);
+	}
+	h2 {
+		color: $landing-pink;
+	}
+}
+
 .v2front {
 	margin-bottom: rem-calc(30);
 	.articlepreviewtext {

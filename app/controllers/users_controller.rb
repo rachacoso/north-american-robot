@@ -12,70 +12,84 @@ class UsersController < ApplicationController
 
   def new
     @newuser = User.new
-    @newuser.build_contact    
+    @newuser.build_contact
+    if ["brand", "retailer", "distributor"].include? params[:t]
+      type = params[:t]
+    end
+    respond_to do |format|
+      format.html {
+        if type
+          render "new_#{type}"
+        else
+          redirect_to root_url
+        end
+      }
+      format.js
+    end
   end
 
   def create
 
-    @share_id = params[:pshare]
-
     @newuser = User.new
-
-    @newuser.administrator = true if params[:administrator] #set as admin if admin create
-    @newuser.email = params[:user][:email]
-    @newuser.password = params[:user][:password]
-    @newuser.password_confirmation = params[:user][:password_confirmation]
     @newuser.build_contact
-    @newuser.contact.firstname = params[:user][:contact_attributes][:firstname]
-    @newuser.contact.lastname = params[:user][:contact_attributes][:lastname]
 
-    if verify_recaptcha(model: @newuser) && @newuser.save # if validates
-      #create profile for the selected user type
-      
-      @newuser.initial_setup(params[:user_type])
+    if all_user_params_present
 
-      # no longer log in automatically, need to confirm email (except if administrator)
-      if params[:administrator]
-        cookies[:auth_token] = @newuser.auth_token
+      @newuser.administrator = true if params[:administrator] #set as admin if admin create
+
+      @newuser.email = @user_email
+      @newuser.password = params[:user][:password]
+      @newuser.password_confirmation = params[:user][:password_confirmation]
+      @newuser.contact.firstname = @user_firstname
+      @newuser.contact.lastname = @user_lastname
+
+      if verify_recaptcha(model: @newuser) && @newuser.save # if validates
+      # if @newuser.save # if validates
+        #create profile for the selected user type
+        @newuser.initial_setup(type: @user_type, company_name: @company_name, website: @website)
+
+        # no longer log in automatically, need to confirm email (except if administrator)
+        if params[:administrator]
+          cookies[:auth_token] = @newuser.auth_token
+        end
+
+        # for new user modal firing
+        # flash[:notice] = true 
+        flash[:newuser_modal] = "
+          <div class='row'>
+            <div class='medium-5 columns'>
+              <h2>You're almost done!</h2>
+            </div><!--/.medium-5-->
+            <div class='medium-7 columns'>
+              <h3><strong>We need to confirm your email address before we can sign you in.</strong></h3>
+              <h3>We've sent an email to you at<br>
+               <strong>#{@newuser.email}</strong></h3>
+              <h3>Please check your email and follow the instructions to activate your account.</h3>
+            </div><!--/.medium-7-->
+          </div><!--/.row-->
+        "
+        flash[:newuser] = "
+          <div class='row'>
+            <div class='small-12 columns'>
+              <h3><strong>We need to confirm your email address before we can sign you in.</strong></h3>
+              <h3>We've sent an email to you at<br>
+               <strong>#{@newuser.email}</strong></h3>
+              <h3>Please check your email and follow the instructions to activate your account.</h3>
+            </div><!--/.small-12-->
+          </div><!--/.row-->
+        "
+        if params[:administrator]
+          @redirect_url = users_url
+        else
+          @redirect_url = login_url
+        end
+
       end
-
-      # for new user modal firing
-      # flash[:notice] = true 
-      flash[:newuser_modal] = "
-        <div class='row'>
-          <div class='medium-5 columns'>
-            <h2>You're almost done!</h2>
-          </div><!--/.medium-5-->
-          <div class='medium-7 columns'>
-            <h3><strong>We need to confirm your email address before we can sign you in.</strong></h3>
-            <h3>We've sent an email to you at<br>
-             <strong>#{@newuser.email}</strong></h3>
-            <h3>Please check your email and follow the instructions to activate your account.</h3>
-          </div><!--/.medium-7-->
-        </div><!--/.row-->
-      "
-      flash[:newuser] = "
-        <div class='row'>
-          <div class='small-12 columns'>
-            <h3><strong>We need to confirm your email address before we can sign you in.</strong></h3>
-            <h3>We've sent an email to you at<br>
-             <strong>#{@newuser.email}</strong></h3>
-            <h3>Please check your email and follow the instructions to activate your account.</h3>
-          </div><!--/.small-12-->
-        </div><!--/.row-->
-      "
-      if params[:administrator]
-        response_action = "redirect_to users_url"
-      else
-        response_action = "redirect_to login_url"
-      end
-
-    else
-      render :new and return
+    
     end
 
     respond_to do |format|
-      format.html { eval(response_action) }
+      format.html { redirect_to @redirect_url }
       format.js
     end
 
@@ -324,6 +338,14 @@ class UsersController < ApplicationController
     if params[:user_type]
       @user_type = params[:user_type]
     end
+    if @user_type == "brand"
+      if params[:user][:brand][:company_name]
+        @company_name = params[:user][:brand][:company_name]
+      end
+      if params[:user][:brand][:website]
+        @website = params[:user][:brand][:website]
+      end
+    end
   end
 
   def administrators_only
@@ -335,4 +357,23 @@ class UsersController < ApplicationController
   def do_kaminari_array(users, page)
     return Kaminari.paginate_array(users).page(page).per(20)
   end
+
+  private
+
+  def all_user_params_present
+    if @user_type == "brand"
+      @newuser.errors.add("company_name","can't be blank") if params[:user][:brand][:company_name].blank?
+      @newuser.errors.add("website","can't be blank") if params[:user][:brand][:website].blank?
+    end
+    @newuser.errors.add("email","can't be blank") if params[:user][:email].blank?
+    @newuser.errors.add("email","should be a proper email address") unless params[:user][:email].match(/.+@.+/)
+    @newuser.errors.add("password","can't be blank") if params[:user][:password].blank?
+    @newuser.errors.add("password_confirmation","must match password") if params[:user][:password] != params[:user][:password_confirmation]
+    if @newuser.errors.any?
+      return false
+    else
+      return true
+    end
+  end
+
 end

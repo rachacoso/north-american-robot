@@ -29,9 +29,11 @@ module LandingCompany
 		extend ActiveSupport::Concern
 
 		included do
-			field :subscriber, type: Mongoid::Boolean
+			# field :subscriber, type: Mongoid::Boolean
+			field :subscription_expiration, type: Date
+			field :date, type: Date
 			field :active, type: Mongoid::Boolean, default: true
-			
+
 			# LOGINS/USERS WHO CAN ACT ON BEHALF OF BRAND
 			has_many :users, dependent: :destroy
 
@@ -110,6 +112,18 @@ module LandingCompany
 				self.sectors << p
 			end
 			return subsector_parents.uniq
+		end
+
+		def subscriber?
+			if self.subscription_expiration && self.subscription_expiration > Date.today
+				return true
+			else
+				return false
+			end
+		end
+
+		def set_subscription_expiration
+			self.subscription_expiration = Date.now + 1.year
 		end
 
 	end

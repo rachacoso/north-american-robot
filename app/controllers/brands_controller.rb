@@ -337,12 +337,17 @@ class BrandsController < ApplicationController
 	end	
 
   def adminupdate
-    brand = Brand.find(params[:id])
-    brand.update!(admin_brand_parameters)
+    @brand = Brand.find(params[:id])
     
+		if params[:brand][:subscription_expiration].present?
+			params[:brand][:subscription_expiration] = Date.strptime(params[:brand][:subscription_expiration], '%m-%d-%Y') 
+		end
+
+		@brand.update(admin_brand_parameters)
+
     respond_to do |format|
       format.html { 
-        redirect_to admin_brand_view_url(brand)
+        redirect_to admin_brand_view_url(@brand)
       }
       format.js 
     end
@@ -407,8 +412,8 @@ class BrandsController < ApplicationController
 			:social_causes,
 			:social_organizations,
 			:social_give_back,
-			:subscriber,
 			:active,
+			:subscription_expiration,
       address_attributes: [ 
         :address1,
         :address2,

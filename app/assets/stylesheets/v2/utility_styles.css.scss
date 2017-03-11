@@ -3,7 +3,6 @@
 @import "global_variables";
 @import "mixins";
 
-
 .container {
 	margin-top: rem-calc(15);
 	margin-bottom: rem-calc(15);
@@ -50,6 +49,28 @@
 	}
 	& > #main-body {
 		padding: 0 rem-calc(30) rem-calc(30) rem-calc(30);
+		&.restricted::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			@include transparent($landing-light-gray, 0.9);
+			z-index: 999;
+		}
+		&.restricted > #restricted-message {
+			z-index: 1001;
+			position: fixed;
+			width: rem-calc(400);
+			border: 1px solid $landing-dark-gray;
+			top: 30%;
+			left: 50%;
+			text-align: center;
+			background-color: white;
+			padding: rem-calc(20);
+			margin-left: rem-calc(-200);
+		}
 	}
 	&#article {
 		max-width: rem-calc(1000);
@@ -180,6 +201,70 @@ ul.tablist {
     background-color: rgba(0,0,0,0.1);
   }
 }
+
+//updated modals
+#modal {
+	display:none;
+	#modal-overlay {
+	  position: fixed;
+	  top: 0;
+	  left: 0;
+	  height: 100%;
+	  width: 100%;
+	  z-index: 100000;
+	  // background-color: rgba(0,0,0,0.5);
+	  background-color: rgba(0,0,0,0.8);
+	}
+	#modal-container {
+		position: fixed;
+		top: -50%;
+		left: 50%;
+		&.x-large {
+			@media only screen and (min-width: 40.063em) { 
+				margin: 0 0 0 -40%;
+				width:80%;
+			}
+		}
+		&.large {
+			@media only screen and (min-width: 40.063em) { 
+				margin: 0 0 0 -25%;
+				width:50%;
+			}
+		}
+		&.small {
+			@media only screen and (min-width: 40.063em) { 
+				margin: 0 0 0 -15%;
+				width:30%;
+			}	  	
+		}
+			@media only screen { 
+				width:95%; 
+				margin: 0 0 0 -47.5%;
+			}
+			max-height: 85%;  
+			background: white;
+			z-index: 100021;
+			padding: rem-calc(20) rem-calc(10);
+			overflow-x: scroll;
+		}
+		#modal-data {
+			height: 100%;
+			overflow-x: hidden;
+			overflow-y: scroll;
+			padding: rem-calc(5);
+		}
+		#modal-close-x {
+			position: absolute;
+			top: rem-calc(-40);
+			right: rem-calc(10);
+			font-size: rem-calc(60);
+			font-weight: 900;
+			color: $landing-middle-gray;
+			z-index: 100022;
+		}
+
+}
+
 
 .ajax-wait {
 	position: fixed;

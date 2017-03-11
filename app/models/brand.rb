@@ -18,8 +18,8 @@ class Brand
 	has_and_belongs_to_many :key_retailers, inverse_of: nil
 	has_and_belongs_to_many :trends, inverse_of: nil
 
-  has_many :brand_photos, dependent: :destroy
-  has_many :library_documents, as: :documentable, dependent: :destroy
+	has_many :brand_photos, dependent: :destroy
+	has_many :library_documents, as: :documentable, dependent: :destroy
 
 	# Current/Future SKUs
 	has_many :products, dependent: :destroy
