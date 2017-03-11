@@ -22,3 +22,5 @@
 
 # Ignore pow symlink
 /landing
+
+.DS_Store
