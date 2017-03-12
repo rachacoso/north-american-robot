@@ -81,17 +81,18 @@ class AdminController < ApplicationController
 
   def orders_index
     @orders = Order.active
-    @orders_by = Hash.new
-    @orders_by[:current] = Order.current
-    @orders_by[:submitted] = Order.submitted
-    @orders_by[:pending] = Order.pending
-    @orders_by[:approved] = Order.approved
-    @orders_by[:paid] = Order.paid
-    @orders_by[:shipped] = Order.shipped
-    @orders_by[:delivered] = Order.delivered
-    @orders_by[:completed] = Order.completed
-    @orders_by[:error] = Order.error
-    @orders_by[:disputed] = Order.disputed
+    @completed_orders = Order.completed
+    # @orders_by = Hash.new
+    # @orders_by[:current] = Order.current
+    # @orders_by[:submitted] = Order.submitted
+    # @orders_by[:pending] = Order.pending
+    # @orders_by[:approved] = Order.approved
+    # @orders_by[:paid] = Order.paid
+    # @orders_by[:shipped] = Order.shipped
+    # @orders_by[:delivered] = Order.delivered
+    # @orders_by[:completed] = Order.completed
+    # @orders_by[:error] = Order.error
+    # @orders_by[:disputed] = Order.disputed
 
     case params[:group]
     when "d"

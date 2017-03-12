@@ -11,18 +11,11 @@
 			<li <%= @group_type == "d" ? "class=active" : "" %>><%= link_to "by Distributor", admin_orders_index_url("d") %></li>
 		</ul>
 		<%= paginate @group %><br>
+		<%#= render partial: "orders_table", locals: { orders: @orders } %>
 		<% @group.each do |o| %>
 			<h2><%= o.company_name %></h2>
-			<% @orders_by.each do |status,orders| %>
-				<% next if order_groupquery(orders, @group_type, o).blank? %>
-				<div class="admin-order-set">
-				<h3><%= status.capitalize %> Orders</h3>
-				<% order_groupquery(orders, @group_type, o).each do |order| %>
-					<%= render partial: 'order', locals: { order: order, group_type: @group_type }  %>
-				<% end %>
-				</div>
-			<% end %>
-			<hr style="border-top: 1px solid #e3e3e3;">
+			<%= render partial: "orders_table", locals: { orders: order_groupquery(@orders, @group_type, o), type: @group_type } %>
+			<br>
 		<% end %>
 		</div><!--/.medium-6-->
 	</div><!--/.row-->
