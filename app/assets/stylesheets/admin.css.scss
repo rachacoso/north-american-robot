@@ -8,6 +8,10 @@
 @import "mixins";
 
 
+h2.admin-orders-search-header {
+	background-color: $landing-middle-gray;
+	padding-left: rem-calc(10);
+}
 .admin-order-set {
 	padding: rem-calc(5);
 	margin: rem-calc(5) 0;

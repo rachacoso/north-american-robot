@@ -1,0 +1,21 @@
+<% if @orders[:by_id].blank? && @orders[:brands].blank? && @orders[:retailers].blank? && @orders[:distributors].blank? %>
+	<h1>No Orders Found</h1>
+<% else %>
+	<h3><small>searching for "<%= @q %>"</small></h3>
+	<% if @orders[:by_id].present? %>
+		<h2><strong>Retailer PO / Landing Order ID Search Results</strong> <small>(<%= @orders[:by_id].count %> orders found)</small></h2>
+		<%= render partial: "orders_table", locals: { orders: @orders[:by_id], type: 'all' } %>
+	<% end %>
+	<% @orders.each do |type,results| %>
+		<% next if results.empty? %>
+		<% next if type.to_s == 'by_id' %>
+		<h2 class="admin-orders-search-header"><strong><%= type.capitalize %></strong> <small>(<%= results.count %> found)</small></h2>
+		<% results.each do |company| %>
+			<% company.each do |company_name,orders| %>
+				<h3><strong><%= company_name %> (<%= orders.count %> orders)</strong></h3>
+				<%= render partial: "orders_table", locals: { orders: orders, type: type } unless orders.empty? %>
+			<% end %>
+			<br>
+		<% end %>
+	<% end %>
+<% end %>

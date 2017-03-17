@@ -79,35 +79,72 @@ class AdminController < ApplicationController
     @retailer = Retailer.find(params[:id])
   end
 
-  def orders_index
-    @orders = Order.active
-    @completed_orders = Order.completed
-    # @orders_by = Hash.new
-    # @orders_by[:current] = Order.current
-    # @orders_by[:submitted] = Order.submitted
-    # @orders_by[:pending] = Order.pending
-    # @orders_by[:approved] = Order.approved
-    # @orders_by[:paid] = Order.paid
-    # @orders_by[:shipped] = Order.shipped
-    # @orders_by[:delivered] = Order.delivered
-    # @orders_by[:completed] = Order.completed
-    # @orders_by[:error] = Order.error
-    # @orders_by[:disputed] = Order.disputed
+  def orders_pre_search
 
-    case params[:group]
-    when "d"
-      distributors = @orders.where(orderer_type: "Distributor").map(&:orderer).uniq.sort_by { |x| x.company_name }
-      @group = do_kaminari_array(distributors, params[:page])
-      @group_type = "d"
-    when "r"
-      retailers = @orders.where(orderer_type: "Retailer").map(&:orderer).uniq.sort_by { |x| x.company_name }
-      @group = do_kaminari_array(retailers, params[:page])
-      @group_type = "r"
-    when "b"
-      brands = @orders.map(&:brand).uniq.sort_by { |x| x.company_name }
-      @group = do_kaminari_array(brands, params[:page])
-      @group_type = "b"
+    @list = Hash.new
+    @list['suggestions'] = Array.new
+
+    brands = Brand.activated
+    retailers = Retailer.activated
+    distributors = Distributor.activated
+
+    if !params[:query].blank?
+      q = params[:query]
+      brands = brands.select {|brand| brand[:company_name][/#{q}/i] }
+      retailers = retailers.select {|retailer| retailer[:company_name][/#{q}/i] }
+      distributors = distributors.select {|distributor| distributor[:company_name][/#{q}/i] }
     end
+    brands.each do |p|
+      @list['suggestions'] << { "value": p[:company_name], "data": p[:company_name] }
+    end
+    retailers.each do |p|
+      @list['suggestions'] << { "value": p[:company_name], "data": p[:company_name] }
+    end
+    distributors.each do |p|
+      @list['suggestions'] << { "value": p[:company_name], "data": p[:company_name] }
+    end
+
+    render json: @list
+
+  end
+
+  def orders_search
+
+    @orders = {}
+    @orders[:brands] = []
+    @orders[:retailers] = []
+    @orders[:distributors] = []
+    @orders[:by_id] = []
+
+    if @q = params[:query]
+      if @q.to_s.length > 1
+        brands = Brand.activated.where(company_name: /#{@q}/i )
+        retailers = Retailer.activated.where(company_name: /#{@q}/i )
+        distributors = Distributor.activated.where(company_name: /#{@q}/i )
+        brands.each do |brand|
+          next if brand.orders.empty?
+          o = params[:show_completed] ? brand.orders : brand.orders.active
+          @orders[:brands] << { "#{brand.company_name}": o }
+        end
+        retailers.each do |retailer|
+          next if retailer.orders.empty?
+          o = params[:show_completed] ? retailer.orders : retailer.orders.active
+          @orders[:retailers] << { "#{retailer.company_name}": o }
+        end
+        distributors.each do |distributor|
+          next if distributor.orders.empty?
+          o = params[:show_completed] ? distributor.orders : distributor.orders.active
+          @orders[:distributors] << { "#{distributor.company_name}": o }
+        end
+
+        @orders[:by_id] = params[:show_completed] ? Order.by_id(@q) : Order.by_id(@q).and(Order.active.selector)
+      end
+    end
+
+  end
+
+  def orders_index
+    @orders = {}
   end
 
   def order_view

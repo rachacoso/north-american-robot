@@ -1,28 +1,41 @@
-<%= render layout: "index_layout" do %>
+<%= render partial: "shared/topbar_admin" %>
+<div class="admin-container">
+	<div class="row collapse">
+		<div class="small-12 columns">
+			<div class="panel">
+				<h2>
+					Orders
+				</h2>
 
-
-
-	<% if !@orders.empty? %>
+			</div>
+		</div>
+	</div>
+	<div class="row collapse">
+		<div class="small-12 columns">
+			<div class="panel">
+				<h2><small> Search by Company Name, Retailer PO, Landing Order Reference Number</small></h2>
+				<%= form_tag admin_orders_search_url, remote: true do %>
+					<div class="row collapse">
+						<div class="medium-3 small-10 columns">
+							<%= text_field_tag 'query', nil, {id: 'orders-search-input'} %>
+						</div><!--/.small-10-->
+						<div class="medium-2 small-2 columns end">
+							<%= submit_tag "Search Orders", class: "button tiny postfix" %>
+						</div><!--/.small-2-->
+						<div class="small-12 columns">
+							<%= check_box_tag "show_completed", 1 %> <%= label_tag "show_completed", "Show Completed Orders" %>
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+				<% end %>
+			</div>
+		</div>
+	</div>
 	<div class="row">
 		<div class="small-12 columns">
-		<ul class="filterlist">
-			<li <%= @group_type == "b" ? "class=active" : "" %>><%= link_to "by Brand", admin_orders_index_url("b") %></li>
-			<li <%= @group_type == "r" ? "class=active" : "" %>><%= link_to "by Retailer", admin_orders_index_url("r") %></li>
-			<li <%= @group_type == "d" ? "class=active" : "" %>><%= link_to "by Distributor", admin_orders_index_url("d") %></li>
-		</ul>
-		<%= paginate @group %><br>
-		<%#= render partial: "orders_table", locals: { orders: @orders } %>
-		<% @group.each do |o| %>
-			<h2><%= o.company_name %></h2>
-			<%= render partial: "orders_table", locals: { orders: order_groupquery(@orders, @group_type, o), type: @group_type } %>
-			<br>
-		<% end %>
-		</div><!--/.medium-6-->
+
+		<div id="orders-search-reults">
+		</div>
+
+		</div><!--/.small-12-->
 	</div><!--/.row-->
-
-	<% else %>
-		<hr>
-		<h3><em>No Orders</em></h3>
-	<% end %>
-
-<% end %>
+</div><!--/.admin-container-->
