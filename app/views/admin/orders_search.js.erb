@@ -1,7 +1,11 @@
-$('#orders-search-reults').html("<%= j (render partial: 'orders_search_results', locals: { orders: @orders } ) %>", 
-	function(){
-		var newTables = $('.sortable');
-		sorttable.makeSortable(newTables);		
-	});
+$('#orders-search-reults').html("<%= j (render partial: 'orders_search_results', locals: { orders: @orders } ) %>");
+
+  var newTables = document.getElementsByClassName('sortable'),
+      i = newTables.length;
+
+  while (i--) {
+    sorttable.makeSortable(newTables[i]);
+  }
 
 
+		

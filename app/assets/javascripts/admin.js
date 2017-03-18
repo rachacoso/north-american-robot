@@ -26,3 +26,13 @@ function setAdminModalActions () {
 	});
 
 }
+
+function resetSortableTables () {
+  var newTables = document.getElementsByClassName('sortable'),
+      i = newTables.length;
+
+  while (i--) {
+    sorttable.makeSortable(newTable[i]);
+    console.log(newTable[i]);
+  }
+}

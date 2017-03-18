@@ -30,7 +30,7 @@
 				</td>
 				<td><%= link_to admin_order_view_url(o) do %><%= number_to_currency(o.subtotal_price) %><% end %></td>
 				<td><%= link_to admin_order_view_url(o) do %><%= number_to_currency(o.charges_subtotal_price) %><% end %></td>
-				<td><%= link_to admin_order_view_url(o) do %><%= o.status.capitalize unless o.status == "open" %><%= o.status == "open" ? "In Cart" : "" %><% end %></td>
+				<td <%= sortable_status(o.status) %>><%= link_to admin_order_view_url(o) do %><%= o.status.capitalize unless o.status == "open" %><%= o.status == "open" ? "In Cart" : "" %><% end %></td>
 			</tr>
 			<% end %>
 		<% else %>
