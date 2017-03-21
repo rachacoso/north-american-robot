@@ -129,11 +129,12 @@ class AdminController < ApplicationController
     if params[:query_retailer_po].present?
       q = params[:query_retailer_po]
       @orders = params[:show_completed] ? Order.by_retailer_po(q) : Order.by_retailer_po(q).and(Order.active.selector)
-      @reset_buyer_bra = true
+      @search_type = 'retailer_po'
     elsif params[:query_landing_id].present?
       q = params[:query_landing_id]
       @orders = params[:show_completed] ? Order.by_landing_id(q) : Order.by_landing_id(q).and(Order.active.selector)
       @reset_buyer_brand = true
+      @search_type = 'landing_id'
     elsif params[:query_brands].present? && params[:query_buyers].present?
       brand_query = params[:query_brands]
       buyer_query = params[:query_buyers]
@@ -142,16 +143,19 @@ class AdminController < ApplicationController
       buyer_ids = retailer_ids + distributor_ids
       brand_ids = Brand.activated.where(company_name: /#{brand_query}/i ).pluck(:id)
       @orders = params[:show_completed] ? Order.by_buyer(buyer_ids).by_brand(brand_ids) : Order.by_buyer(buyer_ids).by_brand(brand_ids).and(Order.active.selector)
+      @search_type = 'buyer_brand'
     elsif params[:query_buyers].present?
       buyer_query = params[:query_buyers]
       retailer_ids = Retailer.activated.where(company_name: /#{buyer_query}/i ).pluck(:id)
       distributor_ids = Distributor.activated.where(company_name: /#{buyer_query}/i ).pluck(:id)
       buyer_ids = retailer_ids + distributor_ids
       @orders = params[:show_completed] ? Order.by_buyer(buyer_ids) : Order.by_buyer(buyer_ids).and(Order.active.selector)
+      @search_type = 'buyer'
     elsif params[:query_brands].present?
       brand_query = params[:query_brands]
       brand_ids = Brand.activated.where(company_name: /#{brand_query}/i ).pluck(:id)
       @orders = params[:show_completed] ? Order.by_brand(brand_ids) : Order.by_brand(brand_ids).and(Order.active.selector)
+      @search_type = 'brand'
     end
 
 

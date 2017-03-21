@@ -7,5 +7,37 @@ $('#orders-search-reults').html("<%= j (render partial: 'orders_search_results',
     sorttable.makeSortable(newTables[i]);
   }
 
+<% case @search_type
+	when 'retailer_po' %>
+		$('#orders-search-input-retailer-po').css("background-color", "yellow");
+		$('#orders-search-input-landing-id').css("background-color", "");
+		$('#orders-search-input-brands').css("background-color", "");
+		$('#orders-search-input-buyers').css("background-color", "");
+	<% when 'landing_id' %>
+		$('#orders-search-input-retailer-po').css("background-color", "");
+		$('#orders-search-input-landing-id').css("background-color", "yellow");
+		$('#orders-search-input-brands').css("background-color", "");
+		$('#orders-search-input-buyers').css("background-color", "");
+	<% when 'buyer_brand' %>
+		$('#orders-search-input-retailer-po').css("background-color", "");
+		$('#orders-search-input-landing-id').css("background-color", "");
+		$('#orders-search-input-brands').css("background-color", "yellow");
+		$('#orders-search-input-buyers').css("background-color", "yellow");
+	<% when 'buyer' %>
+		$('#orders-search-input-retailer-po').css("background-color", "");
+		$('#orders-search-input-landing-id').css("background-color", "");
+		$('#orders-search-input-brands').css("background-color", "");
+		$('#orders-search-input-buyers').css("background-color", "yellow");
+	<% when 'brand' %>
+		$('#orders-search-input-retailer-po').css("background-color", "");
+		$('#orders-search-input-landing-id').css("background-color", "");
+		$('#orders-search-input-brands').css("background-color", "yellow");
+		$('#orders-search-input-buyers').css("background-color", "");
+	<% else %>
+		$('#orders-search-input-retailer-po').css("background-color", "");
+		$('#orders-search-input-landing-id').css("background-color", "");
+		$('#orders-search-input-brands').css("background-color", "");
+		$('#orders-search-input-buyers').css("background-color", "");
+<% end %>
 
 		

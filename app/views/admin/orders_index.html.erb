@@ -21,8 +21,8 @@
 					<tr>
 						<td><%= text_field_tag 'query_buyers', nil, {id: 'orders-search-input-buyers', placeholder: '(buyer)', class: 'auto-form-text'} %></td>
 						<td><%= text_field_tag 'query_brands', nil, {id: 'orders-search-input-brands', placeholder: '(brand)', class: 'auto-form-text'} %></td>
-						<td><%= text_field_tag 'query_retailer_po', nil, {id: 'orders-search-input', placeholder: '(retailer po)', class: 'auto-form-text'} %></td>
-						<td><%= text_field_tag 'query_landing_id', nil, {id: 'orders-search-input', placeholder: '(landing id)', class: 'auto-form-text'} %></td>
+						<td><%= text_field_tag 'query_retailer_po', nil, {id: 'orders-search-input-retailer-po', placeholder: '(retailer po)', class: 'auto-form-text'} %></td>
+						<td><%= text_field_tag 'query_landing_id', nil, {id: 'orders-search-input-landing-id', placeholder: '(landing id)', class: 'auto-form-text'} %></td>
 						<td colspan=2><%= check_box_tag "show_completed", 1, nil, {class: "auto-form"} %> <%= label_tag "show_completed", "include completed orders" %></td>
 						<td colspan=4></td>
 					</tr>
