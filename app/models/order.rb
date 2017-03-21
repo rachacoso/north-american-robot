@@ -60,9 +60,10 @@ class Order # for V2 ordering
   scope :active_brand, ->{any_of(:status.in => ["submitted","pending","approved","paid", "shipped","delivered","disputed"])}
   scope :in_progress, ->{any_of(:status.in => ["submitted","pending","approved","paid", "shipped","delivered","disputed"])}
   scope :editable, ->{any_of(:status.in => ["open","submitted","pending"])}
-  scope :by_id, ->(id) {any_of({landing_order_reference_id: /#{id}/i} , {orderer_order_reference_id: /#{id}/i} )}
-
-
+  scope :by_retailer_po, ->(id) {where(orderer_order_reference_id: /#{id}/i )}
+  scope :by_landing_id, ->(id) {where(landing_order_reference_id: /#{id}/i )}
+  scope :by_brand, ->(ids) {where(:brand_id.in => ids) }
+  scope :by_buyer, ->(ids) {where(:orderer_id.in => ids) }
 
   def self.of_company(company_id:, type:)
     if type == "brand"

@@ -31,3 +31,17 @@ table.brand-payment-information {
 	display: inline-block;
 	vertical-align: top;
 }
+
+table#order-search {
+	table-layout: fixed; 
+	width: 100%;
+	background-color: $landing-lighter-blue;
+	tr {
+		td {
+			padding: 0;
+			input {
+				margin: 0;
+			}
+		}
+	}
+}

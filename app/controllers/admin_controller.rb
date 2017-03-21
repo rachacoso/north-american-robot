@@ -79,23 +79,37 @@ class AdminController < ApplicationController
     @retailer = Retailer.find(params[:id])
   end
 
-  def orders_pre_search
+  def orders_pre_search_brands
 
     @list = Hash.new
     @list['suggestions'] = Array.new
 
     brands = Brand.activated
+
+    if !params[:query].blank?
+      q = params[:query]
+      brands = brands.select {|brand| brand[:company_name][/#{q}/i] }
+    end
+    brands.each do |p|
+      @list['suggestions'] << { "value": p[:company_name], "data": p[:company_name] }
+    end
+
+    render json: @list
+
+  end
+
+  def orders_pre_search_buyers
+
+    @list = Hash.new
+    @list['suggestions'] = Array.new
+
     retailers = Retailer.activated
     distributors = Distributor.activated
 
     if !params[:query].blank?
       q = params[:query]
-      brands = brands.select {|brand| brand[:company_name][/#{q}/i] }
       retailers = retailers.select {|retailer| retailer[:company_name][/#{q}/i] }
       distributors = distributors.select {|distributor| distributor[:company_name][/#{q}/i] }
-    end
-    brands.each do |p|
-      @list['suggestions'] << { "value": p[:company_name], "data": p[:company_name] }
     end
     retailers.each do |p|
       @list['suggestions'] << { "value": p[:company_name], "data": p[:company_name] }
@@ -110,36 +124,62 @@ class AdminController < ApplicationController
 
   def orders_search
 
-    @orders = {}
-    @orders[:brands] = []
-    @orders[:retailers] = []
-    @orders[:distributors] = []
-    @orders[:by_id] = []
+    @orders = []
 
-    if @q = params[:query]
-      if @q.to_s.length > 1
-        brands = Brand.activated.where(company_name: /#{@q}/i )
-        retailers = Retailer.activated.where(company_name: /#{@q}/i )
-        distributors = Distributor.activated.where(company_name: /#{@q}/i )
-        brands.each do |brand|
-          next if brand.orders.empty?
-          o = params[:show_completed] ? brand.orders : brand.orders.active
-          @orders[:brands] << { "#{brand.company_name}": o }
-        end
-        retailers.each do |retailer|
-          next if retailer.orders.empty?
-          o = params[:show_completed] ? retailer.orders : retailer.orders.active
-          @orders[:retailers] << { "#{retailer.company_name}": o }
-        end
-        distributors.each do |distributor|
-          next if distributor.orders.empty?
-          o = params[:show_completed] ? distributor.orders : distributor.orders.active
-          @orders[:distributors] << { "#{distributor.company_name}": o }
-        end
-
-        @orders[:by_id] = params[:show_completed] ? Order.by_id(@q) : Order.by_id(@q).and(Order.active.selector)
-      end
+    if params[:query_retailer_po].present?
+      q = params[:query_retailer_po]
+      @orders = params[:show_completed] ? Order.by_retailer_po(q) : Order.by_retailer_po(q).and(Order.active.selector)
+      @reset_buyer_bra = true
+    elsif params[:query_landing_id].present?
+      q = params[:query_landing_id]
+      @orders = params[:show_completed] ? Order.by_landing_id(q) : Order.by_landing_id(q).and(Order.active.selector)
+      @reset_buyer_brand = true
+    elsif params[:query_brands].present? && params[:query_buyers].present?
+      brand_query = params[:query_brands]
+      buyer_query = params[:query_buyers]
+      retailer_ids = Retailer.activated.where(company_name: /#{buyer_query}/i ).pluck(:id)
+      distributor_ids = Distributor.activated.where(company_name: /#{buyer_query}/i ).pluck(:id)
+      buyer_ids = retailer_ids + distributor_ids
+      brand_ids = Brand.activated.where(company_name: /#{brand_query}/i ).pluck(:id)
+      @orders = params[:show_completed] ? Order.by_buyer(buyer_ids).by_brand(brand_ids) : Order.by_buyer(buyer_ids).by_brand(brand_ids).and(Order.active.selector)
+    elsif params[:query_buyers].present?
+      buyer_query = params[:query_buyers]
+      retailer_ids = Retailer.activated.where(company_name: /#{buyer_query}/i ).pluck(:id)
+      distributor_ids = Distributor.activated.where(company_name: /#{buyer_query}/i ).pluck(:id)
+      buyer_ids = retailer_ids + distributor_ids
+      @orders = params[:show_completed] ? Order.by_buyer(buyer_ids) : Order.by_buyer(buyer_ids).and(Order.active.selector)
+    elsif params[:query_brands].present?
+      brand_query = params[:query_brands]
+      brand_ids = Brand.activated.where(company_name: /#{brand_query}/i ).pluck(:id)
+      @orders = params[:show_completed] ? Order.by_brand(brand_ids) : Order.by_brand(brand_ids).and(Order.active.selector)
     end
+
+
+
+    # if @q = params[:query]
+    #   if @q.to_s.length > 1
+    #     brands = Brand.activated.where(company_name: /#{@q}/i )
+    #     retailers = Retailer.activated.where(company_name: /#{@q}/i )
+    #     distributors = Distributor.activated.where(company_name: /#{@q}/i )
+    #     brands.each do |brand|
+    #       next if brand.orders.empty?
+    #       o = params[:show_completed] ? brand.orders : brand.orders.active
+    #       @orders[:brands] << { "#{brand.company_name}": o }
+    #     end
+    #     retailers.each do |retailer|
+    #       next if retailer.orders.empty?
+    #       o = params[:show_completed] ? retailer.orders : retailer.orders.active
+    #       @orders[:retailers] << { "#{retailer.company_name}": o }
+    #     end
+    #     distributors.each do |distributor|
+    #       next if distributor.orders.empty?
+    #       o = params[:show_completed] ? distributor.orders : distributor.orders.active
+    #       @orders[:distributors] << { "#{distributor.company_name}": o }
+    #     end
+
+    #     @orders[:by_id] = params[:show_completed] ? Order.by_id(@q) : Order.by_id(@q).and(Order.active.selector)
+    #   end
+    # end
 
   end
 
