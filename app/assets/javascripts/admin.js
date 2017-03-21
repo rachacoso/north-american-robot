@@ -33,6 +33,25 @@ $('#orders-search-input-buyers').devbridgeAutocomplete({
   }
 });
 
+$('#orders-search-input-buyers, #orders-search-input-brands').focus(function() {
+    var $this = $(this);
+
+    $this.select();
+
+    window.setTimeout(function() {
+        $this.select();
+    }, 1);
+
+    // Work around WebKit's little problem
+    function mouseUpHandler() {
+        // Prevent further mouseup intervention
+        $this.off("mouseup", mouseUpHandler);
+        return false;
+    }
+
+    $this.mouseup(mouseUpHandler);
+});
+
 function setAdminModalActions () {
 
 	$('.overlay#inventory-item-overlay, a#close-inventory-item, a#submit-close').on('click', function(e){
