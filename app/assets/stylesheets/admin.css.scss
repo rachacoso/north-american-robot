@@ -45,3 +45,13 @@ table#order-search {
 		}
 	}
 }
+
+a.order-index-select {
+	text-align: center;
+	display: block;
+	width: 100%;
+	color: $landing-middle-gray;
+	padding: rem-calc(10);
+	border: 1px dotted $landing-light-gray;
+	margin-bottom: rem-calc(5);
+}

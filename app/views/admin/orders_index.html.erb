@@ -12,53 +12,26 @@
 	</div>
 	<div class="row">
 		<div class="small-12 columns">
+		<ul class="filterlist">
+		<li <%= order_index_filterlist_class(@group, "search") %>>
+			<%= link_to 'Search', admin_orders_index_url("search") %>
+		</li>
+		<li <%= order_index_filterlist_class(@group, "brands") %>>
+			<%= link_to 'by Brands', admin_orders_index_url("brands") %>
+		</li>
+		<li <%= order_index_filterlist_class(@group, "buyers") %>>
+			<%= link_to 'by Buyers', admin_orders_index_url("buyers") %>
+		</li>
+		</ul>
 		<div class="panel">
-			<h3>find orders by</h3>
-			<div class="editform">
-			<%= form_tag admin_orders_search_url, remote: true do %>
-			<table id="order-search">
-				<tbody>
-					<tr>
-						<td><%= text_field_tag 'query_buyers', nil, {id: 'orders-search-input-buyers', placeholder: '(buyer)', class: 'auto-form-text'} %></td>
-						<td><%= text_field_tag 'query_brands', nil, {id: 'orders-search-input-brands', placeholder: '(brand)', class: 'auto-form-text'} %></td>
-						<td><%= search_field_tag 'query_retailer_po', nil, {id: 'orders-search-input-retailer-po', placeholder: '(retailer po)', class: 'auto-form-text'} %></td>
-						<td><%= search_field_tag 'query_landing_id', nil, {id: 'orders-search-input-landing-id', placeholder: '(landing id)', class: 'auto-form-text'} %></td>
-						<td colspan=2><%= check_box_tag "show_completed", 1, nil, {class: "auto-form"} %> <%= label_tag "show_completed", "include completed orders" %></td>
-						<td colspan=4></td>
-					</tr>
-				</tbody>
-			</table>
+			<% case @group 
+			when "search" %>
+				<%= render partial: "orders_search" %>
+			<% when "brands" %>
+				<%= render partial: "orders_by_brands" %>
+			<% when "buyers" %>
+				<%= render partial: "orders_by_buyers" %>
 			<% end %>
-			</div>
-			<div id="orders-search-reults">
-				<table class="sortable" id="order-index" style="table-layout: fixed; width: 100%;">
-					<thead>
-						<tr>
-							<th>Buyer</th>
-							<th>Brand</th>
-							<th>Retailer PO#</th>
-							<th>Landing Order ID</th>
-							<th>Order Date</th>
-							<th>Ship Date</th>
-							<th>Cancel Date</th>
-							<th>Order Amount</th>
-							<th>Additional Charges</th>
-							<th>Status</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td colspan=10 style="text-align: center;"></td>
-						</tr>
-						<tr>
-							<td colspan=10 style="text-align: center;"><h3>find orders</h3></td>
-						</tr>
-						<tr>
-							<td colspan=10 style="text-align: center;"></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
 		</div><!--/.panel-->
 		</div><!--/.small-12-->
 	</div><!--/.row-->

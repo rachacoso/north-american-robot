@@ -11,6 +11,14 @@ module AdminHelper
 		end
 	end
 
+	def order_index_filterlist_class(group_type, link_type)
+		if link_type == group_type
+			return "class=active"
+		else
+			return nil
+		end
+	end
+
 	def sortable_status(status)
 		status_order = {
 			"open" => "1" ,

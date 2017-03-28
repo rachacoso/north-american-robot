@@ -1,0 +1,5 @@
+<% @orders.each do |buyer, orders| %>
+<h2><%= buyer.company_name %></h2>
+<%= render partial: "orders_search_results", locals: { orders: orders } %>
+<br>
+<% end %>

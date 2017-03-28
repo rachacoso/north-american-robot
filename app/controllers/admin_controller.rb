@@ -188,7 +188,29 @@ class AdminController < ApplicationController
   end
 
   def orders_index
-    @orders = {}
+    @group = params[:group]
+    case @group
+    when "search"
+      @orders = {}
+    when "brands"
+      @orders = {}
+      brands = Brand.activated.order_by(:company_name => 'asc')
+      brands.each do |brand|
+        next if brand.orders.blank?
+        @orders[brand] = brand.orders  
+      end
+    when "buyers"
+      @orders = {}
+      retailers = Retailer.activated.order_by(:company_name => 'asc')
+      distributors = Distributor.activated.order_by(:company_name => 'asc')
+      buyers = retailers + distributors
+      buyers.each do |buyer|
+        next if buyer.orders.blank?
+        @orders[buyer] = buyer.orders  
+      end
+    else
+      @orders = {}
+    end
   end
 
   def order_view
