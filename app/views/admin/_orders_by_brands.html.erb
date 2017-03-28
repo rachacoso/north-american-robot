@@ -1,4 +1,4 @@
-<% @orders.each do |brand, orders| %>
+<% all_orders.each do |brand, orders| %>
 <h2><%= brand.company_name %></h2>
 <%= render partial: "orders_search_results", locals: { orders: orders } %>
 <br>

@@ -26,11 +26,11 @@
 		<div class="panel">
 			<% case @group 
 			when "search" %>
-				<%= render partial: "orders_search" %>
+				<%= render partial: "orders_search", locals: { all_orders: @orders } %>
 			<% when "brands" %>
-				<%= render partial: "orders_by_brands" %>
+				<%= render partial: "orders_by_brands", locals: { all_orders: @orders }  %>
 			<% when "buyers" %>
-				<%= render partial: "orders_by_buyers" %>
+				<%= render partial: "orders_by_buyers", locals: { all_orders: @orders }  %>
 			<% end %>
 		</div><!--/.panel-->
 		</div><!--/.small-12-->
