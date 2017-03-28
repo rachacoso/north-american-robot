@@ -156,34 +156,9 @@ class AdminController < ApplicationController
       brand_ids = Brand.activated.where(company_name: /#{brand_query}/i ).pluck(:id)
       @orders = params[:show_completed] ? Order.by_brand(brand_ids) : Order.by_brand(brand_ids).and(Order.active.selector)
       @search_type = 'brand'
+    else
+      @orders = Order.in_progress
     end
-
-
-
-    # if @q = params[:query]
-    #   if @q.to_s.length > 1
-    #     brands = Brand.activated.where(company_name: /#{@q}/i )
-    #     retailers = Retailer.activated.where(company_name: /#{@q}/i )
-    #     distributors = Distributor.activated.where(company_name: /#{@q}/i )
-    #     brands.each do |brand|
-    #       next if brand.orders.empty?
-    #       o = params[:show_completed] ? brand.orders : brand.orders.active
-    #       @orders[:brands] << { "#{brand.company_name}": o }
-    #     end
-    #     retailers.each do |retailer|
-    #       next if retailer.orders.empty?
-    #       o = params[:show_completed] ? retailer.orders : retailer.orders.active
-    #       @orders[:retailers] << { "#{retailer.company_name}": o }
-    #     end
-    #     distributors.each do |distributor|
-    #       next if distributor.orders.empty?
-    #       o = params[:show_completed] ? distributor.orders : distributor.orders.active
-    #       @orders[:distributors] << { "#{distributor.company_name}": o }
-    #     end
-
-    #     @orders[:by_id] = params[:show_completed] ? Order.by_id(@q) : Order.by_id(@q).and(Order.active.selector)
-    #   end
-    # end
 
   end
 
@@ -191,7 +166,7 @@ class AdminController < ApplicationController
     @group = params[:group]
     case @group
     when "search"
-      @orders = {}
+      @orders = Order.in_progress
     when "brands"
       @orders = {}
       brands = Brand.activated.order_by(:company_name => 'asc')

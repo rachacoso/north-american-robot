@@ -33,4 +33,12 @@ module AdminHelper
 		return "sorttable_customkey=#{status_order[status]}"
 	end
 
+	def sortable_date(date)
+		if date.present?
+			return "sorttable_customkey=#{date.strftime('%Y%m%d%H%M%S')}"
+		else
+			return "sorttable_customkey=00000000000000"
+		end
+	end
+
 end

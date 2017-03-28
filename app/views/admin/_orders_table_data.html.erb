@@ -7,12 +7,12 @@
 			<td><%= link_to admin_order_view_url(o) do %><%= o.orderer_order_reference_id %><% end %></td>
 			<td><%= link_to admin_order_view_url(o) do %><%= o.landing_order_reference_id %><% end %></td>
 			<td><%= link_to admin_order_view_url(o) do %><%= o.c_at.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%Y at %R %Z") %><% end %></td>
-			<td>
+			<td <%= sortable_date(o.ship_date) %>> 
 				<% if o.ship_date.present? %>
 					<%= link_to admin_order_view_url(o) do %><%= o.ship_date.strftime("%m/%d/%Y") %><% end %>
 				<% end %>
 			</td>
-			<td>
+			<td <%= sortable_date(o.cancel_date) %>>
 				<% if o.cancel_date.present? %>
 					<%= link_to admin_order_view_url(o) do %><%= o.cancel_date.strftime("%m/%d/%Y") %><% end %>
 				<% end %>

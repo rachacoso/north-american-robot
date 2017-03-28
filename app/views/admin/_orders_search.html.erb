@@ -16,31 +16,5 @@
 <% end %>
 </div>
 <div id="orders-search-reults">
-	<table class="sortable" id="order-index" style="table-layout: fixed; width: 100%;">
-		<thead>
-			<tr>
-				<th>Buyer</th>
-				<th>Brand</th>
-				<th>Retailer PO#</th>
-				<th>Landing Order ID</th>
-				<th>Order Date</th>
-				<th>Ship Date</th>
-				<th>Cancel Date</th>
-				<th>Order Amount</th>
-				<th>Additional Charges</th>
-				<th>Status</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td colspan=10 style="text-align: center;"></td>
-			</tr>
-			<tr>
-				<td colspan=10 style="text-align: center;"><h3>find orders</h3></td>
-			</tr>
-			<tr>
-				<td colspan=10 style="text-align: center;"></td>
-			</tr>
-		</tbody>
-	</table>
+	<%= render partial: "orders_search_results" %>
 </div>

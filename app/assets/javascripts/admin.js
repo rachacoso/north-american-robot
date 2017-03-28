@@ -28,8 +28,7 @@ $('#orders-search-input-buyers').devbridgeAutocomplete({
   triggerSelectOnValidInput: true,  
   onSelect: function (suggestion) {
     var thisForm = $(this).parents('form');
-    $(thisForm).submit(); 
-    console.log('did it');
+    $(thisForm).submit();
   }
 });
 
