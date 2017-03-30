@@ -32,7 +32,7 @@ module LandingCompany
 			# field :subscriber, type: Mongoid::Boolean
 			field :subscription_expiration, type: Date
 			field :date, type: Date
-			field :active, type: Mongoid::Boolean, default: true
+			field :active, type: Mongoid::Boolean, default: proc { self.class.to_s == "Brand" ?  false : true }
 
 			# LOGINS/USERS WHO CAN ACT ON BEHALF OF BRAND
 			has_many :users, dependent: :destroy

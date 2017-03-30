@@ -8,8 +8,6 @@ class ApplicationController < ActionController::Base
   before_action :get_unread_message_count
   before_action :administrator_redirect
 
-
-
   # DATE SAVING (used for collections date [trade show, trademarks, patents, compliances])
   def save_date(year, month, item)
     unless year.empty? && month.empty?
@@ -53,7 +51,7 @@ class ApplicationController < ActionController::Base
                 <h2>Welcome Back to the Landing Marketplace!</h2>
               </div><!--/.medium-5-->
               <div class='medium-7 columns'>
-                <h3><strong>We're doing a little housekeeping and need to confirm your email address before we can sign you in.</strong></h3>
+                <h3><strong>We need to confirm your email address before we can sign you in.</strong></h3>
                 <h3>We've sent an email to you at<br>
                 <strong>#{a.email}</strong></h3>
                 <h3>Please check your email and follow the instructions to activate your account.</h3>
@@ -63,7 +61,7 @@ class ApplicationController < ActionController::Base
           flash[:newuser] = "
             <div class='row'>
               <div class='small-12 columns'>
-                <h3><strong>We're doing a little housekeeping and need to confirm your email address before we can sign you in.</strong></h3>
+                <h3><strong>We need to confirm your email address before we can sign you in.</strong></h3>
                 <h3>We've sent an email to you at<br>
                 <strong>#{a.email}</strong></h3>
                 <h3>Please check your email and follow the instructions to activate your account.</h3>
@@ -83,7 +81,15 @@ class ApplicationController < ActionController::Base
   end
  
   def require_login
-    unless @current_user
+    if @current_user 
+      if @current_user.brand #checks for brand approval & subscription
+        if !@current_user.brand.active
+          render "/pages/private/wait"
+        elsif !@current_user.brand.subscriber?
+          render "/pages/private/subscribe"
+        end
+      end
+    else
       flash[:notice] = "YOU MUST BE LOGGED IN TO ACCESS (err: 22)"
       session[:persisted_redirect] = nil # reset any persisted redirect
       redirect_to login_url # halts request cycle

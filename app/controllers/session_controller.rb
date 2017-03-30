@@ -1,6 +1,6 @@
 class SessionController < ApplicationController
 	
-	skip_before_action :require_login, only: [:new, :create]
+	skip_before_action :require_login, only: [:new, :create, :destroy]
 
 	def new
 		if @current_user

@@ -1,6 +1,8 @@
 class HomeController < ApplicationController
   
-  skip_before_action :require_login, only: [:front, :dashboard, :prospect_share, :prospect_share_login]
+	skip_before_action :require_login, only: [:front, :dashboard, :prospect_share, :prospect_share_login]
+	before_action :require_login, only: [:dashboard], :if => :is_a_brand?
+
 
 	def front
 		
@@ -130,4 +132,10 @@ class HomeController < ApplicationController
 
 	end
 
+
+	private
+
+	def is_a_brand?
+		return true if @current_user && @current_user.brand
+	end
 end
