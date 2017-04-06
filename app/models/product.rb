@@ -26,6 +26,12 @@ class Product
   	return self.inventory_adjustments.received.sum(:units) - self.inventory_adjustments.deducted.sum(:units)
   end
 
+  def inventory_less_on_hold
+  	bought = self.brand.orders.with_inventory_hold(self).map! { |o| o.order_items.find_by(product_id: self.id).quantity }.map {|e| e ? e : 0}.inject(0){|sum,x| sum + x }
+  	testers = self.brand.orders.with_inventory_hold(self).map! { |o| o.order_items.find_by(product_id: self.id).quantity_testers }.map {|e| e ? e : 0}.inject(0){|sum,x| sum + x }
+  	return self.inventory - ( bought + testers )
+  end
+
 	def save_price(p)
 		unless p.blank?
 			pc = (p.to_f * 100).round

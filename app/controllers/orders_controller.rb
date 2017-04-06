@@ -365,7 +365,7 @@ class OrdersController < ApplicationController
 			@render_this = "shipping_address"
 		end
 
-		if params[:order][:post_delivery_status] == "sent"
+		if ["sent","received","awaiting","paid"].include? params[:order][:post_delivery_status]
 			@order.update_inventory
 		end
 
