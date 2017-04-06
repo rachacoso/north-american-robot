@@ -19,7 +19,7 @@
   }
 }
 
-#new-user-intro {
+.new-user-intro, .new-user-subscription {
 	a {
 		color: $landing-dark-gray;
 		font-weight: 800;
@@ -29,6 +29,7 @@
 		color: $landing-pink;
 		font-weight: 900;
 		font-size: rem-calc(50);
+		line-height: rem-calc(50);
 	}
 	h2 {
 		font-size: rem-calc(50);
@@ -66,6 +67,17 @@
 		font-weight: 600;
 		font-size: rem-calc(20);
 		padding: rem-calc(20) rem-calc(30);
+	}
+}
+
+.new-user-subscription {
+	h1 {
+		font-size: rem-calc(40);
+		line-height: rem-calc(30);
+	}
+	h2 {
+		font-size: rem-calc(30);
+		line-height: rem-calc(30);
 	}
 }
 

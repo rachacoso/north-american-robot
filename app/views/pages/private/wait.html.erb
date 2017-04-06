@@ -2,12 +2,41 @@
 <%= render partial: 'shared/v2/header/marketplace' %>
 <div class="pages-wrapper">
 
-<div class="row">
-	<div class="medium-10 medium-centered columns text-center">
-		<h1><strong>Please Wait for Approval</strong></h1>
-		<p></p>
-	</div><!--/.small-12-->
-</div><!--/.row-->
+	<div class="row">
+		<div class="medium-11 medium-centered columns">
+			<div class="new-user-subscription">
+				<h1>Hello, <%= @current_user.brand.company_name %>!</h1>
+				<h2>You need a subscription to access the full marketplace!<strong><br>Just $600/year for verified brands.</strong></h2>
+			
+				<br>
+				<div class="row" data-equalizer>
+					<div class="medium-6 columns panel" data-equalizer-watch style="border: 1px solid #B3B3B3;">
+						
+						<h2><span class="step" data-step="1"></span><br>Wait for Approval</h2>
+						
+						<h3><strong>We will need to confirm your brand fit with our marketplace!</strong></h3>
+						<br>
+						<h3>Here's the company information we have for you:</h3>
+						<br>
+						<table><tbody>
+							<tr><td>Company Name: </td><td><strong><%= @current_user.brand.company_name %></strong></td></tr>
+							<tr><td>Company Website: </td><td><strong><%= @current_user.brand.website %></strong></td></tr>
+						</tbody></table>
+						<br>
+						<h3>If there are any errors, or if you have any questions, please contact us for assistance any time at <a mailto="info@landingintl.com" style="color:black;">info@landingintl.com</a></h3>
+						<br>
+					</div><!--/.medium-4-->
+					<div class="medium-6 columns panel" data-equalizer-watch>
+					
+						<h2><span class="step" data-step="2"></span><br>Pay Subscription Fee</h2>
+						<h3>You will be able to pay after approval</h3>
+					</div><!--/.medium-4-->
+
+				</div><!--/.row-->
+
+			</div><!--/.new-user-intro -->
+		</div><!--/.small-12-->
+	</div><!--/.row-->
 
 </div><!--/.pages-wrapper-->
 <%= render partial: 'shared/v2/footer/main' %>
