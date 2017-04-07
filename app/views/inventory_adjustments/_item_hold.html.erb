@@ -1,0 +1,29 @@
+<tr class="item">
+	<td>
+		<%= order.approved_date.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y") %><br>
+		<small><%= order.approved_date.in_time_zone("Pacific Time (US & Canada)").strftime("%H:%M:%S %Z") %></small>
+	</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>
+	<%= order.order_items.find_by(product_id: product.id).quantity + (order.order_items.find_by(product_id: product.id).quantity_testers ||= 0) %> 
+	<br>
+	<small>Units on Hold</small><br>
+
+	<small>
+	<% if @current_user.administrator? %>
+	<%= link_to "#{order.orderer.company_name} Order",admin_order_view_url(order), target: "_blank" %>
+	<% else %>
+	<%= link_to "#{order.orderer.company_name} Order",order_url(order), target: "_blank" %>
+	<% end %>
+	</small>
+	
+	<br>
+	<div class="comments">
+	<%= "BUYER Reference ID: #{order.orderer_order_reference_id}<br>".html_safe if order.orderer_order_reference_id.present? %>
+	<%= "BRAND Reference ID: #{order.brand_order_reference_id}<br>".html_safe if order.brand_order_reference_id.present? %>
+	<%= "LANDING Reference ID: #{order.landing_order_reference_id}<br>".html_safe if order.landing_order_reference_id.present? %>
+	</div>
+	</td>
+</tr>

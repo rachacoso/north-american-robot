@@ -38,4 +38,12 @@ module InventoryAdjustmentsHelper
 		} 
 		return render partial: "inventory_adjustment_display", locals: locals
 	end
+
+	def get_combined_entries(product)
+		orders = product.brand.orders.with_inventory_hold(product).entries
+		adjustments = product.inventory_adjustments.entries
+		combined = orders + adjustments
+		return combined.sort_by! { |a| a.class.to_s == "Order" ? a.approved_date : a.c_at }.reverse
+	end
+
 end

@@ -1,100 +1,48 @@
 <% @brand.products.each do |product| %>
 <table class="inventory" id="p_<%= product.id %>">	
 	<tr class="product-header">
-		<td colspan="4"><%= product.name %></td>
+		<td colspan="5"><%= product.name %></td>
 	</tr>
 	<tr class="total">
-		<td colspan="3">CURRENT INVENTORY: </td>
-		<td><%= product.inventory ||= 0 %></td>
+		<td colspan="3">&nbsp;</td>
+		<td>CURRENT INVENTORY:<br>
+		<strong><%= product.inventory ||= 0 %></strong></td>
+		<td>PENDING INVENTORY:<br>
+		<strong><%= product.inventory_less_on_hold ||= 0 %></strong></td>
 	</tr>
-	<tr class="total">
-		<td colspan="3">PROJECTED INVENTORY (less pending orders): </td>
-		<td><%= product.inventory_less_on_hold ||= 0 %></td>
-	</tr>
-	<% product.brand.orders.with_inventory_hold(product).order_by(:c_at.desc).each do |order| %>
-	<tr class="item">
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>
-		<span style="color:red;">(<%= order.order_items.find_by(product_id: product.id).quantity %>) units</span><br>
-		<% if order.order_items.find_by(product_id: product.id).quantity_testers.present? %>
-		<span style="color:red;">(<%= order.order_items.find_by(product_id: product.id).quantity_testers %>) testers</span><br>
-		<% end %>
-		<small>Units on Hold (PENDING ORDER)</small><br>
-		<small>
-		<% if @current_user.administrator? %>
-		<%= link_to "#{order.orderer.company_name} Order",admin_order_view_url(order), target: "_blank" %>
-		<% else %>
-		<%= link_to "#{order.orderer.company_name} Order",order_url(order), target: "_blank" %>
-		<% end %>
-		</small>
-		<br>
-		<div class="comments">
-		<%= "BUYER Reference ID: #{order.orderer_order_reference_id}<br>".html_safe if order.orderer_order_reference_id.present? %>
-		<%= "BRAND Reference ID: #{order.brand_order_reference_id}<br>".html_safe if order.brand_order_reference_id.present? %>
-		<%= "LANDING Reference ID: #{order.landing_order_reference_id}<br>".html_safe if order.landing_order_reference_id.present? %>
-		</div>
-		</td>
-	</tr>
-	<% end %>
 	<tr class="controls">
 		<% if @current_user.administrator? %>
 		<td>&nbsp;</td>
 		<td class="addnew"><%= link_to "add inventory request", new_inventory_adjustment_url("requested",product.id), remote: true %></td>
 		<td>&nbsp;</td>
 		<td class="addnew"><%= link_to "add received/deducted inventory", new_inventory_adjustment_url("received",product.id), remote: true %></td>
+		<td>&nbsp;</td>
 		<% else %>
 		<td colspan="2">&nbsp;</td>
 		<td class="addnew"><%= link_to "add shipment notification", new_inventory_adjustment_url("shipment",product.id), remote: true %></td>
+		<td>&nbsp;</td>
 		<td>&nbsp;</td>
 		<% end %>
 	</tr>
 	<tr class="adjustments-header">
 		<th>DATE</th>
-		<th>UNITS REQUESTED BY LANDING</th>
-		<th>UNITS SHIPPED BY <%=@brand.company_name %></th>
+		<th>UNITS REQUESTED by Landing</th>
+		<th>UNITS SHIPPED by <%=@brand.company_name %></th>
 		<th>UNITS RECEIVED (UNITS DEDUCTED)</th>
+		<th>UNITS on HOLD for PENDING ORDERS</th>
 	</tr>
 	<% if product.inventory_adjustments.blank? %>
 	<tr class="item">
 		<td colspan="2">&nbsp;</td>
-		<td colspan="2">&nbsp;</td>
+		<td colspan="3">&nbsp;</td>
 	</tr>
 	<% end %>
-	<% product.inventory_adjustments.order_by(c_at: :desc).each do |adjustment| %>
-	<tr class="item">
-		<td>
-			<%= adjustment.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y") %><br>
-			<small><%= adjustment.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%H:%M:%S %Z") %></small>
-		</td>
-		<td>
-			<%= render partial: "inventory_adjustments/item_requested", locals: { adjustment: adjustment } %>
-		</td>
-		<td>
-			<%= render partial: "inventory_adjustments/item_shipment", locals: { adjustment: adjustment } %>
-		</td>
-		<td>
-			<%= render partial: "inventory_adjustments/item_received_deducted", locals: { adjustment: adjustment } %>
-		</td>
-	</tr>
-	<% end %>
-	<tr class="controls">
-		<% if @current_user.administrator? %>
-		<td>&nbsp;</td>
-		<td class="addnew"><%= link_to "add inventory request", new_inventory_adjustment_url("requested",product.id), remote: true %></td>
-		<td>&nbsp;</td>
-		<td class="addnew"><%= link_to "add received/deducted inventory", new_inventory_adjustment_url("received",product.id), remote: true %></td>
+	<% get_combined_entries(product).each do |item| %>
+		<% if item.class.to_s == "Order" %>
+			<%= render partial: "/inventory_adjustments/item_hold", locals: { order: item, product: product } %>
 		<% else %>
-		<td colspan="2">&nbsp;</td>
-		<td class="addnew"><%= link_to "add shipment notification", new_inventory_adjustment_url("shipment",product.id), remote: true %></td>
-		<td>&nbsp;</td>
+			<%= render partial: "/inventory_adjustments/item_adjustment", locals: { adjustment: item } %>
 		<% end %>
-	</tr>
-	<tr class="total">
-		<td colspan="3">TOTAL INVENTORY: </td>
-		<td><%= product.inventory ||= 0 %></td>
-	</tr>
-
+	<% end %>
 </table>
 <% end %>
