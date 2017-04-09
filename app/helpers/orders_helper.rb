@@ -329,7 +329,7 @@ module OrdersHelper
 			end
 		end
 
-		if comment.text.present?
+		if comment && comment.text.present?
 			return { preface: preface, comment: comment, additional_comments: additional_comments }
 		else
 			return false
