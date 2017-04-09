@@ -69,7 +69,11 @@ module OrdersHelper
 		when "awaiting"
 			return "Awaiting payment from #{order.orderer_company_name}"
 		when "paid"
-			return "Paid by #{order.orderer_company_name}<br><small>You should be receiving payment shortly</small>".html_safe
+			if @current_user.brand
+				return "Paid by #{order.orderer_company_name}<br><small>You should be receiving payment shortly</small>".html_safe
+			else
+				return "Paid by #{order.orderer_company_name}".html_safe
+			end
 		end
 	end
 

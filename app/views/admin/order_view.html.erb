@@ -94,6 +94,40 @@
 	</div>
 	<% end %>
 
+<div class="row">
+	<div class="medium-11 medium-centered columns">
+		<div class="panel">
+
+			<h1><strong>Update Order Fulfillment Status (Optional)</strong></h1>
+			<div class="info">
+				<h3>Let everyone know where the goods are!  <br>Keep everyone in the loop by updating the current status of the goods below:</h3>
+			</div>
+
+			<%= form_for @order, remote: true, authenticity_token: true do |f| %>
+			<div class="row">
+				<div class="small-12 columns">
+
+			<%= radio_button_tag("order[post_delivery_status]", "", @order.post_delivery_status.blank?, class: "auto-form" ) %>
+			<%= label_tag("order[post_delivery_status]_", "(do not display)") %>
+			<%= radio_button_tag("order[post_delivery_status]", "warehouse", @order.post_delivery_status == 'warehouse' || !@order.post_delivery_status, class: "auto-form" ) %>
+			<%= label_tag("order[post_delivery_status]_warehouse", "At U.S. Warehouse") %>
+			<%= radio_button_tag("order[post_delivery_status]", "sent", @order.post_delivery_status == 'sent', class: "auto-form" ) %>
+			<%= label_tag("order[post_delivery_status]_sent", "Sent to Retailer") %>
+			<%= radio_button_tag("order[post_delivery_status]", "received", @order.post_delivery_status == 'received', class: "auto-form" ) %>
+			<%= label_tag("order[post_delivery_status]_received", "Received by Retailer") %>
+			<%= radio_button_tag("order[post_delivery_status]", "awaiting", @order.post_delivery_status == 'awaiting', class: "auto-form" ) %>
+			<%= label_tag("order[post_delivery_status]_awaiting", "Awaiting Payment") %>
+			<%= radio_button_tag("order[post_delivery_status]", "paid", @order.post_delivery_status == 'paid', class: "auto-form" ) %>
+			<%= label_tag("order[post_delivery_status]_paid", "Paid by Retailer") %>
+				</div>
+			</div><!--/.row-->
+			<%#= f.submit "Update Shipping Address", class: "landing-button" %>
+			<% end %>
+
+		</div>
+	</div><!--/.small-12-->
+</div><!--/.row-->
+
 
 <div class="row">
 	<div class="medium-11 medium-centered columns">
