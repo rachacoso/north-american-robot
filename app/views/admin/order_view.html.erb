@@ -45,9 +45,11 @@
 	</div>
 </div>
 
-
-	<% if @order.status == "approved" %>		
+	
+	<% if @order.status == "approved" %>
 		<% if @order.armor_enabled? %>
+
+			<% if false %> <%# hiding section %>		
 			<div class="row">
 				<div class="medium-11 medium-centered columns">
 					<div class="panel">
@@ -55,6 +57,8 @@
 					</div>
 				</div>
 			</div>
+			<% end %>
+
 		<% elsif @order.is_prepay? %>
 			<div class="row">
 				<div class="medium-11 medium-centered columns">
@@ -84,7 +88,8 @@
 		<% end %>
 	<% end %>
 
-	<% if @order.status == "shipped" %>
+	<% if false %> <%# hiding section %>
+	<%#if @order.status == "shipped" %>
 	<div class="row">
 		<div class="medium-11 medium-centered columns">
 			<div class="panel">
@@ -94,6 +99,8 @@
 	</div>
 	<% end %>
 
+
+<% if @order.status == "delivered" %>
 <div class="row">
 	<div class="medium-11 medium-centered columns">
 		<div class="panel">
@@ -127,7 +134,7 @@
 		</div>
 	</div><!--/.small-12-->
 </div><!--/.row-->
-
+<% end %>
 
 <div class="row">
 	<div class="medium-11 medium-centered columns">
