@@ -128,34 +128,26 @@ class AdminController < ApplicationController
 
     if params[:query_retailer_po].present?
       q = params[:query_retailer_po]
-      @orders = params[:show_completed] ? Order.by_retailer_po(q) : Order.by_retailer_po(q).and(Order.active.selector)
       @search_type = 'retailer_po'
+      @orders = Order.order_search(query: [q], type: @search_type, show_completed: params[:show_completed])
     elsif params[:query_landing_id].present?
       q = params[:query_landing_id]
-      @orders = params[:show_completed] ? Order.by_landing_id(q) : Order.by_landing_id(q).and(Order.active.selector)
-      @reset_buyer_brand = true
       @search_type = 'landing_id'
+      @orders = Order.order_search(query: [q], type: @search_type, show_completed: params[:show_completed])
+      @reset_buyer_brand = true
     elsif params[:query_brands].present? && params[:query_buyers].present?
       brand_query = params[:query_brands]
       buyer_query = params[:query_buyers]
-      retailer_ids = Retailer.activated.where(company_name: /#{buyer_query}/i ).pluck(:id)
-      distributor_ids = Distributor.activated.where(company_name: /#{buyer_query}/i ).pluck(:id)
-      buyer_ids = retailer_ids + distributor_ids
-      brand_ids = Brand.activated.where(company_name: /#{brand_query}/i ).pluck(:id)
-      @orders = params[:show_completed] ? Order.by_buyer(buyer_ids).by_brand(brand_ids) : Order.by_buyer(buyer_ids).by_brand(brand_ids).and(Order.active.selector)
       @search_type = 'buyer_brand'
+      @orders = Order.order_search(query: [brand_query,buyer_query], type: @search_type, show_completed: params[:show_completed])      
     elsif params[:query_buyers].present?
-      buyer_query = params[:query_buyers]
-      retailer_ids = Retailer.activated.where(company_name: /#{buyer_query}/i ).pluck(:id)
-      distributor_ids = Distributor.activated.where(company_name: /#{buyer_query}/i ).pluck(:id)
-      buyer_ids = retailer_ids + distributor_ids
-      @orders = params[:show_completed] ? Order.by_buyer(buyer_ids) : Order.by_buyer(buyer_ids).and(Order.active.selector)
+      q = params[:query_buyers]
       @search_type = 'buyer'
+      @orders = Order.order_search(query: [q], type: @search_type, show_completed: params[:show_completed])
     elsif params[:query_brands].present?
-      brand_query = params[:query_brands]
-      brand_ids = Brand.activated.where(company_name: /#{brand_query}/i ).pluck(:id)
-      @orders = params[:show_completed] ? Order.by_brand(brand_ids) : Order.by_brand(brand_ids).and(Order.active.selector)
+      q = params[:query_brands]
       @search_type = 'brand'
+      @orders = Order.order_search(query: [q], type: @search_type, show_completed: params[:show_completed])
     else
       @orders = Order.in_progress
     end

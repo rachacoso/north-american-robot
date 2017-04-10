@@ -553,4 +553,33 @@ class Order # for V2 ordering
     return true if InventoryAdjustment.from_order(self.id).present?
   end
 
+  def self.order_search(query:, type:, show_completed: false)
+    case type
+    when "retailer_po"
+      q = query[0]
+      return show_completed ? Order.by_retailer_po(q) : Order.by_retailer_po(q).and(Order.active.selector)
+    when "landing_id"
+      q = query[0]
+      return show_completed ? Order.by_landing_id(q) : Order.by_landing_id(q).and(Order.active.selector)
+    when "buyer_brand"
+      brand_query = query[0]
+      buyer_query = query[1]
+      retailer_ids = Retailer.activated.where(company_name: /#{buyer_query}/i ).pluck(:id)
+      distributor_ids = Distributor.activated.where(company_name: /#{buyer_query}/i ).pluck(:id)
+      buyer_ids = retailer_ids + distributor_ids
+      brand_ids = Brand.activated.where(company_name: /#{brand_query}/i ).pluck(:id)
+      return show_completed ? Order.by_buyer(buyer_ids).by_brand(brand_ids) : Order.by_buyer(buyer_ids).by_brand(brand_ids).and(Order.active.selector)
+    when "buyer"
+      q = query[0]
+      retailer_ids = Retailer.activated.where(company_name: /#{q}/i ).pluck(:id)
+      distributor_ids = Distributor.activated.where(company_name: /#{q}/i ).pluck(:id)
+      buyer_ids = retailer_ids + distributor_ids
+      return show_completed ? Order.by_buyer(buyer_ids) : Order.by_buyer(buyer_ids).and(Order.active.selector)
+    when "brand"
+      q = query[0]
+      brand_ids = Brand.where(company_name: /#{q}/i ).pluck(:id)
+      return show_completed ? Order.by_brand(brand_ids) : Order.by_brand(brand_ids).and(Order.active.selector)
+    end
+  end
+
 end
