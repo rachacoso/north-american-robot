@@ -19,12 +19,11 @@
 
 <% else %>
 
+<div id="delivered-status-bar">
 <div class="info">
-	<h3>Post U.S. Delivery Status</h3>
+	<h1 class="top-level">Fulfillment Status</h1>
 	<h3>There are a few more steps before <%= order.orderer_company_name %> sends payment for this order.  Keep updated on the progress here.</h3>
 </div>
-
-<div id="delivered-status-bar">
 <%= render partial: "orders/showfull/post_delivery_flow_progress", locals: { order: order } %>
 </div>
 
