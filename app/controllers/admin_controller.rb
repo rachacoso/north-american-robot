@@ -149,7 +149,7 @@ class AdminController < ApplicationController
       @search_type = 'brand'
       @orders = Order.order_search(query: [q], type: @search_type, show_completed: params[:show_completed], user: @current_user)
     else
-      @orders = Order.in_progress
+      @orders = params[:show_completed] ? Order.all : Order.in_progress
     end
 
   end
