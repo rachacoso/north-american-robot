@@ -9,6 +9,7 @@ class OrdersController < ApplicationController
 		@orders = []
 		if params[:query_general_search].present?
 			q = params[:query_general_search]
+			q.tr!('$','')
 			@search_type = 'general_search'
 			@orders = Order.order_search(query: [q], type: @search_type, show_completed: params[:show_completed], user: @current_user)
 		# elsif params[:query_amount].present?
