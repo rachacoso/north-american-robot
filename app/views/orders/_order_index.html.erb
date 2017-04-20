@@ -1,47 +1,34 @@
 <% unless controller_name == "home" %>
-<div class="editform">
-<%= form_tag orders_search_url, remote: true do %>
-<table id="order-search">
-	<tbody>
-		<tr>
-			<td colspan=5>&nbsp;</td>
-			<td colspan=2><%= check_box_tag "show_completed", 1, nil, {class: "auto-form"} %> <%= label_tag "show_completed", "include completed orders" %></td>
-		</tr>
-		<tr><td colspan="7" class="text-center"><h2>SEARCH BY:</h2></td></tr>
-		<tr>
-			<td><%= search_field_tag 'query_general_search', nil, {id: 'orders-search-input-amount', placeholder: '(amount, buyer po, landing po)', class: 'auto-form-text'} %></td>
-			<td><%= search_field_tag 'query_amount', nil, {id: 'orders-search-input-amount', placeholder: '(amount)', class: 'auto-form-text'} %></td>
-			<td><%= search_field_tag 'query_retailer_po', nil, {id: 'orders-search-input-retailer-po', placeholder: '(buyer po)', class: 'auto-form-text'} %></td>
-			<td><%= search_field_tag 'query_landing_id', nil, {id: 'orders-search-input-landing-id', placeholder: '(landing po)', class: 'auto-form-text'} %></td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-		</tr>
-		<tr><td colspan="7" class="text-center"><h2>FILTER BY:</h2></td></tr>
-		<tr>
-			<td>
-			<% buyers_list = @current_user.company.orders.map { |order| [order.orderer_company_name, order.orderer_company_name] } %>
-			<%= select_tag :query_buyers, options_for_select(buyers_list.uniq), class: 'auto-form', include_blank: 'ALL BUYERS', style: 'margin-bottom: 0' %>
-			<%#= text_field_tag 'query_buyers', nil, {id: 'orders-search-input-buyers-by-brand', placeholder: '(buyer)', class: 'auto-form-text'} %>
-			</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>
-			
-			<%= select_tag :query_products, options_for_select(@current_user.company.orders.map{ |o| o.order_items.pluck(:name)}.flatten.uniq.sort!), class: 'auto-form', include_blank: 'ALL PRODUCTS', style: 'margin-bottom: 0' %>
-			<%#= search_field_tag 'query_products', nil, {id: 'orders-search-input-products', placeholder: '(products)', class: 'auto-form-text'} %></td>
-			<td>
-			<%= select_tag :query_fulfillment, options_for_select([['Yes',true],['No',false]]), class: 'auto-form', include_blank: 'ALL FULFILLMENT TYPES', style: 'margin-bottom: 0' %>
-			<%#= search_field_tag 'query_fulfillment', nil, {id: 'orders-search-input-fulfillment', placeholder: '(fulfillment)', class: 'auto-form-text'} %></td>
-			<td>
-				<%= select_tag :query_status, options_for_select([['Submitted','submitted'],['Pending','pending'],['Approved','approved'],['Paid','paid'],['Shipped','shipped'],['Delivered','delivered'],['Complete','complete']]), class: 'auto-form', include_blank: 'ALL STATUSES', style: 'margin-bottom: 0' %>
-			</td>
-		</tr>
-	</tbody>
-</table>
-<% end %>
-</div>
+	<div class="editform">
+	<div class="panel">
+	<%= form_tag orders_search_url, remote: true do %>
+		<div class="row">
+			<div class="small-12 columns">
+				<h2 class="text-center">SEARCH:</h2>
+				<%= search_field_tag 'query_general_search', nil, {id: 'orders-search-input-amount', placeholder: '(order total amount, buyer po, landing po)', class: 'auto-form-text'} %>
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+		<div class="row">
+			<div class="small-12 columns">
+				<h2 class="text-center">FILTERS:</h2>
+				<% buyers_list = @current_user.company.orders.map { |order| [order.orderer_company_name, order.orderer_company_name] } %>
+				<div class="row">
+					<div class="medium-3 columns"><h3>buyers:</h3><%= select_tag :query_buyers, options_for_select(buyers_list.uniq), class: 'auto-form', include_blank: '(all)', style: 'margin-bottom: 0' %></div><!--/.medium-3-->
+					<div class="medium-3 columns"><h3>products:</h3><%= select_tag :query_products, options_for_select(@current_user.company.orders.map{ |o| o.order_items.pluck(:name)}.flatten.uniq.sort!), class: 'auto-form', include_blank: '(all)', style: 'margin-bottom: 0' %></div><!--/.medium-3-->
+					<div class="medium-2 columns"><h3>status:</h3><%= select_tag :query_status, options_for_select([['Submitted','submitted'],['Pending','pending'],['Approved','approved'],['Paid','paid'],['Shipped','shipped'],['Delivered','delivered'],['Complete','complete']]), class: 'auto-form', include_blank: '(all)', style: 'margin-bottom: 0' %></div><!--/.medium-3-->
+					<div class="medium-2 columns"><h3>fulfillment:</h3><%= select_tag :query_fulfillment, options_for_select([['Yes',true],['No',false]]), class: 'auto-form', include_blank: '(all)', style: 'margin-bottom: 0' %></div><!--/.medium-3-->
+					<div class="medium-2 columns"><h3>show completed:</h3>
+					<%= select_tag :show_completed, options_for_select([['Yes','1']]), class: 'auto-form', include_blank: 'No', style: 'margin-bottom: 0' %>
+					</div><!--/.medium-3-->
+				</div><!--/.row-->
+				<div class="row">
+					<div class="small-12 columns">&nbsp;</div><!--/.small-12-->
+				</div><!--/.row-->
+			</div><!--/.small-12-->
+		</div><!--/.row-->
+	<% end %>
+	</div>
+	</div>
 <% end %>
 <div id="orders-search-reults">
 	<%= render partial: "orders/orders_search_results", locals: { orders: orders } %>
