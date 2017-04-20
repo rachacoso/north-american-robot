@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 
   # ORDERS
   resources :orders, only: [:show, :edit, :update, :destroy, :index]
+  post   '/orders/search/' => 'orders#orders_search', as: 'orders_search'
   post   '/order/new' => 'orders#create', as: 'new_order'
   get   '/order/s/:id/:confirm' => 'orders#submit', as: 'submit_order'
   get   '/order/p/:id/:confirm' => 'orders#pending', as: 'pending_order'

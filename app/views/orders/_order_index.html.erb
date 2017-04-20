@@ -1,30 +1,48 @@
-<table class="sortable" id="order-index">
-	<thead>
-		<tr>
-			<th><%= @current_user.type? == "brand" ? "Retailer/Distributor" : "Brand" %></th>
-			<th>Total</th>
-			<th>Buyer PO#</th>
-			<th>Landing PO#</th>
-			<th>Products</th>
-			<th>Fulfillment</th>
-			<th>Status</th>
-		</tr>
-	</thead>
+<% unless controller_name == "home" %>
+<div class="editform">
+<%= form_tag orders_search_url, remote: true do %>
+<table id="order-search">
 	<tbody>
-		<% if orders.any? %>
-			<% orders.each do |o| %>
-			<tr>
-				<td><%= link_to order_url(o), target: 'blank' do %><%= @current_user.type? == "brand" ? o.orderer.company_name : o.brand.company_name %><% end %></td>
-				<td><%= link_to order_url(o), target: 'blank' do %><%= number_to_currency(o.total_price) %><% end %></td>
-				<td><%= link_to order_url(o), target: 'blank' do %><%= o.orderer_order_reference_id %><% end %></td>
-				<td><%= link_to order_url(o), target: 'blank' do %><%= o.landing_order_reference_id %><% end %></td>
-				<td><%= link_to order_url(o), target: 'blank' do %><%= o.order_items.pluck(:name).join("<br>").html_safe %><% end %></td>
-				<td><%= link_to order_url(o), target: 'blank' do %><%= o.landing_fulfillment_services ? "YES" : "NO" %><% end %></td>
-				<td <%= sortable_status(o.status) %>><%= link_to order_url(o), target: 'blank' do %><%= o.status.capitalize unless o.status == "open" %><%= o.status == "open" ? "In Cart" : "" %><% end %></td>
-			</tr>
-			<% end %>
-		<% else %>
-			<tr><td colspan="4" class="text-center">No Orders</td></tr>
-		<% end %>
+		<tr>
+			<td colspan=5>&nbsp;</td>
+			<td colspan=2><%= check_box_tag "show_completed", 1, nil, {class: "auto-form"} %> <%= label_tag "show_completed", "include completed orders" %></td>
+		</tr>
+		<tr><td colspan="7" class="text-center"><h2>SEARCH BY:</h2></td></tr>
+		<tr>
+			<td><%= search_field_tag 'query_general_search', nil, {id: 'orders-search-input-amount', placeholder: '(amount, buyer po, landing po)', class: 'auto-form-text'} %></td>
+			<td><%= search_field_tag 'query_amount', nil, {id: 'orders-search-input-amount', placeholder: '(amount)', class: 'auto-form-text'} %></td>
+			<td><%= search_field_tag 'query_retailer_po', nil, {id: 'orders-search-input-retailer-po', placeholder: '(buyer po)', class: 'auto-form-text'} %></td>
+			<td><%= search_field_tag 'query_landing_id', nil, {id: 'orders-search-input-landing-id', placeholder: '(landing po)', class: 'auto-form-text'} %></td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr><td colspan="7" class="text-center"><h2>FILTER BY:</h2></td></tr>
+		<tr>
+			<td>
+			<% buyers_list = @current_user.company.orders.map { |order| [order.orderer_company_name, order.orderer_company_name] } %>
+			<%= select_tag :query_buyers, options_for_select(buyers_list.uniq), class: 'auto-form', include_blank: 'ALL BUYERS', style: 'margin-bottom: 0' %>
+			<%#= text_field_tag 'query_buyers', nil, {id: 'orders-search-input-buyers-by-brand', placeholder: '(buyer)', class: 'auto-form-text'} %>
+			</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>
+			
+			<%= select_tag :query_products, options_for_select(@current_user.company.orders.map{ |o| o.order_items.pluck(:name)}.flatten.uniq.sort!), class: 'auto-form', include_blank: 'ALL PRODUCTS', style: 'margin-bottom: 0' %>
+			<%#= search_field_tag 'query_products', nil, {id: 'orders-search-input-products', placeholder: '(products)', class: 'auto-form-text'} %></td>
+			<td>
+			<%= select_tag :query_fulfillment, options_for_select([['Yes',true],['No',false]]), class: 'auto-form', include_blank: 'ALL FULFILLMENT TYPES', style: 'margin-bottom: 0' %>
+			<%#= search_field_tag 'query_fulfillment', nil, {id: 'orders-search-input-fulfillment', placeholder: '(fulfillment)', class: 'auto-form-text'} %></td>
+			<td>
+				<%= select_tag :query_status, options_for_select([['Submitted','submitted'],['Pending','pending'],['Approved','approved'],['Paid','paid'],['Shipped','shipped'],['Delivered','delivered'],['Complete','complete']]), class: 'auto-form', include_blank: 'ALL STATUSES', style: 'margin-bottom: 0' %>
+			</td>
+		</tr>
 	</tbody>
 </table>
+<% end %>
+</div>
+<% end %>
+<div id="orders-search-reults">
+	<%= render partial: "orders/orders_search_results", locals: { orders: orders } %>
+</div>

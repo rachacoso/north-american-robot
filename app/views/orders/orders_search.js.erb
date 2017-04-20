@@ -1,0 +1,69 @@
+$('#orders-search-reults').html("<%= j (render partial: 'orders_search_results', locals: { orders: @orders } ) %>");
+
+  var newTables = document.getElementsByClassName('sortable'),
+      i = newTables.length;
+
+  while (i--) {
+    sorttable.makeSortable(newTables[i]);
+  }
+
+<% case @search_type
+	when 'retailer_po' %>
+		$('#orders-search-input-retailer-po').css({ "background-color": "yellow", "border": "1px solid black" });
+		$('#orders-search-input-landing-id').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-brands').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-buyers').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-products').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-fulfillment').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-status').css({ "background-color": "", "border": ""});
+	<% when 'landing_id' %>
+		$('#orders-search-input-retailer-po').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-landing-id').css({ "background-color": "yellow", "border": "1px solid black" });
+		$('#orders-search-input-brands').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-buyers').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-products').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-fulfillment').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-status').css({ "background-color": "", "border": ""});
+	<% when 'buyer' %>
+		$('#orders-search-input-retailer-po').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-landing-id').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-brands').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-buyers').css({ "background-color": "yellow", "border": "1px solid black" });
+		$('#orders-search-input-products').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-fulfillment').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-status').css({ "background-color": "", "border": ""});
+	<% when 'products' %>
+		$('#orders-search-input-retailer-po').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-landing-id').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-brands').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-buyers').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-products').css({ "background-color": "yellow", "border": "1px solid black"});
+		$('#orders-search-input-fulfillment').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-status').css({ "background-color": "", "border": ""});
+	<% when 'fulfillment' %>
+		$('#orders-search-input-retailer-po').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-landing-id').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-brands').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-buyers').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-products').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-fulfillment').css({ "background-color": "yellow", "border": "1px solid black"});
+		$('#orders-search-input-status').css({ "background-color": "", "border": ""});
+	<% when 'status' %>
+		$('#orders-search-input-retailer-po').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-landing-id').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-brands').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-buyers').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-products').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-fulfillment').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-status').css({ "background-color": "yellow", "border": "1px solid black"});
+	<% else %>
+		$('#orders-search-input-retailer-po').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-landing-id').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-brands').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-buyers').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-products').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-fulfillment').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-status').css({ "background-color": "", "border": ""});
+<% end %>
+
+		

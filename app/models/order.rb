@@ -59,12 +59,17 @@ class Order # for V2 ordering
   scope :error, ->{where(status: "error")}
   scope :active, ->{any_of(:status.in => ["open","submitted","pending","approved","paid", "shipped","delivered","disputed"])}
   scope :active_brand, ->{any_of(:status.in => ["submitted","pending","approved","paid", "shipped","delivered","disputed"])}
+  scope :all_brand, ->{any_of(:status.in => ["submitted","pending","approved","paid", "shipped","delivered","disputed","completed"])}
   scope :in_progress, ->{any_of(:status.in => ["submitted","pending","approved","paid", "shipped","delivered","disputed"])}
   scope :editable, ->{any_of(:status.in => ["open","submitted","pending"])}
   scope :by_retailer_po, ->(id) {where(orderer_order_reference_id: /#{id}/i )}
   scope :by_landing_id, ->(id) {where(landing_order_reference_id: /#{id}/i )}
   scope :by_brand, ->(ids) {where(:brand_id.in => ids) }
   scope :by_buyer, ->(ids) {where(:orderer_id.in => ids) }
+  scope :by_status, ->(status) {where(status: status) }
+  scope :by_product, ->(product_name) {where('order_items.name' => /#{product_name}/i) }
+  scope :by_fulfillment, -> (fulfillment) { fulfillment == 'true' ? where(landing_fulfillment_services: true) : where(landing_fulfillment_services: false) }
+  scope :fulfillment_off, -> {where(landing_fulfillment_services: false) }
   scope :with_inventory_hold, ->(product) {where(:status.in => ["pending","approved","paid", "shipped","delivered"], :post_delivery_status.nin => ["sent","received","awaiting","paid"], :landing_fulfillment_services => true,'order_items.product_id' => product.id)}
   scope :with_inventory_deductions, ->(product) {where(:status.in => ["delivered","completed"], :post_delivery_status.in => ["sent","received","awaiting","paid"], :landing_fulfillment_services => true, 'order_items.product_id' => product.id)}
 
@@ -553,14 +558,30 @@ class Order # for V2 ordering
     return true if InventoryAdjustment.from_order(self.id).present?
   end
 
-  def self.order_search(query:, type:, show_completed: false)
+  def self.order_search(query:, type:, show_completed: false, user: )
+
+    if user.administrator
+      order_set = Order.all
+    else
+      order_set = user.company.orders
+    end
     case type
+    when "amount"
+      q = query[0]
+      # return show_completed ? Order.all_brand.select{ |o| o.total_price.to_f.round(2) == q.to_f } : Order.active_brand.select{ |o| o.total_price.to_f.round(2) == q.to_f }
+      return show_completed ? order_set.all_brand.select{ |o|  /#{q.to_s}/.match('%.2f' % o.total_price.round(2).to_s) } : order_set.active_brand.select{ |o| /#{q.to_s}/.match('%.2f' % o.total_price.round(2).to_s).and(Order.active.selector) }
     when "retailer_po"
       q = query[0]
-      return show_completed ? Order.by_retailer_po(q) : Order.by_retailer_po(q).and(Order.active.selector)
+      return show_completed ? order_set.by_retailer_po(q) : order_set.by_retailer_po(q).and(Order.active.selector)
     when "landing_id"
       q = query[0]
-      return show_completed ? Order.by_landing_id(q) : Order.by_landing_id(q).and(Order.active.selector)
+      return show_completed ? order_set.by_landing_id(q) : order_set.by_landing_id(q).and(Order.active.selector)
+    when "general_search"
+      q = query[0]
+      amount = show_completed ? order_set.all_brand.select{ |o|  /#{q.to_s}/.match('%.2f' % o.total_price.round(2).to_s) } : order_set.active_brand.select{ |o| /#{q.to_s}/.match('%.2f' % o.total_price.round(2).to_s) }
+      retailer_po = show_completed ? order_set.by_retailer_po(q) : order_set.by_retailer_po(q).and(Order.active.selector)
+      landing_id = show_completed ? order_set.by_landing_id(q) : order_set.by_landing_id(q).and(Order.active.selector)
+      return amount + retailer_po + landing_id
     when "buyer_brand"
       brand_query = query[0]
       buyer_query = query[1]
@@ -568,18 +589,31 @@ class Order # for V2 ordering
       distributor_ids = Distributor.activated.where(company_name: /#{buyer_query}/i ).pluck(:id)
       buyer_ids = retailer_ids + distributor_ids
       brand_ids = Brand.activated.where(company_name: /#{brand_query}/i ).pluck(:id)
-      return show_completed ? Order.by_buyer(buyer_ids).by_brand(brand_ids) : Order.by_buyer(buyer_ids).by_brand(brand_ids).and(Order.active.selector)
+      return show_completed ? order_set.by_buyer(buyer_ids).by_brand(brand_ids) : order_set.by_buyer(buyer_ids).by_brand(brand_ids).and(Order.active.selector)
     when "buyer"
       q = query[0]
       retailer_ids = Retailer.activated.where(company_name: /#{q}/i ).pluck(:id)
       distributor_ids = Distributor.activated.where(company_name: /#{q}/i ).pluck(:id)
       buyer_ids = retailer_ids + distributor_ids
-      return show_completed ? Order.by_buyer(buyer_ids) : Order.by_buyer(buyer_ids).and(Order.active.selector)
+      return show_completed ? order_set.by_buyer(buyer_ids) : order_set.by_buyer(buyer_ids).and(Order.active.selector)
     when "brand"
       q = query[0]
       brand_ids = Brand.where(company_name: /#{q}/i ).pluck(:id)
-      return show_completed ? Order.by_brand(brand_ids) : Order.by_brand(brand_ids).and(Order.active.selector)
+      return show_completed ? order_set.by_brand(brand_ids) : order_set.by_brand(brand_ids).and(Order.active.selector)
+    when "products"
+      q = query[0]
+      return show_completed ? order_set.by_product(q) : order_set.by_product(q).and(Order.active.selector)
+    when "fulfillment"
+      q = query[0]
+      return show_completed ? order_set.by_fulfillment(q) : order_set.by_fulfillment(q).and(Order.active.selector)
+    when "status"
+      q = query[0]
+      return show_completed ? order_set.by_status(q) : order_set.by_status(q).and(Order.active.selector)
+    when "all"
+      q = query[0]
+      return show_completed ? order_set.search_all(q) : order_set.search_all(q).and(Order.active.selector)
     end
+
   end
 
 end

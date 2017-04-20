@@ -18,11 +18,13 @@
 				<%= render partial: "to_do" %>
 
 				<div class="row">
+					<% if false %><%# hiding %>
 					<div class="medium-2 columns">
 						<h3>Orders</h3>
 						<%= render partial: "shared/orders/orders_chart", locals: { filter: @filter } %>
 					</div><!--/.medium-2-->
-					<div class="medium-10 columns">
+					<% end %>
+					<div class="medium-12 columns">
 
 					<% if @recently_updated_orders %>
 						<h3>Recently Updated Orders</h3>

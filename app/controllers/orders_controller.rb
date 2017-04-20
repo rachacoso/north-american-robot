@@ -5,6 +5,46 @@ class OrdersController < ApplicationController
 	#setting of paid only done for testing & by admin only
 	before_action :administrators_only, only: [:paid, :delivered, :complete]
 
+	def orders_search
+		@orders = []
+		if params[:query_general_search].present?
+			q = params[:query_general_search]
+			@search_type = 'general_search'
+			@orders = Order.order_search(query: [q], type: @search_type, show_completed: params[:show_completed], user: @current_user)
+		# elsif params[:query_amount].present?
+		# 	q = params[:query_amount]
+		# 	@search_type = 'amount'
+		# 	@orders = Order.order_search(query: [q], type: @search_type, show_completed: params[:show_completed], user: @current_user)
+		# elsif params[:query_retailer_po].present?
+		# 	q = params[:query_retailer_po]
+		# 	@search_type = 'retailer_po'
+		# 	@orders = Order.order_search(query: [q], type: @search_type, show_completed: params[:show_completed], user: @current_user)
+		# elsif params[:query_landing_id].present?
+		# 	q = params[:query_landing_id]
+		# 	@search_type = 'landing_id'
+		# 	@orders = Order.order_search(query: [q], type: @search_type, show_completed: params[:show_completed], user: @current_user)
+		# 	@reset_buyer_brand = true
+		elsif params[:query_buyers].present?
+			q = params[:query_buyers]
+			@search_type = 'buyer'
+			@orders = Order.order_search(query: [q], type: @search_type, show_completed: params[:show_completed], user: @current_user)
+		elsif params[:query_products].present?
+			q = params[:query_products]
+			@search_type = 'products'
+			@orders = Order.order_search(query: [q], type: @search_type, show_completed: params[:show_completed], user: @current_user)
+		elsif params[:query_fulfillment].present?
+			q = params[:query_fulfillment]
+			@search_type = 'fulfillment'
+			@orders = Order.order_search(query: [q], type: @search_type, show_completed: params[:show_completed], user: @current_user)
+		elsif params[:query_status].present?
+			q = params[:query_status]
+			@search_type = 'status'
+			@orders = Order.order_search(query: [q], type: @search_type, show_completed: params[:show_completed], user: @current_user)
+		else
+			@orders = params[:show_completed] ? @current_user.company.orders : @current_user.company.orders.in_progress
+		end
+	end
+
 	def index
 
 		if company_id = params[:company_id] #with company filter
