@@ -7,15 +7,16 @@ class OrdersController < ApplicationController
 
 	def orders_search
 		@orders = []
-		show_complete = true if params[:show_completed] == "1"
+		@filters = params[:filters]
+		@show_complete = true if params[:show_completed] == "1"
 		if params[:query_general_search].present?
 			q = params[:query_general_search]
 			q.tr!('$','')
 			@search_type = 'general_search'
 			orders_set = params[:show_completed] == '1' ? @current_user.company.orders : @current_user.company.orders.in_progress
-			@orders = orders_set.set_filters(filters: params[:filters]).order_search(query: [q], type: @search_type, show_completed: show_complete, user: @current_user)
+			@orders = orders_set.set_filters(filters: params[:filters]).order_search(query: [q], type: @search_type, show_completed: @show_complete, user: @current_user)
 		else
-			orders = params[:show_completed] == '1' ? @current_user.company.orders : @current_user.company.orders.in_progress
+			orders = @show_complete ? @current_user.company.orders : @current_user.company.orders.in_progress
 			@orders = orders.set_filters(filters: params[:filters])
 		end
 	end

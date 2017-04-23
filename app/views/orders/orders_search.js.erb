@@ -8,62 +8,46 @@ $('#orders-search-reults').html("<%= j (render partial: 'orders_search_results',
   }
 
 <% case @search_type
-	when 'retailer_po' %>
-		$('#orders-search-input-retailer-po').css({ "background-color": "yellow", "border": "1px solid black" });
-		$('#orders-search-input-landing-id').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-brands').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-buyers').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-products').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-fulfillment').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-status').css({ "background-color": "", "border": ""});
-	<% when 'landing_id' %>
-		$('#orders-search-input-retailer-po').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-landing-id').css({ "background-color": "yellow", "border": "1px solid black" });
-		$('#orders-search-input-brands').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-buyers').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-products').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-fulfillment').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-status').css({ "background-color": "", "border": ""});
-	<% when 'buyer' %>
-		$('#orders-search-input-retailer-po').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-landing-id').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-brands').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-buyers').css({ "background-color": "yellow", "border": "1px solid black" });
-		$('#orders-search-input-products').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-fulfillment').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-status').css({ "background-color": "", "border": ""});
-	<% when 'products' %>
-		$('#orders-search-input-retailer-po').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-landing-id').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-brands').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-buyers').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-products').css({ "background-color": "yellow", "border": "1px solid black"});
-		$('#orders-search-input-fulfillment').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-status').css({ "background-color": "", "border": ""});
-	<% when 'fulfillment' %>
-		$('#orders-search-input-retailer-po').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-landing-id').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-brands').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-buyers').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-products').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-fulfillment').css({ "background-color": "yellow", "border": "1px solid black"});
-		$('#orders-search-input-status').css({ "background-color": "", "border": ""});
-	<% when 'status' %>
-		$('#orders-search-input-retailer-po').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-landing-id').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-brands').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-buyers').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-products').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-fulfillment').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-status').css({ "background-color": "yellow", "border": "1px solid black"});
+	when 'general_search' %>
+		$('#orders-search-input-general').css({ "background-color": "yellow", "border": "1px solid black" });
 	<% else %>
-		$('#orders-search-input-retailer-po').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-landing-id').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-brands').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-buyers').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-products').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-fulfillment').css({ "background-color": "", "border": ""});
-		$('#orders-search-input-status').css({ "background-color": "", "border": ""});
+		$('#orders-search-input-general').css({ "background-color": "", "border": ""});
 <% end %>
 
+<% @filters.each do |filter, value| %>
+	<% if filter == "buyers"  %>
+		<% if value.present? %>
+			$('#_filtersbuyers').css({ "background-color": "yellow", "border": "1px solid black" });
+		<% else %>
+			$('#_filtersbuyers').css({ "background-color": "", "border": ""});
+		<% end %>
+	<% end %>
+	<% if filter == "products" %>
+		<% if value.present? %>
+			$('#_filtersproducts').css({ "background-color": "yellow", "border": "1px solid black" });
+		<% else %>
+			$('#_filtersproducts').css({ "background-color": "", "border": ""});
+		<% end %>
+	<% end %>
+	<% if filter == "fulfillment" %>
+		<% if value.present? %>
+			$('#_filtersfulfillment').css({ "background-color": "yellow", "border": "1px solid black" });
+		<% else %>
+			$('#_filtersfulfillment').css({ "background-color": "", "border": ""});
+		<% end %>
+	<% end %>
+	<% if filter == "status" %>
+		<% if value.present? %>
+			$('#_filtersstatus').css({ "background-color": "yellow", "border": "1px solid black" });
+		<% else %>
+			$('#_filtersstatus').css({ "background-color": "", "border": ""});
+		<% end %>
+	<% end %>
+<% end %>
+
+<% if @show_complete %>
+	$('#show_completed').css({ "background-color": "yellow", "border": "1px solid black" });
+<% else %>
+	$('#show_completed').css({ "background-color": "", "border": ""});
+<% end %>
 		
