@@ -11,14 +11,14 @@
 		<div class="row">
 			<div class="small-12 columns">
 				<h2 class="text-center">FILTERS:</h2>
-				<% buyers_list = @current_user.company.orders.map { |order| [order.orderer_company_name, order.orderer_company_name] } %>
+				<% buyers_list = @current_user.company.orders.map { |order| [order.orderer_company_name, order.orderer.id] } %>
 				<div class="row">
-					<div class="medium-3 columns"><h3>buyers:</h3><%= select_tag :query_buyers, options_for_select(buyers_list.uniq), class: 'auto-form', include_blank: '(all)', style: 'margin-bottom: 0' %></div><!--/.medium-3-->
-					<div class="medium-3 columns"><h3>products:</h3><%= select_tag :query_products, options_for_select(@current_user.company.orders.map{ |o| o.order_items.pluck(:name)}.flatten.uniq.sort!), class: 'auto-form', include_blank: '(all)', style: 'margin-bottom: 0' %></div><!--/.medium-3-->
-					<div class="medium-2 columns"><h3>status:</h3><%= select_tag :query_status, options_for_select([['Submitted','submitted'],['Pending','pending'],['Approved','approved'],['Paid','paid'],['Shipped','shipped'],['Delivered','delivered'],['Complete','complete']]), class: 'auto-form', include_blank: '(all)', style: 'margin-bottom: 0' %></div><!--/.medium-3-->
-					<div class="medium-2 columns"><h3>fulfillment:</h3><%= select_tag :query_fulfillment, options_for_select([['Yes',true],['No',false]]), class: 'auto-form', include_blank: '(all)', style: 'margin-bottom: 0' %></div><!--/.medium-3-->
+					<div class="medium-3 columns"><h3>buyers:</h3><%= select_tag "[filters]buyers", options_for_select(buyers_list.uniq), class: 'auto-form', include_blank: '(all)', style: 'margin-bottom: 0' %></div><!--/.medium-3-->
+					<div class="medium-3 columns"><h3>products:</h3><%= select_tag "[filters]products", options_for_select(@current_user.company.orders.map{ |o| o.order_items.pluck(:name)}.flatten.uniq.sort!), class: 'auto-form', include_blank: '(all)', style: 'margin-bottom: 0' %></div><!--/.medium-3-->
+					<div class="medium-2 columns"><h3>fulfillment:</h3><%= select_tag "[filters]fulfillment", options_for_select([['Yes',true],['No',false]]), class: 'auto-form', include_blank: '(all)', style: 'margin-bottom: 0' %></div><!--/.medium-3-->
+					<div class="medium-2 columns"><h3>status:</h3><%= select_tag "[filters]status", options_for_select([['Submitted','submitted'],['Pending','pending'],['Approved','approved'],['Paid','paid'],['Shipped','shipped'],['Delivered','delivered'],['Completed','completed']]), class: 'auto-form', include_blank: '(all)', style: 'margin-bottom: 0' %></div><!--/.medium-3-->
 					<div class="medium-2 columns"><h3>show completed:</h3>
-					<%= select_tag :show_completed, options_for_select([['Yes','1']]), class: 'auto-form', include_blank: 'No', style: 'margin-bottom: 0' %>
+					<%= select_tag :show_completed, options_for_select([['No','0'],['Yes','1']]), class: 'auto-form', style: 'margin-bottom: 0' %>
 					</div><!--/.medium-3-->
 				</div><!--/.row-->
 				<div class="row">

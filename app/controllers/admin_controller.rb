@@ -129,25 +129,25 @@ class AdminController < ApplicationController
     if params[:query_retailer_po].present?
       q = params[:query_retailer_po]
       @search_type = 'retailer_po'
-      @orders = Order.order_search(query: [q], type: @search_type, show_completed: params[:show_completed], user: @current_user)
+      @orders = Order.all.order_search(query: [q], type: @search_type, show_completed: params[:show_completed], user: @current_user)
     elsif params[:query_landing_id].present?
       q = params[:query_landing_id]
       @search_type = 'landing_id'
-      @orders = Order.order_search(query: [q], type: @search_type, show_completed: params[:show_completed], user: @current_user)
+      @orders = Order.all.order_search(query: [q], type: @search_type, show_completed: params[:show_completed], user: @current_user)
       @reset_buyer_brand = true
     elsif params[:query_brands].present? && params[:query_buyers].present?
       brand_query = params[:query_brands]
       buyer_query = params[:query_buyers]
       @search_type = 'buyer_brand'
-      @orders = Order.order_search(query: [brand_query,buyer_query], type: @search_type, show_completed: params[:show_completed], user: @current_user)      
+      @orders = Order.all.order_search(query: [brand_query,buyer_query], type: @search_type, show_completed: params[:show_completed], user: @current_user)      
     elsif params[:query_buyers].present?
       q = params[:query_buyers]
       @search_type = 'buyer'
-      @orders = Order.order_search(query: [q], type: @search_type, show_completed: params[:show_completed], user: @current_user)
+      @orders = Order.all.order_search(query: [q], type: @search_type, show_completed: params[:show_completed], user: @current_user)
     elsif params[:query_brands].present?
       q = params[:query_brands]
       @search_type = 'brand'
-      @orders = Order.order_search(query: [q], type: @search_type, show_completed: params[:show_completed], user: @current_user)
+      @orders = Order.all.order_search(query: [q], type: @search_type, show_completed: params[:show_completed], user: @current_user)
     else
       @orders = params[:show_completed] ? Order.all : Order.in_progress
     end

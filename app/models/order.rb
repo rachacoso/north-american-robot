@@ -68,6 +68,7 @@ class Order # for V2 ordering
   scope :by_buyer, ->(ids) {where(:orderer_id.in => ids) }
   scope :by_status, ->(status) {where(status: status) }
   scope :by_product, ->(product_name) {where('order_items.name' => /#{product_name}/i) }
+  scope :by_product_exact, ->(product_name) {where('order_items.name' => /^#{product_name}$/i) }
   scope :by_fulfillment, -> (fulfillment) { fulfillment == 'true' ? where(landing_fulfillment_services: true) : where(landing_fulfillment_services: false) }
   scope :fulfillment_off, -> {where(landing_fulfillment_services: false) }
   scope :with_inventory_hold, ->(product) {where(:status.in => ["pending","approved","paid", "shipped","delivered"], :post_delivery_status.nin => ["sent","received","awaiting","paid"], :landing_fulfillment_services => true,'order_items.product_id' => product.id)}
@@ -558,13 +559,8 @@ class Order # for V2 ordering
     return true if InventoryAdjustment.from_order(self.id).present?
   end
 
-  def self.order_search(query:, type:, show_completed: false, user: )
-
-    if user.administrator
-      order_set = Order.all
-    else
-      order_set = user.company.orders
-    end
+  def self.order_search(query:, type:, show_completed: false, user:)
+    order_set = all
     case type
     when "amount"
       q = query[0]
@@ -610,10 +606,26 @@ class Order # for V2 ordering
       q = query[0]
       return show_completed ? order_set.by_status(q) : order_set.by_status(q).and(Order.active.selector)
     when "all"
-      q = query[0]
       return show_completed ? order_set.search_all(q) : order_set.search_all(q).and(Order.active.selector)
     end
 
+  end
+
+  def self.set_filters(filters:)
+    orders = all
+    if filters[:buyers].present?
+      orders = orders.by_buyer([filters[:buyers]])
+    end
+    if filters[:products].present?
+      orders = orders.by_product_exact(filters[:products])
+    end
+    if filters[:fulfillment].present?
+      orders = orders.by_fulfillment(filters[:fulfillment])
+    end
+    if filters[:status].present?
+      orders = orders.by_status(filters[:status])
+    end
+    return orders
   end
 
 end

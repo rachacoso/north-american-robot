@@ -7,42 +7,16 @@ class OrdersController < ApplicationController
 
 	def orders_search
 		@orders = []
+		show_complete = true if params[:show_completed] == "1"
 		if params[:query_general_search].present?
 			q = params[:query_general_search]
 			q.tr!('$','')
 			@search_type = 'general_search'
-			@orders = Order.order_search(query: [q], type: @search_type, show_completed: params[:show_completed], user: @current_user)
-		# elsif params[:query_amount].present?
-		# 	q = params[:query_amount]
-		# 	@search_type = 'amount'
-		# 	@orders = Order.order_search(query: [q], type: @search_type, show_completed: params[:show_completed], user: @current_user)
-		# elsif params[:query_retailer_po].present?
-		# 	q = params[:query_retailer_po]
-		# 	@search_type = 'retailer_po'
-		# 	@orders = Order.order_search(query: [q], type: @search_type, show_completed: params[:show_completed], user: @current_user)
-		# elsif params[:query_landing_id].present?
-		# 	q = params[:query_landing_id]
-		# 	@search_type = 'landing_id'
-		# 	@orders = Order.order_search(query: [q], type: @search_type, show_completed: params[:show_completed], user: @current_user)
-		# 	@reset_buyer_brand = true
-		elsif params[:query_buyers].present?
-			q = params[:query_buyers]
-			@search_type = 'buyer'
-			@orders = Order.order_search(query: [q], type: @search_type, show_completed: params[:show_completed], user: @current_user)
-		elsif params[:query_products].present?
-			q = params[:query_products]
-			@search_type = 'products'
-			@orders = Order.order_search(query: [q], type: @search_type, show_completed: params[:show_completed], user: @current_user)
-		elsif params[:query_fulfillment].present?
-			q = params[:query_fulfillment]
-			@search_type = 'fulfillment'
-			@orders = Order.order_search(query: [q], type: @search_type, show_completed: params[:show_completed], user: @current_user)
-		elsif params[:query_status].present?
-			q = params[:query_status]
-			@search_type = 'status'
-			@orders = Order.order_search(query: [q], type: @search_type, show_completed: params[:show_completed], user: @current_user)
+			orders_set = params[:show_completed] == '1' ? @current_user.company.orders : @current_user.company.orders.in_progress
+			@orders = orders_set.set_filters(filters: params[:filters]).order_search(query: [q], type: @search_type, show_completed: show_complete, user: @current_user)
 		else
-			@orders = params[:show_completed] ? @current_user.company.orders : @current_user.company.orders.in_progress
+			orders = params[:show_completed] == '1' ? @current_user.company.orders : @current_user.company.orders.in_progress
+			@orders = orders.set_filters(filters: params[:filters])
 		end
 	end
 
