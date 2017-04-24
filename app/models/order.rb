@@ -64,7 +64,7 @@ class Order # for V2 ordering
   scope :by_landing_id, ->(id) {where(landing_order_reference_id: /#{id}/i )}
   scope :by_brand, ->(ids) {where(:brand_id.in => ids) }
   scope :by_buyer, ->(ids) {where(:orderer_id.in => ids) }
-  scope :with_inventory_hold, ->(product) {where(:status.in => ["approved","paid", "shipped","delivered"], :post_delivery_status.nin => ["sent","received","awaiting","paid"],'order_items.product_id' => product.id)}
+  scope :with_inventory_hold, ->(product) {where(:status.in => ["pending","approved","paid", "shipped","delivered"], :post_delivery_status.nin => ["sent","received","awaiting","paid"],'order_items.product_id' => product.id)}
 
   def self.of_company(company_id:, type:)
     if type == "brand"

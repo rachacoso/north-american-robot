@@ -43,7 +43,7 @@ module InventoryAdjustmentsHelper
 		orders = product.brand.orders.with_inventory_hold(product).entries
 		adjustments = product.inventory_adjustments.entries
 		combined = orders + adjustments
-		return combined.sort_by! { |a| a.class.to_s == "Order" ? a.approved_date : a.c_at }.reverse
+		return combined.sort_by! { |a| a.class.to_s == "Order" ? a.pending_date_array.last : a.c_at }.reverse
 	end
 
 end

@@ -1,7 +1,7 @@
 <tr class="item">
 	<td>
-		<%= order.approved_date.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y") %><br>
-		<small><%= order.approved_date.in_time_zone("Pacific Time (US & Canada)").strftime("%H:%M:%S %Z") %></small>
+		<%= order.pending_date_array.last.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y") %><br>
+		<small><%= order.pending_date_array.last.in_time_zone("Pacific Time (US & Canada)").strftime("%H:%M:%S %Z") %></small>
 	</td>
 	<td>&nbsp;</td>
 	<td>&nbsp;</td>
