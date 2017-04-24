@@ -3,12 +3,17 @@
 <div class="pages-wrapper">
 
 	<div class="row">
-		<div class="medium-11 medium-centered columns">
+		<div class="medium-6 medium-centered columns">
 			<div class="new-user-subscription">
-				<h1>Hello, <%= @current_user.brand.company_name %>!</h1>
-				<h2>You need a subscription to access the full marketplace!<strong> Just $600/year for verified brands.</strong></h2>
-			
+				<h1>Hi there!</h1>
+				<h2>Your account is ready to be activated</h2>
 				<br>
+				<h2><strong>Please send your subscription payment!</strong></h2>
+				<br>
+				<%= link_to "PAY NOW", brand_subscription_url, class: "landing-button", style: "font-weight: 400;
+		text-decoration: none; color: white;", remote: true %>
+				<br>
+				<% if false %><%# hide this stuff%>
 				<div class="row" data-equalizer>
 					<div class="medium-6 columns panel" data-equalizer-watch>
 						
@@ -43,9 +48,8 @@
 							</div><!--/ .text-center -->
 						</div><!--/ .new-user-intro -->
 					</div><!--/.medium-4-->
-
 				</div><!--/.row-->
-
+				<% end %>
 			</div><!--/.new-user-intro -->
 		</div><!--/.small-12-->
 	</div><!--/.row-->

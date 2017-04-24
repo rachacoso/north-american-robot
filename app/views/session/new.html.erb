@@ -4,7 +4,7 @@
 <div class="front-top-panel">
 	<div class="row">
 		<div class="small-12 columns">
-			<div class="text-center" style="margin-top: 1em;"><h1>환영<br>WELCOME</h1></div>
+			<div class="text-center" style="margin-top: 1em;"><h1>WELCOME</h1></div>
 		</div><!--/.small-8 small-centered-->
 	</div><!--/.row-->
 	<div class="row">
@@ -32,7 +32,8 @@
 				<div class="ldpanel">
 				<div class="text-center">
 					<h2>
-						<%= link_to new_user_url, style: "color: black;" do %>not yet a member? <br><strong> JOIN US </strong><% end %>
+					<%#= link_to "JOIN", new_user_url, class: "action-link", remote: true %>
+						<%= link_to new_user_url, style: "color: black;", remote: true do %>not yet a member? <br><strong> JOIN US </strong><% end %>
 					</h2>
 				</div>
 				</div>

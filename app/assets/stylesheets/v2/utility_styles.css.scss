@@ -521,3 +521,12 @@ ul.tablist {
   color: $landing-middle-gray;
   z-index: 100022;
 }
+
+.large-banner {
+	font-weight: 900;
+	font-size: rem-calc(100);
+	line-height: rem-calc(100);
+	color: white;
+	background-color: $landing-blue;
+	padding: rem-calc(40) rem-calc(40);
+}

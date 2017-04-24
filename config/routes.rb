@@ -161,6 +161,7 @@ Rails.application.routes.draw do
   get    '/brand/full_profile' => 'brands#full_profile', as: 'brand_full_profile'
   patch  '/brand/edit' => 'brands#update'
   patch  '/brand/adminupdate/:id' => 'brands#adminupdate', as: 'brand_admin_update'
+  get    '/brand/subscribe' => 'brands#subscription', as: 'brand_subscription'
 
   # for article brand link
   get    '/brands/list' => 'brands#list', as: 'brand_list'

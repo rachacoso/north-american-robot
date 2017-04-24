@@ -2,7 +2,7 @@ class BrandsController < ApplicationController
 
 	before_action :check_usertype, only: [:edit, :public_profile, :full_profile, :update]
 	before_action :administrators_only, only: [:adminupdate]
-	skip_before_action :require_login, only: [:index, :view, :preview, :search]
+	skip_before_action :require_login, only: [:index, :view, :preview, :search, :subscription]
 
 	# V2 ACTIONS
 
@@ -43,6 +43,14 @@ class BrandsController < ApplicationController
 
 	end
 
+	def subscription
+
+	   respond_to do |format|
+	      format.html
+	      format.js
+	    end
+
+	end
 
 	def search
 		if params[:q].present?

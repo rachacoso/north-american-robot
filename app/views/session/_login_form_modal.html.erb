@@ -1,0 +1,46 @@
+<%= render layout: "shared/modal", locals: { size: "small" } do  %>
+<% remote ||= false %>
+<div class="row">
+	<div class="small-12 columns text-center">
+		<%= image_tag 'https://s3.amazonaws.com/landingintl-us/general/landing-logo.png', width: "100", alt: "Landing International" %>
+		<div class="errornotice <%= flash[:notice] ? "error-on" : "" %>">
+			<%= flash[:notice] ? flash[:notice].html_safe : "&nbsp;".html_safe %>
+		</div>
+	</div>
+</div>
+
+<%= form_tag '/login', method: 'post', id: "loginform" do %>
+<div class="row">
+	<div class="small-12 columns">
+		<%= email_field_tag :email, '', placeholder: 'EMAIL'%>
+	</div>
+</div>
+<div class="row">
+	<div class="small-12 columns">
+		<%= password_field_tag :password, '', placeholder: 'PASSWORD' %>
+	</div>
+</div>
+<div class="row">
+	<div class="medium-8 columns">
+		<div class="row">
+			<div class="small-1 columns">
+				<%= check_box_tag :keep_me_logged_in %>
+			</div>
+			<div class="small-11 columns">
+				<%= label_tag :keep_me_logged_in, 'KEEP ME LOGGED IN' %>
+			</div>
+		</div>
+	</div>
+	<div class="medium-4 columns text-right">
+		<%= submit_tag "LOGIN", class: "alert button", id: "submit-login", style: "padding:0; color: black;" %>
+		<%#= link_to 'LOGIN', "#", :onclick => "$('#loginform').submit()".html_safe, class: "alert button expand" %>
+	</div>
+</div>
+<% end %>
+
+<div class="row">
+	<div class="medium-6 medium-centered columns text-center">
+		<small><%= link_to "forgot password?", new_password_reset_path, style: "color: black;" %></small>
+	</div>
+</div>
+<% end %>
