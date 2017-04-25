@@ -6,8 +6,7 @@
 	<tr class="total">
 		<td colspan="3">&nbsp;</td>
 		<td>CURRENT INVENTORY:<br>
-		<strong>old:<%= product.inventory ||= 0 %></strong><br>
-		<strong>new:<%= product.inventory_new ||= 0 %></strong>
+		<strong><%= product.inventory_new ||= 0 %></strong>
 		</td>
 		<td>PENDING INVENTORY:<br>
 		<strong><%= product.inventory_less_on_hold ||= 0 %></strong></td>
