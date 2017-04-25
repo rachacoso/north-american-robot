@@ -6,7 +6,9 @@
 	<tr class="total">
 		<td colspan="3">&nbsp;</td>
 		<td>CURRENT INVENTORY:<br>
-		<strong><%= product.inventory ||= 0 %></strong></td>
+		<strong>old:<%= product.inventory ||= 0 %></strong><br>
+		<strong>new:<%= product.inventory_new ||= 0 %></strong>
+		</td>
 		<td>PENDING INVENTORY:<br>
 		<strong><%= product.inventory_less_on_hold ||= 0 %></strong></td>
 	</tr>
@@ -39,9 +41,15 @@
 	<% end %>
 	<% get_combined_entries(product).each do |item| %>
 		<% if item.class.to_s == "Order" %>
-			<%= render partial: "/inventory_adjustments/item_hold", locals: { order: item, product: product } %>
+			<% if Order.with_inventory_hold(product).include?(item) %>
+				<%= render partial: "/inventory_adjustments/item_hold", locals: { order: item, product: product } %>
+			<% elsif Order.with_inventory_deductions(product).include?(item) %>
+				<%= render partial: "/inventory_adjustments/item_deduction", locals: { order: item, product: product } %>
+			<% end %>
 		<% else %>
-			<%= render partial: "/inventory_adjustments/item_adjustment", locals: { adjustment: item } %>
+			<% if item.type != "deducted" %>
+				<%= render partial: "/inventory_adjustments/item_adjustment", locals: { adjustment: item } %>
+			<% end %>
 		<% end %>
 	<% end %>
 </table>

@@ -37,6 +37,7 @@ class Order # for V2 ordering
   field :disputed_date, type: DateTime
   field :completed_date, type: DateTime
   field :error_date, type: DateTime
+  field :inventory_deduction_date, type: DateTime
 
   field :ship_date, type: DateTime
   field :ship_to_us_date, type: DateTime
@@ -65,6 +66,7 @@ class Order # for V2 ordering
   scope :by_brand, ->(ids) {where(:brand_id.in => ids) }
   scope :by_buyer, ->(ids) {where(:orderer_id.in => ids) }
   scope :with_inventory_hold, ->(product) {where(:status.in => ["pending","approved","paid", "shipped","delivered"], :post_delivery_status.nin => ["sent","received","awaiting","paid"],'order_items.product_id' => product.id)}
+  scope :with_inventory_deductions, ->(product) {where(:status.in => ["delivered","completed"], :post_delivery_status.in => ["sent","received","awaiting","paid"],:landing_fulfillment_services => true, 'order_items.product_id' => product.id)}
 
   def self.of_company(company_id:, type:)
     if type == "brand"
@@ -526,22 +528,25 @@ class Order # for V2 ordering
   end
 
   def update_inventory
-    if self.brand.has_inventory? && !self.inventory_deducted?
-      self.order_items.each do |item|
-        units_to_deduct = item.quantity.to_i + item.quantity_testers.to_i
-        product = Product.find(item.product_id)
-        comment = ""
-        comment += "Landing Order ID: #{self.landing_order_reference_id}" if self.landing_order_reference_id.present?
-        comment += "\n#{self.brand.company_name} Order ID: #{self.brand_order_reference_id}" if self.brand_order_reference_id.present?
-        comment += "\n#{self.orderer.company_name} Order ID: #{self.orderer_order_reference_id}" if self.orderer_order_reference_id.present?
-        product.inventory_adjustments.create(
-          units: units_to_deduct, 
-          type: "deducted", 
-          comment: comment,
-          order_id: self.id
-          )
-      end
+    if self.inventory_deduction_date.blank?
+      self.inventory_deduction_date = DateTime.now
     end
+    # if self.brand.has_inventory? && !self.inventory_deducted?
+    #   self.order_items.each do |item|
+    #     units_to_deduct = item.quantity.to_i + item.quantity_testers.to_i
+    #     product = Product.find(item.product_id)
+    #     comment = ""
+    #     comment += "Landing Order ID: #{self.landing_order_reference_id}" if self.landing_order_reference_id.present?
+    #     comment += "\n#{self.brand.company_name} Order ID: #{self.brand_order_reference_id}" if self.brand_order_reference_id.present?
+    #     comment += "\n#{self.orderer.company_name} Order ID: #{self.orderer_order_reference_id}" if self.orderer_order_reference_id.present?
+    #     product.inventory_adjustments.create(
+    #       units: units_to_deduct, 
+    #       type: "deducted", 
+    #       comment: comment,
+    #       order_id: self.id
+    #       )
+    #   end
+    # end
   end
 
   def inventory_deducted?

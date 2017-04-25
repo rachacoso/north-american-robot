@@ -40,10 +40,11 @@ module InventoryAdjustmentsHelper
 	end
 
 	def get_combined_entries(product)
-		orders = product.brand.orders.with_inventory_hold(product).entries
+		holds = product.brand.orders.with_inventory_hold(product).entries
+		deductions = product.brand.orders.with_inventory_deductions(product).entries
 		adjustments = product.inventory_adjustments.entries
-		combined = orders + adjustments
-		return combined.sort_by! { |a| a.class.to_s == "Order" ? a.pending_date_array.last : a.c_at }.reverse
+		combined = holds + deductions + adjustments
+		return combined.sort_by! { |a| a.class.to_s == "Order" ? ( Order.with_inventory_deductions(product).include?(a) ? (a.inventory_deduction_date.blank? ? a.delivered_date : a.inventory_deduction_date ) : a.pending_date_array.last) : a.c_at }.reverse
 	end
 
 end
