@@ -120,4 +120,10 @@ module HomeHelper
 		end
 		
 	end
+
+	def show_to_do?
+		# if @adjustments.present?
+			return true
+		# end
+	end
 end

@@ -1,26 +1,44 @@
+<% if show_to_do? %>
+	<div class="row">
+		<div class="small-12 columns">
+			<h3 style="color: #EA84C7;">To Do</h3>
+			<div id="dashboard-alerts">
 
-<% if @adjustments.present? %>
-<div class="row">
-	<div class="small-12 columns">
-		<h3 style="color: #EA84C7;">To Do</h3>
-		<div id="dashboard-alerts">
-			<div class="small-centered">
-			<% if @adjustments.present? %>
-			<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
-				<% @adjustments.each do |a| %>
-					<li><%= render partial: "inventory_adjustments/item_requested_dashboard_display", locals: { adjustment: a } %></li>
-				<% end %>
-			</ul>
+			<% if !@show_whats_next %>
+				<div id="whats-next"15>
+					<h1>Complete Your Profile</h1>
+					<div id="content">
+					<h2>Please complete your brand profile so your potential partners can learn about you and be better matched to your products and customer base</h2>
+					<%= link_to "COMPLETE YOUR PROFILE", brand_url, class: "landing-button", target: "_blank"%>
+					</div>
+				</div><!--#whats-next-->
 			<% end %>
-			</div>
-			<div id="onboard">
-				<%# if @current_user.brand %>
-					<%#= render partial: "onboard_brand" %>
-				<%# else %>
-					<%#= render partial: "onboard_buyer" %>
-				<%# end %>
-			</div>
-		</div>
-	</div><!--/.small-12-->
-</div><!--/.row-->
+			
+			<% if @adjustments.present? %>
+				<div id="adjustments">
+					<h1>Inventory Requests</h1>
+					<br>
+					<div class="small-centered">
+						<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
+							<% @adjustments.each do |a| %>
+								<li><%= render partial: "inventory_adjustments/item_requested_dashboard_display", locals: { adjustment: a } %></li>
+							<% end %>
+						</ul>
+					</div>
+				</div><!--#adjustments-->
+			<% end %>
+
+			<% if false %><%# hide for now %>
+				<div id="onboard">
+					<%# if @current_user.brand %>
+						<%#= render partial: "onboard_brand" %>
+					<%# else %>
+						<%#= render partial: "onboard_buyer" %>
+					<%# end %>
+				</div>
+			<% end %>
+
+			</div><!--#dashboard-alerts -->
+		</div><!--.small-12-->
+	</div><!--.row-->
 <% end %>

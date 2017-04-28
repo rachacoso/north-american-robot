@@ -1,5 +1,17 @@
 <%= render partial: 'shared/v2/header/main' %>
 <%= render partial: 'shared/v2/header/marketplace' %>
+<% content_for :javascript_foot do %>
+  <%= javascript_tag do %>
+		$(document).ready(function() {
+
+			$('#profile-preview-data').html("<%= j (render partial: '/pages/private/newbrand_modal') %>");
+			$('.overlay#profile-preview-overlay').fadeIn();
+			$('#profile-preview').fadeIn();
+			setModalActions();
+
+		});
+  <% end %>
+<% end %>
 <div style="height: 100vh;">
 <br><br><br>
 	<div class="row">

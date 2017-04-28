@@ -17,10 +17,14 @@
 
 #marketplace-dashboard {
 	#top-info {
-		font-size: rem-calc(25);
+		font-size: rem-calc(20);
+		@media #{$small-only} {
+			font-size: rem-calc(20);
+			line-height: rem-calc(20);
+		}
 		font-weight: 900;
 		color: $landing-middle-gray;
-		text-align: justify;
+//		text-align: justify;
 		line-height: rem-calc(25);
 		small {
 			font-size: 80%;
@@ -37,6 +41,29 @@
 		border-top: 2px solid $landing-middle-gray;
 	}
 	#dashboard-alerts {
+		margin-bottom: rem-calc(30);
+		& > div {
+			margin: rem-calc(30) 0;
+		}
+		h1 {
+			color: $landing-darker-blue;
+			font-weight: 900;
+			font-size: rem-calc(30);
+			line-height: rem-calc(30);
+			@media #{$small-only} {
+				font-size: rem-calc(20);
+			}
+		}
+		h2 {
+			@media #{$small-only} {
+				font-size: rem-calc(20);
+			}
+		}
+		#whats-next {
+			#content {
+				margin: rem-calc(20);
+			}
+		}
 		#onboard {
 			margin: rem-calc(20) 0;
 			// border: 1px solid $landing-middle-gray;
@@ -51,42 +78,44 @@
 				margin-bottom: rem-calc(40);
 			}
 		}
-		.inventory-request {
-			position: relative;
-			background-color: $landing-light-gray;
-			border: 1px solid $landing-middle-gray;
-			width: rem-calc(220);
-			height: rem-calc(220);
-			padding: rem-calc(10);
-			margin: 0 auto;
-			font-weight: 200;
-			color: black;
-			#title {
-				// text-align: right;
-			}
-			#name {
-				font-weight: 800;
-				margin-bottom: rem-calc(5);
-			}
-			#units {
+		#adjustments {
+			.inventory-request {
+				position: relative;
+				background-color: $landing-light-gray;
+				border: 1px solid $landing-middle-gray;
+				width: rem-calc(220);
+				height: rem-calc(220);
+				padding: rem-calc(10);
+				margin: 0 auto;
 				font-weight: 200;
-				font-size: rem-calc(30);
-				span {
-					font-size: rem-calc(15);
+				color: black;
+				#title {
+					// text-align: right;
 				}
-			}
-			#comments {
+				#name {
+					font-weight: 800;
+					margin-bottom: rem-calc(5);
+				}
+				#units {
+					font-weight: 200;
+					font-size: rem-calc(30);
+					span {
+						font-size: rem-calc(15);
+					}
+				}
+				#comments {
 
-			}
-			#request-remainder {
-				position: absolute;
-				bottom: 0px;
-				span { font-weight: 500;}
-				margin-bottom: rem-calc(10);
-			}
-			&:hover {
-				-webkit-filter: drop-shadow( 0px 0px 2px $landing-dark-gray );
-				filter: drop-shadow( 0px 0px 2px $landing-dark-gray ); 
+				}
+				#request-remainder {
+					position: absolute;
+					bottom: 0px;
+					span { font-weight: 500;}
+					margin-bottom: rem-calc(10);
+				}
+				&:hover {
+					-webkit-filter: drop-shadow( 0px 0px 2px $landing-dark-gray );
+					filter: drop-shadow( 0px 0px 2px $landing-dark-gray ); 
+				}
 			}
 		}
 	}
