@@ -1,44 +1,19 @@
 <%= render partial: 'shared/v2/header/main' %>
 <%= render partial: 'shared/v2/header/marketplace' %>
-<div class="pages-wrapper">
-
+<div style="height: 100vh;">
+<br><br><br>
 	<div class="row">
-		<div class="medium-6 medium-centered columns">
+		<div class="medium-6 medium-centered columns text-center">
 			<div class="new-user-subscription">
-				<h1>Hi there!</h1>
-				<h2> It looks like your brand profile is still waiting to be approved.</h2>
-				<br>
-				<h2><strong> Please email us at <a mailto="info@landingintl.com" style="color:black;">info@landingintl.com</a><br> if you haven’t heard back about the status of your profile.</strong></h2>
-				<br>
-				<% if false %><%# hide this stuff%>
-				<div class="row" data-equalizer>
-					<div class="medium-6 columns panel" data-equalizer-watch style="border: 1px solid #B3B3B3;">
-						
-						<h2><span class="step" data-step="1"></span><br>Wait for Approval</h2>
-						
-						<h3><strong>We will need to confirm your brand fit with our marketplace!</strong></h3>
-						<br>
-						<h3>Here's the company information we have for you:</h3>
-						<br>
-						<table><tbody>
-							<tr><td>Company Name: </td><td><strong><%= @current_user.brand.company_name %></strong></td></tr>
-							<tr><td>Company Website: </td><td><strong><%= @current_user.brand.website %></strong></td></tr>
-						</tbody></table>
-						<br>
-						<h3>If there are any errors, or if you have any questions, please contact us for assistance any time at <a mailto="info@landingintl.com" style="color:black;">info@landingintl.com</a></h3>
-						<br>
-					</div><!--/.medium-4-->
-					<div class="medium-6 columns panel" data-equalizer-watch>
-					
-						<h2><span class="step" data-step="2"></span><br>Pay Subscription Fee</h2>
-						<h3>You will be able to pay after approval</h3>
-					</div><!--/.medium-4-->
-
-				</div><!--/.row-->
-				<% end %>
-			</div><!--/.new-user-intro -->
-		</div><!--/.small-12-->
+				<div id="notice">this area requires a subscription</div><!--/#notice -->	
+				<div id="main">
+					<h1>Hi there!</h1>
+					<h2> It looks like your brand profile is still waiting to be approved.</h2>
+					<hr style="border-top: 1px solid #B3B3B3;">
+					<h3> Please email us at <a mailto="info@landingintl.com" style="color:black;">info@landingintl.com</a><br> if you haven’t heard back about the status of your profile.</h3>
+				</div><!--/#main -->	
+			</div><!--/.new-user-subscription -->
+		</div><!--/.medium-6-->
 	</div><!--/.row-->
-
-</div><!--/.pages-wrapper-->
+</div><!--/.100vh-->
 <%= render partial: 'shared/v2/footer/main' %>

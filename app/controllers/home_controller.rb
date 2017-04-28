@@ -1,8 +1,8 @@
 class HomeController < ApplicationController
   
 	skip_before_action :require_login, only: [:front, :dashboard, :prospect_share, :prospect_share_login]
-	before_action :require_login, only: [:dashboard], :if => :is_a_brand?
-
+	# before_action :require_login, only: [:dashboard], :if => :is_a_brand?
+	before_action :check_subscription, only: [:dashboard]
 
 	def front
 		

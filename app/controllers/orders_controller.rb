@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
 
+	before_action :check_subscription, only: [:index]
 	before_action :set_order, only: [:show, :edit, :update, :destroy, :submit, :pending, :approve, :decline_approval, :shipment, :paid, :delivered, :armor_disabled_delivered, :armor_disabled_completed, :complete, :ship_date, :cancel_date]
 
 	#setting of paid only done for testing & by admin only

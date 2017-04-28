@@ -1,58 +1,21 @@
 <%= render partial: 'shared/v2/header/main' %>
 <%= render partial: 'shared/v2/header/marketplace' %>
-<div class="pages-wrapper">
-
+<div style="height: 100vh;">
+<br><br><br>
 	<div class="row">
-		<div class="medium-6 medium-centered columns">
+		<div class="medium-6 medium-centered columns text-center">
 			<div class="new-user-subscription">
-				<h1>Hi there!</h1>
-				<h2>Your account is ready to be activated</h2>
-				<br>
-				<h2><strong>Please send your subscription payment!</strong></h2>
-				<br>
-				<%= link_to "PAY NOW", brand_subscription_url, class: "landing-button", style: "font-weight: 400;
-		text-decoration: none; color: white;", remote: true %>
-				<br>
-				<% if false %><%# hide this stuff%>
-				<div class="row" data-equalizer>
-					<div class="medium-6 columns panel" data-equalizer-watch>
-						
-							<h2 style="color: green;"><span class="step" data-step="1"></span><br>Wait for Approval  &#10003;</h2>
-							<h3><strong>Congratulations, you've been approved!</strong></h3>
-						
-					</div><!--/.medium-4-->
-					<div class="medium-6 columns panel" data-equalizer-watch style="border: 1px solid #B3B3B3;">
-					
-						<h2><span class="step" data-step="2"></span><br>Pay Subscription Fee</h2>
-						<div class="new-user-intro panel" style="background-color: #f2f2f2;">
-							<div class="text-center">
-								<h3><strong>To subscribe,<br>please pay by wire</strong></h3>
-								<h3><strong>$600 annual subscription fee can be wired to:</strong></h3>
-								<br>
-								<table style="margin: auto;"><tbody>
-									<tr><td>Bank: </td><td><strong>Citibank, NA</strong></td></tr>
-									<tr><td>Swift Code: </td><td><strong>CITIUS33</strong></td></tr>
-									<tr><td>Routing/ABA Number: </td><td><strong>321171184</strong></td></tr>
-									<tr><td>Account Number: </td><td><strong>205978521</strong></td></tr>
-								</tbody></table>
-								<br>
-
-								
-								<h3><strong>
-								Landing International Inc.<br>
-								800 Wilshire Blvd, Suite 200<br>
-								Los Angeles, CA 90017<br>
-								</strong></h3>
-								<br>
-								<h3>Contact us for assistance any time at <a mailto="info@landingintl.com" style="color:black;">info@landingintl.com</a></h3>
-							</div><!--/ .text-center -->
-						</div><!--/ .new-user-intro -->
-					</div><!--/.medium-4-->
-				</div><!--/.row-->
-				<% end %>
+				<div id="notice">this area requires a subscription</div><!--/#notice -->	
+				<div id="main">
+					<h1>Hi there!</h1>
+					<h2>Your subscription is ready to be activated.</h2>
+					<hr style="border-top: 1px solid #B3B3B3;">
+					<h3>Please send your subscription payment!</h3>
+					<%= link_to "PAY NOW", brand_subscription_url, class: "landing-button", style: "font-weight: 400;
+			text-decoration: none; color: white;", remote: true %>
+				</div><!--/#main -->	
 			</div><!--/.new-user-intro -->
 		</div><!--/.small-12-->
 	</div><!--/.row-->
-
-</div><!--/.pages-wrapper-->
+</div><!--/.100vh-->
 <%= render partial: 'shared/v2/footer/main' %>

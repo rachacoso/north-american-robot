@@ -81,15 +81,7 @@ class ApplicationController < ActionController::Base
   end
  
   def require_login
-    if @current_user 
-      if @current_user.brand #checks for brand approval & subscription
-        if !@current_user.brand.active
-          render "/pages/private/wait"
-        elsif !@current_user.brand.subscriber?
-          render "/pages/private/subscribe"
-        end
-      end
-    else
+    unless @current_user 
       flash[:notice] = "YOU MUST BE LOGGED IN TO ACCESS (err: 22)"
       session[:persisted_redirect] = nil # reset any persisted redirect
       redirect_to login_url # halts request cycle
@@ -118,6 +110,16 @@ class ApplicationController < ActionController::Base
     if @current_user && @current_user.administrator
       unless controller_name == "users" || controller_name == "admin" || controller_name == "session" || controller_name == "sectors" || controller_name == "channels" || controller_name = "comapny_sizes" || controller_name = "displays" 
         redirect_to admin_url
+      end
+    end
+  end
+
+  def check_subscription
+    if @current_user && @current_user.brand #checks for brand approval & subscription
+      if !@current_user.brand.active
+        render "/pages/private/wait"
+      elsif !@current_user.brand.subscriber?
+        render "/pages/private/subscribe"
       end
     end
   end

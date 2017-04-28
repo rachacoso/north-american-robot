@@ -3,6 +3,7 @@ class BrandsController < ApplicationController
 	before_action :check_usertype, only: [:edit, :public_profile, :full_profile, :update]
 	before_action :administrators_only, only: [:adminupdate]
 	skip_before_action :require_login, only: [:index, :view, :preview, :search, :subscription]
+	before_action :check_subscription, only: [:view, :edit, :full_profile]
 
 	# V2 ACTIONS
 
