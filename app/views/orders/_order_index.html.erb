@@ -14,11 +14,11 @@
 				<% brand_or_buyer_list = get_brands_or_buyers(@current_user) %>
 				<div class="row">
 					<% if @current_user.brand %>
-						<div class="medium-3 columns"><h3>buyers:</h3><%= select_tag "[filters]buyers", options_for_select(brand_or_buyer_list.uniq), class: 'auto-form', include_blank: '(all)', style: 'margin-bottom: 0' %></div><!--/.medium-3-->
+						<div class="medium-3 columns"><h3>buyer:</h3><%= select_tag "[filters]buyers", options_for_select(brand_or_buyer_list.uniq), class: 'auto-form', include_blank: '(all)', style: 'margin-bottom: 0' %></div><!--/.medium-3-->
 					<% else %>
-						<div class="medium-3 columns"><h3>buyers:</h3><%= select_tag "[filters]brands", options_for_select(brand_or_buyer_list.uniq), class: 'auto-form', include_blank: '(all)', style: 'margin-bottom: 0' %></div><!--/.medium-3-->
+						<div class="medium-3 columns"><h3>brand:</h3><%= select_tag "[filters]brands", options_for_select(brand_or_buyer_list.uniq), class: 'auto-form', include_blank: '(all)', style: 'margin-bottom: 0' %></div><!--/.medium-3-->
 					<% end %>
-					<div class="medium-3 columns"><h3>products:</h3><%= select_tag "[filters]products", options_for_select(@current_user.company.orders.map{ |o| o.order_items.pluck(:name)}.flatten.uniq.sort!), class: 'auto-form', include_blank: '(all)', style: 'margin-bottom: 0' %></div><!--/.medium-3-->
+					<div class="medium-3 columns"><h3>product:</h3><%= select_tag "[filters]products", options_for_select(@current_user.company.orders.map{ |o| o.order_items.pluck(:name)}.flatten.uniq.sort!), class: 'auto-form', include_blank: '(all)', style: 'margin-bottom: 0' %></div><!--/.medium-3-->
 					<div class="medium-2 columns"><h3>fulfillment:</h3><%= select_tag "[filters]fulfillment", options_for_select([['Yes',true],['No',false]]), class: 'auto-form', include_blank: '(all)', style: 'margin-bottom: 0' %></div><!--/.medium-3-->
 					<% if @current_user.brand %>
 						<div class="medium-2 columns"><h3>status:</h3><%= select_tag "[filters]status", options_for_select([['Submitted','submitted'],['Pending','pending'],['Approved','approved'],['Paid','paid'],['Shipped','shipped'],['Delivered','delivered'],['Completed','completed']]), class: 'auto-form', include_blank: '(all)', style: 'margin-bottom: 0' %></div><!--/.medium-3-->
