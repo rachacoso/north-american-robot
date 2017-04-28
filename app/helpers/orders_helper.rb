@@ -1,5 +1,14 @@
 module OrdersHelper
 
+	def get_brands_or_buyers(user)
+		if user.brand
+			list = user.company.orders.map { |order| [order.orderer_company_name, order.orderer.id] }
+		else	
+			list = user.company.orders.map { |order| [order.brand_company_name, order.brand.id] }
+		end
+		return list.sort_by { |o| o[0] }
+	end
+
 	def order_flow_cart(status:, step:)
 		case step
 		when "cart"

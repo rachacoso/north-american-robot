@@ -14,7 +14,7 @@
 		<% if orders.any? %>
 			<% orders.each do |o| %>
 			<tr>
-				<td><%= link_to order_url(o), target: 'blank' do %><%= @current_user.type? == "brand" ? o.orderer.company_name : o.brand.company_name %><% end %></td>
+				<td><%= link_to order_url(o), target: 'blank' do %><%= @current_user.type? == "brand" ? o.orderer_company_name : o.brand_company_name %><% end %></td>
 				<td><%= link_to order_url(o), target: 'blank' do %><%= number_to_currency(o.total_price) %><% end %></td>
 				<td><%= link_to order_url(o), target: 'blank' do %><%= o.orderer_order_reference_id %><% end %></td>
 				<td><%= link_to order_url(o), target: 'blank' do %><%= o.landing_order_reference_id %><% end %></td>

@@ -66,6 +66,7 @@ class Order # for V2 ordering
   scope :by_landing_id, ->(id) {where(landing_order_reference_id: /#{id}/i )}
   scope :by_brand, ->(ids) {where(:brand_id.in => ids) }
   scope :by_buyer, ->(ids) {where(:orderer_id.in => ids) }
+  scope :by_brand, ->(ids) {where(:brand_id.in => ids) }
   scope :by_status, ->(status) {where(status: status) }
   scope :by_product, ->(product_name) {where('order_items.name' => /#{product_name}/i) }
   scope :by_product_exact, ->(product_name) {where('order_items.name' => /^#{product_name}$/i) }
@@ -615,6 +616,9 @@ class Order # for V2 ordering
     orders = all
     if filters[:buyers].present?
       orders = orders.by_buyer([filters[:buyers]])
+    end
+    if filters[:brands].present?
+      orders = orders.by_brand([filters[:brands]])
     end
     if filters[:products].present?
       orders = orders.by_product_exact(filters[:products])

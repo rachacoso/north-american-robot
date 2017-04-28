@@ -22,6 +22,13 @@ $('#orders-search-reults').html("<%= j (render partial: 'orders_search_results',
 			$('#_filtersbuyers').css({ "background-color": "", "border": ""});
 		<% end %>
 	<% end %>
+	<% if filter == "brands"  %>
+		<% if value.present? %>
+			$('#_filtersbrands').css({ "background-color": "yellow", "border": "1px solid black" });
+		<% else %>
+			$('#_filtersbrands').css({ "background-color": "", "border": ""});
+		<% end %>
+	<% end %>
 	<% if filter == "products" %>
 		<% if value.present? %>
 			$('#_filtersproducts').css({ "background-color": "yellow", "border": "1px solid black" });
