@@ -12,15 +12,6 @@
  *
  
  *= require_self
- *= require foundation_and_overrides
- *= require colorbox
- *= require foundation-datepicker
- *= require dropzone
- *= require finaltilesgallery
- *= require owl.carousel
- *= require owl.theme
- *= require owl.transitions
- *= require dropit
- *= require_tree ./screen
+ *= require_tree ./print
  
  */
