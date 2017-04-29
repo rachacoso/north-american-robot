@@ -17,16 +17,6 @@
  *= require foundation-datepicker
  *= require dropzone
  *= require finaltilesgallery
- *= require mixins
- *= require landing
- *= require profiles
- *= require profiles_edit
- *= require errors_and_alerts
- *= require onboard
- *= require conversations
- *= require front_page
- *= require matches
- *= require forms
  *= require owl.carousel
  *= require owl.theme
  *= require owl.transitions
