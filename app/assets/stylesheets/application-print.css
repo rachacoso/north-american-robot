@@ -15,3 +15,7 @@
  *= require_tree ./print
  
  */
+
+html {
+	font-family: "proxima-nova", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+}

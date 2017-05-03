@@ -50,6 +50,8 @@ Rails.application.routes.draw do
   patch   '/order/comments/:id' => 'comments#update', as: 'order_update_comment'
   # order-calculator display
   get   'order/calculator/show/:id' => 'orders#show_calculator', as: 'show_order_calculator'
+  # printable order
+  get   'order/print/:id' => 'orders#print', as: 'print_order'
 
 # comments
   resources :comments, only: [:create]

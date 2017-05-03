@@ -1,0 +1,25 @@
+<% additional_comments ||= [] %>
+<% unless comment.blank? && additional_comments.blank? %>
+<div class="order-comment-display">
+	<div id="comment-title">
+		
+	</div>
+
+	<% unless comment.blank? %>
+		<% unless comment.text.blank? %>
+			<div id="comment-body">
+				<%= simple_format(comment.text, {}, wrapper_tag: "div") %>
+				<span id="attribution">&#747; comment from <span id="author"><%= comment.author == "brand" ? comment.commentable.brand.company_name : comment.commentable.orderer.company_name %></span>
+			</div>
+		<% end %>
+	<% end %>	
+
+	<% additional_comments.each do |comment| %>
+	<div id="comment-body">
+		<%= simple_format(comment.text, {}, wrapper_tag: "div") %>
+		<span id="attribution">&#747; comment from <span id="author"><%= comment.author == "brand" ? comment.commentable.brand.company_name : comment.commentable.orderer.company_name %></span>
+		on <span id="date"><%= comment.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %d, %Y at %H:%M:%S %Z") if comment.c_at.present? %></span> </span>
+	</div>
+	<% end %>
+</div>
+<% end %>

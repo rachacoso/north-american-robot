@@ -1,0 +1,16 @@
+
+@page { margin: 1cm; }
+
+#print-header {
+	float: right;
+	text-align: right;
+	font-weight: 100;
+	h2 { font-weight: 100; }
+	#title { font-weight: 500; }
+}
+#order-shipping-data {
+	clear: both;
+}
+ul {
+	list-style-type: none; /*to remove bullets*/
+}

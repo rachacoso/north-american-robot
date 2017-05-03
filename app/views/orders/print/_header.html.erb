@@ -3,8 +3,7 @@
 	<div class="row">
 		<div class="small-6 columns">
 		</div><!--/.small-6-->
-		<div class="small-6 columns text-right">
-			<div id="print-header">
+		<div class="small-6 columns text-right" id="print-header">
 			<h2><%= "[Estimated]" if ['open','submitted','pending'].include? order.status %> Invoice</h2>
 			<small>by</small>
 			<%= image_tag 'https://s3.amazonaws.com/landingintl-us/general/landing-logo.png', width: "100", alt: "Landing International" %>
@@ -30,7 +29,6 @@
 					<li><span id="title"><%= order.orderer_company_name %> Order Reference ID</span> <%= order.orderer_order_reference_id %></li>
 				<% end %>
 			</ul>
-			</div>
 		</div><!--/.small-6-->
 	</div><!--/.row-->
 	<div class="row" id="order-shipping-data">
