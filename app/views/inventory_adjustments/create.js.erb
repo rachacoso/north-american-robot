@@ -7,6 +7,7 @@ $('#inventory_adjustment_<%= e %>').css({'background-color' : '#ff8772'});
 <% else %>
 $('#inventory-item').fadeOut();
 $('.overlay').fadeOut();
-$('#inventory-management').html("<%= j (render partial: 'inventory_adjustments/inventory_adjustments') %>");
+$('#inventory-table-view').html("<%= j (render partial: '/inventory_adjustments/inventory_table', locals: { product: @product }) %>");
+// $('#inventory-management').html("<%= j (render partial: 'inventory_adjustments/inventory_adjustments') %>");
 <%= render partial: 'shared/ajax_message', locals: { updated_item: "Inventory" } %>
 <% end %>

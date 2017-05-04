@@ -1,55 +1,7 @@
-<% @brand.products.each do |product| %>
-<table class="inventory" id="p_<%= product.id %>">	
-	<tr class="product-header">
-		<td colspan="5"><%= product.name %></td>
-	</tr>
-	<tr class="total">
-		<td colspan="3">&nbsp;</td>
-		<td>CURRENT INVENTORY:<br>
-		<strong><%= product.inventory_new ||= 0 %></strong>
-		</td>
-		<td>PENDING INVENTORY:<br>
-		<strong><%= product.inventory_less_on_hold ||= 0 %></strong></td>
-	</tr>
-	<tr class="controls">
-		<% if @current_user.administrator? %>
-		<td>&nbsp;</td>
-		<td class="addnew"><%= link_to "add inventory request", new_inventory_adjustment_url("requested",product.id), remote: true %></td>
-		<td>&nbsp;</td>
-		<td class="addnew"><%= link_to "add received/deducted inventory", new_inventory_adjustment_url("received",product.id), remote: true %></td>
-		<td>&nbsp;</td>
-		<% else %>
-		<td colspan="2">&nbsp;</td>
-		<td class="addnew"><%= link_to "add shipment notification", new_inventory_adjustment_url("shipment",product.id), remote: true %></td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<% end %>
-	</tr>
-	<tr class="adjustments-header">
-		<th>DATE</th>
-		<th>UNITS REQUESTED by Landing</th>
-		<th>UNITS SHIPPED by <%=@brand.company_name %></th>
-		<th>UNITS RECEIVED (UNITS DEDUCTED)</th>
-		<th>UNITS on HOLD for PENDING ORDERS</th>
-	</tr>
-	<% if product.inventory_adjustments.blank? %>
-	<tr class="item">
-		<td colspan="2">&nbsp;</td>
-		<td colspan="3">&nbsp;</td>
-	</tr>
-	<% end %>
-	<% get_combined_entries(product).each do |item| %>
-		<% if item.class.to_s == "Order" %>
-			<% if Order.with_inventory_hold(product).include?(item) %>
-				<%= render partial: "/inventory_adjustments/item_hold", locals: { order: item, product: product } %>
-			<% elsif Order.with_inventory_deductions(product).include?(item) %>
-				<%= render partial: "/inventory_adjustments/item_deduction", locals: { order: item, product: product } %>
-			<% end %>
-		<% else %>
-			<% if item.type != "deducted" %>
-				<%= render partial: "/inventory_adjustments/item_adjustment", locals: { adjustment: item } %>
-			<% end %>
-		<% end %>
-	<% end %>
-</table>
+<%= form_tag view_inventory_table_url, remote: true do %>
+<%= select_tag(:product_id, options_from_collection_for_select(@brand.products.sort_by{ |product| product.item_id }, :id, :name_with_id), include_blank: 'Select a product', class: 'auto-form') %>
 <% end %>
+
+<div id="inventory-table-view">
+<%#= render partial: "/inventory_adjustments/inventory_table", locals: { product: product } %>
+</div>

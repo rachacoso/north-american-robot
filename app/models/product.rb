@@ -58,4 +58,7 @@ class Product
 		return (self.price * (1-(discount.to_f/100)))
 	end
 
+	def name_with_id
+		return "#{self.item_id} - #{self.name}"
+	end
 end

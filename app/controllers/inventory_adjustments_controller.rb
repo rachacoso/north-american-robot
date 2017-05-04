@@ -1,8 +1,12 @@
 class InventoryAdjustmentsController < ApplicationController
 
-	before_action :set_product, only: [:new,:create]
+	before_action :set_product, only: [:new,:create,:view_table]
 	before_action :set_adjustment, only: [:edit,:update, :destroy]
 	# before_action :administrators_only, only: [:edit,:update]
+
+	def view_table
+
+	end
 
 	def index
 		@brand = @current_user.brand
@@ -54,7 +58,7 @@ class InventoryAdjustmentsController < ApplicationController
 			@adjustment.mailer_send_update_notice
 		end
 		@brand = @adjustment.product.brand
-
+		@product = @adjustment.product
 	end
 
 	def destroy
@@ -65,6 +69,7 @@ class InventoryAdjustmentsController < ApplicationController
 			end
 			@adjustment.destroy
 		end
+		@product = @adjustment.product
 	end
 
 	private
