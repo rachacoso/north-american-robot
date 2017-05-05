@@ -1,0 +1,23 @@
+<%= render layout: "shared/modal", locals: { size: "large" } do  %>
+<div class="row">
+  <div class="small-12 text-center">
+    <div class="new-user-modal">
+      <% if flash[:newuser_returning] %>
+        <h1>Welcome Back!</h1>
+      <% else %>
+        <h1>You're almost done!</h1>
+      <% end %>
+      <div class="row">
+        <div class="small-10 small-centered columns">
+        <h2>We need to confirm your email address <br>before we can sign you in.</h2>
+        <br>
+        <h3>We've sent you an email at<br>
+        <strong><%= email %></strong></h3>
+        <br>
+        <h3>Please check your email and follow the instructions to activate your account.</h3>
+        </div><!--/.small-12-->
+      </div><!--/.row-->
+    </div><!--/.new-user-subscription -->
+  </div><!--/.medium-6-->
+</div><!--/.row-->
+<% end %>

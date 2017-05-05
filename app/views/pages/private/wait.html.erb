@@ -1,27 +1,21 @@
 <%= render partial: 'shared/v2/header/main' %>
 <%= render partial: 'shared/v2/header/marketplace' %>
-<% content_for :javascript_foot do %>
-  <%= javascript_tag do %>
-		$(document).ready(function() {
 
-			$('#profile-preview-data').html("<%= j (render partial: '/pages/private/newbrand_modal') %>");
-			$('.overlay#profile-preview-overlay').fadeIn();
-			$('#profile-preview').fadeIn();
-			setModalActions();
-
-		});
-  <% end %>
-<% end %>
 <div style="height: 100vh;">
 <br><br><br>
 	<div class="row">
 		<div class="medium-6 medium-centered columns text-center">
 			<div class="new-user-subscription">
-				<div id="notice">this area requires a subscription</div><!--/#notice -->	
+				<div id="notice">this area requires a subscription</div><!--/#notice -->
+				<div id="sub-notice">AWAITING APPROVAL</div><!--/#notice -->
 				<div id="main">
 					<h1>Hi there!</h1>
-					<h2> It looks like your brand profile is still waiting to be approved.</h2>
-					<hr style="border-top: 1px solid #B3B3B3;">
+					<div class="row">
+						<div class="small-10 small-centered columns">
+							<h2>It looks like your brand profile is still waiting to be approved.</h2>		
+						</div><!--/.small-12-->
+					</div><!--/.row-->
+					<br>
 					<h3> Please email us at <a mailto="info@landingintl.com" style="color:black;">info@landingintl.com</a><br> if you haven’t heard back about the status of your profile.</h3>
 				</div><!--/#main -->	
 			</div><!--/.new-user-subscription -->

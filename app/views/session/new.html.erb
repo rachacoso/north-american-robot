@@ -1,5 +1,6 @@
 <%= render partial: 'shared/v2/header/main' %>
-<%= render "newuser" if flash[:newuser_modal] %>
+<%= (render partial: "newuser", locals: { confirmed: false, email: flash[:newuser_confirmation_needed] }) if flash[:newuser_confirmation_needed] %>
+<%= (render partial: "newuser", locals: { confirmed: true, email: flash[:email_confirmed] }) if flash[:email_confirmed] %>
 
 <div class="front-top-panel">
 	<div class="row">
@@ -9,12 +10,21 @@
 	</div><!--/.row-->
 	<div class="row">
 		<div class="small-10 medium-5 small-centered columns">
-			<% if flash[:newuser] %>
+			<% if flash[:newuser_confirmation_needed] %>
 			<div class="ldpanel" style="background: #f2f2f2">
-				<%= flash[:newuser].html_safe %>
+				<%= render partial: "shared/newusers/new_user_notice", locals: { email: flash[:newuser_confirmation_needed] } %>
 			</div>
 			<% end %>
-
+			<% if flash[:email_confirmed] %>
+			<div class="ldpanel" style="background: #f2f2f2">
+				<%= render partial: "shared/newusers/email_confirmed_notice", locals: { email: flash[:email_confirmed] } %>
+			</div>
+			<% end %>
+			<% if flash[:email_confirmation_failed] %>
+			<div class="ldpanel" style="background: #f2f2f2">
+				<%= render partial: "shared/newusers/email_confirmation_failed" %>
+			</div>
+			<% end %>
 			<div class="ldpanel">
 			  <div class="row">
 					<div class="small-12 columns">

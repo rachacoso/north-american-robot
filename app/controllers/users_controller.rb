@@ -54,30 +54,8 @@ class UsersController < ApplicationController
         end
 
         # for new user modal firing
-        # flash[:notice] = true 
-        flash[:newuser_modal] = "
-          <div class='row'>
-            <div class='medium-5 columns'>
-              <h2>You're almost done!</h2>
-            </div><!--/.medium-5-->
-            <div class='medium-7 columns'>
-              <h3><strong>We need to confirm your email address before we can sign you in.</strong></h3>
-              <h3>We've sent an email to you at<br>
-               <strong>#{@newuser.email}</strong></h3>
-              <h3>Please check your email and follow the instructions to activate your account.</h3>
-            </div><!--/.medium-7-->
-          </div><!--/.row-->
-        "
-        flash[:newuser] = "
-          <div class='row'>
-            <div class='small-12 columns'>
-              <h3><strong>We need to confirm your email address before we can sign you in.</strong></h3>
-              <h3>We've sent an email to you at<br>
-               <strong>#{@newuser.email}</strong></h3>
-              <h3>Please check your email and follow the instructions to activate your account.</h3>
-            </div><!--/.small-12-->
-          </div><!--/.row-->
-        "
+        flash[:newuser_confirmation_needed] = "#{@newuser.email}"
+
         if params[:administrator]
           @redirect_url = users_url
         else
@@ -115,28 +93,10 @@ class UsersController < ApplicationController
     user = User.find_by(email_confirmation_token: params[:token])
     if user
       user.confirm_email
-      flash[:newuser_modal] = "
-        <div class='row'>
-          <div class='medium-5 columns'>
-            <h2>Welcome to the Landing Marketplace!</h2>
-          </div><!--/.medium-5-->
-          <div class='medium-7 columns'>
-            <h3>Thank you for confirming your email address:<br> <strong>#{user.email}</strong></h3>
-            <h3>Please sign in to continue.</h3>
-          </div><!--/.medium-7-->
-        </div><!--/.row-->
-      "
-      flash[:newuser] = "
-        <div class='row'>
-          <div class='small-12 columns'>
-            <h3>Thank you for confirming your email address:<br> <strong>#{user.email}</strong></h3>
-            <h3>Please sign in to continue.</h3>
-          </div><!--/.small-12-->
-        </div><!--/.row-->
-      "
+      flash[:email_confirmed] = user.email
       redirect_to login_url
     else
-      flash[:newuser] = "Sorry! Email Confirmation Failed <br>[User does not exist or Link has expired]"
+      flash[:email_confirmation_failed] = true
       redirect_to login_url
     end
   end

@@ -8,8 +8,16 @@
 				<div id="whats-next"15>
 					<h1>Complete Your Profile</h1>
 					<div id="content">
-					<h2>Please complete your brand profile so your potential partners can learn about you and be better matched to your products and customer base</h2>
-					<%= link_to "COMPLETE YOUR PROFILE", brand_url, class: "landing-button", target: "_blank"%>
+					<% if  @current_user.brand %>
+						<h2>Please complete your brand profile so your potential partners can learn about you and be better matched to your products and customer base</h2>
+						<%= link_to "COMPLETE YOUR PROFILE", brand_url, class: "landing-button", target: "_blank"%>
+					<% elsif @current_user.retailer %>
+						<h2>Please complete your retailer profile so your potential partners can learn about you and be better matched to your customer base</h2>
+						<%= link_to "COMPLETE YOUR PROFILE", retailer_url, class: "landing-button", target: "_blank"%>
+					<% elsif @current_user.distributor %>
+						<h2>Please complete your distributor profile so your potential partners can learn about you and be better matched to your customer base</h2>
+						<%= link_to "COMPLETE YOUR PROFILE", distributor_url, class: "landing-button", target: "_blank"%>
+					<% end %>
 					</div>
 				</div><!--#whats-next-->
 			<% end %>

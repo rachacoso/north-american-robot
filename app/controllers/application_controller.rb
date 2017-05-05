@@ -45,29 +45,8 @@ class ApplicationController < ActionController::Base
         else # re/send email confirmation if email not yet confirmed and logout
           a.resend_confirmation
           cookies.delete :auth_token
-          flash[:newuser_modal] = "
-            <div class='row'>
-              <div class='medium-5 columns'>
-                <h2>Welcome Back to the Landing Marketplace!</h2>
-              </div><!--/.medium-5-->
-              <div class='medium-7 columns'>
-                <h3><strong>We need to confirm your email address before we can sign you in.</strong></h3>
-                <h3>We've sent an email to you at<br>
-                <strong>#{a.email}</strong></h3>
-                <h3>Please check your email and follow the instructions to activate your account.</h3>
-              </div><!--/.medium-7-->
-            </div><!--/.row-->
-          "
-          flash[:newuser] = "
-            <div class='row'>
-              <div class='small-12 columns'>
-                <h3><strong>We need to confirm your email address before we can sign you in.</strong></h3>
-                <h3>We've sent an email to you at<br>
-                <strong>#{a.email}</strong></h3>
-                <h3>Please check your email and follow the instructions to activate your account.</h3>
-              </div><!--/.small-12-->
-            </div><!--/.row-->
-          "
+          flash[:newuser_confirmation_needed] = "#{a.email}"
+          flash[:newuser_returning] = true
           @current_user = nil
           redirect_to login_url and return # halts request cycle     
         end

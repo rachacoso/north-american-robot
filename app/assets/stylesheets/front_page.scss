@@ -19,7 +19,7 @@
   }
 }
 
-.new-user-intro, .new-user-subscription {
+.new-user-intro, .new-user-subscription, .new-user-modal {
 	a {
 		color: $landing-dark-gray;
 		font-weight: 800;
@@ -94,8 +94,16 @@
 		font-weight: bold;
 		font-size: rem-calc(17);
 	}
+	#sub-notice {
+		width: 100%;
+		padding: rem-calc(7) 0;
+		background-color: $landing-light-gray;
+		color: $landing-dark-gray;
+		font-weight: bold;
+		font-size: rem-calc(17);	
+	}
 	#main {
-		padding: rem-calc(30);
+		padding: rem-calc(20) 0 rem-calc(30) 0;
 	}
 }
 
@@ -202,6 +210,19 @@
             filter: drop-shadow( 2px 2px 3px #000 ); /* Same syntax as box-shadow */
 }
 
-
+.new-user-modal {
+	h1 {
+		font-size: rem-calc(40);
+		line-height: rem-calc(30);
+	}
+	h2 {
+		font-size: rem-calc(30);
+		line-height: rem-calc(30);
+	}
+	h3 {
+		font-size: rem-calc(20);
+		line-height: rem-calc(20);
+	}
+}
 
 

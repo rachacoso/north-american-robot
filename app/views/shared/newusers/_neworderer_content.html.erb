@@ -1,17 +1,20 @@
+<%= render layout: "shared/modal", locals: { size: "x-large" } do  %>
 <div class="row newuser-modal">
 	<div class="medium-11 medium-centered columns">
-		<h2>Thank you for joining the Landing Marketplace!</h2>
-		
-		<div class="row">
-			<div class="medium-5 columns" id="left-column">
-				<h3><strong>View Brands</strong><br>You can now view full brand profiles and order products directly from brands. Browse potential partners in the <%= link_to "beauty marketplace", brands_url, target: "_blank", style: "font-weight: 500;" %>.</h3>
-			</div><!--/.medium-5-->
-			<div class="medium-7 columns">
-				<h3><strong>Complete Your Profile</strong><br>Don't forget to complete your <%= link_to "#{@current_user.type?} profile", eval("#{@current_user.type?}_url"), target: "_blank", style: "font-weight: 500;" %> so your potential brand partners can learn about you and be better matched to your brand assortment and customer base.</h3>
-			</div><!--/.medium-7-->
-		</div><!--/.row-->
+		<div class="new-user-intro">
+			<h1>Thank you for joining the Landing Marketplace!</h1>
+			<div class="row">
+				<div class="medium-5 columns" id="left-column">
+					<h3><strong>View Brands</strong><br>You can now view full brand profiles and order products directly from brands. Browse potential partners in the <%= link_to "beauty marketplace", brands_url, target: "_blank", style: "font-weight: 500;" %>.</h3>
+				</div><!--/.medium-5-->
+				<div class="medium-7 columns">
+					<h3><strong>Complete Your Profile</strong><br>Don't forget to complete your <%= link_to "#{@current_user.type?} profile", eval("#{@current_user.type?}_url"), target: "_blank", style: "font-weight: 500;" %> so your potential brand partners can learn about you and be better matched to your brand assortment and customer base.</h3>
+				</div><!--/.medium-7-->
+			</div><!--/.row-->
 
-		<hr>
-		<h3>Contact us for assistance any time at <a mailto="info@landingintl.com" style="font-weight: 500;">info@landingintl.com</a></h3>
+			<hr>
+			<h3>Contact us for assistance any time at <a mailto="info@landingintl.com" style="font-weight: 500;">info@landingintl.com</a></h3>
+		</div><!--/.new-user-subscription-->	
 	</div><!--/.medium-10 medium-centered-->
 </div><!--/.row-->
+<% end %>

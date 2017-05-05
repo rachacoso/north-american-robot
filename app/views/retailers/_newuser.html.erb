@@ -2,9 +2,7 @@
   <%= javascript_tag do %>
 		$(document).ready(function() {
 
-			$('#profile-preview-data').html("<%= j (render partial: 'shared/newusers/neworderer_content') %>");
-			$('.overlay#profile-preview-overlay').fadeIn();
-			$('#profile-preview').fadeIn();
+			showModal("<%= j (render partial: 'shared/newusers/neworderer_content') %>");
 
 		});
   <% end %>
