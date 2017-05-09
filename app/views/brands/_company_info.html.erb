@@ -34,7 +34,7 @@
 		<%= form_for @brand, url: brand_url, remote: true do |f| %>
 			<div class="row">
 				<div class="small-12 columns">
-					<%= f.text_area :company_name, rows: 2, style: "font-size:2em; font-weight:bold;", placeholder: "Brand Name", required: "required", class: "auto-form-text" %>
+					<%= f.text_area :company_name, rows: 2, style: "font-size:2em; font-weight:bold;", placeholder: "Brand Name", required: "required", class: "auto-form-text", label: "Brand Name" %>
 				</div>
 			</div>
 
