@@ -10,7 +10,7 @@
 				<%= form_for @brand, :html => {id: 'company-info-form'}, url: brand_url do |f| %>
 					<%= hidden_field_tag "redirect_anchor", "a-companyinfo" %>
 					<%= f.label :logo do %>
-						Company logo <br>
+						Brand logo <br>
 						<div class="text-center">
 							<% if @brand.logo.exists? %>
 								<br>
@@ -34,7 +34,7 @@
 		<%= form_for @brand, url: brand_url, remote: true do |f| %>
 			<div class="row">
 				<div class="small-12 columns">
-					<%= f.text_area :company_name, rows: 2, style: "font-size:2em; font-weight:bold;", placeholder: "Company Name", required: "required", class: "auto-form-text" %>
+					<%= f.text_area :company_name, rows: 2, style: "font-size:2em; font-weight:bold;", placeholder: "Brand Name", required: "required", class: "auto-form-text" %>
 				</div>
 			</div>
 
