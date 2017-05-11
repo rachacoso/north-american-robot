@@ -3,6 +3,7 @@
 		<tr>
 			<th><%= @current_user.type? == "brand" ? "Buyer" : "Brand" %></th>
 			<th>Total</th>
+			<th>Date</th>
 			<th>Buyer PO#</th>
 			<th>Landing PO#</th>
 			<th>Products</th>
@@ -16,6 +17,7 @@
 			<tr>
 				<td><%= link_to order_url(o), target: 'blank' do %><%= @current_user.type? == "brand" ? o.orderer_company_name : o.brand_company_name %><% end %></td>
 				<td><%= link_to order_url(o), target: 'blank' do %><%= number_to_currency(o.total_price) %><% end %></td>
+				<td <%= sortable_date(o.c_at) %>><%= link_to order_url(o), target: 'blank' do %><%= o.c_at.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%Y<br><small>at %R %Z</small>").html_safe %><% end %></td>
 				<td><%= link_to order_url(o), target: 'blank' do %><%= o.orderer_order_reference_id %><% end %></td>
 				<td><%= link_to order_url(o), target: 'blank' do %><%= o.landing_order_reference_id %><% end %></td>
 				<td><%= link_to order_url(o), target: 'blank' do %><%= o.order_items.pluck(:name).join("<br>").html_safe %><% end %></td>
