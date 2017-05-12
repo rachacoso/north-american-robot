@@ -216,8 +216,8 @@ input[type=radio]+ label:active  {
   */
   input[type=checkbox]:checked + label { 
     background-image: none;
-    background-color: scale-color($landing-green, $lightness: 30%);
-    border: 1px solid scale-color($landing-green, $lightness: -50%);
+    background-color: scale-color($input-background-color, $lightness: 30%);
+    border: 1px solid scale-color($input-background-color, $lightness: -50%);
     color: #000;
     // background-color: #e7e7e7;
   }

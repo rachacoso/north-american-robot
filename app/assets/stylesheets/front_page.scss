@@ -104,6 +104,12 @@
 	}
 	#main {
 		padding: rem-calc(20) 0 rem-calc(30) 0;
+		h1.greyed {
+			color: scale-color($landing-middle-gray, $lightness: 30%);
+		}
+	}
+	@media #{$small-only} { 
+		margin-bottom: rem-calc(5);
 	}
 }
 
