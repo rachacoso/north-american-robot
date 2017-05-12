@@ -120,9 +120,15 @@
 
 <%= form_for @brand, url: brand_admin_update_path(@brand), remote: true do |f| %>
 	
-		<div class="row">
-			<div class="small-12 columns">
-				<div class="panel">
+		<div class="row editform" data-equalizer>
+			<div class="medium-5 columns">
+				<div class="panel" data-equalizer-watch>
+					<h2>Brand Approval</h2>
+					<%= f.check_box :active, class: "auto-form toggle-text", label: false, data: {on: "Approved", off: "Not Approved"} %><%= f.label :active, (@brand.active ? "Approved" : "Not Approved") %>
+				</div>
+			</div><!--/.medium-5-->
+			<div class="medium-7 columns">	
+				<div class="panel" data-equalizer-watch>
 					<h2>Subscriber Status</h2>
 					<div class="row">
 						<div class="small-12 columns">
@@ -144,12 +150,7 @@
 						</div><!--/.medium-3-->
 					</div><!--/.row-->
 				</div>
-				<div class="panel">
-					<h2>Active/Visibility Status</h2>
-					<small><span data-tooltip aria-haspopup="true" class="has-tip" title="This controls whether this profile is visible/available for matching.">What is this?</span></small><br>
-					<%= f.check_box :active, class: "auto-form" %>
-				</div>
-			</div><!--/.small-12-->	
+			</div><!--/.medium-7-->	
 		</div><!--/.row-->	
 
 <% end %>

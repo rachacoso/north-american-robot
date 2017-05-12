@@ -1,6 +1,7 @@
 $( document ).ready(function() {
 
     initializeAutoForm();
+    toggleFormText();
 
 });
 
@@ -48,6 +49,19 @@ function initializeAutoForm() {
     $('.auto-form').unbind('change').on('change', function(e){
         var thisForm = $(this).parents('form');
         $(thisForm).submit();
+    });
+
+}
+
+function toggleFormText() {
+    $('.toggle-text').click(function() {
+        var onText = $(this).data('on');
+        var offText = $(this).data('off');
+        if ($(this).is(':checked')) {
+            $(this).siblings('label').html(onText);
+        } else {
+            $(this).siblings('label').html(offText);
+        }
     });
 
 }
