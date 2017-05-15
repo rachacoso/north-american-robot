@@ -12,7 +12,7 @@ function showModal(data) {
     });
     $('#modal-overlay, a.modal-close').on('click', function(e){
         e.preventDefault();
-        $('#modal-container').animate( {top: "-50%"}, 200, function() { 
+        $('#modal-container').animate( {top: "-100%"}, 200, function() { 
             $('#modal').fadeOut( 200, function() {
                 $( this ).empty();
               });
