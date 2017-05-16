@@ -37,7 +37,14 @@ class AdminController < ApplicationController
     brands = Brand.all
     if params[:q] && !params[:q].blank?
       @query = params[:q]
-      brands = brands.where(company_name: /#{@query}/i )
+      company_search_results = brands.where(company_name: /#{@query}/i )
+      
+      if matches = @query.match(/\A(LB-)?(?<account_number>\d+)\z/)
+        account_number_search_results = brands.where(subscriber_account_number: matches[:account_number].to_i )
+        brands = company_search_results + account_number_search_results
+      else
+        brands = company_search_results
+      end
     end
     brands = brands.sort_by{ |d| d.company_name.to_s }
     @brands = do_kaminari_array(brands, params[:page])
