@@ -39,7 +39,7 @@ class AdminController < ApplicationController
       @query = params[:q]
       company_search_results = brands.where(company_name: /#{@query}/i )
       
-      if matches = @query.match(/\A(LB-)?(?<account_number>\d+)\z/)
+      if matches = @query.match(/\A(LB-)?(lb-)?(?<account_number>\d+)\z/)
         account_number_search_results = brands.where(subscriber_account_number: matches[:account_number].to_i )
         brands = company_search_results + account_number_search_results
       else
