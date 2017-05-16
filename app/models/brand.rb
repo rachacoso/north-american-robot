@@ -6,10 +6,12 @@ class Brand
 	include LandingCompany::Sellers
 	include LandingCompany::BuyersAndSellers
 
+	before_create { set_subscriber_account_number }
+
   #####################
 	### Profile
 	#####################
-
+	field :subscriber_account_number, type: Integer
 	# BRAND STORY
 	field :brand_positioning, type: String # now referenced as "company introduction" in ui
 
@@ -73,6 +75,10 @@ class Brand
 
 	def has_inventory?
 		return true if InventoryAdjustment.any_in(:product_id => self.products.pluck(:id)).present?
+	end
+
+	def display_subscriber_account_number
+		return "LB-#{self.subscriber_account_number}"
 	end
 
 	def all_product_photos
@@ -184,5 +190,17 @@ class Brand
 			return 2
 		end
 
+	end
+
+	def set_subscriber_account_number
+		unless self.subscriber_account_number.present?
+			next_number = Brand.max(:subscriber_account_number)
+			if next_number != nil
+				begin
+					next_number += 1
+					self.subscriber_account_number = next_number
+				end while Brand.where(subscriber_account_number: next_number).exists?
+			end
+		end
 	end
 end

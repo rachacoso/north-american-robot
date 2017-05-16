@@ -1,3 +1,12 @@
+task :set_brand_subscriber_account_numbers => :environment do
+	brands = Brand.all
+	brands.each do |b|
+		b.set_subscriber_account_number
+		b.save
+		puts "#{b.company_name} #{b.active} #{b.subscriber_account_number}"
+	end
+end
+
 task :set_auth_tokens => :environment do
 	users = User.where(:auth_token => nil)
 	puts users.count

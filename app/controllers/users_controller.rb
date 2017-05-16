@@ -43,8 +43,8 @@ class UsersController < ApplicationController
       @newuser.contact.firstname = @user_firstname
       @newuser.contact.lastname = @user_lastname
 
-      if verify_recaptcha(model: @newuser) && @newuser.save # if validates
-      # if @newuser.save # if validates
+      # if verify_recaptcha(model: @newuser) && @newuser.save # if validates
+      if @newuser.save # if validates
         #create profile for the selected user type
         @newuser.initial_setup(type: @user_type, company_name: @company_name, website: @website)
 
