@@ -1,0 +1,9 @@
+<% if brand.subscriber? %>
+	<h3 id="subscription-status" style="color: green;">
+		Subscription Expires on:<br><%= brand.subscription_expiration.strftime("%m-%d-%Y") %>
+	</h3>
+<% else %>
+	<h3 id="subscription-status" style="color: red;">
+		<%= brand.subscription_expiration.present? ? "Subscription Expired on:<br>#{brand.subscription_expiration.strftime('%m-%d-%Y')}".html_safe : "" %>
+	</h3>
+<% end %>

@@ -5,12 +5,43 @@
 
 
 // Profile Edit Form
+#form-inputs {
+  & > div.optional {
+    display: none;
+  }
+}
+#profile-edit-tabs {
+//  padding: 0 rem-calc(5) rem-calc(5) 0;
+  span {
+    cursor: pointer;
+    display: inline-block;
+    width: 40%;
+    border-top: 1px solid $landing-middle-gray;
+    border-left: 1px solid $landing-middle-gray;
+    border-right: 1px solid $landing-middle-gray;
+    padding: 0 rem-calc(5) rem-calc(5) 0;
+    text-align: center;
+    font-weight: 200;
+    color: $landing-middle-gray;
+    @media #{$small-only} { 
+
+    }
+    @media #{$medium-up} { 
+      border-top: 5px solid $landing-middle-gray;
+      border-radius: 3px 3px 0px 0px;
+    }
+    &.selected {
+      font-weight: 800;
+      color: $landing-dark-gray;
+    }
+  }
+}
 
 .profile-edit-form {
-  border-radius: 3px;
+  border-radius: 3px 0px 3px 3px;
   border: 1px solid $landing-middle-gray;
   padding: 0em 1em 1em 1em;
-  margin: 0.5em 0em 1.5em 0em;
+  margin: 0 0em 1.5em 0em;
   background: white;
   h1 {
     padding-bottom: 0.4em;
@@ -34,6 +65,9 @@
     @media #{$medium-up} { 
       border-top: 5px solid $landing-middle-gray;
       // border-right: 5px solid $landing-middle-gray;
+    }
+    & > div.optional {
+      display: none;
     }
   }
 }

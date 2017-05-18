@@ -1,14 +1,13 @@
-<div class="row">
-	<div class="small-1 columns">
-		<%= image_tag b_or_d.logo.url(:medium)%>
-	</div>
-	<div class="small-11 columns">
-		<% if b_or_d.class.to_s == "Distributor" %>
-			<%= link_to "#{b_or_d.company_name.blank? ? '(no name)' : b_or_d.company_name}", admin_distributor_view_url(b_or_d) %>
-		<% elsif b_or_d.class.to_s == "Retailer" %> 
-			<%= link_to "#{b_or_d.company_name.blank? ? '(no name)' : b_or_d.company_name}", admin_retailer_view_url(b_or_d) %>
-		<% elsif b_or_d.class.to_s == "Brand" %> 
-			<%= link_to "#{b_or_d.company_name.blank? ? '(no name)' : b_or_d.company_name}", admin_brand_view_url(b_or_d) %>
-		<% end %>
-	</div><!--/.small-12-->
-</div><!--/.row-->
+<tr>
+	<% if b_or_d.class.to_s == "Distributor" %>
+		<td><%= link_to "#{b_or_d.company_name.blank? ? '(no name)' : b_or_d.company_name}", admin_distributor_view_url(b_or_d) %></td>
+		<td><%= link_to "#{b_or_d.users.first.email}", admin_distributor_view_url(b_or_d) %></td>
+	<% elsif b_or_d.class.to_s == "Retailer" %> 
+		<td><%= link_to "#{b_or_d.company_name.blank? ? '(no name)' : b_or_d.company_name}", admin_retailer_view_url(b_or_d) %></td>
+		<td><%= link_to "#{b_or_d.users.first.email}", admin_retailer_view_url(b_or_d) %></td>
+	<% elsif b_or_d.class.to_s == "Brand" %> 
+		<td><%= link_to "#{b_or_d.company_name.blank? ? '(no name)' : b_or_d.company_name}", admin_brand_view_url(b_or_d) %></td>
+		<td><%= link_to "#{b_or_d.display_subscriber_account_number}", admin_brand_view_url(b_or_d) %></td>
+		<td><%= link_to "#{b_or_d.users.first.email}", admin_brand_view_url(b_or_d) %></td>
+	<% end %>
+</tr>

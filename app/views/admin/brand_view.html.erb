@@ -120,38 +120,47 @@
 
 <%= form_for @brand, url: brand_admin_update_path(@brand), remote: true do |f| %>
 	
-		<div class="row editform" data-equalizer>
-			<div class="medium-5 columns">
-				<div class="panel" data-equalizer-watch>
-					<h2>Brand Approval</h2>
-					<%= f.check_box :active, class: "auto-form toggle-text", label: false, data: {on: "Approved", off: "Not Approved"} %><%= f.label :active, (@brand.active ? "Approved" : "Not Approved") %>
+		<div class="row">
+			<div class="small-12 columns">
+				<div class="panel">
+					<h2>Brand Approval &amp; Subscription</h2>
+
+					<h3>Account Number: <%= @brand.display_subscriber_account_number %></h3>
+					<br>
+					<div class="row editform" data-equalizer>
+						<div class="medium-6 columns">
+							<div class="panel" data-equalizer-watch>
+								<h3>Approval Status</h3>
+								<div class="row">
+									<div class="medium-6 columns">
+										<%= f.check_box :active, class: "auto-form toggle-text", label: false, data: {on: "Approved", off: "Not Approved"} %><%= f.label :active, (@brand.active ? "Approved" : "Not Approved") %>
+									</div><!--.medium-6-->
+								</div><!--/.row-->
+							</div><!--/.panel-->
+						</div><!--/.medium-6-->
+						<div class="medium-6 columns">
+							<div class="panel" data-equalizer-watch>
+								<h3>Subscriber Status</h3>
+								<div class="row">
+									<div class="medium-6 columns">
+										<%= hidden_field_tag "brand_subscription", 0, id: nil %>
+										<%= check_box_tag 'brand_subscription', 1, (@brand.subscriber? ? true : false), {class: "auto-form toggle-text",  data: {on: "Subscriber", off: "Not Subscribed"} } %><%= label_tag 'brand_subscription', (@brand.subscriber? ? "Subscriber" : "Not Subscribed") %>
+									</div><!--/.medium-6-->
+									<div class="medium-6 columns">
+										<div class="row">
+											<div class="small-12 columns" id="subscription-status">
+												<%= render partial: "admin/subscription_indicator", locals: {brand: @brand} %>
+											</div><!--/.small-12-->
+										</div><!--/.row-->
+									</div><!--.medium-6-->
+								</div><!--/.row-->
+							</div><!--/.panel-->
+						</div><!--/.medium-6-->	
+					</div><!--/.row-->	
+
 				</div>
-			</div><!--/.medium-5-->
-			<div class="medium-7 columns">	
-				<div class="panel" data-equalizer-watch>
-					<h2>Subscriber Status</h2>
-					<div class="row">
-						<div class="small-12 columns">
-							<h4 id="subscription-status" style="font-weight: 500;color: <%= @brand.subscriber? ? 'green' : 'red' %>"><%= @brand.subscriber? ? "Subscriber" : "Inactive" %></h4>
-						</div><!--/.small-12-->
-					</div><!--/.row-->
-					<div class="row">
-						<div class="small-12 columns">
-							<%= f.label :subscription_expiration, "Subscription Expiration Date" %>
-						</div><!--/.small-12-->
-					</div><!--/.row-->
-					<div class="row">
-						<div class="medium-3 columns">
-							<% if @brand.subscription_expiration %>
-								<%= f.text_field :subscription_expiration, label: false, value: @brand.subscription_expiration.strftime("%m-%d-%Y"), placeholder: 'Subscription Expiration' , class: "datepick auto-form" %>
-							<% else %>
-								<%= f.text_field :subscription_expiration, label: false, value: '', placeholder: 'Subscription Expiration' , class: "datepick auto-form" %>
-							<% end %>
-						</div><!--/.medium-3-->
-					</div><!--/.row-->
-				</div>
-			</div><!--/.medium-7-->	
-		</div><!--/.row-->	
+			</div><!--/.small-12-->
+		</div><!--/.row-->
 
 <% end %>
 

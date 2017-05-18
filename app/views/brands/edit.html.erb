@@ -54,19 +54,26 @@
 									<div class="row">
 										<div class="small-12 columns">
 											<h2 style="margin-top:15px;">Please complete your brand profile so your potential partners can learn about you and be better matched to your products and customer base. </h2>
-											<h3 style="margin-top:15px;">The profile sections <strong>in bold</strong> are required before you can start selling products on Landing International.  Filling out the other profile sections will help you stand out from the crowd!</h3>
+											<h3 style="margin-top:15px;">The REQUIRED profile sections must be filled out before you can start selling products on Landing International. Filling out the OPTIONAL profile sections will help you stand out from the crowd!</h3>
 										</div>
 									</div>
 							</div>
 							<div class="medium-4 medium-pull-8 columns medium-text-right">
+								<div id="profile-edit-tabs">
+									<span class="selected" id="required">Required</span>
+									<span id="optional">Optional</span>
+								</div>
 								<div class="profile-edit-form info-panel">
+											<div class="required">
 											<h2>Just The Facts</h2>
 											<%= link_to "Company Info", "#a-companyinfo", class: "profile-edit-links required" %><br>
 											<%= link_to "Contact Info", "#a-login-info", class: "profile-edit-links required" %><br>
 											<%= link_to "Product Portfolio", "#a-product-portfolio", class: "profile-edit-links required" %><br>
 											<%= link_to "Company Introduction", "#a-company-introduction", class: "profile-edit-links required" %><br>
 											<%= link_to "Brand Photos", "#a-brand-photos", class: "profile-edit-links required" %><br>
-											<hr>
+											</div>
+
+											<div class="optional">
 											<h2>Ordering &amp; Payment</h2>
 											<%#= link_to "Payments", "#a-ordering-and-payments", class: "profile-edit-links required" <br>%>
 											<%= link_to "Ordering Requirements", "#a-ordering-requirements", class: "profile-edit-links" %><br>
@@ -88,20 +95,21 @@
 											<%= link_to "Trademarks", "#a-trademarks", class: "profile-edit-links" %><br>
 											<%= link_to "Business Certifications / Regulatory Compliance", "#a-business-certifications", class: "profile-edit-links" %><br>
 											<%= link_to "Social Ethos &amp; Impact".html_safe, "#a-social-fields", class: "profile-edit-links" %>
+											</div>
 											<br>
 								</div>
 							</div><!--/.medium-4-->
 						</div>
 
 
-
-						<div class="row">
+						<div id="form-inputs">
+						<div class="row required">
 							<div class="small-12 columns profile-section-header">
 								<h1>Just the Facts</h1>
 							</div><!--/.small-12-->
 						</div><!--/.row-->
 
-						<div class="row">
+						<div class="row required">
 							<div class="medium-4 columns medium-text-right">
 								<div class="profile-edit-form info-panel">
 								<h1>Company Info</h1>
@@ -115,7 +123,7 @@
 							</div>
 						</div><!-- /.row -->
 
-						<div class="row">
+						<div class="row required">
 							<div class="medium-4 columns medium-text-right">
 								<div class="profile-edit-form info-panel">
 								<h1>Contact Info</h1>
@@ -129,7 +137,7 @@
 							</div>
 						</div>
 
-						<div class="row">
+						<div class="row required">
 							<div class="medium-4 columns medium-text-right">
 								<div class="profile-edit-form info-panel">
 									<h1>Product Portfolio</h1>
@@ -143,7 +151,7 @@
 							</div>
 						</div>
 
-						<div class="row">
+						<div class="row required">
 							<div class="medium-4 columns medium-text-right">
 								<div class="profile-edit-form info-panel">
 								<h1>Company Introduction</h1>
@@ -157,7 +165,7 @@
 							</div>
 						</div>
 
-						<div class="row">
+						<div class="row required">
 							<div class="medium-4 columns medium-text-right">
 								<div class="profile-edit-form info-panel">
 									<h1>Brand Photos</h1>
@@ -171,13 +179,13 @@
 							</div>
 						</div>
 
-						<div class="row">
+						<div class="row optional">
 							<div class="small-12 columns profile-section-header">
 								<h1>Ordering &amp; Payment</h1>
 							</div><!--/.small-12-->
 						</div><!--/.row-->
 
-						<div class="row">
+						<div class="row optional">
 							<div class="medium-4 columns medium-text-right">
 								<div class="profile-edit-form info-panel">
 								<h1>Ordering Requirements</h1>
@@ -191,7 +199,7 @@
 							</div>
 						</div>
 
-						<div class="row">
+						<div class="row optional">
 							<div class="medium-4 columns medium-text-right">
 								<div class="profile-edit-form info-panel">
 								<h1>Payment Information</h1>
@@ -205,7 +213,7 @@
 						</div>
 
 				<%#		HIDING FOR NOW UNTIL DETERMINE HOW USED  %>
-				<%#		<div class="row">  %>
+				<%#		<div class="row optional">  %>
 				<%#			<div class="medium-8 medium-push-4 columns">  %>
 				<%#				<div class="profile-edit-form">  %>
 				<%#					<%#= render "company_contacts" %>
@@ -213,13 +221,13 @@
 				<%#			</div>  %>
 				<%#		</div> %>
 
-						<div class="row">
+						<div class="row optional">
 							<div class="small-12 columns profile-section-header">
 								<h1>Boost Your Profile</h1>
 							</div><!--/.small-12-->
 						</div><!--/.row-->
 
-						<div class="row">
+						<div class="row optional">
 							<div class="medium-4 columns medium-text-right">
 								<div class="profile-edit-form info-panel">
 									<h1>Trends</h1>
@@ -233,7 +241,7 @@
 							</div>
 						</div>
 
-						<div class="row" data-equalizer>
+						<div class="row optional" data-equalizer>
 							<div class="medium-4 columns medium-text-right">
 								<div class="profile-edit-form info-panel" data-equalizer-watch>
 									<h1>Global Good Tags</h1>
@@ -247,7 +255,7 @@
 							</div>
 						</div><!-- /.row -->
 
-						<div class="row">
+						<div class="row optional">
 							<div class="medium-4 columns medium-text-right">
 								<div class="profile-edit-form info-panel">
 									<h1>Key Retailers</h1>
@@ -262,7 +270,7 @@
 						</div>
 
 
-						<div class="row">
+						<div class="row optional">
 							<div class="medium-4 columns medium-text-right">
 								<div class="profile-edit-form info-panel">
 									<h1>Sectors</h1>
@@ -276,7 +284,7 @@
 							</div>
 						</div><!-- /.row -->
 
-						<div class="row">
+						<div class="row optional">
 							<div class="medium-4 columns medium-text-right">
 								<div class="profile-edit-form info-panel">
 									<h1>Channels</h1>
@@ -290,7 +298,7 @@
 							</div>
 						</div>
 
-						<div class="row">
+						<div class="row optional">
 							<div class="medium-4 columns medium-text-right">
 								<div class="profile-edit-form info-panel">
 									<h1>Channel Capacities</h1>
@@ -304,7 +312,7 @@
 							</div>
 						</div>
 
-						<div class="row">
+						<div class="row optional">
 							<div class="medium-4 columns medium-text-right">
 								<div class="profile-edit-form info-panel">
 									<h1>Countries of Distribution</h1>
@@ -319,13 +327,13 @@
 						</div>
 
 
-						<div class="row">
+						<div class="row optional">
 							<div class="small-12 columns profile-section-header">
 								<h1>Show Off Your Brand</h1>
 							</div><!--/.small-12-->
 						</div><!--/.row-->
 
-						<div class="row">
+						<div class="row optional">
 							<div class="medium-4 columns medium-text-right">
 								<div class="profile-edit-form info-panel">
 									<h1>Press Hits</h1>
@@ -339,7 +347,7 @@
 							</div>
 						</div>
 
-						<div class="row">
+						<div class="row optional">
 							<div class="medium-4 columns medium-text-right">
 								<div class="profile-edit-form info-panel">
 									<h1>Tradeshows</h1>
@@ -353,7 +361,7 @@
 							</div>
 						</div>
 
-						<div class="row">
+						<div class="row optional">
 							<div class="medium-4 columns medium-text-right">
 								<div class="profile-edit-form info-panel">
 									<h1>Patents</h1>
@@ -367,7 +375,7 @@
 							</div>
 						</div>
 
-						<div class="row">
+						<div class="row optional">
 							<div class="medium-4 columns medium-text-right">
 								<div class="profile-edit-form info-panel">
 									<h1>Trademarks</h1>
@@ -381,7 +389,7 @@
 							</div>
 						</div>
 
-						<div class="row">
+						<div class="row optional">
 							<div class="medium-4 columns medium-text-right">
 								<div class="profile-edit-form info-panel">
 									<h1>Business Certifications / Regulatory Compliance</h1>
@@ -395,7 +403,7 @@
 							</div>
 						</div>
 
-						<div class="row">
+						<div class="row optional">
 							<div class="medium-4 columns medium-text-right">
 								<div class="profile-edit-form info-panel">
 									<h1>Social Ethos &amp; Impact</h1>
@@ -408,6 +416,7 @@
 								</div>
 							</div>			
 						</div>
+						</div><!--/#form-inputs-->
 
 					</div><!-- /.row collapse -->
 				</div><!-- ./small-12 columns marketplace-content -->

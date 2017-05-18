@@ -351,6 +351,14 @@ class BrandsController < ApplicationController
 		if params[:brand][:subscription_expiration].present?
 			params[:brand][:subscription_expiration] = Date.strptime(params[:brand][:subscription_expiration], '%m-%d-%Y') 
 		end
+		if params[:brand_subscription]
+			if params[:brand_subscription] == "1"
+				@brand.set_subscription_expiration
+			else
+				@brand.reset_subscription_expiration
+			end
+			@subscription_set = true
+		end
 
 		@brand.update(admin_brand_parameters)
 

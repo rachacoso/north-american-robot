@@ -60,7 +60,7 @@
 				<span class="prefix"><i class="fi-magnifying-glass"></i></span>
 			</div><!--/.small-1-->
 			<div class="small-11 columns">
-				<%= text_field_tag(:q, "", :placeholder => 'Search by Company Name', :value => @query, :style => "margin-bottom: 0;") %>
+				<%= text_field_tag(:q, "", :placeholder => (type == 'brands' ? 'Search by Company Name or Subscriber Account Number' : 'Search by Company Name'), :value => @query, :style => "margin-bottom: 0;") %>
 				<% if @query %>
 					<small><%= link_to "BACK TO ALL #{type.upcase} LIST", eval("admin_#{type}_index_path") %></small>
 				<% end %>

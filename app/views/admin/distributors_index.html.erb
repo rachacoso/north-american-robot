@@ -2,7 +2,17 @@
 
 		<% if !@distributors.empty? %>
 			<%= paginate @distributors %><br>
-			<%= render partial: 'b_or_d', collection: @distributors, as: :b_or_d, spacer_template: "shared/indexspacer"  %>
+			<table class="sortable" id="order-index" style="table-layout: fixed;">
+				<thead>
+					<tr>
+						<th>Distributor</th>
+						<th>Primary Username</th>
+					</tr>
+				</thead>
+				<tbody>
+					<%= render partial: 'b_or_d', collection: @distributors, as: :b_or_d %>
+				</tbody>
+			</table>
 		<% else %>
 			<hr>
 			<h3><em>No Distributors</em></h3>

@@ -2,7 +2,18 @@
 
 		<% if !@brands.empty? %>
 			<%= paginate @brands %><br>
-			<%= render partial: 'b_or_d', collection: @brands, as: :b_or_d, spacer_template: "shared/indexspacer"  %>
+			<table class="sortable" id="order-index" style="table-layout: fixed;">
+				<thead>
+					<tr>
+						<th>Brand</th>
+						<th>Subscriber Account NUmber</th>
+						<th>Primary Username</th>
+					</tr>
+				</thead>
+				<tbody>
+					<%= render partial: 'b_or_d', collection: @brands, as: :b_or_d %>
+				</tbody>
+			</table>
 		<% else %>
 			<hr>
 			<h3><em>No Brands</em></h3>

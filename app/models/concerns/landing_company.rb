@@ -123,7 +123,13 @@ module LandingCompany
 		end
 
 		def set_subscription_expiration
-			self.subscription_expiration = Date.now + 1.year
+			self.subscription_expiration = Date.today + 1.year
+			self.save
+		end
+
+		def reset_subscription_expiration
+			self.subscription_expiration = nil
+			self.save
 		end
 
 	end

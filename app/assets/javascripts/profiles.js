@@ -4,8 +4,32 @@ $( document ).ready(function() {
 	setModalActions();
 	shippingtermsControls();
 	setProfileActions();
+	setEditProfileTabs();
 
 });
+
+function setEditProfileTabs() {
+	$('#profile-edit-tabs > #required').on('click', function(e){
+		e.preventDefault();
+		$('#form-inputs > .optional').slideUp();
+		$('.profile-edit-form.info-panel > div.optional').slideUp();
+		$('#form-inputs > .required').slideDown();
+		$('.profile-edit-form.info-panel > div.required').slideDown();
+		$('#profile-edit-tabs > span#required').addClass('selected');
+		$('#profile-edit-tabs > span#optional').removeClass('selected');
+		initializeAutoForm();
+	});
+	$('#profile-edit-tabs > #optional').on('click', function(e){
+		e.preventDefault();
+		$('#form-inputs > .required').slideUp();
+		$('.profile-edit-form.info-panel > div.required').slideUp();
+		$('#form-inputs > .optional').slideDown();
+		$('.profile-edit-form.info-panel > div.optional').slideDown();
+		$('#profile-edit-tabs > span#optional').addClass('selected');
+		$('#profile-edit-tabs > span#required').removeClass('selected');
+		initializeAutoForm();
+	});
+}
 
 function setProfileActions() {
 	$('#back-control').on('click', function(e){

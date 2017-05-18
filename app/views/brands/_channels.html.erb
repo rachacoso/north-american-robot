@@ -1,6 +1,6 @@
 <br>
 <a class="anchor" id="a-channels"></a>
-<%= form_for @brand, url: brand_url do |f| %>
+<%= form_for @brand, url: brand_url, remote: true do |f| %>
 	<%= f.hidden_field :company_name %>
 	<%= hidden_field_tag "redirect_anchor", "a-channels" %>
 
@@ -8,7 +8,7 @@
 		<div class="medium-10 push-2 columns">
 		<h3>Standard Channels</h3>					
 			<% Channel.each do |ch| %>
-				<%= check_box_tag "channels[#{ch.id}]", ch.id, (@brand.channels.find(ch) rescue false) ? true : false  %>
+				<%= check_box_tag "channels[#{ch.id}]", ch.id, (@brand.channels.find(ch) rescue false) ? true : false, class: "auto-form"  %>
 				<%= label_tag "channels[#{ch.id}]" do %>
 					<%= ch.name %><br>
 					<%= simple_format(ch.description, {style: "font-size: 0.75em; margin-left: 2em;"}, wrapper_tag: "div") %>
@@ -19,7 +19,7 @@
 
 	<div class="row">
 		<div class="medium-10 push-2 columns">
-			<%= f.submit 'Update Standard Channels', class: "landing-button right" %>
+			<br>
 		</div>
 	</div>
 <% end %>

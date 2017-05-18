@@ -3,8 +3,6 @@
 <% else %>
 	<%= render partial: 'shared/ajax_message', locals: { updated_item: "Brand Admin Settings" } %>
 <% end %>
-<% if @brand.subscriber? %>
-	$('h4#subscription-status').text("Subscriber").css("color", "green");
-<% else %>
-	$('h4#subscription-status').text("Inactive").css("color", "red");
+<% if @subscription_set %>
+	$('#subscription-status').html("<%= j (render partial: 'admin/subscription_indicator', locals: {brand: @brand}) %>")
 <% end %>
