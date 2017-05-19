@@ -95,6 +95,10 @@ class ApplicationController < ActionController::Base
 
   def check_subscription
     if @current_user && @current_user.brand #checks for brand approval & subscription
+      if @current_user.brand.subscriber_account_number.blank? #set account number for any legacy brands who don't have acct number
+        @current_user.brand.set_subscriber_account_number
+        @current_user.brand.save
+      end
       if !@current_user.brand.active
         render "/pages/private/wait"
       elsif !@current_user.brand.subscriber?

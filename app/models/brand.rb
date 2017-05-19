@@ -79,10 +79,10 @@ class Brand
 
 	def display_subscriber_account_number
 		if self.subscriber_account_number.blank? 
-			self.set_subscriber_account_number
-			self.save!
+			return "n/a"
+		else
+			return "LB-#{self.subscriber_account_number}"
 		end
-		return "LB-#{self.subscriber_account_number}"
 	end
 
 	def all_product_photos
