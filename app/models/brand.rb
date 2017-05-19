@@ -78,6 +78,10 @@ class Brand
 	end
 
 	def display_subscriber_account_number
+		if self.subscriber_account_number.blank? 
+			self.set_subscriber_account_number
+			self.save!
+		end
 		return "LB-#{self.subscriber_account_number}"
 	end
 
@@ -195,7 +199,9 @@ class Brand
 	def set_subscriber_account_number
 		unless self.subscriber_account_number.present?
 			next_number = Brand.max(:subscriber_account_number)
-			if next_number != nil
+			if next_number == nil
+				self.subscriber_account_number = 100001 #set first if not present
+			else
 				begin
 					next_number += 1
 					self.subscriber_account_number = next_number
