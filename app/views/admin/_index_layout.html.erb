@@ -12,7 +12,7 @@
 		</div>
 	</div>
 </div>
-<div class="row">
+<div class="row collapse">
 	<div class="small-12 columns">
 		<% if type == "retailers" %>
 			<% unless @retailers_margin.blank? && @retailers_payment_terms.blank? %>
@@ -47,6 +47,65 @@
 			<br><br>
 			<% end %>
 		<% end %>
+
+		<% if type == "brands" %>
+		<% if !@brands_awaiting_approval.empty? || !@brands_awaiting_subscription_activation.empty? || !@brands_with_expired_subscription.empty? %>
+			<div class="panel">
+			<% if !@brands_awaiting_approval.empty? %>
+			<h2>BRANDS AWAITING APPROVAL</h2>
+				<table class="sortable" id="order-index" style="table-layout: fixed;">
+					<thead>
+						<tr>
+							<th>Brand</th>
+							<th>Subscriber Account NUmber</th>
+							<th>Primary Username</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%= render partial: 'b_or_d', collection: @brands_awaiting_approval, as: :b_or_d %>
+					</tbody>
+				</table>
+				<%= "<br>".html_safe if !@brands_awaiting_subscription_activation.empty? %>
+			<% end %>
+
+			<% if !@brands_awaiting_subscription_activation.empty? %>
+			<h2>BRANDS AWAITING SUBSCRIPTION PAYMENT &amp; ACTIVATION</h2>
+				<table class="sortable" id="order-index" style="table-layout: fixed;">
+					<thead>
+						<tr>
+							<th>Brand</th>
+							<th>Subscriber Account NUmber</th>
+							<th>Primary Username</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%= render partial: 'b_or_d', collection: @brands_awaiting_subscription_activation, as: :b_or_d %>
+					</tbody>
+				</table>
+				<%= "<br>".html_safe if !@brands_with_expired_subscription.empty? %>
+			<% end %>
+
+			<% if !@brands_with_expired_subscription.empty? %>
+			<h2>BRANDS WITH EXPIRED SUBSCRIPTION</h2>
+				<table class="sortable" id="order-index" style="table-layout: fixed;">
+					<thead>
+						<tr>
+							<th>Brand</th>
+							<th>Subscriber Account NUmber</th>
+							<th>Primary Username</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%= render partial: 'b_or_d', collection: @brands_with_expired_subscription, as: :b_or_d %>
+					</tbody>
+				</table>
+			<% end %>
+
+			</div>
+		<% end %>			
+		<% end %>
+		
+
 	</div><!--/.small-12-->
 </div><!--/.row-->
 
@@ -54,6 +113,7 @@
 <div class="row collapse">
 	<div class="small-12 columns">
 		<div class="panel">
+			<h2>SEARCH / BROWSE BRANDS</h2>
 			<%= form_tag(eval("admin_#{type}_index_path"), method: "get") do %>
 			<div class="row collapse">
 			<div class="small-1 columns">
@@ -72,6 +132,7 @@
 	</div>
 </div>
 <% end %>
+
 <div class="row collapse">
 	<div class="small-12 columns">
 		<div class="panel">

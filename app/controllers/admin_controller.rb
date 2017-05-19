@@ -35,6 +35,9 @@ class AdminController < ApplicationController
 
   def brands_index
     brands = Brand.all
+    @brands_awaiting_approval = Brand.awaiting_approval
+    @brands_awaiting_subscription_activation = Brand.awaiting_subscription_activation
+    @brands_with_expired_subscription = Brand.with_expired_subscription
     if params[:q] && !params[:q].blank?
       @query = params[:q]
       company_search_results = brands.where(company_name: /#{@query}/i )

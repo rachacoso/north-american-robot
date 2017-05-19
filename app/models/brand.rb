@@ -68,6 +68,17 @@ class Brand
 
 	# default_scope ->{ where(:country_of_origin.ne => "United States") }
 	scope :international, ->{ where(:country_of_origin.ne => "United States") }
+	scope :awaiting_approval, -> {
+		where(	:subscriber_account_number.nin => ["", nil],
+				active: false )}
+	scope :awaiting_subscription_activation, -> {
+		where(	:subscriber_account_number.nin => ["", nil],
+				active: true,
+				subscription_expiration: nil )}
+	scope :with_expired_subscription, -> {
+		where(	:subscriber_account_number.nin => ["", nil],
+				active: true,
+				:subscription_expiration.lt => Date.today )}
 
 ################
 # MODEL METHODS
