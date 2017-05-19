@@ -1,6 +1,9 @@
 <%= render layout: "index_layout" do %>
 
 		<% if !@brands.empty? %>
+			<% if @query %>
+				<span style="font-weight: 200;">You searched for: <strong><%=@query%></strong></span>
+			<% end %>
 			<%= paginate @brands %><br>
 			<table class="sortable" id="order-index" style="table-layout: fixed;">
 				<thead>

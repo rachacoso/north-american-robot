@@ -50,7 +50,7 @@
 
 		<% if type == "brands" %>
 		<% if !@brands_awaiting_approval.empty? || !@brands_awaiting_subscription_activation.empty? || !@brands_with_expired_subscription.empty? %>
-			<div class="panel">
+			<div class="panel" style="background-color: #f2f2f2;">
 			<% if !@brands_awaiting_approval.empty? %>
 			<h2>BRANDS AWAITING APPROVAL</h2>
 				<table class="sortable" id="order-index" style="table-layout: fixed;">
