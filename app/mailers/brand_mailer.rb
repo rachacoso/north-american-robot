@@ -7,16 +7,18 @@ class BrandMailer < ActionMailer::Base
 		@user = @brand.users.first
 		case @stage
 		when "awaiting_approval"
+			email = @user.email
 			subject = "Thanks for Signing Up!"
+		when "approval_alert"
+			email = 'chloe@landingintl.com'
+			subject = "PLEASE APPROVE: #{brand.company_name} (#{brand.display_subscriber_account_number})"
 		when "awaiting_payment"
+			email = @user.email
 			subject = "You're Approved!"
 		when "subscription_paid"
+			email = @user.email
 			subject = "Welcome to the Landing International Marketplace!"
 		end
-		mail :to => @user.email, :subject => subject
-	end
-	def awaiting_approval_admin_notice(user:)
-
-		mail :to => 'chloe@landingintl.com', :subject => "PLEASE APPROVE: #{user.brand.company_name} (#{user.brand.display_subscriber_account_number})"
+		mail :to => email, :subject => subject
 	end
 end

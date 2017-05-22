@@ -32,4 +32,12 @@ class BrandMailerPreview < ActionMailer::Preview
         stage: 'subscription_renewal'
       )
   end
+
+  # Preview this email at http://landing.dev/rails/mailers/brand_mailer/subscriber_notice_approval_alert
+  def subscriber_notice_approval_alert
+    BrandMailer.subscriber_notice(
+        brand: Brand.find_by(company_name: 'Brand Nine'),
+        stage: 'approval_alert'
+      )
+  end
 end
