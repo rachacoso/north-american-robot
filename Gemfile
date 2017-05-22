@@ -11,7 +11,7 @@ gem "recaptcha", require: "recaptcha/rails"
 gem 'armor_payments'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.9'
+gem 'rails', '4.2'
 # Use SCSS for stylesheets
 # gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -59,7 +59,10 @@ gem 'carmen', '~> 1.0', '>= 1.0.2'
 
 # Use paperclip/s3 for file upload
 gem "mongoid-paperclip", :require => "mongoid_paperclip"
-gem 'aws-sdk', '~> 1.3.4'
+gem 'paperclip', :git=> 'https://github.com/thoughtbot/paperclip', :ref => '523bd46c768226893f23889079a7aa9c73b57d68'
+# gem 'aws-sdk', '~> 1.3.4'
+# gem 'aws-sdk-v1'
+gem 'aws-sdk', '< 2.0'
 
 
 gem 'foundation-rails', '5.5.2.1'
@@ -75,6 +78,8 @@ gem 'rails_12factor', group: [:staging, :production]
 gem 'rails_autolink'
 
 gem 'kaminari'
+
+gem 'kaminari-mongoid'
 
 gem 'remotipart', '~> 1.2'
 
