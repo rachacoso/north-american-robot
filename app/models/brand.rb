@@ -220,4 +220,24 @@ class Brand
 			end
 		end
 	end
+
+	def send_subscriber_message(stage:)
+		begin
+			BrandMailer.subscriber_notice(
+				brand: self, 
+				stage: stage,
+			).deliver
+		rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
+			self.errors.add(:base, e.message)
+		else
+			if stage == 'subscription_renewal'
+				self.emails_sent[stage] ||= []
+				self.emails_sent[stage] << DateTime.now
+				self.save				
+			else
+				self.emails_sent[stage] = DateTime.now
+				self.save
+			end
+		end
+	end
 end

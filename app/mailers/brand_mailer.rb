@@ -1,9 +1,10 @@
 class BrandMailer < ActionMailer::Base
 	default from: "Landing International <info@landingintl.com>"
 
-	def subscriber_notice(user:, stage:)
+	def subscriber_notice(brand:, stage:)
 		@stage = stage
-		@user = user
+		@brand = brand
+		@user = @brand.users.first
 		case @stage
 		when "awaiting_approval"
 			subject = "Thanks for Signing Up!"
@@ -12,7 +13,7 @@ class BrandMailer < ActionMailer::Base
 		when "subscription_paid"
 			subject = "Welcome to the Landing International Marketplace!"
 		end
-		mail :to => user.email, :subject => subject
+		mail :to => @user.email, :subject => subject
 	end
 	def awaiting_approval_admin_notice(user:)
 

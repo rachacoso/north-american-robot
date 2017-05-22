@@ -351,9 +351,17 @@ class BrandsController < ApplicationController
 		if params[:brand][:subscription_expiration].present?
 			params[:brand][:subscription_expiration] = Date.strptime(params[:brand][:subscription_expiration], '%m-%d-%Y') 
 		end
+		if params[:brand][:active] && params[:brand][:active] == "1" && @brand.subscription_expiration.blank?
+			@brand.send_subscriber_message(stage: 'awaiting_payment') unless @brand.emails_sent.keys.include? 'awaiting_payment'
+		end
 		if params[:brand_subscription]
 			if params[:brand_subscription] == "1"
 				@brand.set_subscription_expiration
+				if @brand.emails_sent.keys.include? 'subscription_paid'
+					@brand.send_subscriber_message(stage: 'subscription_renewal')
+				else
+					@brand.send_subscriber_message(stage: 'subscription_paid')
+				end
 			else
 				@brand.reset_subscription_expiration
 			end
