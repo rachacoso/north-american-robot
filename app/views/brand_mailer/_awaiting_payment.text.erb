@@ -1,0 +1,43 @@
+Yay! Your profile has been approved!
+You are one short step away from completion.
+ 
+What's Next?
+
+Send your payment by check or wire to pay for your annual subscription.
+
+For payment by check:
+
+	PAYABLE TO:
+	Landing International
+
+	MAIL TO:
+	Landing International
+	800 Wilshire Blvd, Suite 200
+	Los Angeles, CA 90017
+
+	Please be sure to write your company name (<%= @user.brand.company_name %>) and reference number (<%= @user.brand.display_subscriber_account_number %>) on the check
+
+
+For payment by wire:
+
+	Bank: Citibank, NA
+	Swift Code: CITIUS33
+	Routing/ABA Number: 321171184
+	Account Number: 205978521
+	Address:
+	Landing International
+	800 Wilshire Blvd, Suite 200
+	Los Angeles, CA 90017
+	646-389-9047
+	Memo/Note: Subscription payment for <%= @user.brand.company_name %>, reference number <%= @user.brand.display_subscriber_account_number %>
+
+You can also view payment instructions on the Landing International Marketplace:
+<%= brand_url %>
+
+Thanks and have a great day!
+
+ 
+-Team Landing
+
+ 
+If you have any questions, please email us at info@landinginternational.com.
