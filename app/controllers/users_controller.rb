@@ -94,10 +94,6 @@ class UsersController < ApplicationController
     if user
       user.confirm_email
       flash[:email_confirmed] = user.email
-      if user.brand
-        user.brand.send_subscriber_message(stage: 'awaiting_approval')
-        user.brand.send_subscriber_message(stage: 'approval_alert')
-      end
       redirect_to login_url
     else
       flash[:email_confirmation_failed] = true

@@ -158,10 +158,15 @@ class User
 	end
 
 	def confirm_email
-    self.email_confirmed = true
-    self.email_confirmation_token = nil
-    save!(:validate => false)
+		self.email_confirmed = true
+		self.email_confirmation_token = nil
+		save!(:validate => false)
 		UserMailer.send_new_user_notification(self) unless self.administrator
+		if self.brand
+			sleep(2) if Rails.env.staging? #being cheap to get around mailtrap limit
+			self.brand.send_subscriber_message(stage: 'awaiting_approval')
+			self.brand.send_subscriber_message(stage: 'approval_alert')
+		end
 	end
 
 end
