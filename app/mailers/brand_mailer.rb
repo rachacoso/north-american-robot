@@ -8,16 +8,16 @@ class BrandMailer < ActionMailer::Base
 		case @stage
 		when "awaiting_approval"
 			email = @user.email
-			subject = "Thanks for Signing Up!"
+			subject = "Landing International: Thanks for Signing Up!"
 		when "approval_alert"
 			email = 'chloe@landingintl.com'
 			subject = "PLEASE APPROVE: #{brand.company_name} (#{brand.display_subscriber_account_number})"
 		when "awaiting_payment"
 			email = @user.email
-			subject = "You're Approved!"
+			subject = "Landing International: You're Approved!"
 		when "subscription_paid"
 			email = @user.email
-			subject = "Welcome to the Landing International Marketplace!"
+			subject = "Landing International: Welcome to the Marketplace!"
 		end
 		mail :to => email, :subject => subject
 	end
