@@ -1,0 +1,10 @@
+<div id="subscription-notice" class="site-notice">
+<span>
+Subscription Status: 
+<% if status == "not approved" %>
+We are verifying your brand information and will be back to you shortly.
+<% elsif status == "not subscribed" %>
+You've been approved - your subscription is ready to be activated! <%= link_to brand_subscription_url, remote: true do %>Pay Now!<% end %>
+<% end %>
+</span>
+</div>

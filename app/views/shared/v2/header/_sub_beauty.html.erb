@@ -12,3 +12,4 @@
 	</div><!--/.hide-for-small-only-->
 </div>
 
+<%= render partial: "brands/subscription_notice", locals: {status: @brand_subscriber_status} if @brand_subscriber_status %>

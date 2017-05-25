@@ -7,6 +7,9 @@ class ApplicationController < ActionController::Base
   before_action :get_display
   before_action :get_unread_message_count
   before_action :administrator_redirect
+  before_action do
+    check_subscription(area: 'public')
+  end
 
   # DATE SAVING (used for collections date [trade show, trademarks, patents, compliances])
   def save_date(year, month, item)
@@ -93,16 +96,25 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def check_subscription
+  def check_subscription(area:)
     if @current_user && @current_user.brand #checks for brand approval & subscription
       if @current_user.brand.subscriber_account_number.blank? #set account number for any legacy brands who don't have acct number
         @current_user.brand.set_subscriber_account_number
         @current_user.brand.save
       end
-      if !@current_user.brand.active
-        render "/pages/private/wait"
-      elsif !@current_user.brand.subscriber?
-        render "/pages/private/subscribe"
+      case area
+      when "restricted"
+          if !@current_user.brand.active
+            render "/pages/private/wait"
+          elsif !@current_user.brand.subscriber?
+            render "/pages/private/subscribe"
+          end
+      when "public"
+          if !@current_user.brand.active
+            @brand_subscriber_status = "not approved"
+          elsif !@current_user.brand.subscriber?
+            @brand_subscriber_status = "not subscribed"
+          end
       end
     end
   end
