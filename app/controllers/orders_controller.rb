@@ -1,6 +1,5 @@
 class OrdersController < ApplicationController
 
-	skip_before_action [:check_subscription], only: [:index]
 	before_action only: [:index] do
 		check_subscription(area: 'restricted')
 	end
