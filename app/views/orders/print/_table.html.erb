@@ -3,7 +3,7 @@
 		<table class="order" style="margin: auto;">
 
 			<tbody>
-				<tr>
+				<tr id="header">
 					<th>Item</th>
 					<th>Description</th>
 					<th>Quantity</th>
@@ -13,7 +13,7 @@
 					<th>Amount</th>
 				</tr>
 				<% get_sorted_order_items(order).each do |lineitem| %>
-				<tr>
+				<tr class="line-item">
 				<td><%= lineitem.item_id.present? ? "#{lineitem.item_id}" : "&nbsp;".html_safe %></td>
 				<td><%= display_lineitem_name(lineitem) %> <%= lineitem.product ? "" : "(err: 33!)" %></td>
 				<td><%= display_lineitem_quantity(lineitem) %></td>
@@ -46,8 +46,8 @@
 				</tr>
 				<% end %>
 
-				<tr class="<%= order.status == 'open' ? 'inactive' : '' %>"><th colspan="7"> Additional Charges (e.g. shipping) </th></tr>
-				<tr class="<%= order.status == 'open' ? 'inactive' : '' %>">
+				<tr class="<%= order.status == 'open' ? 'inactive' : '' %> additional-charges"><th colspan="7"> Additional Charges (e.g. shipping) </th></tr>
+				<tr class="<%= order.status == 'open' ? 'inactive' : '' %> additional-charges">
 					<th colspan="3">&nbsp;</th>
 					<th>Charge</th>
 					<th colspan="2">Description</th>
@@ -55,7 +55,7 @@
 				</tr>
 				<% if order.order_additional_charges.present? %>
 					<% order.order_additional_charges.each do |lineitem| %>
-					<tr>
+					<tr class="line-item">
 						<td colspan="3">&nbsp;</td>
 						<td><%= lineitem.name %></td>
 						<td colspan="2"><%= lineitem.description %></td>
@@ -79,7 +79,7 @@
 				<% end %>
 
 				<% if order.meets_minimum(user: @current_user) %>
-					<tr class="total">
+					<tr class="total" id="total-price">
 						<td colspan="6" class="text-right">Order Total <small></small></td>
 						<td class="text-right"><%= number_to_currency(order.total_price) %></td>
 					</tr>
@@ -88,7 +88,7 @@
 						<td colspan="6" class="text-right" style="color: red;">Order Minimum <small></small></td>
 						<td class="text-right" style="color: red;"><%= number_to_currency(dollarize(order.brand.order_minimum)) %></td>
 					</tr>
-					<tr class="total">
+					<tr class="total" id="total-price">
 						<td colspan="6" class="text-right" >Current Order Total <small></small></td>
 						<td class="text-right" ><%= number_to_currency(order.total_price) %></td>
 					</tr>

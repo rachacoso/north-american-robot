@@ -8,9 +8,151 @@
 	h2 { font-weight: 100; }
 	#title { font-weight: 500; }
 }
-#order-shipping-data {
+#order-header {
+	page-break-after: always;
+}
+#order-shipping-data, #order-terms-data {
 	clear: both;
+	ul {
+		padding-left: 0;
+		li.title {
+
+		}
+		li.term {
+			margin-bottom: 10pt;
+		}
+	}
+	font-weight: 600;
+	#header-row > .row {
+		text-transform: uppercase;
+		border-bottom: 1px solid black;
+		div {
+			display: inline-block;
+		}
+	}
+	#body > .row {
+		a {
+			color: black;
+			text-decoration: none;
+		}
+		.title {
+			font-weight: 300;
+			border-bottom: 1px solid #f2f2f2;
+		}
+		div {
+			display: inline-block;
+			vertical-align: top;
+		}
+	}
+}
+#order-shipping-data {
+	#header-row > .row {
+		div:first-child {
+			width: 24%;
+		}
+		div:nth-child(2) {
+			width: 24%;
+		}
+		div:last-child {
+			width: 50%;
+		}
+	}
+	div#body > div.row {
+		div#brand-info {
+			width: 24%;
+		}
+		div#orderer-info {
+			width: 24%;
+		}
+		div#shipping-info {
+			width: 50%;
+			div#ship-cancel-dates {
+				width: 100%;
+				div:first-child {
+					width: 49%;
+				}
+				div:last-child {
+					width: 49%;
+				}
+			}
+		}
+	}
+}
+#order-terms-data {
+	#body > .row {
+		div:first-child {
+			width: 48%;
+		}
+		div:last-child {
+			width: 49%;
+		ul {
+			li.term {
+				margin-bottom: 0pt;
+			}
+		}
+		}
+	}
 }
 ul {
 	list-style-type: none; /*to remove bullets*/
+}
+table.order {
+	width: 100%;
+//	border: 1px solid black;
+	tr#header {
+		th {
+			border: 1px solid black;
+			text-align: center;
+		}
+	}
+	tr.line-item {
+		td { 
+			border:none;
+			text-align: center;
+		}
+		td:last-child {
+			text-align: right;
+		}
+	}
+	tr.subtotal, tr.discount {
+
+	}
+	tr.additional-charges {
+		th { border: 1px solid black; }
+	}
+	margin-bottom: 1cm;
+	td.text-right { 
+		text-align: right;
+	}
+	tr#total-price {
+		td {
+			border-top: 1px solid gray;
+			font-size: larger;
+			font-weight: 700;
+		}
+	}
+}
+#order-comments {
+	margin-top: 2cm;
+	#header-row {
+		text-transform: uppercase;
+		font-weight: 700;
+		border-bottom: 1px solid black;
+	}
+	#data {
+		ul { 
+			padding-left: 0;
+			li { 
+				margin-bottom: 5mm;
+			} 
+		}
+		#title {
+			font-weight: 700;
+		}
+	}
+	.order-comment-display {
+		border: 1px solid gray;
+		padding: 3mm;
+		#comment-body { padding-bottom: 3mm; }
+	}
 }
