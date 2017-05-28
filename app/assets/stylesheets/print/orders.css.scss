@@ -1,6 +1,14 @@
+@import "global_variables";
 
 @page { margin: 1cm; }
 
+a {
+	color: black;
+	text-decoration: none;
+}
+#v2footer, #v2header, #v2subheader, #full-order, .admin-container {
+	display: none;
+}
 #print-header {
 	float: right;
 	text-align: right;
@@ -25,14 +33,14 @@
 	font-weight: 600;
 	#header-row > .row {
 		text-transform: uppercase;
-		border-bottom: 1px solid black;
+		border-bottom: 1px solid $landing-dark-gray;
 		div {
 			display: inline-block;
 		}
 	}
 	#body > .row {
 		a {
-			color: black;
+			color: $landing-dark-gray;
 			text-decoration: none;
 		}
 		.title {
@@ -98,10 +106,10 @@ ul {
 }
 table.order {
 	width: 100%;
-//	border: 1px solid black;
+	border: 1px solid $landing-dark-gray;
 	tr#header {
 		th {
-			border: 1px solid black;
+			border-bottom: 1px solid $landing-middle-gray;
 			text-align: center;
 		}
 	}
@@ -114,11 +122,14 @@ table.order {
 			text-align: right;
 		}
 	}
-	tr.subtotal, tr.discount {
-
+	tr.subtotal {
+		td { 
+			border-top: 1px solid $landing-middle-gray;
+			padding-bottom: 2em;
+		}
 	}
 	tr.additional-charges {
-		th { border: 1px solid black; }
+		th { border-bottom: 1px solid $landing-middle-gray; border-top: 1px solid $landing-middle-gray;}
 	}
 	margin-bottom: 1cm;
 	td.text-right { 
@@ -126,7 +137,7 @@ table.order {
 	}
 	tr#total-price {
 		td {
-			border-top: 1px solid gray;
+			border-top: 1px solid $landing-middle-gray;
 			font-size: larger;
 			font-weight: 700;
 		}
@@ -137,7 +148,7 @@ table.order {
 	#header-row {
 		text-transform: uppercase;
 		font-weight: 700;
-		border-bottom: 1px solid black;
+		border-bottom: 1px solid $landing-dark-gray;
 	}
 	#data {
 		ul { 
@@ -151,8 +162,15 @@ table.order {
 		}
 	}
 	.order-comment-display {
-		border: 1px solid gray;
+		border: 1px solid $landing-middle-gray;
 		padding: 3mm;
 		#comment-body { padding-bottom: 3mm; }
 	}
+}
+
+#order-comments li {
+	page-break-before: auto;
+}
+.text-center {
+	text-align: center;
 }

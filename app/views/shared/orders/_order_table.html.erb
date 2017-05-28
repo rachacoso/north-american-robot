@@ -46,19 +46,16 @@
 				</tr>
 				<% end %>
 
-				<tr class="<%= order.status == 'open' ? 'inactive' : '' %>"><th colspan="7"> Additional Charges (e.g. shipping) </th></tr>
 				<tr class="<%= order.status == 'open' ? 'inactive' : '' %>">
-					<th colspan="3">&nbsp;</th>
-					<th>Charge</th>
-					<th colspan="2">Description</th>
+					<th colspan="2">Additional Charge</th>
+					<th colspan="4">Description</th>
 					<th>Amount</th>
 				</tr>
 				<% if order.order_additional_charges.present? %>
 					<% order.order_additional_charges.each do |lineitem| %>
 					<tr>
-						<td colspan="3">&nbsp;</td>
-						<td><%= lineitem.name %></td>
-						<td colspan="2"><%= lineitem.description %></td>
+						<td colspan="2"><%= lineitem.name %></td>
+						<td colspan="4"><%= lineitem.description %></td>
 						<td class="text-right"><%= number_to_currency(lineitem.amount_in_dollars) %></td>
 					</tr>
 					<% end %>

@@ -46,19 +46,16 @@
 				</tr>
 				<% end %>
 
-				<tr class="<%= order.status == 'open' ? 'inactive' : '' %> additional-charges"><th colspan="7"> Additional Charges (e.g. shipping) </th></tr>
 				<tr class="<%= order.status == 'open' ? 'inactive' : '' %> additional-charges">
-					<th colspan="3">&nbsp;</th>
-					<th>Charge</th>
-					<th colspan="2">Description</th>
+					<th colspan="2">Additional Charge</th>
+					<th colspan="4">Description</th>
 					<th>Amount</th>
 				</tr>
 				<% if order.order_additional_charges.present? %>
 					<% order.order_additional_charges.each do |lineitem| %>
 					<tr class="line-item">
-						<td colspan="3">&nbsp;</td>
-						<td><%= lineitem.name %></td>
-						<td colspan="2"><%= lineitem.description %></td>
+						<td colspan="2"><%= lineitem.name %></td>
+						<td colspan="4"><%= lineitem.description %></td>
 						<td class="text-right"><%= number_to_currency(lineitem.amount_in_dollars) %></td>
 					</tr>
 					<% end %>
@@ -69,7 +66,9 @@
 				<% else %>
 					<tr><td colspan="7" class="text-center">
 						<% if ["open","submitted","pending"].include? order.status %>
-						<h3>[ Any additional charges will be calculated and added by <%= order.brand.company_name %> after the order is submitted ]</h3>
+						<p>[ Any additional charges will be calculated and added by <%= order.brand.company_name %> after the order is submitted ]</p>
+						<% else %>
+						<p>[ No additional charges ]</p>
 						<% end %>
 					</th></td>
 					<tr class="subtotal inactive">
