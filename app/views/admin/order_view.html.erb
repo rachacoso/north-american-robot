@@ -148,7 +148,7 @@
 
 </div>
 <div class="printable">
-	<%= render partial: "orders/print/header", locals: { order: @order } %>
-	<%= render partial: "orders/print/table", locals: { order: @order } %>
-	<%= render partial: "orders/print/comments", locals: { order: @order } %>
+	<%= render partial: "shared/orders/print/header", locals: { order: @order } %>
+	<%= render partial: "shared/orders/print/table", locals: { order: @order } %>
+	<%= render partial: "shared/orders/print/comments", locals: { order: @order } %>
 </div>

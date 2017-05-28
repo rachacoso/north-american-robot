@@ -10,7 +10,7 @@
 					
 					<% if order.status == "open" && order.comments.open.first.text.present? %>
 						<li>
-							<%= render partial: "orders/print/comment_display", locals: { comment: order.comments.open.first } %>
+							<%= render partial: "shared/orders/print/comment_display", locals: { comment: order.comments.open.first } %>
 						</li>
 					<% end %>
 
@@ -18,7 +18,7 @@
 						<li>
 							<span id='title'>SUBMITTED by <%= order.orderer_company_name %></span> <%= order.submission_date.in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M:%S %Z") %>
 							<% if (comment = order.comments.open.first) && (order.comments.open.first.text.present? || get_additional_comments(order: order, section: "submitted").present? ) %>
-								<%= render partial: "orders/print/comment_display", locals: { comment: comment, additional_comments: get_additional_comments(order: order, section: "submitted")} %>
+								<%= render partial: "shared/orders/print/comment_display", locals: { comment: comment, additional_comments: get_additional_comments(order: order, section: "submitted")} %>
 							<% end %>
 						</li>
 					<% end %>
@@ -27,7 +27,7 @@
 					<li>
 						<span id='title'>SENT FOR APPROVAL by <%= order.brand_company_name %></span> <%= order.pending_date_array[0].in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M:%S %Z") %>
 							<% if (comment = order.comments.submitted.first) && (order.comments.submitted.first.text.present? || get_additional_comments(order: order, section: "pending").present? ) %>
-								<%= render partial: "orders/print/comment_display", locals: { comment: comment, additional_comments: get_additional_comments(order: order, section: "pending") } %>
+								<%= render partial: "shared/orders/print/comment_display", locals: { comment: comment, additional_comments: get_additional_comments(order: order, section: "pending") } %>
 							<% end %>
 					</li>
 					<% end %>
@@ -36,13 +36,13 @@
 						<% change_requests.each_with_index do |c,index| %>
 						<li>
 							<span id='title'>CHANGES REQUESTED by <%= order.orderer_company_name %></span> <%= c.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M:%S %Z") %>
-							<%= render partial: "orders/print/comment_display", locals: { comment: c, additional_comments: get_additional_comments(comment: c, order: order, section: "changes_requested", section_index: index.to_i ) } %>
+							<%= render partial: "shared/orders/print/comment_display", locals: { comment: c, additional_comments: get_additional_comments(comment: c, order: order, section: "changes_requested", section_index: index.to_i ) } %>
 						</li>
 							<% if order.pending_date_array[index.to_i+1] %>
 								<li>
 									<span id='title'>SENT FOR APPROVAL by <%= order.brand_company_name %></span> <%= order.pending_date_array[index.to_i+1].in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M:%S %Z") %>
 									<% if order.comments.submitted[index.to_i+1] && order.comments.submitted[index.to_i+1].text.present? %>
-										<%= render partial: "orders/print/comment_display", locals: { comment: order.comments.submitted[index.to_i+1], additional_comments: get_additional_comments(order: order, section: "resent_for_approval", section_index: index.to_i+1 ) } %>
+										<%= render partial: "shared/orders/print/comment_display", locals: { comment: order.comments.submitted[index.to_i+1], additional_comments: get_additional_comments(order: order, section: "resent_for_approval", section_index: index.to_i+1 ) } %>
 									<% end %>
 								</li>
 							<% end %>
@@ -53,7 +53,7 @@
 					<% if order.status == "submitted" && @current_user.brand && order.comments.submitted.last.text.present? %>
 						<li>
 							<span id='title'>by <%= order.brand_company_name %></span>
-							<%= render partial: "orders/print/comment_display", locals: { comment: order.comments.submitted.last } %>
+							<%= render partial: "shared/orders/print/comment_display", locals: { comment: order.comments.submitted.last } %>
 						</li>
 					<% end %>
 
@@ -61,14 +61,14 @@
 					<% if order.approved_date.present? %>
 					<li>
 						<span id='title'>APPROVED by <%= order.orderer_company_name %></span> <%= order.approved_date.in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M %Z") %>
-						<%= render partial: "orders/print/comment_display", locals: { comment: nil, additional_comments: get_additional_comments(order: order, section: "approved") } %>
+						<%= render partial: "shared/orders/print/comment_display", locals: { comment: nil, additional_comments: get_additional_comments(order: order, section: "approved") } %>
 					</li>
 					<% end %>
 
 					<% if order.paid_date.present? %>
 					<li>
 						<span id='title'>PAYMENT SUBMITTED by <%= order.orderer_company_name %></span> <%= order.paid_date.in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M %Z") %>
-						<%= render partial: "orders/print/comment_display", locals: { comment: nil, additional_comments: get_additional_comments(order: order, section: "paid") } %>
+						<%= render partial: "shared/orders/print/comment_display", locals: { comment: nil, additional_comments: get_additional_comments(order: order, section: "paid") } %>
 					</li>
 					<% end %>
 
@@ -85,14 +85,14 @@
 								<%= "<h4>Description: <strong>#{order.armor_shipment_description}</strong> </h4>".html_safe if order.armor_shipment_description.present? %>
 							</div>
 						</div>
-						<%= render partial: "orders/print/comment_display", locals: { comment: nil, additional_comments: get_additional_comments(order: order, section: "shipped") } %>
+						<%= render partial: "shared/orders/print/comment_display", locals: { comment: nil, additional_comments: get_additional_comments(order: order, section: "shipped") } %>
 					</li>
 					<% end %>
 
 					<% if order.delivered_date.present? %>
 					<li>
 						<span id='title'>DELIVERED</span> <%= order.delivered_date.in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M %Z") %>
-						<%= render partial: "orders/print/comment_display", locals: { comment: nil, additional_comments: get_additional_comments(order: order, section: "delivered") } %>
+						<%= render partial: "shared/orders/print/comment_display", locals: { comment: nil, additional_comments: get_additional_comments(order: order, section: "delivered") } %>
 					</li>
 					<% end %>
 

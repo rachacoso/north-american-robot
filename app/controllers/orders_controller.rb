@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
 
-	before_action :set_order, only: [:show, :edit, :update, :destroy, :submit, :pending, :approve, :decline_approval, :shipment, :paid, :delivered, :armor_disabled_delivered, :armor_disabled_completed, :complete, :ship_date, :cancel_date, :print]
+	before_action :set_order, only: [:show, :edit, :update, :destroy, :submit, :pending, :approve, :decline_approval, :shipment, :paid, :delivered, :armor_disabled_delivered, :armor_disabled_completed, :complete, :ship_date, :cancel_date]
 
 	#setting of paid only done for testing & by admin only
 	before_action :administrators_only, only: [:paid, :delivered, :complete]
@@ -171,12 +171,6 @@ class OrdersController < ApplicationController
 			unless @order.errors.any?
 				@armor_payment_dispute_url = disputeurl
 			end
-		end
-	end
-
-	def print
-		unless @order.viewable_by? @current_user
-			redirect_to root_url
 		end
 	end
 
