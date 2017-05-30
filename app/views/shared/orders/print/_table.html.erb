@@ -3,7 +3,7 @@
 		<table class="order" style="margin: auto;">
 
 			<tbody>
-				<tr>
+				<tr id="header">
 					<th>Item</th>
 					<th>Description</th>
 					<th>Quantity</th>
@@ -13,7 +13,7 @@
 					<th>Amount</th>
 				</tr>
 				<% get_sorted_order_items(order).each do |lineitem| %>
-				<tr>
+				<tr class="line-item">
 				<td><%= lineitem.item_id.present? ? "#{lineitem.item_id}" : "&nbsp;".html_safe %></td>
 				<td><%= display_lineitem_name(lineitem) %> <%= lineitem.product ? "" : "(err: 33!)" %></td>
 				<td><%= display_lineitem_quantity(lineitem) %></td>
@@ -46,14 +46,14 @@
 				</tr>
 				<% end %>
 
-				<tr class="<%= order.status == 'open' ? 'inactive' : '' %>">
+				<tr class="<%= order.status == 'open' ? 'inactive' : '' %> additional-charges">
 					<th colspan="2">Additional Charge</th>
 					<th colspan="4">Description</th>
 					<th>Amount</th>
 				</tr>
 				<% if order.order_additional_charges.present? %>
 					<% order.order_additional_charges.each do |lineitem| %>
-					<tr>
+					<tr class="line-item">
 						<td colspan="2"><%= lineitem.name %></td>
 						<td colspan="4"><%= lineitem.description %></td>
 						<td class="text-right"><%= number_to_currency(lineitem.amount_in_dollars) %></td>
@@ -66,7 +66,9 @@
 				<% else %>
 					<tr><td colspan="7" class="text-center">
 						<% if ["open","submitted","pending"].include? order.status %>
-						<h3>[ Any additional charges will be calculated and added by <%= order.brand.company_name %> after the order is submitted ]</h3>
+						<p>[ Any additional charges will be calculated and added by <%= order.brand.company_name %> after the order is submitted ]</p>
+						<% else %>
+						<p>[ No additional charges ]</p>
 						<% end %>
 					</th></td>
 					<tr class="subtotal inactive">
@@ -76,7 +78,7 @@
 				<% end %>
 
 				<% if order.meets_minimum(user: @current_user) %>
-					<tr class="total">
+					<tr class="total" id="total-price">
 						<td colspan="6" class="text-right">Order Total <small></small></td>
 						<td class="text-right"><%= number_to_currency(order.total_price) %></td>
 					</tr>
@@ -85,17 +87,12 @@
 						<td colspan="6" class="text-right" style="color: red;">Order Minimum <small></small></td>
 						<td class="text-right" style="color: red;"><%= number_to_currency(dollarize(order.brand.order_minimum)) %></td>
 					</tr>
-					<tr class="total">
+					<tr class="total" id="total-price">
 						<td colspan="6" class="text-right" >Current Order Total <small></small></td>
 						<td class="text-right" ><%= number_to_currency(order.total_price) %></td>
 					</tr>
 				<% end %>
 
-				<% if @current_user.brand %>
-				<tr>
-					<td colspan="7" class="text-right"><%= link_to "View your estimated payout", show_order_calculator_url(order), class: "landing-button", style: "color: white; text-decoration: none; font-weight: 500;", remote: true %></td>
-				</tr>
-				<% end %>
 			</tbody>
 		</table>
 	</div><!--/.small-12-->

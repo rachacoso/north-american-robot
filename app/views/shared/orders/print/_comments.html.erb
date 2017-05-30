@@ -1,0 +1,111 @@
+<div id="order-comments">
+	<div class="row">
+		<div class="small-12 columns">
+			<div id="header-row">
+			order history &amp; comments
+			</div>
+			<div id="data">
+				<ul>
+					<%= display_history_and_comments(order: order) %>
+					
+					<% if order.status == "open" && order.comments.open.first.text.present? %>
+						<li>
+							<%= render partial: "shared/orders/print/comment_display", locals: { comment: order.comments.open.first } %>
+						</li>
+					<% end %>
+
+					<% if order.submission_date.present? %>
+						<li>
+							<span id='title'>SUBMITTED by <%= order.orderer_company_name %></span> <%= order.submission_date.in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M:%S %Z") %>
+							<% if (comment = order.comments.open.first) && (order.comments.open.first.text.present? || get_additional_comments(order: order, section: "submitted").present? ) %>
+								<%= render partial: "shared/orders/print/comment_display", locals: { comment: comment, additional_comments: get_additional_comments(order: order, section: "submitted")} %>
+							<% end %>
+						</li>
+					<% end %>
+
+					<% if order.pending_date_array.present? %>
+					<li>
+						<span id='title'>SENT FOR APPROVAL by <%= order.brand_company_name %></span> <%= order.pending_date_array[0].in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M:%S %Z") %>
+							<% if (comment = order.comments.submitted.first) && (order.comments.submitted.first.text.present? || get_additional_comments(order: order, section: "pending").present? ) %>
+								<%= render partial: "shared/orders/print/comment_display", locals: { comment: comment, additional_comments: get_additional_comments(order: order, section: "pending") } %>
+							<% end %>
+					</li>
+					<% end %>
+
+					<% if change_requests = order.comments.declined %>
+						<% change_requests.each_with_index do |c,index| %>
+						<li>
+							<span id='title'>CHANGES REQUESTED by <%= order.orderer_company_name %></span> <%= c.c_at.in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M:%S %Z") %>
+							<%= render partial: "shared/orders/print/comment_display", locals: { comment: c, additional_comments: get_additional_comments(comment: c, order: order, section: "changes_requested", section_index: index.to_i ) } %>
+						</li>
+							<% if order.pending_date_array[index.to_i+1] %>
+								<li>
+									<span id='title'>SENT FOR APPROVAL by <%= order.brand_company_name %></span> <%= order.pending_date_array[index.to_i+1].in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M:%S %Z") %>
+									<% if order.comments.submitted[index.to_i+1] && order.comments.submitted[index.to_i+1].text.present? %>
+										<%= render partial: "shared/orders/print/comment_display", locals: { comment: order.comments.submitted[index.to_i+1], additional_comments: get_additional_comments(order: order, section: "resent_for_approval", section_index: index.to_i+1 ) } %>
+									<% end %>
+								</li>
+							<% end %>
+						<% end %>
+					<% end %>
+
+					<%# THIS IS THE BRAND'S PREVIEW OF THE COMMENTS TO BE SENT %>
+					<% if order.status == "submitted" && @current_user.brand && order.comments.submitted.last.text.present? %>
+						<li>
+							<span id='title'>by <%= order.brand_company_name %></span>
+							<%= render partial: "shared/orders/print/comment_display", locals: { comment: order.comments.submitted.last } %>
+						</li>
+					<% end %>
+
+
+					<% if order.approved_date.present? %>
+					<li>
+						<span id='title'>APPROVED by <%= order.orderer_company_name %></span> <%= order.approved_date.in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M %Z") %>
+						<%= render partial: "shared/orders/print/comment_display", locals: { comment: nil, additional_comments: get_additional_comments(order: order, section: "approved") } %>
+					</li>
+					<% end %>
+
+					<% if order.paid_date.present? %>
+					<li>
+						<span id='title'>PAYMENT SUBMITTED by <%= order.orderer_company_name %></span> <%= order.paid_date.in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M %Z") %>
+						<%= render partial: "shared/orders/print/comment_display", locals: { comment: nil, additional_comments: get_additional_comments(order: order, section: "paid") } %>
+					</li>
+					<% end %>
+
+					<% if order.shipped_date.present? %>
+					<li>
+						<span id='title'>SHIPPED by <%= order.brand_company_name %></span> <%= order.shipped_date.in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M %Z") %>
+						<div class="order-comment-display">
+							<div id="comment-title">
+								shipment info
+							</div>
+							<div id="comment-body">
+								<h4>Carrier: <strong><%= order.armor_shipment_carrier_name %></strong></h4>
+								<h4>Tracking ID: <strong><%= order.armor_shipment_tracking_number %></strong></h4>
+								<%= "<h4>Description: <strong>#{order.armor_shipment_description}</strong> </h4>".html_safe if order.armor_shipment_description.present? %>
+							</div>
+						</div>
+						<%= render partial: "shared/orders/print/comment_display", locals: { comment: nil, additional_comments: get_additional_comments(order: order, section: "shipped") } %>
+					</li>
+					<% end %>
+
+					<% if order.delivered_date.present? %>
+					<li>
+						<span id='title'>DELIVERED</span> <%= order.delivered_date.in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M %Z") %>
+						<%= render partial: "shared/orders/print/comment_display", locals: { comment: nil, additional_comments: get_additional_comments(order: order, section: "delivered") } %>
+					</li>
+					<% end %>
+
+					<% if order.completed_date.present? %>
+					<li>
+						<span id='title'>ORDER COMPLETE</span> <%= order.completed_date.in_time_zone("Pacific Time (US & Canada)").strftime("on %d %b %Y at %H:%M %Z") %>
+					</li>
+					<% end %>
+
+				</ul>
+			</div><!--/.data-->
+		</div><!--/.small-12-->
+	</div><!--/.row-->
+</div>
+
+

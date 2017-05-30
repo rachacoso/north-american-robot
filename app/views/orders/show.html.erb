@@ -7,4 +7,9 @@
 	</div><!--/.medium-11 medium-centered-->
 </div><!--/.row-->
 
+<div class="printable">
+	<%= render partial: "shared/orders/print/header", locals: { order: @order } %>
+	<%= render partial: "shared/orders/print/table", locals: { order: @order } %>
+	<%= render partial: "shared/orders/print/comments", locals: { order: @order } %>
+</div>
 <%= render partial: 'shared/v2/footer/main' %>

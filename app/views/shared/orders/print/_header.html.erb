@@ -3,8 +3,7 @@
 	<div class="row">
 		<div class="small-6 columns">
 		</div><!--/.small-6-->
-		<div class="small-6 columns text-right">
-			<div id="print-header">
+		<div class="small-6 columns text-right" id="print-header">
 			<h2><%= "[Estimated]" if ['open','submitted','pending'].include? order.status %> Invoice</h2>
 			<small>by</small>
 			<%= image_tag 'https://s3.amazonaws.com/landingintl-us/general/landing-logo.png', width: "100", alt: "Landing International" %>
@@ -30,7 +29,6 @@
 					<li><span id="title"><%= order.orderer_company_name %> Order Reference ID</span> <%= order.orderer_order_reference_id %></li>
 				<% end %>
 			</ul>
-			</div>
 		</div><!--/.small-6-->
 	</div><!--/.row-->
 	<div class="row" id="order-shipping-data">
@@ -44,7 +42,7 @@
 			</div>
 			<div id="body">
 				<div class="row">
-					<div class="medium-3 columns">
+					<div class="medium-3 columns" id="brand-info">
 					<ul>
 					<li><span id="title"><%= link_to order.brand_company_name, profile_link(order.brand), target: "_blank" %></span></li>
 					<%= "<li>#{order.brand.address.address1}</li>".html_safe unless !order.brand.address.address1 || order.brand.address.address1.empty? %>
@@ -57,7 +55,7 @@
 					<%= "<li>#{order.brand.address.country}</li>".html_safe unless !order.brand.address.country || order.brand.address.country.empty? %>
 					</ul>
 					</div><!--/.medium-3-->
-					<div class="medium-3 columns">
+					<div class="medium-3 columns" id="orderer-info">
 					<ul>
 					<li><span id="title"><%= link_to order.orderer_company_name, profile_link(order.orderer), target: "_blank" %></span></li>
 					<%= "<li>#{order.orderer.address.address1}</li>".html_safe unless !order.orderer.address.address1 || order.orderer.address.address1.empty? %>
@@ -70,7 +68,7 @@
 					<%= "<li>#{order.orderer.address.country}</li>".html_safe unless !order.orderer.address.country || order.orderer.address.country.empty? %>
 					</ul>
 					</div><!--/.medium-3-->
-					<div class="medium-6 columns">
+					<div class="medium-6 columns" id="shipping-info">
 						
 						<ul id='shipping-address'>
 						<li class="title">Address</li>
@@ -81,7 +79,7 @@
 						<li class="title">Contact</li>
 						<li><span id="title">
 						<%= order.user.contact.firstname if order.user.contact.firstname.present? %> <%= order.user.contact.lastname if order.user.contact.lastname.present? %>
-						<%= order.user.contact.phone.present? ? "/ #{order.user.contact.phone.phony_formatted(format: :international , spaces: '-')}".html_safe : "<br>Phone n/a".html_safe %></span>
+						<%= order.user.contact.phone.present? ? "<br> #{order.user.contact.phone.phony_formatted(format: :international , spaces: '-')}".html_safe : "<br>Phone n/a".html_safe %></span>
 						</li>
 						</ul>
 
@@ -89,7 +87,7 @@
 							
 						<% end %>
 
-						<div class="row">
+						<div class="row" id="ship-cancel-dates">
 							<div class="small-6 columns">
 								<ul>
 								<% if order.ship_to_us_date.present? %>
@@ -119,7 +117,7 @@
 		</div><!--/.small-12-->
 	</div><!--/.row-->
 
-<div class="row" id="order-shipping-data">
+<div class="row" id="order-terms-data">
 		<div class="small-12 columns">
 			<div id="header-row">
 				<div class="row">
@@ -139,8 +137,6 @@
 							<li class="title">U.S. Shipping Terms</li>
 							<li class="term"><%= simple_format(shipping_terms, {}, wrapper_tag: "div") %></li>
 							<% end %>
-						</ul>
-						<ul>
 							<% unless additional_terms.blank? %>
 								<li class="title">Additional Terms</li> 
 								<% additional_terms.each do |term| %>
