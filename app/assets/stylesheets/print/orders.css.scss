@@ -6,6 +6,9 @@ a {
 	color: black;
 	text-decoration: none;
 }
+.tooltip {
+	display: none !important;
+}
 #v2footer, #v2header, #v2subheader, #full-order, .admin-container {
 	display: none;
 }
