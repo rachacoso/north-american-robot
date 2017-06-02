@@ -16,35 +16,77 @@
 	<div class="small-12 columns">
 		<% if type == "retailers" %>
 			<% unless @retailers_margin.blank? && @retailers_payment_terms.blank? %>
-			<h1>To Do</h1>
+			<div class="panel" style="background-color: #f2f2f2;">
 			<% end %>
 			<% unless @retailers_margin.blank? %>
-				<h3>Retailers Awaiting Margin Approval</h3>
-				<%= render partial: 'b_or_d', collection: @retailers_margin, as: :b_or_d, spacer_template: "shared/indexspacer"  %>
+				<h2>Retailers Awaiting Margin Approval</h2>
+				<table class="sortable" id="order-index" style="table-layout: fixed;">
+					<thead>
+						<tr>
+							<th>Retailer</th>
+							<th>Primary Username</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%= render partial: 'b_or_d', collection: @retailers_margin, as: :b_or_d %>
+					</tbody>
+				</table>
+				<%= "<br>".html_safe unless @retailers_payment_terms.blank? %>
 			<% end %>
 			<% unless @retailers_payment_terms.blank? %>
-				<h3>Retailers Awaiting Net Payment Terms Approval</h3>
-				<%= render partial: 'b_or_d', collection: @retailers_payment_terms, as: :b_or_d, spacer_template: "shared/indexspacer"  %>
+				<h2>Retailers Awaiting Net Payment Terms Approval</h2>
+				<table class="sortable" id="order-index" style="table-layout: fixed;">
+					<thead>
+						<tr>
+							<th>Retailer</th>
+							<th>Primary Username</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%= render partial: 'b_or_d', collection: @retailers_payment_terms, as: :b_or_d  %>
+					</tbody>
+				</table>
 			<% end %>
 			<% unless @retailers_margin.blank? && @retailers_payment_terms.blank? %>
-			<br><br>
+			</div><!--/.panel -->
 			<% end %>
 		<% end %>
 
 		<% if type == "distributors" %>
 			<% unless @distributors_margin.blank? && @distributors_payment_terms.blank? %>
-			<h1>To Do</h1>
+			<div class="panel" style="background-color: #f2f2f2;">
 			<% end %>
 			<% unless @distributors_margin.blank? %>
-				<h3>Distributors Awaiting Margin Approval</h3>
-				<%= render partial: 'b_or_d', collection: @distributors_margin, as: :b_or_d, spacer_template: "shared/indexspacer"  %>
+				<h2>Distributors Awaiting Margin Approval</h2>
+				<table class="sortable" id="order-index" style="table-layout: fixed;">
+					<thead>
+						<tr>
+							<th>Retailer</th>
+							<th>Primary Username</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%= render partial: 'b_or_d', collection: @distributors_margin, as: :b_or_d %>
+					</tbody>
+				</table>
+				<%= "<br>".html_safe unless @distributors_payment_terms.blank? %>
 			<% end %>
 			<% unless @distributors_payment_terms.blank? %>
-				<h3>Distributors Awaiting Net Payment Terms Approval</h3>
-				<%= render partial: 'b_or_d', collection: @distributors_payment_terms, as: :b_or_d, spacer_template: "shared/indexspacer"  %>
+				<h2>Distributors Awaiting Net Payment Terms Approval</h2>
+				<table class="sortable" id="order-index" style="table-layout: fixed;">
+					<thead>
+						<tr>
+							<th>Retailer</th>
+							<th>Primary Username</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%= render partial: 'b_or_d', collection: @distributors_payment_terms, as: :b_or_d %>
+					</tbody>
+				</table>
 			<% end %>
 			<% unless @distributors_margin.blank? && @distributors_payment_terms.blank? %>
-			<br><br>
+			</div><!--/.panel -->
 			<% end %>
 		<% end %>
 
