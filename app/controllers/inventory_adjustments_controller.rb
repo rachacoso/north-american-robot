@@ -9,6 +9,9 @@ class InventoryAdjustmentsController < ApplicationController
 	end
 
 	def index
+		if params[:product]
+			@product = Product.find(params[:product])
+		end
 		@brand = @current_user.brand
 	end
 

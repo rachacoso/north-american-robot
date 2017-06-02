@@ -1,4 +1,4 @@
-<%= link_to inventory_adjustments_path(anchor: "p_#{adjustment.product.id}") do %>
+<%= link_to inventory_adjustments_path(product: "#{adjustment.product.id}") do %>
 <div class="inventory-request">
 <div id="title">Inventory Request</div>
 <div id="name"><%= adjustment.product.name %></div>
