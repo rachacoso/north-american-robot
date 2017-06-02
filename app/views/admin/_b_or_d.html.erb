@@ -1,13 +1,13 @@
 <tr>
 	<% if b_or_d.class.to_s == "Distributor" %>
 		<td><%= link_to "#{b_or_d.company_name.blank? ? '(no name)' : b_or_d.company_name}", admin_distributor_view_url(b_or_d) %></td>
-		<td><%= link_to "#{b_or_d.users.first.email}", admin_distributor_view_url(b_or_d) %></td>
+		<td><%= link_to "#{b_or_d.users.present? ? b_or_d.users.first.email : 'n/a'}", admin_distributor_view_url(b_or_d) %></td>
 	<% elsif b_or_d.class.to_s == "Retailer" %> 
 		<td><%= link_to "#{b_or_d.company_name.blank? ? '(no name)' : b_or_d.company_name}", admin_retailer_view_url(b_or_d) %></td>
-		<td><%= link_to "#{b_or_d.users.first.email}", admin_retailer_view_url(b_or_d) %></td>
+		<td><%= link_to "#{b_or_d.users.present? ? b_or_d.users.first.email : 'n/a'}", admin_retailer_view_url(b_or_d) %></td>
 	<% elsif b_or_d.class.to_s == "Brand" %> 
 		<td><%= link_to "#{b_or_d.company_name.blank? ? '(no name)' : b_or_d.company_name}", admin_brand_view_url(b_or_d) %></td>
 		<td><%= link_to "#{b_or_d.display_subscriber_account_number}", admin_brand_view_url(b_or_d) %></td>
-		<td><%= link_to "#{b_or_d.users.first.email}", admin_brand_view_url(b_or_d) %></td>
+		<td><%= link_to "#{b_or_d.users.present? ? b_or_d.users.first.email : 'n/a'}", admin_brand_view_url(b_or_d) %></td>
 	<% end %>
 </tr>
