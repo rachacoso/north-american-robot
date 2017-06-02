@@ -159,7 +159,8 @@ class AdminController < ApplicationController
       @search_type = 'brand'
       @orders = Order.all.order_search(query: [q], type: @search_type, show_completed: params[:show_completed], user: @current_user)
     else
-      @orders = params[:show_completed] ? Order.all : Order.in_progress
+      # @orders = params[:show_completed] ? Order.all : Order.in_progress
+      @newsearch = true
     end
 
   end
@@ -168,7 +169,9 @@ class AdminController < ApplicationController
     @group = params[:group]
     case @group
     when "search"
-      @orders = Order.in_progress
+      # @orders = Order.in_progress
+      @orders = {}
+      @newsearch = true
     when "brands"
       @orders = {}
       brands = Brand.activated.order_by(:company_name => 'asc')
