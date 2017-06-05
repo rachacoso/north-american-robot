@@ -1,1 +1,7 @@
 $('#orders-by-company').html("<%= j (render partial: 'orders_search_results', locals: { orders: @selected_company.orders }) %>");
+  var newTables = document.getElementsByClassName('sortable'),
+      i = newTables.length;
+
+  while (i--) {
+    sorttable.makeSortable(newTables[i]);
+  }
