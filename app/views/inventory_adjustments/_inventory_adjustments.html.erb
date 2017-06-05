@@ -1,9 +1,5 @@
 <%= form_tag view_inventory_table_url, remote: true do %>
-<% if @product %>
-<%= select_tag(:product_id, options_from_collection_for_select(@brand.products.sort_by{ |product| product.item_id }, :id, :name_with_id, @product.id), include_blank: 'Select a product', class: 'auto-form') %>
-<% else %>
-<%= select_tag(:product_id, options_from_collection_for_select(@brand.products.sort_by{ |product| product.item_id }, :id, :name_with_id), include_blank: 'Select a product', class: 'auto-form') %>
-<% end %>
+<%= select_tag(:product_id, options_from_collection_for_select(@brand.products.sort_by{ |product| product.item_id }, :id, :name_with_id, @product ? @product.id : nil), include_blank: 'Select a product', class: 'auto-form') %>
 <% end %>
 
 <div id="inventory-table-view">

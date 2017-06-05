@@ -1,5 +1,5 @@
 <tbody>
-	<% if orders.any? %>
+	<% if orders.any? && !@newsearch %>
 		<% orders.each do |o| %>
 		<tr>
 			<td><%= link_to admin_order_view_url(o) do %><%= o.orderer.company_name %><% end %></td>
@@ -27,7 +27,7 @@
 			<td colspan=10 style="text-align: center;"></td>
 		</tr>
 		<tr>
-			<td colspan=10 style="text-align: center;"><h3>no orders found</h3></td>
+			<td colspan=10 style="text-align: center;"><h3><%= @newsearch ? 'search orders' : 'no orders found' %></h3></td>
 		</tr>
 		<tr>
 			<td colspan=10 style="text-align: center;"></td>

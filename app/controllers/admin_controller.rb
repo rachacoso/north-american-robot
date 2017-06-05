@@ -159,32 +159,56 @@ class AdminController < ApplicationController
       @search_type = 'brand'
       @orders = Order.all.order_search(query: [q], type: @search_type, show_completed: params[:show_completed], user: @current_user)
     else
-      @orders = params[:show_completed] ? Order.all : Order.in_progress
+      # @orders = params[:show_completed] ? Order.all : Order.in_progress
+      @newsearch = true
     end
 
+  end
+
+  def orders_by_company
+    @selected_company = Brand.find(params[:company_id]) || Retailer.find(params[:company_id]) || Distributor.find(params[:company_id]) 
+    if @selected_company.class == "Brand"
+      brand_ids = Order.pluck(:brand_id).uniq
+      @companies = Brand.find(brand_ids).sort_by { |b| b.company_name }
+    else
+      orderer_ids = Order.pluck(:orderer_id).uniq
+      distributors = Distributor.find(orderer_ids)
+      retailers = Retailer.find(orderer_ids)
+      @companies = distributors + retailers
+      @companies.sort_by! { |b| b.company_name }
+    end
   end
 
   def orders_index
     @group = params[:group]
     case @group
     when "search"
-      @orders = Order.in_progress
+      # @orders = Order.in_progress
+      @orders = {}
+      @newsearch = true
     when "brands"
-      @orders = {}
-      brands = Brand.activated.order_by(:company_name => 'asc')
-      brands.each do |brand|
-        next if brand.orders.blank?
-        @orders[brand] = brand.orders  
-      end
+      brand_ids = Order.pluck(:brand_id).uniq
+      @companies = Brand.find(brand_ids).sort_by { |b| b.company_name }
+      # @orders = {}
+      # brands = Brand.activated.order_by(:company_name => 'asc')
+      # brands.each do |brand|
+      #   next if brand.orders.blank?
+      #   @orders[brand] = brand.orders  
+      # end
     when "buyers"
-      @orders = {}
-      retailers = Retailer.activated.order_by(:company_name => 'asc')
-      distributors = Distributor.activated.order_by(:company_name => 'asc')
-      buyers = retailers + distributors
-      buyers.each do |buyer|
-        next if buyer.orders.blank?
-        @orders[buyer] = buyer.orders  
-      end
+      orderer_ids = Order.pluck(:orderer_id).uniq
+      distributors = Distributor.find(orderer_ids)
+      retailers = Retailer.find(orderer_ids)
+      @companies = distributors + retailers
+      @companies.sort_by! { |b| b.company_name }
+      # @orders = {}
+      # retailers = Retailer.activated.order_by(:company_name => 'asc')
+      # distributors = Distributor.activated.order_by(:company_name => 'asc')
+      # buyers = retailers + distributors
+      # buyers.each do |buyer|
+      #   next if buyer.orders.blank?
+      #   @orders[buyer] = buyer.orders  
+      # end
     else
       @orders = {}
     end

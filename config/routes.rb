@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get   '/admin/retailers' => 'admin#retailers_index', as: 'admin_retailers_index'
   get   '/admin/orders/:group' => 'admin#orders_index', as: 'admin_orders_index'
   post   '/admin/orders/search/' => 'admin#orders_search', as: 'admin_orders_search'
+  post   '/admin/orders/bc/' => 'admin#orders_by_company', as: 'admin_view_orders_by_company'
   get   '/admin/orders/search/pre/brands' => 'admin#orders_pre_search_brands', as: 'admin_orders_pre_search_brands'
   get   '/admin/orders/search/pre/buyers' => 'admin#orders_pre_search_buyers', as: 'admin_orders_pre_search_buyers'
   get   '/admin/order/d/:id/:confirm' => 'admin#order_destroy', as: 'admin_order_destroy'
