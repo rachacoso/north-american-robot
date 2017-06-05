@@ -1,5 +1,6 @@
-<% all_orders.each do |buyer, orders| %>
-<h2><%= buyer.company_name %></h2>
-<%= render partial: "orders_search_results", locals: { orders: orders } %>
-<br>
+<%= form_tag admin_view_orders_by_company_url, remote: true do %>
+<%= select_tag(:company_id, options_from_collection_for_select(@companies, :id, :company_name, @selected_company ? @selected_company.id : nil), include_blank: 'Select a buyer', class: 'auto-form') %>
 <% end %>
+<div id="orders-by-company">
+<%= render partial: "orders_search_results", locals: { orders: @selected_company.orders } if @selected_company %>
+</div>

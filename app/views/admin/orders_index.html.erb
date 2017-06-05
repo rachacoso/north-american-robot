@@ -28,9 +28,9 @@
 			when "search" %>
 				<%= render partial: "orders_search", locals: { all_orders: @orders } %>
 			<% when "brands" %>
-				<%= render partial: "orders_by_brands", locals: { all_orders: @orders }  %>
+				<%= render partial: "orders_by_brands", locals: { brands: @brands }  %>
 			<% when "buyers" %>
-				<%= render partial: "orders_by_buyers", locals: { all_orders: @orders }  %>
+				<%= render partial: "orders_by_buyers", locals: { buyers: @buyers }  %>
 			<% end %>
 		</div><!--/.panel-->
 		</div><!--/.small-12-->
