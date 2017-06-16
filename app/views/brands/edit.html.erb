@@ -71,6 +71,7 @@
 											<%= link_to "Product Portfolio", "#a-product-portfolio", class: "profile-edit-links required" %><br>
 											<%= link_to "Company Introduction", "#a-company-introduction", class: "profile-edit-links required" %><br>
 											<%= link_to "Brand Photos", "#a-brand-photos", class: "profile-edit-links required" %><br>
+											<%= link_to "Sectors", "#a-sectors", class: "profile-edit-links required" %><br>
 											</div>
 
 											<div class="optional">
@@ -83,7 +84,6 @@
 											<%= link_to "Trends", "#a-trends", class: "profile-edit-links" %><br>
 											<%= link_to "Global Good Tags", "#a-social-tags", class: "profile-edit-links" %><br>
 											<%= link_to "Key Retailers", "#a-key-retailers", class: "profile-edit-links" %><br>
-											<%= link_to "Sectors", "#a-sectors", class: "profile-edit-links" %><br>
 											<%= link_to "Channels", "#a-channels", class: "profile-edit-links" %><br>
 											<%= link_to "Channel Capacities", "#a-channelcapacity", class: "profile-edit-links" %><br>
 											<%= link_to "Countries of Distribution", "#a-exportcountries", class: "profile-edit-links" %><br>
@@ -179,6 +179,20 @@
 							</div>
 						</div>
 
+						<div class="row required">
+							<div class="medium-4 columns medium-text-right">
+								<div class="profile-edit-form info-panel">
+									<h1>Sectors</h1>
+									<h3>In which sectors do you specialize?</h3>
+								</div>
+							</div><!--/.medium-4-->
+							<div class="medium-8 columns">
+								<div class="profile-edit-form">
+									<%= render "sectors" %>
+								</div>
+							</div>
+						</div><!-- /.row -->
+
 						<div class="row optional">
 							<div class="small-12 columns profile-section-header">
 								<h1>Ordering &amp; Payment</h1>
@@ -268,21 +282,6 @@
 								</div>
 							</div>
 						</div>
-
-
-						<div class="row optional">
-							<div class="medium-4 columns medium-text-right">
-								<div class="profile-edit-form info-panel">
-									<h1>Sectors</h1>
-									<h3>In which sectors do you specialize?</h3>
-								</div>
-							</div><!--/.medium-4-->
-							<div class="medium-8 columns">
-								<div class="profile-edit-form">
-									<%= render "sectors" %>
-								</div>
-							</div>
-						</div><!-- /.row -->
 
 						<div class="row optional">
 							<div class="medium-4 columns medium-text-right">
