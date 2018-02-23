@@ -12,6 +12,10 @@ class OrderItem # for V2 ordering
   field :item_id, type: String, default: ""
   field :item_size, type: String, default: ""
   field :product_id, type: BSON::ObjectId
+  field :packing_list_id, type: BSON::ObjectId # packing list that this item has been shipped in
+
+  scope :sent, ->{where(:packing_list_id.nin => ["", nil])}  
+  scope :unsent, ->{where(:packing_list_id.in => ["", nil])}
 
   def self.get_item(product:, orderer:)
     order = Order.current.where(brand: product.brand, orderer: orderer).first

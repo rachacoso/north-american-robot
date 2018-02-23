@@ -161,6 +161,9 @@ module LandingCompany
 			# V2 ORDERING
 			has_many :orders, as: :orderer
 
+			# PACKING LIST
+			has_many :packing_lists
+
 			# VERIFICATION
 			# CONTROLLED/ADDED BY BUYER
 			field :business_id, type: String # BUSINESS REGISTRATION

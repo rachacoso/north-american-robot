@@ -24,7 +24,7 @@ class Order # for V2 ordering
   field :status_error_message, type: String
   field :landing_order_reference_id, type: String
   field :orderer_company_name, type: String
-  field :orderer_order_reference_id, type: String
+  field :orderer_order_reference_id, type: String # PO number
   field :brand_company_name, type: String
   field :brand_order_reference_id, type: String
   field :submission_date, type: DateTime
@@ -631,5 +631,17 @@ class Order # for V2 ordering
     end
     return orders
   end
+
+  # FOR PACKING LIST
+
+  def unsent_items
+    order_items.where(sent: false)
+    items = orders
+  end
+
+  def sent_items
+
+  end
+
 
 end

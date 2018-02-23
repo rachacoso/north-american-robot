@@ -52,6 +52,12 @@ Rails.application.routes.draw do
   # order-calculator display
   get   'order/calculator/show/:id' => 'orders#show_calculator', as: 'show_order_calculator'
 
+# PACKING LISTS
+
+  get   '/admin/packinglists' => 'packing_lists#index', as: 'packing_lists'
+  get   '/admin/packinglist/new' => 'packing_lists#new', as: 'new_packing_list'
+  patch   '/admin/packinglist/update' => 'packing_lists#update', as: 'update_packing_list'
+
 # comments
   resources :comments, only: [:create]
 
