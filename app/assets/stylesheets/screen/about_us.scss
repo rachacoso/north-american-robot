@@ -1,0 +1,34 @@
+@import "foundation/functions";
+@import "foundation/components/labels";
+@import "global_variables";
+@import "mixins";
+
+#about-us-tabs {
+//  padding: 0 rem-calc(5) rem-calc(5) 0;
+  span {
+    cursor: pointer;
+    display: inline-block;
+    width: 24%;
+    border: 1px solid $landing-middle-gray;
+    padding: 0 rem-calc(5) rem-calc(5) 0;
+    text-align: center;
+    font-weight: 200;
+    color: $landing-middle-gray;
+    @media #{$small-only} { 
+
+    }
+    @media #{$medium-up} { 
+//      border-top: 5px solid $landing-middle-gray;
+//      border-radius: 3px 3px 0px 0px;
+    }
+    &.selected {
+      font-weight: 800;
+      color: $landing-dark-gray;
+      border: 1px solid $landing-dark-gray;
+    }
+  }
+}
+
+div#brand, div#retail, div#press {
+  display: none;
+}
