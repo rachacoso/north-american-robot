@@ -96,7 +96,7 @@ class Order # for V2 ordering
   end
 
   def can_be_deleted?
-    if ["open","submitted","pending"].include? self.status
+    if ["open","submitted","pending","approved"].include? self.status
       return true
     else
       return false
