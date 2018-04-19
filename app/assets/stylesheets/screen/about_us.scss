@@ -32,3 +32,25 @@
 div#brand, div#retail, div#press {
   display: none;
 }
+
+div.bio {
+  padding-bottom: rem-calc(100);
+}
+.headshots {
+  position: relative;
+  border: 1px solid $landing-light-gray;
+//  padding: rem-calc(5);
+  width: rem-calc(180);
+  height: rem-calc(252);
+  -moz-background-size: contain;
+  -o-background-size: contain;
+  -webkit-background-size: contain;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  margin: auto;
+  a { 
+    color: $landing-middle-gray;
+  }
+}
